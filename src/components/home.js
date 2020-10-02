@@ -13,15 +13,21 @@ const Home = () => (
               <div data-aos="zoom-in-up">
                 <div className="banner-title">
                   <h3 className="font-weight-medium">
-                    One platform to manage your DevOps lifecylce with ease
+                    One platform to manage your DevOps lifecycle with ease
                   </h3>
                 </div>
                 <p className="mt-3">
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry.
-                  <br />
-                  Lorem Ipsum has been the industry's standard dummy text ever
-                  since the 1500s,
+                  Hoverkraft provides a unified hub of services to manage the
+                  lifecycle of your applications and micro-services within a
+                  cloud infrastructure.
+                </p>
+                <p className="mt-3">
+                  From development 🏗️ to supervision 📈, including deployment 🚀
+                  & scaling ⚖️
+                </p>
+                <p className="mt-3 font-weight-bold">
+                  Get started in a few clicks, pick-out your services on demand,
+                  pay as you go !
                 </p>
                 <Link to="#" className="btn btn-secondary mt-3">
                   Learn more
@@ -30,7 +36,7 @@ const Home = () => (
               <div className="mt-5 mt-lg-0">
                 <img
                   src={group}
-                  alt="marsmello"
+                  alt="hoverkraft"
                   className="img-fluid"
                   data-aos="zoom-in-up"
                 />

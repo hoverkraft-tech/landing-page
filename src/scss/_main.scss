@@ -12,6 +12,9 @@ html {
   @media (max-width: 991px) {
     padding-top: 71px;
   }
+  p {
+    font-size: 1.2rem;
+  }
 }
 
 .main-banner {
@@ -44,6 +47,10 @@ section {
   padding: 10px 100px 40px 0;
   @media (max-width: 991px) {
     padding: 10px 10px 40px 0;
+  }
+  img {
+    width: 5rem;
+    height: 5rem;
   }
   &:hover {
     img {

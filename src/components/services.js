@@ -1,20 +1,20 @@
 import React from 'react';
 
-import designDevelopment from '../images/design-development.svg';
-import digitalMarketing from '../images/digital-marketing.svg';
-import digitalStrategy from '../images/digital-strategy.svg';
-import growthStrategy from '../images/growth-strategy.svg';
-import integratedMarketing from '../images/integrated-marketing.svg';
-import savingStrategy from '../images/saving-strategy.svg';
+import cicd from '../images/services/ci-cd.png';
+import dockerRegistry from '../images/services/docker-registry.webp';
+import gitOps from '../images/services/gitops.png';
+import metricsMonitoring from '../images/services/metrics-monitoring.png';
+import rancher from '../images/services/rancher-logo-cow-blue.svg';
+import secrets from '../images/services/secrets.png';
 
 const Services = () => (
   <section className="our-services" id="services">
     <div className="container">
       <div className="row">
         <div className="col-sm-12">
-          <h5 className="text-dark">We’re offering</h5>
+          <h5 className="text-dark">Our platform</h5>
           <h3 className="font-weight-medium text-dark mb-5">
-            Creative Digital Agency
+            Unified services hub for DevOps lifecycle
           </h3>
         </div>
       </div>
@@ -26,16 +26,14 @@ const Services = () => (
             data-aos-easing="linear"
             data-aos-duration={1500}
           >
-            <img
-              src={integratedMarketing}
-              alt="integrated-marketing"
-              data-aos="zoom-in"
-            />
+            <img src={rancher} alt="rancher" data-aos="zoom-in" />
             <h6 className="text-dark mb-3 mt-4 font-weight-medium">
-              Integrated Marketing
+              Rancher as a service
             </h6>
             <p>
-              Lorem ipsum dolor sit amet, pretium pretium tempor.Lorem ipsum
+              Hosted, fully managed Rancher control plane, to manage multiple
+              Kubernetes clusters, while providing DevOps teams with integrated
+              tools for running containerized workloads.
             </p>
           </div>
         </div>
@@ -47,15 +45,17 @@ const Services = () => (
             data-aos-duration={1500}
           >
             <img
-              src={designDevelopment}
-              alt="design-development"
+              src={metricsMonitoring}
+              alt="metrics-monitoring"
               data-aos="zoom-in"
             />
             <h6 className="text-dark mb-3 mt-4 font-weight-medium">
-              Design &amp; Development
+              Metrics & monitoring
             </h6>
             <p>
-              Lorem ipsum dolor sit amet, pretium pretium tempor.Lorem ipsum
+              Monitoring service for cloud-scale applications, providing
+              monitoring of servers, databases, tools, and services, through our
+              SaaS-based data analytics platform
             </p>
           </div>
         </div>
@@ -67,15 +67,16 @@ const Services = () => (
             data-aos-duration={1500}
           >
             <img
-              src={digitalStrategy}
-              alt="digital-strategy"
+              src={dockerRegistry}
+              alt="docker-registry"
               data-aos="zoom-in"
             />
             <h6 className="text-dark mb-3 mt-4 font-weight-medium">
-              Digital Strategy
+              Docker registry
             </h6>
             <p>
-              Lorem ipsum dolor sit amet, pretium pretium tempor.Lorem ipsum
+              Stateless, highly scalable server side application that stores and
+              lets you distribute Docker images
             </p>
           </div>
         </div>
@@ -88,16 +89,11 @@ const Services = () => (
             data-aos-easing="linear"
             data-aos-duration={1500}
           >
-            <img
-              src={digitalMarketing}
-              alt="digital-marketing"
-              data-aos="zoom-in"
-            />
-            <h6 className="text-dark mb-3 mt-4 font-weight-medium">
-              Digital Marketing
-            </h6>
+            <img src={gitOps} alt="digital-marketing" data-aos="zoom-in" />
+            <h6 className="text-dark mb-3 mt-4 font-weight-medium">GitOps</h6>
             <p>
-              Lorem ipsum dolor sit amet, pretium pretium tempor.Lorem ipsum
+              Use Git as a single source of truth for declarative infrastructure
+              and applications
             </p>
           </div>
         </div>
@@ -108,16 +104,12 @@ const Services = () => (
             data-aos-easing="linear"
             data-aos-duration={1500}
           >
-            <img
-              src={growthStrategy}
-              alt="growth-strategy"
-              data-aos="zoom-in"
-            />
-            <h6 className="text-dark mb-3 mt-4 font-weight-medium">
-              Growth Strategy
-            </h6>
+            <img src={cicd} alt="ci-cd" data-aos="zoom-in" />
+            <h6 className="text-dark mb-3 mt-4 font-weight-medium">CI/CD</h6>
             <p>
-              Lorem ipsum dolor sit amet, pretium pretium tempor.Lorem ipsum
+              Bridge the gaps between development and operation activities and
+              teams by enforcing automation in building, testing and deployment
+              of applications
             </p>
           </div>
         </div>
@@ -128,16 +120,14 @@ const Services = () => (
             data-aos-easing="linear"
             data-aos-duration={1500}
           >
-            <img
-              src={savingStrategy}
-              alt="saving-strategy"
-              data-aos="zoom-in"
-            />
+            <img src={secrets} alt="secrets-as-a-service" data-aos="zoom-in" />
             <h6 className="text-dark mb-3 mt-4 font-weight-medium">
-              Saving Strategy
+              Secrets as a service
             </h6>
             <p>
-              Lorem ipsum dolor sit amet, pretium pretium tempor.Lorem ipsum
+              Secure, store and tightly control access to tokens, passwords,
+              certificates, encryption keys for protecting secrets and other
+              sensitive data using a UI, CLI, or HTTP API.
             </p>
           </div>
         </div>
