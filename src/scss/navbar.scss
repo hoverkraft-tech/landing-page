@@ -74,6 +74,7 @@
       }
     }
   }
+
   .navbar-toggler {
     color: $white;
   }
@@ -117,6 +118,20 @@
           height: 30px;
           text-align: center;
         }
+      }
+    }
+  }
+
+  &.navbar-light {
+    background-color: transparent;
+
+    .navbar-brand {
+      color: #1d2026;
+    }
+
+    .nav-item {
+      .nav-link {
+        color: #1d2026;
       }
     }
   }

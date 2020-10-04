@@ -1,4 +1,3 @@
-import { Link } from 'gatsby';
 import PropTypes from 'prop-types';
 import React from 'react';
 
@@ -6,7 +5,7 @@ import logo from '../images/logo.png';
 
 const Footer = ({ siteTitle }) => (
   <footer className="footer">
-    <div className="footer-top">
+    {/* <div className="footer-top">
       <div className="container">
         <div className="row">
           <div className="col-sm-6">
@@ -130,7 +129,7 @@ const Footer = ({ siteTitle }) => (
           </div>
         </div>
       </div>
-    </div>
+    </div> */}
     <div className="footer-bottom">
       <div className="container">
         <div className="d-flex justify-content-between align-items-center">
@@ -138,13 +137,13 @@ const Footer = ({ siteTitle }) => (
             <img src={logo} alt="logo" className="mr-3" />
             <p className="mb-0 text-small pt-1">
               © {new Date().getFullYear()}{' '}
-              <Link to="https://hoverkraft.sh" className="text-white">
+              <a href="https://hoverkraft.sh" className="text-white">
                 {siteTitle}
-              </Link>
+              </a>
               . All rights reserved.
             </p>
           </div>
-          <div>
+          {/* <div>
             <div className="d-flex">
               <Link to="#" className="text-small text-white mx-2 footer-link">
                 Privacy Policy
@@ -158,7 +157,7 @@ const Footer = ({ siteTitle }) => (
                 Careers
               </Link>
             </div>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

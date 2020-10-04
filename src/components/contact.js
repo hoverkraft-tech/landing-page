@@ -11,11 +11,9 @@ const Contact = () => (
         </div>
         <div className="col-sm-7" data-aos="fade-up" data-aos-offset={-500}>
           <h3 className="font-weight-medium text-dark mt-5 mt-lg-0">
-            Got A Problem
+            Contact us
           </h3>
-          <h5 className="text-dark mb-5">
-            Lorem ipsum dolor sit amet, consectetur pretium
-          </h5>
+          <h5 className="text-dark mb-5">Do You Have Any Questions?</h5>
           <form>
             <div className="row">
               <div className="col-sm-6">

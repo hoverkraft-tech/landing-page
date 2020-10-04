@@ -22,14 +22,28 @@ const Home = () => (
                   cloud infrastructure.
                 </p>
                 <p className="mt-3">
-                  From development 🏗️ to supervision 📈, including deployment 🚀
-                  & scaling ⚖️
+                  From development{' '}
+                  <span role="img" aria-label="development">
+                    🏗️
+                  </span>{' '}
+                  to supervision{' '}
+                  <span role="img" aria-label="supervision">
+                    📈
+                  </span>
+                  , including deployment{' '}
+                  <span role="img" aria-label="deployment">
+                    🚀
+                  </span>{' '}
+                  and scaling{' '}
+                  <span role="img" aria-label="scaling">
+                    ⚖️
+                  </span>
                 </p>
                 <p className="mt-3 font-weight-bold">
-                  Get started in a few clicks, pick-out your services on demand,
-                  pay as you go !
+                  Get started in a few clicks, pick-up the on demand services
+                  you need, pay as you go !
                 </p>
-                <Link to="#" className="btn btn-secondary mt-3">
+                <Link to="#services" className="btn btn-secondary mt-3">
                   Learn more
                 </Link>
               </div>

@@ -6,13 +6,12 @@
  */
 
 import { graphql, useStaticQuery } from 'gatsby';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import Footer from './footer';
 import Header from './header';
 
-const Layout = ({ children }) => {
+const Layout = ({ light, children }) => {
   const data = useStaticQuery(graphql`
     query SiteTitleQuery {
       site {
@@ -25,18 +24,20 @@ const Layout = ({ children }) => {
 
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Header
+        siteTitle={data.site.siteMetadata?.title || `Title`}
+        light={light}
+      />
       <main>
         <div id="mobile-menu-overlay" />
         <div className="page-body-wrapper">{children}</div>
       </main>
-      <Footer siteTitle={data.site.siteMetadata?.title || `Title`} />
+      <Footer
+        siteTitle={data.site.siteMetadata?.title || `Title`}
+        light={light}
+      />
     </>
   );
-};
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
 };
 
 export default Layout;

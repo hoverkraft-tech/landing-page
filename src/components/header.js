@@ -5,11 +5,15 @@ import React from 'react';
 import logoDark from '../images/logo-dark.png';
 import logo from '../images/logo.png';
 
-const Header = ({ siteTitle }) => (
-  <nav className="navbar navbar-expand-lg fixed-top">
+const Header = ({ light, siteTitle }) => (
+  <nav
+    className={`navbar navbar-expand-lg fixed-top ${
+      light ? 'navbar-light' : ''
+    }`}
+  >
     <div className="container">
-      <Link className="navbar-brand" to="#">
-        <img src={logo} alt={siteTitle} />
+      <Link className="navbar-brand" to="/">
+        <img src={light ? logoDark : logo} alt={siteTitle} />
       </Link>
       <button
         className="navbar-toggler"
@@ -42,7 +46,7 @@ const Header = ({ siteTitle }) => (
               Services
             </Link>
           </li>
-          <li className="nav-item">
+          {/* <li className="nav-item">
             <Link to="#about" className="nav-link">
               About
             </Link>
@@ -61,7 +65,7 @@ const Header = ({ siteTitle }) => (
             <Link to="#plans" className="nav-link">
               Plans
             </Link>
-          </li>
+          </li> */}
           <li className="nav-item">
             <Link to="#contact" className="nav-link">
               Contact
