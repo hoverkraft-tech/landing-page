@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: '/landing-page', // TODO remove this when deploy on custom domain
+  pathPrefix: '/', // TODO remove this when deploy on custom domain
   siteMetadata: {
     title: `Hoverkraft`,
     description: `Frictionless DevOps cloud platform as a service`,
