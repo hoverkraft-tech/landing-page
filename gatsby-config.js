@@ -11,6 +11,12 @@ module.exports = {
     siteUrl: 'https://hoverkraft.sh',
   },
   plugins: [
+    {
+      resolve: `gatsby-plugin-plausible`,
+      options: {
+        domain: `hoverkraft.sh`,
+      },
+    },
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
