@@ -11,8 +11,8 @@ html {
   min-height: 733px;
   padding-top: 103px;
   @media (max-width: 991px) {
-    padding-top: 71px;
-    background-position: 0 71px;
+    padding-top: 0px;
+    background-position: 0 123px;
   }
   p {
     font-size: 1.2rem;
@@ -31,6 +31,7 @@ html {
     width: 56%;
     @media (max-width: 991px) {
       width: 100%;
+      color: #1d2026;
     }
   }
 }
