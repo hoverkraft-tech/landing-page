@@ -40,9 +40,9 @@ const ComingSoon = () => {
             <h3 className="font-weight-medium text-dark mt-5 mt-lg-0">
               {t('comingSoon::Coming Soon')}
             </h3>
-            <h5 className="text-dark mb-5">
+            <h4 className="text-dark mb-5">
               {t('comingSoon::Follow us for update now!')}
-            </h5>
+            </h4>
             <form
               action={data.site.siteMetadata?.subscribeFormUrl || ''}
               method="post"

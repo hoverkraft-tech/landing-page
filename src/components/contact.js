@@ -46,9 +46,9 @@ const Contact = () => {
             <h3 className="font-weight-medium text-dark mt-5 mt-lg-0">
               {t('contact::Contact us')}
             </h3>
-            <h5 className="text-dark mb-5">
+            <h4 className="text-dark mb-5">
               {t('contact::Do You Have Any Questions?')}
-            </h5>
+            </h4>
             {formMessage}
             <form
               action="#"
@@ -59,10 +59,13 @@ const Contact = () => {
               <div className="row">
                 <div className="col-sm-6">
                   <div className="form-group">
+                    <label htmlFor="contact-name" className="sr-only">
+                      {t('contact::Name*')}
+                    </label>
                     <input
                       type="text"
                       className="form-control"
-                      id="name"
+                      id="contact-name"
                       name="name"
                       placeholder={t('contact::Name*')}
                       value={formData.name}
@@ -73,10 +76,13 @@ const Contact = () => {
                 </div>
                 <div className="col-sm-6">
                   <div className="form-group">
+                    <label htmlFor="contact-mail" className="sr-only">
+                      {t('contact::Email*')}
+                    </label>
                     <input
                       type="email"
                       className="form-control"
-                      id="mail"
+                      id="contact-mail"
                       name="mail"
                       placeholder={t('contact::Email*')}
                       value={formData.mail}
@@ -87,8 +93,11 @@ const Contact = () => {
                 </div>
                 <div className="col-sm-12">
                   <div className="form-group">
+                    <label htmlFor="contact-message" className="sr-only">
+                      {t('contact::Message*')}
+                    </label>
                     <textarea
-                      id="message"
+                      id="contact-message"
                       name="message"
                       className="form-control"
                       placeholder={t('contact::Message*')}
@@ -102,7 +111,7 @@ const Contact = () => {
                 <div className="col-sm-12">
                   <button
                     type="submit"
-                    className="btn btn-secondary pageclip-form__submit"
+                    className="btn btn-secondary"
                     disabled={!canSendForm}
                   >
                     {t('contact::SEND')}

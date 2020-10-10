@@ -15,10 +15,10 @@ const Services = () => {
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <h5 className="text-dark">Our platform</h5>
-            <h3 className="font-weight-medium text-dark mb-5">
+            <h4 className="text-dark">Our platform</h4>
+            <h5 className="font-weight-medium text-dark mb-5">
               {t('services::Unified services hub for DevOps lifecycle')}
-            </h3>
+            </h5>
           </div>
         </div>
         <div className="row" data-aos="fade-up">
