@@ -1,0 +1,16 @@
+{
+    "Unified services hub for DevOps lifecycle": "Unified services hub for DevOps lifecycle",
+    "Rancher as a service": "Rancher as a service",
+    "Hosted, fully managed Rancher control panel, to manage multiple Kubernetes clusters, while providing DevOps teams with integrated tools for running containerized workloads.": "Hosted, fully managed Rancher control panel, to manage multiple Kubernetes clusters, while providing DevOps teams with integrated tools for running containerized workloads.",
+    "Metrics & monitoring": "Metrics & monitoring",
+    "Monitoring service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through our SaaS-based data analytics platform": "Monitoring service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through our SaaS-based data analytics platform",
+    "Docker registry": "Docker registry",
+    "Stateless, highly scalable server side application that stores and lets you distribute Docker images": "Stateless, highly scalable server side application that stores and lets you distribute Docker images",
+    "GitOps": "GitOps",
+    "Use Git as a single source of truth for declarative infrastructure and applications": "Use Git as a single source of truth for declarative infrastructure and applications",
+    "CI/CD": "CI/CD",
+    "Bridge the gaps between development and operation activities and teams by enforcing automation in building, testing and deployment of applications": "Bridge the gaps between development and operation activities and teams by enforcing automation in building, testing and deployment of applications",
+    "Secrets as a service": "Secrets as a service",
+    "Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.": "Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API."
+}
+

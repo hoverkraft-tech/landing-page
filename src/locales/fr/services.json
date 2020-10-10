@@ -1,0 +1,15 @@
+{
+    "Unified services hub for DevOps lifecycle": "Hub de services unifiés pour le cycle de vie des DevOps",
+    "Rancher as a service": "Rancher as a service",
+    "Hosted, fully managed Rancher control panel, to manage multiple Kubernetes clusters, while providing DevOps teams with integrated tools for running containerized workloads.": "Tableau de bord Rancher hébergé et entièrement géré, pour gérer plusieurs Clusters Kubernetes, tout en fournissant aux équipes DevOps des outils intégrés pour gérer des resources conteneurisées.",
+    "Metrics & monitoring": "Métriques et contrôle",
+    "Monitoring service for cloud-scale applications, providing monitoring of servers, databases, tools, and services, through our SaaS-based data analytics platform": "Service de supervision des applications Cloud, assurant la surveillance des serveurs, des bases de données, des outils et des services, grâce à notre plateforme d'analyse des données en mode SaaS",
+    "Docker registry": "Docker registry",
+    "Stateless, highly scalable server side application that stores and lets you distribute Docker images": "Service Stateless, fortement évolutif, permettant le stockage et la distribution des images Docker",
+    "GitOps": "GitOps",
+    "Use Git as a single source of truth for declarative infrastructure and applications": "Utiliser Git comme une source unique de vérité pour les infrastructures et les applications déclaratives",
+    "CI/CD": "CI/CD",
+    "Bridge the gaps between development and operation activities and teams by enforcing automation in building, testing and deployment of applications": "Combler le fossé entre les équipes de développement et d'exploitation en imposant l'automatisation dans la construction, le test et le déploiement d'applications",
+    "Secrets as a service": "Secrets as a service",
+    "Secure, store and tightly control access to tokens, passwords, certificates, encryption keys for protecting secrets and other sensitive data using a UI, CLI, or HTTP API.": "Sécuriser, stocker et contrôler étroitement l'accès aux jetons, mots de passe, certificats, clés de cryptage pour protéger les secrets et autres données sensibles en utilisant une interface utilisateur, un CLI ou une API HTTP"
+}

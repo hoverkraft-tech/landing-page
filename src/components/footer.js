@@ -1,11 +1,13 @@
-import PropTypes from 'prop-types';
+import { useTranslation } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 
 import logo from '../images/logo.png';
 
-const Footer = ({ siteTitle }) => (
-  <footer className="footer">
-    {/* <div className="footer-top">
+const Footer = ({ siteTitle }) => {
+  const { t } = useTranslation(['footer']);
+  return (
+    <footer className="footer">
+      {/* <div className="footer-top">
       <div className="container">
         <div className="row">
           <div className="col-sm-6">
@@ -130,20 +132,20 @@ const Footer = ({ siteTitle }) => (
         </div>
       </div>
     </div> */}
-    <div className="footer-bottom">
-      <div className="container">
-        <div className="d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
-            <img src={logo} alt="logo" className="mr-3" />
-            <p className="mb-0 text-small pt-1">
-              © {new Date().getFullYear()}{' '}
-              <a href="https://hoverkraft.sh" className="text-white">
-                {siteTitle}
-              </a>
-              . All rights reserved.
-            </p>
-          </div>
-          {/* <div>
+      <div className="footer-bottom">
+        <div className="container">
+          <div className="d-flex justify-content-between align-items-center">
+            <div className="d-flex align-items-center">
+              <img src={logo} alt="logo" className="mr-3" />
+              <p className="mb-0 text-small pt-1">
+                © {new Date().getFullYear()}{' '}
+                <a href="https://hoverkraft.sh" className="text-white">
+                  {siteTitle}
+                </a>
+                . {t('All rights reserved.')}
+              </p>
+            </div>
+            {/* <div>
             <div className="d-flex">
               <Link to="#" className="text-small text-white mx-2 footer-link">
                 Privacy Policy
@@ -158,18 +160,11 @@ const Footer = ({ siteTitle }) => (
               </Link>
             </div>
           </div> */}
+          </div>
         </div>
       </div>
-    </div>
-  </footer>
-);
-
-Footer.propTypes = {
-  siteTitle: PropTypes.string,
-};
-
-Footer.defaultProps = {
-  siteTitle: ``,
+    </footer>
+  );
 };
 
 export default Footer;

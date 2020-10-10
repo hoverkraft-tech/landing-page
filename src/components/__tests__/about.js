@@ -1,11 +1,11 @@
 import React from 'react';
 import renderer from 'react-test-renderer';
 
-import Contact from '../contact';
+import About from '../about';
 
-describe('Contact', () => {
+describe('About', () => {
   it('renders correctly', () => {
-    const tree = renderer.create(<Contact />);
+    const tree = renderer.create(<About />);
     tree.unmount();
   });
 });
