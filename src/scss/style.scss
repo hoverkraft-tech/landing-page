@@ -48,8 +48,8 @@
 
 /*-------------------------------------------------------------------*/
 /* === Boostrap Main SCSS === */
-@import '../../node_modules/slick-carousel/slick/slick.css';
-@import '../../node_modules/slick-carousel/slick/slick-theme.css';
+// @import '../../node_modules/slick-carousel/slick/slick.css';
+// @import '../../node_modules/slick-carousel/slick/slick-theme.css';
 
 /*-------------------------------------------------------------------*/
 
@@ -59,13 +59,14 @@
 @import 'footer';
 @import 'navbar';
 @import 'main';
-@import 'testimonial';
-@import 'pricing';
+@import 'comingSoon';
+// @import 'testimonial';
+// @import 'pricing';
 
 /*-------------------------------------------------------------------*/
 /* === Components === */
 @import 'components/buttons';
 @import 'components/forms';
 @import 'components/toggle-switch';
-@import 'components/owl-carousel';
-@import 'components/flipster';
+// @import 'components/owl-carousel';
+// @import 'components/flipster';

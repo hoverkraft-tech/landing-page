@@ -59,7 +59,6 @@ const ComingSoon = () => {
                   id="mail"
                   placeholder={t('comingSoon::Email') + '*'}
                   required
-                  style={{ width: '30rem' }}
                   value={formData.EMAIL}
                   onChange={onValueChange}
                 />

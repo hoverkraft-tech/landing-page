@@ -18,7 +18,7 @@ const LanguageDropdownItem = ({ language, originalPath }) => {
     >
       <ReactCountryFlag
         countryCode={language === 'en' ? 'GB' : language}
-        style={{ fontSize: '0.7em' }}
+        className="flag-icon"
       />{' '}
       {language}
     </NavDropdown.Item>
@@ -33,7 +33,7 @@ const LanguagesDropdown = () => {
         <>
           <ReactCountryFlag
             countryCode={language === 'en' ? 'GB' : language}
-            style={{ fontSize: '0.7em' }}
+            className="flag-icon"
           />{' '}
           {language}
         </>

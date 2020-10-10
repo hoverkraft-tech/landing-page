@@ -11,6 +11,7 @@ module.exports = {
     siteUrl: 'https://hoverkraft.sh',
   },
   plugins: [
+    'gatsby-plugin-minify-html',
     {
       resolve: `gatsby-plugin-plausible`,
       options: {
