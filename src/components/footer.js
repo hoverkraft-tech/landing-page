@@ -134,10 +134,12 @@ const Footer = ({ siteTitle }) => {
     </div> */}
       <div className="footer-bottom">
         <div className="container">
-          <div className="d-flex justify-content-between align-items-center">
-            <div className="d-flex align-items-center">
+          <div className="row">
+            <div className="col">
               <img src={logo} alt="logo" className="mr-3" />
-              <p className="mb-0 text-small pt-1">
+            </div>
+            <div className="col">
+              <p className="mb-0 text-small pt-1 text-center">
                 © {new Date().getFullYear()}{' '}
                 <a href="https://hoverkraft.sh" className="text-white">
                   {siteTitle}
@@ -145,7 +147,8 @@ const Footer = ({ siteTitle }) => {
                 . {t('All rights reserved.')}
               </p>
             </div>
-            {/* <div>
+          </div>
+          {/* <div>
             <div className="d-flex">
               <Link to="#" className="text-small text-white mx-2 footer-link">
                 Privacy Policy
@@ -160,7 +163,6 @@ const Footer = ({ siteTitle }) => {
               </Link>
             </div>
           </div> */}
-          </div>
         </div>
       </div>
     </footer>

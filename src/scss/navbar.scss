@@ -75,18 +75,12 @@
     }
   }
 
-  .navbar-toggler {
-    color: $white;
-  }
-  .navbar-toggler-icon {
-    height: auto;
-  }
   @media (max-width: 991px) {
     .navbar-collapse {
       position: fixed;
       right: -$mobile-menu-width;
       width: $mobile-menu-width;
-      top: 0;
+      top: 71px;
       height: 100%;
       background: $white;
       z-index: 999999;
