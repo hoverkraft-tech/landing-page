@@ -1,6 +1,5 @@
 import { Link } from 'gatsby';
 import React from 'react';
-import Slider from 'react-slick';
 
 import slider1 from '../images/carousel/slider1.jpg';
 import slider2 from '../images/carousel/slider2.jpg';
@@ -31,31 +30,23 @@ const Projects = () => (
       </div>
     </div>
     <div className="mb-5" data-aos="fade-up">
-      <Slider
-        {...{
-          dots: true,
-          infinite: true,
-          speed: 500,
-          slidesToShow: 5,
-          slidesToScroll: 1,
-        }}
-      >
-        <div className="item">
+      <Carousel>
+        <Carousel.Item>
           <img src={slider1} alt="slider" />
-        </div>
-        <div className="item">
+        </Carousel.Item>
+        <Carousel.Item>
           <img src={slider2} alt="slider" />
-        </div>
-        <div className="item">
+        </Carousel.Item>
+        <Carousel.Item>
           <img src={slider3} alt="slider" />
-        </div>
-        <div className="item">
+        </Carousel.Item>
+        <Carousel.Item>
           <img src={slider4} alt="slider" />
-        </div>
-        <div className="item">
+        </Carousel.Item>
+        <Carousel.Item>
           <img src={slider5} alt="slider" />
-        </div>
-      </Slider>
+        </Carousel.Item>
+      </Carousel>
     </div>
     <div className="container">
       <div className="row pt-5 mt-5 pb-5 mb-5">
