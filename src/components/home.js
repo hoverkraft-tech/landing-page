@@ -54,7 +54,7 @@ const Home = () => {
                     )}
                   </p>
                   <Link to="#services" className="btn btn-secondary mt-3">
-                    {t('home::Learn more')}
+                    {t('home::Discover our platform')}
                   </Link>
                 </div>
                 <div className="mt-5 mt-lg-0">

@@ -59,24 +59,26 @@ const Header = ({ light, siteTitle }) => {
   return (
     <Navbar variant={light ? 'light' : 'dark'} expand="lg" fixed="top">
       <div className="container">
-        <Navbar.Brand as={Link} to="/">
+        <Navbar.Brand as={Link} to="/" title={siteTitle}>
           <img src={light ? logoDark : logo} alt={siteTitle} />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
-          <Nav className="ml-auto align-items-center" as="ul">
-            <Nav.Item as="li">
+          <Nav className="ml-auto align-items-center">
+            <Nav.Item>
               <Nav.Link as={Link} to="/">
                 {t('header::Home')}
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item as="li">
+            <Nav.Item>
               <Nav.Link href="#services">{t('header::Service')}</Nav.Link>
             </Nav.Item>
-            <Nav.Item as="li">
+            <Nav.Item>
               <Nav.Link href="#contact">{t('header::Contact')}</Nav.Link>
             </Nav.Item>
-            <LanguagesDropdown />
+            <Nav.Item>
+              <LanguagesDropdown />
+            </Nav.Item>
             {/* <li className="nav-item">
             <Link to="#about" className="nav-link">
             About

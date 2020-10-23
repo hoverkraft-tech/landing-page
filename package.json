@@ -37,6 +37,7 @@
     "identity-obj-proxy": "^3.0.0",
     "import-sort-style-module": "^6.0.0",
     "jest": "^26.6.0",
+    "lighthouse-plugin-field-performance": "^2.2.1",
     "prettier": "2.1.2",
     "prettier-plugin-import-sort": "^0.0.6",
     "react-test-renderer": "^16.14.0"

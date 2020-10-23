@@ -9728,6 +9728,14 @@ levn@^0.3.0, levn@~0.3.0:
     prelude-ls "~1.1.2"
     type-check "~0.3.2"
 
+lighthouse-plugin-field-performance@^2.2.1:
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/lighthouse-plugin-field-performance/-/lighthouse-plugin-field-performance-2.2.1.tgz#2965e5121dbe667143a55bc1664d785d70a92333"
+  integrity sha512-qvV6kvtdifaDwzAH3ypt1a4OjLo64lYFAg2wHG/cfyP7lKk4KqdwG+RJnHbnkZ3PI4o+ESfYQrs5bSYmjDlesw==
+  dependencies:
+    lodash "^4.17.20"
+    node-fetch "^2.6.0"
+
 lines-and-columns@^1.1.6:
   version "1.1.6"
   resolved "https://registry.yarnpkg.com/lines-and-columns/-/lines-and-columns-1.1.6.tgz#1c00c743b433cd0a4e80758f7b64a57440d9ff00"
@@ -10594,7 +10602,7 @@ node-eta@^0.9.0:
   resolved "https://registry.yarnpkg.com/node-eta/-/node-eta-0.9.0.tgz#9fb0b099bcd2a021940e603c64254dc003d9a7a8"
   integrity sha1-n7CwmbzSoCGUDmA8ZCVNwAPZp6g=
 
-node-fetch@2.6.1, node-fetch@^2.5.0, node-fetch@^2.6.1:
+node-fetch@2.6.1, node-fetch@^2.5.0, node-fetch@^2.6.0, node-fetch@^2.6.1:
   version "2.6.1"
   resolved "https://registry.yarnpkg.com/node-fetch/-/node-fetch-2.6.1.tgz#045bd323631f76ed2e2b55573394416b639a0052"
   integrity sha512-V4aYg89jEoVRxRb2fJdAg8FHvI7cEyYdVAh94HH0UIK8oJxUfkjlDQN9RbMx+bEjP7+ggMiFRprSti032Oipxw==

@@ -7,8 +7,8 @@
   <a href="https://github.com/hoverkraft/landing-page/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a href="https://github.com/hoverkraft/landing-page/blob/master/LICENSE" target="_blank">
-    <img alt="License: 0BSD" src="https://img.shields.io/github/license/hoverkraft/@hoverkaraft/landing-page" />
+  <a title="Go to Lighthouse report" href="https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1603467911267-45174.report.html" target="_blank">
+    <img alt="Lighthouse" src="https://img.shields.io/badge/Lighthouse-68%25-brightgreen?logo=lighthouse" />
   </a>
 </p>
 
@@ -38,8 +38,8 @@ yarn run test
 
 👤 **Hoverkraft <contact@hoverkraft.sh>**
 
-* Website: https://hoverkraft.sh
-* Github: [@hoverkraft](https://github.com/hoverkraft)
+- Website: https://hoverkraft.sh
+- Github: [@hoverkraft](https://github.com/hoverkraft)
 
 ## 🤝 Contributing
 
@@ -54,5 +54,6 @@ Give a ⭐️ if this project helped you!
 Copyright © 2020 [Hoverkraft <contact@hoverkraft.sh>](https://github.com/hoverkraft).<br />
 This project is [0BSD](https://github.com/hoverkraft/landing-page/blob/master/LICENSE) licensed.
 
-***
+---
+
 _This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_

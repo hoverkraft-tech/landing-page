@@ -9,40 +9,63 @@ on:
       - master
 
 jobs:
-  checks:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v2.1.2
-        with:
-          node-version: '12.x'
+  # checks:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v2
+  #     - uses: actions/setup-node@v2.1.2
+  #       with:
+  #         node-version: '12.x'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+  #     - name: Get yarn cache directory path
+  #       id: yarn-cache-dir-path
+  #       run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
-        with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+  #     - uses: actions/cache@v2
+  #       id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+  #       with:
+  #         path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+  #         key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+  #         restore-keys: |
+  #           ${{ runner.os }}-yarn-
 
-      - name: Install Dependencies
-        run: yarn
+  #     - uses: actions/cache@v2
+  #       id: gatsby-cache
+  #       with:
+  #         path: |
+  #           .cache
+  #           public/
+  #         key: ${{ runner.os }}-cache-gatsby
+  #         restore-keys: |
+  #           ${{ runner.os }}-cache-gatsby
 
-      - name: Build
-        run: yarn build
+  #     - name: Install Dependencies
+  #       run: yarn
 
-      - name: Test
-        run: yarn test
-        env:
-          CI: true
+  #     - name: Test
+  #       run: yarn test
+  #       env:
+  #         CI: true
 
-  gh-release:
+  #     - name: Build
+  #       run: |
+  #         mkdir -p .cache
+  #         yarn build --log-pages
+  #       env:
+  #         GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES: true
+  #         NODE_ENV: production
+  #         CI: true
+
+  #     - name: Lighthouse
+  #       uses: treosh/lighthouse-ci-action@v3
+  #       with:
+  #         # no urls needed, since it uses local folder to scan .html files
+  #         configPath: '.github/workflows/lighthouserc.json'
+  #         temporaryPublicStorage: true
+
+  deploy:
     if: github.event_name == 'push' && github.ref == 'refs/heads/master'
-    needs: [checks]
+    # needs: [checks]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -50,39 +73,74 @@ jobs:
         with:
           node-version: '12.x'
 
-      - name: Get yarn cache directory path
-        id: yarn-cache-dir-path
-        run: echo "::set-output name=dir::$(yarn cache dir)"
+      # - name: Get yarn cache directory path
+      #   id: yarn-cache-dir-path
+      #   run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v2
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      # - uses: actions/cache@v2
+      #   id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      #   with:
+      #     path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+      #     key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+      #     restore-keys: |
+      #       ${{ runner.os }}-yarn-
+
+      # - uses: actions/cache@v2
+      #   id: gatsby-cache
+      #   with:
+      #     path: |
+      #       .cache
+      #       public/
+      #     key: ${{ runner.os }}-cache-gatsby
+      #     restore-keys: |
+      #       ${{ runner.os }}-cache-gatsby
+
+      # - name: Add key to allow access to repository
+      #   env:
+      #     SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+      #   run: |
+      #     mkdir -p ~/.ssh
+      #     ssh-keyscan github.com >> ~/.ssh/known_hosts
+      #     echo "${{ secrets.GH_PAGES_DEPLOY }}" > ~/.ssh/id_rsa
+      #     chmod 600 ~/.ssh/id_rsa
+      #     cat <<EOT >> ~/.ssh/config
+      #     Host github.com
+      #     HostName github.com
+      #     IdentityFile ~/.ssh/id_rsa
+      #     EOT
+
+      # - name: Release to GitHub Pages
+      #   env:
+      #     USE_SSH: true
+      #     GIT_USER: git
+      #   run: |
+      #     git config --global user.email "actions@gihub.com"
+      #     git config --global user.name "GitHub Actions"
+      #     git remote set-url origin git@github.com:${{ github.repository }}.git
+      #     yarn install --frozen-lockfile
+      #     NODE_DEBUG=gh-pages yarn deploy
+
+      - name: Audit URLs using Lighthouse
+        id: lighthouse-ci-audit
+        uses: treosh/lighthouse-ci-action@v3
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
-          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-yarn-
+          urls: |
+            https://hoverkraft.sh
+          temporaryPublicStorage: true
 
-      - name: Add key to allow access to repository
+      - name: Update Lighthouse badge
+        run: node .github/workflows/updateLighthouseReport.js;
         env:
-          SSH_AUTH_SOCK: /tmp/ssh_agent.sock
-        run: |
-          mkdir -p ~/.ssh
-          ssh-keyscan github.com >> ~/.ssh/known_hosts
-          echo "${{ secrets.GH_PAGES_DEPLOY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          cat <<EOT >> ~/.ssh/config
-          Host github.com
-          HostName github.com
-          IdentityFile ~/.ssh/id_rsa
-          EOT
+          LIGHTHOUSE_LINKS: ${{ steps.lighthouse-ci-audit.outputs.links }}
+          LIGHTHOUSE_RESULTS_PATH: ${{ steps.lighthouse-ci-audit.outputs.resultsPath }}
 
-      - name: Release to GitHub Pages
+      - uses: stefanzweifel/git-auto-commit-action@v4
         env:
-          USE_SSH: true
-          GIT_USER: git
-        run: |
-          git config --global user.email "actions@gihub.com"
-          git config --global user.name "GitHub Actions"
-          git remote set-url origin git@github.com:${{ github.repository }}.git
-          yarn install --frozen-lockfile
-          NODE_DEBUG=gh-pages yarn deploy
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: master
+          commit_user_name: GitHub Action
+          commit_user_email: actions@github.com
+          commit_author: GitHub Action <actions@github.com>
+          commit_message: 'docs: Update Lighthouse badge'
+          file_pattern: README.md
