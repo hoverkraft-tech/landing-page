@@ -7150,10 +7150,10 @@ gatsby-plugin-minify-html@^1.0.4:
     glob "^7.1.6"
     html-minifier-terser "^5.1.1"
 
-gatsby-plugin-offline@^3.2.32:
-  version "3.2.32"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.2.32.tgz#b59db824fad0ebe4070e36574914ed196325453b"
-  integrity sha512-xgFBeiBqIURiRdeRKpCdKBvKzu/x43dDnL2WnswiKOJbPb9tp0rYMbb8T6LtIMWxk3knD2mlowRQEG2xSFZlmw==
+gatsby-plugin-offline@^3.2.37:
+  version "3.2.37"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-offline/-/gatsby-plugin-offline-3.2.37.tgz#2c57f390425264cdc670c7b039cd1ca9857ea264"
+  integrity sha512-GwutE/t5t1SlPv8tQPboxGdwk2ERMFoVLE/LAMgLKnt+SonDk3kLd2+j7qwyA60qdVjyET1gGa2296gyPnLPsw==
   dependencies:
     "@babel/runtime" "^7.11.2"
     cheerio "^1.0.0-rc.3"
