@@ -20,7 +20,7 @@
     "gatsby-plugin-sass": "^2.3.16",
     "gatsby-plugin-sharp": "^2.6.43",
     "gatsby-plugin-sitemap": "^2.4.17",
-    "gatsby-source-filesystem": "^2.3.34",
+    "gatsby-source-filesystem": "^2.3.35",
     "gatsby-transformer-sharp": "^2.5.19",
     "gsap": "^3.5.1",
     "i18next": "^19.8.2",
