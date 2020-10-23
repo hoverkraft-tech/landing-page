@@ -2,13 +2,13 @@ const { readFileSync, readdirSync, writeFileSync } = require('fs');
 
 const lighthouseLinks = JSON.parse(process.env.LIGHTHOUSE_LINKS);
 const reportUrl = lighthouseLinks[Object.keys(lighthouseLinks)[0]];
-const summary = JSON.parse(
+const [{ summary }] = JSON.parse(
   readFileSync(process.env.LIGHTHOUSE_RESULTS_PATH + '/manifest.json')
 );
 
 const summaryKeys = Object.keys(summary);
 const sum = summaryKeys.reduce(
-  (currentSum, key) => (currentSum += summaryKeys[key]),
+  (currentSum, key) => (currentSum += summary[key]),
   0
 );
 
