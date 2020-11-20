@@ -44,14 +44,16 @@ module.exports = {
     },
     'gatsby-plugin-sass',
     {
-      resolve: 'gatsby-plugin-prefetch-google-fonts',
+      resolve: `gatsby-plugin-webfonts`,
       options: {
-        fonts: [
-          {
-            family: 'Abel',
-            variants: ['300', '400', '700'],
-          },
-        ],
+        fonts: {
+          google: [
+            {
+              family: 'Abel',
+              variants: ['300', '400', '500'],
+            },
+          ],
+        },
       },
     },
     {
