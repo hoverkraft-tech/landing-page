@@ -7,7 +7,7 @@
   <a href="https://github.com/hoverkraft/landing-page/graphs/commit-activity" target="_blank">
     <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
   </a>
-  <a title="Go to Lighthouse report" href="https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1611517785789-70923.report.html" target="_blank">
+  <a title="Go to Lighthouse report" href="https://storage.googleapis.com/lighthouse-infrastructure.appspot.com/reports/1611518065585-82571.report.html" target="_blank">
     <img alt="Lighthouse" src="https://img.shields.io/badge/Lighthouse-97%25-brightgreen?logo=lighthouse" />
   </a>
 </p>
