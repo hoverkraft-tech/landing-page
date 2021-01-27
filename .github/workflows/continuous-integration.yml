@@ -134,13 +134,13 @@ jobs:
           LIGHTHOUSE_LINKS: ${{ steps.lighthouse-ci-audit.outputs.links }}
           LIGHTHOUSE_RESULTS_PATH: ${{ steps.lighthouse-ci-audit.outputs.resultsPath }}
 
-      - uses: stefanzweifel/git-auto-commit-action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          branch: master
-          commit_user_name: '${{ github.actor }}'
-          commit_user_email: '${{ github.actor }}@users.noreply.github.com'
-          commit_author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
-          commit_message: 'docs: Update Lighthouse badge'
-          file_pattern: README.md
+#       - uses: stefanzweifel/git-auto-commit-action@v4
+#         env:
+#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+#         with:
+#           branch: master
+#           commit_user_name: '${{ github.actor }}'
+#           commit_user_email: '${{ github.actor }}@users.noreply.github.com'
+#           commit_author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
+#           commit_message: 'docs: Update Lighthouse badge'
+#           file_pattern: README.md
