@@ -6051,7 +6051,7 @@ gatsby-cli@^2.18.0:
     yoga-layout-prebuilt "^1.9.6"
     yurnalist "^2.1.0"
 
-gatsby-core-utils@^1.8.0, gatsby-core-utils@^1.9.0:
+gatsby-core-utils@^1.9.0:
   version "1.9.0"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-1.9.0.tgz#ff349cc2013fd06a85099b3aee061b01f64ceabb"
   integrity sha512-AWq9E+rBY+fWJrhdOx0rn/LlZ0eCjpqLYlDcUmLZ5NjwLARgkEXNf4JsvDETLtThcNlSOibEMQex8arsYatmkA==
@@ -6224,13 +6224,6 @@ gatsby-plugin-typescript@^2.11.0:
     "@babel/preset-typescript" "^7.12.1"
     "@babel/runtime" "^7.12.5"
     babel-plugin-remove-graphql-queries "^2.15.0"
-
-gatsby-plugin-utils@^0.7.0:
-  version "0.7.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-utils/-/gatsby-plugin-utils-0.7.0.tgz#bc511319a25241b31456f8178b8414bae8c48838"
-  integrity sha512-fClolFlWQvczukRQhLfdFtz9GXIehgf567HJbggC2oPkVT0NCwwNPAAjVq1CcmxQE8k/kcp7kxQVc86pVcWuzA==
-  dependencies:
-    joi "^17.2.1"
 
 gatsby-plugin-utils@^0.8.0:
   version "0.8.0"
@@ -7260,10 +7253,10 @@ humanize-url@^1.0.0:
     normalize-url "^1.0.0"
     strip-url-auth "^1.0.0"
 
-i18next@^19.8.4:
-  version "19.8.4"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-19.8.4.tgz#447718f2a26319b8debdbcc6fbc1a9761be7316b"
-  integrity sha512-FfVPNWv+felJObeZ6DSXZkj9QM1Ivvh7NcFCgA8XPtJWHz0iXVa9BUy+QY8EPrCLE+vWgDfV/sc96BgXVo6HAA==
+i18next@^19.8.5:
+  version "19.8.5"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-19.8.5.tgz#8275c98ab98faffa348de2c34c2fd80ffeadb999"
+  integrity sha512-mDuH/mvnNXZmvqxl3akSZuJtbX7ou7M66kzfXQTfRngTZ9cAjktlx4yVzA+gS9VPZp51eZOQAGfEDbFcnyvliw==
   dependencies:
     "@babel/runtime" "^7.12.0"
 

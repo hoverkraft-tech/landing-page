@@ -20,7 +20,7 @@
     "gatsby-plugin-webfonts": "^1.1.4",
     "gatsby-source-filesystem": "^2.10.0",
     "gsap": "^3.6.0",
-    "i18next": "^19.8.4",
+    "i18next": "^19.8.5",
     "node-sass": "^4.9.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.4.3",
