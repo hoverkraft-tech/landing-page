@@ -6372,10 +6372,10 @@ gatsby-telemetry@^1.10.0:
     node-fetch "^2.6.1"
     uuid "3.4.0"
 
-gatsby@^2.32.2:
-  version "2.32.2"
-  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.32.2.tgz#f285a4447bd136c68e58eb476611b11ed219e04c"
-  integrity sha512-XqncpfCgx9hqIh/rEqKVEvM9oB7pNBZbkJV4z29r4E02qzxs/sDyi26QQe+qMelZwN6fpyiVyzhfx6Rds72P9A==
+gatsby@^2.32.3:
+  version "2.32.3"
+  resolved "https://registry.yarnpkg.com/gatsby/-/gatsby-2.32.3.tgz#af4c12e676c9e0cdbc69c29508af2384da462c11"
+  integrity sha512-6l1ktlIbj6dRDnAPi+dh/tAEx7FdEYm55RwM3aiFEpwNIHeevG+Jw1RZhIpwUmhkGBwaOjr559KJYf7dYuXk3w==
   dependencies:
     "@babel/code-frame" "^7.10.4"
     "@babel/core" "^7.12.3"
@@ -6404,7 +6404,7 @@ gatsby@^2.32.2:
     babel-plugin-dynamic-import-node "^2.3.3"
     babel-plugin-lodash "^3.3.4"
     babel-plugin-remove-graphql-queries "^2.16.0"
-    babel-preset-gatsby "^0.12.0"
+    babel-preset-gatsby "^0.12.1"
     better-opn "^2.0.0"
     better-queue "^3.8.10"
     bluebird "^3.7.2"
