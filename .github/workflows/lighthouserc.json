@@ -1,0 +1,25 @@
+{
+  "ci": {
+    "assert": {
+      "preset": "lighthouse:recommended",
+      "assertions": {
+        "uses-long-cache-ttl": "off",
+        "uses-http2": "off",
+        "content-width": "off",
+        "image-size-responsive": "off",
+        "uses-responsive-images": "off",
+        "maskable-icon": "off",
+        "tap-targets": "off",
+        "unsized-images": "off",
+        "color-contrast": "off",
+        "unused-javascript": "off",
+        "errors-in-console": "off",
+        "largest-contentful-paint": "off",
+        "legacy-javascript": "off"
+      }
+    },
+    "collect": {
+      "staticDistDir": "./public"
+    }
+  }
+}
