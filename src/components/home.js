@@ -61,7 +61,7 @@ const Home = () => {
                   <img
                     src={group}
                     alt="hoverkraft"
-                    className="img-fluid"
+                    className="img-fluid banner-group-img"
                     data-aos="zoom-in-up"
                   />
                 </div>
