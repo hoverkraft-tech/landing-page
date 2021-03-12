@@ -140,8 +140,8 @@ jobs:
           USE_SSH: true
           GIT_USER: git
         run: |
-          git config --global user.email "actions@gihub.com"
-          git config --global user.name "GitHub Actions"
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --local user.name "${{ github.actor }}"
           git remote set-url origin git@github.com:${{ github.repository }}.git
           NODE_DEBUG=gh-pages yarn deploy
 
@@ -164,10 +164,11 @@ jobs:
           LIGHTHOUSE_LINKS: ${{ steps.lighthouse-ci-audit.outputs.links }}
           LIGHTHOUSE_RESULTS_PATH: ${{ steps.lighthouse-ci-audit.outputs.resultsPath }}
           # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: node .github/workflows/updateLighthouseReport.js;
-      - uses: EndBug/add-and-commit@v7
-        with:
-          author_name: GitHub Actions
-          author_email: actions@gihub.com
-          message: 'docs: Update Lighthouse badge'
-          add: README.md
+        run: |
+          node .github/workflows/updateLighthouseReport.js;
+
+          git config --local user.email "${{ github.actor }}@users.noreply.github.com"
+          git config --local user.name "${{ github.actor }}"
+
+          echo `git add -A && git commit -m "docs: Update Lighthouse badge"`
+          git push --follow-tags origin master
