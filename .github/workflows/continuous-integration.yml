@@ -163,7 +163,7 @@ jobs:
         env:
           LIGHTHOUSE_LINKS: ${{ steps.lighthouse-ci-audit.outputs.links }}
           LIGHTHOUSE_RESULTS_PATH: ${{ steps.lighthouse-ci-audit.outputs.resultsPath }}
-          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           node .github/workflows/updateLighthouseReport.js;
 
