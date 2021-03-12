@@ -163,9 +163,11 @@ jobs:
         env:
           LIGHTHOUSE_LINKS: ${{ steps.lighthouse-ci-audit.outputs.links }}
           LIGHTHOUSE_RESULTS_PATH: ${{ steps.lighthouse-ci-audit.outputs.resultsPath }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          node .github/workflows/updateLighthouseReport.js;
-          git add README.md
-          git commit -v --no-edit --amend
-          git push --force-with-lease
+          # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node .github/workflows/updateLighthouseReport.js;
+      - uses: EndBug/add-and-commit@v7
+        with:
+          author_name: GitHub Actions
+          author_email: actions@gihub.com
+          message: 'docs: Update Lighthouse badge'
+          add: README.md
