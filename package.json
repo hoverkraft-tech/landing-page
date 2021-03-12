@@ -6,7 +6,7 @@
   "author": "Hoverkraft <contact@hoverkraft.sh>",
   "dependencies": {
     "bootstrap": "^4.6.0",
-    "gatsby": "^2.32.9",
+    "gatsby": "^2.32.11",
     "gatsby-image": "^3.0.0",
     "gatsby-plugin-manifest": "^2.12.1",
     "gatsby-plugin-minify-html": "^1.0.4",
