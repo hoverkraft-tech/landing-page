@@ -14,40 +14,39 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.5
-        with:
-          node-version: '12.x'
 
-      - name: Get yarn cache directory path
+      - name: ♻️ Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v2.1.4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: ♻️ Yarn packages cache
+        id: yarn-cache
+        uses: actions/cache@v2.1.4
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            */*/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - uses: actions/cache@v2.1.4
+      - name: ⚙️ Install Dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn
+
+      - name: ♻️ Gatsby cache
+        uses: actions/cache@v2.1.4
         id: gatsby-cache
         with:
           path: |
             .cache
             public/
-          key: ${{ runner.os }}-cache-gatsby
+          key: ${{ runner.os }}-cache-gatsby-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-cache-gatsby
+            ${{ runner.os }}-cache-gatsby-
 
-      - name: Install Dependencies
-        run: yarn
-
-      - name: Test
-        run: yarn test
-        env:
-          CI: true
-
-      - name: Build
+      - name: 🏗️ Build
         run: |
           mkdir -p .cache
           yarn build --log-pages
@@ -56,7 +55,27 @@ jobs:
           NODE_ENV: production
           CI: true
 
-      - name: Lighthouse
+      - name: ♻️ Get Jest cache dir
+        id: jest-cache-dir-path
+        run: |
+          JEST_CACHE_DIR=$(yarn jest --showConfig | grep -oP '(?<="cacheDirectory": ")[^"]+(?=")')
+          echo "::set-output name=dir::$JEST_CACHE_DIR"
+
+      - name: ♻️ Test cache
+        uses: actions/cache@v2.1.4
+        with:
+          path: |
+            ${{ steps.jest-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-test-${{ github.sha }}
+          restore-keys: |
+            ${{ runner.os }}-test-
+
+      - name: 🧪 Test
+        run: yarn test
+        env:
+          CI: true
+
+      - name: 🚦 Lighthouse
         uses: treosh/lighthouse-ci-action@7.0.0
         with:
           # no urls needed, since it uses local folder to scan .html files
@@ -70,30 +89,37 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v2.1.5
-        with:
-          node-version: '12.x'
 
-      - name: Get yarn cache directory path
+      - name: ♻️ Get yarn cache directory path
         id: yarn-cache-dir-path
         run: echo "::set-output name=dir::$(yarn cache dir)"
 
-      - uses: actions/cache@v2.1.4
-        id: yarn-cache # use this to check for `cache-hit` (`steps.yarn-cache.outputs.cache-hit != 'true'`)
+      - name: ♻️ Yarn packages cache
+        id: yarn-cache
+        uses: actions/cache@v2.1.4
         with:
-          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          path: |
+            ${{ steps.yarn-cache-dir-path.outputs.dir }}
+            node_modules
+            */*/node_modules
           key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
           restore-keys: |
             ${{ runner.os }}-yarn-
 
-      - uses: actions/cache@v2.1.4
+      - name: ⚙️ Install Dependencies
+        if: steps.yarn-cache.outputs.cache-hit != 'true'
+        run: yarn
+
+      - name: ♻️ Gatsby cache
+        uses: actions/cache@v2.1.4
         id: gatsby-cache
         with:
           path: |
             .cache
             public/
-          key: ${{ runner.os }}-cache-gatsby
+          key: ${{ runner.os }}-cache-gatsby-${{ github.sha }}
           restore-keys: |
-            ${{ runner.os }}-cache-gatsby
+            ${{ runner.os }}-cache-gatsby-
 
       - name: Add key to allow access to repository
         env:
@@ -117,7 +143,6 @@ jobs:
           git config --global user.email "actions@gihub.com"
           git config --global user.name "GitHub Actions"
           git remote set-url origin git@github.com:${{ github.repository }}.git
-          yarn install --frozen-lockfile
           NODE_DEBUG=gh-pages yarn deploy
 
       - name: Audit URLs using Lighthouse
@@ -134,13 +159,11 @@ jobs:
           LIGHTHOUSE_LINKS: ${{ steps.lighthouse-ci-audit.outputs.links }}
           LIGHTHOUSE_RESULTS_PATH: ${{ steps.lighthouse-ci-audit.outputs.resultsPath }}
 
-#       - uses: stefanzweifel/git-auto-commit-action@v4
-#         env:
-#           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-#         with:
-#           branch: master
-#           commit_user_name: '${{ github.actor }}'
-#           commit_user_email: '${{ github.actor }}@users.noreply.github.com'
-#           commit_author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
-#           commit_message: 'docs: Update Lighthouse badge'
-#           file_pattern: README.md
+      - uses: stefanzweifel/git-auto-commit-action@v4
+        with:
+          branch: master
+          commit_user_name: '${{ github.actor }}'
+          commit_user_email: '${{ github.actor }}@users.noreply.github.com'
+          commit_author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
+          commit_message: 'docs: Update Lighthouse badge'
+          file_pattern: README.md
