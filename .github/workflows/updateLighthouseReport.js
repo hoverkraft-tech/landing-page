@@ -1,4 +1,4 @@
-const { readFileSync, readdirSync, writeFileSync } = require('fs');
+const { readFileSync, writeFileSync } = require('fs');
 
 const lighthouseLinks = JSON.parse(process.env.LIGHTHOUSE_LINKS);
 const reportUrl = lighthouseLinks[Object.keys(lighthouseLinks)[0]];

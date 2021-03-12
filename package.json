@@ -21,7 +21,7 @@
     "gatsby-source-filesystem": "^3.0.0",
     "gsap": "^3.6.0",
     "i18next": "^19.9.2",
-    "node-sass": "^4.9.0",
+    "node-sass": "^5.0.0",
     "react": "^17.0.1",
     "react-bootstrap": "^1.5.2",
     "react-country-flag": "^2.3.0",
