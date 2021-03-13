@@ -33,7 +33,6 @@
   "devDependencies": {
     "babel-jest": "^26.6.3",
     "babel-preset-gatsby": "^1.0.0",
-    "gh-pages": "^3.1.0",
     "identity-obj-proxy": "^3.0.0",
     "import-sort-style-module": "^6.0.0",
     "jest": "^26.6.3",
@@ -48,8 +47,7 @@
   ],
   "license": "0BSD",
   "scripts": {
-    "build": "yarn clean && gatsby build --prefix-paths",
-    "deploy": "yarn build && gh-pages -d public",
+    "build": "yarn clean && GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --prefix-paths --log-pages",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "yarn develop",
