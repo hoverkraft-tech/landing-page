@@ -1,3 +1,4 @@
+import { graphql } from 'gatsby';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 import { Power1, Power3, TweenMax } from 'gsap/all';
 import React from 'react';
@@ -319,3 +320,17 @@ const NotFoundPage = () => {
 };
 
 export default NotFoundPage;
+
+export const query = graphql`
+  query($language: String!) {
+    locales: allLocale(filter: { language: { eq: $language } }) {
+      edges {
+        node {
+          ns
+          data
+          language
+        }
+      }
+    }
+  }
+`;
