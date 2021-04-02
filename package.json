@@ -7,7 +7,7 @@
   "dependencies": {
     "bootstrap": "^4.6.0",
     "gatsby": "^3.1.2",
-    "gatsby-image": "^3.1.0",
+    "gatsby-image": "^3.2.0",
     "gatsby-plugin-manifest": "^3.1.0",
     "gatsby-plugin-minify-html": "^1.0.4",
     "gatsby-plugin-offline": "^4.1.0",
