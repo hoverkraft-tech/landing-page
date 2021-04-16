@@ -5848,10 +5848,10 @@ gatsby-plugin-plausible@^0.0.7:
     minimatch "3.0.4"
     react "^16.13.1"
 
-gatsby-plugin-purgecss@^6.0.0:
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-purgecss/-/gatsby-plugin-purgecss-6.0.0.tgz#0baafc15f7ea896898393664f19adf9fa6c5cade"
-  integrity sha512-/rznrqj2rE2Gj0klSMCSjZ9YWP8eLf92MAWmTxWKKgIkKRwYWxIcaBJioHci4ToWSr6fht4yOZ05VyyDe6hgEQ==
+gatsby-plugin-purgecss@^6.0.1:
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-purgecss/-/gatsby-plugin-purgecss-6.0.1.tgz#82ab29d68994c43b2a2cf94373cc8bc843d8622b"
+  integrity sha512-ZVu15UQ5astpGE4kPUynBN7S9sB5f+83POPAc529Obe81el8cAyfgQGNpga1nW1wicgDYQObQD95rEVwnX4E7A==
   dependencies:
     fs-extra "^9.0.1"
     loader-utils "^2.0.0"
