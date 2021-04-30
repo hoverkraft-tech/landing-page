@@ -13,7 +13,7 @@
     "gatsby-plugin-offline": "^4.4.0",
     "gatsby-plugin-plausible": "^0.0.7",
     "gatsby-plugin-purgecss": "^6.0.1",
-    "gatsby-plugin-react-helmet": "^4.3.0",
+    "gatsby-plugin-react-helmet": "^4.4.0",
     "gatsby-plugin-react-i18next": "^1.1.1",
     "gatsby-plugin-sass": "^4.4.0",
     "gatsby-plugin-sitemap": "^3.3.0",
