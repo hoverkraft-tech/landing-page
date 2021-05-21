@@ -5827,7 +5827,7 @@ gatsby-cli@^3.5.0:
     yoga-layout-prebuilt "^1.9.6"
     yurnalist "^2.1.0"
 
-gatsby-core-utils@^2.4.0, gatsby-core-utils@^2.5.0:
+gatsby-core-utils@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-2.5.0.tgz#70b3aabf184a39c790e12af8001be4164fd8afa6"
   integrity sha512-YbKv7FLpeTCts28bv0H2lSuHrKgUxnsC1ZG1PPydOheQgPW9G8pdNlYvwZzGJmmS7rBcC/w859ss90wlvF6GEw==
@@ -5943,10 +5943,10 @@ gatsby-plugin-plausible@^0.0.7:
     minimatch "3.0.4"
     react "^16.13.1"
 
-gatsby-plugin-purgecss@^6.0.1:
-  version "6.0.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-purgecss/-/gatsby-plugin-purgecss-6.0.1.tgz#82ab29d68994c43b2a2cf94373cc8bc843d8622b"
-  integrity sha512-ZVu15UQ5astpGE4kPUynBN7S9sB5f+83POPAc529Obe81el8cAyfgQGNpga1nW1wicgDYQObQD95rEVwnX4E7A==
+gatsby-plugin-purgecss@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-purgecss/-/gatsby-plugin-purgecss-6.0.2.tgz#31f7b3c8a1e1d5ee8df0350f5339c0d78360479f"
+  integrity sha512-7LefFqQ9ZGqcmgE3wWbFdOna7lIUTAiS1KISmvAl5M25u2IKreN1Yj7xbOF1RVz8Ta6ClAmTtc9fgNCWlr7oKQ==
   dependencies:
     fs-extra "^9.0.1"
     loader-utils "^2.0.0"
@@ -6004,7 +6004,7 @@ gatsby-plugin-typescript@^3.5.0:
     "@babel/runtime" "^7.12.5"
     babel-plugin-remove-graphql-queries "^3.5.0"
 
-gatsby-plugin-utils@^1.4.0, gatsby-plugin-utils@^1.5.0:
+gatsby-plugin-utils@^1.5.0:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-utils/-/gatsby-plugin-utils-1.5.0.tgz#793b0796ea225cf3c75871d06f5e75e3c3fa82c9"
   integrity sha512-IqCXOGTC+WRtzLUhEbJzR9RlumDGtN/xmsl41AOgfeJvfdeXiomm9nrlCs915XDZh/fYa5MbRpf7Xu4S3skhLA==
