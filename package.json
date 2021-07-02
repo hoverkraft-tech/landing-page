@@ -37,7 +37,7 @@
     "import-sort-style-module": "^6.0.0",
     "jest": "^27.0.1",
     "lighthouse-plugin-field-performance": "^2.2.1",
-    "prettier": "2.3.0",
+    "prettier": "2.3.2",
     "prettier-plugin-import-sort": "^0.0.7",
     "react-test-renderer": "^17.0.2"
   },
