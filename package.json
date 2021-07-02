@@ -35,7 +35,7 @@
     "babel-preset-gatsby": "^1.5.0",
     "identity-obj-proxy": "^3.0.0",
     "import-sort-style-module": "^6.0.0",
-    "jest": "^27.0.1",
+    "jest": "^27.0.6",
     "lighthouse-plugin-field-performance": "^2.2.1",
     "prettier": "2.3.0",
     "prettier-plugin-import-sort": "^0.0.7",
