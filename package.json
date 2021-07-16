@@ -19,7 +19,7 @@
     "gatsby-plugin-sitemap": "^4.2.0",
     "gatsby-plugin-webfonts": "^2.1.0",
     "gatsby-source-filesystem": "^3.6.0",
-    "gsap": "^3.6.1",
+    "gsap": "^3.7.1",
     "i18next": "^19.9.2",
     "node-sass": "^6.0.0",
     "react": "^17.0.2",
