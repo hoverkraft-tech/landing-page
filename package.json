@@ -16,7 +16,7 @@
     "gatsby-plugin-react-helmet": "^4.6.0",
     "gatsby-plugin-react-i18next": "^1.1.1",
     "gatsby-plugin-sass": "^4.6.0",
-    "gatsby-plugin-sitemap": "^4.2.0",
+    "gatsby-plugin-sitemap": "^4.6.0",
     "gatsby-plugin-webfonts": "^2.1.0",
     "gatsby-source-filesystem": "^3.6.0",
     "gsap": "^3.6.1",
