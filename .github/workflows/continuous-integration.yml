@@ -75,7 +75,7 @@ jobs:
           CI: true
 
       - name: 🚦 Lighthouse
-        uses: treosh/lighthouse-ci-action@7.0.0
+        uses: treosh/lighthouse-ci-action@8.0.0
         with:
           # no urls needed, since it uses local folder to scan .html files
           configPath: '.github/workflows/lighthouserc.json'
@@ -144,7 +144,7 @@ jobs:
 
       - name: 🚦 Audit URLs using Lighthouse
         id: lighthouse-ci-audit
-        uses: treosh/lighthouse-ci-action@7.0.0
+        uses: treosh/lighthouse-ci-action@8.0.0
         with:
           urls: |
             https://hoverkraft.sh
