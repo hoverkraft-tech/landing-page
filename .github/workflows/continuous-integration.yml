@@ -12,7 +12,7 @@ jobs:
   checks:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2.1.5
 
       - name: ♻️ Get yarn cache directory path
@@ -86,7 +86,7 @@ jobs:
     needs: [checks]
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - uses: actions/setup-node@v2.1.5
 
       - name: ♻️ Get yarn cache directory path
