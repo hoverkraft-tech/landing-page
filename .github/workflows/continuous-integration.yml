@@ -21,7 +21,7 @@ jobs:
 
       - name: ♻️ Yarn packages cache
         id: yarn-cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.3
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -36,7 +36,7 @@ jobs:
         run: yarn
 
       - name: ♻️ Gatsby cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.3
         id: gatsby-cache
         with:
           path: |
@@ -61,7 +61,7 @@ jobs:
           echo "::set-output name=dir::$JEST_CACHE_DIR"
 
       - name: ♻️ Test cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.3
         with:
           path: |
             ${{ steps.jest-cache-dir-path.outputs.dir }}
@@ -95,7 +95,7 @@ jobs:
 
       - name: ♻️ Yarn packages cache
         id: yarn-cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.3
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -110,7 +110,7 @@ jobs:
         run: yarn
 
       - name: ♻️ Gatsby cache
-        uses: actions/cache@v2.1.6
+        uses: actions/cache@v3.0.3
         id: gatsby-cache
         with:
           path: |
