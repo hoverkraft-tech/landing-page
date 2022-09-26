@@ -1,25 +1,34 @@
+const title = 'Hoverkraft';
+const hostname = 'hoverkraft.sh';
+const siteUrl = `https://${hostname}`;
+
 module.exports = {
   pathPrefix: '/',
   siteMetadata: {
-    title: 'Hoverkraft',
+    title,
     description: 'Frictionless DevOps cloud platform as a service',
     author: '@hoverkraft',
     contactFormUrl:
       'https://send.pageclip.co/zSPWTmFycyOKcVDIW2vvZKAbkjQqZ9o8/contact-form',
     subscribeFormUrl:
       'https://hoverkraft.us2.list-manage.com/subscribe/post?u=74407d5544e6e09de1a62cccf&amp;id=5a44d0bce9',
-    siteUrl: 'https://hoverkraft.sh',
+    siteUrl,
   },
   plugins: [
     'gatsby-plugin-minify-html',
-
+    'gatsby-plugin-sass',
+    // this (optional) plugin enables Progressive Web App + Offline functionality
+    // To learn more, visit: https://gatsby.dev/offline
+    'gatsby-plugin-offline',
+    'gatsby-plugin-sitemap',
+    'gatsby-plugin-image',
+    'gatsby-plugin-sharp',
     {
       resolve: `gatsby-plugin-plausible`,
       options: {
-        domain: `hoverkraft.sh`,
+        domain: hostname,
       },
     },
-    'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -28,21 +37,12 @@ module.exports = {
       },
     },
     {
-      resolve: 'gatsby-plugin-manifest',
+      resolve: `gatsby-source-filesystem`,
       options: {
-        name: 'gatsby-starter-default',
-        short_name: 'starter',
-        start_url: '/',
-        background_color: '#663399',
-        theme_color: '#663399',
-        display: 'minimal-ui',
-        icon: 'src/images/gatsby-icon.png', // This path is relative to the root of the site.
-        icon_options: {
-          purpose: `any maskable`,
-        },
+        name: `locale`,
+        path: `${__dirname}/src/locales`,
       },
     },
-    'gatsby-plugin-sass',
     {
       resolve: `gatsby-plugin-webfonts`,
       options: {
@@ -56,17 +56,11 @@ module.exports = {
         },
       },
     },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        path: `${__dirname}/src/locales`,
-        name: `locale`,
-      },
-    },
+
     {
       resolve: `gatsby-plugin-react-i18next`,
       options: {
-        siteUrl: 'https://hoverkraft.sh',
+        siteUrl,
         localeJsonSourceName: `locale`,
         languages: [`en`, `fr`],
         defaultLanguage: `en`,
@@ -80,8 +74,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Hoverkraft.sh`,
-        short_name: `Hoverkraft.sh`,
+        name: title,
+        short_name: title,
         start_url: `/`,
         background_color: `#1d2026`,
         theme_color: `#1998ff`,
@@ -89,63 +83,6 @@ module.exports = {
         icon: `${__dirname}/src/images/gatsby-icon.png`, // This path is relative to the root of the site.
       },
     },
-    {
-      resolve: 'gatsby-plugin-sitemap',
-      options: {
-        exclude: ['/**/404', '/**/404.html'],
-        query: `
-          {
-            site {
-              siteMetadata {
-                siteUrl
-              }
-            }
-            allSitePage(filter: {context: {i18n: {routed: {eq: false}}}}) {
-              edges {
-                node {
-                  context {
-                    i18n {
-                      defaultLanguage
-                      languages
-                      originalPath
-                    }
-                  }
-                  path
-                }
-              }
-            }
-          }
-        `,
-        serialize: ({ site, allSitePage }) => {
-          return allSitePage.edges.map((edge) => {
-            const {
-              languages,
-              originalPath,
-              defaultLanguage,
-            } = edge.node.context.i18n;
-            const { siteUrl } = site.siteMetadata;
-            const url = siteUrl + originalPath;
-            const links = [
-              { lang: defaultLanguage, url },
-              { lang: 'x-default', url },
-            ];
-            languages.forEach((lang) => {
-              if (lang === defaultLanguage) return;
-              links.push({ lang, url: `${siteUrl}/${lang}${originalPath}` });
-            });
-            return {
-              url,
-              changefreq: 'daily',
-              priority: originalPath === '/' ? 1.0 : 0.7,
-              links,
-            };
-          });
-        },
-      },
-    },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    'gatsby-plugin-offline',
     {
       resolve: `gatsby-plugin-purgecss`,
       options: {
@@ -174,6 +111,7 @@ module.exports = {
             'alert',
             'alert-success',
             'alert-danger',
+            'visually-hidden',
           ],
         },
       },

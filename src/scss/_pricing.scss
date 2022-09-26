@@ -11,10 +11,10 @@
 	-o-transition: all 1s;
 	transition: all 1s;
 	.title-text {
-		color: theme-color(dark);
+		color: $dark;
 	}
 	.text-amount {
-		color: theme-color(primary);
+		color: $primary;
 	}
 	img {
 		margin-bottom: 37px;
@@ -31,7 +31,7 @@
 		box-shadow: 0 9px 15px 0 rgba(7, 42, 68, 0.09);
 	}
 	&:hover {
-		background: theme-color(secondary);
+		background: $secondary;
 		.title-text {
 			color: $white;
 		}
