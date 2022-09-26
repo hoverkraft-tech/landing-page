@@ -8,7 +8,7 @@ const Home = () => {
   const { t } = useTranslation(['home']);
   return (
     <section id="home" className="home">
-      <h1 className="sr-only">{t('home::Hoverkraft.sh')}</h1>
+      <h1 className="sr-only">{t('home::hoverkraft.cloud')}</h1>
       <h2 className="sr-only">
         {t('home::The frictionless DevOps Cloud platform')}
       </h2>

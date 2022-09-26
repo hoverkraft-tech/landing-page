@@ -8,7 +8,7 @@ module.exports = {
       'https://send.pageclip.co/zSPWTmFycyOKcVDIW2vvZKAbkjQqZ9o8/contact-form',
     subscribeFormUrl:
       'https://hoverkraft.us2.list-manage.com/subscribe/post?u=74407d5544e6e09de1a62cccf&amp;id=5a44d0bce9',
-    siteUrl: 'https://hoverkraft.sh',
+    siteUrl: 'https://hoverkraft.cloud',
   },
   plugins: [
     'gatsby-plugin-minify-html',
@@ -16,7 +16,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-plausible`,
       options: {
-        domain: `hoverkraft.sh`,
+        domain: `hoverkraft.cloud`,
       },
     },
     'gatsby-plugin-react-helmet',
@@ -66,7 +66,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-react-i18next`,
       options: {
-        siteUrl: 'https://hoverkraft.sh',
+        siteUrl: 'https://hoverkraft.cloud',
         localeJsonSourceName: `locale`,
         languages: [`en`, `fr`],
         defaultLanguage: `en`,
@@ -80,8 +80,8 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `Hoverkraft.sh`,
-        short_name: `Hoverkraft.sh`,
+        name: `hoverkraft.cloud`,
+        short_name: `hoverkraft.cloud`,
         start_url: `/`,
         background_color: `#1d2026`,
         theme_color: `#1998ff`,

@@ -14,7 +14,7 @@
 
 > Landing page for Hoverkraft project
 
-### 🏠 [Homepage](https://hoverkraft.sh)
+### 🏠 [Homepage](https://hoverkraft.cloud)
 
 ## Install
 
@@ -36,9 +36,9 @@ yarn run test
 
 ## Author
 
-👤 **Hoverkraft <contact@hoverkraft.sh>**
+👤 **Hoverkraft <contact@hoverkraft.cloud>**
 
-- Website: https://hoverkraft.sh
+- Website: <https://hoverkraft.cloud>
 - Github: [@hoverkraft](https://github.com/hoverkraft)
 
 ## 🤝 Contributing
@@ -51,7 +51,7 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2020 [Hoverkraft <contact@hoverkraft.sh>](https://github.com/hoverkraft).<br />
+Copyright © 2020 [Hoverkraft <contact@hoverkraft.cloud>](https://github.com/hoverkraft).<br />
 This project is [0BSD](https://github.com/hoverkraft/landing-page/blob/master/LICENSE) licensed.
 
 ---

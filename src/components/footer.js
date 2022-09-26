@@ -16,14 +16,14 @@ const Footer = ({ siteTitle }) => {
               <p className="mb-4">district, kiyev port south Canada</p>
               <div className="d-flex align-items-center">
                 <p className="mr-4 mb-0">+3 123 456 789</p>
-                <Link to="mailto:contact@hoverkraft.sh" className="footer-link">
-                  contact@hoverkraft.sh
+                <Link to="mailto:contact@hoverkraft.cloud" className="footer-link">
+                  contact@hoverkraft.cloud
                 </Link>
               </div>
               <div className="d-flex align-items-center">
                 <p className="mr-4 mb-0">+1 222 345 342</p>
-                <Link to="mailto:contact@hoverkraft.sh" className="footer-link">
-                  contact@hoverkraft.sh
+                <Link to="mailto:contact@hoverkraft.cloud" className="footer-link">
+                  contact@hoverkraft.cloud
                 </Link>
               </div>
             </address>
@@ -141,7 +141,7 @@ const Footer = ({ siteTitle }) => {
             <div className="col">
               <p className="mb-0 text-small pt-1 text-center">
                 © {new Date().getFullYear()}{' '}
-                <a href="https://hoverkraft.sh" className="text-white">
+                <a href="https://hoverkraft.cloud" className="text-white">
                   {siteTitle}
                 </a>
                 . {t('All rights reserved.')}
