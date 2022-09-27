@@ -1,5 +1,5 @@
 const title = 'Hoverkraft';
-const hostname = 'hoverkraft.sh';
+const hostname = 'hoverkraft.cloud';
 const siteUrl = `https://${hostname}`;
 
 module.exports = {

@@ -3,7 +3,7 @@
   "private": true,
   "description": "Landing page for Hoverkraft project",
   "version": "0.1.0",
-  "author": "Hoverkraft <contact@hoverkraft.sh>",
+  "author": "Hoverkraft <contact@hoverkraft.cloud>",
   "dependencies": {
     "bootstrap": "^5.2.1",
     "gatsby": "^4.23.1",
