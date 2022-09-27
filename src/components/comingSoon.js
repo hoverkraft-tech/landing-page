@@ -1,9 +1,9 @@
 import { graphql, useStaticQuery } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 
 import useSendFormData from '../hooks/useSendFormData';
-import comingSoon from '../images/coming-soon.svg';
 
 const ComingSoon = () => {
   const { t } = useTranslation(['coming-soon']);
@@ -30,10 +30,11 @@ const ComingSoon = () => {
       <div className="container">
         <div className="row mb-5 pb-5">
           <div className="col-sm-4" data-aos="fade-up" data-aos-offset={-500}>
-            <img
-              src={comingSoon}
+            <StaticImage
+              src="../images/coming-soon.svg"
               alt={t('comingSoon::Coming Soon')}
               className="img-fluid"
+              placeholder="tracedSVG"
             />
           </div>
           <div className="col-sm-8" data-aos="fade-up" data-aos-offset={-500}>
@@ -49,7 +50,7 @@ const ComingSoon = () => {
               className="form-inline"
             >
               <div className="form-group mx-sm-2">
-                <label htmlFor="mail" className="sr-only">
+                <label htmlFor="mail" className="visually-hidden">
                   {t('comingSoon::Email')}
                 </label>
                 <input

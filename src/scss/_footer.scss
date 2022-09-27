@@ -1,6 +1,6 @@
 .footer {
   color: $footer-color;
-  background: theme-color(primary) url(../images/footer_bg.svg);
+  background: $primary url(../images/footer_bg.svg);
   background-size: cover;
   background-position: left bottom;
   p {
@@ -29,7 +29,7 @@
         }
         &:hover {
           i {
-            color: theme-color(dark);
+            color: $dark;
           }
         }
       }
