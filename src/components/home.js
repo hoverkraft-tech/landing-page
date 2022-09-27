@@ -1,15 +1,26 @@
 import { Link } from 'gatsby';
+import { graphql, useStaticQuery } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 
-import group from '../images/group.png';
-
 const Home = () => {
   const { t } = useTranslation(['home']);
+
+  const data = useStaticQuery(graphql`
+    query HomeQuery {
+      site {
+        siteMetadata {
+          title
+        }
+      }
+    }
+  `);
+
   return (
     <section id="home" className="home">
-      <h1 className="sr-only">{t('home::hoverkraft.cloud')}</h1>
-      <h2 className="sr-only">
+      <h1 className="visually-hidden">{data.site.siteMetadata.title}</h1>
+      <h2 className="visually-hidden">
         {t('home::The frictionless DevOps Cloud platform')}
       </h2>
       <div className="container">
@@ -58,11 +69,13 @@ const Home = () => {
                   </Link>
                 </div>
                 <div className="mt-5 mt-lg-0">
-                  <img
-                    src={group}
-                    alt="hoverkraft"
+                  <StaticImage
+                    src="../images/group.png"
+                    alt={data.site.siteMetadata.title}
                     className="img-fluid banner-group-img"
                     data-aos="zoom-in-up"
+                    placeholder="tracedSVG"
+                    width={430}
                   />
                 </div>
               </div>

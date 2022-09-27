@@ -1,66 +1,51 @@
-import { Link, useI18next, useTranslation } from 'gatsby-plugin-react-i18next';
+import { graphql, useStaticQuery } from 'gatsby';
+import { StaticImage } from 'gatsby-plugin-image';
+import { Link, useTranslation } from 'gatsby-plugin-react-i18next';
 import React from 'react';
+import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import ReactCountryFlag from 'react-country-flag';
 
-import logoDark from '../images/logo-dark.png';
-import logo from '../images/logo.png';
+import { LanguagesDropdown } from './LanguagesDropdown';
 
-const LanguageDropdownItem = ({ language, originalPath }) => {
-  return (
-    <NavDropdown.Item
-      as={Link}
-      to={originalPath}
-      language={language}
-      className="dropdown-item"
-    >
-      <ReactCountryFlag
-        countryCode={language === 'en' ? 'GB' : language}
-        className="flag-icon"
-      />{' '}
-      {language}
-    </NavDropdown.Item>
-  );
-};
-
-const LanguagesDropdown = () => {
-  const { languages, originalPath, language } = useI18next();
-  return (
-    <NavDropdown
-      title={
-        <>
-          <ReactCountryFlag
-            countryCode={language === 'en' ? 'GB' : language}
-            className="flag-icon"
-          />{' '}
-          {language}
-        </>
-      }
-      id="language-nav-dropdown"
-    >
-      {languages
-        .filter((lng) => language !== lng)
-        .map((lng) => (
-          <LanguageDropdownItem
-            key={lng}
-            language={lng}
-            originalPath={originalPath}
-          />
-        ))}
-    </NavDropdown>
-  );
-};
-
-const Header = ({ light, siteTitle }) => {
+const Header = ({ light }) => {
   const { t } = useTranslation(['header']);
 
+  const data = useStaticQuery(graphql`
+    query HeaderQuery {
+      site {
+        siteMetadata {
+          siteUrl
+          title
+        }
+      }
+    }
+  `);
+
   return (
-    <Navbar variant={light ? 'light' : 'dark'} expand="lg" fixed="top">
-      <div className="container">
-        <Navbar.Brand as={Link} to="/" title={siteTitle}>
-          <img src={light ? logoDark : logo} alt={siteTitle} />
+    <Navbar
+      variant={light ? 'light' : 'dark'}
+      bg={light ? 'light' : 'dark'}
+      expand="lg"
+      fixed="top"
+    >
+      <Container>
+        <Navbar.Brand as={Link} to="/" title={data.site.siteMetadata.title}>
+          {light ? (
+            <StaticImage
+              src="../images/logos/logo-dark.png"
+              alt={data.site.siteMetadata.title}
+              placeholder="tracedSVG"
+              width={420}
+            />
+          ) : (
+            <StaticImage
+              src="../images/logos/logo.png"
+              alt={data.site.siteMetadata.title}
+              width={420}
+              placeholder="tracedSVG"
+            />
+          )}
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="main-navbar-nav" />
         <Navbar.Collapse id="main-navbar-nav">
@@ -101,7 +86,7 @@ const Header = ({ light, siteTitle }) => {
           </li> */}
           </Nav>
         </Navbar.Collapse>
-      </div>
+      </Container>
     </Navbar>
   );
 };
