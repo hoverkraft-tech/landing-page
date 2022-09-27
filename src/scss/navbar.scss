@@ -1,7 +1,7 @@
 .navbar {
   width: 100%;
   padding: 1.875rem 1rem;
-  background: theme-color(primary);
+  background: $primary;
   @media (max-width: 991px) {
     padding: 0.875rem 1rem;
     height: $mobile-header-height;
@@ -67,7 +67,7 @@
       &:last-child {
         .nav-link {
           &.active {
-            background: theme-color(success);
+            background: $success;
             border-radius: 50px;
           }
         }
@@ -97,13 +97,13 @@
       .navbar-nav {
         .nav-item {
           .nav-link {
-            color: theme-color(dark);
+            color: $dark;
           }
         }
       }
       @media (max-width: 991px) {
         .close-menu {
-          color: theme-color(dark);
+          color: $dark;
           padding: 2px 4px;
           background: transparent;
           display: inline-block;
@@ -154,7 +154,7 @@
     padding: 0.875rem 0.1rem;
     position: static;
     z-index: auto;
-    background: theme-color(primary);
+    background: $primary;
     @media (max-width: 991px) {
       padding: 0.875rem 1rem;
     }
