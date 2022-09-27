@@ -49,12 +49,12 @@
 				-webkit-backface-visibility: visible;
 				transition: opacity .2s ease;
 				border-radius: 3;
-				border: solid 2px theme-color(primary);
+				border: solid 2px $primary;
 			}
 			&.active,
 			&:hover {
 				span {
-					background: theme-color(primary);
+					background: $primary;
 				}
 			}
 		}
