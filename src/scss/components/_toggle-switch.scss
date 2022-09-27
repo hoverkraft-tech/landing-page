@@ -34,7 +34,7 @@
 		visibility: hidden;
 		&:checked {
 			+.toggle-slider {
-				background-color: theme-color(primary);
+				background-color: $primary;
 				&:before {
 					-webkit-transform: translateX(21px);
 					-ms-transform: translateX(21px);
@@ -45,7 +45,7 @@
 	}
 }
 .text-active {
-	color: theme-color(dark);
+	color: $dark;
 }
 
 /* Rounded sliders */

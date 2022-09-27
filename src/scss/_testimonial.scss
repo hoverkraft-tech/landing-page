@@ -9,7 +9,7 @@
     width: 450px;
     padding: 34px 34px 34px 94px;
     background: $white;
-    color: theme-color(dark);
+    color: $dark;
     border-radius: 10px;
     position: relative;
     box-shadow: 0 20px 70px -10px rgba(109, 121, 141, 0.15);
@@ -41,7 +41,7 @@
       }
     }
     .testimonial-destination {
-      color: theme-color(light);
+      color: $light;
       font-weight: normal;
     }
   }
