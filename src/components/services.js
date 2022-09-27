@@ -1,21 +1,16 @@
+import { StaticImage } from 'gatsby-plugin-image';
 import { useTranslation } from 'gatsby-plugin-react-i18next';
 import React from 'react';
 
-import cicd from '../images/services/ci-cd.png';
-import dockerRegistry from '../images/services/docker-registry.webp';
-import gitOps from '../images/services/gitops.png';
-import metricsMonitoring from '../images/services/metrics-monitoring.png';
-import rancher from '../images/services/rancher-logo-cow-blue.svg';
-import secrets from '../images/services/secrets.png';
-
 const Services = () => {
   const { t } = useTranslation(['services']);
+
   return (
     <section className="our-services" id="services">
       <div className="container">
         <div className="row">
           <div className="col-sm-12">
-            <h4 className="text-dark">Our platform</h4>
+            <h4 className="text-dark">{t('services::Our platform')}</h4>
             <h5 className="font-weight-medium text-dark mb-5">
               {t('services::Unified services hub for DevOps lifecycle')}
             </h5>
@@ -29,10 +24,12 @@ const Services = () => {
               data-aos-easing="linear"
               data-aos-duration={1500}
             >
-              <img
-                src={rancher}
+              <StaticImage
+                src="../images/services/rancher.png"
                 alt={t('services::Rancher as a service')}
                 data-aos="zoom-in"
+                placeholder="tracedSVG"
+                width={100}
               />
               <h6 className="text-dark mb-3 mt-4 font-weight-medium">
                 {t('services::Rancher as a service')}
@@ -51,10 +48,12 @@ const Services = () => {
               data-aos-easing="linear"
               data-aos-duration={1500}
             >
-              <img
-                src={metricsMonitoring}
+              <StaticImage
+                src="../images/services/metrics-monitoring.png"
                 alt={t('services::Metrics & monitoring')}
                 data-aos="zoom-in"
+                placeholder="tracedSVG"
+                width={100}
               />
               <h6 className="text-dark mb-3 mt-4 font-weight-medium">
                 {t('services::Metrics & monitoring')}
@@ -73,10 +72,12 @@ const Services = () => {
               data-aos-easing="linear"
               data-aos-duration={1500}
             >
-              <img
-                src={dockerRegistry}
+              <StaticImage
+                src="../images/services/docker-registry.png"
                 alt={t('services::Docker registry')}
                 data-aos="zoom-in"
+                placeholder="tracedSVG"
+                width={100}
               />
               <h6 className="text-dark mb-3 mt-4 font-weight-medium">
                 {t('services::Docker registry')}
@@ -97,10 +98,12 @@ const Services = () => {
               data-aos-easing="linear"
               data-aos-duration={1500}
             >
-              <img
-                src={gitOps}
+              <StaticImage
+                src="../images/services/gitops.png"
                 alt={t('services::GitOps')}
                 data-aos="zoom-in"
+                placeholder="tracedSVG"
+                width={100}
               />
               <h6 className="text-dark mb-3 mt-4 font-weight-medium">
                 {t('services::GitOps')}
@@ -119,7 +122,13 @@ const Services = () => {
               data-aos-easing="linear"
               data-aos-duration={1500}
             >
-              <img src={cicd} alt={t('services::CI/CD')} data-aos="zoom-in" />
+              <StaticImage
+                src="../images/services/ci-cd.png"
+                alt={t('services::CI/CD')}
+                data-aos="zoom-in"
+                placeholder="tracedSVG"
+                width={100}
+              />
               <h6 className="text-dark mb-3 mt-4 font-weight-medium">
                 {t('services::CI/CD')}
               </h6>
@@ -137,10 +146,12 @@ const Services = () => {
               data-aos-easing="linear"
               data-aos-duration={1500}
             >
-              <img
-                src={secrets}
+              <StaticImage
+                src="../images/services/secrets.png"
                 alt={t('services::Secrets as a service')}
                 data-aos="zoom-in"
+                placeholder="tracedSVG"
+                width={100}
               />
               <h6 className="text-dark mb-3 mt-4 font-weight-medium">
                 {t('services::Secrets as a service')}

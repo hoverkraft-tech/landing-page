@@ -6,9 +6,9 @@ import React from 'react';
 
 import ComingSoon from '../components/comingSoon';
 import Contact from '../components/contact';
+import HeadComponent from '../components/head';
 import Home from '../components/home';
 import Layout from '../components/layout';
-import SEO from '../components/seo';
 import Services from '../components/services';
 
 // import About from '../components/about';
@@ -18,10 +18,8 @@ import Services from '../components/services';
 // import Testimonial from '../components/testimonial';
 
 const IndexPage = () => {
-  const { t } = useTranslation(['index']);
   return (
     <Layout>
-      <SEO title={t('index::Home')} />
       <Home />
       <ComingSoon />
       <Services />
@@ -38,7 +36,7 @@ const IndexPage = () => {
 export default IndexPage;
 
 export const query = graphql`
-  query($language: String!) {
+  query ($language: String!) {
     locales: allLocale(filter: { language: { eq: $language } }) {
       edges {
         node {
@@ -50,3 +48,9 @@ export const query = graphql`
     }
   }
 `;
+
+export function Head() {
+  const { t } = useTranslation(['index']);
+
+  return <HeadComponent title={t('Home')} />;
+}

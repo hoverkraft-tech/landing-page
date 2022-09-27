@@ -37,15 +37,24 @@ $colors: (
   black: #000000,
 );
 
+$primary: #1d2026;
+$secondary: #1998ff;
+$success: #00d663;
+$info: #00b3ff;
+$warning: #ffe671;
+$danger: #ff696d;
+$light: #506690;
+$dark: #000000;
+
 $theme-colors: (
-  primary: #1d2026,
-  secondary: #1998ff,
-  success: #00d663,
-  info: #00b3ff,
-  warning: #ffe671,
-  danger: #ff696d,
-  light: #506690,
-  dark: #000000,
+  primary: $primary,
+  secondary: $secondary,
+  success: $success,
+  info: $info,
+  warning: $warning,
+  danger: $danger,
+  light: $light,
+  dark: $dark,
 );
 
 $theme-gradient-colors: (
@@ -106,7 +115,7 @@ $nav-link-active-color: #fff;
 $header-padding-x: 0;
 $header-padding-y: 0px;
 $nav-link-padding: 0.625rem 1.25rem;
-$navbar-bg: theme-color(secondary);
+$navbar-bg: $secondary;
 $active-bg: rgba(0, 0, 0, 0.2);
 $mobile-menu-width: 280px;
 $mobile-header-height: 71px;
