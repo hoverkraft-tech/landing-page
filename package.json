@@ -18,7 +18,7 @@
     "gatsby-plugin-sharp": "^4.23.1",
     "gatsby-plugin-sitemap": "^5.23.1",
     "gatsby-plugin-webfonts": "^2.2.2",
-    "gatsby-source-filesystem": "^4.23.0",
+    "gatsby-source-filesystem": "^4.24.0",
     "gsap": "^3.11.2",
     "i18next": "^21.9.2",
     "node-sass": "^7.0.3",
