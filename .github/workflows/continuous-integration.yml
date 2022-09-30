@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3.4.1
+      - uses: actions/setup-node@v3.5.0
 
       - name: ♻️ Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -21,7 +21,7 @@ jobs:
 
       - name: ♻️ Yarn packages cache
         id: yarn-cache
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.0.9
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -36,7 +36,7 @@ jobs:
         run: yarn
 
       - name: ♻️ Gatsby cache
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.0.9
         id: gatsby-cache
         with:
           path: |
@@ -61,7 +61,7 @@ jobs:
           echo "::set-output name=dir::$JEST_CACHE_DIR"
 
       - name: ♻️ Test cache
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.0.9
         with:
           path: |
             ${{ steps.jest-cache-dir-path.outputs.dir }}
@@ -87,7 +87,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3.4.1
+      - uses: actions/setup-node@v3.5.0
 
       - name: ♻️ Get yarn cache directory path
         id: yarn-cache-dir-path
@@ -95,7 +95,7 @@ jobs:
 
       - name: ♻️ Yarn packages cache
         id: yarn-cache
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.0.9
         with:
           path: |
             ${{ steps.yarn-cache-dir-path.outputs.dir }}
@@ -110,7 +110,7 @@ jobs:
         run: yarn
 
       - name: ♻️ Gatsby cache
-        uses: actions/cache@v3.0.8
+        uses: actions/cache@v3.0.9
         id: gatsby-cache
         with:
           path: |
