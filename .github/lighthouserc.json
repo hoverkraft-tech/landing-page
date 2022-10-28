@@ -1,0 +1,10 @@
+{
+  "ci": {
+    "assert": {
+      "preset": "lighthouse:default"
+    },
+    "collect": {
+      "staticDistDir": "./public"
+    }
+  }
+}

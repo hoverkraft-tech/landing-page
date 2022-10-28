@@ -1,0 +1,43 @@
+name: 🚀 Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  ci:
+    name: Continuous Integration
+    uses: ./.github/workflows/__shared-ci.yml
+
+  release:
+    needs: ci
+    runs-on: "ubuntu-latest"
+    environment: github-pages
+    steps:
+      - uses: escemi-tech/actions-node@v1.10.0
+
+      - name: 🚀 Release to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v3
+        with:
+          target_branch: gh-pages
+          build_dir: public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: 🔭 Check the site is up
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: "${{ secrets.SITE_URL }}"
+
+      - name: 🚦 Audit URLs using Lighthouse
+        id: lighthouse-ci-audit
+        uses: treosh/lighthouse-ci-action@9.3.0
+        with:
+          urls: ${{ secrets.SITE_URL }}
+          temporaryPublicStorage: true
+
+      - name: 🚦 Update Lighthouse badge
+        uses: ./github/actions/lighthouse-badge
+        with:
+            links: ${{ steps.lighthouse-ci-audit.outputs.links }}
+            manifest: ${{ steps.lighthouse-ci-audit.outputs.manifest }}

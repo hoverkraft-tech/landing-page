@@ -48,11 +48,16 @@
   "scripts": {
     "build": "yarn clean && GATSBY_EXPERIMENTAL_PAGE_BUILD_ON_DATA_CHANGES=true gatsby build --prefix-paths --log-pages",
     "develop": "gatsby develop",
+    "lint": "prettier --check \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
     "start": "yarn develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "jest"
+    "jest": "jest --detectOpenHandles --forceExit",
+    "test": "yarn jest --maxWorkers=50%",
+    "test:watch": "yarn jest --watch --maxWorkers=25%",
+    "test:cov": "yarn jest --coverage",
+    "test:ci": "yarn test:cov --runInBand"
   },
   "repository": {
     "type": "git",
