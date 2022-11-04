@@ -1,0 +1,50 @@
+name: 🚀 Release
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  # ci:
+  #   name: Continuous Integration
+  #   uses: ./.github/workflows/__shared-ci.yml
+
+  release:
+    # needs: ci
+    runs-on: "ubuntu-latest"
+    permissions:
+      pages: write      # to deploy to Pages
+      id-token: write
+    # environment:
+    #   name: github-pages
+    #   url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      # - name: 🏗️ Build
+      #   uses: escemi-tech/actions-node@v1.10.0
+      # - uses: actions/upload-pages-artifact@v1
+      #   with:
+      #     path: ./public
+
+      # - name: 🚀 Deploy to GitHub Pages
+      #   id: deployment
+      #   uses: actions/deploy-pages@v1
+
+      # - name: 🔭 Check the site is up
+      #   uses: jtalk/url-health-check-action@v2
+      #   with:
+      #     url: ${{ steps.deployment.outputs.page_url }}
+
+      - uses: actions/checkout@v3
+
+      - name: 🚦 Audit URLs using Lighthouse
+        id: lighthouse-ci-audit
+        uses: treosh/lighthouse-ci-action@9.3.0
+        with:
+          # urls: ${{ steps.deployment.outputs.page_url }}
+          urls: https://hoverkraft.cloud
+          temporaryPublicStorage: true
+
+      - uses: ./.github/actions/lighthouse-ci-badge
+        with:
+          links: ${{ steps.lighthouse-ci-audit.outputs.links }}
+          manifest: ${{ steps.lighthouse-ci-audit.outputs.manifest }}
