@@ -9,7 +9,7 @@ jobs:
     runs-on: "ubuntu-latest"
     name: Run checks
     steps:
-      - uses: escemi-tech/actions-node@v1.10.0
+      - uses: escemi-tech/actions-node@v1.11.0
         with:
           checks: true
 
