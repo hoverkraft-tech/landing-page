@@ -23,7 +23,7 @@
     "i18next": "^21.10.0",
     "node-sass": "^7.0.3",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.6.0",
+    "react-bootstrap": "^2.7.0",
     "react-country-flag": "^3.0.2",
     "react-dom": "^18.2.0",
     "react-i18next": "^11.18.6",
