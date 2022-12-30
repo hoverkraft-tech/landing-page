@@ -6235,10 +6235,10 @@ gatsby-plugin-utils@^3.18.0, gatsby-plugin-utils@^3.19.0:
     joi "^17.4.2"
     mime "^3.0.0"
 
-gatsby-plugin-webfonts@^2.3.1:
-  version "2.3.1"
-  resolved "https://registry.yarnpkg.com/gatsby-plugin-webfonts/-/gatsby-plugin-webfonts-2.3.1.tgz#62fbad0f604a909eb78f01db1a0f1265ab07fc0b"
-  integrity sha512-HH0fJZMYDjazdYe7HlcoAXoXcWQkkqU9dgZbDzMi/+YRJIqzEZ5tuqHiLu6YqmF3Mc+aI0GPnvc3LBQL9hxlfQ==
+gatsby-plugin-webfonts@^2.3.2:
+  version "2.3.2"
+  resolved "https://registry.yarnpkg.com/gatsby-plugin-webfonts/-/gatsby-plugin-webfonts-2.3.2.tgz#382f40aa9415e16c179e3649f03d79a7d606db48"
+  integrity sha512-ANnRNjYUbSs+THSLAcZb6LWZJ2rK9QHe/xXV3R2EX7mlDUmigs+vmFQaSBgrkom6purJ/4TInd1xz3AdY2ysnA==
   dependencies:
     axios "^1.2.1"
     cssnano "^5.1.14"
