@@ -38,7 +38,7 @@ jobs:
 
       - name: 🚦 Audit URLs using Lighthouse
         id: lighthouse-ci-audit
-        uses: treosh/lighthouse-ci-action@9.3.1
+        uses: treosh/lighthouse-ci-action@9.6.8
         with:
           # urls: ${{ steps.deployment.outputs.page_url }}
           urls: https://hoverkraft.cloud
