@@ -3515,10 +3515,10 @@ babel-preset-gatsby@^2.25.0:
     gatsby-core-utils "^3.25.0"
     gatsby-legacy-polyfills "^2.25.0"
 
-babel-preset-gatsby@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-3.8.0.tgz#75979608b290db8172563942b5394c080f6ce129"
-  integrity sha512-mT/k0hHEVGMjiWWH+uTgCq0KEZy5lNyDzIBa/IxCFbyKJsblPBZdqrTZlUncJNjWvT38FdaquTRnaYdUaKHnKw==
+babel-preset-gatsby@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-3.9.0.tgz#cdd0e81d44d31f5ebbd19a879b0cf75d72979344"
+  integrity sha512-mPWsCwz4tz6oTff6cSj8ZMDKFdsOhhRTp1VVdJDGlKSNg0x8+CamNJLsnIayJvv+PpoXEZuaNF5LOUZNGfx1oQ==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.18.6"
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.18.6"
@@ -3533,8 +3533,8 @@ babel-preset-gatsby@^3.8.0:
     babel-plugin-dynamic-import-node "^2.3.3"
     babel-plugin-macros "^3.1.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
-    gatsby-core-utils "^4.8.0"
-    gatsby-legacy-polyfills "^3.8.0"
+    gatsby-core-utils "^4.9.0"
+    gatsby-legacy-polyfills "^3.9.0"
 
 babel-preset-jest@^29.5.0:
   version "29.5.0"
@@ -5693,6 +5693,13 @@ fastq@^1.13.0, fastq@^1.6.0:
   dependencies:
     reusify "^1.0.4"
 
+fastq@^1.15.0:
+  version "1.15.0"
+  resolved "https://registry.yarnpkg.com/fastq/-/fastq-1.15.0.tgz#d04d07c6a2a68fe4599fea8d2e103a937fae6b3a"
+  integrity sha512-wBrocU2LCXXa+lWBt8RoIRD89Fi8OdABODa/kEnyeyjS5aZO5/GNvI5sEINADqP/h8M29UHTHUb53sUu5Ihqdw==
+  dependencies:
+    reusify "^1.0.4"
+
 fb-watchman@^2.0.0:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/fb-watchman/-/fb-watchman-2.0.2.tgz#e9524ee6b5c77e9e5001af0f85f3adbb8623255c"
@@ -5952,6 +5959,15 @@ fs-extra@^11.1.0:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
+fs-extra@^11.1.1:
+  version "11.1.1"
+  resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-11.1.1.tgz#da69f7c39f3b002378b0954bb6ae7efdc0876e2d"
+  integrity sha512-MGIE4HOvQCeUCzmlHs0vXpih4ysz4wg9qiSAu6cd42lVwPbTM1TjV7RusoyQqMmk/95gdQZX72u+YW+c3eEpFQ==
+  dependencies:
+    graceful-fs "^4.2.0"
+    jsonfile "^6.0.1"
+    universalify "^2.0.0"
+
 fs-extra@^4.0.2:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-4.0.3.tgz#0d852122e5bc5beb453fb028e9c0c9bf36340c94"
@@ -6087,18 +6103,18 @@ gatsby-core-utils@^3.24.0, gatsby-core-utils@^3.25.0:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
-gatsby-core-utils@^4.8.0:
-  version "4.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-4.8.0.tgz#b9baac9f9434d0c789e470e8caf8003edf91d7ac"
-  integrity sha512-C2uOZBd9j6AYIyiB+DdxRtbQgAa3kMDRsKR5eCwALp0Bkg3W5I/YiXhSF7zQxVckaqNXzXvmedJESKCJNIvO7w==
+gatsby-core-utils@^4.9.0:
+  version "4.9.0"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-4.9.0.tgz#1134d9a119f49b90d3b5107210dfdd17a4231463"
+  integrity sha512-diCAmlr42YQpSKapD374JVF+ojDXTHxnrNoS907jNGgT4J35t2az9GsEQFgrEou3Td5TLuUl/8yJM2Hpwn4gyg==
   dependencies:
     "@babel/runtime" "^7.20.13"
     ci-info "2.0.0"
     configstore "^5.0.1"
-    fastq "^1.13.0"
-    file-type "^16.5.3"
-    fs-extra "^11.1.0"
-    got "^11.8.5"
+    fastq "^1.15.0"
+    file-type "^16.5.4"
+    fs-extra "^11.1.1"
+    got "^11.8.6"
     hash-wasm "^4.9.0"
     import-from "^4.0.0"
     lmdb "2.5.3"
@@ -6124,10 +6140,10 @@ gatsby-legacy-polyfills@^2.25.0:
     "@babel/runtime" "^7.15.4"
     core-js-compat "3.9.0"
 
-gatsby-legacy-polyfills@^3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/gatsby-legacy-polyfills/-/gatsby-legacy-polyfills-3.8.0.tgz#59bddeb81d0dba4ba4e71b39436d006f48337937"
-  integrity sha512-ZUfvOA27FvwcqTdYPe3SCzMk+4uC+YLp4jjZEGZeRI6fyTIfO7WKqETZ0Ey2rzEEBhwxF9P5BuuPjNnBR9NbOg==
+gatsby-legacy-polyfills@^3.9.0:
+  version "3.9.0"
+  resolved "https://registry.yarnpkg.com/gatsby-legacy-polyfills/-/gatsby-legacy-polyfills-3.9.0.tgz#3c93619e92d51fd16bf0a083e14992b5c7582d5a"
+  integrity sha512-gKQ8tbQ1h6nmR8xmLBox7GrzSgYhso/aMKSC0o3BQNOlutI+DHdkmsz+Jph0R2cB+yakqQfZBUYM/xg/Om515Q==
   dependencies:
     "@babel/runtime" "^7.20.13"
     core-js-compat "3.9.0"
@@ -6805,6 +6821,23 @@ got@^11.8.5:
   version "11.8.5"
   resolved "https://registry.yarnpkg.com/got/-/got-11.8.5.tgz#ce77d045136de56e8f024bebb82ea349bc730046"
   integrity sha512-o0Je4NvQObAuZPHLFoRSkdG2lTgtcynqymzg2Vupdx6PorhaT5MCbIyXG6d4D94kk8ZG57QeosgdiqfJWhEhlQ==
+  dependencies:
+    "@sindresorhus/is" "^4.0.0"
+    "@szmarczak/http-timer" "^4.0.5"
+    "@types/cacheable-request" "^6.0.1"
+    "@types/responselike" "^1.0.0"
+    cacheable-lookup "^5.0.3"
+    cacheable-request "^7.0.2"
+    decompress-response "^6.0.0"
+    http2-wrapper "^1.0.0-beta.5.2"
+    lowercase-keys "^2.0.0"
+    p-cancelable "^2.0.0"
+    responselike "^2.0.0"
+
+got@^11.8.6:
+  version "11.8.6"
+  resolved "https://registry.yarnpkg.com/got/-/got-11.8.6.tgz#276e827ead8772eddbcfc97170590b841823233a"
+  integrity sha512-6tfZ91bOr7bOXnK7PRDCGBLa1H4U080YHNaAQ2KsMGlLEzRbk44nsZF2E1IeRc3vtJHPVbKCYgdFbaGO2ljd8g==
   dependencies:
     "@sindresorhus/is" "^4.0.0"
     "@szmarczak/http-timer" "^4.0.5"
