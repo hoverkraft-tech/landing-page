@@ -14,7 +14,7 @@ jobs:
           checks: true
 
       - name: 🚦 Lighthouse
-        uses: treosh/lighthouse-ci-action@9.6.8
+        uses: treosh/lighthouse-ci-action@10.1.0
         with:
           # no urls needed, since it uses local folder to scan .html files
           configPath: ".github/lighthouserc.json"
