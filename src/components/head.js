@@ -10,19 +10,17 @@ import PropTypes from 'prop-types';
 import React from 'react';
 
 function Head({ title }) {
-  const { site } = useStaticQuery(
-    graphql`
-      query {
-        site {
-          siteMetadata {
-            title
-            description
-            author
-          }
+  const { site } = useStaticQuery(graphql`
+    query {
+      site {
+        siteMetadata {
+          title
+          description
+          author
         }
       }
-    `
-  );
+    }
+  `);
 
   const metaDescription = site.siteMetadata.description;
   const defaultTitle = site.siteMetadata?.title;
