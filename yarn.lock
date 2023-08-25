@@ -3569,10 +3569,10 @@ babel-preset-gatsby@^2.25.0:
     gatsby-core-utils "^3.25.0"
     gatsby-legacy-polyfills "^2.25.0"
 
-babel-preset-gatsby@^3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-3.11.0.tgz#96451de254d2f22a53e7a87868069071b3541143"
-  integrity sha512-JKsFEeqQk6dvWGyqN8VPhxsWU7RohzILK5fxoSXQIk8MQnV/gHJSULju1FFH6DNpb85lgFGsgpU77X9/YPS7Sw==
+babel-preset-gatsby@^3.12.0:
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-3.12.0.tgz#b23dea00cacd42eaba630defdfb7569044bc1a24"
+  integrity sha512-355xQi5cZIFYCdCbeJ9mHipEZrk0Jmk5zq21Kd4FlYAAYn0L8lC/YiSG44muRyPDdSVJiLOr6pMGOWQRe5PPyg==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.18.6"
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.18.6"
@@ -3587,8 +3587,8 @@ babel-preset-gatsby@^3.11.0:
     babel-plugin-dynamic-import-node "^2.3.3"
     babel-plugin-macros "^3.1.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
-    gatsby-core-utils "^4.11.0"
-    gatsby-legacy-polyfills "^3.11.0"
+    gatsby-core-utils "^4.12.0"
+    gatsby-legacy-polyfills "^3.12.0"
 
 babel-preset-jest@^29.5.0:
   version "29.5.0"
@@ -4441,10 +4441,10 @@ cookie@^0.4.1, cookie@~0.4.1:
   resolved "https://registry.yarnpkg.com/cookie/-/cookie-0.4.2.tgz#0e41f24de5ecf317947c82fc789e06a884824432"
   integrity sha512-aSWTXFzaKWkvHO1Ny/s+ePFpvKsPnjc551iI41v3ny/ow6tBG5Vd+FuqGNhh1LxOmVzOlGUriIlOaokOvhaStA==
 
-core-js-compat@3.30.2:
-  version "3.30.2"
-  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.30.2.tgz#83f136e375babdb8c80ad3c22d67c69098c1dd8b"
-  integrity sha512-nriW1nuJjUgvkEjIot1Spwakz52V9YkYHZAQG6A1eCgC8AA1p0zngrQEP9R0+V6hji5XilWKG1Bd0YRppmGimA==
+core-js-compat@3.31.0:
+  version "3.31.0"
+  resolved "https://registry.yarnpkg.com/core-js-compat/-/core-js-compat-3.31.0.tgz#4030847c0766cc0e803dcdfb30055d7ef2064bf1"
+  integrity sha512-hM7YCu1cU6Opx7MXNu0NuumM0ezNeAeRKadixyiQELWY3vT3De9S4J5ZBMraWV2vZnrE1Cirl0GtFtDtMUXzPw==
   dependencies:
     browserslist "^4.21.5"
 
@@ -6176,10 +6176,10 @@ gatsby-core-utils@^3.24.0, gatsby-core-utils@^3.25.0:
     tmp "^0.2.1"
     xdg-basedir "^4.0.0"
 
-gatsby-core-utils@^4.11.0:
-  version "4.11.0"
-  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-4.11.0.tgz#16d300129d0d143a79ad32816b8837630d7e7fae"
-  integrity sha512-W7pfrKgBchdk19g802IuPkCA2iJ69lRR1GzkfYjB8d1TuIQqf0l1z0lv7e+2kQqO+uQ5Yt3sGMMN2qMYMWfLXg==
+gatsby-core-utils@^4.12.0:
+  version "4.12.0"
+  resolved "https://registry.yarnpkg.com/gatsby-core-utils/-/gatsby-core-utils-4.12.0.tgz#1ee4ced94cf2c7b2139d8d3ea6321391ce3ffdea"
+  integrity sha512-1vK0cmL8FNHAddQ5WZt0yTPdFSZuMPNUSsHckM+ZdVmRxyif3aZYSi7ofj6sJo/UvhKj7fBqJv/smZYpp2PRqg==
   dependencies:
     "@babel/runtime" "^7.20.13"
     ci-info "2.0.0"
@@ -6213,13 +6213,13 @@ gatsby-legacy-polyfills@^2.25.0:
     "@babel/runtime" "^7.15.4"
     core-js-compat "3.9.0"
 
-gatsby-legacy-polyfills@^3.11.0:
-  version "3.11.0"
-  resolved "https://registry.yarnpkg.com/gatsby-legacy-polyfills/-/gatsby-legacy-polyfills-3.11.0.tgz#daf118c2b56307de084cbe59410c953d2e0f1fe8"
-  integrity sha512-3NvNmrmmng28MS4KYAUEd1Vip4B1VJCyeGMof8OfQlMPxZMijHmeasjFDf1l5HSTUsaHotNe7gdLqITTP9CAKQ==
+gatsby-legacy-polyfills@^3.12.0:
+  version "3.12.0"
+  resolved "https://registry.yarnpkg.com/gatsby-legacy-polyfills/-/gatsby-legacy-polyfills-3.12.0.tgz#f9333ee90457e4c1549a62ce81abb7198c433293"
+  integrity sha512-hj0M4w4xFvKHtBNE3StkLmbCS3LXK0oxW5g3UkubbyMAwFqylQnWzXfysBpeFicQN/tr2px1cNGaqp91Z3Nh+g==
   dependencies:
     "@babel/runtime" "^7.20.13"
-    core-js-compat "3.30.2"
+    core-js-compat "3.31.0"
 
 gatsby-link@^4.25.0:
   version "4.25.0"
