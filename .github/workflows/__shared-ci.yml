@@ -2,11 +2,10 @@ name: Shared - Continuous Integration for common tasks
 
 on:
   workflow_call:
-   
 
 jobs:
   checks:
-    runs-on: "ubuntu-latest"
+    runs-on: 'ubuntu-latest'
     name: Run checks
     steps:
       - uses: escemi-tech/actions-node@v1.14.0
@@ -17,5 +16,5 @@ jobs:
         uses: treosh/lighthouse-ci-action@10.1.0
         with:
           # no urls needed, since it uses local folder to scan .html files
-          configPath: ".github/lighthouserc.json"
+          configPath: '.github/lighthouserc.json'
           temporaryPublicStorage: true
