@@ -3,36 +3,41 @@ name: 🚀 Release
 on:
   push:
     branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  # ci:
-  #   name: Continuous Integration
-  #   uses: ./.github/workflows/__shared-ci.yml
+  ci:
+    name: Continuous Integration
+    uses: ./.github/workflows/__shared-ci.yml
 
   release:
-    # needs: ci
-    runs-on: "ubuntu-latest"
+    needs: ci
+    runs-on: 'ubuntu-latest'
     permissions:
-      pages: write      # to deploy to Pages
+      pages: write # to deploy to Pages
       id-token: write
-    # environment:
-    #   name: github-pages
-    #   url: ${{ steps.deployment.outputs.page_url }}
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      # - name: 🏗️ Build
-      #   uses: escemi-tech/actions-node@v1.10.0
-      # - uses: actions/upload-pages-artifact@v1
-      #   with:
-      #     path: ./public
+      - name: 🏗️ Build
+        uses: escemi-tech/actions-node@v1.10.0
+      - uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./public
 
-      # - name: 🚀 Deploy to GitHub Pages
-      #   id: deployment
-      #   uses: actions/deploy-pages@v1
+      - name: 🚀 Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
 
-      # - name: 🔭 Check the site is up
-      #   uses: jtalk/url-health-check-action@v2
-      #   with:
-      #     url: ${{ steps.deployment.outputs.page_url }}
+      - name: 🔭 Check the site is up
+        uses: jtalk/url-health-check-action@v2
+        with:
+          url: ${{ steps.deployment.outputs.page_url }}
 
       - uses: actions/checkout@v4
 
@@ -40,8 +45,7 @@ jobs:
         id: lighthouse-ci-audit
         uses: treosh/lighthouse-ci-action@10.1.0
         with:
-          # urls: ${{ steps.deployment.outputs.page_url }}
-          urls: https://hoverkraft.cloud
+          urls: ${{ steps.deployment.outputs.page_url }}
           temporaryPublicStorage: true
 
       - uses: ./.github/actions/lighthouse-ci-badge
