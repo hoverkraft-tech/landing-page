@@ -34,7 +34,7 @@ runs:
   using: "composite"
   steps:
     - id: enhance-manifest
-      uses: actions/github-script@v6.3.3
+      uses: actions/github-script@v7.0.1
       with:
         script: |
           const manifest = ${{ inputs.manifest }};
@@ -54,7 +54,7 @@ runs:
           return manifest;
 
     - name: Print summary
-      uses: actions/github-script@v6.3.3
+      uses: actions/github-script@v7.0.1
       with:
         script: |
           const manifest = ${{ steps.enhance-manifest.outputs.result }};
@@ -82,7 +82,7 @@ runs:
           core.summary.write();
 
     - id: generate-badge
-      uses: actions/github-script@v6.3.3
+      uses: actions/github-script@v7.0.1
       with:
         script: |
           const averageToColor = (average) => {
@@ -121,7 +121,7 @@ runs:
 
     - id: write-badge
       if: ${{ inputs.update_readme }} == 'true'
-      uses: actions/github-script@v6.3.3
+      uses: actions/github-script@v7.0.1
       with:
         script: |
           // Get readme file content
@@ -148,7 +148,7 @@ runs:
             writeFileSync(readmePath, newReadmeContent, 'utf8');          
           }
   
-    - uses: stefanzweifel/git-auto-commit-action@v4
+    - uses: stefanzweifel/git-auto-commit-action@v5
       if: steps.write-badge.outputs.readme_content_has_changed == 'true'
       with:
         commit_message: ${{ inputs.commit_message }}
