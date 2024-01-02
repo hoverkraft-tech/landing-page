@@ -24,18 +24,25 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - name: ⚙️ Setup Pages
+        id: pages
+        uses: actions/configure-pages@v4
+        with:
+          static_site_generator: gatsby
+
       - name: 🏗️ Build
-        uses: escemi-tech/actions-node@v1.10.0
-      - uses: actions/upload-pages-artifact@v1
+        uses: escemi-tech/actions-node@v1.14.0
+
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: ./public
 
       - name: 🚀 Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v1
+        uses: actions/deploy-pages@v4
 
       - name: 🔭 Check the site is up
-        uses: jtalk/url-health-check-action@v2
+        uses: jtalk/url-health-check-action@v3
         with:
           url: ${{ steps.deployment.outputs.page_url }}
 
