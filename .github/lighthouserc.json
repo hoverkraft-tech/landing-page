@@ -4,7 +4,8 @@
       "preset": "lighthouse:default"
     },
     "collect": {
-      "staticDistDir": "./public"
+      "staticDistDir": "./public",
+      "autodiscoverUrlBlocklist": ["_gatsby/slices/_gatsby-scripts-1.html"]
     }
   }
 }
