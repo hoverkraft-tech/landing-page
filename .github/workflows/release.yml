@@ -42,7 +42,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: 🔭 Check the site is up
-        uses: jtalk/url-health-check-action@v3
+        uses: jtalk/url-health-check-action@v4
         with:
           url: ${{ steps.deployment.outputs.page_url }}
 
