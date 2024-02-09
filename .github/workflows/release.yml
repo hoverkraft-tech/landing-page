@@ -42,7 +42,7 @@ jobs:
         uses: actions/deploy-pages@v4
 
       - name: 🔭 Check the site is up
-        uses: jtalk/url-health-check-action@v3
+        uses: jtalk/url-health-check-action@v4
         with:
           url: ${{ steps.deployment.outputs.page_url }}
 
@@ -50,7 +50,7 @@ jobs:
 
       - name: 🚦 Audit URLs using Lighthouse
         id: lighthouse-ci-audit
-        uses: treosh/lighthouse-ci-action@10.1.0
+        uses: treosh/lighthouse-ci-action@11.4.0
         with:
           urls: ${{ steps.deployment.outputs.page_url }}
           temporaryPublicStorage: true
