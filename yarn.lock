@@ -3626,9 +3626,9 @@ babel-preset-fbjs@^3.4.0:
     babel-plugin-syntax-trailing-function-commas "^7.0.0-beta.0"
 
 babel-preset-gatsby@^3.12.0, babel-preset-gatsby@^3.13.1:
-  version "3.13.1"
-  resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-3.13.1.tgz#727486f9c60169aab70b51f0edf71f30014978d0"
-  integrity sha512-JpWj9bkUZ2mlcu4Hc+8Yp8Bml5jmShW1IGVVCQyXrbiKHyBoTr77PhWqy00mvY9EPwlmfTPlgB6QrQBVONLqmw==
+  version "3.13.2"
+  resolved "https://registry.yarnpkg.com/babel-preset-gatsby/-/babel-preset-gatsby-3.13.2.tgz#61f9f3a11f96577ca889c6061096c67ef287ec47"
+  integrity sha512-1zZ3Fpt9jD63inJXWUF2hA6U2cBAMYFDSC5hKqnSSVbNUzKlHUcY0Vbx8azBSaHg27TVp9BitR10zvq5AHP/OQ==
   dependencies:
     "@babel/plugin-proposal-class-properties" "^7.18.6"
     "@babel/plugin-proposal-nullish-coalescing-operator" "^7.18.6"
@@ -3644,7 +3644,7 @@ babel-preset-gatsby@^3.12.0, babel-preset-gatsby@^3.13.1:
     babel-plugin-macros "^3.1.0"
     babel-plugin-transform-react-remove-prop-types "^0.4.24"
     gatsby-core-utils "^4.13.1"
-    gatsby-legacy-polyfills "^3.13.0"
+    gatsby-legacy-polyfills "^3.13.1"
 
 babel-preset-jest@^29.6.3:
   version "29.6.3"
@@ -6224,10 +6224,10 @@ gatsby-graphiql-explorer@^3.13.1:
   resolved "https://registry.yarnpkg.com/gatsby-graphiql-explorer/-/gatsby-graphiql-explorer-3.13.1.tgz#906f5b75f9c01ca5cd836de6cda60e376126e3e2"
   integrity sha512-WR6jv18OhKLwK/hGZ6ZGUd82GFtM6gHz+sOpgsJJx/+uqRjZwqcrH2LSrWRSWUCk7FoZY1rJuBSD1QkOODV01A==
 
-gatsby-legacy-polyfills@^3.13.0:
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/gatsby-legacy-polyfills/-/gatsby-legacy-polyfills-3.13.0.tgz#fbf87a18eeffa8b96fc1e35f038520fa8dc9a352"
-  integrity sha512-nFZzq0+iv1+fGbDq1Pry2tFGOuj7VFXXTicxtWWaz0+vdE72Gp7HBGIjxlrcUPW709JUc4J2L7DTUG74sNWEFw==
+gatsby-legacy-polyfills@^3.13.0, gatsby-legacy-polyfills@^3.13.1:
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/gatsby-legacy-polyfills/-/gatsby-legacy-polyfills-3.13.1.tgz#6b18f6979a2dda4e9e0ffd0a453479a90a583385"
+  integrity sha512-NjR3B/rq6dsJuaMmeHlGExdVXJfDqVWERXi9ROfIBt7O3Fwzy5WYgoPeVikVZE06DmeZWlBzuNcGSfc8lilB5g==
   dependencies:
     "@babel/runtime" "^7.20.13"
     core-js-compat "3.31.0"
