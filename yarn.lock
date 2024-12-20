@@ -2289,10 +2289,10 @@
   dependencies:
     dequal "^2.0.3"
 
-"@restart/ui@^1.9.0":
-  version "1.9.1"
-  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-1.9.1.tgz#f0f22d255470e02f6fee6dcc449e56f0f1b8ebc1"
-  integrity sha512-qghR21ynHiUrpcIkKCoKYB+3rJtezY5Y7ikrwradCL+7hZHdQ2Ozc5ffxtpmpahoAGgc31gyXaSx2sXXaThmqA==
+"@restart/ui@^1.9.2":
+  version "1.9.2"
+  resolved "https://registry.yarnpkg.com/@restart/ui/-/ui-1.9.2.tgz#dad8f084e6a56f87f9799dbc248af04168ffc03b"
+  integrity sha512-MWWqJqSyqUWWPBOOiRQrX57CBc/9CoYONg7sE+uag72GCAuYrHGU5c49vU5s4BUSBgiKNY6rL7TULqGDrouUaA==
   dependencies:
     "@babel/runtime" "^7.26.0"
     "@popperjs/core" "^2.11.8"
@@ -2650,10 +2650,10 @@
   resolved "https://registry.yarnpkg.com/@types/parse-json/-/parse-json-4.0.2.tgz#5950e50960793055845e956c427fc2b0d70c5239"
   integrity sha512-dISoDXWWQwUquiKsyZ4Ng+HX2KsPL7LyHKHQwgGFEA3IaKac4Obd+h2a/a6waisAoepJlBcx9paWqjA8/HVjCw==
 
-"@types/prop-types@*":
-  version "15.7.11"
-  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.11.tgz#2596fb352ee96a1379c657734d4b913a613ad563"
-  integrity sha512-ga8y9v9uyeiLdpKddhxYQkxNDrfvuPrlFb0N1qnZZByvcElJaXthF1UhvCh9TLWJBEHeNtdnbysW7Y6Uq8CVng==
+"@types/prop-types@*", "@types/prop-types@^15.7.12":
+  version "15.7.14"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.14.tgz#1433419d73b2a7ebfc6918dcefd2ec0d5cd698f2"
+  integrity sha512-gNMvNH49DJ7OJYv+KAKn0Xp45p8PLl6zo2YnvDIbTd4J6MER2BmWN49TG7n9LvkyihINxeKW8+3bfS2yDC9dzQ==
 
 "@types/reach__router@^1.3.10":
   version "1.3.15"
@@ -10715,13 +10715,14 @@ rc@1.2.8, rc@^1.2.7:
     strip-json-comments "~2.0.1"
 
 react-bootstrap@^2.8.0:
-  version "2.10.6"
-  resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-2.10.6.tgz#cb8b6f3604480b99b1e3cfa09cf53446e760bba7"
-  integrity sha512-fNvKytSp0nHts1WRnRBJeBEt+I9/ZdrnhIjWOucEduRNvFRU1IXjZueDdWnBiqsTSJ7MckQJi9i/hxGolaRq+g==
+  version "2.10.7"
+  resolved "https://registry.yarnpkg.com/react-bootstrap/-/react-bootstrap-2.10.7.tgz#63954e8faa6f0d28d9c755e5f8fbd27b5b09764a"
+  integrity sha512-w6mWb3uytB5A18S2oTZpYghcOUK30neMBBvZ/bEfA+WIF2dF4OGqjzoFVMpVXBjtyf92gkmRToHlddiMAVhQqQ==
   dependencies:
     "@babel/runtime" "^7.24.7"
     "@restart/hooks" "^0.4.9"
-    "@restart/ui" "^1.9.0"
+    "@restart/ui" "^1.9.2"
+    "@types/prop-types" "^15.7.12"
     "@types/react-transition-group" "^4.4.6"
     classnames "^2.3.2"
     dom-helpers "^5.2.1"
