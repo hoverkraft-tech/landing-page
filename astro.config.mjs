@@ -8,17 +8,19 @@ import AutoImport from "astro-auto-import";
 
 // https://astro.build/config
 export default defineConfig({
-  site: config.site.base_url ? config.site.base_url : "https://hoverkraft.cloud",
+  site: config.site.base_url
+    ? config.site.base_url
+    : "https://hoverkraft.cloud",
   base: config.site.base_path ? config.site.base_path : "/",
   trailingSlash: config.site.trailing_slash ? "always" : "never",
   vite: {
     css: {
       preprocessorOptions: {
         scss: {
-          api: "modern-compiler"
-        }
-      }
-    }
+          api: "modern-compiler",
+        },
+      },
+    },
   },
   // Image optimization service
   image: {
@@ -38,12 +40,12 @@ export default defineConfig({
         "@/components/Badge.astro",
       ],
     }),
-    mdx()
+    mdx(),
   ],
   markdown: {
     shikiConfig: {
       theme: "one-dark-pro",
       wrap: true,
-    }
-  }
+    },
+  },
 });

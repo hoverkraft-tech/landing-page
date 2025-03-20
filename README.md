@@ -96,7 +96,7 @@ There's 3 files involved in the theme customization:
 │       └── theme.json    # A JSON file used for theme domain names and font settings. Define your theme color names and font settings here.
 ├── tailwind.config.js   # The tailwind configuration file, you know what it is, the other two files are used here.
 ```
- 
+
 ## 🧞 Commands (by Astro)
 
 All commands are run from the root of the project, from a terminal:
@@ -109,7 +109,6 @@ All commands are run from the root of the project, from a terminal:
 | `npm run preview`         | Preview your build locally, before deploying     |
 | `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
 | `npm run astro -- --help` | Get help using the Astro CLI                     |
-
 
 ## Author
 
