@@ -1,0 +1,32 @@
+@use "./utilities" as utils;
+@use "sass:list";
+
+$colors: ("secondary", "accent", "danger", "success", "warning", "info");
+
+
+.btn {
+  @apply cursor-pointer rounded-[50px] h-[52px] px-8 py-2 text-sm font-medium leading-[36px] transition-all duration-200 flex flex-row items-center justify-center hover:shadow-[0px_5px_15px] hover:shadow-slate-500/60;
+  &-primary {
+    @extend .btn;
+    @extend .bg-gradient-primary;
+    @apply border-0 text-center font-medium text-white hover:shadow-[0px_5px_30px] hover:shadow-primary;
+    &-outline {
+      @extend .btn;
+      @apply border border-text text-text bg-transparent;
+      &:hover {
+        @extend .bg-gradient-primary;
+      }
+    }
+  }
+  @each $color in $colors {
+    &-#{$color} {
+      @extend .btn;
+
+      @apply bg-none border-0 text-white font-medium hover:shadow-[0px_5px_30px] hover:shadow-#{$color}/50 bg-#{$color}; // Error here does not break the build and the styles are applied correctly
+      &-outline {
+        @extend .btn;
+        @apply border border-text text-text bg-transparent;
+      }
+    }
+  } // Dont know why this line triggers an error
+}

@@ -1,0 +1,48 @@
+@use "sass:meta";
+@include meta.load-css("themes.scss");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @include meta.load-css("base");
+}
+
+@layer components {
+  @include meta.load-css("components");
+  @include meta.load-css("navigation");
+  @include meta.load-css("utilities");
+  @include meta.load-css("buttons");
+}
+
+/**
+ * Scrollbar styles
+ */
+
+body {
+  --sb-track-color: transparent;
+  --sb-thumb-color: rgba(var(--primary), 0.6);
+  --sb-size: 0.8rem;
+}
+
+body::-webkit-scrollbar {
+  width: var(--sb-size);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--sb-track-color);
+  // border-radius: 8px;
+}
+
+body::-webkit-scrollbar-thumb {
+  background: var(--sb-thumb-color);
+  border-radius: 8px;
+  border: 3px solid rgba(var(--background))
+}
+
+@supports not selector(::-webkit-scrollbar) {
+  body {
+    scrollbar-color: var(--sb-thumb-color) var(--sb-track-color);
+  }
+}

@@ -1,0 +1,30 @@
+---
+import LinkButton from "@/components/LinkButton.astro";
+import { markdownify } from "@/lib/utils/textConverter";
+
+const {
+  title,
+  description,
+  button,
+} = Astro.props;
+---
+
+<section class="px-5 py-20 xl:py-[120px]">
+  <div class="container">
+    <div
+      class="bg-surface shadow row justify-center rounded-2xl px-[30px] pb-[75px] pt-16"
+    >
+      <div class="lg:col-11">
+        <div class="row">
+          <div class="lg:col-7">
+            <h2 class="h1 text-text" set:html={markdownify(title)}/>
+            {button && <LinkButton {...button} addClasses="mt-8" />}
+          </div>
+          <div class="mt-8 lg:col-5 lg:mt-0">
+            <p class="text-text" set:html={markdownify(description)}/>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

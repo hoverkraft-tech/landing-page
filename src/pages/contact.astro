@@ -1,0 +1,76 @@
+---
+import PageHeader from "@/components/core/PageHeader.astro";
+import config from "@/config/config.json";
+import Base from "@/layouts/Base.astro";
+import { getEntry } from "astro:content";
+
+const entry = await getEntry("contact", "index");
+const { contact_form_action } = config.params;
+---
+
+<Base
+  entry_keys={["contact", "index"]}
+>
+  <section class=" pb-6 pt-16">
+    <div class="container"><PageHeader page_data={entry.data} /></div>
+  </section>
+
+  <section class="section pt-0">
+    <div class="container">
+      <div class="row">
+
+        <div class="md:col-12 md:order-1 grid place-content-center">
+          <form
+            class="lg:max-w-[484px]"
+            action={contact_form_action}
+            method="POST"
+          >
+            <div class="form-group mb-5">
+              <label class="form-label" for="name">Full Name</label>
+              <input
+                class="form-control"
+                type="text"
+                id="name"
+                placeholder="Your Full Name"
+              />
+            </div>
+            <div class="form-group mb-5">
+              <label class="form-label" for="eamil">Email Adrdess</label>
+              <input
+                class="form-control"
+                type="text"
+                id="email"
+                placeholder="Your  Email Address"
+              />
+            </div>
+            <div class="form-group mb-5">
+              <label class="form-label" for="reason">Reason/Purpose</label>
+              <select name="reason" id="reason" class="form-select" required>
+                <option value="">Select reason/purpose</option>
+                <option value="hello">Wanted to say hello</option>
+                <option value="work-with-you">I want to work with you</option>
+                <option value="work-for-me">I want you to work for me</option>
+                <option value="investment plane-3">There's a project I want to discuss with you</option>
+                <option value="investment plane-3">Other</option>
+              </select>
+            </div>
+            <div class="form-group mb-5">
+              <label class="form-label" for="message">Message Here</label>
+              <textarea
+                class="form-control h-[150px]"
+                id="message"
+                cols="30"
+                rows="10"></textarea>
+            </div>
+            <input
+              class="btn-primary block w-full"
+              type="submit"
+              value="Send Message"
+              onclick="alert('This form is not functional. Please use the email address provided in the footer to contact me.')"
+            />
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>

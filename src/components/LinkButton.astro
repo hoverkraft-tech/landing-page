@@ -1,0 +1,37 @@
+---
+import type { LinkButton } from "@/content/page.types";
+import FeatherIcon from "./react/FeatherIcon";
+
+type Props = LinkButton;
+
+const {
+  label = undefined,
+  target = "_blank",
+  mode = "solid",
+  color = undefined,
+  disabled,
+  icon,
+  addClasses = undefined,
+}: Props = Astro.props;
+const hasChildren = Object.keys(Astro.slots).length > 0;
+// console.log({ hasChildren });
+---
+
+<a
+  {...Astro.props}
+  target={target}
+  class={`btn${color ? "-" + color : ""}${mode === "outline" ? "-outline" : ""} me-4 mb-4 ${addClasses ?? ""} `}
+  aria-disabled={disabled}
+>
+  {
+    icon && (
+      <FeatherIcon
+        icon={icon}
+        size={20}
+        client:load
+        className={`${label || hasChildren ? "mr-4" : "null"}`}
+      />
+    )
+  }
+  {label ?? <slot />}
+</a>

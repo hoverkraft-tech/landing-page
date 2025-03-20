@@ -1,0 +1,19 @@
+---
+import PageHeader from "@/components/core/PageHeader.astro";
+import Base from "@/layouts/Base.astro";
+import { getEntry } from "astro:content";
+
+const features = await getEntry("features", "index");
+const { Content } = await features.render();
+---
+
+<Base>
+  <section class="py-16">
+    <div class="container">
+      <PageHeader page_data={features.data} />
+    </div>
+    <div class="container">
+       <Content />
+    </div>
+  </section>
+</Base>

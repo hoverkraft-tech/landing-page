@@ -1,0 +1,289 @@
+---
+import TwSizeIndicator from "@/components/core/TailwindSizeIndicator.astro";
+import config from "@/config/config.json";
+import theme from "@/config/theme.json";
+import { plainify } from "@/lib/utils/textConverter";
+import Footer from "@/layouts/partials/Footer.astro";
+import Header from "@/layouts/partials/Header.astro";
+import "@/styles/main.scss";
+
+import { AstroFont } from "astro-font";
+import { ViewTransitions } from "astro:transitions";
+import { getEntry } from "astro:content";
+import type { PageType } from "@/content/page.types";
+import type { ContentEntryMap } from "astro:content";
+
+const GTAG = import.meta.env.GTAG_ID
+
+// font families
+const pf = theme.fonts.font_family.primary;
+const sf = theme.fonts.font_family.secondary;
+
+let fontPrimary, fontSecondary;
+if (theme.fonts.font_family.primary) {
+  fontPrimary = theme.fonts.font_family.primary
+    .replace(/\+/g, " ")
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
+}
+if (theme.fonts.font_family.secondary) {
+  fontSecondary = theme.fonts.font_family.secondary
+    .replace(/\+/g, " ")
+    .replace(/:[ital,]*[ital@]*[wght@]*[0-9,;]+/gi, "");
+}
+
+// types for frontmatters
+export interface Props {
+  /**
+   * Entry keys to fetch data from content. The entry is expected to be a `PageType`
+   * If an entry is not found, it will log a warning in the console.
+   *
+   * When found, the page data will be used to build the metadata for the page (SEO)
+   *
+   * @see PageType
+   */
+  entry_keys?: [keyof ContentEntryMap, string];
+  /**
+   * Override <title> og:title and twitter:title
+   * @default config.site.title
+   */
+  title?: string;
+  /**
+   * Override meta description, og:description and twitter:description-
+   * @default config.metadata.meta_description
+   */
+  description?: string;
+  /**
+   * Override meta keywords
+   * @default config.metadata.meta_keywords
+   */
+  keywords?: string[];
+  /**
+   * Override the meta author
+   * @default config.metadata.meta_author
+   */
+  author?: string;
+  /**
+   * Override og:image and twitter:image
+   * @default config.metadata.meta_image
+   */
+  image?: string;
+  noindex?: boolean;
+  canonical_url?: string;
+}
+
+// distructure frontmatters
+const {
+  entry_keys,
+  title,
+  description,
+  author,
+  keywords,
+  image,
+  noindex,
+  canonical_url,
+} = Astro.props;
+
+let page: PageType | undefined = undefined;
+
+if (entry_keys) {
+  const page_entry = await getEntry(...entry_keys);
+  if (page_entry) {
+    page = page_entry.data as PageType;
+  }
+}
+const _title = title
+  ? title
+  : page?.document_title
+    ? page.document_title
+    : config.site.title;
+const _description = description
+  ? description
+  : page?.meta_description
+    ? page.meta_description
+    : config.metadata.meta_description;
+const _image = image
+  ? image
+  : page?.meta_image
+    ? page.meta_image
+    : config.metadata.meta_image;
+const _author = author
+  ? author
+  : page?.meta_author
+    ? page.meta_author
+    : config.metadata.meta_author;
+const _keywords = keywords
+  ? keywords
+  : page?.meta_keywords
+    ? page.meta_keywords
+    : config.metadata.meta_keywords;
+const _canonical_url = canonical_url
+  ? canonical_url
+  : page?.canonical_url
+    ? page.canonical_url
+    : undefined;
+const _noindex =
+  noindex === true ? true : page?.noindex === true ? true : false;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- favicon -->
+    <link rel="shortcut icon" href={config.site.favicon} />
+    <!-- theme meta -->
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: light)"
+      content="#fff"
+    />
+    <meta
+      name="theme-color"
+      media="(prefers-color-scheme: dark)"
+      content="#000"
+    />
+    <meta name="generator" content={Astro.generator} />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <!-- google font css -->
+    <AstroFont
+      config={[
+        {
+          src: [],
+          preload: false,
+          display: "swap",
+          name: fontPrimary!,
+          fallback: "sans-serif",
+          cssVariable: "font-primary",
+          googleFontsURL: `https://fonts.googleapis.com/css2?family=${pf}&display=swap`,
+        },
+        {
+          src: [],
+          preload: false,
+          display: "swap",
+          name: fontSecondary!,
+          fallback: "sans-serif",
+          cssVariable: "font-secondary",
+          googleFontsURL: `https://fonts.googleapis.com/css2?family=${sf}&display=swap`,
+        },
+      ]}
+    />
+
+    <!-- responsive meta -->
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=5"
+    />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src={"https://www.googletagmanager.com/gtag/js?id="+GTAG}></script>
+    <script type="text/javascript" define:vars={{GTAG}}>
+      // Pasamos la variable GTAG_ID al navegador como una variable global
+      window.GTAG_ID = GTAG;
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', window.GTAG_ID);
+    </script>
+
+    <!-- title -->
+    <title>
+      {plainify(_title)}
+    </title>
+
+    <!-- canonical url -->
+    {
+      _canonical_url && (
+        <link rel="canonical" href={_canonical_url} item-prop="url" />
+      )
+    }
+
+    <!-- noindex robots -->
+    {
+      _noindex === true ? (
+        <meta name="robots" content="noindex, nofollow" />
+      ) : (
+        <meta name="robots" content="index, follow" />
+      )
+    }
+
+    <!-- meta-description -->
+    <meta name="description" content={plainify(_description)} />
+
+    <ViewTransitions />
+
+    <!-- author from config.json -->
+    <meta name="author" content={plainify(_author)} />
+
+    <!-- og-title -->
+    <meta property="og:title" content={plainify(_title)} />
+
+    <!-- og-description -->
+    <meta property="og:description" content={plainify(_description)} />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content={`${config.site.base_url}/${Astro.url.pathname.replace("/", "")}`}
+    />
+
+    <!-- twitter-title -->
+    <meta
+      name="twitter:title"
+      content={plainify(_title)}
+    />
+
+    <!-- twitter-description -->
+    <meta
+      name="twitter:description"
+      content={plainify(_description)}
+    />
+
+    <!-- og-image -->
+    <meta
+      property="og:image"
+      content={`${config.site.base_url}${_image}`}
+    />
+
+    <!-- twitter-image -->
+    <meta
+      name="twitter:image"
+      content={`${config.site.base_url}${_image}`}
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline>
+      const setTheme = () => {
+        const theme = (() => {
+          if (
+            typeof localStorage !== "undefined" &&
+            localStorage.getItem("theme")
+          ) {
+            return localStorage.getItem("theme");
+          }
+          if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            return "dark";
+          }
+          return "light";
+        })();
+
+        if (theme === "light") {
+          document.documentElement.classList.remove("dark");
+        } else {
+          document.documentElement.classList.add("dark");
+        }
+
+        window.localStorage.setItem("theme", theme || "light");
+      };
+
+      setTheme();
+
+      document.addEventListener("astro:after-swap", setTheme);
+    </script>
+  </head>
+  <body class="transition-colors duration-500">
+    <TwSizeIndicator />
+    <Header />
+    <main id="main-content">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

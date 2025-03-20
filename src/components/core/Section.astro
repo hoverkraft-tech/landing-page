@@ -1,0 +1,92 @@
+---
+import type { PageSection } from "@/content/page.types";
+import { markdownify } from "@/lib/utils/textConverter";
+import { Image } from "astro:assets";
+import Button from "../LinkButton.astro";
+
+export type Section = PageSection;
+export type Props = {
+  section: Section;
+};
+
+const { section } = Astro.props;
+if (!section) {
+  throw new Error("Section data is required");
+}
+const { title, buttons, image, content, image_position } = section;
+const image_position_classes = (() => {
+  if (!image && !image_position) {
+    return ["", "col-12", ""];
+  }
+
+  if (image) {
+    switch (image_position) {
+      case "top":
+        return ["flex-row-reverse", "col-12", "col-12 mb-4 lg:mb-0"];
+      case "bottom":
+        return ["", "col-12", "col-12"];
+      case "left":
+        return [
+          "flex-row-reverse",
+          "col-12 md:col-7 lg:col-6",
+          "col-12 md:col-5 lg:col-6",
+        ];
+      case "right":
+      default:
+        return ["", "col-12 md:col-7 lg:col-6", "col-12 md:col-5 lg:col-6"];
+    }
+  } else {
+    return ["", "col-12", ""];
+  }
+})();
+---
+
+<section class="section relative">
+  <div class="container">
+    <div
+      class=`row items-center ${image_position ? 'custom-position' : ''} ${image_position_classes[0]}`
+    >
+      {
+        image && image_position === "top" && (
+          <div class={`${image_position_classes[2]}`}>
+            <Image
+              class="w-1/2 mr-auto ml-auto object-contain"
+              alt="section-image"
+              src={image}
+              width={500}
+              height={333}
+            />
+          </div>
+        )
+      }
+      <div class=`${image_position_classes[1]}`>
+        <h1 class={`${section.title_size}`} set:html={markdownify(title)} />
+
+        <p class="mt-6" set:html={markdownify(content)} />
+
+        {
+          buttons && buttons.length > 0 && (
+            <div class="flex flex-wrap mt-8">
+              {buttons.map((button) => (
+                <Button {...button} />
+              ))}
+            </div>
+          )
+        }
+      </div>
+        {
+          image && image_position != "top" && (
+            <div class={`${image_position_classes[2]}`}>
+              <Image
+                class="w-full object-contain"
+                alt="section-image"
+                src={image}
+                width={500}
+                height={333}
+              />
+            </div>
+          )
+        }
+    </div>
+  </div>
+</section>

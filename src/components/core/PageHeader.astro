@@ -1,0 +1,33 @@
+---
+import { markdownify } from "@/lib/utils/textConverter";
+import Button from "@/components/LinkButton.astro";
+import type { PageType } from "@/content/page.types";
+
+export type Props = {
+  page_data: PageType;
+};
+
+const { page_data } = Astro.props || {};
+const { title, description, buttons } = page_data || {};
+  page_data || {};
+---
+
+<div class="text-center mb-5">
+  <h1 class="mb-5 mt-8" set:html={markdownify(title)} />
+  {
+    description && (
+      <p class="text-lg text-center text-text-secondary">
+        {description}
+      </p>
+    )
+  }
+  {
+    buttons && (
+      <div class="mt-11 justify-center sm:flex">
+        {buttons.map((button) => (
+          <Button {...button} />
+        ))}
+      </div>
+    )
+  }
+</div>
