@@ -9,7 +9,7 @@ export interface LinkButtonI {
   label?: string;
   mode?: "outline" | "solid";
   disabled?: boolean;
-  icon?: FeatherIconProps["name"];
+  icon?: FeatherIconProps["icon"];
   /**
    * Applies to the main button color (background, border, effects)
    * Possible values: in @/config/theme.json

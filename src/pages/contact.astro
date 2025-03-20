@@ -4,7 +4,7 @@ import config from "@/config/config.json";
 import Base from "@/layouts/Base.astro";
 import { getEntry } from "astro:content";
 
-const entry = await getEntry("contact", "index");
+const entry = await getEntry("contact", "index")!;
 const { contact_form_action } = config.params;
 ---
 

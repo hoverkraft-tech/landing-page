@@ -3,7 +3,7 @@ import PageHeader from "@/components/core/PageHeader.astro";
 import Base from "@/layouts/Base.astro";
 import { getEntry } from "astro:content";
 
-const features = await getEntry("features", "index");
+const features = await getEntry("features", "index")!;
 const { Content } = await features.render();
 ---
 

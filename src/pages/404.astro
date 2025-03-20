@@ -5,8 +5,7 @@ import Base from "@/layouts/Base.astro";
 import { markdownify } from "@/lib/utils/textConverter";
 import { getEntry } from "astro:content";
 
-const { logo } = config.site;
-const entry = await getEntry("pages", "404");
+const entry = await getEntry("pages", "404")!;
 const { Content } = await entry.render();
 ---
 

@@ -6,7 +6,7 @@ import Base from "@/layouts/Base.astro";
 import Cta from "@/layouts/partials/Cta.astro";
 import { getEntry } from "astro:content";
 
-const homepage = await getEntry("homepage", "index");
+const homepage = await getEntry("homepage", "index")!;
 // console.log(homepage);
 const { banner, sections, features, testimonial } = homepage.data;
 const call_to_action = homepage.data.call_to_action;

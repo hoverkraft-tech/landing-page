@@ -3,7 +3,7 @@ import PageHeader from "@/components/core/PageHeader.astro";
 import Base from "@/layouts/Base.astro";
 import { getEntry } from "astro:content";
 
-const about = await getEntry("changelog", "index");
+const about = await getEntry("changelog", "index")!;
 const page_data = {
   ...about.data,
   content: about.body,
