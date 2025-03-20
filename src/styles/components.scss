@@ -1,0 +1,247 @@
+// section style
+.section {
+  @apply py-16;
+}
+
+// If .section are surrounded by a .multi-section class, make even sections have a flex direction of row-reverse
+.multi-section {
+
+  & > .section:nth-child(even):not(.custom-position) .row {
+    @apply md:flex-row-reverse;
+  }
+
+}
+
+// badge
+.badge {
+  @apply relative top-[0.625rem] rounded-md px-[0.8rem] py-[0.45rem] text-xs font-semibold text-white;
+  &.primary {
+    @apply bg-primary;
+  }
+  &.secondary {
+    @apply bg-secondary;
+  }
+  &.accent {
+    @apply bg-accent;
+  }
+  &.danger {
+    @apply bg-danger;
+  }
+  &.success {
+    @apply bg-success;
+  }
+  &.warning {
+    @apply bg-warning;
+  }
+  &.info {
+    @apply bg-info;
+  }
+  &.light {
+    @apply bg-white text-text;
+  }
+  &.dark {
+    @apply bg-surface text-text-secondary;
+  }
+
+}
+
+
+// container
+.container {
+  @apply mx-auto max-w-[1202px] px-4;
+}
+
+// form style
+.form-inputs * {
+  @apply mb-5 leading-10;
+}
+
+// social icon style
+.social-icons {
+  li {
+    @apply mr-2 inline-block;
+    a {
+      @apply inline-flex h-11 w-11 items-center justify-center rounded-full bg-white text-center transition-all duration-200 hover:bg-primary;
+
+      svg {
+        @apply m-auto h-11 fill-gray-600 text-xl;
+      }
+
+      path {
+        @apply transition-all duration-200;
+      }
+
+      &:hover path {
+        @apply fill-white;
+      }
+    }
+  }
+}
+
+
+//footer
+.footer {
+  h6 {
+    @apply mb-4 font-primary font-semibold lg:mb-8;
+  }
+
+  p {
+    @apply text-sm;
+  }
+
+  li > a {
+    @apply text-sm hover:text-primary hover:underline;
+  }
+}
+
+
+//review-carousel
+.review {
+  @apply mx-[0.9rem] my-10 rounded-xl bg-surface px-3 py-6 pb-16 text-center shadow;
+
+  &-author-avatar {
+    @apply mx-auto -mt-12 h-[90px] w-[90px] -translate-y-5 rounded-full p-0.5;
+  }
+}
+.review-rating {
+  &.five {
+    svg {
+      @apply fill-secondary text-secondary;
+    }
+  }
+
+  &.four {
+    svg {
+      &:not(:last-child) {
+        @apply fill-secondary text-secondary;
+      }
+      &:nth-child(5) {
+        @apply fill-gray-300 text-gray-300;
+      }
+    }
+  }
+
+  &.three {
+    svg {
+      @apply fill-secondary text-secondary;
+
+      &:last-child {
+        @apply fill-gray-300 text-gray-300;
+      }
+
+      &:nth-child(4) {
+        @apply fill-gray-300 text-gray-300;
+      }
+    }
+  }
+
+  &.two {
+    svg {
+      &:first-child {
+        @apply fill-secondary text-secondary;
+      }
+
+      &:nth-child(2) {
+        @apply fill-secondary text-secondary;
+      }
+    }
+  }
+
+  &.one {
+    svg {
+      &:first-child {
+        @apply fill-secondary text-secondary;
+      }
+    }
+  }
+}
+
+
+
+//footer
+.footer {
+  h6 {
+    @apply mb-4 font-primary font-semibold lg:mb-8;
+  }
+
+  p {
+    @apply text-sm;
+  }
+
+  li > a {
+    @apply text-sm hover:text-primary hover:underline;
+  }
+}
+
+.key-feature-grid {
+  p {
+    @apply mt-3 text-sm md:text-base break-all text-text-secondary;
+  }
+
+  .icon {
+    @apply h-6 w-6;
+
+    svg {
+      @apply text-secondary;
+    }
+  }
+}
+
+
+//changelogs
+.changelogs {
+  &-content {
+    // First child of the changelogs-content below a badge should have a margin-top of 6
+    > .badge + * {
+      @apply mt-8;
+    }
+    @apply relative shadow-lg rounded-xl bg-surface  ;
+    &::before {
+      @apply absolute -top-[38px] left-0 h-[18px] w-[18px] rounded-full border-4 border-secondary/70 bg-background content-[''] lg:-left-[49px] lg:top-0;
+    }
+
+
+    ul {
+      @apply list-disc pl-6 marker:text-text;
+
+      + .changelogs-tag {
+        @apply mt-6;
+      }
+
+      & > li {
+        @apply mb-3;
+
+        span {
+          @apply text-primary;
+        }
+      }
+    }
+  }
+
+  &-tag {
+    @apply mb-5 inline-block h-5 rounded px-1 py-0.5 text-xs text-red-500;
+  }
+}
+
+
+
+// form style
+.form-control,
+.form-select {
+  & option {
+    @apply text-text dark:text-text-contrast;
+  }
+  @apply h-[60px] w-full rounded-lg border-surface-contrast/50 text-text placeholder:text-text focus:border-primary focus:ring-transparent bg-transparent;
+}
+
+.form-inputs * {
+  @apply mb-5 leading-10;
+}
+
+.form-label {
+  @apply mb-2 block font-bold text-text;
+}
+
+select:invalid {
+  color: #b0b0b0 !important;
+}

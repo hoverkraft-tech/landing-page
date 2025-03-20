@@ -1,47 +1,50 @@
 version: 2
+
 updates:
-  - package-ecosystem: npm
+  - package-ecosystem: "npm"
     open-pull-requests-limit: 20
-    versioning-strategy: widen
-    directory: '/'
+    directory: "/application"
+    versioning-strategy: increase
     schedule:
-      interval: weekly
-      day: friday
-      time: '04:00'
+      interval: "weekly"
     groups:
-      gatsby-dependencies:
+      npm-astro-dependencies:
         patterns:
-          - 'gatsby'
-          - 'gatsby-*'
-      bootstrap-dependencies:
+          - "@astrojs/*"
+          - "@astrolib/*"
+          - "astro"
+          - "astro-*"
+      npm-tailwind-dependencies:
         patterns:
-          - 'bootstrap'
-          - 'react-bootstrap'
-      react-dependencies:
+          - "@tailwindcss/*"
+          - "tailwindcss"
+          - "tailwind-*"
+      npm-react-dependencies:
         patterns:
-          - 'react'
-          - 'react-*'
-      dev-dependencies:
-        dependency-type: development
+          - "react"
+          - "react-*"
+      npm-fontsource-variable-dependencies:
+        patterns:
+          - "@fontsource-variable/*"
+      npm-development-dependencies:
+        dependency-type: "development"
 
   - package-ecosystem: github-actions
-    directory: '/'
+    open-pull-requests-limit: 20
+    directory: "/"
     schedule:
       interval: weekly
-      day: friday
-      time: '04:00'
     groups:
       github-actions-dependencies:
         patterns:
-          - '*'
+          - "*"
 
-  - package-ecosystem: github-actions
-    directory: '.github/actions/lighthouse-ci-badge'
+  - package-ecosystem: "devcontainers"
+    open-pull-requests-limit: 20
+    directory: "/"
     schedule:
       interval: weekly
-      day: friday
-      time: '04:00'
     groups:
-      github-actions-dependencies:
+      devcontainers-dependencies:
         patterns:
-          - '*'
+          - "*"
