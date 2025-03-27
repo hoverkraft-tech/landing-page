@@ -4,10 +4,10 @@
 banner:
   title: 'A <span class="text-accent text-shadow-[0px_5px_15px] shadow-accent/10">cloud-native</span><span class="text-secondary"> ecosystem</span>'
   title_size: "text-4xl md:text-6xl"
-  content: "That helps teams quickly build, deploy, and scale applications using modern best practices."  
+  content: "That helps teams quickly build, deploy, and scale applications using modern best practices."
   image: /images/logo_v5_xl_pfp.png
   buttons:
-    - label: Get the Code
+    - label: Let's build & deploy now!
       href: "https://github.com/organizations/hoverkraft-tech"
       target: "_blank"
       icon: _GitHub
@@ -30,49 +30,47 @@ sections:
     content: "Built on an <b class='text-accent'>open source-first philosophy</b>, Hoverkraft champions community-driven innovation and transparency. Enjoy a system that not only adapts seamlessly to your scaling needs but also evolves continuously with contributions from a vibrant ecosystem—ensuring reliable performance, day or night."
     image: /images/open-source.webp
 
-
 ##key features
 features:
   title: Why <span class="text-accent">Hoverkraft Ecosystem</span>?
   description: "Because building scalable, cloud-native applications shouldn’t be burdened by repetitive boilerplate. We provide you with the tools, methodologies, and support needed to focus on what truly matters."
   feature_list:
-    - icon: "box"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "box" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Simple
       content: "Streamlined setup that avoids unnecessary complexity—packed with essential features that are <b class='text-accent'>easy to use</b>."
-    - icon: "clock"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "clock" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Up-to-date
       content: "Leveraging the latest in cloud-native technologies, modern CI/CD pipelines, and agile methodologies to keep you ahead of the curve."
-    - icon: "git-branch"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "git-branch" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: DevOps-Ready
       content: "Seamlessly integrate with automated CI/CD workflows, version control, and deployment pipelines, empowering your team to deliver faster and more reliably."
-    - icon: "plus"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "plus" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Extendable
       content: "Easily add or modify features with our modular design—each component is built for rapid integration and seamless customization."
-    - icon: "coffee"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "coffee" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Focused
       content: "Focus on innovating and delivering value rather than on repetitive setup tasks—let Hoverkraft handle the groundwork."
-    - icon: "tool"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "tool" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Customizable
       content: "Every aspect of the ecosystem is configurable to meet your specific needs, offering a <b class='text-accent'>tailor-made solution</b> for your team."
-    - icon: "shield"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "shield" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Cloud Native Resilience
       content: "Engineered for robust performance and observability, ensuring your applications remain reliable, scalable, and secure in dynamic environments."
-    - icon: "feather"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "feather" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Lightweight
       content: "Optimized for minimal load times and maximum efficiency—each asset is designed to keep your application fast and responsive."
-    - icon: "layers"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "layers" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Modular
       content: "Built with reusable components, making it easy to add, update, or remove sections as your project evolves."
-    - icon: "zap"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "zap" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Performance-First
       content: "Engineered for best-in-class performance, ensuring your applications deliver top-notch efficiency under any load."
-    - icon: "layout"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "layout" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Content-Centric
       content: "Optimized for seamless content delivery, making it ideal for dynamic portfolios, showcases, and landing pages."
-    - icon: "code"  #icon package feather-icons-reacther-icon [https://feathericons.com/]
+    - icon: "code" #icon package feather-icons-reacther-icon [https://feathericons.com/]
       title: Team-Friendly
       content: "Built for teams, with comprehensive tools and guidelines that emphasize <b class='text-accent'>simplicity, flexibility, and modern practices</b>."
-
 
 #testimonial
 testimonial:
@@ -104,14 +102,12 @@ testimonial:
       rating: four
       content: "You might not take my word for it, but you should take a leap of faith in this product!"
 
-
 ## Call to Action
 call_to_action:
   title: "Because we believe in <span class='text-accent text-shadow-[0px_5px_15px]'>cloud-native excellence</span> and <span class='text-[#38bdf8] text-shadow-[0px_5px_15px]'>DevOps best practices</span>."
   description: "Save valuable time and energy. Leverage our ready-to-deploy ecosystem and work as if you built it from scratch. We won’t tell—just be sure to show some love by leaving a star."
   button:
-    label: "Let's build & deploy now!"
-    href: "https://github.com/diego-alfadev/alfadev-astro-starter"
+    label: "Get started now!"
+    href: "mailto:contact@hoverkraft.cloud"
     color: accent
-
 ---
