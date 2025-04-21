@@ -4,7 +4,6 @@
   "description": "Astro + tailwindcss + react + mdx base template",
   "author": "alfadev",
   "license": "MIT",
-  "packageManager": "pnpm@9.13.2",
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
