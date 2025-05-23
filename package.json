@@ -27,7 +27,7 @@
     "astro": "^5.7.13",
     "astro-auto-import": "^0.4.2",
     "astro-font": "^1.1.0",
-    "feather-icons-react": "^0.8.1",
+    "feather-icons-react": "^0.9.0",
     "github-slugger": "^2.0.0",
     "marked": "^12.0.0",
     "react-icons": "^5.0.1",
