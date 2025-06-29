@@ -1,6 +1,5 @@
-import { humanize } from '@/lib/utils/textConverter'
-import React from 'react'
-import Icon, { type FeatherIconProps } from 'feather-icons-react'
+import React from "react";
+import Icon, { type FeatherIconProps } from "feather-icons-react";
 
 /**
  * This component is a wrapper around feather-icons-reacther icons prepared to be used in the markdown files content of the project.
@@ -10,9 +9,9 @@ import Icon, { type FeatherIconProps } from 'feather-icons-react'
  * @returns
  */
 export default function FeatherIcon(props: FeatherIconProps) {
-    const iconName = props.icon?.startsWith("_") ? props.icon.substring(1,props.icon.length) : props.icon
+  const iconName = props.icon?.startsWith("_")
+    ? props.icon.substring(1, props.icon.length)
+    : props.icon;
 
-    return (
-        <Icon {...props} icon={iconName as FeatherIconProps['icon']} />
-    )
+  return <Icon {...props} icon={iconName as FeatherIconProps["icon"]} />;
 }

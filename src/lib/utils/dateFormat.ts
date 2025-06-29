@@ -12,7 +12,7 @@ const dateFormat = (datetime: string | Date) => {
     minute: "2-digit",
   });
 
-  return date;
+  return `${date} at ${time}`;
 };
 
 export default dateFormat;

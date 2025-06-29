@@ -74,19 +74,19 @@ const image_position_classes = (() => {
           )
         }
       </div>
-        {
-          image && image_position != "top" && (
-            <div class={`${image_position_classes[2]}`}>
-              <Image
-                class="w-full object-contain"
-                alt="section-image"
-                src={image}
-                width={500}
-                height={333}
-              />
-            </div>
-          )
-        }
+      {
+        image && image_position != "top" && (
+          <div class={`${image_position_classes[2]}`}>
+            <Image
+              class="w-full object-contain"
+              alt="section-image"
+              src={image}
+              width={500}
+              height={333}
+            />
+          </div>
+        )
+      }
     </div>
   </div>
 </section>

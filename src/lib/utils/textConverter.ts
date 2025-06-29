@@ -1,4 +1,4 @@
-import { slug } from 'github-slugger';
+import { slug } from "github-slugger";
 import { marked } from "marked";
 
 // slugify
@@ -27,7 +27,7 @@ export function humanize(content: string | undefined): string | undefined {
     .replace(/^[a-z]/, function (m) {
       return m.toUpperCase();
     });
-};
+}
 
 // plainify
 export const plainify = (content: string) => {
@@ -53,7 +53,7 @@ const htmlEntityDecoder = (htmlWithEntities: string): string => {
     /(&amp;|&lt;|&gt;|&quot;|&#39;)/g,
     (entity: string): string => {
       return entityList[entity];
-    }
+    },
   );
   return htmlWithoutEntities;
 };

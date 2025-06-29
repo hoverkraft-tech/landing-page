@@ -3,7 +3,6 @@
 
 $colors: ("secondary", "accent", "danger", "success", "warning", "info");
 
-
 .btn {
   @apply cursor-pointer rounded-[50px] h-[52px] px-8 py-2 text-sm font-medium leading-[36px] transition-all duration-200 flex flex-row items-center justify-center hover:shadow-[0px_5px_15px] hover:shadow-slate-500/60;
   &-primary {

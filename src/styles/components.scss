@@ -5,11 +5,9 @@
 
 // If .section are surrounded by a .multi-section class, make even sections have a flex direction of row-reverse
 .multi-section {
-
   & > .section:nth-child(even):not(.custom-position) .row {
     @apply md:flex-row-reverse;
   }
-
 }
 
 // badge
@@ -42,9 +40,7 @@
   &.dark {
     @apply bg-surface text-text-secondary;
   }
-
 }
-
 
 // container
 .container {
@@ -78,7 +74,6 @@
   }
 }
 
-
 //footer
 .footer {
   h6 {
@@ -93,7 +88,6 @@
     @apply text-sm hover:text-primary hover:underline;
   }
 }
-
 
 //review-carousel
 .review {
@@ -156,8 +150,6 @@
   }
 }
 
-
-
 //footer
 .footer {
   h6 {
@@ -187,7 +179,6 @@
   }
 }
 
-
 //changelogs
 .changelogs {
   &-content {
@@ -195,11 +186,10 @@
     > .badge + * {
       @apply mt-8;
     }
-    @apply relative shadow-lg rounded-xl bg-surface  ;
+    @apply relative shadow-lg rounded-xl bg-surface;
     &::before {
       @apply absolute -top-[38px] left-0 h-[18px] w-[18px] rounded-full border-4 border-secondary/70 bg-background content-[''] lg:-left-[49px] lg:top-0;
     }
-
 
     ul {
       @apply list-disc pl-6 marker:text-text;
@@ -222,8 +212,6 @@
     @apply mb-5 inline-block h-5 rounded px-1 py-0.5 text-xs text-red-500;
   }
 }
-
-
 
 // form style
 .form-control,

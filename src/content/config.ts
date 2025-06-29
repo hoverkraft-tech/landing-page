@@ -50,5 +50,3 @@ export const collections = {
   homepage: indexPage,
   pages: pagesCollection,
 };
-
-
