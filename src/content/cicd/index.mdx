@@ -1,0 +1,196 @@
+---
+document_title: "CI/CD Solutions"
+meta_description: "Discover how Hoverkraft revolutionizes CI/CD with automated pipelines, seamless deployments, and cloud-native DevOps practices that accelerate your development lifecycle."
+meta_keywords: "hoverkraft, CI/CD, continuous integration, continuous deployment, devops, automation, pipelines, kubernetes, docker, gitops"
+
+title: "CI/CD? We make it work!"
+description: "Transform your development workflow with Hoverkraft's comprehensive CI/CD solutions. From automated testing to production deployments, we handle the complexity so you can focus on building great features."
+buttons:
+  - label: "Get Started"
+    href: "https://github.com/hoverkraft-tech"
+    icon: github
+    color: primary
+  - label: "Contact Us"
+    href: "/contact"
+    icon: mail
+    color: secondary
+---
+
+<Section
+  section={{
+    title: "End-to-End Automation",
+    content:
+      "Hoverkraft delivers <span class='text-accent font-bold'>fully automated CI/CD pipelines</span> that take your code from commit to production without manual intervention. Our battle-tested workflows handle building, testing, security scanning, and deployment across multiple environments. <br/><br/> Experience <span class='text-[#38bdf8] font-bold'>zero-downtime deployments</span> with automatic rollbacks, blue-green deployments, and comprehensive monitoring.",
+  }}
+/>
+
+<div class="row mb-10 lg:mb-20">
+  <div class="col-12 text-sm">
+    ```yaml
+    # Complete CI/CD Pipeline Example
+    name: Deploy Application
+    on:
+      push:
+        branches: [main, develop]
+      pull_request:
+        branches: [main]
+
+    jobs:
+      test:
+        runs-on: ubuntu-latest
+        steps:
+          - uses: actions/checkout@v4
+          - name: Run Tests
+            run: |
+              npm ci
+              npm run test:coverage
+              npm run lint
+              npm run security-audit
+
+      build-and-deploy:
+        needs: test
+        if: github.ref == 'refs/heads/main'
+        uses: hoverkraft-tech/ci-github-publish/.github/workflows/deploy-chart.yml@0.3.1
+        secrets:
+          oci-registry-password: ${{ secrets.GITHUB_TOKEN }}
+          github-app-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
+        with:
+          environment: production
+          tag: ${{ github.sha }}
+          github-app-id: ${{ vars.CI_BOT_APP_ID }}
+          images: |
+            [
+              {
+                "name": "application",
+                "context": ".",
+                "dockerfile": "./Dockerfile",
+                "platforms": ["linux/amd64", "linux/arm64"]
+              }
+            ]
+          chart-values: |
+            [
+              { "path": ".image", "image": "application" },
+              { "path": ".replicaCount", "value": "3" },
+              { "path": ".autoscaling.enabled", "value": "true" }
+            ]
+    ```
+
+  </div>
+  <p class="text-[0.5rem] text-text">Complete pipeline with testing, multi-arch builds, Helm deployment, and GitOps integration!</p>
+</div>
+
+<Section
+  section={{
+    title: "Multi-Environment Management",
+    content:
+      "Deploy to <span class='text-accent font-bold'>development, staging, and production</span> environments with environment-specific configurations. Our GitOps approach ensures consistency across all environments while maintaining security boundaries and approval workflows. <br/><br/> Features include automated review apps for pull requests, environment promotion workflows, and comprehensive environment monitoring.",
+  }}
+/>
+
+<div class="row mb-10 lg:mb-20">
+  <div class="col-12 md:col-6 text-sm py-2">
+    ```yaml # Development Environment environment: development auto_deploy: true
+    replicas: 1 resources: requests: cpu: 100m memory: 128Mi ingress: host:
+    dev.myapp.com tls: false ```
+  </div>
+  <div class="col-12 md:col-6 text-sm py-2">
+    ```yaml # Production Environment environment: production auto_deploy: false
+    replicas: 3 resources: requests: cpu: 500m memory: 512Mi ingress: host:
+    myapp.com tls: true ```
+  </div>
+</div>
+
+<Section
+  section={{
+    title: "Container Orchestration & GitOps",
+    content:
+      "Leverage <span class='text-accent font-bold'>Kubernetes-native deployments</span> with Helm charts and ArgoCD for GitOps workflows. Our container orchestration handles scaling, health checks, service discovery, and secret management automatically. <br/><br/> Built-in support for <span class='text-[#38bdf8] font-bold'>multi-architecture builds</span>, security scanning, and compliance reporting ensures your applications meet enterprise standards.",
+  }}
+/>
+
+<div class="row mb-10 lg:mb-20">
+  <div class="col-12 text-sm">
+    ```yaml # GitOps Application Configuration apiVersion: argoproj.io/v1alpha1
+    kind: Application metadata: name: my-application namespace: argocd spec:
+    project: default source: repoURL: https://github.com/company/helm-charts
+    targetRevision: HEAD path: charts/application helm: valueFiles: -
+    values.yaml - values-production.yaml destination: server:
+    https://kubernetes.default.svc namespace: production syncPolicy: automated:
+    prune: true selfHeal: true syncOptions: - CreateNamespace=true ```
+  </div>
+  <p class="text-[0.5rem] text-text">
+    GitOps configuration with automated sync, self-healing, and namespace
+    management!
+  </p>
+</div>
+
+<Section
+  section={{
+    title: "Security & Compliance First",
+    content:
+      "Security is built into every step of our CI/CD process. Automated vulnerability scanning, dependency checks, and compliance reporting ensure your applications meet the highest security standards. <br/><br/> Features include <span class='text-accent font-bold'>image scanning</span>, secret management, RBAC integration, and audit logging for complete traceability.",
+  }}
+/>
+
+<div class="row mb-10 lg:mb-20">
+  <div class="col-12 md:col-6 text-sm py-2">
+    ```yaml # Security Scanning Pipeline security-scan: runs-on: ubuntu-latest
+    steps: - name: Vulnerability Scan uses: aquasecurity/trivy-action@master
+    with: image-ref: myapp:latest format: sarif - name: Dependency Check run: |
+    npm audit --audit-level moderate docker run --rm owasp/dependency-check \
+    --scan /src --format ALL ```
+  </div>
+  <div class="col-12 md:col-6 text-sm py-2">
+    ```yaml # Compliance Reporting compliance: steps: - name: Generate Reports
+    run: | # SBOM Generation syft . -o spdx-json=sbom.json # Security Compliance
+    oscal-cli component-definition \ create --file compliance.yaml # Upload to
+    compliance portal curl -X POST compliance-api/reports \ -F "sbom=@sbom.json"
+    ```
+  </div>
+</div>
+
+<Section
+  section={{
+    title: "Monitoring & Observability",
+    content:
+      "Comprehensive monitoring and observability built into every deployment. Track application performance, deployment success rates, and system health with integrated metrics, logging, and alerting. <br/><br/> Features include <span class='text-[#38bdf8] font-bold'>real-time dashboards</span>, automated alerting, and detailed deployment analytics to help you optimize your delivery pipeline.",
+  }}
+/>
+
+<div class="row mb-10 lg:mb-20">
+  <div class="col-12 text-sm">
+    ```yaml
+    # Monitoring Configuration
+    monitoring:
+      prometheus:
+        enabled: true
+        serviceMonitor:
+          interval: 30s
+          path: /metrics
+      grafana:
+        dashboards:
+          - deployment-metrics
+          - application-performance
+          - infrastructure-health
+      alerting:
+        rules:
+          - alert: DeploymentFailed
+            expr: kube_deployment_status_replicas_unavailable > 0
+            for: 5m
+            annotations:
+              summary: "Deployment {{ $labels.deployment }} has failed"
+          - alert: HighErrorRate
+            expr: rate(http_requests_total{status=~"5.."}[5m]) > 0.1
+            for: 2m
+    ```
+  </div>
+  <p class="text-[0.5rem] text-text">Complete monitoring stack with Prometheus metrics, Grafana dashboards, and intelligent alerting!</p>
+</div>
+
+<Section
+  section={{
+    title: "Developer Experience Excellence",
+    content:
+      "Streamlined developer workflows with fast feedback loops, easy debugging, and self-service capabilities. Our CI/CD platform provides developers with the tools they need to ship code confidently and efficiently. <br/><br/> Features include <span class='text-accent font-bold'>instant feedback</span> on pull requests, automated testing environments, and comprehensive documentation to accelerate your team's productivity.",
+  }}
+/>
