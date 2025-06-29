@@ -16,9 +16,16 @@ const { counter } = Astro.props;
               0
             </span>
             <span
-              class={"text-primary inline-flex items-center justify-center ml-2"}
+              class={
+                "text-primary inline-flex items-center justify-center ml-2"
+              }
             >
-              <FeatherIcon icon={item.icon ?? 'plus'} color={item.color} size={20} client:load />
+              <FeatherIcon
+                icon={item.icon ?? "plus"}
+                color={item.color}
+                size={20}
+                client:load
+              />
             </span>
           </h3>
           <p>{item.name}</p>

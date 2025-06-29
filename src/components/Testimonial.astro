@@ -2,7 +2,6 @@
 import TestimonialSlider from "@/components/react/TestimonialSlider";
 import { markdownify } from "@/lib/utils/textConverter";
 
-
 export type TestimonialItem = {
   avatar?: string;
   author: string;
@@ -24,10 +23,10 @@ const { testimonial } = Astro.props;
   <div class="container">
     <div class="row justify-between">
       <div class="lg:col-6 lg:mb-0 mb-4">
-        <h2 set:html={markdownify(testimonial.title)}/>
+        <h2 set:html={markdownify(testimonial.title)} />
       </div>
       <div class="lg:col-4">
-        <p set:html={markdownify(testimonial.description)}/>
+        <p set:html={markdownify(testimonial.description)} />
       </div>
     </div>
     <div class="row mt-2 md:mt-10">
