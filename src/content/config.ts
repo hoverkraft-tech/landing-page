@@ -46,6 +46,7 @@ export const collections = {
   changelog: pagesCollection,
   contact: pagesCollection,
   features: pagesCollection,
+  cicd: pagesCollection,
   homepage: indexPage,
   pages: pagesCollection,
 };

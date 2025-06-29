@@ -9,6 +9,10 @@
       "url": "/features"
     },
     {
+      "name": "CI/CD",
+      "url": "/cicd"
+    },
+    {
       "name": "About",
       "url": "/about"
     }
