@@ -20,7 +20,7 @@ jobs:
       id-token: write
 
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref_name == github.event.repository.default_branch
     name: Deploy website
     needs: ci
     runs-on: ubuntu-latest
@@ -32,6 +32,7 @@ jobs:
       url: ${{ steps.deployment.outputs.url }}
     steps:
       - id: deployment
-        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@0.5.1
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@0.7.1
         with:
-          build-assets-path: dist
+          build-path: dist
+          build-artifact-name: build
