@@ -43,7 +43,7 @@ npm run dev
 
 The project structure is designed to be easy to understand and navigate. Here's a quick overview of the directories and files you'll find in this project:
 
-```
+```txt
 /
 ├── public/             # Static assets (images, icons, etc.)
 ├── src/
@@ -71,7 +71,7 @@ Ideally, you should use them as a starting point and modify them to fit your nee
 
 There's only a few of them that are considered **core and generic**:
 
-```
+```txt
 /
 ├── components/
 │   └── Logo.astro      # The site logo. Reused across the site, every page has it.
@@ -87,7 +87,7 @@ Every other component is considered **specific** and is used in the demo site. Y
 The starter comes with a default theme that you can customize to fit your needs.
 There's 3 files involved in the theme customization:
 
-```
+```txt
 /
 ├── src/
 │   └── styles/
@@ -114,8 +114,8 @@ All commands are run from the root of the project, from a terminal:
 
 👤 **Hoverkraft <contact@hoverkraft.cloud>**
 
-- Website: <https://hoverkraft.cloud>
-- Github: [@hoverkraft](https://github.com/hoverkraft-tech)
+- Site: <https://hoverkraft.cloud>
+- GitHub: [@hoverkraft](https://github.com/hoverkraft-tech)
 
 ## 🤝 Contributing
 
