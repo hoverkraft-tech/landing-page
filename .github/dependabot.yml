@@ -48,3 +48,13 @@ updates:
       devcontainers-dependencies:
         patterns:
           - "*"
+
+  - package-ecosystem: "docker"
+    open-pull-requests-limit: 20
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    groups:
+      docker-dependencies:
+        patterns:
+          - "*"

@@ -5,6 +5,12 @@ on:
     branches: [main]
     tags: ["*"]
 
+permissions:
+  contents: read
+  id-token: write
+  pages: write
+  security-events: write
+
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

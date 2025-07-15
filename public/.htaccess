@@ -1,6 +1,6 @@
 ##### Optimize default expiration time - BEGIN
 <IfModule mod_expires.c>
-  
+
   ## Enable expiration control
   ExpiresActive On
 
