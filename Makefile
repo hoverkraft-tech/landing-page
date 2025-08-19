@@ -15,7 +15,8 @@ start: ## Start application in dev mode
 	npm run start
 
 lint: ## Run linters
-	npm run check -- $(filter-out $@,$(MAKECMDGOALS))
+	npm run lint -- $(filter-out $@,$(MAKECMDGOALS))
+	$(call run_linter,)
 
 lint-fix: ## Run linters
 	npm audit fix
@@ -34,7 +35,6 @@ linter-fix: ## Execute linting and fix
 		-e FIX_CSS_PRETTIER=true \
 		-e FIX_JSON_PRETTIER=true \
 		-e FIX_JAVASCRIPT_PRETTIER=true \
-		-e FIX_JAVASCRIPT_STANDARD=true \
 		-e FIX_YAML_PRETTIER=true \
 		-e FIX_MARKDOWN=true \
 		-e FIX_MARKDOWN_PRETTIER=true \
@@ -49,11 +49,8 @@ define run_linter
 		-e DEFAULT_WORKSPACE="$$DEFAULT_WORKSPACE" \
 		-e FILTER_REGEX_INCLUDE="$(filter-out $@,$(MAKECMDGOALS))" \
 		-e IGNORE_GITIGNORED_FILES=true \
-		-e KUBERNETES_KUBECONFORM_OPTIONS="--schema-location default --schema-location 'https://raw.githubusercontent.com/datreeio/CRDs-catalog/main/{{.Group}}/{{.ResourceKind}}_{{.ResourceAPIVersion}}.json'" \
 		-e VALIDATE_TYPESCRIPT_PRETTIER=false \
 		-e VALIDATE_TYPESCRIPT_ES=false \
-		-e VALIDATE_TYPESCRIPT_STANDARD=false \
-        -e VALIDATE_KUBERNETES_KUBECONFORM=false \
         -e VALIDATE_CSS=false \
 		$(1) \
 		-v $$VOLUME \
