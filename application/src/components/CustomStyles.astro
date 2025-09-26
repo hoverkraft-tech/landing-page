@@ -1,0 +1,60 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource/roboto-mono';
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --aw-font-serif: 'Inter Variable', ui-serif, Georgia, Cambria, serif;
+    --aw-font-heading: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --aw-font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, monospace;
+
+    /* Hoverkraft Brand Colors */
+    --aw-color-primary: rgb(29 32 38); /* #1d2026 */
+    --aw-color-secondary: rgb(25 152 255); /* #1998ff */
+    --aw-color-accent: rgb(255 90 2); /* #ff5a02 */
+    --aw-color-info: rgb(0 179 255); /* #00b3ff */
+    --aw-color-warning: rgb(255 230 113); /* #ffe671 */
+    --aw-color-danger: rgb(255 105 109); /* #ff696d */
+    --aw-color-success: rgb(0 214 99); /* #00d663 */
+
+    --aw-color-text-heading: rgb(29 32 38); /* Primary color for headings */
+    --aw-color-text-default: rgb(80 102 144); /* Light gray for body text */
+    --aw-color-text-muted: rgb(80 102 144 / 70%);
+    --aw-color-bg-page: rgb(255 255 255);
+
+    --aw-color-bg-page-dark: rgb(0 0 0);
+
+    ::selection {
+      background-color: rgb(25 152 255 / 20%); /* Secondary color with opacity */
+      color: rgb(29 32 38);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --aw-font-serif: 'Inter Variable', ui-serif, Georgia, Cambria, serif;
+    --aw-font-heading: 'Inter Variable', ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    --aw-font-mono: 'Roboto Mono', ui-monospace, SFMono-Regular, 'Cascadia Code', 'Source Code Pro', Menlo, Monaco, Consolas, monospace;
+
+    /* Hoverkraft Brand Colors - Dark Mode */
+    --aw-color-primary: rgb(25 152 255); /* Secondary becomes primary in dark */
+    --aw-color-secondary: rgb(255 90 2); /* Accent becomes secondary in dark */
+    --aw-color-accent: rgb(0 214 99); /* Success becomes accent in dark */
+    --aw-color-info: rgb(0 179 255); /* #00b3ff */
+    --aw-color-warning: rgb(255 230 113); /* #ffe671 */
+    --aw-color-danger: rgb(255 105 109); /* #ff696d */
+    --aw-color-success: rgb(0 214 99); /* #00d663 */
+
+    --aw-color-text-heading: rgb(255 255 255);
+    --aw-color-text-default: rgb(229 236 246);
+    --aw-color-text-muted: rgb(229 236 246 / 70%);
+    --aw-color-bg-page: rgb(29 32 38); /* Primary color as dark background */
+
+    ::selection {
+      background-color: rgb(25 152 255 / 30%); /* Secondary color with opacity */
+      color: rgb(255 255 255);
+    }
+  }
+</style>

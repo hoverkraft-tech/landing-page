@@ -40,5 +40,5 @@ jobs:
       - id: deployment
         uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@0.8.0
         with:
-          build-path: dist
+          build-path: application/dist
           build-artifact-name: build
