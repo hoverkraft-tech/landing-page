@@ -1,13 +1,16 @@
 ---
-import Features2 from '~/components/widgets/Features2.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'About us',
+  title: 'À propos de HoverKraft',
+  description:
+    'Découvrez la vision, les valeurs et l’équipe derrière la méthodologie HoverKraft et son approche orientée connecteurs.',
 };
 ---
 
@@ -15,61 +18,59 @@ const metadata = {
   <!-- Hero Widget ******************* -->
 
   <Hero
-    tagline="About us"
+    tagline="Notre ADN"
     image={{
-      src: 'https://images.unsplash.com/photo-1559136555-9303baea8ebd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Caos Image',
+      src: '~/assets/images/tired-of-writing.webp',
+      alt: 'Développeur libéré grâce à HoverKraft',
     }}
   >
-    <Fragment slot="title">
-      Elevate your online presence with our <br />
-      <span class="text-accent dark:text-white"> Beautiful Website Templates</span>
-    </Fragment>
+    <Fragment slot="title">Une équipe de Platform Engineers obsédés par la libération des développeurs</Fragment>
 
     <Fragment slot="subtitle">
-      Donec efficitur, ipsum quis congue luctus, mauris magna convallis mauris, eu auctor nisi lectus non augue. Donec
-      quis lorem non massa vulputate efficitur ac at turpis. Sed tincidunt ex a nunc convallis, et lobortis nisi tempus.
-      Suspendisse vitae nisi eget tortor luctus maximus sed non lectus.
+      HoverKraft est née d'un constat simple : sans connecteurs solides, les meilleurs outils ne suffisent pas. Nous
+      concevons une méthodologie orientée preuves, ancrée dans l’open source et adaptée aux réalités des PME/ETI
+      françaises.
     </Fragment>
   </Hero>
 
   <!-- Stats Widget ****************** -->
 
   <Stats
-    title="Statistics about us"
+    title="Ce que nous mesurons"
+    subtitle="Nos engagements se vérifient par les métriques DORA, SPACE et Lean sur chaque mission."
     stats={[
-      { title: 'Offices', amount: '4' },
-      { title: 'Employees', amount: '248' },
-      { title: 'Templates', amount: '12' },
-      { title: 'Awards', amount: '24' },
+      { title: 'Lead time médian', amount: '-76%' },
+      { title: 'Fréquence de déploiement', amount: '×3' },
+      { title: 'MTTR moyen', amount: '-81%' },
+      { title: 'Score bien-être SPACE', amount: '+1,7 pts' },
     ]}
   />
 
   <!-- Features3 Widget ************** -->
 
   <Features3
-    title="Our templates"
-    subtitle="Etiam scelerisque, enim eget vestibulum luctus, nibh mauris blandit nulla, nec vestibulum risus justo ut enim. Praesent lacinia diam et ante imperdiet euismod."
+    title="Pourquoi nous existons"
+    subtitle="Une conviction forgée sur le terrain : la plateforme doit être un accélérateur, pas un centre de coût."
     columns={3}
-    isBeforeContent={true}
+    isBeforeContent
     items={[
       {
-        title: 'Educational',
+        title: 'Vision',
         description:
-          'Morbi faucibus luctus quam, sit amet aliquet felis tempor id. Cras augue massa, ornare quis dignissim a, molestie vel nulla.',
-        icon: 'tabler:template',
+          'Libérer les développeurs pour qu’ils livrent la valeur métier attendue, sans friction opérationnelle.',
+        icon: 'tabler:target',
       },
       {
-        title: 'Interior Design',
+        title: 'Approche orientée connecteurs',
         description:
-          'Vivamus porttitor, tortor convallis aliquam pretium, turpis enim consectetur elit, vitae egestas purus erat ac nunc nulla.',
-        icon: 'tabler:template',
+          'Nous orchestrons vos outils existants via une glue open source pour éviter le lock-in et maximiser la réversibilité.',
+        icon: 'tabler:puzzle',
       },
       {
-        title: 'Photography',
+        title: 'Mesure continue',
         description:
-          'Duis sed lectus in nisl vehicula porttitor eget quis odio. Aliquam erat volutpat. Nulla eleifend nulla id sem fermentum.',
-        icon: 'tabler:template',
+          'DORA, SPACE et Lean : nos décisions et priorités sont guidées par des métriques partagées avec vos équipes.',
+        icon: 'tabler:report-analytics',
       },
     ]}
   />
@@ -78,71 +79,66 @@ const metadata = {
 
   <Features3
     columns={3}
-    isAfterContent={true}
+    isAfterContent
     items={[
       {
-        title: 'E-commerce',
-        description:
-          'Rutrum non odio at vehicula. Proin ipsum justo, dignissim in vehicula sit amet, dignissim id quam. Sed ac tincidunt sapien.',
-        icon: 'tabler:template',
+        title: 'Manifeste HoverKraft',
+        description: 'Un cadre publié et mis à jour pour aligner toutes les parties prenantes sur la plateforme cible.',
+        icon: 'tabler:book',
       },
       {
-        title: 'Blog',
-        description:
-          'Nullam efficitur volutpat sem sed fringilla. Suspendisse et enim eu orci volutpat laoreet ac vitae libero.',
-        icon: 'tabler:template',
+        title: 'Formations & certification',
+        description: 'Parcours certifiants pour faire monter vos équipes en maturité platform engineering.',
+        icon: 'tabler:sparkles',
       },
       {
-        title: 'Business',
+        title: 'Kraft Builders',
         description:
-          'Morbi et elit finibus, facilisis justo ut, pharetra ipsum. Donec efficitur, ipsum quis congue luctus, mauris magna.',
-        icon: 'tabler:template',
+          'Une task-force de Platform Engineers qui co-construit, transmet et sécurise vos chantiers critiques.',
+        icon: 'tabler:users',
       },
       {
-        title: 'Branding',
-        description:
-          'Suspendisse vitae nisi eget tortor luctus maximus sed non lectus. Cras malesuada pretium placerat. Nullam venenatis dolor a ante rhoncus.',
-        icon: 'tabler:template',
+        title: 'OpenKraft',
+        description: 'Des connecteurs open source maintenus, des dashboards DORA et une communauté active.',
+        icon: 'tabler:brand-github',
       },
       {
-        title: 'Medical',
-        description:
-          'Vestibulum malesuada lacus id nibh posuere feugiat. Nam volutpat nulla a felis ultrices, id suscipit mauris congue. In hac habitasse platea dictumst.',
-        icon: 'tabler:template',
+        title: 'Transparence totale',
+        description: 'Code ouvert, documentation complète, reporting régulier et gouvernance partagée.',
+        icon: 'tabler:eye',
       },
       {
-        title: 'Fashion Design',
-        description:
-          'Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus.',
-        icon: 'tabler:template',
+        title: 'Souveraineté by design',
+        description: 'Infrastructure compatible cloud européen et exigences réglementaires (SecNumCloud, ISO, RGPD).',
+        icon: 'tabler:shield-star',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Colorful Image',
+      src: '~/assets/images/open-source.webp',
+      alt: 'Illustration de la communauté OpenKraft',
     }}
   />
 
   <!-- Steps2 Widget ****************** -->
 
   <Steps2
-    title="Our values"
-    subtitle="Maecenas eu tellus eget est scelerisque lacinia et a diam. Aliquam velit lorem, vehicula id fermentum et, rhoncus et purus. Nulla facilisi. Vestibulum malesuada lacus."
+    title="Nos valeurs"
+    subtitle="Elles guident chaque décision, de la roadmap produit aux interactions avec vos équipes."
     items={[
       {
-        title: 'Customer-centric approach',
+        title: 'Franchise radicale',
         description:
-          'Donec id nibh neque. Quisque et fermentum tortor. Fusce vitae dolor a mauris dignissim commodo. Ut eleifend luctus condimentum.',
+          'Nous disons ce qui bloque réellement vos équipes, chiffres à l’appui, quitte à bousculer l’ordre établi.',
       },
       {
-        title: 'Constant Improvement',
+        title: 'Transfert de compétences',
         description:
-          'Phasellus laoreet fermentum venenatis. Vivamus dapibus pulvinar arcu eget mattis. Fusce eget mauris leo.',
+          'La mission n’est réussie que lorsque vos équipes peuvent continuer sans nous, outillées et formées.',
       },
       {
-        title: 'Ethical Practices',
+        title: 'Impact mesurable',
         description:
-          'Vestibulum imperdiet libero et lectus molestie, et maximus augue porta. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.',
+          'Pas de slideware : chaque livrable s’accompagne d’indicateurs DORA/SPACE et de feedbacks terrain.',
       },
     ]}
   />
@@ -150,79 +146,63 @@ const metadata = {
   <!-- Steps2 Widget ****************** -->
 
   <Steps2
-    title="Achievements"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla, sed porttitor est nibh at nulla."
-    isReversed={true}
-    callToAction={{
-      text: 'See more',
-      href: '/',
+    title="Ce qui nous différencie"
+    subtitle="Une méthodologie propriétaire, une posture d’ingénieurs et une exigence de preuve continue."
+    isReversed
+    items={[
+      {
+        title: 'Méthode HoverKraft',
+        description: 'Un blueprint complet qui va du diagnostic au run quotidien, documenté et partagé.',
+        icon: 'tabler:manual-gearbox',
+      },
+      {
+        title: 'Glue open source',
+        description: 'Nous publions nos connecteurs pour éviter l’effet boîte noire et accélérer la contribution.',
+        icon: 'tabler:brand-github',
+      },
+      {
+        title: 'Kraft Builders',
+        description:
+          'Une équipe senior, hybride conseil + delivery, capable de piloter et d’exécuter en contexte complexe.',
+        icon: 'tabler:users',
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    title="Une équipe hybride"
+    subtitle="Des profils ayant vécu la douleur des équipes plate-forme, des product managers et des coachs Lean."
+    items={[
+      {
+        title: 'Ingénieurs plateforme',
+        description: 'Experts Kubernetes, GitOps, observabilité, sécurité et automatisation Laptop to Prod.',
+      },
+      {
+        title: 'Coachs transformation',
+        description: 'Specialistes Lean/DORA/SPACE pour accompagner le changement culturel et organisationnel.',
+      },
+      {
+        title: 'Product & Ops',
+        description:
+          'Pilotage des chantiers, garantie de l’alignement business et animation de la communauté OpenKraft.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/application-configuration-management.png',
+      alt: 'Collectif HoverKraft pilotant la plateforme',
     }}
-    items={[
-      {
-        title: 'Global reach',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
-        icon: 'tabler:globe',
-      },
-      {
-        title: 'Positive customer feedback and reviews',
-        description:
-          'Cras semper nulla leo, eget laoreet erat cursus sed. Praesent faucibus massa in purus iaculis dictum.',
-        icon: 'tabler:message-star',
-      },
-      {
-        title: 'Awards and recognition as industry experts',
-        description:
-          'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus, blandit lobortis ex rhoncus vitae.',
-        icon: 'tabler:award',
-      },
-    ]}
   />
 
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Our locations"
-    tagline="Find us"
-    columns={4}
-    items={[
-      {
-        title: 'EE.UU',
-        description: '1234 Lorem Ipsum St, 12345, Miami',
-      },
-      {
-        title: 'Spain',
-        description: '5678 Lorem Ipsum St, 56789, Madrid',
-      },
-      {
-        title: 'Australia',
-        description: '9012 Lorem Ipsum St, 90123, Sydney',
-      },
-      {
-        title: 'Brazil',
-        description: '3456 Lorem Ipsum St, 34567, São Paulo',
-      },
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Rencontrer un Kraft Builder', href: '/contact' },
+      { text: 'Lire le manifeste', href: '/methodologie' },
     ]}
-  />
-
-  <!-- Features2 Widget ************** -->
-
-  <Features2
-    title="Technical Support"
-    tagline="Contact us"
-    columns={2}
-    items={[
-      {
-        title: 'Chat with us',
-        description:
-          'Integer luctus laoreet libero, auctor varius purus rutrum sit amet. Ut nec molestie nisi, quis eleifend mi.',
-        icon: 'tabler:messages',
-      },
-      {
-        title: 'Call us',
-        description:
-          'Mauris faucibus finibus orci, in posuere elit viverra non. In hac habitasse platea dictumst. Cras lobortis metus a hendrerit congue.',
-        icon: 'tabler:headset',
-      },
-    ]}
-  />
+  >
+    <Fragment slot="title">Prêts à libérer vos développeurs ?</Fragment>
+    <Fragment slot="subtitle"
+      >Explorons ensemble comment la méthode HoverKraft peut transformer votre chaîne de delivery.</Fragment
+    >
+  </CallToAction>
 </Layout>

@@ -1,0 +1,297 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Offres HoverKraft',
+  description:
+    'Choisissez l’offre HoverKraft qui correspond à votre maturité plateforme : diagnostic, coaching, restart ou Platform Engineering as a Service.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Nos offres"
+    actions={[
+      { variant: 'primary', text: 'Parler à un Kraft Builder', href: '/contact#form' },
+      { text: 'Voir la méthodologie', href: '/methodologie' },
+    ]}
+    image={{
+      src: '~/assets/images/programming-1.webp',
+      alt: 'Présentation des offres HoverKraft',
+    }}
+  >
+    <Fragment slot="title">Des packs conçus pour libérer vos développeurs, étape par étape</Fragment>
+
+    <Fragment slot="subtitle">
+      De l’audit express à l’exécution managée (PEaaS), chaque offre HoverKraft combine méthodologie, connecteurs open
+      source et accompagnement senior. Sélectionnez le pack qui correspond à votre niveau de maturité et à vos objectifs
+      business.
+    </Fragment>
+  </Hero>
+
+  <Pricing
+    title="Nos packs"
+    subtitle="Des engagements clairs, des livrables concrets, des résultats mesurables."
+    prices={[
+      {
+        title: 'Diagnostic HoverKraft',
+        subtitle: 'Cartographie en 2 jours pour objectiver vos irritants',
+        price: '2 500',
+        currency: '€',
+        period: 'HT (2 jours sur site)',
+        items: [
+          { description: 'Interviews dev / ops / produit et revue de vos assets' },
+          { description: 'Carte des connecteurs existants et des points de friction' },
+          { description: 'Score DORA/SPACE initial + recommandations priorisées' },
+        ],
+        callToAction: { text: 'Planifier le diagnostic', href: '/contact#form' },
+      },
+      {
+        title: 'Pack Autonomie',
+        subtitle: 'Coaching ciblé pour ancrer la méthode HoverKraft',
+        price: '1 800',
+        currency: '€',
+        period: 'HT / jour (minimum 5 jours)',
+        items: [
+          { description: 'Roadmap 6 mois détaillée et jalons DORA' },
+          { description: 'Pairing hebdomadaire avec un Kraft Builder' },
+          { description: 'Mise en place de la glue open source sur un flux critique' },
+        ],
+        callToAction: { text: 'Construire le plan', href: '/contact' },
+        hasRibbon: true,
+        ribbonTitle: 'Populaire',
+      },
+      {
+        title: 'Restart Platform',
+        subtitle: 'Rebooter votre chaîne de valeur et embarquer les équipes',
+        price: '4 000',
+        currency: '€',
+        period: 'HT + 6 mois de coaching',
+        items: [
+          { description: 'Programme de transformation sur 6 mois avec gouvernance partagée' },
+          { description: 'Déploiement complet de la glue HoverKraft (CI/CD, observabilité, IAM)' },
+          { description: 'Formations certifiantes et rituels DORA/SPACE' },
+        ],
+        callToAction: { text: 'Lancer le restart', href: '/contact' },
+      },
+      {
+        title: 'Platform Engineering as a Service',
+        subtitle: 'Votre équipe plateforme HoverKraft intégrée sur la durée',
+        price: '8 000',
+        currency: '€',
+        period: 'HT / mois (engagement 6 mois)',
+        items: [
+          { description: 'Squad HoverKraft dédiée (Platform + Product + Coach Lean)' },
+          { description: 'Roadmap continue, run partagé et reporting exécutif mensuel' },
+          { description: 'Accès prioritaire à la communauté OpenKraft et releases connecteurs' },
+        ],
+        callToAction: { text: 'Discuter de PEaaS', href: '/contact' },
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    title="Ce que chaque pack garantit"
+    items={[
+      {
+        title: 'Livrables tangibles',
+        description: 'Audit écrit, backlog priorisé, dashboards DORA/SPACE et code source de la glue déployée.',
+      },
+      {
+        title: 'Transfert de compétences',
+        description: 'Formations et pairings pour ancrer durablement les pratiques HoverKraft dans vos rituels.',
+      },
+      {
+        title: 'Mesure continue',
+        description: 'Indicateurs avant/après, ROI calculé et boucle de feedback mensuelle avec vos équipes.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/questions-answers.png',
+      alt: 'Gestion opérationnelle des livrables HoverKraft',
+    }}
+  />
+
+  <Features2
+    title="Comparatif rapide"
+    subtitle="Choisissez la formule adaptée à votre contexte."
+    columns={2}
+    items={[
+      {
+        title: 'Diagnostic HoverKraft',
+        description: 'Idéal pour prendre une photo claire de votre chaîne de delivery et convaincre votre direction.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Pack Autonomie',
+        description: 'Vous disposez d’une équipe motivée et voulez monter en maturité rapidement, en gardant la main.',
+        icon: 'tabler:road',
+      },
+      {
+        title: 'Restart Platform',
+        description: 'Vous devez relancer votre initiative plateforme en mêlant accompagnement, delivery et change.',
+        icon: 'tabler:refresh',
+      },
+      {
+        title: 'PEaaS',
+        description: 'Vous souhaitez externaliser une partie de l’équipe plateforme tout en gardant la gouvernance.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+  />
+
+  <Features3
+    title="Ce qui est inclus"
+    subtitle="Chaque pack HoverKraft combine accompagnement, livrables et transfert."
+    columns={2}
+    items={[
+      {
+        title: 'Livrables documentés',
+        description: 'Audit écrit, plans d’action, dashboards et code source de la glue livrés dans chaque offre.',
+        icon: 'tabler:clipboard-text',
+      },
+      {
+        title: 'Coaching dédié',
+        description: 'Un Kraft Builder référent qui suit votre mission et anime les rituels clés.',
+        icon: 'tabler:user-star',
+      },
+      {
+        title: 'Open source first',
+        description: 'Tous nos connecteurs sont publiés sur GitHub pour garantir la réversibilité.',
+        icon: 'tabler:brand-github',
+      },
+      {
+        title: 'Mesure d’impact',
+        description: 'Suivi DORA/SPACE avant/après, ROI chiffré et recommandations à 6 mois.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Support communautaire',
+        description: 'Accès à la communauté OpenKraft, webinars et ressources exclusives.',
+        icon: 'tabler:messages',
+      },
+      {
+        title: 'Flexibilité d’engagement',
+        description: 'Possibilité de monter ou descendre en gamme selon vos chantiers et votre rythme.',
+        icon: 'tabler:arrows-random',
+      },
+    ]}
+    classes={{ container: 'max-w-5xl' }}
+  />
+
+  <Steps
+    title="Un cadre identique, quelle que soit l’offre"
+    items={[
+      {
+        title: '1. Diagnostic structuré',
+        description: 'Interviews, collecte d’indicateurs et revue de vos pipelines existants.',
+        icon: 'tabler:clipboard-text',
+      },
+      {
+        title: '2. Trajectoire partagée',
+        description: 'Roadmap co-construite autour des métriques DORA/SPACE et des quick wins identifiés.',
+        icon: 'tabler:timeline',
+      },
+      {
+        title: '3. Delivery en binôme',
+        description: 'Intégration de la glue HoverKraft avec vos équipes pour garantir l’appropriation.',
+        icon: 'tabler:users',
+      },
+      {
+        title: '4. Preuve & transfert',
+        description: 'Dashboards avant/après, documentation livrée et passage de relais sécurisé.',
+        icon: 'tabler:report-analytics',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-6.webp',
+      alt: 'Ingénieurs HoverKraft en mission',
+    }}
+  />
+
+  <Steps
+    title="Comment choisir votre pack"
+    tagline="processus accompagné"
+    isReversed
+    items={[
+      {
+        title: '1. Diagnostic flash offert',
+        description: '30 minutes pour comprendre vos défis actuels et valider l’adéquation du pack.',
+        icon: 'tabler:phone',
+      },
+      {
+        title: '2. Projection financière',
+        description: 'Estimation du ROI basée sur vos métriques DORA/SPACE actuelles.',
+        icon: 'tabler:abacus',
+      },
+      {
+        title: '3. Signature & kick-off',
+        description: 'Planification des ateliers et constitution de l’équipe mixte.',
+        icon: 'tabler:calendar-event',
+      },
+      {
+        title: '4. Delivery & mesure',
+        description: 'Suivi hebdomadaire, dashboards partagés et adaptation continue.',
+        icon: 'tabler:chart-dots',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/rbac-and-gouvernance.png',
+      alt: 'Schéma de gouvernance HoverKraft',
+    }}
+  />
+
+  <FAQs
+    title="Questions fréquentes"
+    subtitle="Précisions sur nos modalités d'engagement."
+    columns={1}
+    items={[
+      {
+        title: 'Peut-on commencer par le diagnostic avant de s’engager ?',
+        description:
+          'Oui. Le diagnostic est souvent le point d’entrée. Il peut être déduit du pack choisi si la mission débute dans les 60 jours.',
+      },
+      {
+        title: 'Les prix indiqués sont-ils HT ?',
+        description:
+          'Oui, tous les montants sont exprimés hors taxes. Les frais de déplacement éventuels sont indiqués avant signature.',
+      },
+      {
+        title: 'Peut-on ajuster la durée d’accompagnement ?',
+        description:
+          'Les packs sont modulables. Nous recalons la durée et la volumétrie en fonction de vos objectifs et de vos équipes.',
+      },
+      {
+        title: 'Quelles sont les modalités de paiement ?',
+        description:
+          'Facturation à la mission pour le diagnostic et le pack autonomie, mensuelle pour Restart et PEaaS.',
+      },
+      {
+        title: 'Existe-t-il une option d’abonnement ?',
+        description:
+          'PEaaS fonctionne comme un abonnement trimestriel renouvelable. Nous ajustons la capacité de la squad selon votre roadmap.',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Choisir mon pack', href: '/contact#form' },
+      { text: 'Découvrir la méthode', href: '/methodologie' },
+    ]}
+  >
+    <Fragment slot="title">Besoin d’un coup de main pour vous décider ?</Fragment>
+    <Fragment slot="subtitle"
+      >Parlons de votre contexte et identifions ensemble l’offre HoverKraft la plus pertinente.</Fragment
+    >
+  </CallToAction>
+</Layout>

@@ -16,5 +16,5 @@ jobs:
       working-directory: application
       build: |
         {
-          "artifact": ["dist"]
+          "artifact": ["application/dist"]
         }

@@ -5,73 +5,62 @@ import ContactUs from '~/components/widgets/Contact.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Contact ventes et support',
 };
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
+  <!-- Widget HeroText ******************* -->
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <HeroText tagline="Contact" title="Contactez notre équipe" />
 
   <ContactUs
     id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+    title="Demandez une démo ou contactez les ventes"
+    subtitle="Parlez-nous de vos besoins et nous vous proposerons l'offre et les étapes suivantes."
     inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
+      { type: 'text', name: 'name', label: 'Nom complet' },
+      { type: 'email', name: 'email', label: 'Email professionnel' },
+      { type: 'text', name: 'company', label: 'Entreprise' },
     ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
+    textarea={{ label: 'Message / besoins' }}
+    disclaimer={{ label: 'Nous ne partagerons jamais vos données. Consultez notre politique de confidentialité.' }}
+    description="Notre équipe répond sous un jour ouvré. Pour une demande urgente, utilisez l’un des canaux ci-dessous."
+    button="Envoyer"
   />
 
-  <!-- Features2 Widget ************** -->
+  <!-- Widget Features2 ************** -->
 
   <Features2
-    title="We are here to help!"
+    title="Nous sommes là pour vous aider"
     items={[
       {
-        title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
+        title: 'Support général',
+        description: `Contactez-nous pour des questions sur la gestion de compte, la facturation, l'accès aux services ou toute autre demande générale.`,
       },
       {
-        title: 'Contact sales',
+        title: 'Ventes',
         description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
+          'Discutez avec notre équipe commerciale pour choisir l’offre adaptée, comprendre la tarification ou planifier un lancement sur mesure.',
       },
       {
-        title: 'Technical support',
+        title: 'Support technique',
         description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
+          "Contactez le support pour des problèmes d'intégration, d'installation ou toute panne technique liée à la plateforme.",
       },
       {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
+        title: 'Téléphone',
+        description: '+33 (0)1 23 45 67 89',
         icon: 'tabler:headset',
       },
       {
         title: 'Email',
-        description: 'contact@support.com',
+        description: 'contact@hoverkraft.cloud',
         icon: 'tabler:mail',
       },
       {
-        title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
+        title: 'Adresse',
+        description: '10 rue (à compléter), 75000 Paris, France',
         icon: 'tabler:map-pin',
       },
     ]}

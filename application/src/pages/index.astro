@@ -1,6 +1,5 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
 import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
@@ -13,7 +12,9 @@ import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'AstroWind — Free template for creating websites with Astro + Tailwind CSS',
+  title: 'Hoverkraft — Platform Engineering orienté connecteurs',
+  description:
+    'Hoverkraft unifie méthodologie, connecteurs open source et accompagnement expert pour libérer vos développeurs et accélérer votre time-to-market.',
   ignoreTitleTemplate: true,
 };
 ---
@@ -22,81 +23,73 @@ const metadata = {
   <!-- Hero Widget ******************* -->
 
   <Hero
+    tagline="Platform Engineering souverain"
     actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
-      { text: 'Learn more', href: '#features' },
+      { variant: 'primary', text: 'Planifier un diagnostic', href: '/contact#form' },
+      { text: 'Explorer la méthodologie', href: '/methodologie' },
     ]}
-    image={{ src: '~/assets/images/hero-image.png', alt: 'AstroWind Hero Image' }}
+    image={{ src: '~/assets/images/hero-image.png', alt: 'Illustration de la plateforme Hoverkraft' }}
   >
     <Fragment slot="title">
-      Free template for <span class="hidden xl:inline">creating websites with</span>
-      <span class="text-accent dark:text-white"> Astro 5.0</span> + Tailwind CSS
+      La plateforme orientée connecteurs
+      <br />
+      <span class="text-accent dark:text-white">qui libère vos développeurs</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span class="hidden sm:inline">
-        <span class="font-semibold">AstroWind</span> is a free, customizable and production-ready template for Astro 5.0
-        + Tailwind CSS.</span
-      >
-      <span class="block mb-1 sm:hidden font-bold text-blue-600">AstroWind: Production-ready.</span>
-      Suitable for Startups, Small Business, SaaS websites, Professional Portfolios, Marketing websites, Landing Pages &
-      Blogs.
+      Combinez la méthode HoverKraft, ses connecteurs open source et l'accompagnement des Kraft Builders pour
+      transformer une dette technique chronique en chaîne de valeur continue, pilotée par les métriques DORA, SPACE et
+      Lean.
     </Fragment>
   </Hero>
 
   <!-- Note Widget ******************* -->
 
-  <Note title="Philosophy:" description="Simplicity, Best Practices and High Performance" />
+  <Note
+    title="Notre mission"
+    description="Faire passer les PME/ETI françaises de la dette technique à l'excellence opérationnelle grâce à une plateforme unifiée, mesurable et souveraine."
+  />
 
   <!-- Features Widget *************** -->
 
   <Features
     id="features"
-    tagline="Features"
-    title="What you get with AstroWind"
-    subtitle="One of the most professional and comprehensive templates currently on the market. Most starred & forked Astro theme in 2022, 2023 and 2024."
+    tagline="La promesse HoverKraft"
+    title="Les briques qui cimentent vos équipes"
+    subtitle="Une vision orientée connecteurs qui marie process, outillage et accompagnement pour un delivery sans bricolage."
     items={[
       {
-        title: 'Astro + Tailwind CSS Integration',
+        title: 'Méthode HoverKraft',
         description:
-          'A seamless integration between two great frameworks that offer high productivity, performance and versatility.',
-        icon: 'tabler:brand-tailwind',
+          'Une méthodologie branded, assumée et documentée du laptop à la prod pour aligner tech et produit.',
+        icon: 'tabler:manual-gearbox',
       },
       {
-        title: 'Ready-to-use Components',
-        description:
-          'Widgets made with Tailwind CSS ready to be used in Marketing Websites, SaaS, Blogs, Personal Profiles, Small Business...',
-        icon: 'tabler:components',
+        title: 'Glue open source',
+        description: 'Des connecteurs intelligents qui unifient vos outils hétérogènes sans lock-in propriétaire.',
+        icon: 'tabler:puzzle',
       },
       {
-        title: 'Best Practices',
-        description:
-          'Creating secure, efficient, and user-friendly websites that deliver exceptional experiences and lasting value.',
-        icon: 'tabler:list-check',
+        title: 'Pilotage DORA + SPACE + Lean',
+        description: 'Une lecture croisée performance & bien-être pour arbitrer sur des preuves, pas des intuitions.',
+        icon: 'tabler:report-analytics',
       },
       {
-        title: 'Excellent Page Speed',
+        title: 'Accompagnement Kraft Builders',
         description:
-          'Having a good page speed impacts organic search ranking, improves user experience (UI/UX) and increase conversion rates.',
-        icon: 'tabler:rocket',
+          'Des Platform Engineers seniors qui cadrent, forment et construisent avec vos équipes, pas à leur place.',
+        icon: 'tabler:users',
       },
       {
-        title: 'Search Engine Optimization (SEO)',
-        description:
-          "SEO lies in its ability to enhance a website's visibility, driving organic traffic and enabling it to reach a wider audience.",
-        icon: 'tabler:arrows-right-left',
+        title: 'Libération du développeur',
+        description: 'Chaque profil retrouve son métier : moins de scripts jetlag, plus de delivery focus produit.',
+        icon: 'tabler:layout-board',
       },
       {
-        title: 'Open to new ideas and contributions',
+        title: 'Souveraineté et réversibilité',
         description:
-          'Embracing a culture that is open to new ideas and contributions is integral fostering innovation, collaboration, and a dynamic user experience.',
-        icon: 'tabler:bulb',
+          'Un socle souverain, portable et documenté. Vous gardez la main, nous faisons décoller la plateforme.',
+        icon: 'tabler:shield-star',
       },
     ]}
   />
@@ -105,109 +98,35 @@ const metadata = {
 
   <Content
     isReversed
-    tagline="Inside template"
-    title="AstroWind's Blueprint: Fun Meets Functionality!"
+    tagline="3 piliers"
+    title="Méthodologie, accompagnement, ressources"
     items={[
       {
-        title: 'Built on top of Astro 5.0',
-        description:
-          'Benefiting from the performance and developer-friendly features of this modern static site generator.',
+        title: 'Méthode HoverKraft',
+        description: 'Manifeste, formations et certification pour aligner pratiques, outillage et culture produit.',
       },
       {
-        title: 'Styled using Tailwind CSS',
+        title: 'Kraft Builders',
         description:
-          'Facilitating rapid design and consistent styling with this highly popular utility-first CSS framework.',
+          'Audit, autonomie, restart ou PEaaS : un accompagnement expert qui s’intègre à votre organisation.',
       },
       {
-        title: 'Cross-browser compatibility',
-        description:
-          'Ensure your website looks and functions consistently across various web browsers, delivering a seamless experience to all users.',
+        title: 'OpenKraft',
+        description: 'Connecteurs open source, dashboards DORA et templates d’IDP pour prouver par le code.',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Colorful Image',
+      src: '~/assets/images/demo-presentation.png',
+      alt: 'Pilier HoverKraft',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Building on modern foundations</h3>
-      Gain a competitive advantage by incorporating industry leading practices
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Un cadre commun de la stratégie à l'opérationnel
+      </h3>
+      Nous articulons les trois piliers HoverKraft pour sécuriser votre trajectoire : vision, exécution et preuve par l'open
+      source.
     </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'High level of customization',
-        description: `Tailor the template effortlessly to match your brand's identity and requirements, making your website distinct and saving you time.`,
-      },
-      {
-        title: 'Multiple layout possibilities',
-        description:
-          'Explore various layout options to find the structure that best presents your content, enhancing user engagement and navigation.',
-      },
-      {
-        title: 'Fully responsive design',
-        description:
-          "Ensure your website's optimal performance on various devices and screen sizes, providing a consistent and enjoyable user experience.",
-      },
-      {
-        title: 'Integration of media',
-        description:
-          'Seamlessly incorporate images, videos, and multimedia elements that enhance your content and engage visitors effectively.',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1600132806370-bf17e65e942f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2194&q=80',
-      alt: 'Blueprint Image',
-    }}
-  >
-    <Fragment slot="content">Ensure your online presence truly represents you.</Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!-- Content Widget **************** -->
-
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Enhanced user engagement',
-        description:
-          'Captivate your audience with interactive elements, intuitive navigation, and visually appealing layouts, encouraging longer visits.',
-      },
-      {
-        title: 'Continuous improvement',
-        description:
-          'Ensure your website stays aligned with the latest trends and technologies through regular updates and enhancements.',
-      },
-      {
-        title: 'Time and resource efficiency',
-        description:
-          'Skip the time-consuming process of building a website from scratch and launch your online presence sooner with AstroWind.',
-      },
-      {
-        title: 'Community support',
-        description: `Join the growing AstroWind community for insights, resources, and assistance, ensuring you're never alone on your web development journey.`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1611462985358-60d3498e0364?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Astronauts Image',
-    }}
-  >
-    <Fragment slot="content">Designed to foster growth and success.</Fragment>
 
     <Fragment slot="bg">
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
@@ -217,93 +136,130 @@ const metadata = {
   <!-- Steps Widget ****************** -->
 
   <Steps
-    title="Get your dream website up and running in no time with AstroWind."
+    title="Comment nous faisons décoller votre plateforme"
     items={[
       {
-        title: 'Step 1: <span class="font-medium">Download</span>',
+        title: 'Étape 1 : <span class="font-medium">Diagnostic HoverKraft</span>',
         description:
-          "Kickstart with GitHub! Either fork the AstroWind template or simply click 'Use this template'. Your canvas awaits, ready for your digital masterpiece. In just a few clicks, you've already set the foundation.",
-        icon: 'tabler:package',
+          '2 jours d’analyse DORA/SPACE, interviews terrain et cartographie des connecteurs pour objectiver les irritants.',
+        icon: 'tabler:search',
       },
       {
-        title: 'Step 2: <span class="font-medium">Add content</span>',
+        title: 'Étape 2 : <span class="font-medium">Plan d’action</span>',
         description:
-          "Pour your vision into it. Add images, text, and all that jazz to breathe life into your digital space. Remember, it's the content that tells your story, so make it captivating.",
-        icon: 'tabler:letter-case',
+          'Priorisation sur 6 mois : quick wins, chantiers structurants et trajectoire de maturité adaptée à votre contexte.',
+        icon: 'tabler:timeline',
       },
       {
-        title: 'Step 3: <span class="font-medium">Customize styles</span>',
+        title: 'Étape 3 : <span class="font-medium">Intégration de la Glue</span>',
         description:
-          'Give it your personal touch. Tailor colors, fonts, and layouts until it feels just right. Your unique flair, amplified by AstroWind! Precision in design ensures a seamless user experience.',
-        icon: 'tabler:paint',
+          'Déploiement des connecteurs open source, automatisation Laptop to Prod et mise en place des dashboards.',
+        icon: 'tabler:puzzle',
       },
       {
-        title: 'Ready!',
-        icon: 'tabler:check',
+        title: 'Étape 4 : <span class="font-medium">Transfert & accélération</span>',
+        description: 'Coaching in situ, rituels DORA et accompagnement continu via Kraft Builders ou PEaaS.',
+        icon: 'tabler:rocket',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1616198814651-e71f960c3180?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=987&q=80',
-      alt: 'Steps image',
+      src: '~/assets/images/programming-4.webp',
+      alt: 'Illustration du parcours HoverKraft',
     }}
   />
 
-  <!-- Features2 Widget ************** -->
+  <!-- Content Widget **************** -->
 
-  <Features2
-    title="Most used widgets"
-    subtitle="Provides frequently used components for building websites using Tailwind CSS"
-    tagline="Components"
+  <Content
+    isAfterContent
     items={[
       {
-        title: 'Headers',
-        description: "Ever tried driving without GPS? Boom! That's why websites need headers for direction.",
-        icon: 'flat-color-icons:template',
+        title: 'Connecteurs Laptop to Prod',
+        description: 'CI/CD, secrets, observabilité et IAM orchestrés pour éliminer les scripts orphelins.',
       },
       {
-        title: 'Heros',
+        title: 'Workflows standardisés',
+        description: 'Des pipelines reproductibles pour chaque équipe et produit, du MVP au scale-up.',
+      },
+      {
+        title: 'Observabilité partagée',
+        description: 'Dashboards DORA/SPACE et alerting contextualisé pour arbitrer collectivement.',
+      },
+      {
+        title: 'Réversibilité garantie',
+        description: 'Code source ouvert, documentation et transfert de compétences pour garder la main.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/platform-glue.png',
+      alt: 'Connecteurs Hoverkraft',
+    }}
+  >
+    <Fragment slot="content">Un socle technique cohérent qui rend visible chaque étape du flow développeur.</Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!-- Content Widget **************** -->
+
+  <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'Libération du développeur',
         description:
-          "Picture a superhero landing – epic, right? That's the job of a Hero section, making grand entrances!",
-        icon: 'flat-color-icons:gallery',
+          'Réduisez les temps morts et les tâches ingrates pour refocusser vos talents sur la création de valeur.',
       },
       {
-        title: 'Features',
+        title: 'Coaching in situ',
+        description: 'Formations et pairings ciblés pour ancrer les nouvelles pratiques dans vos rituels.',
+      },
+      {
+        title: 'Time-to-market accéléré',
+        description: 'Des cycles maîtrisés et un passage à l’échelle sans friction grâce aux métriques DORA.',
+      },
+      {
+        title: 'Communauté OpenKraft',
+        description: `Partage de retours d'expérience, contributions GitHub et webinars mensuels pour rester à jour.`,
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-3.webp',
+      alt: 'Équipe libérée',
+    }}
+  >
+    <Fragment slot="content">Une expérience développeur qui attire, retient et aligne.</Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Features2
+    title="Pour qui concevons-nous HoverKraft ?"
+    subtitle="Une réponse directe aux irritants des équipes tech françaises"
+    columns={3}
+    items={[
+      {
+        title: 'Développeur interne frustré',
         description:
-          'Where websites strut their stuff and show off superpowers. No holding back on the bragging rights here!',
-        icon: 'flat-color-icons:approval',
+          'Retirez les scripts bricolés, standardisez les workflows et gagnez du temps pour livrer de la valeur.',
+        icon: 'tabler:keyboard',
       },
       {
-        title: 'Content',
+        title: 'CTO / DSI débordé',
         description:
-          "Dive into the meat and potatoes of a site; without it, you'd just be window shopping. Content is king.",
-        icon: 'flat-color-icons:document',
+          'Une plateforme mesurable qui réduit la charge mentale, fiabilise les déploiements et rend les arbitrages clairs.',
+        icon: 'tabler:server-cog',
       },
       {
-        title: 'Call-to-Action',
+        title: 'Lead DevOps / Platform',
         description:
-          'That enthusiastic friend who\'s always urging, "Do it! Do it!"? Yeah, that\'s this button nudging you towards adventure.',
-        icon: 'flat-color-icons:advertising',
-      },
-      {
-        title: 'Pricing',
-        description: 'Behold the dessert menu of the website world. Tempting choices await, can you resist?',
-        icon: 'flat-color-icons:currency-exchange',
-      },
-      {
-        title: 'Testimonial',
-        description: 'Step into the gossip corner! Here, other visitors spill the beans and share the juicy details.',
-        icon: 'flat-color-icons:voice-presentation',
-      },
-      {
-        title: 'Contact',
-        description:
-          'Like a digital mailbox, but faster! Drop a line, ask a question, or send a virtual high-five. Ding! Message in.',
-        icon: 'flat-color-icons:business-contact',
-      },
-      {
-        title: 'Footers',
-        description: "The footer's like the credits of a movie but sprinkled with easter eggs. Time to hunt!",
-        icon: 'flat-color-icons:database',
+          'Une base crédible, documentée et extensible pour arrêter de réinventer la roue et gagner en posture.',
+        icon: 'tabler:tool',
       },
     ]}
   >
@@ -315,50 +271,42 @@ const metadata = {
   <!-- HighlightedPosts Widget ******* -->
 
   <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
+    title="Nos derniers contenus"
+    information={`Retours d'expérience, analyses DORA et ressources open source pour faire progresser votre plateforme. Abonnez-vous pour ne rien manquer.`}
   />
 
   <!-- FAQs Widget ******************* -->
 
   <FAQs
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into the powerful features that AstroWind offers and how it can elevate your web development journey."
-    tagline="FAQs"
+    title="Questions fréquentes"
+    subtitle="Quelques réponses directes aux interrogations que l'on nous pose en mission."
+    tagline="FAQ"
     classes={{ container: 'max-w-6xl' }}
     items={[
       {
-        title: 'Why AstroWind?',
+        title: 'Pourquoi parler de “connecteurs” ?',
         description:
-          "Michael Knight a young loner on a crusade to champion the cause of the innocent. The helpless. The powerless in a world of criminals who operate above the law. Here he comes Here comes Speed Racer. He's a demon on wheels.",
+          'Parce qu’un mur de briques sans ciment ne tient pas. Les connecteurs HoverKraft orchestrent vos outils existants pour créer une chaîne de delivery cohérente et mesurable.',
       },
       {
-        title: 'What do I need to start?',
+        title: 'Combien de temps pour voir les premiers résultats ?',
         description:
-          'Space, the final frontier. These are the voyages of the Starship Enterprise. Its five-year mission: to explore strange new worlds. Many say exploration is part of our destiny, but it’s actually our duty to future generations.',
+          'Suite au diagnostic, nous activons un plan 6 mois avec quick wins dès les 4 premières semaines : automatisation des déploiements critiques et pilotage par métriques.',
       },
       {
-        title: 'How to install the Astro + Tailwind CSS template?',
+        title: 'Sommes-nous dépendants de HoverKraft après la mission ?',
         description:
-          "Well, the way they make shows is, they make one show. That show's called a pilot. Then they show that show to the people who make shows, and on the strength of that one show they decide if they're going to make more shows.",
+          'Non. Notre code est open source, la documentation livrée et vos équipes formées. Vous pouvez continuer en autonomie ou prolonger l’accompagnement si besoin.',
       },
       {
-        title: "What's something that you don't understand?",
+        title: 'Peut-on garder notre stack actuelle ?',
         description:
-          "A flower in my garden, a mystery in my panties. Heart attack never stopped old Big Bear. I didn't even know we were calling him Big Bear.",
+          'Nous ne remplaçons pas vos outils préférés : nous les connectons. Notre glue intègre GitLab, GitHub, Backstage, Dagger, AWS, OVHcloud, etc.',
       },
       {
-        title: 'What is something that you would like to try again?',
+        title: 'Comment se matérialisent les preuves d’impact ?',
         description:
-          "A business big enough that it could be listed on the NASDAQ goes belly up. Disappears! It ceases to exist without me. No, you clearly don't know who you're talking to, so let me clue you in.",
-      },
-      {
-        title: 'If you could only ask one question to each person you meet, what would that question be?',
-        description:
-          "This is not about revenge. This is about justice. A lot of things can change in twelve years, Admiral. Well, that's certainly good to know. About four years. I got tired of hearing how young I looked.",
+          'Nous fournissons un dashboard avant/après sur les métriques DORA/SPACE, un ROI chiffré (time-to-market, incidents, coûts infra) et des témoignages vidéo de vos équipes.',
       },
     ]}
   />
@@ -366,11 +314,12 @@ const metadata = {
   <!-- Stats Widget ****************** -->
 
   <Stats
+    title="Impacts mesurés chez nos clients"
     stats={[
-      { title: 'Downloads', amount: '132K' },
-      { title: 'Stars', amount: '24.8K' },
-      { title: 'Forks', amount: '10.3K' },
-      { title: 'Users', amount: '48.4K' },
+      { title: 'Fréquence de déploiement', amount: '×3' },
+      { title: 'Lead time moyen', amount: '-76%' },
+      { title: 'MTTR', amount: '-81%' },
+      { title: 'Satisfaction développeurs', amount: '+1,7 pts' },
     ]}
   />
 
@@ -378,22 +327,13 @@ const metadata = {
 
   <CallToAction
     actions={[
-      {
-        variant: 'primary',
-        text: 'Get template',
-        href: 'https://github.com/arthelokyo/astrowind',
-        target: '_blank',
-        icon: 'tabler:download',
-      },
+      { variant: 'primary', text: 'Réserver un diagnostic HoverKraft', href: '/contact#form' },
+      { text: 'Découvrir nos offres', href: '/offres' },
     ]}
   >
-    <Fragment slot="title">
-      Astro&nbsp;+&nbsp;<br class="block sm:hidden" /><span class="sm:whitespace-nowrap">Tailwind CSS</span>
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Be very surprised by these huge fake numbers you are seeing on this page. <br class="hidden md:inline" />Don't
-      waste more time! :P
-    </Fragment>
+    <Fragment slot="title">On craque le lifecycle de votre chaîne de valeur</Fragment>
+    <Fragment slot="subtitle"
+      >Parlons de vos irritants actuels et dessinons le plan d’action HoverKraft adapté à votre contexte.</Fragment
+    >
   </CallToAction>
 </Layout>
