@@ -1,0 +1,141 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'OpenKraft — Ressources',
+  description:
+    'Accédez aux connecteurs open source HoverKraft, à la communauté et aux ressources pour accélérer votre plateforme.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="OpenKraft"
+    actions={[
+      { variant: 'primary', text: 'Accéder au GitHub', href: 'https://github.com/hoverkraft-tech', target: '_blank' },
+      { text: 'S’abonner à la newsletter', href: '#newsletter' },
+    ]}
+    image={{
+      src: '~/assets/images/open-source.webp',
+      alt: 'Communauté OpenKraft',
+    }}
+  >
+    <Fragment slot="title">Le hub open source pour vos connecteurs plateforme</Fragment>
+
+    <Fragment slot="subtitle">
+      OpenKraft rassemble nos templates, dashboards, playbooks et retours d’expérience. Un espace pensé pour les
+      développeurs, les teams plateforme et les leaders qui veulent accélérer sans perdre en souveraineté.
+    </Fragment>
+  </Hero>
+
+  <Note
+    title="Philosophie"
+    description="Le savoir qui ne circule pas s’éteint. Nous publions en open source les briques nécessaires pour faire vivre la méthode HoverKraft dans n’importe quel contexte."
+  />
+
+  <Content
+    isReversed
+    title="Ce que vous trouverez dans OpenKraft"
+    items={[
+      {
+        title: 'Connecteurs laptop to prod',
+        description: 'CI/CD, observabilité, sécurité, provisioning : tout est prêt à l’emploi et maintenu.',
+      },
+      {
+        title: 'Dashboards DORA/SPACE',
+        description: 'Pack Grafana/Looker Studio pour piloter vos améliorations et partager les résultats.',
+      },
+      {
+        title: 'Templates IDP',
+        description: 'Backstage, Portainer et composants UI pour offrir un portail développeur crédible.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
+      alt: 'Ressources open source HoverKraft',
+    }}
+  />
+
+  <Features2
+    title="Nos formats"
+    subtitle="Des contenus pour apprendre, implémenter et partager."
+    columns={3}
+    items={[
+      {
+        title: 'Glue HoverKraft',
+        description: 'Repositories GitHub avec connecteurs, scripts et documentation d’intégration.',
+        icon: 'tabler:brand-github',
+      },
+      {
+        title: 'Playbooks & runbooks',
+        description: 'Guides PDF et Markdown prêts à adapter à votre organisation.',
+        icon: 'tabler:notebook',
+      },
+      {
+        title: 'Templates IDP',
+        description: 'Catalogues de services, composants Backstage et checklists d’onboarding.',
+        icon: 'tabler:layout-board',
+      },
+      {
+        title: 'Webinars mensuels',
+        description: 'Sessions live pour décortiquer un sujet (DORA, PEaaS, sécurité, etc.).',
+        icon: 'tabler:video',
+      },
+      {
+        title: 'Communauté',
+        description: 'Canal privé Discord pour échanger entre pairs et poser vos questions.',
+        icon: 'tabler:messages',
+      },
+      {
+        title: 'Newsletter “Hoverletter”',
+        description: 'Une synthèse mensuelle des meilleures pratiques platform engineering.',
+        icon: 'tabler:mail',
+      },
+    ]}
+  />
+
+  <Steps
+    title="Comment contribuer"
+    items={[
+      {
+        title: '1. Explorer',
+        description: 'Clonez les repositories, testez les connecteurs et ouvrez des issues si besoin.',
+        icon: 'tabler:search',
+      },
+      {
+        title: '2. Adapter',
+        description: 'Proposez des PRs pour adapter la glue à de nouveaux outils ou providers.',
+        icon: 'tabler:code-plus',
+      },
+      {
+        title: '3. Partager',
+        description: 'Publiez vos retours d’expérience via la newsletter ou les webinars.',
+        icon: 'tabler:messages',
+      },
+    ]}
+  />
+
+  <CallToAction
+    id="newsletter"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Rejoindre la communauté',
+        href: 'https://github.com/hoverkraft-tech',
+        target: '_blank',
+      },
+      { text: 'Contacter l’équipe HoverKraft', href: '/contact' },
+    ]}
+  >
+    <Fragment slot="title">Envie d’aller plus loin ?</Fragment>
+    <Fragment slot="subtitle"
+      >Inscrivez-vous pour recevoir la Hoverletter et participer à nos prochains événements OpenKraft.</Fragment
+    >
+  </CallToAction>
+</Layout>

@@ -2,7 +2,7 @@
 import PageLayout from '~/layouts/PageLayout.astro';
 import Header from '~/components/widgets/Header.astro';
 
-import { headerData } from '~/navigation';
+import { getLocalizedHeaderData } from '~/navigation';
 import type { MetaData } from '~/types';
 
 export interface Props {
@@ -10,6 +10,7 @@ export interface Props {
 }
 
 const { metadata } = Astro.props;
+const localizedHeaderData = getLocalizedHeaderData(Astro.url);
 ---
 
 <PageLayout metadata={metadata}>
@@ -19,7 +20,7 @@ const { metadata } = Astro.props;
   <Fragment slot="header">
     <slot name="header">
       <Header
-        links={headerData?.links[2] ? [headerData.links[2]] : undefined}
+        links={localizedHeaderData?.links[2] ? [localizedHeaderData.links[2]] : undefined}
         actions={[
           {
             text: 'Download',

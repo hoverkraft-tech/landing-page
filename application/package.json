@@ -9,16 +9,16 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro build",
+    "build": "astro check && astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "check": "npm run check:astro && npm run check:eslint && npm run check:prettier",
-    "check:astro": "astro check",
-    "check:eslint": "eslint .",
-    "check:prettier": "prettier --check .",
-    "fix": "npm run fix:eslint && npm run fix:prettier",
-    "fix:eslint": "eslint --fix .",
-    "fix:prettier": "prettier -w ."
+    "format": "prettier -w .",
+    "lint": "npm run lint:prettier && npm run lint:astro",
+    "lint:astro": "astro check",
+    "lint:prettier": "prettier --check .",
+    "lint:fix": "npm run lint:fix:prettier",
+    "lint:fix:prettier": "prettier -w .",
+    "test:ci": "echo \"No test specified\" && exit 0"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.12",

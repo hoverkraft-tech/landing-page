@@ -3,9 +3,9 @@
 <img src="https://raw.githubusercontent.com/arthelokyo/.github/main/resources/astrowind/lighthouse-score.png" align="right"
      alt="AstroWind Lighthouse Score" width="100" height="358">
 
-🌟 _Most *starred* & *forked* Astro theme in 2022, 2023 & 2024_. 🌟
+🌟 _Most \_starred_ & _forked_ Astro theme in 2022, 2023 & 2024\_. 🌟
 
-**AstroWind** is a free and open-source template to make your website using **[Astro 5.0](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/)**. Ready to start a new project and designed taking into account web best practices.
+**AstroWind** is a free and open-source template to make your site using **[Astro 5.0](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/)**. Ready to start a new project and designed taking into account web best practices.
 
 - ✅ **Production-ready** scores in **PageSpeed Insights** reports.
 - ✅ Integration with **Tailwind CSS** supporting **Dark mode** and **_RTL_**.
@@ -56,7 +56,7 @@
 
 <br>
 
-## 🔔 Upcoming: AstroWind 2.0 – We Need Your Vision!
+## 🔔 Upcoming: AstroWind 2.0 – We Need Your Vision
 
 We're embarking on an exciting journey with **AstroWind 2.0**, and we want you to be a part of it! We're currently taking the first steps in developing this new version and your insights are invaluable. Join the discussion and share your feedback, ideas, and suggestions to help shape the future of **AstroWind**. Let's make **AstroWind 2.0** even better, together!
 
@@ -72,9 +72,9 @@ npm create astro@latest -- --template arthelokyo/astrowind
 
 ## Getting started
 
-**AstroWind** tries to give you quick access to creating a website using [Astro 5.0](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/). It's a free theme which focuses on simplicity, good practices and high performance.
+**AstroWind** tries to give you quick access to creating a site using [Astro 5.0](https://astro.build/) + [Tailwind CSS](https://tailwindcss.com/). It's a free theme which focuses on simplicity, good practices and high performance.
 
-Very little vanilla javascript is used only to provide basic functionality so that each developer decides which framework (React, Vue, Svelte, Solid JS...) to use and how to approach their goals.
+Very little vanilla JavaScript is used only to provide basic functionality so that each developer decides which framework (React, Vue, Svelte, Solid JS...) to use and how to approach their goals.
 
 In this version the template supports all the options in the `output` configuration, `static`, `hybrid` and `server`, but the blog only works with `prerender = true`. We are working on the next version and aim to make it fully compatible with SSR.
 
@@ -131,7 +131,7 @@ Inside **AstroWind** template, you'll see the following folders and files:
 └── ...
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its filename.
 
 There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
 
@@ -154,7 +154,7 @@ All commands are run from the root of the project, from a terminal:
 | `npm run build`     | Build your production site to `./dist/`            |
 | `npm run preview`   | Preview your build locally, before deploying       |
 | `npm run check`     | Check your project for errors                      |
-| `npm run fix`       | Run Eslint and format codes with Prettier          |
+| `npm run fix`       | Run ESLint and format codes with Prettier          |
 | `npm run astro ...` | Run CLI commands like `astro add`, `astro preview` |
 
 <br>
@@ -257,7 +257,7 @@ You can create an optimized production build with:
 npm run build
 ```
 
-Now, your website is ready to be deployed. All generated files are located at
+Now, your site is ready to be deployed. All generated files are located at
 `dist` folder, which you can deploy the folder to any hosting service you
 prefer.
 
@@ -286,7 +286,7 @@ Clone this repository on your own GitHub account and deploy to Vercel:
 ## Related projects
 
 - [TailNext](https://tailnext.vercel.app/) - Free template using Next.js 14 and Tailwind CSS with the new App Router.
-- [Qwind](https://qwind.pages.dev/) - Free template to make your website using Qwik + Tailwind CSS.
+- [Qwind](https://qwind.pages.dev/) - Free template to make your site using Qwik + Tailwind CSS.
 
 ## Contributing
 

@@ -1,0 +1,72 @@
+---
+publishDate: 2025-08-25T00:00:00Z
+title: "Broadcom coupe l'accès aux images Bitnami : comment nous sécurisons vos clusters"
+excerpt: 'Broadcom met fin à la diffusion publique des images Docker Bitnami. Voici comment hoverkraft protège les équipes Kubernetes et gagne du temps de migration.'
+image: ~/assets/images/blog/images-bitnami-broadcom/preview.png
+tags:
+  - kubernetes
+  - sre
+  - bitnami
+  - broadcom
+  - docker
+---
+
+> ⚠️ Retour de vacances mouvementé pour les équipes plateformes : Broadcom retire les images Docker Bitnami de l'accès public.
+
+## Ce qui vient de changer
+
+Le 25 août 2025, Broadcom a officialisé la fin de la disponibilité publique des images Bitnami. Jusqu'ici, ces images maintenues par l'ex-VMware figuraient parmi les briques les plus utilisées pour déployer rapidement des middlewares (PostgreSQL, Redis, Keycloak, etc.) sur Kubernetes.
+
+Pour les admins et SRE, l'annonce est tombée à la reprise : plus de pull anonyme possible, et donc un risque immédiat de blocage des pipelines CI/CD, des clusters de staging et des démos commerciales.
+
+## Pourquoi c'est critique pour les admins k8s
+
+- **Rupture de service potentielle** si les images disparaissent de vos registries locaux sans alternative.
+- **Endettement opérationnel** avec des versions figées, faute de pouvoir récupérer des correctifs de sécurité.
+- **Pression sur les migrations** qui doivent soudainement être menées dans l'urgence.
+
+Bref : pas le « welcome back » rêvé après les congés.
+
+## Notre réponse immédiate
+
+Plutôt que d'attendre les premiers incidents de production, nous avons monté un dépôt communautaire pour préserver l'accès aux images critiques et laisser aux équipes le temps de s'adapter.
+
+➡️ Le dépôt est disponible ici : [hoverkraft-tech/bitnami-depreciation](https://github.com/hoverkraft-tech/bitnami-depreciation)
+
+### Ce que vous y trouverez
+
+- Un **miroir des images Bitnami essentielles** déjà rapatriées avec leur historique.
+- Des **scripts d'automatisation** pour synchroniser les nouvelles versions en fonction de vos besoins.
+- Une **veille continue** sur les annonces Broadcom pour anticiper d'autres retraits.
+
+### Comment l'utiliser tout de suite
+
+1. **Clonez le dépôt** et configurez le pipeline fourni pour alimenter votre registre privé.
+2. **Publiez vos images critiques** en priorité (base de données, caches, solutions d'authentification).
+3. **Ajoutez une alerte** dans vos chaînes CI/CD pour détecter toute dépendance Bitnami restante.
+
+Nous avons documenté chaque étape afin que la bascule se fasse en quelques minutes, sans toucher à vos manifestes Helm ou Kustomize existants.
+
+## Gagner en sérénité pendant la migration
+
+Ce miroir n'est pas une fin en soi : il offre une fenêtre de tir pour planifier l'adoption d'images alternatives (mainteneurs upstream, distributions Linux officielles, charts certifiés, etc.) sans subir la pression d'une coupure brutale.
+
+Nous recommandons de profiter de ce délai pour :
+
+- **Cartographier toutes vos dépendances Bitnami** grâce à un scan automatisé (Helm, Terraform, Argo CD).
+- **Qualifier des remplacements** compatibles avec vos exigences de sécurité et de support.
+- **Mettre à jour la documentation d'onboarding** afin que les nouveaux arrivants ne déploient plus les images deprecated.
+
+## Contribuez, partagez, alertez
+
+Ce dépôt est conçu comme une ressource communautaire. Vos contributions sont bienvenues : ajout d'images manquantes, scripts de synchronisation, retours sur d'éventuelles ruptures.
+
+Si vous êtes concernés, n'hésitez pas à :
+
+- partager l'information dans vos équipes SRE/plateforme ;
+- proposer des améliorations via issues ou pull requests ;
+- relayer toute nouvelle annonce pouvant impacter la roadmap.
+
+En agissant collectivement, on réduit le risque opérationnel et on garde la main sur notre supply chain logicielle.
+
+À votre disposition pour échanger si vous avez besoin d'un accompagnement plus poussé sur Kubernetes, la gestion d'images ou la gouvernance de vos registries.

@@ -1,120 +1,85 @@
 ---
-title: 'Terms and Conditions'
+title: 'Conditions Générales d’Utilisation'
 layout: '~/layouts/MarkdownLayout.astro'
 ---
 
-_Last updated_: January 06, 2023
+*Dernière mise à jour* : 27 septembre 2025
 
-Please read these terms and conditions carefully before using Our Service.
+Veuillez lire attentivement les présentes conditions générales d’utilisation avant de parcourir le site ou de faire appel aux services proposés par Hoverkraft.
 
-## Interpretation and Definitions
+## 1. Objet et champ d’application
 
-### Interpretation
+Les présentes conditions générales d’utilisation (ci-après les « CGU ») ont pour objet de définir les modalités et conditions dans lesquelles la société Hoverkraft met à disposition des visiteurs et des clients professionnels son site internet accessible à l’adresse [https://hoverkraft.cloud](https://hoverkraft.cloud) (ci-après le « Site ») ainsi que les services associés (démonstrations, ressources et contenus informatifs).
 
-The words of which the initial letter is capitalized have meanings defined under the following conditions. The following definitions shall have the same meaning regardless of whether they appear in singular or in plural.
+Toute consultation du Site emporte adhésion sans réserve aux CGU par l’internaute (ci-après « l’Utilisateur »).
 
-### Definitions
+## 2. Définitions
 
-For the purposes of these Terms and Conditions:
+Aux fins des présentes CGU, les termes ci-dessous auront la signification suivante :
 
-- **Affiliate** means an entity that controls, is controlled by or is under common control with a party, where "control" means ownership of 50% or more of the shares, equity interest or other securities entitled to vote for election of directors or other managing authority.
+- **Hoverkraft** : société opérant sous la marque Hoverkraft, responsable de l’édition du Site et de l’offre de services de platform engineering.
+- **Services** : l’ensemble des contenus, fonctionnalités, formulaires de contact, démonstrations, événements et prestations accessibles depuis le Site.
+- **Utilisateur** : toute personne physique ou morale accédant au Site, qu’elle soit cliente ou simple visiteuse.
+- **Partenaires** : toute entité tierce (fournisseur, intégrateur, service cloud) avec laquelle Hoverkraft collabore pour fournir ses Services.
 
-- **Country** refers to: California, United States
+## 3. Acceptation des CGU
 
-- **Company** (referred to as either "the Company", "We", "Us" or "Our" in this Agreement) refers to AstroWind LLC, 1 Cupertino, CA 95014.
+L’accès au Site et son utilisation supposent l’acceptation pleine et entière des présentes CGU. En cas de désaccord, l’Utilisateur doit s’abstenir d’utiliser le Site. Les CGU peuvent être complétées par des conditions particulières ou un contrat de services spécifique conclu entre Hoverkraft et un client professionnel.
 
-- **Device** means any device that can access the Service such as a computer, a cellphone or a digital tablet.
+## 4. Accès au Site et disponibilité
 
-- **Service** refers to the Website.
+Hoverkraft s’efforce de maintenir l’accessibilité du Site 24 h/24 et 7 j/7, sous réserve des opérations de maintenance, mises à jour ou cas de force majeure. Les interruptions temporaires pourront intervenir sans préavis. Hoverkraft ne saurait être tenue responsable des éventuels préjudices résultant d’une indisponibilité du Site.
 
-- **Terms and Conditions** (also referred as "Terms") mean these Terms and Conditions that form the entire agreement between You and the Company regarding the use of the Service. This Terms and Conditions agreement is a Demo.
+## 5. Utilisation du Site
 
-- **Third-party Social Media Service** means any services or content (including data, information, products or services) provided by a third-party that may be displayed, included or made available by the Service.
+L’Utilisateur s’engage à ne pas porter atteinte au bon fonctionnement du Site, notamment en introduisant des virus, scripts automatisés ou tout autre procédé susceptible de perturber ou d’altérer les Services. L’Utilisateur s’engage également à fournir des informations exactes lorsqu’il remplit un formulaire et à ne pas usurper l’identité d’un tiers.
 
-- **Website** refers to AstroWind, accessible from [https://astrowind.vercel.app](https://astrowind.vercel.app)
+Le Site est destiné en priorité à un public professionnel (équipes produit, platform engineering et dirigeants). Les contenus partagés sont fournis à titre informatif et ne constituent pas un engagement contractuel de livraison ou de résultat.
 
-- **You** means the individual accessing or using the Service, or the company, or other legal entity on behalf of which such individual is accessing or using the Service, as applicable.
+## 6. Contenus publiés
 
-## Acknowledgment
+Les contenus éditoriaux, éléments graphiques, logos, marques, vidéos, podcasts et plus généralement l’ensemble des éléments présents sur le Site sont protégés par le droit de la propriété intellectuelle. Toute reproduction, représentation ou adaptation, totale ou partielle, sans autorisation écrite préalable de Hoverkraft est interdite.
 
-These are the Terms and Conditions governing the use of this Service and the agreement that operates between You and the Company. These Terms and Conditions set out the rights and obligations of all users regarding the use of the Service.
+Il est toutefois possible de partager des extraits en citant explicitement la source et en insérant un lien vers la page d’origine.
 
-Your access to and use of the Service is conditioned on Your acceptance of and compliance with these Terms and Conditions. These Terms and Conditions apply to all visitors, users and others who access or use the Service.
+## 7. Services tiers et liens externes
 
-By accessing or using the Service You agree to be bound by these Terms and Conditions. If You disagree with any part of these Terms and Conditions then You may not access the Service.
+Le Site peut contenir des liens hypertextes renvoyant vers des sites tiers. Hoverkraft ne dispose d’aucun contrôle sur le contenu de ces sites et décline toute responsabilité quant aux informations qu’ils contiennent. L’Utilisateur est invité à consulter les politiques propres à ces sites tiers avant toute interaction.
 
-You represent that you are over the age of 18\. The Company does not permit those under 18 to use the Service.
+## 8. Responsabilité
 
-Your access to and use of the Service is also conditioned on Your acceptance of and compliance with the Privacy Policy of the Company. Our Privacy Policy describes Our policies and procedures on the collection, use and disclosure of Your personal information when You use the Application or the Website and tells You about Your privacy rights and how the law protects You. Please read Our Privacy Policy carefully before using Our Service.
+Hoverkraft déploie ses meilleurs efforts pour fournir des informations fiables et à jour. Toutefois, aucune garantie n’est donnée quant à l’exhaustivité ou l’absence d’erreurs du contenu publié. L’utilisation des informations disponibles sur le Site se fait sous la responsabilité exclusive de l’Utilisateur.
 
-## Links to Other Websites
+Dans les limites permises par la loi, Hoverkraft ne pourra être tenue responsable des dommages indirects, immatériels ou consécutifs résultant de l’utilisation ou de l’impossibilité d’utiliser le Site ou les Services. En tout état de cause, la responsabilité cumulée d’Hoverkraft est plafonnée au montant effectivement payé par le client au titre du contrat concerné durant les douze (12) derniers mois.
 
-Our Service may contain links to third-party web sites or services that are not owned or controlled by the Company.
+## 9. Garanties
 
-The Company has no control over, and assumes no responsibility for, the content, privacy policies, or practices of any third party web sites or services. You further acknowledge and agree that the Company shall not be responsible or liable, directly or indirectly, for any damage or loss caused or alleged to be caused by or in connection with the use of or reliance on any such content, goods or services available on or through any such web sites or services.
+Les Services sont fournis « en l’état » et « selon disponibilité ». Hoverkraft exclut toute garantie, explicite ou implicite, notamment quant à l’adéquation du Site aux besoins de l’Utilisateur, à son fonctionnement sans interruption ni erreur ou à la correction de défauts éventuels.
 
-We strongly advise You to read the terms and conditions and privacy policies of any third-party web sites or services that You visit.
+## 10. Protection des données personnelles
 
-## Termination
+Hoverkraft traite les données personnelles conformément à la réglementation applicable, et notamment au Règlement (UE) 2016/679 dit RGPD et à la loi Informatique et Libertés modifiée. Les modalités de collecte, d’utilisation et de conservation des données sont précisées dans la [Politique de confidentialité](/privacy).
 
-We may terminate or suspend Your access immediately, without prior notice or liability, for any reason whatsoever, including without limitation if You breach these Terms and Conditions.
+Toute personne dispose d’un droit d’accès, de rectification, d’effacement et d’opposition pour motif légitime, ainsi que d’un droit à la limitation du traitement et à la portabilité de ses données. Ces droits peuvent être exercés en écrivant à l’adresse électronique mentionnée à l’article 15.
 
-Upon termination, Your right to use the Service will cease immediately.
+## 11. Durée – Résiliation
 
-## Limitation of Liability
+Les CGU sont conclues pour une durée indéterminée à compter de la première utilisation du Site par l’Utilisateur. Hoverkraft peut suspendre ou supprimer l’accès à tout ou partie du Site en cas de non-respect des présentes CGU ou de comportement susceptible de porter préjudice à la société, sans préjudice de toute action en responsabilité.
 
-Notwithstanding any damages that You might incur, the entire liability of the Company and any of its suppliers under any provision of this Terms and Your exclusive remedy for all of the foregoing shall be limited to the amount actually paid by You through the Service or 100 USD if You haven't purchased anything through the Service.
+## 12. Modifications des CGU
 
-To the maximum extent permitted by applicable law, in no event shall the Company or its suppliers be liable for any special, incidental, indirect, or consequential damages whatsoever (including, but not limited to, damages for loss of profits, loss of data or other information, for business interruption, for personal injury, loss of privacy arising out of or in any way related to the use of or inability to use the Service, third-party software and/or third-party hardware used with the Service, or otherwise in connection with any provision of this Terms), even if the Company or any supplier has been advised of the possibility of such damages and even if the remedy fails of its essential purpose.
+Hoverkraft se réserve le droit de modifier les CGU à tout moment pour les adapter aux évolutions légales, techniques ou fonctionnelles du Site. La date de dernière mise à jour figure en en-tête du document. Il appartient à l’Utilisateur de consulter régulièrement les CGU. Toute utilisation du Site postérieure à une modification vaut acceptation des nouvelles dispositions.
 
-Some states do not allow the exclusion of implied warranties or limitation of liability for incidental or consequential damages, which means that some of the above limitations may not apply. In these states, each party's liability will be limited to the greatest extent permitted by law.
+## 13. Droit applicable et règlement des litiges
 
-## "AS IS" and "AS AVAILABLE" Disclaimer
+Les présentes CGU sont régies par le droit français. En cas de litige, les parties s’engagent à rechercher une solution amiable avant toute saisine d’une juridiction. À défaut d’accord amiable dans un délai de trente (30) jours, compétence expresse est attribuée aux tribunaux matériellement compétents de Paris, sous réserve d’une compétence territoriale impérative.
 
-The Service is provided to You "AS IS" and "AS AVAILABLE" and with all faults and defects without warranty of any kind. To the maximum extent permitted under applicable law, the Company, on its own behalf and on behalf of its Affiliates and its and their respective licensors and service providers, expressly disclaims all warranties, whether express, implied, statutory or otherwise, with respect to the Service, including all implied warranties of merchantability, fitness for a particular purpose, title and non-infringement, and warranties that may arise out of course of dealing, course of performance, usage or trade practice. Without limitation to the foregoing, the Company provides no warranty or undertaking, and makes no representation of any kind that the Service will meet Your requirements, achieve any intended results, be compatible or work with any other software, applications, systems or services, operate without interruption, meet any performance or reliability standards or be error free or that any errors or defects can or will be corrected.
+## 14. Contact
 
-Without limiting the foregoing, neither the Company nor any of the company's provider makes any representation or warranty of any kind, express or implied: (i) as to the operation or availability of the Service, or the information, content, and materials or products included thereon; (ii) that the Service will be uninterrupted or error-free; (iii) as to the accuracy, reliability, or currency of any information or content provided through the Service; or (iv) that the Service, its servers, the content, or e-mails sent from or on behalf of the Company are free of viruses, scripts, trojan horses, worms, malware, timebombs or other harmful components.
+Pour toute question relative aux CGU, vous pouvez contacter Hoverkraft :
 
-Some jurisdictions do not allow the exclusion of certain types of warranties or limitations on applicable statutory rights of a consumer, so some or all of the above exclusions and limitations may not apply to You. But in such a case the exclusions and limitations set forth in this section shall be applied to the greatest extent enforceable under applicable law.
+- Par courriel : [contact@hoverkraft.cloud](mailto:contact@hoverkraft.cloud)
+- Via le formulaire de contact : [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact)
+- Par courrier postal : Hoverkraft – Service juridique, 10 rue (à compléter), 75000 Paris, France
 
-## Governing Law
-
-The laws of the Country, excluding its conflicts of law rules, shall govern this Terms and Your use of the Service. Your use of the Application may also be subject to other local, state, national, or international laws.
-
-## Disputes Resolution
-
-If You have any concern or dispute about the Service, You agree to first try to resolve the dispute informally by contacting the Company.
-
-## For European Union (EU) Users
-
-If You are a European Union consumer, you will benefit from any mandatory provisions of the law of the country in which you are resident in.
-
-## United States Legal Compliance
-
-You represent and warrant that (i) You are not located in a country that is subject to the United States government embargo, or that has been designated by the United States government as a "terrorist supporting" country, and (ii) You are not listed on any United States government list of prohibited or restricted parties.
-
-## Severability and Waiver
-
-### Severability
-
-If any provision of these Terms is held to be unenforceable or invalid, such provision will be changed and interpreted to accomplish the objectives of such provision to the greatest extent possible under applicable law and the remaining provisions will continue in full force and effect.
-
-### Waiver
-
-Except as provided herein, the failure to exercise a right or to require performance of an obligation under these Terms shall not effect a party's ability to exercise such right or require such performance at any time thereafter nor shall the waiver of a breach constitute a waiver of any subsequent breach.
-
-## Translation Interpretation
-
-These Terms and Conditions may have been translated if We have made them available to You on our Service. You agree that the original English text shall prevail in the case of a dispute.
-
-## Changes to These Terms and Conditions
-
-We reserve the right, at Our sole discretion, to modify or replace these Terms at any time. If a revision is material We will make reasonable efforts to provide at least 30 days' notice prior to any new terms taking effect. What constitutes a material change will be determined at Our sole discretion.
-
-By continuing to access or use Our Service after those revisions become effective, You agree to be bound by the revised terms. If You do not agree to the new terms, in whole or in part, please stop using the website and the Service.
-
-## Contact Us
-
-If you have any questions about these Terms and Conditions, You can contact us:
-
-- By email: somecoolemail@domain.com
+Toute demande recevra une réponse dans les meilleurs délais.
