@@ -13,7 +13,7 @@ jobs:
   continuous-integration:
     uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@1d00c9eb280acbee5df4b4a2087f786e66b13d87 # 0.14.1
     with:
-      test: false
+      working-directory: application
       build: |
         {
           "artifact": ["dist"]

@@ -1,0 +1,18 @@
+---
+import { SITE } from 'astrowind:config';
+---
+
+<div class="flex items-center">
+  <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-8 h-8">
+    <rect width="32" height="32" rx="8" fill="#1D2026"/>
+    <path d="M8 12h16v8H8z" fill="#1998FF"/>
+    <path d="M12 8h8v4h-8z" fill="#FF5A02"/>
+    <path d="M12 20h8v4h-8z" fill="#00D663"/>
+    <circle cx="16" cy="16" r="2" fill="#FFFFFF"/>
+  </svg>
+  <span
+    class="self-center ml-2 rtl:ml-0 rtl:mr-2 text-2xl md:text-xl font-bold text-primary whitespace-nowrap dark:text-white font-heading"
+  >
+    {SITE?.name}
+  </span>
+</div>
