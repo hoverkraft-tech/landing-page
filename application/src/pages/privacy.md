@@ -1,6 +1,6 @@
+---
 title: 'Politique de confidentialité'
 layout: '~/layouts/MarkdownLayout.astro'
-
 ---
 
 *Dernière mise à jour* : 27 septembre 2025
