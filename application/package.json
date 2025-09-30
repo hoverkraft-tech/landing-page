@@ -30,7 +30,7 @@
     "astro": "^5.12.9",
     "astro-embed": "^0.9.1",
     "astro-icon": "^1.1.5",
-    "limax": "4.1.0",
+    "limax": "4.2.1",
     "lodash.merge": "^4.6.2",
     "unpic": "^4.1.3"
   },
