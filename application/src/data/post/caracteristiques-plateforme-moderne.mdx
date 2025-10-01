@@ -14,6 +14,19 @@ author: 'Équipe HoverKraft'
 ---
 
 import Image from '~/components/common/Image.astro';
+import architectureOverview from '~/assets/images/blog/caracteristiques-plateforme-moderne/connector-architecture.webp';
+import developerPortal from '~/assets/images/blog/caracteristiques-plateforme-moderne/developer-portal-backstage.jpg';
+import doraDashboard from '~/assets/images/blog/caracteristiques-plateforme-moderne/dora-metrics-dashboard.png';
+import cicdPipeline from '~/assets/images/blog/caracteristiques-plateforme-moderne/cicd-pipeline-diagram.png';
+import connectorArchitecture from '~/assets/images/blog/caracteristiques-plateforme-moderne/connector-architecture.webp';
+import kubernetesMulticloud from '~/assets/images/blog/caracteristiques-plateforme-moderne/kubernetes-multicloud-architecture.webp';
+import securityLifecycle from '~/assets/images/blog/caracteristiques-plateforme-moderne/security-lifecycle.webp';
+import autoscalingGraph from '~/assets/images/blog/caracteristiques-plateforme-moderne/autoscaling-graph.webp';
+import swaggerDocs from '~/assets/images/blog/caracteristiques-plateforme-moderne/swagger-generated-docs.webp';
+import githubDiscussions from '~/assets/images/blog/caracteristiques-plateforme-moderne/github-architecture-discussion.webp';
+import teamVelocity from '~/assets/images/blog/caracteristiques-plateforme-moderne/team-velocity-trend.webp';
+import sovereigntyMatrix from '~/assets/images/blog/caracteristiques-plateforme-moderne/sovereignty-matrix.webp';
+import hoverkraftJourney from '~/assets/images/blog/caracteristiques-plateforme-moderne/hoverkraft-journey-timeline.webp';
 
 > 🎯 L'architecture logicielle moderne ne se résume plus à des choix techniques. Elle devient une plateforme de delivery qui libère les développeurs, mesure la performance et garantit la souveraineté.
 
@@ -21,7 +34,7 @@ Dans un monde où la vélocité de livraison est devenue un avantage concurrenti
 
 Cette vision s'inspire des meilleures pratiques du platform engineering, mais va plus loin en intégrant notre méthodologie orientée connecteurs, nos principes DORA/SPACE, et notre exigence de transparence totale.
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/connector-architecture.webp')} alt="Vue d'ensemble d'une architecture plateforme moderne avec ses différentes couches" loading="lazy" />
+<Image src={architectureOverview} alt="Vue d'ensemble d'une architecture plateforme moderne avec ses différentes couches" loading="lazy" />
 
 ## 1. Orientée développeur (Developer Experience First)
 
@@ -42,7 +55,7 @@ Une plateforme moderne place l'expérience développeur au centre de toutes les 
 - Nombre de tickets support liés à l'environnement de développement
 - Satisfaction des équipes (enquêtes SPACE régulières)
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/developer-portal-backstage.jpg')} alt="Capture d'écran d'un portail développeur Backstage avec catalogue de services" loading="lazy" />
+<Image src={developerPortal} alt="Capture d'écran d'un portail développeur Backstage avec catalogue de services" loading="lazy" />
 
 ## 2. Mesurée et observable (Metrics-Driven)
 
@@ -64,7 +77,7 @@ On ne peut améliorer que ce qu'on mesure. Une architecture moderne expose des m
 - MTTR < 15 minutes
 - Change failure rate < 5%
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/dora-metrics-dashboard.png')} alt="Dashboard DORA montrant les 4 métriques clés en temps réel" loading="lazy" />
+<Image src={doraDashboard} alt="Dashboard DORA montrant les 4 métriques clés en temps réel" loading="lazy" />
 
 ## 3. Automatisée de bout en bout (Full Automation)
 
@@ -85,7 +98,7 @@ Chaque action manuelle est une source d'erreur, de lenteur et de non-reproductib
 - Taux de réussite des pipelines > 95%
 - Temps de rollback < 5 minutes
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/cicd-pipeline-diagram.png')} alt="Schéma d'un pipeline CI/CD complet avec tests automatisés" loading="lazy" />
+<Image src={cicdPipeline} alt="Schéma d'un pipeline CI/CD complet avec tests automatisés" loading="lazy" />
 
 ## 4. Orientée connecteurs (Connector-First)
 
@@ -106,7 +119,7 @@ Plutôt que de construire des plateformes monolithiques propriétaires, nous pri
 - Nombre de connecteurs réutilisés entre projets
 - Contributions externes à nos connecteurs open source
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/connector-architecture.webp')} alt="Schéma d'architecture orientée connecteurs avec différents services interconnectés" loading="lazy" />
+<Image src={connectorArchitecture} alt="Schéma d'architecture orientée connecteurs avec différents services interconnectés" loading="lazy" />
 
 ## 5. Cloud-native et portable (Multi-Cloud Ready)
 
@@ -127,7 +140,7 @@ L'enfermement propriétaire limite votre souveraineté et votre capacité d'adap
 - Taux de services dépendant d'API propriétaires < 10%
 - Certification Kubernetes native (CNCF conformance)
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/kubernetes-multicloud-architecture.webp')} alt="Architecture Kubernetes multi-cloud avec différents providers" loading="lazy" />
+<Image src={kubernetesMulticloud} alt="Architecture Kubernetes multi-cloud avec différents providers" loading="lazy" />
 
 ## 6. Sécurisée by design (Security First)
 
@@ -149,7 +162,7 @@ La sécurité ne peut pas être un ajout tardif. Elle doit être intégrée dès
 - Temps moyen de remédiation d'une CVE critique < 24h
 - Taux de couverture des politiques de sécurité > 95%
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/security-lifecycle.webp')} alt="Schéma du cycle de vie de la sécurité avec scan, audit et remédiation" loading="lazy" />
+<Image src={securityLifecycle} alt="Schéma du cycle de vie de la sécurité avec scan, audit et remédiation" loading="lazy" />
 
 ## 7. Scalable et résiliente (Built for Growth)
 
@@ -170,7 +183,7 @@ La croissance ne doit jamais être un problème. Une architecture moderne s'adap
 - Temps de réponse P95 < 500ms même en charge
 - 0 incident lié à un pic de charge imprévu
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/autoscaling-graph.webp')} alt="Graphique de scaling automatique lors d'un pic de charge" loading="lazy" />
+<Image src={autoscalingGraph} alt="Graphique de scaling automatique lors d'un pic de charge" loading="lazy" />
 
 ## 8. Documentée et traçable (Documentation as Code)
 
@@ -191,7 +204,7 @@ La documentation obsolète est pire que l'absence de documentation. Chez HoverKr
 - Temps moyen pour trouver une information < 2 minutes
 - Nombre de pull requests incluant de la documentation > 80%
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/swagger-generated-docs.webp')} alt="Exemple de documentation générée automatiquement avec Swagger UI" loading="lazy" />
+<Image src={swaggerDocs} alt="Exemple de documentation générée automatiquement avec Swagger UI" loading="lazy" />
 
 ## 9. Collaborative et transparente (Open by Default)
 
@@ -213,7 +226,7 @@ Le silo est l'ennemi de la vélocité. Une plateforme moderne favorise la collab
 - Nombre d'équipes contribuant à la plateforme > 5
 - Délai moyen de merge d'une pull request < 24h
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/github-architecture-discussion.webp')} alt="Capture d'écran d'une discussion d'architecture dans GitHub Discussions" loading="lazy" />
+<Image src={githubDiscussions} alt="Capture d'écran d'une discussion d'architecture dans GitHub Discussions" loading="lazy" />
 
 ## 10. Agile et itérative (Continuous Improvement)
 
@@ -234,7 +247,7 @@ L'architecture n'est jamais "finie". Elle évolue en permanence, par petits incr
 - Nombre d'expérimentations par trimestre > 10
 - Taux de dette technique < 15% du temps de développement
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/team-velocity-trend.webp')} alt="Graphique d'évolution de la vélocité d'équipe sur 6 mois" loading="lazy" />
+<Image src={teamVelocity} alt="Graphique d'évolution de la vélocité d'équipe sur 6 mois" loading="lazy" />
 
 ## 11. Souveraine et réversible (No Vendor Lock-in)
 
@@ -255,7 +268,7 @@ Votre plateforme doit vous appartenir. Chaque dépendance à un fournisseur doit
 - Taux de services avec alternative documentée > 90%
 - Coûts de sortie évalués et budgétés
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/sovereignty-matrix.webp')} alt="Matrice de souveraineté avec niveau de dépendance par service" loading="lazy" />
+<Image src={sovereigntyMatrix} alt="Matrice de souveraineté avec niveau de dépendance par service" loading="lazy" />
 
 ## Le parcours HoverKraft pour y parvenir
 
@@ -289,7 +302,7 @@ Ces 11 caractéristiques ne s'obtiennent pas du jour au lendemain. Chez HoverKra
 - Contributions aux connecteurs open source
 - Certification des Platform Engineers
 
-<Image src={import('~/assets/images/blog/caracteristiques-plateforme-moderne/hoverkraft-journey-timeline.webp')} alt="Timeline visuel du parcours HoverKraft en 4 phases" loading="lazy" />
+<Image src={hoverkraftJourney} alt="Timeline visuel du parcours HoverKraft en 4 phases" loading="lazy" />
 
 ## Conclusion : une plateforme au service de votre métier
 
