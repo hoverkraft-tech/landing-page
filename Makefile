@@ -27,6 +27,7 @@ build: ## Build libs and applications
 	cd application && npm run build
 
 ci: ## Run tests in CI mode
+	$(MAKE) prepare
 	$(MAKE) lint
 	$(MAKE) build
 
