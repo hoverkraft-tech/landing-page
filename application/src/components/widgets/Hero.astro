@@ -18,8 +18,15 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative md:-mt-[76px] not-prose" {...id ? { id } : {}}>
+<section class="relative md:-mt-[76px] not-prose overflow-hidden" {...id ? { id } : {}}>
+  <!-- Animated gradient background -->
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div
+      class="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-white to-orange-50/30 dark:from-blue-950/20 dark:via-slate-900 dark:to-orange-950/10"
+    >
+    </div>
+    <div class="absolute top-0 right-0 w-96 h-96 bg-secondary/10 rounded-full blur-3xl dark:bg-secondary/5"></div>
+    <div class="absolute bottom-0 left-0 w-96 h-96 bg-accent/10 rounded-full blur-3xl dark:bg-accent/5"></div>
     <slot name="bg">
       {bg ? <Fragment set:html={bg} /> : null}
     </slot>
@@ -31,7 +38,7 @@ const {
         {
           tagline && (
             <p
-              class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              class="text-base text-secondary dark:text-blue-300 font-bold tracking-wide uppercase mb-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade inline-block px-4 py-2 rounded-full bg-secondary/10 dark:bg-secondary/20 backdrop-blur-sm"
               set:html={tagline}
             />
           )
@@ -39,7 +46,7 @@ const {
         {
           title && (
             <h1
-              class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading dark:text-gray-200 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+              class="text-5xl md:text-7xl font-bold leading-tighter tracking-tighter mb-6 font-heading intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
               set:html={title}
             />
           )
@@ -48,7 +55,7 @@ const {
           {
             subtitle && (
               <p
-                class="text-xl text-muted mb-6 dark:text-slate-300 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+                class="text-xl md:text-2xl text-muted mb-8 dark:text-slate-300 leading-relaxed intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
                 set:html={subtitle}
               />
             )
@@ -59,7 +66,7 @@ const {
                 {Array.isArray(actions) ? (
                   actions.map((action) => (
                     <div class="flex w-full sm:w-auto">
-                      <Button {...(action || {})} class="w-full sm:mb-0" />
+                      <Button {...(action || {})} class="w-full sm:mb-0 shadow-xl hover:shadow-2xl transition-shadow" />
                     </div>
                   ))
                 ) : (
@@ -77,11 +84,12 @@ const {
         {
           image && (
             <div class="relative m-auto max-w-5xl">
+              <div class="absolute -inset-4 bg-gradient-to-r from-secondary/20 to-accent/20 rounded-2xl blur-2xl" />
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
               ) : (
                 <Image
-                  class="mx-auto rounded-md w-full"
+                  class="mx-auto rounded-2xl w-full relative shadow-2xl ring-1 ring-gray-900/10 dark:ring-white/10"
                   widths={[400, 768, 1024, 2040]}
                   sizes="(max-width: 767px) 400px, (max-width: 1023px) 768px, (max-width: 2039px) 1024px, 2040px"
                   loading="eager"

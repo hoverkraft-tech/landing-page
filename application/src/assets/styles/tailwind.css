@@ -101,43 +101,61 @@
 @utility btn-primary {
   @apply btn;
   font-weight: 600;
-  background-color: var(--aw-color-primary);
+  background: linear-gradient(135deg, var(--aw-color-secondary) 0%, var(--aw-color-info) 100%);
   color: white;
-  border-color: var(--aw-color-primary);
+  border: none;
+  box-shadow: 0 10px 40px -10px var(--aw-color-secondary);
+  transform: translateY(0);
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: var(--aw-color-secondary);
-    border-color: var(--aw-color-secondary);
+    background: linear-gradient(135deg, var(--aw-color-info) 0%, var(--aw-color-secondary) 100%);
+    box-shadow: 0 15px 50px -10px var(--aw-color-secondary);
+    transform: translateY(-2px);
     color: white;
   }
 
+  &:active {
+    transform: translateY(0);
+  }
+
   &:focus {
-    outline-color: var(--aw-color-primary);
+    outline-color: var(--aw-color-secondary);
+    outline-width: 2px;
+    outline-offset: 2px;
   }
 }
 
 :is(.dark *) .btn-primary {
   color: white;
-  background-color: var(--aw-color-primary);
-  border-color: var(--aw-color-primary);
+  background: linear-gradient(135deg, var(--aw-color-primary) 0%, var(--aw-color-info) 100%);
+  box-shadow: 0 10px 40px -10px var(--aw-color-primary);
 
   &:hover {
-    background-color: var(--aw-color-secondary);
-    border-color: var(--aw-color-secondary);
+    background: linear-gradient(135deg, var(--aw-color-info) 0%, var(--aw-color-primary) 100%);
+    box-shadow: 0 15px 50px -10px var(--aw-color-primary);
   }
 }
 
 @utility btn-secondary {
   @apply btn;
   font-weight: 600;
-  background-color: var(--aw-color-secondary);
-  color: white;
-  border-color: var(--aw-color-secondary);
+  background: rgba(255, 255, 255, 0.9);
+  color: var(--aw-color-secondary);
+  border: 2px solid var(--aw-color-secondary);
+  backdrop-filter: blur(10px);
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: var(--aw-color-accent);
-    border-color: var(--aw-color-accent);
+    background: var(--aw-color-secondary);
+    border-color: var(--aw-color-secondary);
     color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px -10px var(--aw-color-secondary);
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:focus {
@@ -146,27 +164,35 @@
 }
 
 :is(.dark *) .btn-secondary {
-  color: white;
-  background-color: var(--aw-color-secondary);
-  border-color: var(--aw-color-secondary);
+  color: var(--aw-color-primary);
+  background: rgba(29, 32, 38, 0.9);
+  border: 2px solid var(--aw-color-primary);
 
   &:hover {
-    background-color: var(--aw-color-accent);
-    border-color: var(--aw-color-accent);
+    background: var(--aw-color-primary);
+    border-color: var(--aw-color-primary);
+    color: white;
   }
 }
 
 @utility btn-accent {
   @apply btn;
   font-weight: 600;
-  background-color: var(--aw-color-accent);
+  background: linear-gradient(135deg, var(--aw-color-accent) 0%, #ff7733 100%);
   color: white;
-  border-color: var(--aw-color-accent);
+  border: none;
+  box-shadow: 0 10px 40px -10px var(--aw-color-accent);
+  transition: all 0.3s ease;
 
   &:hover {
-    background-color: var(--aw-color-primary);
-    border-color: var(--aw-color-primary);
+    background: linear-gradient(135deg, #ff7733 0%, var(--aw-color-accent) 100%);
+    box-shadow: 0 15px 50px -10px var(--aw-color-accent);
+    transform: translateY(-2px);
     color: white;
+  }
+
+  &:active {
+    transform: translateY(0);
   }
 
   &:focus {
@@ -176,12 +202,12 @@
 
 :is(.dark *) .btn-accent {
   color: white;
-  background-color: var(--aw-color-accent);
-  border-color: var(--aw-color-accent);
+  background: linear-gradient(135deg, var(--aw-color-secondary) 0%, var(--aw-color-accent) 100%);
+  box-shadow: 0 10px 40px -10px var(--aw-color-accent);
 
   &:hover {
-    background-color: var(--aw-color-primary);
-    border-color: var(--aw-color-primary);
+    background: linear-gradient(135deg, var(--aw-color-accent) 0%, var(--aw-color-secondary) 100%);
+    box-shadow: 0 15px 50px -10px var(--aw-color-accent);
   }
 }
 

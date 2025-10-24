@@ -61,4 +61,58 @@ import '@fontsource/roboto-mono';
       color: rgb(255 255 255);
     }
   }
+
+  /* Modern UI Enhancements */
+  body {
+    background: linear-gradient(180deg, rgba(25, 152, 255, 0.03) 0%, rgba(255, 255, 255, 1) 100%);
+  }
+
+  .dark body {
+    background: linear-gradient(180deg, rgba(25, 152, 255, 0.05) 0%, rgb(29 32 38) 100%);
+  }
+
+  /* Gradient text effect for headings */
+  h1,
+  h2 {
+    background: linear-gradient(135deg, var(--aw-color-primary) 0%, var(--aw-color-secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .dark h1,
+  .dark h2 {
+    background: linear-gradient(135deg, var(--aw-color-secondary) 0%, var(--aw-color-info) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  /* Card enhancements with glassmorphism */
+  .bg-white {
+    background: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(25, 152, 255, 0.1);
+  }
+
+  .dark .bg-white {
+    background: rgba(29, 32, 38, 0.8) !important;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(25, 152, 255, 0.2);
+  }
+
+  /* Enhanced shadows */
+  .shadow-lg {
+    box-shadow: 0 20px 60px -15px rgba(25, 152, 255, 0.3) !important;
+  }
+
+  .dark .shadow-lg {
+    box-shadow: 0 20px 60px -15px rgba(25, 152, 255, 0.4) !important;
+  }
+
+  /* Accent borders */
+  .border-t,
+  .border-b {
+    border-image: linear-gradient(90deg, transparent, var(--aw-color-secondary), transparent) 1;
+  }
 </style>
