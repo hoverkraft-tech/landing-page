@@ -36,7 +36,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.5",
-    "@astrojs/mdx": "^4.3.7",
+    "@astrojs/mdx": "^4.3.8",
     "@astrojs/partytown": "^2.1.4",
     "@eslint/js": "^9.38.0",
     "@iconify-json/flat-color-icons": "^1.2.3",
@@ -46,8 +46,8 @@
     "@types/js-yaml": "^4.0.9",
     "@types/lodash.merge": "^4.6.9",
     "@types/mdx": "^2.0.13",
-    "@typescript-eslint/eslint-plugin": "^8.46.1",
-    "@typescript-eslint/parser": "^8.46.1",
+    "@typescript-eslint/eslint-plugin": "^8.46.2",
+    "@typescript-eslint/parser": "^8.46.2",
     "astro-compress": "2.3.8",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.38.0",
@@ -62,7 +62,7 @@
     "tailwind-merge": "^3.3.1",
     "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3",
-    "typescript-eslint": "^8.46.1",
+    "typescript-eslint": "^8.46.2",
     "unist-util-visit": "^5.0.0"
   }
 }
