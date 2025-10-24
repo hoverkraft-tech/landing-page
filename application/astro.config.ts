@@ -21,6 +21,8 @@ const hasExternalScripts = false;
 const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroIntegration)[] = []) =>
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
 
+process.env.ASTRO_TELEMETRY_DISABLED = '1';
+
 export default defineConfig({
   output: 'static',
 

@@ -20,5 +20,6 @@ application/.env.production
 .DS_Store
 
 application/pnpm-lock.yaml
+.pnpm-store
 
 application/.astro

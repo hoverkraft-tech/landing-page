@@ -1,32 +1,55 @@
-<h1 align="center">Welcome to @hoverkraft/landing-page 👋</h1>
-<p>
-  <img alt="Version" src="https://img.shields.io/badge/version-0.1.0-blue.svg?cacheSeconds=2592000" />
-  <a title="Read documentation" href="https://github.com/hoverkraft-tech/landing-page#readme" target="_blank">
-    <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
-  </a>
-  <a title="View repository activity" href="https://github.com/hoverkraft-tech/landing-page/graphs/commit-activity" target="_blank">
-    <img alt="Maintenance" src="https://img.shields.io/badge/Maintained%3F-yes-green.svg" />
-  </a>
-</p>
+# Hoverkraft Landing Page
 
-> Landing page for Hoverkraft Organization
+Marketing site for Hoverkraft, built with [Astro](https://astro.build/) 5 and Tailwind CSS. The production code lives under `application/` and is packaged for deployment as a static site.
 
-## Author
+## Requirements
 
-👤 **Hoverkraft <contact@hoverkraft.cloud>**
+- Node.js 18.17+ (or 20.3+/21+)
+- npm 9+
+- Docker (optional, used by linting workflow)
 
-- Site: <https://hoverkraft.cloud>
-- GitHub: [@hoverkraft](https://github.com/hoverkraft-tech)
+## Getting Started
 
-## 🤝 Contributing
+```bash
+make prepare   # Install npm dependencies in application/
+make start     # Run Astro dev server on http://localhost:4321
+```
 
-Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/hoverkraft-tech/landing-page/issues). You can also take a look at the [contributing guide](https://github.com/hoverkraft-tech/landing-page/blob/main/CONTRIBUTING.md).
+To preview a production build locally:
 
-## Show your support
+```bash
+make build
+npm run preview --prefix application
+```
 
-Give a ⭐️ if this project helped you!
+## Development Workflow
 
-## 📝 License
+- `make lint` – Run Prettier and Astro checks (accepts globs: `make lint src/pages`)
+- `make lint-fix` – Apply automated fixes via npm audit + Dockerized linter
+- `make build` – Run `astro check` and produce a production build
+- `make ci` – Run prepare, lint, and build sequentially
+- `npm run preview --prefix application` – Serve the built site for QA
 
-Copyright © 2020 [Hoverkraft <contact@hoverkraft.cloud>](https://github.com/hoverkraft).<br />
-This project is [0BSD](https://github.com/hoverkraft/landing-page/blob/main/LICENSE) licensed.
+Most changes should happen inside `application/`. See `AGENTS.md` for detailed automation guardrails.
+
+## Project Structure
+
+- `application/astro.config.ts` – Astro configuration, integrations, and Partytown setup
+- `application/src/config.yaml` – Site metadata, feature toggles, and analytics IDs
+- `application/src/i18n/ui.ts` – Shared UI strings for `fr` (default) and `en` locales
+- `application/src/assets/images` – Optimized assets consumed via the shared `Image` component
+- `application/src/content/` and `application/src/data/` – Blog posts and data-driven content
+
+## Configuration Notes
+
+- Keep locale strings synchronized in `application/src/i18n/ui.ts`
+- Update metadata and analytics via `application/src/config.yaml` instead of hard-coding values
+- Follow the frontmatter schema in `application/src/content/config.ts` when adding content
+
+## Contributing
+
+Contributions, issues, and feature requests are welcome. Review the [contributing guide](CONTRIBUTING.md) and use the [issue tracker](https://github.com/hoverkraft-tech/landing-page/issues) to report bugs or request features.
+
+## License
+
+This project is released under the [0BSD License](LICENSE).
