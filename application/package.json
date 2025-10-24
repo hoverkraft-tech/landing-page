@@ -8,10 +8,10 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "start": "astro dev",
+    "start": "astro dev --host",
     "build": "astro check && astro build",
     "preview": "astro preview",
-    "astro": "astro",
+    "astro": "ASTRO_TELEMETRY_DISABLED=1 astro",
     "format": "prettier -w .",
     "lint": "npm run lint:prettier && npm run lint:astro",
     "lint:astro": "astro check",

@@ -1,2 +1,6 @@
+# robots.txt for hoverkraft.cloud
 User-agent: *
-Disallow:
+Allow: /
+
+# Sitemaps
+Sitemap: https://hoverkraft.cloud/sitemap-index.xml
