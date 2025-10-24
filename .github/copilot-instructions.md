@@ -1,0 +1,31 @@
+# Hoverkraft Landing Page – AI Guide
+- **Repo layout:** Core Astro app lives under `application/`; root scripts (Makefile, Dockerfile) just orchestrate tooling.
+- **Node version:** Target Node 20 LTS (package.json allows ^18.17.1 or >=20.3) when running local commands or CI jobs.
+- **Package scripts:** `npm run dev` (ports 4321), `npm run build` (runs `astro check` before build), `npm run lint`, `npm run format`.
+- **Make targets:** `make prepare` installs deps, `make start` proxies to `npm run start`, `make lint`/`make lint-fix` invoke the super-linter Docker image.
+- **CI expectations:** Workflows reuse `hoverkraft-tech/ci-github-nodejs`; builds run from `application/` and publish `application/dist` for GitHub Pages.
+- **Astro config:** `astro.config.ts` outputs static HTML, wires MDX, sitemap, astro-compress, Partytown (disabled by `hasExternalScripts`), and Tailwind via Vite.
+- **Config source:** Update site metadata, analytics IDs, and blog toggles in `src/config.yaml`; the astrowind integration watches this file.
+- **Virtual config module:** Many modules import from `astrowind:config`; changing YAML keys immediately affects permalinks, i18n, analytics, and UI defaults.
+- **Routing engine:** Layout enables `ClientRouter` transitions; comment the import in `src/layouts/Layout.astro` if motion artifacts appear.
+- **Path alias:** All imports use the Vite alias `~` → `application/src`; prefer it over relative paths for shared utilities and assets.
+- **i18n defaults:** `src/i18n/ui.ts` sets `defaultLang = 'fr'` with `showDefaultLang = false`, so French routes omit the locale prefix.
+- **Secondary locales:** English pages live in `src/pages/en`; when adding locales update `routes` in `src/i18n/ui.ts` so `useTranslatedPath` resolves slugs.
+- **Navigation:** Header/footer links derive from `getLocalizedHeaderData`/`FooterData`; keep translation keys in sync with `ui` labels before altering menus.
+- **Blog source:** MDX posts reside in `src/data/post`; `src/content/config.ts` enforces frontmatter (title, publishDate, optional `lang` defaulting to `fr`).
+- **Frontmatter enrichments:** `readingTimeRemarkPlugin` injects `readingTime`; `lazyImagesRehypePlugin` adds `loading="lazy"`; avoid redefining those fields manually.
+- **Permalinks:** `APP_BLOG.post.permalink` is `/%slug%`, so posts publish at the site root; adjust `src/utils/permalinks.ts` cautiously if the pattern changes.
+- **Static paths:** Blog routing in `src/pages/[...blog]/**` uses `getStaticPathsBlog*` helpers; toggling categories/tags off in config automatically disables pages.
+- **RSS feed:** `src/pages/rss.xml.ts` uses `fetchPosts()` and `getPermalink`; ensure `METADATA.description` stays relevant for feed consumers.
+- **Page composition:** Landing pages assemble widget components from `src/components/widgets`; follow `src/types.d.ts` interfaces when passing props.
+- **Shared types:** Extend or reuse structures like `Widget`, `CallToAction`, and `Post` from `src/types.d.ts` to keep TypeScript and Astro templates aligned.
+- **Tailwind setup:** `src/assets/styles/tailwind.css` relies on Tailwind CSS v4 `@theme` tokens and custom utilities (`btn-*`, `bg-page`); stay within that design system.
+- **Custom brand styles:** Use `src/components/CustomStyles.astro` to override CSS variables (`--aw-color-*`, fonts) instead of editing scattered components.
+- **Utility variant:** `tailwindcss-intersect-variant.js` registers the `intersect:` selector; keep it available when adding scroll-triggered styles.
+- **Images:** Store optimized assets under `src/assets/images`; reference them via `~/assets/...` so `findImage` and Astro Assets can resolve metadata.
+- **Metadata helpers:** `src/utils/images.ts` adapts OpenGraph payloads and respects remote CDN (`cdn.pixabay.com`) configured in `astro.config.ts`.
+- **Analytics plumbing:** `src/components/common/Analytics.astro` reads vendor IDs from `config.yaml`; populate `analytics.vendors` there rather than hard-coding.
+- **Optional Partytown:** Flip `hasExternalScripts` in `astro.config.ts` when integrating client trackers that should run through Partytown.
+- **Public assets:** Keep redirects/headers in `public/_headers` and CMS stubs under `public/decapcms`; note the Decap config still points at `src/content/post`, update if activating.
+- **Linting:** Flat ESLint config (`eslint.config.js`) combines Astro + TS rules, enforces `_` prefix for intentionally unused values; run `npm run lint` before commits.
+- **Build checks:** Always finish with `npm run build`; CI will fail if `astro check` surfaces type/content issues or if `application/dist` is missing.
