@@ -54,15 +54,13 @@ const {
                     {title && (
                       <h3 class="text-center text-xl font-semibold uppercase leading-6 tracking-wider mb-2">{title}</h3>
                     )}
-                    {subtitle && <p class="font-light sm:text-lg text-gray-600 dark:text-slate-400">{subtitle}</p>}
+                    {subtitle && <p class="font-light sm:text-lg text-muted">{subtitle}</p>}
                     <div class="my-8">
                       <div class="flex items-center justify-center text-center mb-1 gap-2">
                         {showCurrency && <span class="text-5xl">{currency}</span>}
                         <span class="text-6xl font-extrabold">{amount}</span>
                       </div>
-                      {showPeriod && (
-                        <span class="text-base leading-6 lowercase text-gray-600 dark:text-slate-400">{period}</span>
-                      )}
+                      {showPeriod && <span class="text-base leading-6 lowercase text-muted">{period}</span>}
                     </div>
                     {items && (
                       <ul class="my-8 md:my-10 space-y-2 text-left">
