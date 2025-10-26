@@ -1,59 +1,113 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-@layer utilities {
-  .bg-page {
-    background-color: var(--aw-color-bg-page);
-  }
-  .bg-dark {
-    background-color: var(--aw-color-bg-page-dark);
-  }
-  .bg-light {
-    background-color: var(--aw-color-bg-page);
-  }
-  .text-page {
-    color: var(--aw-color-text-page);
-  }
-  .text-muted {
-    color: var(--aw-color-text-muted);
+@plugin '@tailwindcss/typography';
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* Custom colors - map to actual CSS variables */
+  --color-primary: var(--aw-color-primary);
+  --color-secondary: var(--aw-color-secondary);
+  --color-accent: var(--aw-color-accent);
+  --color-default: var(--aw-color-text-default);
+  --color-muted: var(--aw-color-text-muted);
+
+  /* Custom font families */
+  --font-sans:
+    var(--aw-font-sans, ui-sans-serif), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-heading:
+    var(--aw-font-heading, ui-sans-serif), ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
+    'Segoe UI Symbol', 'Noto Color Emoji';
+
+  /* Custom animations */
+  --animate-fade: fadeInUp 1s both;
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(2rem);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 }
 
-@layer components {
-  .btn {
-    @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base text-page leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-blue-500 focus:ring-offset-2 focus:ring-2 focus:ring-offset-0 hover:bg-gray-100 hover:border-gray-600 dark:text-slate-300 dark:border-slate-500 dark:hover:bg-slate-800 dark:hover:border-slate-800 cursor-pointer;
-  }
+@variant intersect (&:not([no-intersect]));
 
-  .btn-primary {
-    @apply btn font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary hover:text-white dark:text-white dark:bg-primary dark:border-primary dark:hover:border-secondary dark:hover:bg-secondary focus:ring-primary;
-  }
-
-  .btn-secondary {
-    @apply btn font-semibold bg-secondary text-white border-secondary hover:bg-accent hover:border-accent hover:text-white dark:text-white dark:bg-secondary dark:border-secondary dark:hover:border-accent dark:hover:bg-accent focus:ring-secondary;
-  }
-
-  .btn-accent {
-    @apply btn font-semibold bg-accent text-white border-accent hover:bg-primary hover:border-primary hover:text-white dark:text-white dark:bg-accent dark:border-accent dark:hover:border-primary dark:hover:bg-primary focus:ring-accent;
-  }
-
-  .btn-tertiary {
-    @apply btn border-none shadow-none text-muted hover:text-primary dark:text-gray-400 dark:hover:text-white;
+/* Tailwind v4 compatibility: maintain v3 border color behavior */
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
   }
 }
 
+/* Custom utilities */
+@utility bg-page {
+  background-color: var(--aw-color-bg-page);
+}
+
+@utility bg-dark {
+  background-color: var(--aw-color-bg-page-dark);
+}
+
+@utility text-default {
+  color: var(--color-default);
+}
+
+@utility text-heading {
+  color: var(--aw-color-text-heading);
+}
+
+@utility text-primary {
+  color: var(--color-primary);
+}
+
+@utility text-secondary {
+  color: var(--color-secondary);
+}
+
+@utility text-muted {
+  color: var(--color-muted);
+}
+
+@utility text-accent {
+  color: var(--color-accent);
+}
+
+@utility btn {
+  @apply inline-flex items-center justify-center rounded-full border-gray-400 border bg-transparent font-medium text-center text-base text-default leading-snug transition py-3.5 px-6 md:px-8 ease-in duration-200 focus:ring-3 focus:ring-blue-500 focus:ring-offset-2 hover:bg-gray-100 hover:border-gray-600 cursor-pointer;
+}
+
+@utility btn-primary {
+  @apply btn font-semibold bg-primary text-white border-primary hover:bg-secondary hover:border-secondary focus:ring-3 focus:ring-primary;
+}
+
+@utility btn-secondary {
+  @apply btn font-semibold bg-secondary text-white border-secondary hover:bg-accent hover:border-accent focus:ring-3 focus:ring-secondary;
+}
+
+@utility btn-tertiary {
+  @apply btn border-none shadow-none text-muted hover:text-primary;
+}
+
+/* Header scroll styles */
 #header.scroll > div:first-child {
   @apply bg-page md:bg-white/90 md:backdrop-blur-md;
   box-shadow: 0 0.375rem 1.5rem 0 rgb(140 152 164 / 13%);
 }
+
 .dark #header.scroll > div:first-child,
 #header.scroll.dark > div:first-child {
   @apply bg-page md:bg-[#030621e6] border-b border-gray-500/20;
   box-shadow: none;
 }
-/* #header.scroll > div:last-child {
-  @apply py-3;
-} */
 
 #header.expanded nav {
   position: fixed;
@@ -64,12 +118,14 @@
   padding: 0 5px;
 }
 
+/* Dropdown menu */
 .dropdown:focus .dropdown-menu,
 .dropdown:focus-within .dropdown-menu,
 .dropdown:hover .dropdown-menu {
   display: block;
 }
 
+/* Icon styles */
 [astro-icon].icon-light > * {
   stroke-width: 1.2;
 }
@@ -78,19 +134,15 @@
   stroke-width: 2.4;
 }
 
+/* Toggle menu animations */
 [data-aw-toggle-menu] path {
   @apply transition;
 }
+
 [data-aw-toggle-menu].expanded g > path:first-child {
   @apply -rotate-45 translate-y-[15px] translate-x-[-3px];
 }
 
 [data-aw-toggle-menu].expanded g > path:last-child {
   @apply rotate-45 translate-y-[-8px] translate-x-[14px];
-}
-
-/* To deprecated */
-
-.dd *:first-child {
-  margin-top: 0;
 }

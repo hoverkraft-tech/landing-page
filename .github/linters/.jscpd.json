@@ -1,4 +1,4 @@
 {
   "threshold": 5,
-  "ignore": [".astro/**"]
+  "ignore": ["**/.astro/**", "**/node_modules/**", "**/dist/**", "**/.git/**"]
 }
