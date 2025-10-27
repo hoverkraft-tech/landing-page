@@ -43,7 +43,7 @@ Most changes should happen inside `application/`. See `AGENTS.md` for detailed a
 ## Configuration Notes
 
 - Keep locale strings synchronized in `application/src/i18n/ui.ts`
-- Update metadata and analytics via `application/src/config.yaml` instead of hard-coding values
+- Update metadata and analytics via `application/src/config.yaml` instead of hardcoding values
 - Follow the frontmatter schema in `application/src/content/config.ts` when adding content
 
 ## Contributing
