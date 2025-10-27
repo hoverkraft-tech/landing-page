@@ -71,5 +71,7 @@ export const routes = {
     ressources: 'resources',
     contact: 'contact',
     blog: 'blog',
+    privacy: 'privacy',
+    terms: 'terms',
   },
 };

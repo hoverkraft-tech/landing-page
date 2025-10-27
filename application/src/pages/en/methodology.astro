@@ -1,0 +1,194 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Content from '~/components/widgets/Content.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Methodology — HoverKraft',
+  description:
+    'Our method combines DORA, SPACE, and Lean to drive your platform transformation: diagnostic, design, integration, and measurable run.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="HoverKraft Methodology"
+    actions={[
+      { variant: 'primary', text: 'Book a diagnostic', href: '/en/contact#form' },
+      { text: 'View our services', href: '/en/services' },
+    ]}
+    image={{
+      src: '~/assets/images/programming-4.webp',
+      alt: 'Connector-oriented HoverKraft process',
+    }}
+  >
+    <Fragment slot="title">The connector-oriented platform that proves through metrics</Fragment>
+
+    <Fragment slot="subtitle">
+      Our method combines DORA, SPACE, and Lean to drive your platform transformation. Each step is documented, tooled,
+      and measured to create a predictable and sovereign delivery chain.
+    </Fragment>
+  </Hero>
+
+  <Note
+    title="The principle"
+    description="We don't sell an additional tool, but a method that aligns your teams, processes, and systems around a shared delivery vision."
+  />
+
+  <Content
+    isReversed
+    title="Three inseparable building blocks"
+    items={[
+      {
+        title: 'HoverKraft Manifesto',
+        description:
+          'A strategic framework that defines the future state of your platform and its associated governance principles.',
+      },
+      {
+        title: 'Training & bootcamps',
+        description: 'Immersive programs to onboard developers, ops, and product teams on HoverKraft practices.',
+      },
+      {
+        title: 'Certification',
+        description:
+          'Validation of acquired skills that ensures the sustainability of the method beyond our intervention.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/application-configuration-management.png',
+      alt: 'HoverKraft methodological support',
+    }}
+  />
+
+  <Content
+    title="The HoverKraft open source glue"
+    subtitle="Laptop-to-prod connectors to orchestrate your existing tools."
+    items={[
+      {
+        title: 'Standardized GitOps flows',
+        description: 'Pipeline templates, environment promotion, and automated rollbacks.',
+      },
+      {
+        title: 'Unified observability',
+        description: 'DORA/SPACE dashboards, distributed traces, and contextualized alerting.',
+      },
+      {
+        title: 'Security & IAM',
+        description: 'Policy-as-code, secret rotation, and OAuth/SAML integrations.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80',
+      alt: 'Open source HoverKraft connectors',
+    }}
+  />
+
+  <Steps
+    title="The 4 phases of HoverKraft implementation"
+    items={[
+      {
+        title: 'Phase 1: <span class="font-medium">Diagnostic & framing</span>',
+        description:
+          'DORA/SPACE assessment, architecture mapping, and bottleneck identification. Co-construction of the target vision and associated roadmap.',
+        icon: 'tabler:clipboard-check',
+      },
+      {
+        title: 'Phase 2: <span class="font-medium">Design & Architecture</span>',
+        description:
+          'Definition of the target architecture, selection of connectors, ADRs (Architecture Decision Records), and construction of the integration backlog.',
+        icon: 'tabler:building-arch',
+      },
+      {
+        title: 'Phase 3: <span class="font-medium">Integration & onboarding</span>',
+        description:
+          'Deployment of the first connectors, onboarding of pilot teams, implementation of DORA/SPACE observability, and training of champions.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Phase 4: <span class="font-medium">Run & continuous improvement</span>',
+        description:
+          'Scaling across all teams, measured kaizen process, community forum setup, and quarterly monitoring.',
+        icon: 'tabler:chart-line',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/hoverkraft-journey-timeline.png',
+      alt: 'HoverKraft transformation timeline',
+    }}
+  />
+
+  <Features2
+    title="Key deliverables"
+    subtitle="Tangible outputs at each step."
+    columns={3}
+    items={[
+      {
+        title: 'Architectural Decision Records',
+        description: 'Structured documentation of technical choices, their context, and rationale.',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'DORA/SPACE dashboards',
+        description: 'Pre-built Grafana and Looker Studio templates to track your improvements.',
+        icon: 'tabler:dashboard',
+      },
+      {
+        title: 'Connector catalog',
+        description: 'A library of ready-to-use open source connectors with integration guides.',
+        icon: 'tabler:puzzle',
+      },
+      {
+        title: 'GitOps workflows',
+        description: 'Reference pipelines for build, deploy, and release management.',
+        icon: 'tabler:git-branch',
+      },
+      {
+        title: 'IDP portal',
+        description: 'Developer portal based on Backstage or similar, tailored to your context.',
+        icon: 'tabler:app-window',
+      },
+      {
+        title: 'Training materials',
+        description: 'Documentation, videos, and exercises to make teams autonomous.',
+        icon: 'tabler:school',
+      },
+    ]}
+  />
+
+  <Stats
+    title="Measured impact"
+    subtitle="Average results observed after 6 months of implementation"
+    stats={[
+      { title: 'Deployment Frequency', amount: '+230%' },
+      { title: 'Lead Time', amount: '-65%' },
+      { title: 'MTTR', amount: '-48%' },
+      { title: 'Change Failure Rate', amount: '-42%' },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Schedule a diagnostic',
+        href: '/en/contact#form',
+      },
+      {
+        text: 'Explore services',
+        href: '/en/services',
+      },
+    ]}
+  >
+    <Fragment slot="title">Ready to transform your delivery?</Fragment>
+
+    <Fragment slot="subtitle">
+      Kraft Builders support you throughout your platform engineering journey, from strategic framing to operational
+      autonomy of your teams.
+    </Fragment>
+  </CallToAction>
+</Layout>
