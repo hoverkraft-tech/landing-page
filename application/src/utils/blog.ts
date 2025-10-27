@@ -4,17 +4,20 @@ import type { CollectionEntry } from 'astro:content';
 import type { Post } from '~/types';
 import { APP_BLOG } from 'astrowind:config';
 import { cleanSlug, trimSlash, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
+import { defaultLang, showDefaultLang } from '~/i18n/ui';
 
 const generatePermalink = async ({
   id,
   slug,
   publishDate,
   category,
+  lang,
 }: {
   id: string;
   slug: string;
   publishDate: Date;
   category: string | undefined;
+  lang: string;
 }) => {
   const year = String(publishDate.getFullYear()).padStart(4, '0');
   const month = String(publishDate.getMonth() + 1).padStart(2, '0');
@@ -33,11 +36,16 @@ const generatePermalink = async ({
     .replace('%minute%', minute)
     .replace('%second%', second);
 
-  return permalink
+  const segments = permalink
     .split('/')
     .map((el) => trimSlash(el))
-    .filter((el) => !!el)
-    .join('/');
+    .filter((el) => !!el);
+
+  if (lang && (showDefaultLang || lang !== defaultLang)) {
+    segments.unshift(lang);
+  }
+
+  return segments.join('/');
 };
 
 const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> => {
@@ -55,6 +63,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     author,
     draft = false,
     metadata = {},
+    lang = defaultLang,
   } = data;
 
   const slug = cleanSlug(id); // cleanSlug(rawSlug.split('/').pop());
@@ -76,7 +85,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
   return {
     id: id,
     slug: slug,
-    permalink: await generatePermalink({ id, slug, publishDate, category: category?.slug }),
+    permalink: await generatePermalink({ id, slug, publishDate, category: category?.slug, lang }),
 
     publishDate: publishDate,
     updateDate: updateDate,
@@ -92,6 +101,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     draft: draft,
 
     metadata,
+    lang,
 
     Content: Content,
     // or 'content' in case you consume from API
@@ -129,19 +139,27 @@ export const blogTagRobots = APP_BLOG.tag.robots;
 export const blogPostsPerPage = APP_BLOG?.postsPerPage;
 
 /** */
-export const fetchPosts = async (): Promise<Array<Post>> => {
+export const fetchPosts = async ({ lang }: { lang?: string } = {}): Promise<Array<Post>> => {
   if (!_posts) {
     _posts = await load();
+  }
+
+  if (lang) {
+    const resolvedLang = lang || defaultLang;
+    return _posts.filter((post) => (post.lang ?? defaultLang) === resolvedLang);
   }
 
   return _posts;
 };
 
 /** */
-export const findPostsBySlugs = async (slugs: Array<string>): Promise<Array<Post>> => {
+export const findPostsBySlugs = async (
+  slugs: Array<string>,
+  { lang }: { lang?: string } = {}
+): Promise<Array<Post>> => {
   if (!Array.isArray(slugs)) return [];
 
-  const posts = await fetchPosts();
+  const posts = await fetchPosts({ lang });
 
   return slugs.reduce(function (r: Array<Post>, slug: string) {
     posts.some(function (post: Post) {
@@ -152,10 +170,10 @@ export const findPostsBySlugs = async (slugs: Array<string>): Promise<Array<Post
 };
 
 /** */
-export const findPostsByIds = async (ids: Array<string>): Promise<Array<Post>> => {
+export const findPostsByIds = async (ids: Array<string>, { lang }: { lang?: string } = {}): Promise<Array<Post>> => {
   if (!Array.isArray(ids)) return [];
 
-  const posts = await fetchPosts();
+  const posts = await fetchPosts({ lang });
 
   return ids.reduce(function (r: Array<Post>, id: string) {
     posts.some(function (post: Post) {
@@ -166,9 +184,9 @@ export const findPostsByIds = async (ids: Array<string>): Promise<Array<Post>> =
 };
 
 /** */
-export const findLatestPosts = async ({ count }: { count?: number }): Promise<Array<Post>> => {
+export const findLatestPosts = async ({ count, lang }: { count?: number; lang?: string }): Promise<Array<Post>> => {
   const _count = count || 4;
-  const posts = await fetchPosts();
+  const posts = await fetchPosts({ lang });
 
   return posts ? posts.slice(0, _count) : [];
 };
@@ -176,10 +194,30 @@ export const findLatestPosts = async ({ count }: { count?: number }): Promise<Ar
 /** */
 export const getStaticPathsBlogList = async ({ paginate }: { paginate: PaginateFunction }) => {
   if (!isBlogEnabled || !isBlogListRouteEnabled) return [];
-  return paginate(await fetchPosts(), {
-    params: { blog: BLOG_BASE || undefined },
-    pageSize: blogPostsPerPage,
+  const posts = await fetchPosts();
+
+  const postsByLang = posts.reduce<Record<string, Post[]>>((acc, post) => {
+    const lang = post.lang ?? defaultLang;
+    if (!acc[lang]) {
+      acc[lang] = [];
+    }
+    acc[lang].push(post);
+    return acc;
+  }, {});
+
+  const paths = Object.entries(postsByLang).flatMap(([langKey, langPosts]) => {
+    if (langPosts.length === 0) return [];
+
+    const blogParam = langKey === defaultLang ? BLOG_BASE || undefined : [langKey, BLOG_BASE].filter(Boolean).join('/');
+
+    return paginate(langPosts, {
+      params: { blog: blogParam },
+      pageSize: blogPostsPerPage,
+      props: { lang: langKey },
+    });
   });
+
+  return paths;
 };
 
 /** */
@@ -189,7 +227,7 @@ export const getStaticPathsBlogPost = async () => {
     params: {
       blog: post.permalink,
     },
-    props: { post },
+    props: { post, lang: post.lang ?? defaultLang },
   }));
 };
 

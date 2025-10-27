@@ -1,0 +1,59 @@
+---
+publishDate: 2025-08-25T00:00:00Z
+title: 'Broadcom pulls public Bitnami images: how Hoverkraft keeps your clusters safe'
+excerpt: 'Broadcom removed anonymous access to Bitnami Docker images. Here is how we mitigate the impact for Kubernetes teams and buy time for a clean migration.'
+image: ~/assets/images/blog/images-bitnami-broadcom/preview.png
+tags:
+  - kubernetes
+  - sre
+  - bitnami
+  - broadcom
+  - docker
+category: 'Platform Engineering'
+author: 'Hoverkraft Team'
+lang: en
+---
+
+> ⚠️ Coming back from holiday to discover your registries are empty is not fun. That is exactly what the Bitnami announcement created.
+
+On 25 August 2025 Broadcom confirmed that public Bitnami images would no longer be downloadable without authentication. The catalogue includes PostgreSQL, Redis, Keycloak, Kafka, and other staples used by thousands of clusters. Anyone relying on anonymous pulls suddenly faced failing CI/CD pipelines and frozen staging environments.
+
+## Why it matters for SRE and platform teams
+
+- **Service disruption risk** if images are garbage-collected from local registries without replacement.
+- **Security exposure** because you can no longer fetch patched versions.
+- **Forced migrations** undertaken in emergency mode instead of a controlled roadmap.
+
+## Hoverkraft's immediate response
+
+We created a community mirror to keep the critical images available while organisations assess their options.
+
+➡️ Repository: [hoverkraft-tech/bitnami-depreciation](https://github.com/hoverkraft-tech/bitnami-depreciation)
+
+### Inside the repository
+
+- A curated mirror of the most requested Bitnami images.
+- Automation scripts to sync new versions to your private registry.
+- A living advisory tracking Broadcom announcements and potential follow-up deprecations.
+
+### How to use it right now
+
+1. Clone the repository and connect the provided pipeline to your registry (Harbor, ACR, ECR…).
+2. Seed it with the images your workloads need first (databases, caches, IAM).
+3. Monitor your manifests (Helm, Kustomize, Terraform) to surface remaining Bitnami dependencies.
+
+The goal is to restore service without rewriting manifests on day one.
+
+## Plan a controlled migration window
+
+The mirror is a safety net, not a long-term solution. Use the breathing room to:
+
+- Inventory every Bitnami pull across clusters.
+- Evaluate upstream or vendor-maintained alternatives that meet your security baseline.
+- Update onboarding docs and templates so new teams do not reintroduce deprecated images.
+
+## Contribute and stay in the loop
+
+This is a community effort. Contributions are welcome—whether it is adding new automation, reporting issues, or sharing announcements that may impact others.
+
+Together we can keep delivery chains resilient and avoid scrambling each time a vendor changes the rules.

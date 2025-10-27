@@ -5,7 +5,7 @@ layout: '~/layouts/MarkdownLayout.astro'
 
 _Last updated_: September 27, 2025
 
-This privacy policy (the "Policy") describes how Hoverkraft collects, uses, and protects your personal data when you visit the website [https://hoverkraft.cloud](https://hoverkraft.cloud) (the "Site") or interact with us through our forms and content.
+This privacy policy (the "Policy") describes how Hoverkraft collects, uses, and protects your personal data when you visit the site [https://hoverkraft.cloud](https://hoverkraft.cloud) (the "Site") or interact with us through our forms and content.
 
 ## 1. Data Controller
 

@@ -33,6 +33,11 @@ export const ui = {
     'blog.by-author': 'par',
     'blog.related-posts': 'Articles connexes',
     'blog.latest-posts': 'Derniers articles',
+    'blog.back': 'Retour au blog',
+    'blog.view-all': 'Voir tous les articles',
+    'blog.headline.title': 'Le blog Hoverkraft',
+    'blog.headline.subtitle':
+      'Actualités, analyses et ressources sur le Platform Engineering souverain, la méthode HoverKraft et OpenKraft.',
   },
   en: {
     'nav.home': 'Home',
@@ -60,6 +65,11 @@ export const ui = {
     'blog.by-author': 'by',
     'blog.related-posts': 'Related posts',
     'blog.latest-posts': 'Latest posts',
+    'blog.back': 'Back to the blog',
+    'blog.view-all': 'View all posts',
+    'blog.headline.title': 'Hoverkraft Blog',
+    'blog.headline.subtitle':
+      'News, analysis, and resources on sovereign platform engineering, the HoverKraft method, and OpenKraft.',
   },
 } as const;
 

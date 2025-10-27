@@ -1,0 +1,77 @@
+---
+publishDate: 2025-08-21T00:00:00Z
+title: 'Devcontainers + asdf: Hoverkraft repairs the broken Azure workflow'
+excerpt: 'asdf v0.16.0 silently broke the official Devcontainer feature. Here is how Hoverkraft rebuilt a reliable integration and how you can adopt it in minutes.'
+image: ~/assets/images/blog/devcontainer-asdf-feature/preview.png
+tags:
+  - devcontainers
+  - asdf
+  - tooling
+  - azure
+  - iac
+category: 'Tooling'
+author: 'Hoverkraft Team'
+lang: en
+---
+
+import Image from '~/components/common/Image.astro';
+import codeSnippet from '~/assets/images/blog/devcontainer-asdf-feature/code-snippet.png';
+
+> 🛠️ Good news for teams relying on Devcontainers and asdf: the integration works again.
+
+When asdf shipped version 0.16, the installation workflow changed and the Devcontainer feature maintained by Microsoft stopped provisioning runtimes. Containers still booted, but Node, Terraform, Python, or Azure CLI were absent. Hoverkraft reverse-engineered the new behaviour and rebuilt a feature that just works.
+
+## What actually failed?
+
+asdf scans registered plugins before installing the runtimes listed in `.tool-versions`. The generic script inside `mcr.microsoft.com/devcontainers/base` relied on the legacy detection logic, so it skipped the provisioning phase entirely. Every engineer opening a project had to reinstall their toolchain manually.
+
+## Our fix in three steps
+
+1. **A dedicated feature** – we dropped the deprecated script and published `ghcr.io/hoverkraft-tech/devcontainers/asdf`.
+2. **Compatibility with 0.16+** – hooks, environment variables, and plugin paths now match the upstream expectations.
+3. **Optional presets** – popular runtimes such as Terraform, Node.js, Azure CLI, or Python are available out of the box.
+
+📦 The repository is public: [hoverkraft-tech/devcontainers](https://github.com/hoverkraft-tech/devcontainers).
+
+## Fast adoption guide
+
+### 1. Reference the Hoverkraft feature
+
+```json
+{
+  "name": "infra-azure",
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+  "features": {
+    "ghcr.io/hoverkraft-tech/devcontainers/asdf:latest": {}
+  }
+}
+```
+
+### 2. Declare your runtimes once
+
+```
+terraform 1.8.4
+python 3.12.2
+nodejs 20.11.1
+azure-cli 2.61.0
+```
+
+### 3. Customise the post-start hook
+
+We ship a sample `post-start.sh` that updates plugins, exports environment variables, and logs everything in VS Code. Feel free to extend it with internal tooling.
+
+<Image
+  src={codeSnippet}
+  width={codeSnippet.width}
+  height={codeSnippet.height}
+  alt="Updated devcontainer configuration referencing Hoverkraft's asdf feature"
+  loading="lazy"
+/>
+
+## Why it matters
+
+- **Consistent onboarding** – no one loses half a day setting up their laptop.
+- **Reproducible CI** – the same versions run locally and in pipelines.
+- **Sovereignty** – the feature lives in an open repository; you can fork it or contribute back.
+
+If your platform engineering team depends on Devcontainers and asdf, try the feature and share your feedback. We iterate publicly so the community does not have to patch the same bug twice.

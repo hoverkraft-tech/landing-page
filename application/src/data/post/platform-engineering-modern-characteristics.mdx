@@ -1,0 +1,123 @@
+---
+publishDate: 2025-01-15T00:00:00Z
+title: '11 Traits of a Modern Hoverkraft Platform'
+excerpt: 'From velocity to sovereignty—how Hoverkraft turns platform engineering into a measurable, developer-first discipline.'
+image: ~/assets/images/blog/caracteristiques-plateforme-moderne/preview.png
+tags:
+  - platform-engineering
+  - dora
+  - architecture
+  - methodology
+  - devex
+category: 'Platform Engineering'
+author: 'Hoverkraft Team'
+lang: en
+---
+
+import Image from '~/components/common/Image.astro';
+import architectureOverview from '~/assets/images/blog/caracteristiques-plateforme-moderne/connector-architecture.webp';
+import developerPortal from '~/assets/images/blog/caracteristiques-plateforme-moderne/developer-portal-backstage.jpg';
+import doraDashboard from '~/assets/images/blog/caracteristiques-plateforme-moderne/dora-metrics-dashboard.png';
+import cicdPipeline from '~/assets/images/blog/caracteristiques-plateforme-moderne/cicd-pipeline-diagram.png';
+import connectorArchitecture from '~/assets/images/blog/caracteristiques-plateforme-moderne/connector-architecture.webp';
+import kubernetesMulticloud from '~/assets/images/blog/caracteristiques-plateforme-moderne/kubernetes-multicloud-architecture.webp';
+import securityLifecycle from '~/assets/images/blog/caracteristiques-plateforme-moderne/security-lifecycle.webp';
+import autoscalingGraph from '~/assets/images/blog/caracteristiques-plateforme-moderne/autoscaling-graph.webp';
+import swaggerDocs from '~/assets/images/blog/caracteristiques-plateforme-moderne/swagger-generated-docs.webp';
+import githubDiscussions from '~/assets/images/blog/caracteristiques-plateforme-moderne/github-architecture-discussion.webp';
+import teamVelocity from '~/assets/images/blog/caracteristiques-plateforme-moderne/team-velocity-trend.webp';
+import sovereigntyMatrix from '~/assets/images/blog/caracteristiques-plateforme-moderne/sovereignty-matrix.webp';
+import hoverkraftJourney from '~/assets/images/blog/caracteristiques-plateforme-moderne/hoverkraft-journey-timeline.webp';
+
+> 🚀 Platform engineering is no longer about stacking tools. It is the operating system for delivery, and Hoverkraft treats it as such.
+
+Software teams that win today orchestrate velocity, reliability, and sovereignty at the same time. Over the last decade we have learned that a successful platform is connector-first: it glues the existing ecosystem, measures value continuously, and keeps developers focused on shipping. Here are the 11 characteristics we require on every Hoverkraft engagement.
+
+<Image src={architectureOverview} alt="Architecture overview of a Hoverkraft delivery platform" loading="lazy" />
+
+## 1. Developer experience is the product
+
+Every friction a developer hits turns into stalled deliveries and shadow tooling. We provide:
+
+- A single entry point (Backstage or Portainer) for services, deployments, and documentation.
+- Opinionated templates and devcontainers so onboarding stays under 30 minutes.
+- Documentation that is generated from IaC manifests and lives with the code.
+
+**Metric to track:** onboarding time, SPACE satisfaction score, support tickets related to environment issues.
+
+<Image src={developerPortal} alt="Backstage developer portal screenshot" loading="lazy" />
+
+## 2. Evidence-driven decisions
+
+Dashboards are first-class citizens. We expose DORA and SPACE signals to product, platform, and leadership. Alerting is proactive and every connector emits structured telemetry.
+
+**Metric to track:** deployment frequency, lead time, MTTR, change failure rate.
+
+<Image src={doraDashboard} alt="DORA dashboard showing the four core metrics" loading="lazy" />
+
+## 3. Automation end to end
+
+Manual steps are risks. GitOps, pipelines-as-code, and automated testing (quality, security, performance) guarantee repeatability. When something fails, rollback takes minutes, not hours.
+
+<Image src={cicdPipeline} alt="Overview of an end-to-end CI/CD pipeline" loading="lazy" />
+
+## 4. Connector-first glue
+
+We avoid proprietary monoliths. Hoverkraft maintains open-source connectors that keep stacks interchangeable and documented. Integrations use standard APIs, webhooks, and schemas so every team can extend the platform safely.
+
+<Image src={connectorArchitecture} alt="Connector-driven architecture diagram" loading="lazy" />
+
+## 5. Cloud-native and portable
+
+Kubernetes is the lingua franca, but sovereignty matters. We design so workloads can move between OVHcloud, AWS, on-prem, or Sovereign Cloud France without rewriting applications.
+
+<Image src={kubernetesMulticloud} alt="Multi-cloud Kubernetes layout" loading="lazy" />
+
+## 6. Security by design
+
+Secrets management, automated vulnerability scanning, policy-as-code, and exhaustive audit trails are baked in from sprint zero. Least privilege is the default, not an afterthought.
+
+<Image src={securityLifecycle} alt="Security lifecycle diagram" loading="lazy" />
+
+## 7. Built for scale and resilience
+
+Horizontal and vertical autoscaling, chaos engineering playbooks, and multi-region topologies ensure resilience under pressure. Business continuity is measurable, not aspirational.
+
+<Image src={autoscalingGraph} alt="Autoscaling metrics over time" loading="lazy" />
+
+## 8. API-first interoperability
+
+Service catalogs, OpenAPI/AsyncAPI contracts, and change governance prevent the emergence of brittle point-to-point scripts. Every connector ships with examples and rollback stories.
+
+<Image src={swaggerDocs} alt="Swagger generated documentation" loading="lazy" />
+
+## 9. Collaborative governance
+
+We align architecture guilds, platform squads, and compliance early. Decision records are transparent, and shared scorecards highlight where to invest next.
+
+<Image src={githubDiscussions} alt="Architecture discussion in GitHub" loading="lazy" />
+
+## 10. Sustainable pace
+
+Developer wellbeing is a leading indicator. We instrument SPACE surveys, track toil, and invest in pairings and communities of practice.
+
+<Image src={teamVelocity} alt="Team velocity trend chart" loading="lazy" />
+
+## 11. Sovereignty and reversibility
+
+Your platform remains yours. Knowledge transfer, open-source assets, and clear offboarding rituals make sure you can accelerate autonomously.
+
+<Image src={sovereigntyMatrix} alt="Sovereignty matrix for platform capabilities" loading="lazy" />
+
+## Bringing it together
+
+Hoverkraft engagements combine these traits into a tangible transformation roadmap:
+
+<Image src={hoverkraftJourney} alt="Hoverkraft journey timeline" loading="lazy" />
+
+1. **Diagnostic** – two days of SPACE/DORA analysis, connector mapping, and interviews.
+2. **Action plan** – a six-month roadmap with quick wins and structural milestones.
+3. **Connector rollout** – laptop-to-prod automation and dashboards deployed in production.
+4. **Transfer** – coaching, rituals, and continuous improvement with Kraft Builders or PEaaS.
+
+The result is a delivery chain you can trust: faster releases, happier teams, and full control over your platform.
