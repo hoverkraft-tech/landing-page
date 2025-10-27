@@ -3,8 +3,6 @@ import { Icon } from 'astro-icon/components';
 import { languages } from '~/i18n/ui';
 import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
 
-const languageSelectorScript = await import('~/scripts/language-selector.ts?url');
-
 export interface Props {
   showLabels?: boolean;
   class?: string;
@@ -24,7 +22,7 @@ const normalizedPath = pathWithoutLang === '' ? '/' : pathWithoutLang;
 const getLocalizedPath = (targetLang: keyof typeof languages) => translatePath(normalizedPath, targetLang);
 ---
 
-<div class={`relative inline-flex ${className}`} data-language-selector>
+<language-selector class={`relative inline-flex ${className}`}>
   <button
     type="button"
     class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
@@ -66,6 +64,154 @@ const getLocalizedPath = (targetLang: keyof typeof languages) => translatePath(n
       })
     }
   </div>
-</div>
+</language-selector>
 
-<script type="module" src={languageSelectorScript.default} is:inline></script>
+<script type="module" is:inline>
+  class LanguageSelectorElement extends HTMLElement {
+    static instances = new Set();
+    static documentListenersAttached = false;
+
+    static handleGlobalClick(event) {
+      LanguageSelectorElement.instances.forEach((instance) => instance.handleDocumentClick(event));
+    }
+
+    static handleGlobalKeydown(event) {
+      if (event.key !== 'Escape') {
+        return;
+      }
+
+      LanguageSelectorElement.instances.forEach((instance) => instance.handleEscape());
+    }
+
+    static attachDocumentListeners() {
+      if (LanguageSelectorElement.documentListenersAttached) {
+        return;
+      }
+
+      document.addEventListener('click', LanguageSelectorElement.handleGlobalClick);
+      document.addEventListener('keydown', LanguageSelectorElement.handleGlobalKeydown);
+      LanguageSelectorElement.documentListenersAttached = true;
+    }
+
+    static detachDocumentListenersIfUnused() {
+      if (!LanguageSelectorElement.documentListenersAttached || LanguageSelectorElement.instances.size > 0) {
+        return;
+      }
+
+      document.removeEventListener('click', LanguageSelectorElement.handleGlobalClick);
+      document.removeEventListener('keydown', LanguageSelectorElement.handleGlobalKeydown);
+      LanguageSelectorElement.documentListenersAttached = false;
+    }
+
+    button;
+    menu;
+    initialized = false;
+
+    handleButtonClick = (event) => {
+      event.stopPropagation();
+      this.toggleMenu();
+    };
+
+    connectedCallback() {
+      if (this.initialized) {
+        return;
+      }
+
+      this.button = this.querySelector('[data-toggle-language]');
+      this.menu = this.querySelector('[data-language-menu]');
+
+      if (!this.button || !this.menu) {
+        return;
+      }
+
+      this.button.addEventListener('click', this.handleButtonClick);
+      this.button.setAttribute('aria-haspopup', 'true');
+      this.button.setAttribute('aria-expanded', this.isOpen() ? 'true' : 'false');
+
+      LanguageSelectorElement.instances.add(this);
+      LanguageSelectorElement.attachDocumentListeners();
+      this.initialized = true;
+    }
+
+    disconnectedCallback() {
+      if (!this.initialized) {
+        return;
+      }
+
+      if (this.button) {
+        this.button.removeEventListener('click', this.handleButtonClick);
+      }
+
+      LanguageSelectorElement.instances.delete(this);
+      LanguageSelectorElement.detachDocumentListenersIfUnused();
+
+      this.button = undefined;
+      this.menu = undefined;
+      this.initialized = false;
+    }
+
+    handleDocumentClick(event) {
+      if (!this.isConnected || !this.menu) {
+        return;
+      }
+
+      const target = event.target;
+      if (!(target instanceof Node)) {
+        return;
+      }
+
+      if (this.contains(target)) {
+        return;
+      }
+
+      this.closeMenu();
+    }
+
+    handleEscape() {
+      if (!this.isOpen()) {
+        return;
+      }
+
+      this.closeMenu(true);
+    }
+
+    isOpen() {
+      return Boolean(this.menu && !this.menu.classList.contains('hidden'));
+    }
+
+    toggleMenu() {
+      if (this.isOpen()) {
+        this.closeMenu();
+        return;
+      }
+
+      this.openMenu();
+    }
+
+    openMenu() {
+      if (!this.menu || !this.button) {
+        return;
+      }
+
+      this.menu.classList.remove('hidden');
+      this.button.setAttribute('aria-expanded', 'true');
+    }
+
+    closeMenu(focusButton = false) {
+      if (!this.menu || !this.button || !this.isOpen()) {
+        return;
+      }
+
+      this.menu.classList.add('hidden');
+      this.button.setAttribute('aria-expanded', 'false');
+
+      if (focusButton) {
+        this.button.focus();
+      }
+    }
+  }
+
+  if (!customElements.get('language-selector')) {
+    customElements.define('language-selector', LanguageSelectorElement);
+  }
+</script>
