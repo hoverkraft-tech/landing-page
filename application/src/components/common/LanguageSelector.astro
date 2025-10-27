@@ -1,0 +1,108 @@
+---
+import { Icon } from 'astro-icon/components';
+import { languages } from '~/i18n/ui';
+import { getLangFromUrl } from '~/i18n/utils';
+
+export interface Props {
+  showLabels?: boolean;
+  class?: string;
+}
+
+const { showLabels = false, class: className = '' } = Astro.props;
+
+const currentLang = getLangFromUrl(Astro.url);
+
+// Get current path without language prefix
+const pathname = Astro.url.pathname;
+const pathWithoutLang = pathname.replace(/^\/(en|fr)(\/|$)/, '/');
+
+// Function to get the equivalent path in the target language
+const getLocalizedPath = (targetLang: string) => {
+  if (targetLang === 'fr') {
+    // For French (default), remove /en prefix if present
+    return pathWithoutLang === '/' ? '/' : pathWithoutLang;
+  } else {
+    // For English, add /en prefix
+    return pathWithoutLang === '/' ? '/en' : `/en${pathWithoutLang}`;
+  }
+};
+---
+
+<div class={`relative inline-flex ${className}`} data-language-selector>
+  <button
+    type="button"
+    class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+    aria-label="Select language"
+    data-toggle-language
+  >
+    <Icon name="tabler:language" class="w-5 h-5" />
+    {showLabels && <span class="ml-2">{languages[currentLang]}</span>}
+    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-1" />
+  </button>
+
+  <div
+    class="hidden absolute right-0 top-full mt-2 w-40 rounded-lg shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 z-50"
+    data-language-menu
+  >
+    {
+      Object.entries(languages).map(([lang, label]) => (
+        <a
+          href={getLocalizedPath(lang)}
+          class:list={[
+            'block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 first:rounded-t-lg last:rounded-b-lg',
+            {
+              'bg-gray-50 dark:bg-gray-900 font-semibold': currentLang === lang,
+              'text-gray-700 dark:text-gray-300': currentLang !== lang,
+            },
+          ]}
+          hreflang={lang}
+        >
+          <span class="flex items-center">
+            {lang === 'fr' ? '🇫🇷' : '🇬🇧'}
+            <span class="ml-2">{label}</span>
+            {currentLang === lang && <Icon name="tabler:check" class="w-4 h-4 ml-auto text-primary" />}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+</div>
+
+<script>
+  function initLanguageSelector() {
+    const selector = document.querySelector('[data-language-selector]');
+    if (!selector) return;
+
+    const button = selector.querySelector('[data-toggle-language]') as HTMLButtonElement;
+    const menu = selector.querySelector('[data-language-menu]') as HTMLElement;
+
+    if (!button || !menu) return;
+
+    // Toggle menu on button click
+    button.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('hidden');
+    });
+
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+      if (!selector.contains(e.target as Node)) {
+        menu.classList.add('hidden');
+      }
+    });
+
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !menu.classList.contains('hidden')) {
+        menu.classList.add('hidden');
+        button.focus();
+      }
+    });
+  }
+
+  // Initialize on page load
+  initLanguageSelector();
+
+  // Re-initialize after page transitions (Astro View Transitions)
+  document.addEventListener('astro:page-load', initLanguageSelector);
+</script>
