@@ -9,7 +9,7 @@ Please read these terms of use carefully before browsing the site or using servi
 
 ## 1. Purpose and Scope
 
-These terms of use (hereinafter the "Terms") define the terms and conditions under which Hoverkraft makes available to visitors and professional clients its website accessible at [https://hoverkraft.cloud](https://hoverkraft.cloud) (hereinafter the "Site") as well as associated services (demonstrations, resources, and informational content).
+These terms of use (hereinafter the "Terms") define the terms and conditions under which Hoverkraft makes available to visitors and professional clients its site accessible at [https://hoverkraft.cloud](https://hoverkraft.cloud) (hereinafter the "Site") as well as associated services (demonstrations, resources, and informational content).
 
 Any consultation of the Site constitutes unreserved acceptance of the Terms by the internet user (hereinafter the "User").
 

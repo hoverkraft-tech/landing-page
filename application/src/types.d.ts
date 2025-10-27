@@ -31,6 +31,9 @@ export interface Post {
   author?: string;
 
   /**  */
+  lang?: 'fr' | 'en';
+
+  /**  */
   metadata?: MetaData;
 
   /**  */

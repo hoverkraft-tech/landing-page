@@ -31,6 +31,7 @@ export interface Props {
   showToggleTheme?: boolean;
   showRssFeed?: boolean;
   position?: string;
+  homeHref?: string;
 }
 
 const {
@@ -43,15 +44,23 @@ const {
   showToggleTheme = false,
   showRssFeed = false,
   position = 'center',
+  homeHref = getHomePermalink(),
 } = Astro.props;
 
-const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
+const normalizePath = (path: string): string => {
+  if (!path) return '/';
+  const noQueryHash = path.split(/[?#]/)[0] ?? path;
+  const trimmed = trimSlash(noQueryHash);
+  return trimmed ? `/${trimmed}` : '/';
+};
+
+const currentPath = normalizePath(new URL(Astro.url).pathname);
 ---
 
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-[opacity] ease-in-out',
+    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-opacity ease-in-out',
   ]}
   {...isSticky ? { 'data-aw-sticky-header': true } : {}}
   {...id ? { id } : {}}
@@ -72,7 +81,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     ]}
   >
     <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
-      <a class="flex items-center" href={getHomePermalink()}>
+      <a class="flex items-center" href={homeHref}>
         <Logo />
       </a>
       <div class="flex items-center md:hidden">
@@ -104,7 +113,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                         <a
                           class:list={[
                             'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap',
-                            { 'aw-link-active': href2 === currentPath },
+                            { 'aw-link-active': normalizePath(href2 ?? '') === currentPath },
                           ]}
                           href={href2}
                         >
@@ -118,7 +127,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
                 <a
                   class:list={[
                     'hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap',
-                    { 'aw-link-active': href === currentPath },
+                    { 'aw-link-active': normalizePath(href ?? '') === currentPath },
                   ]}
                   href={href}
                 >

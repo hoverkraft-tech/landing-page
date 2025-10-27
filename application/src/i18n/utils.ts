@@ -1,5 +1,8 @@
 import { ui, defaultLang, showDefaultLang, routes } from './ui';
 
+const trimSlashes = (value: string) => value.replace(/^\/+|\/+$/g, '');
+const routesByLang = routes as Record<string, Record<string, string>>;
+
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split('/');
   if (lang in ui) return lang as keyof typeof ui;
@@ -14,11 +17,66 @@ export function useTranslations(lang: keyof typeof ui) {
 
 export function useTranslatedPath(lang: keyof typeof ui) {
   return function translatePath(path: string, l: string = lang) {
-    const pathName = path.replaceAll('/', '');
-    const hasTranslation = defaultLang !== l && routes[l] !== undefined && routes[l][pathName] !== undefined;
-    const translatedPath = hasTranslation ? '/' + routes[l][pathName] : path;
+    const targetLang = l as keyof typeof ui;
+    const cleanedPath = trimSlashes(path);
+    const segments = cleanedPath ? cleanedPath.split('/').filter(Boolean) : [];
 
-    return !showDefaultLang && l === defaultLang ? translatedPath : `/${l}${translatedPath}`;
+    if (segments.length > 0) {
+      const [firstSegment, ...rest] = segments;
+
+      let defaultSegment = firstSegment;
+      const currentRoutes = routesByLang[lang as string];
+
+      if (lang !== defaultLang && currentRoutes) {
+        const match = Object.entries(currentRoutes).find(([, value]) => value === firstSegment);
+        if (match) {
+          defaultSegment = match[0];
+        }
+      }
+
+      if (lang === defaultLang) {
+        defaultSegment = firstSegment;
+      }
+
+      let translatedFirstSegment = defaultSegment;
+      const targetRoutes = routesByLang[targetLang as string];
+      const hasTargetTranslation = Boolean(targetRoutes && targetRoutes[defaultSegment] !== undefined);
+
+      if (targetLang !== defaultLang && targetRoutes) {
+        translatedFirstSegment = targetRoutes[defaultSegment] ?? defaultSegment;
+      }
+
+      if (targetLang === defaultLang) {
+        translatedFirstSegment = defaultSegment;
+      }
+
+      const translatedSegments = [translatedFirstSegment, ...rest];
+      const translatedPath = `/${translatedSegments.join('/')}`;
+
+      if (!showDefaultLang && targetLang === defaultLang) {
+        return translatedPath;
+      }
+
+      if (targetLang === defaultLang) {
+        return translatedPath;
+      }
+
+      if (hasTargetTranslation) {
+        return translatedPath === '/' ? `/${targetLang}` : `/${targetLang}${translatedPath}`;
+      }
+
+      return translatedPath;
+    }
+
+    if (!showDefaultLang && targetLang === defaultLang) {
+      return '/';
+    }
+
+    if (targetLang === defaultLang) {
+      return '/';
+    }
+
+    return `/${targetLang}`;
   };
 }
 
