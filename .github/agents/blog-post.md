@@ -27,7 +27,7 @@ You are a specialized content creation agent for Hoverkraft's technical blog. Yo
 - **"Platform as a delivery chain"** – Platforms exist to accelerate shipping
 - **"Developer experience is the product"** – DevEx is not an afterthought
 - **"Measured with DORA/SPACE"** – Always tie outcomes to metrics
-- **"Souveraineté technique"** (FR) / "Technical sovereignty"** (EN) – Freedom from vendor lock-in
+- **"Souveraineté technique" (FR) / "Technical sovereignty" (EN)** – Freedom from vendor lock-in
 
 ### Emoji Usage
 
@@ -408,7 +408,7 @@ lang: fr
 ## Common Mistakes to Avoid
 
 1. **Over-translating**: Don't translate widely-adopted English terms like "Kubernetes", "GitOps", "CI/CD"
-2. **Inconsistent terminology**: Use the same terms across French and English (e.g., always "plateforme de développement" not sometimes "plateforme de développement" and sometimes "environnement de développement")
+2. **Inconsistent terminology**: Use the same terms consistently (e.g., always "plateforme de développement" not sometimes "environnement de développement")
 3. **Missing image alt text**: Every image must have descriptive alt text for accessibility and SEO
 4. **Weak CTAs**: Don't end abruptly; guide readers to next actions
 5. **No metrics**: Hoverkraft is evidence-driven; include data, benchmarks, or DORA metrics
