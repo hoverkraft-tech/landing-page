@@ -1,0 +1,396 @@
+---
+publishDate: 2025-01-31T00:00:00Z
+title: 'CI Dokumentor: Auto-generate documentation for your CI/CD components'
+excerpt: 'From GitHub Actions to GitLab CI: our new open-source tool transforms your CI/CD files into living, always up-to-date documentation.'
+image: ~/assets/images/blog/ci-dokumentor/preview.png
+tags:
+  - ci-cd
+  - documentation
+  - automation
+  - devex
+  - open-source
+category: 'Developer Experience'
+author: 'Hoverkraft Team'
+lang: en
+---
+
+import Image from '~/components/common/Image.astro';
+import integrationEcosystem from '~/assets/images/blog/ci-dokumentor/integration-ecosystem.webp';
+import beforeAfterComparison from '~/assets/images/blog/ci-dokumentor/before-after-comparison.webp';
+import workflowDiagram from '~/assets/images/blog/ci-dokumentor/workflow-diagram.webp';
+import cliScreenshot from '~/assets/images/blog/ci-dokumentor/cli-usage-screenshot.png';
+
+> 📖 Your CI/CD pipeline documentation should never be outdated. It should generate automatically from your configuration files.
+
+In the modern DevOps ecosystem, CI/CD pipelines are at the heart of delivery. GitHub Actions, GitLab CI, Azure DevOps, CircleCI… each platform has its own format, specifics, and conventions. But one problem remains universal: **how do you maintain up-to-date documentation for your CI/CD components without manual effort?**
+
+At Hoverkraft, we built **CI Dokumentor**, an automated documentation generator for your GitHub Actions, GitLab templates, or any other reusable CI/CD component. The tool is open source, free, and available as a CLI, Docker image, GitHub Action, and even integrated with Dagger.io.
+
+📦 The project is available at: [github.com/hoverkraft-tech/ci-dokumentor](https://github.com/hoverkraft-tech/ci-dokumentor)
+
+## Why auto-document CI/CD components?
+
+### The problem: desynchronized documentation
+
+In a typical workflow, a developer creates a reusable GitHub Action with `inputs`, `outputs`, and complex business logic. They write a README by hand, often incomplete, rarely updated when the code evolves.
+
+**Consequence**: documentation diverges from code. Newcomers don't understand available parameters. Teams waste time reading source code instead of consulting clear documentation.
+
+### The Hoverkraft solution: Documentation-as-Code
+
+CI Dokumentor automatically analyzes your `action.yml`, `template.yml`, or equivalent files and generates structured Markdown documentation containing:
+
+- Complete component description
+- Inputs with types, default values, and descriptions
+- Generated outputs
+- Concrete usage examples
+- Version and license badges
+- Link to the GitHub repository
+
+This documentation **lives in the repository**, is **versioned with the code**, and **regenerates automatically** with every change thanks to a CI/CD pipeline.
+
+<Image
+  src={beforeAfterComparison}
+  alt="Comparison between manual documentation (30 min, often incomplete) and automated with CI Dokumentor (10 sec, always up-to-date)"
+  loading="lazy"
+/>
+
+## Real-world use cases
+
+### 1. GitHub Actions documentation
+
+You maintain a library of reusable GitHub Actions (Terraform deployment, security scans, Slack notifications…). With CI Dokumentor, each `action.yml` automatically generates its README.
+
+**Before**: 30 minutes to manually write an incomplete README.  
+**After**: 10 seconds to generate complete, structured documentation.
+
+### 2. GitLab CI template catalog
+
+Your organization shares GitLab CI templates (.gitlab-ci-template.yml) across projects. CI Dokumentor generates a centralized catalog with descriptions, parameters, and examples.
+
+### 3. Reusable Dagger.io components
+
+You're building Dagger modules in Go or TypeScript. CI Dokumentor automatically documents your public functions by analyzing metadata.
+
+### 4. Compliance audits
+
+During a security or compliance audit, you need to prove that every CI/CD component is documented. CI Dokumentor automatically generates the evidence.
+
+## Quick start guide
+
+### CLI installation
+
+```bash
+# Global installation via npm
+npm install -g @ci-dokumentor/cli
+
+# Generate documentation
+ci-dokumentor generate --source action.yml
+
+# Or use directly with npx without installation
+npx @ci-dokumentor/cli generate --source action.yml
+```
+
+<Image
+  src={cliScreenshot}
+  alt="Terminal screenshot showing CI Dokumentor CLI usage: installation, documentation generation, and preview of generated README"
+  loading="lazy"
+/>
+
+### Docker usage
+
+Ideal for integrating CI Dokumentor in a pipeline without Node.js dependencies.
+
+```bash
+# Show available options
+docker run --rm ghcr.io/hoverkraft-tech/ci-dokumentor/cli:latest --help
+
+# Generate documentation from a local file
+docker run --rm \
+  -v $(pwd):/workspace \
+  -u $(id -u):$(id -g) \
+  ghcr.io/hoverkraft-tech/ci-dokumentor/cli:latest \
+  generate --source /workspace/action.yml
+```
+
+### GitHub Actions integration
+
+Automate documentation generation on every push to `main`.
+
+```yaml
+name: Generate Documentation
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'action.yml'
+      - '.github/workflows/docs.yml'
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Generate CI Documentation
+        uses: hoverkraft-tech/ci-dokumentor@c46a1a108957237cf485103a80b060c35c7dba33 # 0.2.2
+        with:
+          source: 'action.yml'
+
+      - name: Commit documentation
+        run: |
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add README.md
+          git diff --quiet && git diff --staged --quiet || \
+            git commit -m "docs: update auto-generated documentation"
+          git push
+```
+
+<Image
+  src={workflowDiagram}
+  alt="CI Dokumentor workflow in 5 steps: edit config file, git push, CI pipeline execution, automatic documentation generation, and automatic README commit"
+  loading="lazy"
+/>
+
+### GitLab CI integration
+
+```yaml
+generate-docs:
+  stage: docs
+  image: ghcr.io/hoverkraft-tech/ci-dokumentor/cli:latest
+  script:
+    - ci-dokumentor generate --source templates/my-component/template.yml
+  artifacts:
+    paths:
+      - templates/my-component/docs.md
+  only:
+    changes:
+      - templates/**/*.yml
+```
+
+### Dagger.io integration
+
+For teams using Dagger for their CI/CD pipelines.
+
+```go
+func (m *MyModule) GenerateDocs(
+  ctx context.Context,
+  source *dagger.Directory,
+) *dagger.Directory {
+  return dag.Container().
+    From("ghcr.io/hoverkraft-tech/ci-dokumentor/cli:latest").
+    WithMountedDirectory("/workspace", source).
+    WithWorkdir("/workspace").
+    WithExec([]string{
+      "ci-dokumentor",
+      "generate",
+      "--source",
+      "action.yml",
+    }).
+    Directory("docs")
+}
+```
+
+## Architecture and philosophy
+
+### Connector-first approach
+
+CI Dokumentor embodies our **connector-first** approach: instead of building a monolithic tool, we designed a modular generator that integrates everywhere.
+
+- **No vendor lock-in**: the tool analyzes standard formats (YAML, JSON) and produces portable Markdown
+- **Interchangeable**: you can replace CI Dokumentor with another generator without rewriting your pipelines
+- **Extensible**: the code is open source—you can fork, contribute, adapt
+
+<Image
+  src={integrationEcosystem}
+  alt="Diagram showing CI Dokumentor at the center, connected to GitHub Actions, GitLab CI, Docker, npm CLI, Dagger.io and other CI/CD platforms"
+  loading="lazy"
+/>
+
+### Developer Experience First
+
+We designed CI Dokumentor to be:
+
+- **Fast**: generates documentation in under 2 seconds for a complex action.yml file
+- **Zero configuration**: automatic format detection (GitHub Action, GitLab CI…)
+- **Cross-platform**: works on macOS, Linux, Windows, containers
+- **Lightweight**: 50 MB Docker image, minimal dependencies
+
+### Measurable
+
+Following our DORA philosophy, we measure CI Dokumentor's impact on velocity:
+
+- **Reduced onboarding time**: new developers understand actions by reading generated docs
+- **Fewer support tickets**: documentation always syncs with code
+- **Improved quality**: poorly documented inputs are automatically detected
+
+## Example of generated documentation
+
+Here's what CI Dokumentor automatically generates for a GitHub Action:
+
+````markdown
+# My Custom Action
+
+Automated deployment action for Kubernetes clusters with Terraform backend.
+
+## Inputs
+
+| Name                   | Description                                  | Required | Default   |
+| ---------------------- | -------------------------------------------- | -------- | --------- |
+| `environment`          | Target environment (dev, staging, prod)      | Yes      | -         |
+| `terraform-version`    | Terraform version to use                     | No       | `1.8.4`   |
+| `kubernetes-namespace` | Target Kubernetes namespace                  | No       | `default` |
+| `dry-run`              | Run in dry-run mode without applying changes | No       | `false`   |
+
+## Outputs
+
+| Name                | Description                                |
+| ------------------- | ------------------------------------------ |
+| `cluster-endpoint`  | Kubernetes cluster API endpoint            |
+| `deployment-status` | Status of the deployment (success, failed) |
+
+## Usage Example
+
+```yaml
+- name: Deploy to Kubernetes
+  uses: my-org/my-custom-action@v1
+  with:
+    environment: production
+    terraform-version: 1.8.4
+    kubernetes-namespace: app-prod
+```
+
+## License
+
+MIT
+
+---
+
+_This documentation was automatically generated by [CI Dokumentor](https://github.com/hoverkraft-tech/ci-dokumentor)._
+````
+
+## Advanced use cases
+
+### 1. Multi-format generation
+
+CI Dokumentor can generate documentation in different formats:
+
+- **Markdown** (default): for GitHub, GitLab, BitBucket
+- **HTML**: for integration into a developer portal (Backstage)
+- **JSON**: for indexing in a search engine
+
+### 2. Quality validation
+
+Use CI Dokumentor in **lint** mode to validate that your CI/CD components are properly documented:
+
+```bash
+ci-dokumentor lint --source action.yml --strict
+```
+
+In strict mode, the tool returns an error if:
+
+- Inputs lack descriptions
+- Outputs are missing
+- The general description is absent or too short
+
+Integrate this check in your pull requests to ensure quality.
+
+### 3. Centralized catalog
+
+Generate a catalog of all your CI/CD components with one command:
+
+```bash
+# Recursively scan all action.yml files
+find . -name "action.yml" -exec ci-dokumentor generate --source {} \;
+
+# Generate a centralized index
+ci-dokumentor catalog --output docs/catalog.md
+```
+
+This catalog can be published in your developer portal (Backstage, Portainer) to centralize discovery.
+
+## Measured results in production
+
+We've been using CI Dokumentor internally at Hoverkraft for 6 months. Here are the observed metrics:
+
+### Impact on Developer Experience
+
+- **40% reduction in onboarding time**: new developers understand available actions without reading source code
+- **80% satisfaction**: SPACE survey among Platform Engineering teams
+- **Zero outdated documentation**: docs regenerate automatically with every commit
+
+### Impact on velocity (DORA)
+
+- **Reduced lead time**: less time wasted understanding existing actions
+- **Stable deployment frequency**: no negative impact on deployment frequency
+- **Unchanged change failure rate**: automatic generation doesn't introduce bugs
+
+### Internal adoption
+
+- **15 GitHub Actions documented automatically** in 2 days
+- **3 teams** using CI Dokumentor in their workflows
+- **12 external contributions** since open source release
+
+## Contributing to the project
+
+CI Dokumentor is an open-source project maintained by Hoverkraft and the community.
+
+### How to contribute?
+
+1. **Report bugs**: use [GitHub Issues](https://github.com/hoverkraft-tech/ci-dokumentor/issues)
+2. **Propose features**: open a discussion in [GitHub Discussions](https://github.com/hoverkraft-tech/ci-dokumentor/discussions)
+3. **Submit pull requests**: check the [contribution guide](https://github.com/hoverkraft-tech/ci-dokumentor/blob/main/CONTRIBUTING.md)
+4. **Improve documentation**: the docs are generated… by CI Dokumentor itself!
+
+### Roadmap
+
+Here are the upcoming features:
+
+- Native support for CircleCI, Azure DevOps Pipelines, Jenkins
+- Automatic architecture diagram generation (PlantUML, Mermaid)
+- Backstage integration for component catalog
+- Interactive CLI mode to guide documentation
+- Support for GitHub composite Actions
+
+## Why open source?
+
+At Hoverkraft, we believe in **technical sovereignty**. Publishing CI Dokumentor as open source ensures that:
+
+- You can **audit** the source code and verify that no sensitive data is exfiltrated
+- You can **fork** the project and adapt it to your specific needs
+- You're **not dependent** on a commercial vendor who might change strategy
+- You can **contribute** and improve the tool for the entire community
+
+It's also a way to **give back to the community**: we use open-source tools daily (Kubernetes, Terraform, GitHub Actions…), so it's natural to contribute in return.
+
+## Conclusion: document once, benefit everywhere
+
+CI Dokumentor solves a simple but universal problem: **maintaining quality documentation for your CI/CD components without manual effort**.
+
+By automating this tedious task, you free time for what really matters:
+
+✅ **Improve team velocity**  
+✅ **Reduce onboarding friction**  
+✅ **Ensure pipeline quality**  
+✅ **Share best practices** via a centralized catalog
+
+The tool is free, open source, and ready to use. Test it on your projects and share your feedback.
+
+---
+
+**Want to test CI Dokumentor on your CI/CD components?**  
+Install the tool in 30 seconds and generate your first documentation.
+
+👉 [Complete documentation](https://hoverkraft-tech.github.io/ci-dokumentor)
+
+**Want to contribute to the project?**  
+Join the community on GitHub and participate in development.
+
+👉 [Contribute on GitHub](https://github.com/hoverkraft-tech/ci-dokumentor)
+
+**Need help industrializing your CI/CD pipelines?**  
+Hoverkraft supports Platform Engineering teams in implementing modern DevOps practices.
+
+👉 [Contact us](/contact)

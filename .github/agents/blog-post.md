@@ -231,6 +231,7 @@ Hoverkraft blog posts are heavily illustrated. For each post, you must generate 
   - Screenshots: `.png` (for UI clarity)
   - Photos: `.jpg` or `.webp`
 - **Naming convention**: Descriptive, kebab-case
+
   - ✅ `dora-metrics-dashboard.png`
   - ✅ `connector-architecture.webp`
   - ❌ `image1.png`, `screenshot.jpg`
@@ -238,6 +239,7 @@ Hoverkraft blog posts are heavily illustrated. For each post, you must generate 
 - **Color palette** (Hoverkraft brand - use these exact values):
 
   **Light mode palette (default):**
+
   - Primary: `#1d2026` - Dark navy/charcoal (backgrounds, headings, text on light backgrounds)
   - Secondary: `#1998ff` - Bright blue (highlights, links, interactive elements)
   - Accent: `#ff5a02` - Vibrant orange (CTAs, emphasis, key visual elements)
@@ -248,12 +250,14 @@ Hoverkraft blog posts are heavily illustrated. For each post, you must generate 
   - Text: `#506690` - Medium gray-blue (body text on light backgrounds)
 
   **Dark mode palette (for dark-themed images):**
+
   - Primary: `#1998ff` - Bright blue (becomes primary in dark mode)
   - Secondary: `#ff5a02` - Vibrant orange
   - Background: `#1d2026` - Dark navy (dark backgrounds)
   - Text: `#e5ecf6` - Light gray-blue (text on dark backgrounds)
 
 - **Typography in diagrams** (use Hoverkraft's actual fonts):
+
   - Headings: **Inter Variable**, sans-serif, bold (700-900 weight)
   - Body text: **Inter Variable**, sans-serif, regular (400-500 weight)
   - Code/Technical: **Roboto Mono**, monospace
@@ -499,17 +503,20 @@ Visual: Modern, professional matrix suitable for strategic discussions. Position
 After generating images with `text-to-image` tool:
 
 1. **Save with descriptive kebab-case names** matching the content:
+
    - ✅ `kubernetes-multicloud-architecture.webp`
    - ✅ `dora-metrics-dashboard.png`
    - ✅ `team-velocity-trend.webp`
    - ❌ `image1.png`, `diagram.webp`, `screenshot.jpg`
 
 2. **Use appropriate formats**:
+
    - **PNG** for preview images (required for c2pa metadata, social sharing compatibility)
    - **WebP** for diagrams, charts, and illustrations (better compression, 15-35 KB typical)
    - **PNG** for screenshots or images requiring maximum text clarity
 
 3. **Optimize file sizes** if needed:
+
    - Target ~2 MB for preview.png images (acceptable for social sharing)
    - Target 15-35 KB for WebP diagrams and charts
    - Target <200 KB for most other images
@@ -712,38 +719,45 @@ lang: fr
    > 🎯 Le scaling manuel est un anti-pattern. En 2025, vos applications doivent s'adapter automatiquement à la charge.
 
 2. **Introduction** (2-3 paragraphs)
+
    - Context: Why autoscaling matters in modern platforms
    - Problem: Common pitfalls (over-provisioning, manual intervention, cost waste)
    - Promise: What readers will learn
 
 3. **Section 1: Les fondamentaux de l'autoscaling Kubernetes**
+
    - HPA (Horizontal Pod Autoscaler)
    - VPA (Vertical Pod Autoscaler)
    - Cluster Autoscaler
    - When to use each
 
 4. **Section 2: Architecture de référence Hoverkraft**
+
    - [Image: scaling-architecture.webp]
    - Metrics collection with Prometheus
    - Custom metrics via adapters
    - Integration with GitOps
 
 5. **Section 3: Mise en pratique avec un exemple concret**
+
    - Code example: HPA manifest
    - Configuration walkthrough
    - Testing and validation
 
 6. **Section 4: Optimisation des coûts et des performances**
+
    - [Image: cost-optimization-chart.webp]
    - DORA metrics impact (lead time, deployment frequency)
    - Resource right-sizing strategies
 
 7. **Section 5: Pièges à éviter et bonnes pratiques**
+
    - Common mistakes
    - Production-ready configuration
    - Monitoring and alerting
 
 8. **Conclusion**
+
    - Recap key takeaways
    - Next steps for readers
 
