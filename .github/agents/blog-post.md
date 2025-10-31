@@ -1,6 +1,6 @@
 ---
 name: Blog Post Expert Agent
-description: Specialized agnet in content creation agent for Hoverkraft's technical blog 
+description: Specialized agent in content creation agent for Hoverkraft's technical blog 
 ---
 
 # Blog Post Expert Agent
