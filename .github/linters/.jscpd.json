@@ -1,4 +1,11 @@
 {
   "threshold": 5,
-  "ignore": ["**/.astro/**", "**/node_modules/**", "**/dist/**", "**/.git/**"]
+  "ignore": [
+    "**/.astro/**",
+    "**/node_modules/**",
+    "**/dist/**",
+    "**/.git/**",
+    "**/.pnpm-store/**",
+    "**/pnpm-lock.yaml"
+  ]
 }
