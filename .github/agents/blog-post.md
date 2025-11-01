@@ -218,8 +218,8 @@ Hoverkraft blog posts are heavily illustrated. For each post, you must generate 
 
 **Required images**:
 
-1. **preview.png** (1200×628px) – Social media preview, must include Hoverkraft branding
-2. **Hero image** – Top of post, visually summarizes the topic
+1. **preview.png** (1536×1024px recommended, will be cropped to 1200×628 for OpenGraph) – Social media preview, must include Hoverkraft branding
+2. **Hero image** (optional) – Top of post, visually summarizes the topic (can reuse preview or create dedicated hero)
 
 **Optional images**:
 3-12. Section diagrams, screenshots, charts, timelines
@@ -236,19 +236,30 @@ Hoverkraft blog posts are heavily illustrated. For each post, you must generate 
   - ✅ `connector-architecture.webp`
   - ❌ `image1.png`, `screenshot.jpg`
 
-- **Color palette** (Hoverkraft brand):
+- **Color palette** (Hoverkraft brand - use these exact values):
 
-  - Primary: Deep blue `#0A2540` (backgrounds, headings)
-  - Accent: Electric cyan `#00D9FF` (highlights, CTAs)
-  - Secondary: Warm gray `#6B7280` (text, borders)
-  - Success: Green `#10B981`
-  - Warning: Amber `#F59E0B`
+  **Light mode palette (default):**
+  - Primary: `#1d2026` - Dark navy/charcoal (backgrounds, headings, text on light backgrounds)
+  - Secondary: `#1998ff` - Bright blue (highlights, links, interactive elements)
+  - Accent: `#ff5a02` - Vibrant orange (CTAs, emphasis, key visual elements)
+  - Info: `#00b3ff` - Cyan (informational highlights, data visualizations)
+  - Success: `#00d663` - Vibrant green (success states, positive metrics)
+  - Warning: `#ffe671` - Soft yellow (warnings, caution areas)
+  - Danger: `#ff696d` - Coral red (errors, critical alerts)
+  - Text: `#506690` - Medium gray-blue (body text on light backgrounds)
 
-- **Typography in diagrams**:
+  **Dark mode palette (for dark-themed images):**
+  - Primary: `#1998ff` - Bright blue (becomes primary in dark mode)
+  - Secondary: `#ff5a02` - Vibrant orange
+  - Background: `#1d2026` - Dark navy (dark backgrounds)
+  - Text: `#e5ecf6` - Light gray-blue (text on dark backgrounds)
 
-  - Headings: Sans-serif, bold (Inter, Poppins, or similar)
-  - Body: Sans-serif, regular weight
-  - Code: Monospace (JetBrains Mono, Fira Code)
+- **Typography in diagrams** (use Hoverkraft's actual fonts):
+
+  - Headings: **Inter Variable**, sans-serif, bold (700-900 weight)
+  - Body text: **Inter Variable**, sans-serif, regular (400-500 weight)
+  - Code/Technical: **Roboto Mono**, monospace
+  - Keep font sizes large enough for legibility: minimum 14px for body, 18px+ for headings
 
 - **Composition principles**:
   - Clean, minimalist layouts
@@ -259,39 +270,294 @@ Hoverkraft blog posts are heavily illustrated. For each post, you must generate 
 
 **Image generation workflow**:
 
-You must generate all required images for blog posts. Use the MCP server `image-generator-gpt-image` with `text-to-image` tool for AI-driven visuals, and complement with available image generation tools and libraries to create:
+You have access to the `image-generator-gpt-image` MCP server with the `text-to-image` tool, which uses OpenAI's GPT-4 image generation (DALL-E 3). This is your **primary tool** for creating all blog post images. Use it strategically to generate professional, branded visuals that match Hoverkraft's design language.
 
-1. **Architecture diagrams**: Use diagramming tools to generate technical diagrams. Export to SVG or WebP format.
+### Image Generation Strategy by Type
 
-   - **Mermaid**: Best for simple flowcharts, sequence diagrams, and basic system flows
-   - **D2**: Preferred for complex multi-layer architectures and detailed system diagrams
-   - **Graphviz**: Use for dependency graphs and network topologies
+#### 1. **Social Preview Images (preview.png)** - ALWAYS REQUIRED
 
-2. **Charts and graphs**: Generate data visualizations using charting libraries. Export in WebP or PNG format.
+**Dimensions**: 1536×1024 pixels (3:2 ratio, will be cropped to 1200×628 for OpenGraph)
 
-   - **Chart.js/D3.js**: For interactive-style charts converted to static images
-   - **Python libraries (matplotlib, seaborn, plotly)**: For data-driven visualizations and statistical charts
+**Style**: Modern, tech-focused, with clear Hoverkraft branding
 
-3. **Social preview images**: Create branded preview images (1200×628px) with:
+**Required elements**:
+- Post title prominently displayed (use Inter Variable font, bold)
+- Hoverkraft brand colors (primary `#1d2026`, secondary `#1998ff`, accent `#ff5a02`)
+- Visual representation of the topic (abstract or literal)
+- Clean, professional composition with generous whitespace
+- High contrast for social media visibility
 
-   - Post title in clear, readable typography
-   - Hoverkraft branding (logo, colors)
-   - Visual element representing the topic
-   - High contrast for social media visibility
+**Prompt template for preview images**:
+```
+Create a modern social media preview image (1536×1024) for a blog post about [TOPIC]. 
+Style: Clean, professional tech branding with a minimalist design.
+Color palette: Dark navy (#1d2026) background with bright blue (#1998ff) and vibrant orange (#ff5a02) accents.
+Typography: Bold, large title text "[POST TITLE]" using a modern sans-serif font (Inter style).
+Visual elements: [Describe key visual - e.g., "abstract representation of Kubernetes architecture", "stylized developer workflow diagram", "modern cloud infrastructure illustration"].
+Layout: Centered composition with the title in the upper third, visual element in the middle/lower area.
+Ensure high contrast and professional appearance suitable for LinkedIn, Twitter, and blog sharing.
+No photographic elements - use abstract shapes, geometric patterns, or simplified technical diagrams.
+```
 
-4. **Infographics and timelines**: Use design tools or code-based generation to create visual content that follows Hoverkraft's design language.
+**Example prompts from existing posts**:
 
-**Image generation best practices**:
+For "Les 11 caractéristiques d'une plateforme de développement moderne":
+```
+Create a modern social media preview image (1536×1024) about platform engineering characteristics.
+Style: Professional tech branding, minimalist.
+Color palette: Dark navy (#1d2026) as primary, bright blue (#1998ff) and vibrant orange (#ff5a02) accents.
+Typography: Bold title "Les 11 caractéristiques d'une plateforme moderne" in Inter font, white or light text.
+Visual elements: Abstract geometric representation of a platform architecture with interconnected layers, using clean lines and shapes. Include subtle icons representing developers, infrastructure, and automation.
+Layout: Title at top, layered architecture visualization below, maintaining generous spacing.
+Modern, tech-forward aesthetic with high contrast for social sharing.
+```
 
-- Generate images programmatically when possible for consistency and reproducibility
-- Use the Hoverkraft color palette defined above (Deep blue #0A2540, Electric cyan #00D9FF, etc.)
-- Ensure all text in images is readable at the target size
-- Save images in the appropriate format:
-  - **SVG**: Vector diagrams that need to scale perfectly
-  - **WebP**: Photographic content, illustrations, and images under 500KB
-  - **PNG**: Screenshots with text requiring high clarity, or images with transparency
-- Optimize file sizes while maintaining visual quality (target <200KB for most images)
-- Include proper alt text when referencing images in the blog post
+For "Devcontainers et asdf: hoverkraft répare l'intégration indispensable":
+```
+Create a modern social media preview image (1536×1024) about devcontainers and development tooling.
+Style: Professional tech branding, clean and modern.
+Color palette: Dark navy (#1d2026) background, bright blue (#1998ff) and orange (#ff5a02) highlights.
+Typography: Bold title "Devcontainers et asdf" with "hoverkraft répare l'intégration" as subtitle, Inter font.
+Visual elements: Stylized container/box icon with code symbols, integrated development tools representation. Abstract, geometric style.
+Layout: Centered composition, title prominent at top third, container visualization in center.
+High contrast, professional appearance for developer-focused social sharing.
+```
+
+#### 2. **Architecture Diagrams & Technical Illustrations**
+
+**Format**: WebP (for web optimization) or PNG (for maximum quality)
+
+**Target size**: 15-35 KB for WebP diagrams (extremely optimized)
+
+**Style**: Clean, minimalist technical diagrams with clear information hierarchy
+
+**Prompt template for architecture diagrams**:
+```
+Create a technical architecture diagram showing [SYSTEM/CONCEPT].
+Style: Clean, minimalist technical diagram suitable for a professional blog post.
+Color scheme: White/light background with dark navy (#1d2026) for lines and text, bright blue (#1998ff) for primary components, orange (#ff5a02) for highlighted elements.
+Typography: Inter font for labels, Roboto Mono for technical/code elements, minimum 14px size.
+Layout: [Describe the structure - e.g., "horizontal flow from left to right", "layered architecture from bottom to top", "hub-and-spoke with central component"].
+Components: [List key components to show - e.g., "Kubernetes cluster", "CI/CD pipeline", "developer portal", "monitoring stack"].
+Visual style: Use simple geometric shapes (rounded rectangles for services, cylinders for databases, clouds for external services), clean connecting lines with arrows.
+Annotations: Include brief labels and minimal text descriptions.
+Professional, clear, and easy to understand at blog post width (max 1200px).
+```
+
+**Example prompts**:
+
+For connector architecture:
+```
+Create a technical architecture diagram showing Hoverkraft's connector-first architecture pattern.
+Style: Clean, minimalist, professional technical diagram.
+Colors: White background, dark navy (#1d2026) for structure, bright blue (#1998ff) for connectors, orange (#ff5a02) for platform core.
+Layout: Layered architecture - platform layer at bottom, connector layer in middle, services/tools layer at top.
+Components: Central platform box, multiple connector boxes (Kubernetes, Terraform, GitLab, Prometheus), external service icons above.
+Visual: Use rounded rectangles for components, bidirectional arrows for connections, subtle drop shadows for depth.
+Typography: Inter font for labels, minimum 16px.
+Diagram should clearly show modularity and interchangeability of connectors.
+```
+
+For CI/CD pipeline:
+```
+Create a CI/CD pipeline diagram illustrating a complete automated delivery workflow.
+Style: Horizontal flow diagram, clean and professional.
+Colors: Light background, dark navy (#1d2026) for pipeline stages, bright blue (#1998ff) for successful paths, green (#00d663) for checkpoints.
+Layout: Left to right flow - Git commit → Build → Test → Security Scan → Deploy → Monitor.
+Components: Rounded rectangle boxes for each stage, arrows showing flow, icons for Git, Docker, Kubernetes, testing tools.
+Visual: Modern, flat design with subtle gradients, clear stage separation.
+Typography: Inter font, stage names as headings, brief descriptions in smaller text.
+Include success/failure indicators at each stage.
+```
+
+#### 3. **Charts, Graphs & Data Visualizations**
+
+**Format**: WebP or PNG
+
+**Target size**: 15-25 KB for WebP charts
+
+**Style**: Clean, data-focused visualizations that emphasize key metrics
+
+**Prompt template for charts/graphs**:
+```
+Create a [CHART TYPE] visualization showing [DATA/METRIC].
+Style: Clean, modern data visualization suitable for a technical blog.
+Colors: Use Hoverkraft palette - bright blue (#1998ff) for primary data, orange (#ff5a02) for secondary data, green (#00d663) for positive trends, coral (#ff696d) for negative/critical data.
+Background: White or very light gray.
+Typography: Inter font for labels and legends, Roboto Mono for numerical values, axis labels clear and readable.
+Data representation: [Describe the data pattern - e.g., "upward trend over time", "comparison of 4 metrics", "before/after comparison"].
+Layout: Include clear axis labels, legend if needed, title or descriptive text.
+Professional appearance matching corporate dashboards, high contrast for readability.
+```
+
+**Examples**:
+
+DORA metrics dashboard:
+```
+Create a modern dashboard visualization showing the 4 DORA metrics.
+Style: Professional metrics dashboard with clean layout.
+Colors: White background, bright blue (#1998ff) for deployment frequency, orange (#ff5a02) for lead time, green (#00d663) for MTTR, navy (#1d2026) for change failure rate.
+Layout: 2×2 grid of metric cards, each showing metric name, current value, and small trend indicator.
+Visual: Card-based design, large numbers for values, subtle background gradients, small sparkline charts showing trends.
+Typography: Inter font, metric names in bold, values in extra large size with units, trend percentages in smaller text.
+Professional, clean, dashboard-style suitable for a blog post about metrics and observability.
+```
+
+Team velocity trend:
+```
+Create a line graph showing team velocity improvement over time (6 months).
+Style: Clean, professional line chart.
+Colors: Bright blue (#1998ff) line for velocity, green (#00d663) shaded area below line, dark navy (#1d2026) for axes and labels.
+Layout: Horizontal time axis (months), vertical velocity axis (story points or deployments), clear upward trend.
+Visual: Smooth line with data points marked, subtle grid lines, shaded area under curve for emphasis.
+Typography: Inter font for labels, axis titles clear and readable.
+Include title "Team Velocity: 6-Month Trend" and show values from baseline to improved state.
+```
+
+#### 4. **Infographics, Timelines & Conceptual Visuals**
+
+**Format**: WebP for web optimization
+
+**Target size**: 15-20 KB for WebP infographics
+
+**Style**: Clear, engaging visuals that explain concepts or processes
+
+**Prompt template for infographics**:
+```
+Create an infographic illustrating [CONCEPT/PROCESS].
+Style: Modern, clean infographic with clear visual hierarchy.
+Colors: Hoverkraft palette - dark navy (#1d2026) for headings, bright blue (#1998ff) for primary elements, orange (#ff5a02) for accents, structured progression using color.
+Layout: [Describe layout - e.g., "vertical timeline", "horizontal process flow", "circular diagram", "comparison matrix"].
+Elements: [List key elements - e.g., "5 steps", "3 comparison columns", "timeline events"].
+Typography: Inter font for headings (bold), body text readable at small sizes, minimal text per section.
+Visual style: Use icons, simple illustrations, connecting lines/arrows, numbered steps if sequential.
+Professional, engaging, and easy to scan quickly. Emphasize visual communication over text.
+```
+
+**Examples**:
+
+Hoverkraft journey timeline:
+```
+Create a horizontal timeline infographic showing Hoverkraft's platform engineering journey.
+Style: Modern timeline with milestone markers.
+Colors: Dark navy (#1d2026) timeline bar, bright blue (#1998ff) milestone circles, orange (#ff5a02) for current/future state.
+Layout: Horizontal timeline from left (past) to right (future), milestone points above timeline, brief descriptions below.
+Elements: 5-7 milestone markers with icons (rocket for launch, tools for features, graph for metrics adoption, target for goals).
+Typography: Inter font, milestone labels bold, dates and descriptions in smaller text.
+Visual: Clean line connecting milestones, growing or advancing visual metaphor (small to large icons, faded to vibrant colors).
+```
+
+Sovereignty matrix:
+```
+Create a 2×2 matrix diagram illustrating technical sovereignty dimensions.
+Style: Clean quadrant diagram with clear categories.
+Colors: White background, dark navy (#1d2026) for grid lines and labels, each quadrant colored differently using palette (blue, orange, green, cyan).
+Layout: 2×2 grid with labeled axes (e.g., "Vendor Control" horizontal, "Technical Freedom" vertical), each quadrant labeled with category name and brief description.
+Elements: 4 distinct quadrants, axis labels, quadrant titles, brief text in each quadrant explaining the sovereignty level.
+Typography: Inter font, quadrant titles bold and prominent, descriptions concise.
+Visual: Modern, professional matrix suitable for strategic discussions. Position some example tools/platforms in appropriate quadrants as dots or icons.
+```
+
+### GPT Image Generation Best Practices
+
+**DO:**
+- ✅ Use detailed, specific prompts that include exact Hoverkraft brand colors (hex codes)
+- ✅ Specify target dimensions (1536×1024 for preview, flexible for others)
+- ✅ Request "professional", "clean", "minimalist", "modern" styling explicitly
+- ✅ Name specific fonts (Inter Variable, Roboto Mono) even though AI interprets stylistically
+- ✅ Describe layout clearly (centered, left-to-right flow, layered, grid-based, etc.)
+- ✅ Request abstract/geometric representations for technical concepts rather than photographic
+- ✅ Ask for high contrast and clear typography for readability
+- ✅ Iterate on prompts if first generation doesn't match Hoverkraft style - refine and regenerate
+- ✅ Generate multiple variations for preview images and pick the best one
+
+**DON'T:**
+- ❌ Use vague prompts like "create an image about Kubernetes" - be specific about style, colors, layout
+- ❌ Request photographic or realistic imagery - Hoverkraft style is abstract, geometric, and modern
+- ❌ Forget to specify dimensions - always include target size in prompt
+- ❌ Use incorrect brand colors - double-check hex codes before generating
+- ❌ Generate images with too much text - AI-generated text can be fuzzy; keep it minimal
+- ❌ Create overly complex compositions - simpler is better for clarity and file size
+- ❌ Accept first generation if it doesn't match style - regenerate with refined prompts
+- ❌ Use generic stock photo aesthetic - Hoverkraft images are custom, branded, and distinctive
+
+### Saving Generated Images
+
+After generating images with `text-to-image` tool:
+
+1. **Save with descriptive kebab-case names** matching the content:
+   - ✅ `kubernetes-multicloud-architecture.webp`
+   - ✅ `dora-metrics-dashboard.png`
+   - ✅ `team-velocity-trend.webp`
+   - ❌ `image1.png`, `diagram.webp`, `screenshot.jpg`
+
+2. **Use appropriate formats**:
+   - **PNG** for preview images (required for c2pa metadata, social sharing compatibility)
+   - **WebP** for diagrams, charts, and illustrations (better compression, 15-35 KB typical)
+   - **PNG** for screenshots or images requiring maximum text clarity
+
+3. **Optimize file sizes** if needed:
+   - Target ~2 MB for preview.png images (acceptable for social sharing)
+   - Target 15-35 KB for WebP diagrams and charts
+   - Target <200 KB for most other images
+   - Use image optimization tools if generated files are too large
+
+4. **Organize in post-specific directories**:
+   ```
+   /application/src/assets/images/blog/{post-slug}/
+     preview.png                    # Always required
+     architecture-diagram.webp      # Technical diagrams
+     metrics-dashboard.png          # Charts/dashboards
+     timeline-infographic.webp      # Process/timeline visuals
+     [other-descriptive-name].webp  # Additional images
+   ```
+
+### Quality Checklist for Generated Images
+
+Before finalizing any generated image, verify:
+
+- [ ] Colors match Hoverkraft brand palette (primary `#1d2026`, secondary `#1998ff`, accent `#ff5a02`)
+- [ ] Typography is clear and readable (even when scaled down)
+- [ ] Layout is clean and professional with adequate whitespace
+- [ ] Image serves a clear purpose and adds value to the blog post
+- [ ] File size is optimized (preview <3 MB, diagrams <50 KB for WebP)
+- [ ] Filename is descriptive and follows kebab-case convention
+- [ ] Image has corresponding alt text prepared for MDX import
+- [ ] Style is consistent with other Hoverkraft blog images (modern, minimalist, abstract/geometric)
+
+### Example Complete Workflow
+
+For a blog post about "Kubernetes autoscaling in production":
+
+1. **Generate preview.png** (1536×1024):
+   ```
+   Prompt: Create a modern social media preview (1536×1024) for "Comment implémenter l'autoscaling Kubernetes en production".
+   Colors: Dark navy (#1d2026) background, bright blue (#1998ff) and orange (#ff5a02) accents.
+   Title: "Kubernetes Autoscaling en Production" in bold Inter font, white text.
+   Visual: Abstract representation of Kubernetes pods scaling horizontally with arrows, geometric shapes showing growth/expansion.
+   Style: Professional, clean, tech-focused. High contrast for social sharing.
+   ```
+
+2. **Generate architecture diagram** (kubernetes-autoscaling-architecture.webp):
+   ```
+   Prompt: Technical architecture diagram showing Kubernetes autoscaling components (HPA, VPA, Cluster Autoscaler).
+   Colors: White background, navy (#1d2026) for structure, blue (#1998ff) for autoscalers, orange (#ff5a02) for scaling actions.
+   Layout: Layered - Cluster Autoscaler at bottom, HPA/VPA in middle, pods at top. Show scaling arrows.
+   Style: Clean technical diagram, rounded rectangles for components, Inter font labels.
+   Professional, minimalist, clear information hierarchy.
+   ```
+
+3. **Generate metrics chart** (autoscaling-metrics-trend.webp):
+   ```
+   Prompt: Line graph showing pod count autoscaling over time in response to load.
+   Colors: Blue (#1998ff) for pod count, green (#00d663) for CPU threshold, orange (#ff5a02) for scaling events.
+   Layout: Time on X-axis, pod count on Y-axis, show reactive scaling pattern.
+   Style: Clean chart with clear labels, Inter font, professional dashboard aesthetic.
+   ```
+
+4. Save all images to `/application/src/assets/images/blog/kubernetes-autoscaling-production/`
+
+5. Import and reference in blog post MDX with descriptive alt text
 
 **File structure**:
 
@@ -305,11 +571,13 @@ Example structure for a Kubernetes post:
 
 ```
 /application/src/assets/images/blog/autoscaling-kubernetes-hoverkraft/
-  preview.png                    # 1200×628 social preview
-  architecture-diagram.webp      # Architecture illustration
-  metrics-chart.webp             # Performance graph
-  timeline-infographic.webp      # Implementation timeline
+  preview.png                    # 1536×1024 social preview (required)
+  architecture-diagram.webp      # Architecture illustration (~20-30 KB)
+  metrics-chart.webp             # Performance graph (~15-25 KB)
+  timeline-infographic.webp      # Implementation timeline (~15-20 KB)
 ```
+
+**Note**: Existing posts use mostly WebP format for diagrams/charts (15-35 KB typical) and PNG for preview images and screenshots (400 KB - 2.3 MB typical).
 
 ### 7. Import and Reference Images
 
