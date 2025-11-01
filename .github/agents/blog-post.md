@@ -231,7 +231,6 @@ Hoverkraft blog posts are heavily illustrated. For each post, you must generate 
   - Screenshots: `.png` (for UI clarity)
   - Photos: `.jpg` or `.webp`
 - **Naming convention**: Descriptive, kebab-case
-
   - ✅ `dora-metrics-dashboard.png`
   - ✅ `connector-architecture.webp`
   - ❌ `image1.png`, `screenshot.jpg`
@@ -255,7 +254,6 @@ Hoverkraft blog posts are heavily illustrated. For each post, you must generate 
   - Text: `#e5ecf6` - Light gray-blue (text on dark backgrounds)
 
 - **Typography in diagrams** (use Hoverkraft's actual fonts):
-
   - Headings: **Inter Variable**, sans-serif, bold (700-900 weight)
   - Body text: **Inter Variable**, sans-serif, regular (400-500 weight)
   - Code/Technical: **Roboto Mono**, monospace
@@ -281,6 +279,7 @@ You have access to the `image-generator-gpt-image` MCP server with the `text-to-
 **Style**: Modern, tech-focused, with clear Hoverkraft branding
 
 **Required elements**:
+
 - Post title prominently displayed (use Inter Variable font, bold)
 - Hoverkraft brand colors (primary `#1d2026`, secondary `#1998ff`, accent `#ff5a02`)
 - Visual representation of the topic (abstract or literal)
@@ -288,8 +287,9 @@ You have access to the `image-generator-gpt-image` MCP server with the `text-to-
 - High contrast for social media visibility
 
 **Prompt template for preview images**:
-```
-Create a modern social media preview image (1536×1024) for a blog post about [TOPIC]. 
+
+```text
+Create a modern social media preview image (1536×1024) for a blog post about [TOPIC].
 Style: Clean, professional tech branding with a minimalist design.
 Color palette: Dark navy (#1d2026) background with bright blue (#1998ff) and vibrant orange (#ff5a02) accents.
 Typography: Bold, large title text "[POST TITLE]" using a modern sans-serif font (Inter style).
@@ -302,7 +302,8 @@ No photographic elements - use abstract shapes, geometric patterns, or simplifie
 **Example prompts from existing posts**:
 
 For "Les 11 caractéristiques d'une plateforme de développement moderne":
-```
+
+```text
 Create a modern social media preview image (1536×1024) about platform engineering characteristics.
 Style: Professional tech branding, minimalist.
 Color palette: Dark navy (#1d2026) as primary, bright blue (#1998ff) and vibrant orange (#ff5a02) accents.
@@ -313,7 +314,8 @@ Modern, tech-forward aesthetic with high contrast for social sharing.
 ```
 
 For "Devcontainers et asdf: hoverkraft répare l'intégration indispensable":
-```
+
+```text
 Create a modern social media preview image (1536×1024) about devcontainers and development tooling.
 Style: Professional tech branding, clean and modern.
 Color palette: Dark navy (#1d2026) background, bright blue (#1998ff) and orange (#ff5a02) highlights.
@@ -332,7 +334,8 @@ High contrast, professional appearance for developer-focused social sharing.
 **Style**: Clean, minimalist technical diagrams with clear information hierarchy
 
 **Prompt template for architecture diagrams**:
-```
+
+```text
 Create a technical architecture diagram showing [SYSTEM/CONCEPT].
 Style: Clean, minimalist technical diagram suitable for a professional blog post.
 Color scheme: White/light background with dark navy (#1d2026) for lines and text, bright blue (#1998ff) for primary components, orange (#ff5a02) for highlighted elements.
@@ -347,7 +350,8 @@ Professional, clear, and easy to understand at blog post width (max 1200px).
 **Example prompts**:
 
 For connector architecture:
-```
+
+```text
 Create a technical architecture diagram showing Hoverkraft's connector-first architecture pattern.
 Style: Clean, minimalist, professional technical diagram.
 Colors: White background, dark navy (#1d2026) for structure, bright blue (#1998ff) for connectors, orange (#ff5a02) for platform core.
@@ -359,7 +363,8 @@ Diagram should clearly show modularity and interchangeability of connectors.
 ```
 
 For CI/CD pipeline:
-```
+
+```text
 Create a CI/CD pipeline diagram illustrating a complete automated delivery workflow.
 Style: Horizontal flow diagram, clean and professional.
 Colors: Light background, dark navy (#1d2026) for pipeline stages, bright blue (#1998ff) for successful paths, green (#00d663) for checkpoints.
@@ -379,7 +384,8 @@ Include success/failure indicators at each stage.
 **Style**: Clean, data-focused visualizations that emphasize key metrics
 
 **Prompt template for charts/graphs**:
-```
+
+```text
 Create a [CHART TYPE] visualization showing [DATA/METRIC].
 Style: Clean, modern data visualization suitable for a technical blog.
 Colors: Use Hoverkraft palette - bright blue (#1998ff) for primary data, orange (#ff5a02) for secondary data, green (#00d663) for positive trends, coral (#ff696d) for negative/critical data.
@@ -393,7 +399,8 @@ Professional appearance matching corporate dashboards, high contrast for readabi
 **Examples**:
 
 DORA metrics dashboard:
-```
+
+```text
 Create a modern dashboard visualization showing the 4 DORA metrics.
 Style: Professional metrics dashboard with clean layout.
 Colors: White background, bright blue (#1998ff) for deployment frequency, orange (#ff5a02) for lead time, green (#00d663) for MTTR, navy (#1d2026) for change failure rate.
@@ -404,7 +411,8 @@ Professional, clean, dashboard-style suitable for a blog post about metrics and 
 ```
 
 Team velocity trend:
-```
+
+```text
 Create a line graph showing team velocity improvement over time (6 months).
 Style: Clean, professional line chart.
 Colors: Bright blue (#1998ff) line for velocity, green (#00d663) shaded area below line, dark navy (#1d2026) for axes and labels.
@@ -423,7 +431,8 @@ Include title "Team Velocity: 6-Month Trend" and show values from baseline to im
 **Style**: Clear, engaging visuals that explain concepts or processes
 
 **Prompt template for infographics**:
-```
+
+```text
 Create an infographic illustrating [CONCEPT/PROCESS].
 Style: Modern, clean infographic with clear visual hierarchy.
 Colors: Hoverkraft palette - dark navy (#1d2026) for headings, bright blue (#1998ff) for primary elements, orange (#ff5a02) for accents, structured progression using color.
@@ -437,7 +446,8 @@ Professional, engaging, and easy to scan quickly. Emphasize visual communication
 **Examples**:
 
 Hoverkraft journey timeline:
-```
+
+```text
 Create a horizontal timeline infographic showing Hoverkraft's platform engineering journey.
 Style: Modern timeline with milestone markers.
 Colors: Dark navy (#1d2026) timeline bar, bright blue (#1998ff) milestone circles, orange (#ff5a02) for current/future state.
@@ -448,7 +458,8 @@ Visual: Clean line connecting milestones, growing or advancing visual metaphor (
 ```
 
 Sovereignty matrix:
-```
+
+```text
 Create a 2×2 matrix diagram illustrating technical sovereignty dimensions.
 Style: Clean quadrant diagram with clear categories.
 Colors: White background, dark navy (#1d2026) for grid lines and labels, each quadrant colored differently using palette (blue, orange, green, cyan).
@@ -461,6 +472,7 @@ Visual: Modern, professional matrix suitable for strategic discussions. Position
 ### GPT Image Generation Best Practices
 
 **DO:**
+
 - ✅ Use detailed, specific prompts that include exact Hoverkraft brand colors (hex codes)
 - ✅ Specify target dimensions (1536×1024 for preview, flexible for others)
 - ✅ Request "professional", "clean", "minimalist", "modern" styling explicitly
@@ -472,6 +484,7 @@ Visual: Modern, professional matrix suitable for strategic discussions. Position
 - ✅ Generate multiple variations for preview images and pick the best one
 
 **DON'T:**
+
 - ❌ Use vague prompts like "create an image about Kubernetes" - be specific about style, colors, layout
 - ❌ Request photographic or realistic imagery - Hoverkraft style is abstract, geometric, and modern
 - ❌ Forget to specify dimensions - always include target size in prompt
@@ -503,7 +516,7 @@ After generating images with `text-to-image` tool:
    - Use image optimization tools if generated files are too large
 
 4. **Organize in post-specific directories**:
-   ```
+   ```bash
    /application/src/assets/images/blog/{post-slug}/
      preview.png                    # Always required
      architecture-diagram.webp      # Technical diagrams
@@ -530,7 +543,8 @@ Before finalizing any generated image, verify:
 For a blog post about "Kubernetes autoscaling in production":
 
 1. **Generate preview.png** (1536×1024):
-   ```
+
+   ```text
    Prompt: Create a modern social media preview (1536×1024) for "Comment implémenter l'autoscaling Kubernetes en production".
    Colors: Dark navy (#1d2026) background, bright blue (#1998ff) and orange (#ff5a02) accents.
    Title: "Kubernetes Autoscaling en Production" in bold Inter font, white text.
@@ -539,7 +553,8 @@ For a blog post about "Kubernetes autoscaling in production":
    ```
 
 2. **Generate architecture diagram** (kubernetes-autoscaling-architecture.webp):
-   ```
+
+   ```text
    Prompt: Technical architecture diagram showing Kubernetes autoscaling components (HPA, VPA, Cluster Autoscaler).
    Colors: White background, navy (#1d2026) for structure, blue (#1998ff) for autoscalers, orange (#ff5a02) for scaling actions.
    Layout: Layered - Cluster Autoscaler at bottom, HPA/VPA in middle, pods at top. Show scaling arrows.
@@ -548,7 +563,8 @@ For a blog post about "Kubernetes autoscaling in production":
    ```
 
 3. **Generate metrics chart** (autoscaling-metrics-trend.webp):
-   ```
+
+   ```text
    Prompt: Line graph showing pod count autoscaling over time in response to load.
    Colors: Blue (#1998ff) for pod count, green (#00d663) for CPU threshold, orange (#ff5a02) for scaling events.
    Layout: Time on X-axis, pod count on Y-axis, show reactive scaling pattern.
@@ -563,13 +579,13 @@ For a blog post about "Kubernetes autoscaling in production":
 
 Save generated images in:
 
-```
+```text
 /application/src/assets/images/blog/{post-slug}/
 ```
 
 Example structure for a Kubernetes post:
 
-```
+```text
 /application/src/assets/images/blog/autoscaling-kubernetes-hoverkraft/
   preview.png                    # 1536×1024 social preview (required)
   architecture-diagram.webp      # Architecture illustration (~20-30 KB)
@@ -648,7 +664,7 @@ Before finalizing a blog post, verify:
 
 For a post about Kubernetes scaling:
 
-```
+```text
 /application/src/data/post/
   autoscaling-kubernetes-hoverkraft.mdx       # French version
   kubernetes-autoscaling-hoverkraft.mdx       # English version
@@ -696,45 +712,38 @@ lang: fr
    > 🎯 Le scaling manuel est un anti-pattern. En 2025, vos applications doivent s'adapter automatiquement à la charge.
 
 2. **Introduction** (2-3 paragraphs)
-
    - Context: Why autoscaling matters in modern platforms
    - Problem: Common pitfalls (over-provisioning, manual intervention, cost waste)
    - Promise: What readers will learn
 
 3. **Section 1: Les fondamentaux de l'autoscaling Kubernetes**
-
    - HPA (Horizontal Pod Autoscaler)
    - VPA (Vertical Pod Autoscaler)
    - Cluster Autoscaler
    - When to use each
 
 4. **Section 2: Architecture de référence Hoverkraft**
-
    - [Image: scaling-architecture.webp]
    - Metrics collection with Prometheus
    - Custom metrics via adapters
    - Integration with GitOps
 
 5. **Section 3: Mise en pratique avec un exemple concret**
-
    - Code example: HPA manifest
    - Configuration walkthrough
    - Testing and validation
 
 6. **Section 4: Optimisation des coûts et des performances**
-
    - [Image: cost-optimization-chart.webp]
    - DORA metrics impact (lead time, deployment frequency)
    - Resource right-sizing strategies
 
 7. **Section 5: Pièges à éviter et bonnes pratiques**
-
    - Common mistakes
    - Production-ready configuration
    - Monitoring and alerting
 
 8. **Conclusion**
-
    - Recap key takeaways
    - Next steps for readers
 
@@ -751,7 +760,7 @@ lang: fr
 5. **No metrics**: Hoverkraft is evidence-driven; include data, benchmarks, or DORA metrics
 6. **Jargon overload**: Explain concepts; don't assume everyone knows HPA, SPACE, or SBOM
 7. **Ignoring mobile**: Long code blocks or wide images can break mobile layouts; keep readable
-8. **Copy-paste from docs**: Blog posts should teach and inspire, not just document APIs
+8. **Copypaste from docs**: Blog posts should teach and inspire, not just document APIs
 
 ## Resources and References
 
