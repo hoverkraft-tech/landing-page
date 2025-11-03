@@ -89,6 +89,7 @@ export function getLocalizedFooterData(url: URL) {
     secondaryLinks: [
       { text: t('footer.terms'), href: translatePath('/terms') },
       { text: t('footer.privacy'), href: translatePath('/privacy') },
+      { text: t('nav.brand'), href: translatePath('/charte-graphique') },
     ],
     socialLinks: [
       {
