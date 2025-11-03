@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Branding Data Manifest",
+  "description": "Contract interface between hoverkraft-tech/branding and hoverkraft-tech/landing-page repositories",
+  "type": "object",
+  "required": ["version", "timestamp", "commit", "colors", "logos"],
+  "properties": {
+    "version": {
+      "type": "string",
+      "description": "Semantic version of the branding data (e.g., 1.0.0)",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO 8601 timestamp when the branding data was generated",
+      "format": "date-time"
+    },
+    "commit": {
+      "type": "string",
+      "description": "Git commit SHA of the branding repository",
+      "pattern": "^[0-9a-f]{40}$"
+    },
+    "colors": {
+      "type": "object",
+      "description": "Brand color definitions",
+      "required": ["file", "count"],
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "Path to colors.css file in the artifact",
+          "example": "colors.css"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Number of color tokens defined",
+          "minimum": 0
+        }
+      }
+    },
+    "logos": {
+      "type": "object",
+      "description": "Brand logo assets",
+      "required": ["directory", "files"],
+      "properties": {
+        "directory": {
+          "type": "string",
+          "description": "Directory path containing logo files in the artifact",
+          "example": "logo"
+        },
+        "files": {
+          "type": "array",
+          "description": "List of logo files with metadata",
+          "items": {
+            "type": "object",
+            "required": ["name", "path", "format", "size"],
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "Descriptive name of the logo variant",
+                "example": "Primary Logo"
+              },
+              "path": {
+                "type": "string",
+                "description": "Relative path to the logo file",
+                "example": "logo/primary.svg"
+              },
+              "format": {
+                "type": "string",
+                "description": "File format",
+                "enum": ["svg", "png", "pdf", "jpg", "jpeg"]
+              },
+              "size": {
+                "type": "integer",
+                "description": "File size in bytes",
+                "minimum": 0
+              },
+              "usage": {
+                "type": "string",
+                "description": "Usage guidelines for this logo variant",
+                "example": "Main logo for light backgrounds"
+              }
+            }
+          }
+        }
+      }
+    },
+    "mascot": {
+      "type": "object",
+      "description": "Brand mascot asset (optional)",
+      "properties": {
+        "file": {
+          "type": "string",
+          "description": "Path to mascot file in the artifact",
+          "example": "mascot/mascot.png"
+        },
+        "size": {
+          "type": "integer",
+          "description": "File size in bytes",
+          "minimum": 0
+        }
+      }
+    },
+    "fonts": {
+      "type": "object",
+      "description": "Typography information (optional)",
+      "properties": {
+        "primary": {
+          "type": "object",
+          "properties": {
+            "family": {
+              "type": "string",
+              "example": "Inter Variable"
+            },
+            "weights": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            },
+            "fallback": {
+              "type": "string",
+              "example": "system-ui, sans-serif"
+            }
+          }
+        },
+        "monospace": {
+          "type": "object",
+          "properties": {
+            "family": {
+              "type": "string",
+              "example": "Roboto Mono"
+            },
+            "weights": {
+              "type": "array",
+              "items": {
+                "type": "integer"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

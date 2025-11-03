@@ -1,0 +1,219 @@
+name: Update Branding Assets
+
+# This workflow is triggered by the branding repository via repository dispatch
+# when new branding data is available. It receives a manifest and artifact ID,
+# downloads the assets, and updates the landing page accordingly.
+
+on:
+  repository_dispatch:
+    types: [branding-update]
+  workflow_dispatch:
+    inputs:
+      artifact-id:
+        description: 'GitHub artifact ID containing branding assets'
+        required: true
+        type: string
+      manifest:
+        description: 'JSON manifest describing the branding data'
+        required: true
+        type: string
+
+permissions:
+  contents: write
+  actions: read
+
+jobs:
+  update-branding:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Parse manifest from dispatch
+        id: parse-manifest
+        run: |
+          # Get manifest from repository dispatch payload or workflow input
+          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
+            MANIFEST='${{ toJson(github.event.client_payload.manifest) }}'
+            ARTIFACT_ID='${{ github.event.client_payload.artifact_id }}'
+          else
+            MANIFEST='${{ inputs.manifest }}'
+            ARTIFACT_ID='${{ inputs.artifact-id }}'
+          fi
+          
+          echo "manifest=$MANIFEST" >> $GITHUB_OUTPUT
+          echo "artifact_id=$ARTIFACT_ID" >> $GITHUB_OUTPUT
+          
+          # Validate manifest has required fields
+          VERSION=$(echo "$MANIFEST" | jq -r '.version')
+          COMMIT=$(echo "$MANIFEST" | jq -r '.commit')
+          
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+          echo "commit=$COMMIT" >> $GITHUB_OUTPUT
+          
+          echo "📦 Branding update received:"
+          echo "  Version: $VERSION"
+          echo "  Commit: $COMMIT"
+          echo "  Artifact ID: $ARTIFACT_ID"
+
+      - name: Validate manifest against schema
+        run: |
+          # Install ajv-cli for JSON schema validation
+          npm install -g ajv-cli
+          
+          # Validate the manifest
+          echo '${{ steps.parse-manifest.outputs.manifest }}' | \
+            ajv validate -s .github/schemas/branding-manifest.schema.json -d -
+          
+          echo "✓ Manifest validation passed"
+
+      - name: Download branding artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: branding-assets-${{ steps.parse-manifest.outputs.artifact_id }}
+          path: /tmp/branding-assets
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          repository: hoverkraft-tech/branding
+          run-id: ${{ steps.parse-manifest.outputs.artifact_id }}
+
+      - name: Extract and organize assets
+        run: |
+          MANIFEST='${{ steps.parse-manifest.outputs.manifest }}'
+          
+          # Create target directories
+          mkdir -p application/src/data/brand
+          mkdir -p application/public/brand/logos
+          mkdir -p application/public/brand/mascot
+          mkdir -p application/public/brand/downloads
+          
+          # Copy colors.css
+          COLORS_FILE=$(echo "$MANIFEST" | jq -r '.colors.file')
+          if [ -f "/tmp/branding-assets/$COLORS_FILE" ]; then
+            cp "/tmp/branding-assets/$COLORS_FILE" application/src/data/brand/colors.css
+            echo "✓ Copied colors.css"
+          fi
+          
+          # Copy logos
+          LOGOS_DIR=$(echo "$MANIFEST" | jq -r '.logos.directory')
+          if [ -d "/tmp/branding-assets/$LOGOS_DIR" ]; then
+            cp -r "/tmp/branding-assets/$LOGOS_DIR"/* application/public/brand/logos/
+            echo "✓ Copied logos"
+          fi
+          
+          # Copy mascot (if present)
+          MASCOT_FILE=$(echo "$MANIFEST" | jq -r '.mascot.file // empty')
+          if [ -n "$MASCOT_FILE" ] && [ -f "/tmp/branding-assets/$MASCOT_FILE" ]; then
+            cp "/tmp/branding-assets/$MASCOT_FILE" application/public/brand/mascot/
+            echo "✓ Copied mascot"
+          fi
+          
+          # Save manifest for reference
+          echo "$MANIFEST" > application/src/data/brand/manifest.json
+          echo "✓ Saved manifest"
+
+      - name: Create logo pack
+        uses: ./.github/actions/create-logo-pack
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: 'application/package-lock.json'
+
+      - name: Install dependencies
+        run: |
+          cd application
+          npm ci
+
+      - name: Parse brand colors
+        uses: ./.github/actions/parse-brand-colors
+        with:
+          colors-file: 'application/src/data/brand/colors.css'
+          output-file: 'application/src/data/brand/generated-colors.ts'
+
+      - name: Generate brand guidelines PDF
+        uses: ./.github/actions/generate-brand-pdf
+        with:
+          page-url: 'http://localhost:4321/charte-graphique'
+          output-file: 'application/public/brand/downloads/hoverkraft-brand-guidelines.pdf'
+          working-directory: 'application'
+
+      - name: Validate updated assets
+        run: |
+          echo "Validating branding assets..."
+          
+          MISSING_ASSETS=()
+          
+          # Check for colors.css
+          if [ ! -f "application/src/data/brand/colors.css" ]; then
+            MISSING_ASSETS+=("colors.css")
+          fi
+          
+          # Check for generated colors
+          if [ ! -f "application/src/data/brand/generated-colors.ts" ]; then
+            MISSING_ASSETS+=("generated-colors.ts")
+          fi
+          
+          # Check for at least one logo
+          if [ ! -d "application/public/brand/logos" ] || [ -z "$(ls -A application/public/brand/logos)" ]; then
+            MISSING_ASSETS+=("logos")
+          fi
+          
+          # Check for logo pack
+          if [ ! -f "application/public/brand/downloads/hoverkraft-logos.zip" ]; then
+            MISSING_ASSETS+=("hoverkraft-logos.zip")
+          fi
+          
+          # Check for generated PDF
+          if [ ! -f "application/public/brand/downloads/hoverkraft-brand-guidelines.pdf" ]; then
+            MISSING_ASSETS+=("hoverkraft-brand-guidelines.pdf")
+          fi
+          
+          if [ ${#MISSING_ASSETS[@]} -gt 0 ]; then
+            echo "::error::Missing required branding assets: ${MISSING_ASSETS[*]}"
+            exit 1
+          fi
+          
+          echo "✓ All required branding assets are present"
+
+      - name: Commit updated assets
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          
+          git add application/public/brand/
+          git add application/src/data/brand/manifest.json
+          git add application/src/data/brand/generated-colors.ts
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update branding assets to version ${{ steps.parse-manifest.outputs.version }}
+
+Branding repository commit: ${{ steps.parse-manifest.outputs.commit }}
+Artifact ID: ${{ steps.parse-manifest.outputs.artifact_id }}"
+            
+            git push
+            echo "✓ Changes committed and pushed"
+          fi
+
+      - name: Create summary
+        run: |
+          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
+          ## Branding Assets Updated ✅
+          
+          **Version:** ${{ steps.parse-manifest.outputs.version }}
+          **Branding Commit:** `${{ steps.parse-manifest.outputs.commit }}`
+          **Artifact ID:** ${{ steps.parse-manifest.outputs.artifact_id }}
+          
+          ### Assets Updated
+          - ✓ Brand colors (parsed from colors.css)
+          - ✓ Logo files
+          - ✓ Logo pack (ZIP)
+          - ✓ Brand guidelines PDF (generated)
+          - ✓ Mascot image
+          
+          ### Next Steps
+          The brand guidelines pages will be updated with the new assets on the next deployment.
+          EOF
