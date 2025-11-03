@@ -62,28 +62,42 @@ jobs:
           git clone --depth 1 --branch ${{ inputs.branding-ref }} \
             https://github.com/${{ inputs.branding-repo }}.git "$TEMP_DIR"
 
-          # Create target directory if it doesn't exist
+          # Create target directories
           mkdir -p ${{ inputs.target-dir }}
+          mkdir -p application/public/brand/logos
+          mkdir -p application/public/brand/downloads
 
-          # Copy assets (adjust paths based on branding repo structure)
-          # Example structure - update when branding repo is created:
-          # - tokens.json (color, typography, spacing tokens)
-          # - assets/ (logos, icons)
-          # - README.md (usage guidelines)
-
-          if [ -d "$TEMP_DIR/tokens" ]; then
-            cp -r "$TEMP_DIR/tokens/"* ${{ inputs.target-dir }}/
-            echo "✓ Copied branding tokens"
+          # Fetch colors.css (brand colors)
+          if [ -f "$TEMP_DIR/colors.css" ]; then
+            cp "$TEMP_DIR/colors.css" ${{ inputs.target-dir }}/colors.css
+            echo "✓ Copied brand colors (colors.css)"
+          else
+            echo "::warning::colors.css not found in branding repository"
           fi
 
-          if [ -d "$TEMP_DIR/assets" ]; then
-            cp -r "$TEMP_DIR/assets" application/src/assets/brand/
-            echo "✓ Copied branding assets"
+          # Fetch logos from logo/ directory
+          if [ -d "$TEMP_DIR/logo" ]; then
+            cp -r "$TEMP_DIR/logo/"* application/public/brand/logos/
+            echo "✓ Copied brand logos"
+          else
+            echo "::warning::logo/ directory not found in branding repository"
           fi
 
-          if [ -f "$TEMP_DIR/README.md" ]; then
-            cp "$TEMP_DIR/README.md" ${{ inputs.target-dir }}/BRANDING_README.md
-            echo "✓ Copied branding documentation"
+          # Fetch mascot
+          if [ -f "$TEMP_DIR/mascot/mascot.png" ]; then
+            mkdir -p application/public/brand/mascot
+            cp "$TEMP_DIR/mascot/mascot.png" application/public/brand/mascot/
+            echo "✓ Copied mascot"
+          else
+            echo "::warning::mascot/mascot.png not found in branding repository"
+          fi
+
+          # Fetch branding guideline PDF
+          if [ -f "$TEMP_DIR/branding-guideline-pdf" ]; then
+            cp "$TEMP_DIR/branding-guideline-pdf" application/public/brand/downloads/hoverkraft-brand-guidelines.pdf
+            echo "✓ Copied branding guideline PDF"
+          else
+            echo "::warning::branding-guideline-pdf not found in branding repository"
           fi
 
           # Clean up
@@ -91,25 +105,71 @@ jobs:
 
           echo "Branding assets fetched successfully from ${{ inputs.branding-ref }}"
 
+      - name: Create logo pack
+        if: steps.check-repo.outputs.exists == 'true'
+        run: |
+          echo "Creating logo pack ZIP..."
+          
+          # Create logo pack from fetched logos
+          if [ -d "application/public/brand/logos" ] && [ "$(ls -A application/public/brand/logos)" ]; then
+            cd application/public/brand/logos
+            zip -r ../downloads/hoverkraft-logos.zip . -i "*.svg" "*.png" "*.pdf"
+            cd -
+            echo "✓ Created logo pack: hoverkraft-logos.zip"
+            
+            # List contents for verification
+            echo "Logo pack contents:"
+            unzip -l application/public/brand/downloads/hoverkraft-logos.zip
+          else
+            echo "::warning::No logos found to create logo pack"
+          fi
+
+      - name: Setup Node.js
+        if: steps.check-repo.outputs.exists == 'true'
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Parse brand colors
+        if: steps.check-repo.outputs.exists == 'true'
+        run: |
+          echo "Parsing brand colors from colors.css..."
+          cd application
+          if [ -f "src/data/brand/colors.css" ]; then
+            node scripts/parse-brand-colors.mjs
+          else
+            echo "::warning::colors.css not found, using fallback colors"
+          fi
+
       - name: Validate assets
         if: steps.check-repo.outputs.exists == 'true'
         run: |
           echo "Validating branding assets..."
 
-          # Check for required files (update as needed)
+          # Check for required files
           MISSING_ASSETS=()
 
-          # Example validation - update based on actual requirements
-          # if [ ! -f "${{ inputs.target-dir }}/tokens.json" ]; then
-          #   MISSING_ASSETS+=("tokens.json")
-          # fi
-
-          if [ ${#MISSING_ASSETS[@]} -gt 0 ]; then
-            echo "::error::Missing required branding assets: ${MISSING_ASSETS[*]}"
-            exit 1
+          # Check for colors.css
+          if [ ! -f "${{ inputs.target-dir }}/colors.css" ]; then
+            MISSING_ASSETS+=("colors.css")
           fi
 
-          echo "✓ All required branding assets are present"
+          # Check for at least one logo
+          if [ ! -d "application/public/brand/logos" ] || [ -z "$(ls -A application/public/brand/logos)" ]; then
+            MISSING_ASSETS+=("logos")
+          fi
+
+          # Check for logo pack
+          if [ ! -f "application/public/brand/downloads/hoverkraft-logos.zip" ]; then
+            MISSING_ASSETS+=("hoverkraft-logos.zip")
+          fi
+
+          if [ ${#MISSING_ASSETS[@]} -gt 0 ]; then
+            echo "::warning::Missing optional branding assets: ${MISSING_ASSETS[*]}"
+            echo "Build will continue with fallback assets"
+          else
+            echo "✓ All required branding assets are present"
+          fi
 
       - name: Upload fetched assets as artifact
         if: steps.check-repo.outputs.exists == 'true'
