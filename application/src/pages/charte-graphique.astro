@@ -3,6 +3,7 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import { brandColors, typography, logos, brandMission, usageGuidelines } from '~/data/brand/tokens';
 import { Image } from 'astro:assets';
+import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 
 const metadata = {
   title: 'Charte graphique Hoverkraft',
@@ -252,9 +253,7 @@ const guidelines = usageGuidelines[lang];
         <p>
           Pour toute question concernant l'utilisation de notre marque ou pour obtenir des assets personnalisés,
           veuillez nous contacter à{' '}
-          <a href="mailto:brand@hoverkraft.cloud" class="text-blue-600 dark:text-blue-400 hover:underline">
-            brand@hoverkraft.cloud
-          </a>
+          <ContactEmailLink class="text-blue-600 dark:text-blue-400 hover:underline" />
         </p>
         <p class="text-sm">Dernière mise à jour : Novembre 2025</p>
       </div>

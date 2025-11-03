@@ -1,0 +1,119 @@
+name: Fetch Branding Assets
+
+# This workflow fetches branding assets from @hoverkraft-tech/branding repository
+# at build time to ensure the landing page always has up-to-date brand resources.
+# It runs before the main build process to prepare assets for deployment.
+
+on:
+  workflow_call:
+    inputs:
+      branding-repo:
+        description: "Branding repository to fetch from"
+        required: false
+        default: "hoverkraft-tech/branding"
+        type: string
+      branding-ref:
+        description: "Git ref (tag, branch, or commit SHA) to fetch"
+        required: false
+        default: "main"
+        type: string
+      target-dir:
+        description: "Target directory for branding assets"
+        required: false
+        default: "application/src/data/brand"
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  fetch-branding:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Check if branding repo exists
+        id: check-repo
+        continue-on-error: true
+        run: |
+          # Check if the branding repository exists
+          if gh repo view ${{ inputs.branding-repo }} &> /dev/null; then
+            echo "exists=true" >> $GITHUB_OUTPUT
+          else
+            echo "exists=false" >> $GITHUB_OUTPUT
+            echo "::warning::Branding repository '${{ inputs.branding-repo }}' does not exist yet. Skipping asset fetch."
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Fetch branding assets
+        if: steps.check-repo.outputs.exists == 'true'
+        run: |
+          echo "Fetching branding assets from ${{ inputs.branding-repo }} at ref ${{ inputs.branding-ref }}"
+
+          # Create temporary directory for cloning
+          TEMP_DIR=$(mktemp -d)
+
+          # Clone the branding repository at specified ref
+          git clone --depth 1 --branch ${{ inputs.branding-ref }} \
+            https://github.com/${{ inputs.branding-repo }}.git "$TEMP_DIR"
+
+          # Create target directory if it doesn't exist
+          mkdir -p ${{ inputs.target-dir }}
+
+          # Copy assets (adjust paths based on branding repo structure)
+          # Example structure - update when branding repo is created:
+          # - tokens.json (color, typography, spacing tokens)
+          # - assets/ (logos, icons)
+          # - README.md (usage guidelines)
+
+          if [ -d "$TEMP_DIR/tokens" ]; then
+            cp -r "$TEMP_DIR/tokens/"* ${{ inputs.target-dir }}/
+            echo "✓ Copied branding tokens"
+          fi
+
+          if [ -d "$TEMP_DIR/assets" ]; then
+            cp -r "$TEMP_DIR/assets" application/src/assets/brand/
+            echo "✓ Copied branding assets"
+          fi
+
+          if [ -f "$TEMP_DIR/README.md" ]; then
+            cp "$TEMP_DIR/README.md" ${{ inputs.target-dir }}/BRANDING_README.md
+            echo "✓ Copied branding documentation"
+          fi
+
+          # Clean up
+          rm -rf "$TEMP_DIR"
+
+          echo "Branding assets fetched successfully from ${{ inputs.branding-ref }}"
+
+      - name: Validate assets
+        if: steps.check-repo.outputs.exists == 'true'
+        run: |
+          echo "Validating branding assets..."
+
+          # Check for required files (update as needed)
+          MISSING_ASSETS=()
+
+          # Example validation - update based on actual requirements
+          # if [ ! -f "${{ inputs.target-dir }}/tokens.json" ]; then
+          #   MISSING_ASSETS+=("tokens.json")
+          # fi
+
+          if [ ${#MISSING_ASSETS[@]} -gt 0 ]; then
+            echo "::error::Missing required branding assets: ${MISSING_ASSETS[*]}"
+            exit 1
+          fi
+
+          echo "✓ All required branding assets are present"
+
+      - name: Upload fetched assets as artifact
+        if: steps.check-repo.outputs.exists == 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: branding-assets
+          path: |
+            ${{ inputs.target-dir }}
+            application/src/assets/brand/
+          retention-days: 1

@@ -1,6 +1,8 @@
 ---
 title: 'Terms of Use'
 layout: '~/layouts/MarkdownLayout.astro'
+setup: |
+	import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 ---
 
 _Last updated_: September 27, 2025
@@ -72,7 +74,7 @@ These Terms are governed by French law. In case of dispute, and failing amicable
 
 ## 12. Contact
 
-For any questions regarding these Terms, contact us at [legal@hoverkraft.cloud](mailto:legal@hoverkraft.cloud) or via the contact form at [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
+For any questions regarding these Terms, contact us at <ContactEmailLink /> or via the contact form at [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
 
 ## 13. Modification of Terms
 

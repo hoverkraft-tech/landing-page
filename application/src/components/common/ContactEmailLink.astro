@@ -1,0 +1,24 @@
+---
+import { SITE } from 'astrowind:config';
+
+interface Props {
+  class?: string;
+  label?: string;
+  [attribute: string]: unknown;
+}
+
+const { class: className = '', label, ...attributes } = Astro.props as Props;
+
+const email = typeof SITE?.contactEmail === 'string' ? SITE.contactEmail.trim() : '';
+const text = typeof label === 'string' ? label : email;
+---
+
+{
+  !text ? null : email ? (
+    <a href={`mailto:${email}`} class={className} {...attributes}>
+      {text}
+    </a>
+  ) : (
+    text
+  )
+}
