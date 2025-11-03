@@ -1,0 +1,10 @@
+{
+  "name": "parse-brand-colors-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to parse brand colors from CSS",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "@actions/core": "^1.11.1"
+  }
+}
