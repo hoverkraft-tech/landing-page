@@ -15,6 +15,7 @@ export const ui = {
     'nav.resources': 'OpenKraft',
     'nav.contact': 'Contact',
     'nav.blog': 'Blog',
+    'nav.brand': 'Charte graphique',
     'footer.company': 'Entreprise',
     'footer.support': 'Support',
     'footer.docs': 'Documentation',
@@ -47,6 +48,7 @@ export const ui = {
     'nav.resources': 'OpenKraft',
     'nav.contact': 'Contact',
     'nav.blog': 'Blog',
+    'nav.brand': 'Brand Guidelines',
     'footer.company': 'Company',
     'footer.support': 'Support',
     'footer.docs': 'Docs',
@@ -83,5 +85,6 @@ export const routes = {
     blog: 'blog',
     privacy: 'privacy',
     terms: 'terms',
+    'charte-graphique': 'brand-guidelines',
   },
 };
