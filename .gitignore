@@ -4,6 +4,7 @@ application/.output/
 
 # dependencies
 application/node_modules/
+.github/actions/*/node_modules/
 
 # logs
 application/npm-debug.log*

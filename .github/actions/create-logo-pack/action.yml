@@ -1,0 +1,44 @@
+name: 'Create Logo Pack'
+description: 'Creates a ZIP archive of all brand logos'
+inputs:
+  logos-dir:
+    description: 'Directory containing logos'
+    required: false
+    default: 'application/public/brand/logos'
+  output-file:
+    description: 'Output ZIP file path'
+    required: false
+    default: 'application/public/brand/downloads/hoverkraft-logos.zip'
+outputs:
+  pack-created:
+    description: 'Whether the logo pack was successfully created'
+    value: ${{ steps.create-pack.outputs.success }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Create logo pack
+      id: create-pack
+      shell: bash
+      run: |
+        echo "Creating logo pack ZIP..."
+        
+        if [ -d "${{ inputs.logos-dir }}" ] && [ "$(ls -A ${{ inputs.logos-dir }})" ]; then
+          # Ensure output directory exists
+          mkdir -p "$(dirname ${{ inputs.output-file }})"
+          
+          # Create ZIP archive
+          cd ${{ inputs.logos-dir }}
+          zip -r ../../downloads/$(basename ${{ inputs.output-file }}) . -i "*.svg" "*.png" "*.pdf" "*.jpg" "*.jpeg"
+          cd -
+          
+          echo "✓ Created logo pack: ${{ inputs.output-file }}"
+          
+          # List contents for verification
+          echo "Logo pack contents:"
+          unzip -l ${{ inputs.output-file }}
+          
+          echo "success=true" >> $GITHUB_OUTPUT
+        else
+          echo "::warning::No logos found in ${{ inputs.logos-dir }}"
+          echo "success=false" >> $GITHUB_OUTPUT
+        fi
