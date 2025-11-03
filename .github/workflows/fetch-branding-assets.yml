@@ -1,26 +1,27 @@
 name: Fetch Branding Assets
 
-# This workflow fetches branding assets from @hoverkraft-tech/branding repository
-# at build time to ensure the landing page always has up-to-date brand resources.
+# This workflow fetches branding assets from the @hoverkraft-tech/branding repository
+# (https://github.com/hoverkraft-tech/branding) at build time to ensure the landing
+# page always has up-to-date brand resources.
 # It runs before the main build process to prepare assets for deployment.
 
 on:
   workflow_call:
     inputs:
       branding-repo:
-        description: "Branding repository to fetch from"
+        description: 'Branding repository to fetch from'
         required: false
-        default: "hoverkraft-tech/branding"
+        default: 'hoverkraft-tech/branding'
         type: string
       branding-ref:
-        description: "Git ref (tag, branch, or commit SHA) to fetch"
+        description: 'Git ref (tag, branch, or commit SHA) to fetch'
         required: false
-        default: "main"
+        default: 'main'
         type: string
       target-dir:
-        description: "Target directory for branding assets"
+        description: 'Target directory for branding assets'
         required: false
-        default: "application/src/data/brand"
+        default: 'application/src/data/brand'
         type: string
 
 permissions:
@@ -33,16 +34,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Check if branding repo exists
+      - name: Check if branding repo is accessible
         id: check-repo
         continue-on-error: true
         run: |
-          # Check if the branding repository exists
+          # Check if the branding repository is accessible
+          # Note: The repository exists at https://github.com/hoverkraft-tech/branding
+          # but may be private and require proper authentication
           if gh repo view ${{ inputs.branding-repo }} &> /dev/null; then
             echo "exists=true" >> $GITHUB_OUTPUT
           else
             echo "exists=false" >> $GITHUB_OUTPUT
-            echo "::warning::Branding repository '${{ inputs.branding-repo }}' does not exist yet. Skipping asset fetch."
+            echo "::warning::Cannot access branding repository '${{ inputs.branding-repo }}'. It may be private or you may not have permission. Skipping asset fetch."
           fi
         env:
           GH_TOKEN: ${{ github.token }}
