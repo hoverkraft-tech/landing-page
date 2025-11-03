@@ -1,6 +1,8 @@
 ---
 title: 'Conditions Générales d’Utilisation'
 layout: '~/layouts/MarkdownLayout.astro'
+setup: |
+	import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 ---
 
 *Dernière mise à jour* : 27 septembre 2025
@@ -78,7 +80,7 @@ Les présentes CGU sont régies par le droit français. En cas de litige, les pa
 
 Pour toute question relative aux CGU, vous pouvez contacter Hoverkraft :
 
-- Par courriel : [contact@hoverkraft.cloud](mailto:contact@hoverkraft.cloud)
+- Par courriel : <ContactEmailLink />
 - Via le formulaire de contact : [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact)
 - Par courrier postal : Hoverkraft – Service juridique, 10 rue (à compléter), 75000 Paris, France
 

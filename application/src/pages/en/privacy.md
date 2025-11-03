@@ -1,6 +1,8 @@
 ---
 title: 'Privacy Policy'
 layout: '~/layouts/MarkdownLayout.astro'
+setup: |
+	import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 ---
 
 _Last updated_: September 27, 2025
@@ -9,7 +11,7 @@ This privacy policy (the "Policy") describes how Hoverkraft collects, uses, and 
 
 ## 1. Data Controller
 
-The data controller is Hoverkraft, publisher of the Site and provider of platform engineering services. You can contact us at [contact@hoverkraft.cloud](mailto:contact@hoverkraft.cloud) or via the form available at [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
+The data controller is Hoverkraft, publisher of the Site and provider of platform engineering services. You can contact us at <ContactEmailLink /> or via the form available at [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
 
 ## 2. Data Collected
 
@@ -76,7 +78,7 @@ You have the following rights regarding your personal data:
 - **Right to data portability**: receive your data in a structured format or request its transfer.
 - **Right to withdraw consent**: for processing based on your consent.
 
-To exercise these rights, contact us at [privacy@hoverkraft.cloud](mailto:privacy@hoverkraft.cloud) or via our contact form. We will respond within one month of your request.
+To exercise these rights, contact us at <ContactEmailLink /> or via our contact form. We will respond within one month of your request.
 
 ## 8. Data Security
 
@@ -88,7 +90,7 @@ If we transfer your data outside the European Union, we ensure adequate protecti
 
 ## 10. Contact and Complaints
 
-For any questions or concerns about this Policy, contact us at [privacy@hoverkraft.cloud](mailto:privacy@hoverkraft.cloud).
+For any questions or concerns about this Policy, contact us at <ContactEmailLink />.
 
 If you believe your rights have been violated, you can file a complaint with the competent supervisory authority (in France: CNIL - [https://www.cnil.fr](https://www.cnil.fr)).
 

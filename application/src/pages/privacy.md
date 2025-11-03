@@ -1,6 +1,8 @@
 ---
 title: 'Politique de confidentialité'
 layout: '~/layouts/MarkdownLayout.astro'
+setup: |
+	import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 ---
 
 *Dernière mise à jour* : 27 septembre 2025
@@ -9,7 +11,7 @@ La présente politique de confidentialité (la « Politique ») décrit la man
 
 ## 1. Responsable du traitement
 
-Le responsable du traitement est la société Hoverkraft, éditrice du Site et prestataire de services de platform engineering. Vous pouvez nous contacter à l’adresse [contact@hoverkraft.cloud](mailto:contact@hoverkraft.cloud) ou via le formulaire disponible sur [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
+Le responsable du traitement est la société Hoverkraft, éditrice du Site et prestataire de services de platform engineering. Vous pouvez nous contacter à l’adresse <ContactEmailLink /> ou via le formulaire disponible sur [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
 
 ## 2. Données collectées
 
@@ -81,7 +83,7 @@ Conformément à la réglementation applicable, vous disposez des droits suivant
 - Droit à la portabilité des données fournies sur la base du consentement ou de l’exécution d’un contrat.
 - Droit de définir des directives relatives au sort de vos données après votre décès.
 
-Vous pouvez exercer ces droits en écrivant à [privacy@hoverkraft.cloud](mailto:privacy@hoverkraft.cloud) ou à l’adresse postale : Hoverkraft – Délégué à la protection des données, 10 rue (à compléter), 75000 Paris, France. Une réponse vous sera apportée dans un délai maximum de 30 jours. En cas de désaccord persistant, vous pouvez adresser une réclamation à la CNIL (<www.cnil.fr>).
+Vous pouvez exercer ces droits en écrivant à <ContactEmailLink /> ou à l’adresse postale : Hoverkraft – Délégué à la protection des données, 10 rue (à compléter), 75000 Paris, France. Une réponse vous sera apportée dans un délai maximum de 30 jours. En cas de désaccord persistant, vous pouvez adresser une réclamation à la CNIL (<www.cnil.fr>).
 
 ## 10. Modifications de la Politique
 
@@ -91,7 +93,7 @@ La présente Politique peut être amenée à évoluer pour refléter les modific
 
 Pour toute question relative à cette Politique ou à la gestion de vos données personnelles, vous pouvez nous contacter :
 
-- Par email : [contact@hoverkraft.cloud](mailto:contact@hoverkraft.cloud)
+- Par email : <ContactEmailLink />
 - Via le formulaire en ligne : [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact)
 - Par courrier : Hoverkraft – Délégué à la protection des données, 10 rue (à compléter), 75000 Paris, France
 
