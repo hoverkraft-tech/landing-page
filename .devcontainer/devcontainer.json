@@ -5,6 +5,12 @@
     "ghcr.io/devcontainers/features/docker-in-docker:2": {}
   },
   "forwardPorts": [4321, 5432],
+  "secrets": {
+    "COPILOT_MCP_OPENAI_API_KEY": {
+      "description": "OpenAI's key to run GPT.",
+      "documentationUrl": "https://github.com/spartanz51/imagegen-mcp#readme"
+    }
+  },
   "customizations": {
     "vscode": {
       "extensions": [
@@ -18,16 +24,23 @@
         "github.copilot",
         "github.copilot-chat"
       ],
-      "mcpServers": {
-        "playwright": {
-          "command": "npx",
-          "args": ["@playwright/mcp@latest"]
-        },
-        "lighthouse": {
-          "command": "npx",
-          "args": ["lighthouse-mcp"],
-          "disabled": false,
-          "autoApprove": []
+      "mcp": {
+        "servers": {
+          "playwright": {
+            "command": "npx",
+            "args": ["@playwright/mcp@latest"]
+          },
+          "lighthouse": {
+            "command": "npx",
+            "args": ["lighthouse-mcp"]
+          },
+          "image-generator-gpt-image": {
+            "command": "npx",
+            "args": ["imagegen-mcp", "--models", "gpt-image-1"],
+            "env": {
+              "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY"
+            }
+          }
         }
       }
     }
