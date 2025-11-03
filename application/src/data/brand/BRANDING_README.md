@@ -1,10 +1,10 @@
 # Branding Assets Management
 
-This document explains how branding assets are managed in the Hoverkraft landing page and how to update them when the @hoverkraft-tech/branding repository becomes available.
+This document explains how branding assets are managed in the Hoverkraft landing page and how to integrate with the official @hoverkraft-tech/branding repository.
 
 ## Overview
 
-The landing page sources brand identity assets (logos, colors, typography tokens) from a centralized branding repository to ensure consistency across all Hoverkraft properties. Currently, branding data is maintained locally in this repository, but the architecture is designed to fetch assets from `@hoverkraft-tech/branding` at build time.
+The landing page sources brand identity assets (logos, colors, typography tokens) from a centralized branding repository at https://github.com/hoverkraft-tech/branding to ensure consistency across all Hoverkraft properties. Currently, branding data is maintained locally in this repository, but the architecture is designed to fetch assets from the branding repository at build time.
 
 ## Current Architecture
 
@@ -33,17 +33,25 @@ These pages are built from:
 - `application/src/pages/charte-graphique.astro`
 - `application/src/pages/en/brand-guidelines.astro`
 
-## Automated Asset Fetching (Future)
+## Automated Asset Fetching
 
-When the `hoverkraft-tech/branding` repository is created, the CI/CD pipeline will automatically fetch assets at build time using the workflow defined in `.github/workflows/fetch-branding-assets.yml`.
+The branding repository exists at https://github.com/hoverkraft-tech/branding. The CI/CD pipeline will automatically fetch assets at build time using the workflow defined in `.github/workflows/fetch-branding-assets.yml`.
 
 ### Workflow Behavior
 
-1. **Pre-build step**: The workflow checks if the branding repository exists
-2. **Fetch**: If available, clones the repository at a specified ref (tag/branch/commit)
+1. **Pre-build step**: The workflow checks if the branding repository is accessible
+2. **Fetch**: Clones the repository at a specified ref (tag/branch/commit)
 3. **Copy**: Extracts tokens and assets into the landing page structure
 4. **Validate**: Ensures required assets are present before proceeding with build
 5. **Artifact**: Uploads fetched assets for use by the build job
+
+### Repository Access
+
+The branding repository may be private. To enable the workflow to access it:
+
+- The workflow uses `${{ github.token }}` which provides read access to repositories in the same organization
+- For private repositories, ensure the workflow has the necessary permissions via repository settings
+- The `GH_TOKEN` environment variable is automatically configured in GitHub Actions
 
 ### Configuration
 
@@ -75,7 +83,7 @@ hoverkraft-tech/branding/
 
 ## Manual Update Process (Current)
 
-Until the branding repository is available, update brand assets manually:
+Until the branding repository integration is fully enabled in the CI/CD pipeline, update brand assets manually:
 
 ### 1. Update Brand Tokens
 
@@ -122,13 +130,13 @@ Visit:
 - <http://localhost:4321/charte-graphique> (French)
 - <http://localhost:4321/en/brand-guidelines> (English)
 
-## Automated Update Process (Future)
+## Automated Update Process
 
-Once the branding repository exists:
+The branding repository workflow integration:
 
-### 1. Branding repository Workflow
+### 1. Branding Repository Workflow
 
-The branding team will maintain assets in `hoverkraft-tech/branding`. When they release a new version:
+The branding team maintains assets in https://github.com/hoverkraft-tech/branding. When they release a new version:
 
 1. Update tokens/assets in the branding repository
 2. Create a Git tag (e.g., `v1.2.0`)
@@ -144,7 +152,7 @@ Edit `.github/workflows/fetch-branding-assets.yml`:
 
 ```yaml
 branding-ref:
-  default: 'v1.2.0' # Pin to specific tag
+  default: 'v1.2.0'  # Pin to specific tag
 ```
 
 **Option B: Override at workflow call**
@@ -156,8 +164,8 @@ jobs:
   fetch-branding:
     uses: ./.github/workflows/fetch-branding-assets.yml
     with:
-      branding-ref: 'v1.2.0' # Specify version
-
+      branding-ref: 'v1.2.0'  # Specify version
+  
   build:
     needs: fetch-branding
     # ... build steps
@@ -186,13 +194,14 @@ fi
 - Brand tokens defined in `application/src/data/brand/tokens.ts`
 - Brand guidelines pages created
 - Manual updates as needed
+- Branding repository exists at https://github.com/hoverkraft-tech/branding
 
-### Phase 2: Branding Repository Created
+### Phase 2: Repository Structure Alignment
 
-1. Create `hoverkraft-tech/branding` repository
-2. Migrate current tokens from `tokens.ts` to the new repository
+1. Verify the branding repository structure matches expected format
+2. Migrate current tokens from `tokens.ts` to the branding repository if needed
 3. Organize assets following the expected structure
-4. Document usage guidelines in branding repository readme
+4. Document usage guidelines in branding repository README
 
 ### Phase 3: Automated Fetching
 
@@ -214,9 +223,19 @@ fi
 If the branding repository is unavailable or validation fails:
 
 1. Check workflow logs in GitHub Actions
-2. Verify the branding repository exists and is accessible
-3. Ensure the specified `branding-ref` exists in the repository
-4. Check that required assets are present in the branding repository
+2. Verify the branding repository is accessible (may be private)
+3. Ensure the workflow has proper permissions to access the repository
+4. Ensure the specified `branding-ref` exists in the repository
+5. Check that required assets are present in the branding repository
+
+### Repository Access Issues
+
+If the workflow cannot access the branding repository:
+
+1. Verify that the repository exists at https://github.com/hoverkraft-tech/branding
+2. Check if the repository is private and requires authentication
+3. Ensure `GH_TOKEN` has read access to the branding repository
+4. For cross-organization access, you may need a Personal Access Token (PAT)
 
 ### Local development without branding repository
 
@@ -226,8 +245,13 @@ The pages will work with the fallback tokens defined in `tokens.ts`. No action n
 
 For questions about branding assets or to request specific assets:
 
-- Email: value from `site.contactEmail` in `application/src/config.yaml`
+- Email: brand@hoverkraft.cloud
 - GitHub: @hoverkraft-tech
+- Branding Repository: https://github.com/hoverkraft-tech/branding
+
+---
+
+**Note**: The branding repository exists at https://github.com/hoverkraft-tech/branding. The CI/CD workflow is ready to fetch assets once the integration is enabled.
 
 ---
 
