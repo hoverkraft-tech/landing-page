@@ -2,8 +2,8 @@
  * Brand tokens and design system values
  *
  * This file contains the core brand identity tokens including colors, typography,
- * spacing, and other design system values. In the future, these values will be
- * automatically fetched from @hoverkraft-tech/branding repository at build time.
+ * spacing, and other design system values. Colors are fetched from
+ * @hoverkraft-tech/branding repository at build time when available.
  */
 
 export interface ColorToken {
@@ -29,44 +29,56 @@ export interface LogoAsset {
   clearSpace?: string;
 }
 
-export const brandColors: ColorToken[] = [
-  {
-    name: 'Primary Blue',
-    hex: '#1E3A8A',
-    rgb: '30, 58, 138',
-    usage: 'Primary brand color, main CTAs, key UI elements',
-  },
-  {
-    name: 'Secondary Blue',
-    hex: '#3B82F6',
-    rgb: '59, 130, 246',
-    usage: 'Accent color, links, secondary CTAs',
-  },
-  {
-    name: 'Dark Gray',
-    hex: '#1F2937',
-    rgb: '31, 41, 55',
-    usage: 'Primary text color, headings',
-  },
-  {
-    name: 'Medium Gray',
-    hex: '#6B7280',
-    rgb: '107, 114, 128',
-    usage: 'Secondary text, captions',
-  },
-  {
-    name: 'Light Gray',
-    hex: '#F3F4F6',
-    rgb: '243, 244, 246',
-    usage: 'Backgrounds, borders',
-  },
-  {
-    name: 'White',
-    hex: '#FFFFFF',
-    rgb: '255, 255, 255',
-    usage: 'Primary background, text on dark backgrounds',
-  },
-];
+// Try to import generated colors from branding repository, fall back to defaults
+let brandColors: ColorToken[];
+
+try {
+  // @ts-ignore - This file may not exist if branding assets haven't been fetched
+  const generatedColors = await import('./generated-colors.ts');
+  brandColors = generatedColors.brandColors;
+} catch {
+  // Fallback colors if branding repository colors are not available
+  brandColors = [
+    {
+      name: 'Primary Blue',
+      hex: '#1E3A8A',
+      rgb: '30, 58, 138',
+      usage: 'Primary brand color, main CTAs, key UI elements',
+    },
+    {
+      name: 'Secondary Blue',
+      hex: '#3B82F6',
+      rgb: '59, 130, 246',
+      usage: 'Accent color, links, secondary CTAs',
+    },
+    {
+      name: 'Dark Gray',
+      hex: '#1F2937',
+      rgb: '31, 41, 55',
+      usage: 'Primary text color, headings',
+    },
+    {
+      name: 'Medium Gray',
+      hex: '#6B7280',
+      rgb: '107, 114, 128',
+      usage: 'Secondary text, captions',
+    },
+    {
+      name: 'Light Gray',
+      hex: '#F3F4F6',
+      rgb: '243, 244, 246',
+      usage: 'Backgrounds, borders',
+    },
+    {
+      name: 'White',
+      hex: '#FFFFFF',
+      rgb: '255, 255, 255',
+      usage: 'Primary background, text on dark backgrounds',
+    },
+  ];
+}
+
+export { brandColors };
 
 export const typography: TypographyToken[] = [
   {

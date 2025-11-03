@@ -23,3 +23,8 @@ application/pnpm-lock.yaml
 .pnpm-store
 
 application/.astro
+
+# Generated brand assets (fetched from @hoverkraft-tech/branding during CI)
+application/public/brand/
+application/src/data/brand/colors.css
+application/src/data/brand/generated-colors.ts
