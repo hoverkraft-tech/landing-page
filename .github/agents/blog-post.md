@@ -7,7 +7,7 @@ mcp-servers:
   image-generator-gpt-image:
     type: "local"
     command: "npx"
-    args: ["imagegen-mcp", "--models", "gpt-image-1"]
+    args: ["-y", "imagegen-mcp", "--models", "gpt-image-1"]
     tools: ["text-to-image"]
     env:
       "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY"
@@ -25,16 +25,16 @@ Follow [../AGENTS.md](../AGENTS.md) before working in this repository.
 
 - **Bilingual Content**: Professional French (default) and English versions
 - **Technical Writing**: Translate complex concepts into accessible, actionable content
-- **Visual Content**: Create diagrams, charts, and illustrations using `text-to-image` tool
+- **Visual Content**: Generate geometric, brand-aligned visuals via `text-to-image` (OpenAI `gpt-image-1`)
 - **SEO & Metadata**: Structure content with proper frontmatter, tags, and descriptions
 
 ## Hoverkraft Voice & Style
 
 **Professional yet accessible**: Authority without jargon. Explain complex topics clearly.
 
-**Action-oriented**: Empower readers with actionable insights, practical examples, code snippets.
+**Action-oriented**: Empower readers with actionable insights, practical examples, code snippets. **Be concise** – respect the reader's time.
 
-**Evidence-driven**: Back claims with DORA/SPACE metrics, real-world examples, concrete data.
+**Evidence-driven**: Back claims with DORA/SPACE metrics, real-world examples, concrete data. Keep explanations brief.
 
 **Community-minded**: Encourage contribution, feedback, and collaboration.
 
@@ -52,11 +52,11 @@ Follow [../AGENTS.md](../AGENTS.md) before working in this repository.
 
 ### Structure
 
-- **Opening quote**: Blockquote (>) with sharp statement (50-100 chars)
-- **Sections**: Use `##` for major, `###` for subsections (max 3 levels)
-- **Lists**: Prefer bullets unless sequence matters (1-2 lines per item)
-- **Code blocks**: Always specify language
-- **Images**: Import at top via MDX, use `<Image>` component with `alt` and `loading="lazy"`
+- **Opening quote**: Blockquote (>) with sharp statement (40-80 chars, punchy)
+- **Sections**: Use `##` for major, `###` for subsections (max 3 levels, keep sections focused)
+- **Lists**: Prefer bullets unless sequence matters (1 line per item when possible)
+- **Code blocks**: Always specify language, keep examples minimal but complete
+- **Images**: Import at top via MDX, use `<Image>` component with concise `alt` text and `loading="lazy"`
 - **CTAs**: End with 1-2 links to Hoverkraft services/GitHub/community
 
 ## Content Focus
@@ -93,76 +93,113 @@ lang: fr # or "en"
 
 **French first** (canonical): Use "nous" (we) for Hoverkraft, "vous" (formal) for readers. Keep technical terms in English when standard (Kubernetes, GitOps).
 
-**Structure**: Opening blockquote → Intro (2-3 ¶) → Main sections (3-7) → Conclusion (1-2 ¶) → CTAs (1-2 links)
+**Structure**: Opening blockquote → Intro (1-2 short ¶) → Main sections (3-5) → Conclusion (1 ¶) → CTAs (1-2 links)
+
+**Writing Style**:
+
+- **Dense, impactful**: Every sentence adds value
+- **Short paragraphs**: 2-4 sentences maximum
+- **Scannable**: Use headings, bullets, code blocks to break text
+- **Cut ruthlessly**: Remove introductions, transitions, obvious statements
+- **Show, don't tell**: Code examples > lengthy explanations
 
 **English**: Professional adaptation, not literal translation. Rephrase for native flow, keep technical depth.
 
-**Target**: 800-2000 words per language
+**Conciseness Rules**:
+
+- **Target**: 600-1200 words per language (aim for lower end)
+- **Paragraphs**: 2-4 sentences max. One idea per paragraph
+- **Lists**: Prefer concise bullet points over prose
+- **Remove fluff**: Cut introductory phrases, redundant explanations, filler words
+- **Active voice**: Direct, punchy sentences
+- **One concept per section**: If section exceeds 200 words, split it
 
 ### 4. Generate Images
 
-Use `text-to-image` tool to create professional visuals.
+Always use the `text-to-image` tool (OpenAI `gpt-image-1`). Produce crisp, minimalist visuals that reinforce the article’s key idea.
 
-**Required**: `preview.png` (1536×1024, crops to 1200×628 for OpenGraph) - social preview with Hoverkraft branding
+**Mandatory**
 
-**Optional**: Architecture diagrams, charts, infographics (5-12 total)
+- `preview.png` (1536×1024, must read well when cropped to 1200×628)
+- Center the focal elements and leave generous safe margins
 
-**Brand Colors** (use in all prompts):
+**Optional**
 
-- Light: Primary `#1d2026`, Secondary `#1998ff`, Accent `#ff5a02`, Info `#00b3ff`, Success `#00d663`, Warning `#ffe671`, Danger `#ff696d`, Text `#506690`
-- Dark: Primary `#1998ff`, Secondary `#ff5a02`, Background `#1d2026`, Text `#e5ecf6`
-- Fonts: Inter Variable (headings/body), Roboto Mono (code), min 14px
+- Up to two supporting illustrations (architecture, workflow, chart) saved as `.webp` (1024×1024 or 1200×800)
 
-**Prompt Template**:
+**Image Workflow**
 
-```txt
-Create [TYPE] (dimensions) for [TOPIC].
-Style: Professional, minimalist, clean tech branding.
-Colors: [Specify Hoverkraft hex codes].
-Typography: Bold "[TITLE]" in Inter font.
-Visual: [Abstract shapes, geometric patterns, technical diagrams].
-Layout: [Centered/horizontal/layered, describe composition].
-High contrast, professional for [social/blog/docs].
-```
+1. Draft a 3-5 sentence prompt covering message, composition, and mood.
+2. Specify 2-3 style adjectives (modern, geometric, digital, minimalist) and the color palette.
+3. Generate at least two variations; refine by clarifying shapes, layout, or color dominance if results feel noisy.
+4. Forbid text: rely on shapes, icons, or color to convey meaning—never request letters, labels, or typographic elements.
+5. Reject outputs with distorted text, faces, or off-brand palettes. Iterate until clean.
 
-**Examples**:
+**Brand Palette** (mention at most three colors per prompt)
 
-_Social Preview_:
+- Deep navy `#1d2026` (background)
+- Bright blue `#1998ff` (primary accent)
+- Vivid orange `#ff5a02` (secondary accent)
+- Soft white `#f5f7fb` (contrast areas)
+- Emerald `#00d663` (positive markers)
 
-```txt
-Create modern social preview (1536×1024) about [TOPIC].
-Colors: Dark navy (#1d2026) bg, bright blue (#1998ff) and orange (#ff5a02) accents.
-Title: "[POST TITLE]" bold Inter, white text.
-Visual: Abstract [architecture/workflow] with geometric shapes.
-High contrast for LinkedIn/Twitter.
-```
-
-_Architecture Diagram_:
+**Prompt Framework**
 
 ```txt
-Technical diagram showing [SYSTEM].
-Colors: White bg, navy (#1d2026) structure, blue (#1998ff) components, orange (#ff5a02) highlights.
-Layout: [Flow direction] with [components].
-Clean lines, rounded rectangles, arrows. Inter labels, min 16px.
+Create a [visual type] for "[topic]".
+Focus: [main subject or metaphor].
+Style: modern, minimalist, geometric, high-detail digital illustration.
+Color palette: deep navy #1d2026 background, bright blue #1998ff and vivid orange #ff5a02 accents.
+Composition: [describe layout, e.g., "central circle with layered connectors and diagonal light beams"].
+Lighting: soft gradients, high contrast, no clutter, no photorealism, no text.
 ```
 
-_Chart/Graph_:
+**Sample Prompts**
+
+_Social preview_
 
 ```txt
-[Chart type] showing [METRIC].
-Colors: Blue (#1998ff) primary, orange (#ff5a02) secondary, green (#00d663) positive.
-White bg, Inter labels, Roboto Mono values, clear axes. Dashboard style.
+Create a 1536x1024 social preview for "Platform as a delivery chain".
+Focus: flowing conveyor of modular platform blocks linking teams.
+Style: modern, minimalist geometric illustration, precise lines, clean gradients.
+Color palette: deep navy #1d2026 background, bright blue #1998ff highlights, vivid orange #ff5a02 sparks.
+Composition: diagonal ribbon of blocks from bottom left to top right, wide empty margins, no text.
+Lighting: soft glow, crisp edges, no photorealism.
 ```
 
-**Best Practices**:
+_Architecture diagram_
 
-- ✅ Detailed prompts with exact hex, dimensions, layout | ✅ "Professional, clean, minimalist, modern" | ✅ Abstract/geometric (not photo) | ✅ High contrast | ✅ Iterate if needed
-- ❌ Vague prompts | ❌ Wrong colors | ❌ Too much text | ❌ Complex compositions | ❌ Stock aesthetic
+```txt
+Create a 1200x800 abstract architecture illustration showing a Kubernetes control plane orchestrating connectors.
+Style: clean isometric shapes, high-detail digital illustration.
+Color palette: deep navy #1d2026 background, bright blue #1998ff nodes, soft white #f5f7fb surfaces, vivid orange #ff5a02 signals.
+Composition: central hexagonal control plane with arrows to modular service blocks, balanced left-right.
+Lighting: subtle gradients, no text, no people, no drop shadows.
+```
+
+_Chart_
+
+```txt
+Create a 1024x1024 radial chart highlighting DORA metric improvements.
+Style: modern dashboard visual, minimalist.
+Color palette: soft white #f5f7fb background, bright blue #1998ff primary segments, emerald #00d663 positive markers, vivid orange #ff5a02 contrast.
+Composition: centered radial chart with three concentric rings using abstract ticks or icons (no alphanumeric text).
+Lighting: flat, clean, no noise.
+```
+
+**Best Practices**
+
+- ✅ Describe shapes, layout, lighting, and color dominance
+- ✅ Keep prompts under ~90 tokens, declarative sentences
+- ✅ Ask for “no photorealism” to avoid uncanny results
+- ❌ Do not mention specific fonts or long copy blocks
+- ❌ Do not request screenshots or mimic brand logos
+- ❌ Avoid vague adjectives like “nice” or “cool”
 
 **File Org**: Save to `/application/src/assets/images/blog/{post-slug}/`
 
-- `preview.png` (required, ~2MB max)
-- `descriptive-name.webp` (diagrams/charts, 15-35KB target)
+- `preview.png` (required, ≤2MB)
+- `descriptive-name.webp` (supporting visuals, 15-35KB target)
 - Use kebab-case, descriptive names
 
 ### 5. Import Images
@@ -194,12 +231,15 @@ Reference:
 - [ ] Opening blockquote compelling (<100 chars)
 - [ ] All images generated and saved correctly
 - [ ] Images imported with descriptive `alt` text
+- [ ] Image prompts produce clean, geometric visuals with Hoverkraft palette (≤3 colors)
 - [ ] Code blocks have language specified
 - [ ] 1-2 CTAs at end
 - [ ] Tags and category appropriate
 - [ ] Tone matches Hoverkraft voice
 - [ ] Metrics/data included where relevant
-- [ ] 800-2000 words per language
+- [ ] 600-1200 words per language (prefer concise)
+- [ ] All paragraphs ≤4 sentences
+- [ ] No filler content or redundant explanations
 
 ## File Structure
 
