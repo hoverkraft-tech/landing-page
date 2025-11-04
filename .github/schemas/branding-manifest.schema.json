@@ -3,7 +3,7 @@
   "title": "Branding Data Manifest",
   "description": "Contract interface between hoverkraft-tech/branding and hoverkraft-tech/landing-page repositories",
   "type": "object",
-  "required": ["version", "timestamp", "commit", "colors", "logos"],
+  "required": ["version", "timestamp", "commit", "colors", "logos", "brandMission", "usageGuidelines"],
   "properties": {
     "version": {
       "type": "string",
@@ -20,66 +20,88 @@
       "description": "Git commit SHA of the branding repository",
       "pattern": "^[0-9a-f]{40}$"
     },
-    "colors": {
+    "brandMission": {
+      "type": "string",
+      "description": "Brand mission statement",
+      "example": "Empower developers and accelerate time-to-market through a connector-oriented Platform Engineering methodology"
+    },
+    "usageGuidelines": {
       "type": "object",
-      "description": "Brand color definitions",
-      "required": ["file", "count"],
+      "description": "General usage guidelines for the brand",
       "properties": {
-        "file": {
+        "overview": {
           "type": "string",
-          "description": "Path to colors.css file in the artifact",
-          "example": "colors.css"
+          "description": "Overview of brand usage guidelines"
         },
-        "count": {
-          "type": "integer",
-          "description": "Number of color tokens defined",
-          "minimum": 0
+        "dos": {
+          "type": "array",
+          "description": "List of recommended practices",
+          "items": {
+            "type": "string"
+          }
+        },
+        "donts": {
+          "type": "array",
+          "description": "List of practices to avoid",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "colors": {
+      "type": "array",
+      "description": "Brand color definitions",
+      "items": {
+        "type": "object",
+        "required": ["name", "hex", "rgb", "usage"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Color name",
+            "example": "Primary Blue"
+          },
+          "hex": {
+            "type": "string",
+            "description": "Hexadecimal color value",
+            "pattern": "^#[0-9A-Fa-f]{6}$",
+            "example": "#1E3A8A"
+          },
+          "rgb": {
+            "type": "string",
+            "description": "RGB color value",
+            "pattern": "^\\d+,\\s*\\d+,\\s*\\d+$",
+            "example": "30, 58, 138"
+          },
+          "usage": {
+            "type": "string",
+            "description": "Usage guidelines for this color",
+            "example": "Primary brand color, main CTAs, key UI elements"
+          }
         }
       }
     },
     "logos": {
-      "type": "object",
+      "type": "array",
       "description": "Brand logo assets",
-      "required": ["directory", "files"],
-      "properties": {
-        "directory": {
-          "type": "string",
-          "description": "Directory path containing logo files in the artifact",
-          "example": "logo"
-        },
-        "files": {
-          "type": "array",
-          "description": "List of logo files with metadata",
-          "items": {
-            "type": "object",
-            "required": ["name", "path", "format", "size"],
-            "properties": {
-              "name": {
-                "type": "string",
-                "description": "Descriptive name of the logo variant",
-                "example": "Primary Logo"
-              },
-              "path": {
-                "type": "string",
-                "description": "Relative path to the logo file",
-                "example": "logo/primary.svg"
-              },
-              "format": {
-                "type": "string",
-                "description": "File format",
-                "enum": ["svg", "png", "pdf", "jpg", "jpeg"]
-              },
-              "size": {
-                "type": "integer",
-                "description": "File size in bytes",
-                "minimum": 0
-              },
-              "usage": {
-                "type": "string",
-                "description": "Usage guidelines for this logo variant",
-                "example": "Main logo for light backgrounds"
-              }
-            }
+      "items": {
+        "type": "object",
+        "required": ["name", "path"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Descriptive name of the logo variant",
+            "example": "Primary Logo"
+          },
+          "path": {
+            "type": "string",
+            "description": "Relative path to the logo file in the artifact",
+            "example": "logo/primary.svg"
+          },
+          "usage": {
+            "type": "string",
+            "description": "Usage guidelines for this logo variant",
+            "example": "Main logo for light backgrounds"
           }
         }
       }
@@ -92,11 +114,6 @@
           "type": "string",
           "description": "Path to mascot file in the artifact",
           "example": "mascot/mascot.png"
-        },
-        "size": {
-          "type": "integer",
-          "description": "File size in bytes",
-          "minimum": 0
         }
       }
     },
