@@ -16,29 +16,39 @@ outputs:
 runs:
   using: 'composite'
   steps:
-    - name: Create logo pack
-      id: create-pack
+    - name: Verify logos exist
+      id: verify
       shell: bash
       run: |
-        echo "Creating logo pack ZIP..."
-        
-        if [ -d "${{ inputs.logos-dir }}" ] && [ "$(find ${{ inputs.logos-dir }} -type f)" ]; then
-          # Ensure output directory exists
-          mkdir -p "$(dirname ${{ inputs.output-file }})"
-          
-          # Create ZIP archive
-          cd ${{ inputs.logos-dir }}
-          zip -r ../downloads/$(basename ${{ inputs.output-file }}) . -i "*.svg" "*.png" "*.pdf" "*.jpg" "*.jpeg"
-          cd -
-          
+        if [ -d "${{ inputs.logos-dir }}" ] && [ "$(find ${{ inputs.logos-dir }} -type f 2>/dev/null)" ]; then
+          echo "has-logos=true" >> $GITHUB_OUTPUT
+          echo "✓ Found logos in ${{ inputs.logos-dir }}"
+        else
+          echo "has-logos=false" >> $GITHUB_OUTPUT
+          echo "::warning::No logos found in ${{ inputs.logos-dir }}"
+        fi
+    
+    - name: Create logo pack using zip-release
+      id: create-pack
+      if: steps.verify.outputs.has-logos == 'true'
+      uses: TheDoctor0/zip-release@b57d897cb5d60cb78b51a507f63fa184cfe35554 # v0.7.6
+      with:
+        type: 'zip'
+        filename: '${{ inputs.output-file }}'
+        directory: '${{ inputs.logos-dir }}'
+        path: '.'
+    
+    - name: Verify ZIP created
+      if: steps.verify.outputs.has-logos == 'true'
+      shell: bash
+      run: |
+        if [ -f "${{ inputs.output-file }}" ]; then
           echo "✓ Created logo pack: ${{ inputs.output-file }}"
-          
-          # List contents for verification
           echo "Logo pack contents:"
-          unzip -l ${{ inputs.output-file }}
-          
+          unzip -l "${{ inputs.output-file }}" || true
           echo "success=true" >> $GITHUB_OUTPUT
         else
-          echo "::warning::No logos found in ${{ inputs.logos-dir }}"
+          echo "::error::Failed to create logo pack"
           echo "success=false" >> $GITHUB_OUTPUT
+          exit 1
         fi

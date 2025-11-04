@@ -152,7 +152,7 @@ Edit `.github/workflows/fetch-branding-assets.yml`:
 
 ```yaml
 branding-ref:
-  default: 'v1.2.0'  # Pin to specific tag
+  default: 'v1.2.0' # Pin to specific tag
 ```
 
 **Option B: Override at workflow call**
@@ -164,8 +164,8 @@ jobs:
   fetch-branding:
     uses: ./.github/workflows/fetch-branding-assets.yml
     with:
-      branding-ref: 'v1.2.0'  # Specify version
-  
+      branding-ref: 'v1.2.0' # Specify version
+
   build:
     needs: fetch-branding
     # ... build steps

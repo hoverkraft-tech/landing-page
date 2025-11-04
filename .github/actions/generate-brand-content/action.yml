@@ -1,0 +1,17 @@
+name: 'Generate Brand Content'
+description: 'Generates TypeScript files for brand colors, mission, and usage guidelines from manifest'
+inputs:
+  manifest:
+    description: 'JSON manifest containing brand data'
+    required: true
+  output-dir:
+    description: 'Output directory for generated files'
+    required: false
+    default: 'application/src/data/brand'
+outputs:
+  content-generated:
+    description: 'Whether content was successfully generated'
+    value: ${{ steps.generate.outputs.success }}
+runs:
+  using: 'node20'
+  main: 'index.js'
