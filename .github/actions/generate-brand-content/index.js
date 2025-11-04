@@ -1,4 +1,5 @@
 const core = require("@actions/core");
+const io = require("@actions/io");
 const fs = require("fs");
 const path = require("path");
 
@@ -8,7 +9,7 @@ async function run() {
     const version = core.getInput("version", { required: true });
     const commit = core.getInput("commit", { required: true });
     const colorsJson = core.getInput("colors", { required: true });
-    const brandMission = core.getInput("brand-mission", { required: true });
+    const brandMissionJson = core.getInput("brand-mission", { required: true });
     const usageGuidelinesJson = core.getInput("usage-guidelines", {
       required: true,
     });
@@ -18,6 +19,7 @@ async function run() {
 
     // Parse JSON inputs
     const colors = JSON.parse(colorsJson);
+    const brandMission = JSON.parse(brandMissionJson);
     const usageGuidelines = JSON.parse(usageGuidelinesJson);
     const logos = JSON.parse(logosJson);
     const fonts = JSON.parse(fontsJson);
@@ -60,7 +62,13 @@ export const brandColors: ColorToken[] = ${JSON.stringify(colors, null, 2)};
  * Generated: ${timestamp}
  */
 
-export const brandMission: string = ${JSON.stringify(brandMission)};
+import type { BrandMission } from './types';
+
+export const brandMission: BrandMission = ${JSON.stringify(
+      brandMission,
+      null,
+      2,
+    )};
 `;
 
     fs.writeFileSync(
@@ -81,7 +89,11 @@ export const brandMission: string = ${JSON.stringify(brandMission)};
 
 import type { UsageGuidelines } from './types';
 
-export const usageGuidelines: UsageGuidelines = ${JSON.stringify(usageGuidelines, null, 2)};
+export const usageGuidelines: UsageGuidelines = ${JSON.stringify(
+      usageGuidelines,
+      null,
+      2,
+    )};
 `;
 
     fs.writeFileSync(
@@ -102,7 +114,11 @@ export const usageGuidelines: UsageGuidelines = ${JSON.stringify(usageGuidelines
 
 import type { TypographyToken } from './types';
 
-export const typography: TypographyToken[] = ${JSON.stringify(fonts.fonts || [], null, 2)};
+export const typography: TypographyToken[] = ${JSON.stringify(
+      fonts.fonts || [],
+      null,
+      2,
+    )};
 `;
 
     fs.writeFileSync(

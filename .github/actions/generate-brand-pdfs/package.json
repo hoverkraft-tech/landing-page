@@ -1,0 +1,11 @@
+{
+  "name": "generate-brand-pdfs-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to prepare and generate localized brand guideline PDFs",
+  "main": "index.js",
+  "scripts": {},
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "puppeteer": "^24.28.0"
+  }
+}

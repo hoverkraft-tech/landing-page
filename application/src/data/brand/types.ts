@@ -3,6 +3,8 @@
  * These types are shared between the main tokens file and generated files
  */
 
+export type BrandLocale = 'fr' | 'en';
+
 export interface ColorToken {
   name: string;
   hex: string;
@@ -17,14 +19,37 @@ export interface TypographyToken {
   fallback?: string;
 }
 
+export interface LogoAssetCopy {
+  usage: string;
+  minimumSize?: string;
+  clearSpace?: string;
+}
+
+export type LogoAssetLocalizedCopy = Record<BrandLocale, LogoAssetCopy>;
+
 export interface LogoAsset {
   name: string;
   path: string;
-  usage: string;
+  copy: LogoAssetLocalizedCopy;
+  formats: string[];
 }
 
-export interface UsageGuidelines {
-  overview: string;
-  dos: string[];
-  donts: string[];
+export interface GuidelineSet {
+  do: string[];
+  dont: string[];
 }
+
+export interface UsageGuidelineEntry {
+  overview: string;
+  logo: GuidelineSet;
+  colors: GuidelineSet;
+}
+
+export type UsageGuidelines = Record<BrandLocale, UsageGuidelineEntry>;
+
+export interface BrandMissionEntry {
+  title: string;
+  description: string;
+}
+
+export type BrandMission = Record<BrandLocale, BrandMissionEntry>;

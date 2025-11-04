@@ -18,7 +18,7 @@ outputs:
     description: "JSON-stringified array of color tokens"
     value: ${{ steps.parse.outputs.colors }}
   brand-mission:
-    description: "Brand mission statement"
+    description: "JSON-stringified localized brand mission entries"
     value: ${{ steps.parse.outputs.brand-mission }}
   usage-guidelines:
     description: "JSON-stringified usage guidelines object"
@@ -32,6 +32,9 @@ outputs:
   fonts:
     description: "JSON-stringified fonts object (if present)"
     value: ${{ steps.parse.outputs.fonts }}
+  locales:
+    description: "JSON-stringified array of locales present in the manifest"
+    value: ${{ steps.parse.outputs.locales }}
 runs:
   using: "composite"
   steps:
@@ -68,12 +71,15 @@ runs:
           core.setOutput('version', manifest.version);
           core.setOutput('commit', manifest.commit);
           core.setOutput('colors', JSON.stringify(manifest.colors));
-          core.setOutput('brand-mission', manifest.brandMission);
+          core.setOutput('brand-mission', JSON.stringify(manifest.brandMission));
           core.setOutput('usage-guidelines', JSON.stringify(manifest.usageGuidelines));
           core.setOutput('logos', JSON.stringify(manifest.logos));
           core.setOutput('mascot', JSON.stringify(manifest.mascot));
           core.setOutput('fonts', manifest.fonts ? JSON.stringify(manifest.fonts) : '{}');
 
-          core.info(`✓ Exported manifest data: ${manifest.colors.length} colors, ${manifest.logos.length} logos`);
+          const locales = Object.keys(manifest.brandMission || {});
+          core.setOutput('locales', JSON.stringify(locales));
+
+          core.info(`✓ Exported manifest data: ${manifest.colors.length} colors, ${manifest.logos.length} logos, mission locales: ${locales.join(', ')}`);
       env:
         MANIFEST_INPUT: ${{ inputs.manifest }}

@@ -1,0 +1,25 @@
+name: "Generate Brand PDFs"
+description: "Resolves localized brand guideline routes and generates PDFs for each locale"
+inputs:
+  locales:
+    description: "JSON array of locale codes provided by the branding manifest"
+    required: true
+  default-slug:
+    description: "Slug used by the default locale for the brand guidelines page"
+    required: true
+  routes-file:
+    description: "Path to the TypeScript file exporting the localized routes map"
+    required: false
+    default: application/src/i18n/ui.ts
+  base-url:
+    description: "Base URL used to build capture URLs (e.g. http://localhost:4321)"
+    required: true
+  downloads-dir:
+    description: "Directory where the generated PDFs should be written"
+    required: true
+  working-directory:
+    description: "Working directory for the application"
+    required: true
+runs:
+  using: "node20"
+  main: "index.js"

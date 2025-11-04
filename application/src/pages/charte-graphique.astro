@@ -41,35 +41,39 @@ const guidelines = usageGuidelines[lang];
 
       <div class="grid md:grid-cols-2 gap-8 mb-12">
         {
-          logos.map((logo) => (
-            <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
-              <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 mb-6 flex items-center justify-center min-h-[200px]">
-                <Image
-                  src={import('~/assets/images/logo.png')}
-                  alt={logo.name}
-                  class="max-w-[200px] h-auto"
-                  loading="eager"
-                />
-              </div>
-              <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{logo.name}</h3>
-              <p class="text-gray-600 dark:text-gray-400 mb-4">{logo.usage}</p>
-              <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <p>
-                  <strong>Formats :</strong> {logo.formats.join(', ')}
-                </p>
-                {logo.minimumSize && (
+          logos.map((logo) => {
+            const localizedLogo = logo.copy[lang];
+
+            return (
+              <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 mb-6 flex items-center justify-center min-h-[200px]">
+                  <Image
+                    src={import('~/assets/images/logo.png')}
+                    alt={logo.name}
+                    class="max-w-[200px] h-auto"
+                    loading="eager"
+                  />
+                </div>
+                <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{logo.name}</h3>
+                <p class="text-gray-600 dark:text-gray-400 mb-4">{localizedLogo.usage}</p>
+                <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                   <p>
-                    <strong>Taille minimum :</strong> {logo.minimumSize}
+                    <strong>Formats :</strong> {logo.formats.join(', ')}
                   </p>
-                )}
-                {logo.clearSpace && (
-                  <p>
-                    <strong>Espace libre :</strong> {logo.clearSpace}
-                  </p>
-                )}
+                  {localizedLogo.minimumSize && (
+                    <p>
+                      <strong>Taille minimum :</strong> {localizedLogo.minimumSize}
+                    </p>
+                  )}
+                  {localizedLogo.clearSpace && (
+                    <p>
+                      <strong>Espace libre :</strong> {localizedLogo.clearSpace}
+                    </p>
+                  )}
+                </div>
               </div>
-            </div>
-          ))
+            );
+          })
         }
       </div>
 

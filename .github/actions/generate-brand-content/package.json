@@ -5,6 +5,7 @@
   "main": "index.js",
   "dependencies": {
     "@actions/core": "^1.11.1",
+    "@actions/io": "^2.0.0",
     "ajv": "^8.17.1",
     "ajv-formats": "^3.0.1"
   }

@@ -44,7 +44,7 @@ Generates TypeScript files for brand colors, mission, usage guidelines, typograp
     # This input is required.
     colors: ""
 
-    # Brand mission statement
+    # JSON-stringified localized brand mission entries
     # This input is required.
     brand-mission: ""
 
@@ -52,7 +52,7 @@ Generates TypeScript files for brand colors, mission, usage guidelines, typograp
     # This input is required.
     usage-guidelines: ""
 
-    # JSON-stringified array of logo objects
+    # JSON-stringified array of logo metadata with localized copy
     # This input is required.
     logos: ""
 
@@ -74,9 +74,9 @@ Generates TypeScript files for brand colors, mission, usage guidelines, typograp
 | **`version`**          | The branding version                        | **true**     | -           |
 | **`commit`**           | The commit SHA from the branding repository | **true**     | -           |
 | **`colors`**           | JSON-stringified array of color tokens      | **true**     | -           |
-| **`brand-mission`**    | Brand mission statement                     | **true**     | -           |
+| **`brand-mission`**    | JSON-stringified localized brand mission    | **true**     | -           |
 | **`usage-guidelines`** | JSON-stringified usage guidelines object    | **true**     | -           |
-| **`logos`**            | JSON-stringified array of logo objects      | **true**     | -           |
+| **`logos`**            | JSON-stringified array of logo metadata     | **true**     | -           |
 | **`fonts`**            | JSON-stringified fonts object               | **false**    | -           |
 | **`output-dir`**       | Output directory for generated files        | **true**     | -           |
 
