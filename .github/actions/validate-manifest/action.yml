@@ -14,6 +14,24 @@ outputs:
   commit:
     description: 'The commit SHA from the branding repository'
     value: ${{ steps.parse.outputs.commit }}
+  colors:
+    description: 'JSON-stringified array of color tokens'
+    value: ${{ steps.parse.outputs.colors }}
+  brand-mission:
+    description: 'Brand mission statement'
+    value: ${{ steps.parse.outputs.brand-mission }}
+  usage-guidelines:
+    description: 'JSON-stringified usage guidelines object'
+    value: ${{ steps.parse.outputs.usage-guidelines }}
+  logos:
+    description: 'JSON-stringified array of logo objects'
+    value: ${{ steps.parse.outputs.logos }}
+  mascot:
+    description: 'JSON-stringified mascot object'
+    value: ${{ steps.parse.outputs.mascot }}
+  fonts:
+    description: 'JSON-stringified fonts object (if present)'
+    value: ${{ steps.parse.outputs.fonts }}
 runs:
   using: 'composite'
   steps:
@@ -45,12 +63,17 @@ runs:
           
           core.info('✓ Manifest validation passed');
           
-          // Extract and output key values
+          // Extract and output all values needed by downstream actions
           core.setOutput('artifact-id', manifest.artifactId || '');
           core.setOutput('version', manifest.version);
           core.setOutput('commit', manifest.commit);
+          core.setOutput('colors', JSON.stringify(manifest.colors));
+          core.setOutput('brand-mission', manifest.brandMission);
+          core.setOutput('usage-guidelines', JSON.stringify(manifest.usageGuidelines));
+          core.setOutput('logos', JSON.stringify(manifest.logos));
+          core.setOutput('mascot', JSON.stringify(manifest.mascot));
+          core.setOutput('fonts', manifest.fonts ? JSON.stringify(manifest.fonts) : '{}');
           
-          // Export full manifest for downstream steps
-          core.exportVariable('BRANDING_MANIFEST', JSON.stringify(manifest));
+          core.info(`✓ Exported manifest data: ${manifest.colors.length} colors, ${manifest.logos.length} logos`);
       env:
         MANIFEST_INPUT: ${{ inputs.manifest }}

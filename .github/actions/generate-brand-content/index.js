@@ -4,26 +4,30 @@ const path = require('path');
 
 async function run() {
   try {
+    // Get all inputs (no environment variables)
     const version = core.getInput('version', { required: true });
     const commit = core.getInput('commit', { required: true });
+    const colorsJson = core.getInput('colors', { required: true });
+    const brandMission = core.getInput('brand-mission', { required: true });
+    const usageGuidelinesJson = core.getInput('usage-guidelines', { required: true });
+    const logosJson = core.getInput('logos', { required: true });
+    const fontsJson = core.getInput('fonts', { required: false }) || '{}';
     const outputDir = core.getInput('output-dir', { required: true });
     
-    // Get manifest from environment variable (set by validate-manifest action)
-    const manifestJson = process.env.BRANDING_MANIFEST;
-    if (!manifestJson) {
-      core.setFailed('BRANDING_MANIFEST environment variable not found');
-      return;
-    }
+    // Parse JSON inputs
+    const colors = JSON.parse(colorsJson);
+    const usageGuidelines = JSON.parse(usageGuidelinesJson);
+    const logos = JSON.parse(logosJson);
+    const fonts = JSON.parse(fontsJson);
     
-    core.info('Parsing manifest from environment...');
-    const manifest = JSON.parse(manifestJson);
+    core.info(`Generating brand content files in ${outputDir}...`);
     
     // Ensure output directory exists
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir, { recursive: true });
     }
     
-    const timestamp = manifest.timestamp || new Date().toISOString();
+    const timestamp = new Date().toISOString();
     
     // Generate colors TypeScript file
     const colorsContent = `/**
@@ -35,19 +39,13 @@ async function run() {
  * Generated: ${timestamp}
  */
 
-export interface ColorToken {
-  name: string;
-  hex: string;
-  rgb: string;
-  usage: string;
-}
+import type { ColorToken } from './types';
 
-export const brandColors: ColorToken[] = ${JSON.stringify(manifest.colors, null, 2)};
+export const brandColors: ColorToken[] = ${JSON.stringify(colors, null, 2)};
 `;
     
-    const colorsFile = path.join(outputDir, 'generated-colors.ts');
-    fs.writeFileSync(colorsFile, colorsContent);
-    core.info(`✓ Generated ${colorsFile}`);
+    fs.writeFileSync(path.join(outputDir, 'generated-colors.ts'), colorsContent);
+    core.info(`✓ Generated generated-colors.ts (${colors.length} colors)`);
     
     // Generate brand mission TypeScript file
     const missionContent = `/**
@@ -59,12 +57,11 @@ export const brandColors: ColorToken[] = ${JSON.stringify(manifest.colors, null,
  * Generated: ${timestamp}
  */
 
-export const brandMission: string = ${JSON.stringify(manifest.brandMission)};
+export const brandMission: string = ${JSON.stringify(brandMission)};
 `;
     
-    const missionFile = path.join(outputDir, 'generated-mission.ts');
-    fs.writeFileSync(missionFile, missionContent);
-    core.info(`✓ Generated ${missionFile}`);
+    fs.writeFileSync(path.join(outputDir, 'generated-mission.ts'), missionContent);
+    core.info(`✓ Generated generated-mission.ts`);
     
     // Generate usage guidelines TypeScript file
     const guidelinesContent = `/**
@@ -76,21 +73,51 @@ export const brandMission: string = ${JSON.stringify(manifest.brandMission)};
  * Generated: ${timestamp}
  */
 
-export interface UsageGuidelines {
-  overview: string;
-  dos: string[];
-  donts: string[];
-}
+import type { UsageGuidelines } from './types';
 
-export const usageGuidelines: UsageGuidelines = ${JSON.stringify(manifest.usageGuidelines, null, 2)};
+export const usageGuidelines: UsageGuidelines = ${JSON.stringify(usageGuidelines, null, 2)};
 `;
     
-    const guidelinesFile = path.join(outputDir, 'generated-guidelines.ts');
-    fs.writeFileSync(guidelinesFile, guidelinesContent);
-    core.info(`✓ Generated ${guidelinesFile}`);
+    fs.writeFileSync(path.join(outputDir, 'generated-guidelines.ts'), guidelinesContent);
+    core.info(`✓ Generated generated-guidelines.ts`);
     
-    core.setOutput('success', 'true');
-    core.info('✓ All brand content files generated successfully');
+    // Generate typography TypeScript file
+    const typographyContent = `/**
+ * Auto-generated typography tokens from branding repository
+ * DO NOT EDIT - This file is generated during the build process
+ * Source: @hoverkraft-tech/branding
+ * Version: ${version}
+ * Commit: ${commit}
+ * Generated: ${timestamp}
+ */
+
+import type { TypographyToken } from './types';
+
+export const typography: TypographyToken[] = ${JSON.stringify(fonts.fonts || [], null, 2)};
+`;
+    
+    fs.writeFileSync(path.join(outputDir, 'generated-typography.ts'), typographyContent);
+    core.info(`✓ Generated generated-typography.ts`);
+    
+    // Generate logos TypeScript file
+    const logosContent = `/**
+ * Auto-generated logo assets from branding repository
+ * DO NOT EDIT - This file is generated during the build process
+ * Source: @hoverkraft-tech/branding
+ * Version: ${version}
+ * Commit: ${commit}
+ * Generated: ${timestamp}
+ */
+
+import type { LogoAsset } from './types';
+
+export const logos: LogoAsset[] = ${JSON.stringify(logos, null, 2)};
+`;
+    
+    fs.writeFileSync(path.join(outputDir, 'generated-logos.ts'), logosContent);
+    core.info(`✓ Generated generated-logos.ts (${logos.length} logos)`);
+    
+    core.info('✅ All brand content files generated successfully');
     
   } catch (error) {
     core.setFailed(`Action failed: ${error.message}`);
