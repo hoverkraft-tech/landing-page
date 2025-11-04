@@ -29,32 +29,23 @@
       "pattern": "^[0-9a-f]{40}$"
     },
     "brandMission": {
-      "type": "string",
-      "description": "Brand mission statement",
-      "example": "Empower developers and accelerate time-to-market through a connector-oriented Platform Engineering methodology"
+      "type": "object",
+      "description": "Localized brand mission statements",
+      "required": ["fr", "en"],
+      "additionalProperties": false,
+      "properties": {
+        "fr": { "$ref": "#/definitions/missionEntry" },
+        "en": { "$ref": "#/definitions/missionEntry" }
+      }
     },
     "usageGuidelines": {
       "type": "object",
-      "description": "General usage guidelines for the brand",
+      "description": "Localized usage guidelines for the brand",
+      "required": ["fr", "en"],
+      "additionalProperties": false,
       "properties": {
-        "overview": {
-          "type": "string",
-          "description": "Overview of brand usage guidelines"
-        },
-        "dos": {
-          "type": "array",
-          "description": "List of recommended practices",
-          "items": {
-            "type": "string"
-          }
-        },
-        "donts": {
-          "type": "array",
-          "description": "List of practices to avoid",
-          "items": {
-            "type": "string"
-          }
-        }
+        "fr": { "$ref": "#/definitions/usageGuidelinesEntry" },
+        "en": { "$ref": "#/definitions/usageGuidelinesEntry" }
       }
     },
     "colors": {
@@ -94,7 +85,8 @@
       "description": "Brand logo assets",
       "items": {
         "type": "object",
-        "required": ["name", "path"],
+        "required": ["name", "path", "formats", "copy"],
+        "additionalProperties": false,
         "properties": {
           "name": {
             "type": "string",
@@ -106,10 +98,23 @@
             "description": "Relative path to the logo file in the artifact",
             "example": "logo/primary.svg"
           },
-          "usage": {
-            "type": "string",
-            "description": "Usage guidelines for this logo variant",
-            "example": "Main logo for light backgrounds"
+          "formats": {
+            "type": "array",
+            "description": "Available file formats for this logo variant",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1
+          },
+          "copy": {
+            "type": "object",
+            "description": "Localized copy for logo usage details",
+            "required": ["fr", "en"],
+            "additionalProperties": false,
+            "properties": {
+              "fr": { "$ref": "#/definitions/logoCopy" },
+              "en": { "$ref": "#/definitions/logoCopy" }
+            }
           }
         }
       }
@@ -173,6 +178,80 @@
               }
             }
           }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "missionEntry": {
+      "type": "object",
+      "required": ["title", "description"],
+      "additionalProperties": false,
+      "properties": {
+        "title": {
+          "type": "string",
+          "description": "Localized mission title"
+        },
+        "description": {
+          "type": "string",
+          "description": "Localized mission description"
+        }
+      }
+    },
+    "guidelineSet": {
+      "type": "object",
+      "required": ["do", "dont"],
+      "additionalProperties": false,
+      "properties": {
+        "do": {
+          "type": "array",
+          "description": "List of recommended practices",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dont": {
+          "type": "array",
+          "description": "List of practices to avoid",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "usageGuidelinesEntry": {
+      "type": "object",
+      "required": ["overview", "logo", "colors"],
+      "additionalProperties": false,
+      "properties": {
+        "overview": {
+          "type": "string",
+          "description": "Overview of brand usage guidelines"
+        },
+        "logo": {
+          "$ref": "#/definitions/guidelineSet"
+        },
+        "colors": {
+          "$ref": "#/definitions/guidelineSet"
+        }
+      }
+    },
+    "logoCopy": {
+      "type": "object",
+      "required": ["usage"],
+      "additionalProperties": false,
+      "properties": {
+        "usage": {
+          "type": "string",
+          "description": "Usage guidance for the logo variant"
+        },
+        "minimumSize": {
+          "type": "string",
+          "description": "Minimum size instructions"
+        },
+        "clearSpace": {
+          "type": "string",
+          "description": "Clear space guidance around the logo"
         }
       }
     }

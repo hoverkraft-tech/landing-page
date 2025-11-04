@@ -11,13 +11,13 @@ inputs:
     description: "JSON-stringified array of color tokens"
     required: true
   brand-mission:
-    description: "Brand mission statement"
+    description: "JSON-stringified localized brand mission entries"
     required: true
   usage-guidelines:
     description: "JSON-stringified usage guidelines object"
     required: true
   logos:
-    description: "JSON-stringified array of logo objects"
+    description: "JSON-stringified array of logo metadata with localized copy"
     required: true
   fonts:
     description: "JSON-stringified fonts object"

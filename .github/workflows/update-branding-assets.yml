@@ -1,6 +1,3 @@
-# This workflow is triggered by the branding repository via repository dispatch when new branding data is available.
-# It receives a manifest, downloads the assets, and updates the landing page accordingly.
----
 name: Update Branding Assets
 
 on:
@@ -8,8 +5,10 @@ on:
     types: [branding-update]
   workflow_dispatch:
     inputs:
+      #checkov:skip=CKV_GHA_7: required
       manifest:
-        description: "JSON manifest describing the branding data (artifact-id comes from manifest)"
+        description: |
+          JSON manifest describing the branding data (artifact-id comes from manifest)
         required: true
         type: string
 
@@ -19,7 +18,14 @@ permissions:
   pull-requests: write
 
 env:
+  APPLICATION_DIR: application
   BRAND_DIR: application/src/data/brand
+  BRAND_LOGO_DIR: application/public/brand/logo
+  BRAND_DOWNLOADS_DIR: application/public/brand/downloads
+  BRAND_LOGO_PACK_FILE: application/public/brand/downloads/hoverkraft-logos.zip
+  BRAND_GUIDELINES_BASE_URL: http://localhost:4321
+  BRAND_GUIDELINES_DEFAULT_SLUG: charte-graphique
+  BRAND_GUIDELINES_ROUTES_FILE: application/src/i18n/ui.ts
 
 jobs:
   update-branding:
@@ -31,6 +37,8 @@ jobs:
       - name: Parse inputs
         id: parse-inputs
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        env:
+          MANIFEST_INPUT: ${{ inputs.manifest }}
         with:
           script: |
             let manifest;
@@ -43,12 +51,10 @@ jobs:
 
             core.setOutput('manifest', JSON.stringify(manifest));
 
-            core.info(`📦 Branding update received:`);
+            core.info('📦 Branding update received:');
             core.info(`  Version: ${manifest.version}`);
             core.info(`  Commit: ${manifest.commit}`);
             core.info(`  Artifact ID: ${manifest.artifactId}`);
-        env:
-          MANIFEST_INPUT: ${{ inputs.manifest }}
 
       - name: Validate and parse manifest
         id: validate-manifest
@@ -75,25 +81,29 @@ jobs:
           usage-guidelines: ${{ steps.validate-manifest.outputs.usage-guidelines }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
           fonts: ${{ steps.validate-manifest.outputs.fonts }}
-          output-dir: "application/src/data/brand"
+          output-dir: ${{ env.BRAND_DIR }}
 
       - name: Create logo pack
         uses: ./.github/actions/create-logo-pack
         with:
-          logos-dir: "application/public/brand/logo"
-          output-file: "application/public/brand/downloads/hoverkraft-logos.zip"
+          logos-dir: ${{ env.BRAND_LOGO_DIR }}
+          output-file: ${{ env.BRAND_LOGO_PACK_FILE }}
 
-      - name: Generate brand guidelines PDF
-        uses: ./.github/actions/generate-brand-pdf
+      - name: Generate brand guidelines PDFs
+        id: generate-brand-pdfs
+        uses: ./.github/actions/generate-brand-pdfs
         with:
-          page-url: "http://localhost:4321/charte-graphique"
-          output-file: "application/public/brand/downloads/hoverkraft-brand-guidelines.pdf"
-          working-directory: "application"
+          locales: ${{ steps.validate-manifest.outputs.locales }}
+          default-slug: ${{ env.BRAND_GUIDELINES_DEFAULT_SLUG }}
+          routes-file: ${{ env.BRAND_GUIDELINES_ROUTES_FILE }}
+          base-url: ${{ env.BRAND_GUIDELINES_BASE_URL }}
+          downloads-dir: ${{ env.BRAND_DOWNLOADS_DIR }}
+          working-directory: ${{ env.APPLICATION_DIR }}
 
       - name: Create pull request with updated assets
         uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@5f11437c716059f30c635f90055060e4ef8b31a0 # 0.28.0
         with:
-          branch: "branding-update-${{ steps.validate-manifest.outputs.version }}"
+          branch: branding-update-${{ steps.validate-manifest.outputs.version }}
           commit-message: |
             chore: update branding assets to version ${{ steps.validate-manifest.outputs.version }}
 
@@ -107,15 +117,15 @@ jobs:
             **Branding Commit:** `${{ steps.validate-manifest.outputs.commit }}`
             **Artifact ID:** ${{ steps.validate-manifest.outputs.artifact-id }}
 
-            ### Assets Updated
+            ### Assets Updated (${{ steps.validate-manifest.outputs.locales }})
             - ✅ Brand colors (from manifest)
-            - ✅ Brand mission statement
+            - ✅ Brand mission statements
             - ✅ Usage guidelines
             - ✅ Typography tokens
-            - ✅ Logo assets metadata
+            - ✅ Logo assets metadata (localized copy)
             - ✅ Logo files
             - ✅ Logo pack (ZIP)
-            - ✅ Brand guidelines PDF (generated)
+            - ✅ Brand guidelines PDFs
             - ✅ Mascot image
 
             ### Next Steps
@@ -128,27 +138,29 @@ jobs:
           VERSION: ${{ steps.validate-manifest.outputs.version }}
           COMMIT: ${{ steps.validate-manifest.outputs.commit }}
           ARTIFACT_ID: ${{ steps.validate-manifest.outputs.artifact-id }}
+          LOCALES: ${{ steps.validate-manifest.outputs.locales }}
         with:
           script: |
             await core.summary
               .addHeading('Branding Assets Updated ✅', 2)
               .addTable([
-                [{data: 'Version', header: true}, process.env.VERSION],
-                [{data: 'Branding Commit', header: true}, `\`${process.env.COMMIT}\``],
-                [{data: 'Artifact ID', header: true}, process.env.ARTIFACT_ID]
+                [{ data: 'Version', header: true }, process.env.VERSION],
+                [{ data: 'Branding Commit', header: true }, `\`${process.env.COMMIT}\``],
+                [{ data: 'Artifact ID', header: true }, process.env.ARTIFACT_ID],
+                [{ data: 'Locales', header: true }, process.env.LOCALES]
               ])
               .addHeading('Assets Updated', 3)
               .addList([
                 '✅ Brand colors (from manifest)',
-                '✅ Brand mission statement',
-                '✅ Usage guidelines',
+                `✅ Brand mission statements`,
+                `✅ Usage guidelines`,
                 '✅ Typography tokens',
-                '✅ Logo assets metadata',
+                '✅ Logo assets metadata (localized copy)',
                 '✅ Logo files',
                 '✅ Logo pack (ZIP)',
-                '✅ Brand guidelines PDF (generated)',
+                `✅ Brand guidelines PDFs`,
                 '✅ Mascot image'
               ])
               .addHeading('Next Steps', 3)
               .addRaw('The brand guidelines pages will be updated with the new assets on the next deployment.')
-              .write();
+              .write()
