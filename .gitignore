@@ -30,4 +30,6 @@ application/public/brand/
 application/src/data/brand/generated-colors.ts
 application/src/data/brand/generated-mission.ts
 application/src/data/brand/generated-guidelines.ts
+application/src/data/brand/generated-typography.ts
+application/src/data/brand/generated-logos.ts
 application/src/data/brand/manifest.json

@@ -1,5 +1,5 @@
 name: 'Generate Brand Content'
-description: 'Generates TypeScript files for brand colors, mission, and usage guidelines from manifest'
+description: 'Generates TypeScript files for brand colors, mission, usage guidelines, typography, and logos from manifest'
 inputs:
   version:
     description: 'The branding version'
@@ -7,14 +7,24 @@ inputs:
   commit:
     description: 'The commit SHA from the branding repository'
     required: true
+  colors:
+    description: 'JSON-stringified array of color tokens'
+    required: true
+  brand-mission:
+    description: 'Brand mission statement'
+    required: true
+  usage-guidelines:
+    description: 'JSON-stringified usage guidelines object'
+    required: true
+  logos:
+    description: 'JSON-stringified array of logo objects'
+    required: true
+  fonts:
+    description: 'JSON-stringified fonts object'
+    required: false
   output-dir:
     description: 'Output directory for generated files'
-    required: false
-    default: 'application/src/data/brand'
-outputs:
-  content-generated:
-    description: 'Whether content was successfully generated'
-    value: ${{ steps.generate.outputs.success }}
+    required: true
 runs:
   using: 'node20'
   main: 'index.js'

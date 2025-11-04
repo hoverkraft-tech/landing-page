@@ -3,33 +3,41 @@ description: 'Creates a ZIP archive of all brand logos'
 inputs:
   logos-dir:
     description: 'Directory containing logos'
-    required: false
-    default: 'application/public/brand/logo'
+    required: true
   output-file:
     description: 'Output ZIP file path'
-    required: false
-    default: 'application/public/brand/downloads/hoverkraft-logos.zip'
-outputs:
-  pack-created:
-    description: 'Whether the logo pack was successfully created'
-    value: ${{ steps.create-pack.outputs.success }}
+    required: true
 runs:
   using: 'composite'
   steps:
     - name: Verify logos exist
       id: verify
-      shell: bash
-      run: |
-        if [ -d "${{ inputs.logos-dir }}" ] && [ "$(find ${{ inputs.logos-dir }} -type f 2>/dev/null)" ]; then
-          echo "has-logos=true" >> $GITHUB_OUTPUT
-          echo "✓ Found logos in ${{ inputs.logos-dir }}"
-        else
-          echo "has-logos=false" >> $GITHUB_OUTPUT
-          echo "::warning::No logos found in ${{ inputs.logos-dir }}"
-        fi
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      with:
+        script: |
+          const fs = require('fs');
+          const path = require('path');
+          const logosDir = process.env.LOGOS_DIR;
+          
+          if (!fs.existsSync(logosDir)) {
+            return core.setFailed(`Logos directory not found: ${logosDir}`);
+          }
+          
+          const files = fs.readdirSync(logosDir).filter(file => {
+            const filePath = path.join(logosDir, file);
+            return fs.statSync(filePath).isFile();
+          });
+          
+          if (files.length === 0) {
+            return core.setFailed(`No logo files found in: ${logosDir}`);
+          }
+          
+          core.setOutput('has-logos', 'true');
+          core.info(`✓ Found ${files.length} logos in ${logosDir}`);
+      env:
+        LOGOS_DIR: ${{ inputs.logos-dir }}
     
     - name: Create logo pack using zip-release
-      id: create-pack
       if: steps.verify.outputs.has-logos == 'true'
       uses: TheDoctor0/zip-release@b57d897cb5d60cb78b51a507f63fa184cfe35554 # v0.7.6
       with:
@@ -40,15 +48,17 @@ runs:
     
     - name: Verify ZIP created
       if: steps.verify.outputs.has-logos == 'true'
-      shell: bash
-      run: |
-        if [ -f "${{ inputs.output-file }}" ]; then
-          echo "✓ Created logo pack: ${{ inputs.output-file }}"
-          echo "Logo pack contents:"
-          unzip -l "${{ inputs.output-file }}" || true
-          echo "success=true" >> $GITHUB_OUTPUT
-        else
-          echo "::error::Failed to create logo pack"
-          echo "success=false" >> $GITHUB_OUTPUT
-          exit 1
-        fi
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      with:
+        script: |
+          const fs = require('fs');
+          const outputFile = process.env.OUTPUT_FILE;
+          
+          if (!fs.existsSync(outputFile)) {
+            return core.setFailed(`Failed to create logo pack: ${outputFile}`);
+          }
+          
+          const stats = fs.statSync(outputFile);
+          core.info(`✓ Created logo pack: ${outputFile} (${stats.size} bytes)`);
+      env:
+        OUTPUT_FILE: ${{ inputs.output-file }}

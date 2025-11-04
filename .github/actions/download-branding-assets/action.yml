@@ -10,6 +10,12 @@ inputs:
   commit:
     description: 'The commit SHA from the branding repository'
     required: true
+  logos:
+    description: 'JSON-stringified array of logo objects with paths'
+    required: true
+  mascot:
+    description: 'JSON-stringified mascot object with path'
+    required: true
 runs:
   using: 'composite'
   steps:
@@ -28,9 +34,14 @@ runs:
         script: |
           const fs = require('fs');
           const path = require('path');
-          const manifest = JSON.parse(process.env.BRANDING_MANIFEST);
           
-          core.info(`📦 Processing branding assets v${process.env.VERSION} (${process.env.COMMIT})`);
+          // Parse inputs
+          const logos = JSON.parse(process.env.LOGOS_INPUT);
+          const mascot = JSON.parse(process.env.MASCOT_INPUT);
+          const version = process.env.VERSION_INPUT;
+          const commit = process.env.COMMIT_INPUT;
+          
+          core.info(`📦 Processing branding assets v${version} (${commit})`);
           
           // Create target directories
           const dirs = [
@@ -46,8 +57,8 @@ runs:
             }
           });
           
-          // Copy logos based on manifest paths
-          manifest.logos.forEach(logo => {
+          // Copy logos based on paths from manifest
+          logos.forEach(logo => {
             const sourcePath = path.join('/tmp/branding-assets', logo.path);
             const targetPath = path.join('application/public/brand', logo.path);
             
@@ -64,9 +75,9 @@ runs:
           });
           
           // Copy mascot (if present)
-          if (manifest.mascot && manifest.mascot.path) {
-            const mascotSource = path.join('/tmp/branding-assets', manifest.mascot.path);
-            const mascotTarget = path.join('application/public/brand', manifest.mascot.path);
+          if (mascot && mascot.path) {
+            const mascotSource = path.join('/tmp/branding-assets', mascot.path);
+            const mascotTarget = path.join('application/public/brand', mascot.path);
             
             if (fs.existsSync(mascotSource)) {
               const targetDir = path.dirname(mascotTarget);
@@ -74,19 +85,15 @@ runs:
                 fs.mkdirSync(targetDir, { recursive: true });
               }
               fs.copyFileSync(mascotSource, mascotTarget);
-              core.info(`✓ Copied mascot: ${manifest.mascot.name} (${manifest.mascot.path})`);
+              core.info(`✓ Copied mascot: ${mascot.name} (${mascot.path})`);
             } else {
-              core.setFailed(`Mascot file not found: ${manifest.mascot.path}`);
+              core.setFailed(`Mascot file not found: ${mascot.path}`);
             }
           }
           
-          // Save manifest for reference
-          fs.writeFileSync(
-            'application/src/data/brand/manifest.json',
-            JSON.stringify(manifest, null, 2)
-          );
-          core.info('✓ Saved manifest.json');
-          core.info(`✓ Successfully organized ${manifest.logos.length} logos and 1 mascot`);
+          core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
       env:
-        VERSION: ${{ inputs.version }}
-        COMMIT: ${{ inputs.commit }}
+        LOGOS_INPUT: ${{ inputs.logos }}
+        MASCOT_INPUT: ${{ inputs.mascot }}
+        VERSION_INPUT: ${{ inputs.version }}
+        COMMIT_INPUT: ${{ inputs.commit }}

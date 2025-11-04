@@ -68,16 +68,26 @@ jobs:
           artifact-id: ${{ steps.validate-manifest.outputs.artifact-id }}
           version: ${{ steps.validate-manifest.outputs.version }}
           commit: ${{ steps.validate-manifest.outputs.commit }}
+          logos: ${{ steps.validate-manifest.outputs.logos }}
+          mascot: ${{ steps.validate-manifest.outputs.mascot }}
 
-      - name: Generate brand content (colors, mission, guidelines)
+      - name: Generate brand content (colors, mission, guidelines, typography, logos)
         uses: ./.github/actions/generate-brand-content
         with:
           version: ${{ steps.validate-manifest.outputs.version }}
           commit: ${{ steps.validate-manifest.outputs.commit }}
+          colors: ${{ steps.validate-manifest.outputs.colors }}
+          brand-mission: ${{ steps.validate-manifest.outputs.brand-mission }}
+          usage-guidelines: ${{ steps.validate-manifest.outputs.usage-guidelines }}
+          logos: ${{ steps.validate-manifest.outputs.logos }}
+          fonts: ${{ steps.validate-manifest.outputs.fonts }}
           output-dir: 'application/src/data/brand'
 
       - name: Create logo pack
         uses: ./.github/actions/create-logo-pack
+        with:
+          logos-dir: 'application/public/brand/logo'
+          output-file: 'application/public/brand/downloads/hoverkraft-logos.zip'
 
       - name: Generate brand guidelines PDF
         uses: ./.github/actions/generate-brand-pdf
@@ -94,19 +104,21 @@ jobs:
             chore: update branding assets to version ${{ steps.validate-manifest.outputs.version }}
             
             Branding repository commit: ${{ steps.validate-manifest.outputs.commit }}
-            Artifact ID: ${{ steps.parse-manifest.outputs.artifact_id }}
+            Artifact ID: ${{ steps.validate-manifest.outputs.artifact-id }}
           pr-title: 'chore: update branding assets to v${{ steps.validate-manifest.outputs.version }}'
           pr-body: |
             ## Branding Assets Updated 🎨
             
             **Version:** ${{ steps.validate-manifest.outputs.version }}
             **Branding Commit:** `${{ steps.validate-manifest.outputs.commit }}`
-            **Artifact ID:** ${{ steps.parse-manifest.outputs.artifact_id }}
+            **Artifact ID:** ${{ steps.validate-manifest.outputs.artifact-id }}
             
             ### Assets Updated
             - ✅ Brand colors (from manifest)
             - ✅ Brand mission statement
             - ✅ Usage guidelines
+            - ✅ Typography tokens
+            - ✅ Logo assets metadata
             - ✅ Logo files
             - ✅ Logo pack (ZIP)
             - ✅ Brand guidelines PDF (generated)
@@ -122,7 +134,7 @@ jobs:
         env:
           VERSION: ${{ steps.validate-manifest.outputs.version }}
           COMMIT: ${{ steps.validate-manifest.outputs.commit }}
-          ARTIFACT_ID: ${{ steps.parse-manifest.outputs.artifact_id }}
+          ARTIFACT_ID: ${{ steps.validate-manifest.outputs.artifact-id }}
         with:
           script: |
             await core.summary
@@ -137,6 +149,8 @@ jobs:
                 '✅ Brand colors (from manifest)',
                 '✅ Brand mission statement',
                 '✅ Usage guidelines',
+                '✅ Typography tokens',
+                '✅ Logo assets metadata',
                 '✅ Logo files',
                 '✅ Logo pack (ZIP)',
                 '✅ Brand guidelines PDF (generated)',
