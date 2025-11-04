@@ -29,10 +29,17 @@ export interface LogoAsset {
   clearSpace?: string;
 }
 
-// Import generated colors from branding repository
-// @ts-ignore - This file is generated during the build process
+// Import generated data from branding repository
+// @ts-ignore - These files are generated during the build process
 const generatedColors = await import('./generated-colors.ts');
+// @ts-ignore
+const generatedMission = await import('./generated-mission.ts');
+// @ts-ignore
+const generatedGuidelines = await import('./generated-guidelines.ts');
+
 export const brandColors: ColorToken[] = generatedColors.brandColors;
+export const brandMission = generatedMission.brandMission;
+export const usageGuidelines = generatedGuidelines.usageGuidelines;
 
 export const typography: TypographyToken[] = [
   {
@@ -59,79 +66,3 @@ export const logos: LogoAsset[] = [
     clearSpace: '20px on all sides',
   },
 ];
-
-export const brandMission = {
-  fr: {
-    title: 'Notre Mission',
-    description:
-      "Libérer les développeurs et accélérer le time-to-market grâce à une méthodologie Platform Engineering orientée connecteurs, ancrée dans l'open source et adaptée aux réalités des PME/ETI françaises.",
-  },
-  en: {
-    title: 'Our Mission',
-    description:
-      'Empower developers and accelerate time-to-market through a connector-oriented Platform Engineering methodology, rooted in open source and tailored to the realities of French SMEs.',
-  },
-};
-
-export const usageGuidelines = {
-  fr: {
-    logo: {
-      do: [
-        'Utilisez le logo dans sa forme originale sans modification',
-        'Maintenez un espace libre minimum de 20px autour du logo',
-        'Utilisez le logo principal sur des fonds clairs',
-        'Respectez les proportions originales du logo',
-      ],
-      dont: [
-        "Ne déformez pas le logo en l'étirant ou en le compressant",
-        "N'ajoutez pas d'effets (ombres, contours, dégradés)",
-        'Ne changez pas les couleurs du logo',
-        "N'utilisez pas le logo sur des images complexes",
-      ],
-    },
-    colors: {
-      do: [
-        'Utilisez les couleurs primaires pour les éléments clés',
-        'Respectez les ratios de contraste WCAG AA (4.5:1 minimum)',
-        'Utilisez les codes hexadécimaux ou RGB fournis',
-        'Maintenez la cohérence des couleurs sur tous les supports',
-      ],
-      dont: [
-        'Ne créez pas de nouvelles couleurs en dehors de la palette',
-        "N'utilisez pas de dégradés non approuvés",
-        'Ne modifiez pas la transparence sans validation',
-        "N'utilisez pas de couleurs similaires mais non exactes",
-      ],
-    },
-  },
-  en: {
-    logo: {
-      do: [
-        'Use the logo in its original form without modification',
-        'Maintain a minimum clear space of 20px around the logo',
-        'Use the primary logo on light backgrounds',
-        'Respect the original proportions of the logo',
-      ],
-      dont: [
-        'Do not distort the logo by stretching or compressing it',
-        'Do not add effects (shadows, outlines, gradients)',
-        'Do not change the logo colors',
-        'Do not use the logo on complex images',
-      ],
-    },
-    colors: {
-      do: [
-        'Use primary colors for key elements',
-        'Respect WCAG AA contrast ratios (4.5:1 minimum)',
-        'Use the provided hexadecimal or RGB codes',
-        'Maintain color consistency across all media',
-      ],
-      dont: [
-        'Do not create new colors outside the palette',
-        'Do not use unapproved gradients',
-        'Do not modify transparency without validation',
-        'Do not use similar but non-exact colors',
-      ],
-    },
-  },
-};
