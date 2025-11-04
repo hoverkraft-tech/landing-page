@@ -26,10 +26,5 @@ application/pnpm-lock.yaml
 application/.astro
 
 # Generated brand assets (fetched from @hoverkraft-tech/branding during CI)
+# Note: generated-*.ts files are kept in git to allow builds without refetching branding data
 application/public/brand/
-application/src/data/brand/generated-colors.ts
-application/src/data/brand/generated-mission.ts
-application/src/data/brand/generated-guidelines.ts
-application/src/data/brand/generated-typography.ts
-application/src/data/brand/generated-logos.ts
-application/src/data/brand/manifest.json
