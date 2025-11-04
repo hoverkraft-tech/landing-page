@@ -4,10 +4,18 @@ const path = require('path');
 
 async function run() {
   try {
-    const manifestJson = core.getInput('manifest', { required: true });
+    const version = core.getInput('version', { required: true });
+    const commit = core.getInput('commit', { required: true });
     const outputDir = core.getInput('output-dir', { required: true });
     
-    core.info('Parsing manifest...');
+    // Get manifest from environment variable (set by validate-manifest action)
+    const manifestJson = process.env.BRANDING_MANIFEST;
+    if (!manifestJson) {
+      core.setFailed('BRANDING_MANIFEST environment variable not found');
+      return;
+    }
+    
+    core.info('Parsing manifest from environment...');
     const manifest = JSON.parse(manifestJson);
     
     // Ensure output directory exists
@@ -15,13 +23,16 @@ async function run() {
       fs.mkdirSync(outputDir, { recursive: true });
     }
     
+    const timestamp = manifest.timestamp || new Date().toISOString();
+    
     // Generate colors TypeScript file
     const colorsContent = `/**
  * Auto-generated brand colors from branding repository
  * DO NOT EDIT - This file is generated during the build process
  * Source: @hoverkraft-tech/branding
- * Version: ${manifest.version}
- * Generated: ${manifest.timestamp}
+ * Version: ${version}
+ * Commit: ${commit}
+ * Generated: ${timestamp}
  */
 
 export interface ColorToken {
@@ -43,8 +54,9 @@ export const brandColors: ColorToken[] = ${JSON.stringify(manifest.colors, null,
  * Auto-generated brand mission from branding repository
  * DO NOT EDIT - This file is generated during the build process
  * Source: @hoverkraft-tech/branding
- * Version: ${manifest.version}
- * Generated: ${manifest.timestamp}
+ * Version: ${version}
+ * Commit: ${commit}
+ * Generated: ${timestamp}
  */
 
 export const brandMission: string = ${JSON.stringify(manifest.brandMission)};
@@ -59,8 +71,9 @@ export const brandMission: string = ${JSON.stringify(manifest.brandMission)};
  * Auto-generated usage guidelines from branding repository
  * DO NOT EDIT - This file is generated during the build process
  * Source: @hoverkraft-tech/branding
- * Version: ${manifest.version}
- * Generated: ${manifest.timestamp}
+ * Version: ${version}
+ * Commit: ${commit}
+ * Generated: ${timestamp}
  */
 
 export interface UsageGuidelines {
