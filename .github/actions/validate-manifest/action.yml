@@ -1,0 +1,56 @@
+name: 'Validate Branding Manifest'
+description: 'Validates the branding manifest against JSON schema and parses it for use in the workflow'
+inputs:
+  manifest:
+    description: 'The manifest JSON string from the repository dispatch event'
+    required: true
+outputs:
+  artifact-id:
+    description: 'The artifact ID from the manifest'
+    value: ${{ steps.parse.outputs.artifact-id }}
+  version:
+    description: 'The branding version from the manifest'
+    value: ${{ steps.parse.outputs.version }}
+  commit:
+    description: 'The commit SHA from the branding repository'
+    value: ${{ steps.parse.outputs.commit }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Validate and parse manifest
+      id: parse
+      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      with:
+        script: |
+          const fs = require('fs');
+          const Ajv = require('ajv');
+          const addFormats = require('ajv-formats');
+          
+          // Parse manifest from input
+          const manifest = JSON.parse(process.env.MANIFEST_INPUT);
+          
+          // Load and validate against schema
+          const schema = JSON.parse(fs.readFileSync('.github/schemas/branding-manifest.schema.json', 'utf8'));
+          
+          const ajv = new Ajv();
+          addFormats(ajv);
+          
+          const validate = ajv.compile(schema);
+          const valid = validate(manifest);
+          
+          if (!valid) {
+            core.setFailed(`Manifest validation failed: ${JSON.stringify(validate.errors, null, 2)}`);
+            return;
+          }
+          
+          core.info('✓ Manifest validation passed');
+          
+          // Extract and output key values
+          core.setOutput('artifact-id', manifest.artifactId || '');
+          core.setOutput('version', manifest.version);
+          core.setOutput('commit', manifest.commit);
+          
+          // Export full manifest for downstream steps
+          core.exportVariable('BRANDING_MANIFEST', JSON.stringify(manifest));
+      env:
+        MANIFEST_INPUT: ${{ inputs.manifest }}

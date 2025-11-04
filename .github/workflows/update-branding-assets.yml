@@ -47,8 +47,6 @@ jobs:
             
             core.setOutput('manifest', JSON.stringify(manifest));
             core.setOutput('artifact_id', artifactId);
-            core.setOutput('version', manifest.version);
-            core.setOutput('commit', manifest.commit);
             
             core.info(`📦 Branding update received:`);
             core.info(`  Version: ${manifest.version}`);
@@ -58,30 +56,11 @@ jobs:
           MANIFEST_INPUT: ${{ inputs.manifest }}
           ARTIFACT_ID_INPUT: ${{ inputs.artifact-id }}
 
-      - name: Validate manifest against schema
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      - name: Validate and parse manifest
+        id: validate-manifest
+        uses: ./.github/actions/validate-manifest
         with:
-          script: |
-            const fs = require('fs');
-            const Ajv = require('ajv');
-            const addFormats = require('ajv-formats');
-            
-            const manifest = JSON.parse(process.env.MANIFEST);
-            const schema = JSON.parse(fs.readFileSync('.github/schemas/branding-manifest.schema.json', 'utf8'));
-            
-            const ajv = new Ajv();
-            addFormats(ajv);
-            
-            const validate = ajv.compile(schema);
-            const valid = validate(manifest);
-            
-            if (!valid) {
-              core.setFailed(`Manifest validation failed: ${JSON.stringify(validate.errors, null, 2)}`);
-            } else {
-              core.info('✓ Manifest validation passed');
-            }
-        env:
-          MANIFEST: ${{ steps.parse-manifest.outputs.manifest }}
+          manifest: ${{ steps.parse-manifest.outputs.manifest }}
 
       - name: Download branding artifact
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
@@ -164,18 +143,6 @@ jobs:
       - name: Create logo pack
         uses: ./.github/actions/create-logo-pack
 
-      - name: Setup Node.js
-        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
-        with:
-          node-version: '20'
-          cache: 'npm'
-          cache-dependency-path: 'application/package-lock.json'
-
-      - name: Install dependencies
-        run: |
-          cd application
-          npm ci
-
       - name: Generate brand guidelines PDF
         uses: ./.github/actions/generate-brand-pdf
         with:
@@ -183,54 +150,21 @@ jobs:
           output-file: 'application/public/brand/downloads/hoverkraft-brand-guidelines.pdf'
           working-directory: 'application'
 
-      - name: Validate updated assets
-        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
-        with:
-          script: |
-            const fs = require('fs');
-            const missingAssets = [];
-            
-            const requiredFiles = [
-              'application/src/data/brand/generated-colors.ts',
-              'application/src/data/brand/generated-mission.ts',
-              'application/src/data/brand/generated-guidelines.ts',
-              'application/public/brand/downloads/hoverkraft-logos.zip',
-              'application/public/brand/downloads/hoverkraft-brand-guidelines.pdf'
-            ];
-            
-            requiredFiles.forEach(file => {
-              if (!fs.existsSync(file)) {
-                missingAssets.push(file);
-              }
-            });
-            
-            // Check for at least one logo
-            const logoDir = 'application/public/brand/logo';
-            if (!fs.existsSync(logoDir) || fs.readdirSync(logoDir).length === 0) {
-              missingAssets.push('logos');
-            }
-            
-            if (missingAssets.length > 0) {
-              core.setFailed(`Missing required branding assets: ${missingAssets.join(', ')}`);
-            } else {
-              core.info('✓ All required branding assets are present');
-            }
-
       - name: Create pull request with updated assets
         uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@45440f67c2a87d63ba7b99f7ae3ea5b0e1c2f6a3 # v1.2.0
         with:
-          branch-name: 'branding-update-${{ steps.parse-manifest.outputs.version }}'
+          branch-name: 'branding-update-${{ steps.validate-manifest.outputs.version }}'
           commit-message: |
-            chore: update branding assets to version ${{ steps.parse-manifest.outputs.version }}
+            chore: update branding assets to version ${{ steps.validate-manifest.outputs.version }}
             
-            Branding repository commit: ${{ steps.parse-manifest.outputs.commit }}
+            Branding repository commit: ${{ steps.validate-manifest.outputs.commit }}
             Artifact ID: ${{ steps.parse-manifest.outputs.artifact_id }}
-          pr-title: 'chore: update branding assets to v${{ steps.parse-manifest.outputs.version }}'
+          pr-title: 'chore: update branding assets to v${{ steps.validate-manifest.outputs.version }}'
           pr-body: |
             ## Branding Assets Updated 🎨
             
-            **Version:** ${{ steps.parse-manifest.outputs.version }}
-            **Branding Commit:** `${{ steps.parse-manifest.outputs.commit }}`
+            **Version:** ${{ steps.validate-manifest.outputs.version }}
+            **Branding Commit:** `${{ steps.validate-manifest.outputs.commit }}`
             **Artifact ID:** ${{ steps.parse-manifest.outputs.artifact_id }}
             
             ### Assets Updated
@@ -250,8 +184,8 @@ jobs:
       - name: Create summary
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         env:
-          VERSION: ${{ steps.parse-manifest.outputs.version }}
-          COMMIT: ${{ steps.parse-manifest.outputs.commit }}
+          VERSION: ${{ steps.validate-manifest.outputs.version }}
+          COMMIT: ${{ steps.validate-manifest.outputs.commit }}
           ARTIFACT_ID: ${{ steps.parse-manifest.outputs.artifact_id }}
         with:
           script: |
