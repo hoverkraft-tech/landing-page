@@ -1,22 +1,22 @@
-name: 'Generate Brand PDF'
-description: 'Generates a PDF from the brand guidelines page'
+name: "Generate Brand PDF"
+description: "Generates a PDF from the brand guidelines page"
 inputs:
   page-url:
-    description: 'URL of the brand guidelines page to convert to PDF'
+    description: "URL of the brand guidelines page to convert to PDF"
     required: false
-    default: 'http://localhost:4321/charte-graphique'
+    default: "http://localhost:4321/charte-graphique"
   output-file:
-    description: 'Output PDF file path'
+    description: "Output PDF file path"
     required: false
-    default: 'application/public/brand/downloads/hoverkraft-brand-guidelines.pdf'
+    default: "application/public/brand/downloads/hoverkraft-brand-guidelines.pdf"
   working-directory:
-    description: 'Working directory for the application'
+    description: "Working directory for the application"
     required: false
-    default: 'application'
+    default: "application"
 outputs:
   pdf-generated:
-    description: 'Whether the PDF was successfully generated'
+    description: "Whether the PDF was successfully generated"
     value: ${{ steps.generate.outputs.success }}
 runs:
-  using: 'node20'
-  main: 'index.js'
+  using: "node20"
+  main: "index.js"

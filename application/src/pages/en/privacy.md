@@ -1,17 +1,18 @@
 ---
 title: 'Privacy Policy'
 layout: '~/layouts/MarkdownLayout.astro'
-setup: |
-	import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 ---
+
+import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
+import SiteLink from '~/components/common/SiteLink.astro';
 
 _Last updated_: September 27, 2025
 
-This privacy policy (the "Policy") describes how Hoverkraft collects, uses, and protects your personal data when you visit the site [https://hoverkraft.cloud](https://hoverkraft.cloud) (the "Site") or interact with us through our forms and content.
+This privacy policy (the "Policy") describes how Hoverkraft collects, uses, and protects your personal data when you visit the site <SiteLink /> (the "Site") or interact with us through our forms and content.
 
 ## 1. Data Controller
 
-The data controller is Hoverkraft, publisher of the Site and provider of platform engineering services. You can contact us at <ContactEmailLink /> or via the form available at [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
+The data controller is Hoverkraft, publisher of the Site and provider of platform engineering services. You can contact us at <ContactEmailLink /> or via the form available at <SiteLink path="/contact" />.
 
 ## 2. Data Collected
 

@@ -31,6 +31,10 @@ metadata:
 i18n:
   language: fr
   textDirection: ltr
+  showDefaultLang: false
+  languages:
+    fr: Français
+    en: English
 
 apps:
   blog:

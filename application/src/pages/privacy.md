@@ -1,17 +1,18 @@
 ---
 title: 'Politique de confidentialité'
 layout: '~/layouts/MarkdownLayout.astro'
-setup: |
-	import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 ---
+
+import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
+import SiteLink from '~/components/common/SiteLink.astro';
 
 *Dernière mise à jour* : 27 septembre 2025
 
-La présente politique de confidentialité (la « Politique ») décrit la manière dont Hoverkraft collecte, utilise et protège vos données personnelles lorsque vous consultez le site [https://hoverkraft.cloud](https://hoverkraft.cloud) (le « Site ») ou lorsque vous interagissez avec nous via nos formulaires et contenus.
+La présente politique de confidentialité (la « Politique ») décrit la manière dont Hoverkraft collecte, utilise et protège vos données personnelles lorsque vous consultez le site <SiteLink /> (le « Site ») ou lorsque vous interagissez avec nous via nos formulaires et contenus.
 
 ## 1. Responsable du traitement
 
-Le responsable du traitement est la société Hoverkraft, éditrice du Site et prestataire de services de platform engineering. Vous pouvez nous contacter à l’adresse <ContactEmailLink /> ou via le formulaire disponible sur [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
+Le responsable du traitement est la société Hoverkraft, éditrice du Site et prestataire de services de platform engineering. Vous pouvez nous contacter à l’adresse <ContactEmailLink /> ou via le formulaire disponible sur <SiteLink path="/contact" />.
 
 ## 2. Données collectées
 
@@ -94,7 +95,7 @@ La présente Politique peut être amenée à évoluer pour refléter les modific
 Pour toute question relative à cette Politique ou à la gestion de vos données personnelles, vous pouvez nous contacter :
 
 - Par email : <ContactEmailLink />
-- Via le formulaire en ligne : [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact)
+- Via le formulaire en ligne : <SiteLink path="/contact" />
 - Par courrier : Hoverkraft – Délégué à la protection des données, 10 rue (à compléter), 75000 Paris, France
 
 Nous traiterons votre demande dans les meilleurs délais.

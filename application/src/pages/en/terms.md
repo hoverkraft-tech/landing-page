@@ -1,9 +1,10 @@
 ---
 title: 'Terms of Use'
 layout: '~/layouts/MarkdownLayout.astro'
-setup: |
-	import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 ---
+
+import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
+import SiteLink from '~/components/common/SiteLink.astro';
 
 _Last updated_: September 27, 2025
 
@@ -11,7 +12,7 @@ Please read these terms of use carefully before browsing the site or using servi
 
 ## 1. Purpose and Scope
 
-These terms of use (hereinafter the "Terms") define the terms and conditions under which Hoverkraft makes available to visitors and professional clients its site accessible at [https://hoverkraft.cloud](https://hoverkraft.cloud) (hereinafter the "Site") as well as associated services (demonstrations, resources, and informational content).
+These terms of use (hereinafter the "Terms") define the terms and conditions under which Hoverkraft makes available to visitors and professional clients its site accessible at <SiteLink /> (hereinafter the "Site") as well as associated services (demonstrations, resources, and informational content).
 
 Any consultation of the Site constitutes unreserved acceptance of the Terms by the internet user (hereinafter the "User").
 
@@ -60,7 +61,7 @@ Hoverkraft's liability cannot be engaged for:
 
 ## 9. Personal Data
 
-Collection, use, and protection of personal data are governed by our Privacy Policy, accessible at [https://hoverkraft.cloud/privacy](https://hoverkraft.cloud/privacy). By using the Site, the User acknowledges having read and accepted the Privacy Policy.
+Collection, use, and protection of personal data are governed by our Privacy Policy, accessible at <SiteLink path="/privacy" />. By using the Site, the User acknowledges having read and accepted the Privacy Policy.
 
 ## 10. Intellectual Property
 
@@ -74,7 +75,7 @@ These Terms are governed by French law. In case of dispute, and failing amicable
 
 ## 12. Contact
 
-For any questions regarding these Terms, contact us at <ContactEmailLink /> or via the contact form at [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact).
+For any questions regarding these Terms, contact us at <ContactEmailLink /> or via the contact form at <SiteLink path="/contact" />.
 
 ## 13. Modification of Terms
 
