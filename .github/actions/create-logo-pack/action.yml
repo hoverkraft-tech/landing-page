@@ -4,7 +4,7 @@ inputs:
   logos-dir:
     description: 'Directory containing logos'
     required: false
-    default: 'application/public/brand/logos'
+    default: 'application/public/brand/logo'
   output-file:
     description: 'Output ZIP file path'
     required: false
@@ -22,13 +22,13 @@ runs:
       run: |
         echo "Creating logo pack ZIP..."
         
-        if [ -d "${{ inputs.logos-dir }}" ] && [ "$(ls -A ${{ inputs.logos-dir }})" ]; then
+        if [ -d "${{ inputs.logos-dir }}" ] && [ "$(find ${{ inputs.logos-dir }} -type f)" ]; then
           # Ensure output directory exists
           mkdir -p "$(dirname ${{ inputs.output-file }})"
           
           # Create ZIP archive
           cd ${{ inputs.logos-dir }}
-          zip -r ../../downloads/$(basename ${{ inputs.output-file }}) . -i "*.svg" "*.png" "*.pdf" "*.jpg" "*.jpeg"
+          zip -r ../downloads/$(basename ${{ inputs.output-file }}) . -i "*.svg" "*.png" "*.pdf" "*.jpg" "*.jpeg"
           cd -
           
           echo "✓ Created logo pack: ${{ inputs.output-file }}"
