@@ -51,28 +51,24 @@ runs:
             'application/public/brand/downloads'
           ];
 
-          dirs.forEach(dir => {
-            if (!fs.existsSync(dir)) {
-              fs.mkdirSync(dir, { recursive: true });
-            }
-          });
+          for (const dir of dirs) {
+            await io.mkdirP(dir);
+          }
 
           // Copy logos based on paths from manifest
-          logos.forEach(logo => {
+          for (const logo of logos) {
             const sourcePath = path.join('/tmp/branding-assets', logo.path);
             const targetPath = path.join('application/public/brand', logo.path);
             
             if (fs.existsSync(sourcePath)) {
               const targetDir = path.dirname(targetPath);
-              if (!fs.existsSync(targetDir)) {
-                fs.mkdirSync(targetDir, { recursive: true });
-              }
-              fs.copyFileSync(sourcePath, targetPath);
+              await io.mkdirP(targetDir);
+              await io.cp(sourcePath, targetPath);
               core.info(`✓ Copied logo: ${logo.name} (${logo.path})`);
             } else {
               core.setFailed(`Logo file not found: ${logo.path}`);
             }
-          });
+          }
 
           // Copy mascot (if present)
           if (mascot && mascot.path) {
@@ -81,10 +77,8 @@ runs:
             
             if (fs.existsSync(mascotSource)) {
               const targetDir = path.dirname(mascotTarget);
-              if (!fs.existsSync(targetDir)) {
-                fs.mkdirSync(targetDir, { recursive: true });
-              }
-              fs.copyFileSync(mascotSource, mascotTarget);
+              await io.mkdirP(targetDir);
+              await io.cp(mascotSource, mascotTarget);
               core.info(`✓ Copied mascot: ${mascot.name} (${mascot.path})`);
             } else {
               core.setFailed(`Mascot file not found: ${mascot.path}`);
