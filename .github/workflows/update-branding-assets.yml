@@ -8,12 +8,8 @@ on:
     types: [branding-update]
   workflow_dispatch:
     inputs:
-      artifact-id:
-        description: "GitHub artifact ID containing branding assets"
-        required: true
-        type: string
       manifest:
-        description: "JSON manifest describing the branding data"
+        description: "JSON manifest describing the branding data (artifact-id comes from manifest)"
         required: true
         type: string
 
@@ -21,6 +17,9 @@ permissions:
   contents: write
   actions: read
   pull-requests: write
+
+env:
+  BRAND_DIR: application/src/data/brand
 
 jobs:
   update-branding:
@@ -34,26 +33,22 @@ jobs:
         uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
         with:
           script: |
-            let manifest, artifactId;
+            let manifest;
 
             if (context.eventName === 'repository_dispatch') {
               manifest = context.payload.client_payload.manifest;
-              artifactId = context.payload.client_payload.artifact_id;
             } else {
               manifest = JSON.parse(process.env.MANIFEST_INPUT);
-              artifactId = process.env.ARTIFACT_ID_INPUT;
             }
 
             core.setOutput('manifest', JSON.stringify(manifest));
-            core.setOutput('artifact_id', artifactId);
 
             core.info(`📦 Branding update received:`);
             core.info(`  Version: ${manifest.version}`);
             core.info(`  Commit: ${manifest.commit}`);
-            core.info(`  Artifact ID: ${artifactId}`);
+            core.info(`  Artifact ID: ${manifest.artifactId}`);
         env:
           MANIFEST_INPUT: ${{ inputs.manifest }}
-          ARTIFACT_ID_INPUT: ${{ inputs.artifact-id }}
 
       - name: Validate and parse manifest
         id: validate-manifest
