@@ -1,10 +1,4 @@
-export const languages = {
-  fr: 'Français',
-  en: 'English',
-};
-
-export const defaultLang = 'fr';
-export const showDefaultLang = false;
+import { I18N } from 'astrowind:config';
 
 export const ui = {
   fr: {
@@ -88,3 +82,26 @@ export const routes = {
     'charte-graphique': 'brand-guidelines',
   },
 };
+
+type SupportedLanguage = keyof typeof ui;
+
+const supportedLanguages = Object.keys(ui) as SupportedLanguage[];
+const configuredLanguageLabels = (I18N?.languages ?? {}) as Record<string, string>;
+export const languages: Record<SupportedLanguage, string> = supportedLanguages.reduce(
+  (acc, lang) => {
+    const configuredLabel = configuredLanguageLabels[lang];
+    const fallbackLabel = lang.toUpperCase();
+    acc[lang] =
+      typeof configuredLabel === 'string' && configuredLabel.trim().length > 0 ? configuredLabel : fallbackLabel;
+    return acc;
+  },
+  {} as Record<SupportedLanguage, string>
+);
+
+const configuredDefaultLang = I18N?.language as string | undefined;
+const fallbackDefaultLang = (supportedLanguages.find((lang) => lang === ('fr' as SupportedLanguage)) ??
+  supportedLanguages[0]) as SupportedLanguage;
+const resolvedDefaultLang = supportedLanguages.find((lang) => lang === configuredDefaultLang) ?? fallbackDefaultLang;
+
+export const defaultLang: SupportedLanguage = resolvedDefaultLang;
+export const showDefaultLang = I18N?.showDefaultLang ?? false;

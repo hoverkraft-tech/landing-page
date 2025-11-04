@@ -1,23 +1,23 @@
-name: 'Download Branding Assets'
-description: 'Downloads and organizes branding assets from the branding repository'
+name: "Download Branding Assets"
+description: "Downloads and organizes branding assets from the branding repository"
 inputs:
   artifact-id:
-    description: 'The artifact ID from the branding repository'
+    description: "The artifact ID from the branding repository"
     required: true
   version:
-    description: 'The branding version'
+    description: "The branding version"
     required: true
   commit:
-    description: 'The commit SHA from the branding repository'
+    description: "The commit SHA from the branding repository"
     required: true
   logos:
-    description: 'JSON-stringified array of logo objects with paths'
+    description: "JSON-stringified array of logo objects with paths"
     required: true
   mascot:
-    description: 'JSON-stringified mascot object with path'
+    description: "JSON-stringified mascot object with path"
     required: true
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Download branding artifact
       uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
@@ -34,15 +34,15 @@ runs:
         script: |
           const fs = require('fs');
           const path = require('path');
-          
+
           // Parse inputs
           const logos = JSON.parse(process.env.LOGOS_INPUT);
           const mascot = JSON.parse(process.env.MASCOT_INPUT);
           const version = process.env.VERSION_INPUT;
           const commit = process.env.COMMIT_INPUT;
-          
+
           core.info(`📦 Processing branding assets v${version} (${commit})`);
-          
+
           // Create target directories
           const dirs = [
             'application/src/data/brand',
@@ -50,13 +50,13 @@ runs:
             'application/public/brand/mascot',
             'application/public/brand/downloads'
           ];
-          
+
           dirs.forEach(dir => {
             if (!fs.existsSync(dir)) {
               fs.mkdirSync(dir, { recursive: true });
             }
           });
-          
+
           // Copy logos based on paths from manifest
           logos.forEach(logo => {
             const sourcePath = path.join('/tmp/branding-assets', logo.path);
@@ -73,7 +73,7 @@ runs:
               core.setFailed(`Logo file not found: ${logo.path}`);
             }
           });
-          
+
           // Copy mascot (if present)
           if (mascot && mascot.path) {
             const mascotSource = path.join('/tmp/branding-assets', mascot.path);
@@ -90,7 +90,7 @@ runs:
               core.setFailed(`Mascot file not found: ${mascot.path}`);
             }
           }
-          
+
           core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
       env:
         LOGOS_INPUT: ${{ inputs.logos }}

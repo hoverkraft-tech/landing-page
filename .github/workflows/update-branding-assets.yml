@@ -1,8 +1,7 @@
+# This workflow is triggered by the branding repository via repository dispatch when new branding data is available.
+# It receives a manifest, downloads the assets, and updates the landing page accordingly.
+---
 name: Update Branding Assets
-
-# This workflow is triggered by the branding repository via repository dispatch
-# when new branding data is available. It receives a manifest and artifact ID,
-# downloads the assets, and updates the landing page accordingly.
 
 on:
   repository_dispatch:
@@ -10,11 +9,11 @@ on:
   workflow_dispatch:
     inputs:
       artifact-id:
-        description: 'GitHub artifact ID containing branding assets'
+        description: "GitHub artifact ID containing branding assets"
         required: true
         type: string
       manifest:
-        description: 'JSON manifest describing the branding data'
+        description: "JSON manifest describing the branding data"
         required: true
         type: string
 
@@ -36,7 +35,7 @@ jobs:
         with:
           script: |
             let manifest, artifactId;
-            
+
             if (context.eventName === 'repository_dispatch') {
               manifest = context.payload.client_payload.manifest;
               artifactId = context.payload.client_payload.artifact_id;
@@ -44,10 +43,10 @@ jobs:
               manifest = JSON.parse(process.env.MANIFEST_INPUT);
               artifactId = process.env.ARTIFACT_ID_INPUT;
             }
-            
+
             core.setOutput('manifest', JSON.stringify(manifest));
             core.setOutput('artifact_id', artifactId);
-            
+
             core.info(`📦 Branding update received:`);
             core.info(`  Version: ${manifest.version}`);
             core.info(`  Commit: ${manifest.commit}`);
@@ -81,38 +80,38 @@ jobs:
           usage-guidelines: ${{ steps.validate-manifest.outputs.usage-guidelines }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
           fonts: ${{ steps.validate-manifest.outputs.fonts }}
-          output-dir: 'application/src/data/brand'
+          output-dir: "application/src/data/brand"
 
       - name: Create logo pack
         uses: ./.github/actions/create-logo-pack
         with:
-          logos-dir: 'application/public/brand/logo'
-          output-file: 'application/public/brand/downloads/hoverkraft-logos.zip'
+          logos-dir: "application/public/brand/logo"
+          output-file: "application/public/brand/downloads/hoverkraft-logos.zip"
 
       - name: Generate brand guidelines PDF
         uses: ./.github/actions/generate-brand-pdf
         with:
-          page-url: 'http://localhost:4321/charte-graphique'
-          output-file: 'application/public/brand/downloads/hoverkraft-brand-guidelines.pdf'
-          working-directory: 'application'
+          page-url: "http://localhost:4321/charte-graphique"
+          output-file: "application/public/brand/downloads/hoverkraft-brand-guidelines.pdf"
+          working-directory: "application"
 
       - name: Create pull request with updated assets
-        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@45440f67c2a87d63ba7b99f7ae3ea5b0e1c2f6a3 # v1.2.0
+        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@5f11437c716059f30c635f90055060e4ef8b31a0 # 0.28.0
         with:
-          branch-name: 'branding-update-${{ steps.validate-manifest.outputs.version }}'
+          branch: "branding-update-${{ steps.validate-manifest.outputs.version }}"
           commit-message: |
             chore: update branding assets to version ${{ steps.validate-manifest.outputs.version }}
-            
+
             Branding repository commit: ${{ steps.validate-manifest.outputs.commit }}
             Artifact ID: ${{ steps.validate-manifest.outputs.artifact-id }}
-          pr-title: 'chore: update branding assets to v${{ steps.validate-manifest.outputs.version }}'
-          pr-body: |
+          title: "chore: update branding assets to v${{ steps.validate-manifest.outputs.version }}"
+          body: |
             ## Branding Assets Updated 🎨
-            
+
             **Version:** ${{ steps.validate-manifest.outputs.version }}
             **Branding Commit:** `${{ steps.validate-manifest.outputs.commit }}`
             **Artifact ID:** ${{ steps.validate-manifest.outputs.artifact-id }}
-            
+
             ### Assets Updated
             - ✅ Brand colors (from manifest)
             - ✅ Brand mission statement
@@ -123,10 +122,9 @@ jobs:
             - ✅ Logo pack (ZIP)
             - ✅ Brand guidelines PDF (generated)
             - ✅ Mascot image
-            
+
             ### Next Steps
             The brand guidelines pages will be updated with the new assets on the next deployment.
-          auto-merge: true
           github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create summary

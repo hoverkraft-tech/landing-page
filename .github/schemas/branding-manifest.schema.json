@@ -3,7 +3,15 @@
   "title": "Branding Data Manifest",
   "description": "Contract interface between hoverkraft-tech/branding and hoverkraft-tech/landing-page repositories",
   "type": "object",
-  "required": ["version", "timestamp", "commit", "colors", "logos", "brandMission", "usageGuidelines"],
+  "required": [
+    "version",
+    "timestamp",
+    "commit",
+    "colors",
+    "logos",
+    "brandMission",
+    "usageGuidelines"
+  ],
   "properties": {
     "version": {
       "type": "string",

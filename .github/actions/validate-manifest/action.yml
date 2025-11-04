@@ -1,39 +1,39 @@
-name: 'Validate Branding Manifest'
-description: 'Validates the branding manifest against JSON schema and parses it for use in the workflow'
+name: "Validate Branding Manifest"
+description: "Validates the branding manifest against JSON schema and parses it for use in the workflow"
 inputs:
   manifest:
-    description: 'The manifest JSON string from the repository dispatch event'
+    description: "The manifest JSON string from the repository dispatch event"
     required: true
 outputs:
   artifact-id:
-    description: 'The artifact ID from the manifest'
+    description: "The artifact ID from the manifest"
     value: ${{ steps.parse.outputs.artifact-id }}
   version:
-    description: 'The branding version from the manifest'
+    description: "The branding version from the manifest"
     value: ${{ steps.parse.outputs.version }}
   commit:
-    description: 'The commit SHA from the branding repository'
+    description: "The commit SHA from the branding repository"
     value: ${{ steps.parse.outputs.commit }}
   colors:
-    description: 'JSON-stringified array of color tokens'
+    description: "JSON-stringified array of color tokens"
     value: ${{ steps.parse.outputs.colors }}
   brand-mission:
-    description: 'Brand mission statement'
+    description: "Brand mission statement"
     value: ${{ steps.parse.outputs.brand-mission }}
   usage-guidelines:
-    description: 'JSON-stringified usage guidelines object'
+    description: "JSON-stringified usage guidelines object"
     value: ${{ steps.parse.outputs.usage-guidelines }}
   logos:
-    description: 'JSON-stringified array of logo objects'
+    description: "JSON-stringified array of logo objects"
     value: ${{ steps.parse.outputs.logos }}
   mascot:
-    description: 'JSON-stringified mascot object'
+    description: "JSON-stringified mascot object"
     value: ${{ steps.parse.outputs.mascot }}
   fonts:
-    description: 'JSON-stringified fonts object (if present)'
+    description: "JSON-stringified fonts object (if present)"
     value: ${{ steps.parse.outputs.fonts }}
 runs:
-  using: 'composite'
+  using: "composite"
   steps:
     - name: Validate and parse manifest
       id: parse
@@ -43,26 +43,26 @@ runs:
           const fs = require('fs');
           const Ajv = require('ajv');
           const addFormats = require('ajv-formats');
-          
+
           // Parse manifest from input
           const manifest = JSON.parse(process.env.MANIFEST_INPUT);
-          
+
           // Load and validate against schema
           const schema = JSON.parse(fs.readFileSync('.github/schemas/branding-manifest.schema.json', 'utf8'));
-          
+
           const ajv = new Ajv();
           addFormats(ajv);
-          
+
           const validate = ajv.compile(schema);
           const valid = validate(manifest);
-          
+
           if (!valid) {
             core.setFailed(`Manifest validation failed: ${JSON.stringify(validate.errors, null, 2)}`);
             return;
           }
-          
+
           core.info('✓ Manifest validation passed');
-          
+
           // Extract and output all values needed by downstream actions
           core.setOutput('artifact-id', manifest.artifactId || '');
           core.setOutput('version', manifest.version);
@@ -73,7 +73,7 @@ runs:
           core.setOutput('logos', JSON.stringify(manifest.logos));
           core.setOutput('mascot', JSON.stringify(manifest.mascot));
           core.setOutput('fonts', manifest.fonts ? JSON.stringify(manifest.fonts) : '{}');
-          
+
           core.info(`✓ Exported manifest data: ${manifest.colors.length} colors, ${manifest.logos.length} logos`);
       env:
         MANIFEST_INPUT: ${{ inputs.manifest }}

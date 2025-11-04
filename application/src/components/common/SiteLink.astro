@@ -1,0 +1,15 @@
+---
+import type { HTMLAttributes } from 'astro/types';
+import { SITE } from 'astrowind:config';
+
+interface Props extends HTMLAttributes<'a'> {
+  path?: string;
+  children?: unknown;
+}
+
+const { path = '', children, ...attrs } = Astro.props as Props;
+const base = SITE.site?.trim();
+const href = base ? (path ? new URL(path, base).toString() : base) : path;
+---
+
+<a href={href} {...attrs}>{children ?? href}</a>

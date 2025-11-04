@@ -1,9 +1,10 @@
 ---
 title: 'Conditions Générales d’Utilisation'
 layout: '~/layouts/MarkdownLayout.astro'
-setup: |
-	import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 ---
+
+import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
+import SiteLink from '~/components/common/SiteLink.astro';
 
 *Dernière mise à jour* : 27 septembre 2025
 
@@ -11,7 +12,10 @@ Veuillez lire attentivement les présentes conditions générales d’utilisatio
 
 ## 1. Objet et champ d’application
 
-Les présentes conditions générales d’utilisation (ci-après les « CGU ») ont pour objet de définir les modalités et conditions dans lesquelles la société Hoverkraft met à disposition des visiteurs et des clients professionnels son site internet accessible à l’adresse [https://hoverkraft.cloud](https://hoverkraft.cloud) (ci-après le « Site ») ainsi que les services associés (démonstrations, ressources et contenus informatifs).
+Les présentes conditions générales d’utilisation (ci-après les « CGU ») ont pour objet de définir les modalités et
+conditions dans lesquelles la société Hoverkraft met à disposition des visiteurs et
+des clients professionnels son site internet accessible à l’adresse <SiteLink /> (ci-après le « Site »)
+ainsi que les services associés (démonstrations, ressources et contenus informatifs).
 
 Toute consultation du Site emporte adhésion sans réserve aux CGU par l’internaute (ci-après « l’Utilisateur »).
 
@@ -81,7 +85,7 @@ Les présentes CGU sont régies par le droit français. En cas de litige, les pa
 Pour toute question relative aux CGU, vous pouvez contacter Hoverkraft :
 
 - Par courriel : <ContactEmailLink />
-- Via le formulaire de contact : [https://hoverkraft.cloud/contact](https://hoverkraft.cloud/contact)
+- Via le formulaire de contact : <SiteLink path="/contact" />
 - Par courrier postal : Hoverkraft – Service juridique, 10 rue (à compléter), 75000 Paris, France
 
 Toute demande recevra une réponse dans les meilleurs délais.
