@@ -25,9 +25,7 @@ async function run() {
     core.info(`Generating brand content files in ${outputDir}...`);
 
     // Ensure output directory exists
-    if (!fs.existsSync(outputDir)) {
-      fs.mkdirSync(outputDir, { recursive: true });
-    }
+    await io.mkdirP(outputDir);
 
     const timestamp = new Date().toISOString();
 
