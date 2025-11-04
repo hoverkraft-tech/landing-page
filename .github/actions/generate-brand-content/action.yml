@@ -1,8 +1,11 @@
 name: 'Generate Brand Content'
 description: 'Generates TypeScript files for brand colors, mission, and usage guidelines from manifest'
 inputs:
-  manifest:
-    description: 'JSON manifest containing brand data'
+  version:
+    description: 'The branding version'
+    required: true
+  commit:
+    description: 'The commit SHA from the branding repository'
     required: true
   output-dir:
     description: 'Output directory for generated files'
