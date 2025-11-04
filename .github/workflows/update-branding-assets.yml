@@ -21,6 +21,7 @@ on:
 permissions:
   contents: write
   actions: read
+  pull-requests: write
 
 jobs:
   update-branding:
@@ -31,41 +32,56 @@ jobs:
 
       - name: Parse manifest from dispatch
         id: parse-manifest
-        run: |
-          # Get manifest from repository dispatch payload or workflow input
-          if [ "${{ github.event_name }}" = "repository_dispatch" ]; then
-            MANIFEST='${{ toJson(github.event.client_payload.manifest) }}'
-            ARTIFACT_ID='${{ github.event.client_payload.artifact_id }}'
-          else
-            MANIFEST='${{ inputs.manifest }}'
-            ARTIFACT_ID='${{ inputs.artifact-id }}'
-          fi
-          
-          echo "manifest=$MANIFEST" >> $GITHUB_OUTPUT
-          echo "artifact_id=$ARTIFACT_ID" >> $GITHUB_OUTPUT
-          
-          # Validate manifest has required fields
-          VERSION=$(echo "$MANIFEST" | jq -r '.version')
-          COMMIT=$(echo "$MANIFEST" | jq -r '.commit')
-          
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-          echo "commit=$COMMIT" >> $GITHUB_OUTPUT
-          
-          echo "📦 Branding update received:"
-          echo "  Version: $VERSION"
-          echo "  Commit: $COMMIT"
-          echo "  Artifact ID: $ARTIFACT_ID"
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            let manifest, artifactId;
+            
+            if (context.eventName === 'repository_dispatch') {
+              manifest = context.payload.client_payload.manifest;
+              artifactId = context.payload.client_payload.artifact_id;
+            } else {
+              manifest = JSON.parse(process.env.MANIFEST_INPUT);
+              artifactId = process.env.ARTIFACT_ID_INPUT;
+            }
+            
+            core.setOutput('manifest', JSON.stringify(manifest));
+            core.setOutput('artifact_id', artifactId);
+            core.setOutput('version', manifest.version);
+            core.setOutput('commit', manifest.commit);
+            
+            core.info(`📦 Branding update received:`);
+            core.info(`  Version: ${manifest.version}`);
+            core.info(`  Commit: ${manifest.commit}`);
+            core.info(`  Artifact ID: ${artifactId}`);
+        env:
+          MANIFEST_INPUT: ${{ inputs.manifest }}
+          ARTIFACT_ID_INPUT: ${{ inputs.artifact-id }}
 
       - name: Validate manifest against schema
-        run: |
-          # Install ajv-cli for JSON schema validation
-          npm install -g ajv-cli
-          
-          # Validate the manifest
-          echo '${{ steps.parse-manifest.outputs.manifest }}' | \
-            ajv validate -s .github/schemas/branding-manifest.schema.json -d -
-          
-          echo "✓ Manifest validation passed"
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const fs = require('fs');
+            const Ajv = require('ajv');
+            const addFormats = require('ajv-formats');
+            
+            const manifest = JSON.parse(process.env.MANIFEST);
+            const schema = JSON.parse(fs.readFileSync('.github/schemas/branding-manifest.schema.json', 'utf8'));
+            
+            const ajv = new Ajv();
+            addFormats(ajv);
+            
+            const validate = ajv.compile(schema);
+            const valid = validate(manifest);
+            
+            if (!valid) {
+              core.setFailed(`Manifest validation failed: ${JSON.stringify(validate.errors, null, 2)}`);
+            } else {
+              core.info('✓ Manifest validation passed');
+            }
+        env:
+          MANIFEST: ${{ steps.parse-manifest.outputs.manifest }}
 
       - name: Download branding artifact
         uses: actions/download-artifact@fa0a91b85d4f404e444e00e005971372dc801d16 # v4.1.8
@@ -77,58 +93,73 @@ jobs:
           run-id: ${{ steps.parse-manifest.outputs.artifact_id }}
 
       - name: Extract and organize assets
-        run: |
-          MANIFEST='${{ steps.parse-manifest.outputs.manifest }}'
-          
-          # Create target directories
-          mkdir -p application/src/data/brand
-          mkdir -p application/public/brand/logos
-          mkdir -p application/public/brand/mascot
-          mkdir -p application/public/brand/downloads
-          
-          # Generate colors TypeScript file from manifest
-          echo "$MANIFEST" | jq -r '.colors' > /tmp/colors.json
-          cat > application/src/data/brand/generated-colors.ts << 'COLORS_EOF'
-/**
- * Auto-generated brand colors from branding repository
- * DO NOT EDIT - This file is generated during the build process
- * Source: @hoverkraft-tech/branding
- */
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            const manifest = JSON.parse(process.env.MANIFEST);
+            
+            // Create target directories
+            const dirs = [
+              'application/src/data/brand',
+              'application/public/brand/logos',
+              'application/public/brand/mascot',
+              'application/public/brand/downloads'
+            ];
+            
+            dirs.forEach(dir => {
+              if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+              }
+            });
+            
+            // Copy logos based on manifest paths
+            manifest.logos.forEach(logo => {
+              const sourcePath = path.join('/tmp/branding-assets', logo.path);
+              const targetPath = path.join('application/public/brand', logo.path);
+              
+              if (fs.existsSync(sourcePath)) {
+                const targetDir = path.dirname(targetPath);
+                if (!fs.existsSync(targetDir)) {
+                  fs.mkdirSync(targetDir, { recursive: true });
+                }
+                fs.copyFileSync(sourcePath, targetPath);
+                core.info(`✓ Copied logo: ${logo.path}`);
+              } else {
+                core.warning(`Logo file not found: ${logo.path}`);
+              }
+            });
+            
+            // Copy mascot (if present)
+            if (manifest.mascot && manifest.mascot.path) {
+              const mascotSource = path.join('/tmp/branding-assets', manifest.mascot.path);
+              const mascotTarget = path.join('application/public/brand', manifest.mascot.path);
+              
+              if (fs.existsSync(mascotSource)) {
+                const targetDir = path.dirname(mascotTarget);
+                if (!fs.existsSync(targetDir)) {
+                  fs.mkdirSync(targetDir, { recursive: true });
+                }
+                fs.copyFileSync(mascotSource, mascotTarget);
+                core.info(`✓ Copied mascot: ${manifest.mascot.path}`);
+              }
+            }
+            
+            // Save manifest for reference
+            fs.writeFileSync(
+              'application/src/data/brand/manifest.json',
+              JSON.stringify(manifest, null, 2)
+            );
+            core.info('✓ Saved manifest');
+        env:
+          MANIFEST: ${{ steps.parse-manifest.outputs.manifest }}
 
-export interface ColorToken {
-  name: string;
-  hex: string;
-  rgb: string;
-  usage: string;
-}
-
-COLORS_EOF
-          echo "export const brandColors: ColorToken[] = $(cat /tmp/colors.json);" >> application/src/data/brand/generated-colors.ts
-          echo "✓ Generated colors from manifest"
-          
-          # Copy logos based on manifest paths
-          echo "$MANIFEST" | jq -r '.logos[].path' | while read -r logo_path; do
-            if [ -f "/tmp/branding-assets/$logo_path" ]; then
-              # Create directory if needed
-              mkdir -p "application/public/brand/$(dirname "$logo_path")"
-              cp "/tmp/branding-assets/$logo_path" "application/public/brand/$logo_path"
-              echo "✓ Copied logo: $logo_path"
-            else
-              echo "::warning::Logo file not found: $logo_path"
-            fi
-          done
-          
-          # Copy mascot (if present)
-          MASCOT_FILE=$(echo "$MANIFEST" | jq -r '.mascot.file // empty')
-          if [ -n "$MASCOT_FILE" ] && [ -f "/tmp/branding-assets/$MASCOT_FILE" ]; then
-            mkdir -p "application/public/brand/$(dirname "$MASCOT_FILE")"
-            cp "/tmp/branding-assets/$MASCOT_FILE" "application/public/brand/$MASCOT_FILE"
-            echo "✓ Copied mascot: $MASCOT_FILE"
-          fi
-          
-          # Save manifest for reference
-          echo "$MANIFEST" > application/src/data/brand/manifest.json
-          echo "✓ Saved manifest"
+      - name: Generate brand content (colors, mission, guidelines)
+        uses: ./.github/actions/generate-brand-content
+        with:
+          manifest: ${{ steps.parse-manifest.outputs.manifest }}
+          output-dir: 'application/src/data/brand'
 
       - name: Create logo pack
         uses: ./.github/actions/create-logo-pack
@@ -153,75 +184,94 @@ COLORS_EOF
           working-directory: 'application'
 
       - name: Validate updated assets
-        run: |
-          echo "Validating branding assets..."
-          
-          MISSING_ASSETS=()
-          
-          # Check for generated colors
-          if [ ! -f "application/src/data/brand/generated-colors.ts" ]; then
-            MISSING_ASSETS+=("generated-colors.ts")
-          fi
-          
-          # Check for at least one logo
-          if [ ! -d "application/public/brand/logo" ] || [ -z "$(find application/public/brand/logo -type f)" ]; then
-            MISSING_ASSETS+=("logos")
-          fi
-          
-          # Check for logo pack
-          if [ ! -f "application/public/brand/downloads/hoverkraft-logos.zip" ]; then
-            MISSING_ASSETS+=("hoverkraft-logos.zip")
-          fi
-          
-          # Check for generated PDF
-          if [ ! -f "application/public/brand/downloads/hoverkraft-brand-guidelines.pdf" ]; then
-            MISSING_ASSETS+=("hoverkraft-brand-guidelines.pdf")
-          fi
-          
-          if [ ${#MISSING_ASSETS[@]} -gt 0 ]; then
-            echo "::error::Missing required branding assets: ${MISSING_ASSETS[*]}"
-            exit 1
-          fi
-          
-          echo "✓ All required branding assets are present"
-
-      - name: Commit updated assets
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "github-actions[bot]@users.noreply.github.com"
-          
-          git add application/public/brand/
-          git add application/src/data/brand/manifest.json
-          git add application/src/data/brand/generated-colors.ts
-          
-          if git diff --staged --quiet; then
-            echo "No changes to commit"
-          else
-            git commit -m "chore: update branding assets to version ${{ steps.parse-manifest.outputs.version }}
-
-Branding repository commit: ${{ steps.parse-manifest.outputs.commit }}
-Artifact ID: ${{ steps.parse-manifest.outputs.artifact_id }}"
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        with:
+          script: |
+            const fs = require('fs');
+            const missingAssets = [];
             
-            git push
-            echo "✓ Changes committed and pushed"
-          fi
+            const requiredFiles = [
+              'application/src/data/brand/generated-colors.ts',
+              'application/src/data/brand/generated-mission.ts',
+              'application/src/data/brand/generated-guidelines.ts',
+              'application/public/brand/downloads/hoverkraft-logos.zip',
+              'application/public/brand/downloads/hoverkraft-brand-guidelines.pdf'
+            ];
+            
+            requiredFiles.forEach(file => {
+              if (!fs.existsSync(file)) {
+                missingAssets.push(file);
+              }
+            });
+            
+            // Check for at least one logo
+            const logoDir = 'application/public/brand/logo';
+            if (!fs.existsSync(logoDir) || fs.readdirSync(logoDir).length === 0) {
+              missingAssets.push('logos');
+            }
+            
+            if (missingAssets.length > 0) {
+              core.setFailed(`Missing required branding assets: ${missingAssets.join(', ')}`);
+            } else {
+              core.info('✓ All required branding assets are present');
+            }
+
+      - name: Create pull request with updated assets
+        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@45440f67c2a87d63ba7b99f7ae3ea5b0e1c2f6a3 # v1.2.0
+        with:
+          branch-name: 'branding-update-${{ steps.parse-manifest.outputs.version }}'
+          commit-message: |
+            chore: update branding assets to version ${{ steps.parse-manifest.outputs.version }}
+            
+            Branding repository commit: ${{ steps.parse-manifest.outputs.commit }}
+            Artifact ID: ${{ steps.parse-manifest.outputs.artifact_id }}
+          pr-title: 'chore: update branding assets to v${{ steps.parse-manifest.outputs.version }}'
+          pr-body: |
+            ## Branding Assets Updated 🎨
+            
+            **Version:** ${{ steps.parse-manifest.outputs.version }}
+            **Branding Commit:** `${{ steps.parse-manifest.outputs.commit }}`
+            **Artifact ID:** ${{ steps.parse-manifest.outputs.artifact_id }}
+            
+            ### Assets Updated
+            - ✅ Brand colors (from manifest)
+            - ✅ Brand mission statement
+            - ✅ Usage guidelines
+            - ✅ Logo files
+            - ✅ Logo pack (ZIP)
+            - ✅ Brand guidelines PDF (generated)
+            - ✅ Mascot image
+            
+            ### Next Steps
+            The brand guidelines pages will be updated with the new assets on the next deployment.
+          auto-merge: true
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create summary
-        run: |
-          cat >> $GITHUB_STEP_SUMMARY << 'EOF'
-          ## Branding Assets Updated ✅
-          
-          **Version:** ${{ steps.parse-manifest.outputs.version }}
-          **Branding Commit:** `${{ steps.parse-manifest.outputs.commit }}`
-          **Artifact ID:** ${{ steps.parse-manifest.outputs.artifact_id }}
-          
-          ### Assets Updated
-          - ✓ Brand colors (from manifest)
-          - ✓ Logo files
-          - ✓ Logo pack (ZIP)
-          - ✓ Brand guidelines PDF (generated)
-          - ✓ Mascot image
-          
-          ### Next Steps
-          The brand guidelines pages will be updated with the new assets on the next deployment.
-          EOF
+        uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+        env:
+          VERSION: ${{ steps.parse-manifest.outputs.version }}
+          COMMIT: ${{ steps.parse-manifest.outputs.commit }}
+          ARTIFACT_ID: ${{ steps.parse-manifest.outputs.artifact_id }}
+        with:
+          script: |
+            await core.summary
+              .addHeading('Branding Assets Updated ✅', 2)
+              .addTable([
+                [{data: 'Version', header: true}, process.env.VERSION],
+                [{data: 'Branding Commit', header: true}, `\`${process.env.COMMIT}\``],
+                [{data: 'Artifact ID', header: true}, process.env.ARTIFACT_ID]
+              ])
+              .addHeading('Assets Updated', 3)
+              .addList([
+                '✅ Brand colors (from manifest)',
+                '✅ Brand mission statement',
+                '✅ Usage guidelines',
+                '✅ Logo files',
+                '✅ Logo pack (ZIP)',
+                '✅ Brand guidelines PDF (generated)',
+                '✅ Mascot image'
+              ])
+              .addHeading('Next Steps', 3)
+              .addRaw('The brand guidelines pages will be updated with the new assets on the next deployment.')
+              .write();

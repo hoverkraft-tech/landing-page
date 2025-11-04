@@ -28,4 +28,6 @@ application/.astro
 # Generated brand assets (fetched from @hoverkraft-tech/branding during CI)
 application/public/brand/
 application/src/data/brand/generated-colors.ts
+application/src/data/brand/generated-mission.ts
+application/src/data/brand/generated-guidelines.ts
 application/src/data/brand/manifest.json

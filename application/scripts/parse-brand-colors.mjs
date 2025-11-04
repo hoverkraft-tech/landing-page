@@ -13,23 +13,23 @@ const OUTPUT_PATH = path.join(process.cwd(), 'src/data/brand/generated-colors.ts
 
 function parseColorsCSS(cssContent) {
   const colors = [];
-  
+
   // Parse CSS custom properties (--color-name: #hex;)
   const customPropertyRegex = /--([a-zA-Z0-9-]+):\s*(#[0-9A-Fa-f]{6}|#[0-9A-Fa-f]{3})/g;
   let match;
-  
+
   while ((match = customPropertyRegex.exec(cssContent)) !== null) {
     const [, name, hex] = match;
-    
+
     // Convert hex to RGB
     const rgb = hexToRgb(hex);
-    
+
     // Convert CSS variable name to readable name
     const readableName = name
       .split('-')
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
       .join(' ');
-    
+
     colors.push({
       name: readableName,
       hex: hex.toUpperCase(),
@@ -37,23 +37,26 @@ function parseColorsCSS(cssContent) {
       usage: `Brand color: ${readableName}`,
     });
   }
-  
+
   return colors;
 }
 
 function hexToRgb(hex) {
   // Remove # if present
   hex = hex.replace('#', '');
-  
+
   // Handle 3-character hex
   if (hex.length === 3) {
-    hex = hex.split('').map(char => char + char).join('');
+    hex = hex
+      .split('')
+      .map((char) => char + char)
+      .join('');
   }
-  
+
   const r = parseInt(hex.substring(0, 2), 16);
   const g = parseInt(hex.substring(2, 4), 16);
   const b = parseInt(hex.substring(4, 6), 16);
-  
+
   return `${r}, ${g}, ${b}`;
 }
 
@@ -81,18 +84,18 @@ try {
     console.warn('colors.css not found. Using fallback colors.');
     process.exit(0);
   }
-  
+
   const cssContent = fs.readFileSync(COLORS_CSS_PATH, 'utf-8');
   const colors = parseColorsCSS(cssContent);
-  
+
   if (colors.length === 0) {
     console.warn('No colors found in colors.css. Using fallback colors.');
     process.exit(0);
   }
-  
+
   const tsContent = generateTypeScript(colors);
   fs.writeFileSync(OUTPUT_PATH, tsContent, 'utf-8');
-  
+
   console.log(`✓ Generated ${colors.length} brand colors from colors.css`);
   console.log(`  Output: ${OUTPUT_PATH}`);
 } catch (error) {
@@ -100,4 +103,3 @@ try {
   console.warn('Using fallback colors.');
   process.exit(0);
 }
-

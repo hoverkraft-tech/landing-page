@@ -109,11 +109,22 @@
     "mascot": {
       "type": "object",
       "description": "Brand mascot asset (optional)",
+      "required": ["name", "path"],
       "properties": {
-        "file": {
+        "name": {
           "type": "string",
-          "description": "Path to mascot file in the artifact",
+          "description": "Descriptive name of the mascot",
+          "example": "Hoverkraft Mascot"
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative path to the mascot file in the artifact",
           "example": "mascot/mascot.png"
+        },
+        "usage": {
+          "type": "string",
+          "description": "Usage guidelines for the mascot",
+          "example": "Use in playful communications and community content"
         }
       }
     },
