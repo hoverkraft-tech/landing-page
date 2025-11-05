@@ -3,7 +3,7 @@
 # GitHub Workflow: Update Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/9a7e5f67819cc24ed00ac9815b202441df6142dbd6b54f6a9343939dac069ae1/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
+  <img src="https://opengraph.githubassets.com/b62a6cd4911283bb25fad69fb29a109689ec9c0c35be7cb62cc5513669236fd3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
 </div>
 
 ---
@@ -18,18 +18,6 @@
 
 <!-- badges:end -->
 <!-- overview:start -->
-
-## Overview
-
-This workflow is triggered by the branding repository via repository dispatch when new branding data is available.
-It receives a manifest, downloads the assets, and updates the landing page accordingly.
-
-### Permissions
-
-- **`actions`**: `read`
-- **`contents`**: `write`
-- **`pull-requests`**: `write`
-
 <!-- overview:end -->
 
 ### Integration Overview
@@ -71,13 +59,10 @@ permissions:
   pull-requests: write
 jobs:
   update-branding-assets:
-    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@3f63c7758b42ac540466ece2db6670da13e45fd8 # copilot/fix-71885492-298575200-7c78ad40-ab54-4cf1-a785-32ce4b970fa9
+    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@facfad4e0977e3a62d428578bde186309f0a8434 # 2.0.0
     with:
-      # GitHub artifact ID containing branding assets
-      # This input is required.
-      artifact-id: ""
-
-      # JSON manifest describing the branding data
+      # JSON manifest describing the branding data (artifact-id comes from manifest)
+      #
       # This input is required.
       manifest: ""
 ```
@@ -89,10 +74,9 @@ jobs:
 
 ### Workflow Dispatch Inputs
 
-| **Input**         | **Description**                               | **Required** | **Type**   | **Default** |
-| ----------------- | --------------------------------------------- | ------------ | ---------- | ----------- |
-| **`artifact-id`** | GitHub artifact ID containing branding assets | **true**     | **string** | -           |
-| **`manifest`**    | JSON manifest describing the branding data    | **true**     | **string** | -           |
+| **Input**      | **Description**                                                              | **Required** | **Type**   | **Default** |
+| -------------- | ---------------------------------------------------------------------------- | ------------ | ---------- | ----------- |
+| **`manifest`** | JSON manifest describing the branding data (artifact-id comes from manifest) | **true**     | **string** | -           |
 
 <!-- inputs:end -->
 <!-- secrets:start -->
