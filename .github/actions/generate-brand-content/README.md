@@ -3,7 +3,7 @@
 # GitHub Action: Generate Brand Content
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/9a7e5f67819cc24ed00ac9815b202441df6142dbd6b54f6a9343939dac069ae1/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
+  <img src="https://opengraph.githubassets.com/b62a6cd4911283bb25fad69fb29a109689ec9c0c35be7cb62cc5513669236fd3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Generates TypeScript files for brand colors, mission, usage guidelines, typograp
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-content@3f63c7758b42ac540466ece2db6670da13e45fd8 # copilot/fix-71885492-298575200-7c78ad40-ab54-4cf1-a785-32ce4b970fa9
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-content@facfad4e0977e3a62d428578bde186309f0a8434 # 2.0.0
   with:
     # The branding version
     # This input is required.
@@ -69,16 +69,16 @@ Generates TypeScript files for brand colors, mission, usage guidelines, typograp
 
 ## Inputs
 
-| **Input**              | **Description**                             | **Required** | **Default** |
-| ---------------------- | ------------------------------------------- | ------------ | ----------- |
-| **`version`**          | The branding version                        | **true**     | -           |
-| **`commit`**           | The commit SHA from the branding repository | **true**     | -           |
-| **`colors`**           | JSON-stringified array of color tokens      | **true**     | -           |
-| **`brand-mission`**    | JSON-stringified localized brand mission    | **true**     | -           |
-| **`usage-guidelines`** | JSON-stringified usage guidelines object    | **true**     | -           |
-| **`logos`**            | JSON-stringified array of logo metadata     | **true**     | -           |
-| **`fonts`**            | JSON-stringified fonts object               | **false**    | -           |
-| **`output-dir`**       | Output directory for generated files        | **true**     | -           |
+| **Input**              | **Description**                                             | **Required** | **Default** |
+| ---------------------- | ----------------------------------------------------------- | ------------ | ----------- |
+| **`version`**          | The branding version                                        | **true**     | -           |
+| **`commit`**           | The commit SHA from the branding repository                 | **true**     | -           |
+| **`colors`**           | JSON-stringified array of color tokens                      | **true**     | -           |
+| **`brand-mission`**    | JSON-stringified localized brand mission entries            | **true**     | -           |
+| **`usage-guidelines`** | JSON-stringified usage guidelines object                    | **true**     | -           |
+| **`logos`**            | JSON-stringified array of logo metadata with localized copy | **true**     | -           |
+| **`fonts`**            | JSON-stringified fonts object                               | **false**    | -           |
+| **`output-dir`**       | Output directory for generated files                        | **true**     | -           |
 
 <!-- inputs:end -->
 <!-- secrets:start -->

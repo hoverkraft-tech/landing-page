@@ -3,7 +3,7 @@
 # GitHub Action: Generate Brand PDFs
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/9a7e5f67819cc24ed00ac9815b202441df6142dbd6b54f6a9343939dac069ae1/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand PDFs" />
+  <img src="https://opengraph.githubassets.com/b62a6cd4911283bb25fad69fb29a109689ec9c0c35be7cb62cc5513669236fd3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand PDFs" />
 </div>
 
 ---
@@ -22,7 +22,7 @@
 
 ## Overview
 
-Builds the capture plan for localized brand guideline pages, resolves translated slugs from the shared `ui.ts` routes, and renders PDFs for each locale.
+Resolves localized brand guideline routes and generates PDFs for each locale
 
 <!-- overview:end -->
 <!-- usage:start -->
@@ -30,26 +30,31 @@ Builds the capture plan for localized brand guideline pages, resolves translated
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-pdfs@3f63c7758b42ac540466ece2db6670da13e45fd8 # copilot/fix-71885492-298575200-7c78ad40-ab54-4cf1-a785-32ce4b970fa9
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-pdfs@facfad4e0977e3a62d428578bde186309f0a8434 # 2.0.0
   with:
-    # JSON array of locale codes defined in the branding manifest
-    locales-json: '["fr","en"]'
+    # JSON array of locale codes provided by the branding manifest
+    # This input is required.
+    locales: ""
 
-    # Default locale and slug for the brand guidelines page
-    default-locale: fr
-    default-slug: charte-graphique
+    # Slug used by the default locale for the brand guidelines page
+    # This input is required.
+    default-slug: ""
 
-    # Source file containing the localized routes definition
+    # Path to the TypeScript file exporting the localized routes map
+    # Default: `application/src/i18n/ui.ts`
     routes-file: application/src/i18n/ui.ts
 
-    # Base URL used to render pages locally
-    base-url: http://localhost:4321/
+    # Base URL used to build capture URLs (e.g. http://localhost:4321)
+    # This input is required.
+    base-url: ""
 
-    # Destination directory for the generated PDFs
-    downloads-dir: application/public/brand/downloads
+    # Directory where the generated PDFs should be written
+    # This input is required.
+    downloads-dir: ""
 
-    # Directory where `npm run dev` should be invoked
-    working-directory: application
+    # Working directory for the application
+    # This input is required.
+    working-directory: ""
 ```
 
 <!-- usage:end -->
@@ -57,30 +62,19 @@ Builds the capture plan for localized brand guideline pages, resolves translated
 
 ## Inputs
 
-| **Input**               | **Description**                                              | **Required** | **Default**                  |
-| ----------------------- | ------------------------------------------------------------ | ------------ | ---------------------------- |
-| **`locales-json`**      | JSON array of locale codes provided by the branding manifest | **true**     | -                            |
-| **`default-locale`**    | Locale code considered as the default site language          | **true**     | -                            |
-| **`default-slug`**      | Brand guidelines slug for the default locale                 | **true**     | -                            |
-| **`routes-file`**       | Path to the TypeScript file exporting localized routes       | no           | `application/src/i18n/ui.ts` |
-| **`base-url`**          | Base URL used to build capture URLs                          | **true**     | -                            |
-| **`downloads-dir`**     | Directory path where rendered PDFs should be stored          | **true**     | -                            |
-| **`working-directory`** | Working directory for running the Astro dev server           | **true**     | -                            |
+| **Input**               | **Description**                                                    | **Required** | **Default**                  |
+| ----------------------- | ------------------------------------------------------------------ | ------------ | ---------------------------- |
+| **`locales`**           | JSON array of locale codes provided by the branding manifest       | **true**     | -                            |
+| **`default-slug`**      | Slug used by the default locale for the brand guidelines page      | **true**     | -                            |
+| **`routes-file`**       | Path to the TypeScript file exporting the localized routes map     | **false**    | `application/src/i18n/ui.ts` |
+| **`base-url`**          | Base URL used to build capture URLs (e.g. <http://localhost:4321>) | **true**     | -                            |
+| **`downloads-dir`**     | Directory where the generated PDFs should be written               | **true**     | -                            |
+| **`working-directory`** | Working directory for the application                              | **true**     | -                            |
 
 <!-- inputs:end -->
 <!-- secrets:start -->
 <!-- secrets:end -->
 <!-- outputs:start -->
-
-## Outputs
-
-| **Output**            | **Description**                                             |
-| --------------------- | ----------------------------------------------------------- |
-| **`generated-files`** | JSON array describing locales, URLs, and output file paths  |
-| **`plan`**            | JSON array capturing the planned locale/page combinations   |
-| **`locales`**         | Comma-separated list of locales processed in the action run |
-| **`locale-slug-map`** | JSON object mapping locale codes to resolved slugs          |
-
 <!-- outputs:end -->
 <!-- examples:start -->
 <!-- examples:end -->

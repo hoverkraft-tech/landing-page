@@ -3,7 +3,7 @@
 # GitHub Action: Validate Branding Manifest
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/9a7e5f67819cc24ed00ac9815b202441df6142dbd6b54f6a9343939dac069ae1/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
+  <img src="https://opengraph.githubassets.com/b62a6cd4911283bb25fad69fb29a109689ec9c0c35be7cb62cc5513669236fd3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Validates the branding manifest against JSON schema and parses it for use in the
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/validate-manifest@3f63c7758b42ac540466ece2db6670da13e45fd8 # copilot/fix-71885492-298575200-7c78ad40-ab54-4cf1-a785-32ce4b970fa9
+- uses: hoverkraft-tech/landing-page/.github/actions/validate-manifest@facfad4e0977e3a62d428578bde186309f0a8434 # 2.0.0
   with:
     # The manifest JSON string from the repository dispatch event
     # This input is required.
@@ -53,17 +53,18 @@ Validates the branding manifest against JSON schema and parses it for use in the
 
 ## Outputs
 
-| **Output**             | **Description**                             |
-| ---------------------- | ------------------------------------------- |
-| **`artifact-id`**      | The artifact ID from the manifest           |
-| **`version`**          | The branding version from the manifest      |
-| **`commit`**           | The commit SHA from the branding repository |
-| **`colors`**           | JSON-stringified array of color tokens      |
-| **`brand-mission`**    | Brand mission statement                     |
-| **`usage-guidelines`** | JSON-stringified usage guidelines object    |
-| **`logos`**            | JSON-stringified array of logo objects      |
-| **`mascot`**           | JSON-stringified mascot object              |
-| **`fonts`**            | JSON-stringified fonts object (if present)  |
+| **Output**             | **Description**                                           |
+| ---------------------- | --------------------------------------------------------- |
+| **`artifact-id`**      | The artifact ID from the manifest                         |
+| **`version`**          | The branding version from the manifest                    |
+| **`commit`**           | The commit SHA from the branding repository               |
+| **`colors`**           | JSON-stringified array of color tokens                    |
+| **`brand-mission`**    | JSON-stringified localized brand mission entries          |
+| **`usage-guidelines`** | JSON-stringified usage guidelines object                  |
+| **`logos`**            | JSON-stringified array of logo objects                    |
+| **`mascot`**           | JSON-stringified mascot object                            |
+| **`fonts`**            | JSON-stringified fonts object (if present)                |
+| **`locales`**          | JSON-stringified array of locales present in the manifest |
 
 <!-- outputs:end -->
 <!-- examples:start -->
