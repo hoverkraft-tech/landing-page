@@ -10,19 +10,16 @@ async function run() {
     const commit = core.getInput("commit", { required: true });
     const colorsJson = core.getInput("colors", { required: true });
     const brandMissionJson = core.getInput("brand-mission", { required: true });
-    const usageGuidelinesJson = core.getInput("usage-guidelines", {
-      required: true,
-    });
     const logosJson = core.getInput("logos", { required: true });
-    const fontsJson = core.getInput("fonts", { required: false }) || "{}";
+    const typographyJson =
+      core.getInput("typography", { required: false }) || "{}";
     const outputDir = core.getInput("output-dir", { required: true });
 
     // Parse JSON inputs
-    const colors = JSON.parse(colorsJson);
+    const colorCollection = JSON.parse(colorsJson);
     const brandMission = JSON.parse(brandMissionJson);
-    const usageGuidelines = JSON.parse(usageGuidelinesJson);
-    const logos = JSON.parse(logosJson);
-    const fonts = JSON.parse(fontsJson);
+    const logoCollection = JSON.parse(logosJson);
+    const typography = JSON.parse(typographyJson);
 
     core.info(`Generating brand content files in ${outputDir}...`);
 
@@ -41,16 +38,25 @@ async function run() {
  * Generated: ${timestamp}
  */
 
-import type { ColorToken } from './types';
+import type { ColorCollection } from './types';
 
-export const brandColors: ColorToken[] = ${JSON.stringify(colors, null, 2)};
+export const brandColors: ColorCollection = ${JSON.stringify(
+      colorCollection,
+      null,
+      2,
+    )};
 `;
 
     fs.writeFileSync(
       path.join(outputDir, "generated-colors.ts"),
       colorsContent,
     );
-    core.info(`✓ Generated generated-colors.ts (${colors.length} colors)`);
+    const colorCount = Array.isArray(colorCollection.items)
+      ? colorCollection.items.length
+      : Array.isArray(colorCollection)
+        ? colorCollection.length
+        : 0;
+    core.info(`✓ Generated generated-colors.ts (${colorCount} colors)`);
 
     // Generate brand mission TypeScript file
     const missionContent = `/**
@@ -77,31 +83,6 @@ export const brandMission: BrandMission = ${JSON.stringify(
     );
     core.info(`✓ Generated generated-mission.ts`);
 
-    // Generate usage guidelines TypeScript file
-    const guidelinesContent = `/**
- * Auto-generated usage guidelines from branding repository
- * DO NOT EDIT - This file is generated during the build process
- * Source: @hoverkraft-tech/branding
- * Version: ${version}
- * Commit: ${commit}
- * Generated: ${timestamp}
- */
-
-import type { UsageGuidelines } from './types';
-
-export const usageGuidelines: UsageGuidelines = ${JSON.stringify(
-      usageGuidelines,
-      null,
-      2,
-    )};
-`;
-
-    fs.writeFileSync(
-      path.join(outputDir, "generated-guidelines.ts"),
-      guidelinesContent,
-    );
-    core.info(`✓ Generated generated-guidelines.ts`);
-
     // Generate typography TypeScript file
     const typographyContent = `/**
  * Auto-generated typography tokens from branding repository
@@ -112,10 +93,10 @@ export const usageGuidelines: UsageGuidelines = ${JSON.stringify(
  * Generated: ${timestamp}
  */
 
-import type { TypographyToken } from './types';
+import type { TypographyCollection } from './types';
 
-export const typography: TypographyToken[] = ${JSON.stringify(
-      fonts.fonts || [],
+export const typography: TypographyCollection = ${JSON.stringify(
+      typography,
       null,
       2,
     )};
@@ -137,13 +118,19 @@ export const typography: TypographyToken[] = ${JSON.stringify(
  * Generated: ${timestamp}
  */
 
-import type { LogoAsset } from './types';
+import type { LogoCollection } from './types';
 
-export const logos: LogoAsset[] = ${JSON.stringify(logos, null, 2)};
+export const logos: LogoCollection = ${JSON.stringify(logoCollection, null, 2)};
 `;
 
     fs.writeFileSync(path.join(outputDir, "generated-logos.ts"), logosContent);
-    core.info(`✓ Generated generated-logos.ts (${logos.length} logos)`);
+
+    const logoCount = Array.isArray(logoCollection.items)
+      ? logoCollection.items.length
+      : Array.isArray(logoCollection)
+        ? logoCollection.length
+        : 0;
+    core.info(`✓ Generated generated-logos.ts (${logoCount} logos)`);
 
     core.info("✅ All brand content files generated successfully");
   } catch (error) {

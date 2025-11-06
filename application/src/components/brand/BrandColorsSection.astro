@@ -1,0 +1,47 @@
+---
+import BrandGuidelinesChecklist from './BrandGuidelinesChecklist.astro';
+import type { BrandLocale, ColorCollection } from '~/data/brand/tokens';
+
+interface Props {
+  lang: BrandLocale;
+  brandColors: ColorCollection;
+  title: string;
+  doLabel: string;
+  dontLabel: string;
+}
+
+const { lang, brandColors, title, doLabel, dontLabel } = Astro.props as Props;
+const colorItems = brandColors.items ?? [];
+const colorDo = brandColors.do?.[lang] ?? [];
+const colorDont = brandColors.dont?.[lang] ?? [];
+---
+
+<div class="mb-16">
+  <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">{title}</h2>
+  <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+    {
+      colorItems.map((color) => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+          <div
+            class="h-32"
+            style={`background-color: ${color.hex}`}
+            aria-label={`Color swatch for ${color.name[lang]}`}
+          />
+          <div class="p-6">
+            <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">{color.name[lang]}</h3>
+            <div class="space-y-1 text-sm mb-4">
+              <p class="font-mono text-gray-700 dark:text-gray-300">HEX: {color.hex}</p>
+              <p class="font-mono text-gray-700 dark:text-gray-300">RGB: {color.rgb}</p>
+            </div>
+            <p class="text-sm text-gray-600 dark:text-gray-400">{color.usage[lang]}</p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <BrandGuidelinesChecklist title={doLabel} items={colorDo} tone="positive" />
+    <BrandGuidelinesChecklist title={dontLabel} items={colorDont} tone="negative" />
+  </div>
+</div>

@@ -1,3 +1,11 @@
+# Workflow to update branding assets in the landing-page repository upon receiving a dispatch event from the branding repository.
+#
+# - Branding repository packages validated assets, emits manifest, and dispatches `branding-update` with `artifact_id` matching the GitHub run ID.
+# - Landing-page workflow validates the manifest, downloads `branding-assets-<run_id>` from `hoverkraft-tech/branding`, and refreshes assets plus derived outputs (logo ZIP, brand guide PDF).
+#
+# Manifest fields capture version metadata, color tokens, logo inventory, mascot path, and typography tokens and must satisfy `.github/schemas/branding-manifest.schema.json`.
+
+---
 name: Update Branding Assets
 
 on:
@@ -71,16 +79,15 @@ jobs:
           logos: ${{ steps.validate-manifest.outputs.logos }}
           mascot: ${{ steps.validate-manifest.outputs.mascot }}
 
-      - name: Generate brand content (colors, mission, guidelines, typography, logos)
+      - name: Generate brand content (mission, colors, typography, logos)
         uses: ./.github/actions/generate-brand-content
         with:
           version: ${{ steps.validate-manifest.outputs.version }}
           commit: ${{ steps.validate-manifest.outputs.commit }}
           colors: ${{ steps.validate-manifest.outputs.colors }}
           brand-mission: ${{ steps.validate-manifest.outputs.brand-mission }}
-          usage-guidelines: ${{ steps.validate-manifest.outputs.usage-guidelines }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
-          fonts: ${{ steps.validate-manifest.outputs.fonts }}
+          typography: ${{ steps.validate-manifest.outputs.typography }}
           output-dir: ${{ env.BRAND_DIR }}
 
       - name: Create logo pack
@@ -120,7 +127,6 @@ jobs:
             ### Assets Updated (${{ steps.validate-manifest.outputs.locales }})
             - ✅ Brand colors (from manifest)
             - ✅ Brand mission statements
-            - ✅ Usage guidelines
             - ✅ Typography tokens
             - ✅ Logo assets metadata (localized copy)
             - ✅ Logo files
@@ -153,7 +159,6 @@ jobs:
               .addList([
                 '✅ Brand colors (from manifest)',
                 `✅ Brand mission statements`,
-                `✅ Usage guidelines`,
                 '✅ Typography tokens',
                 '✅ Logo assets metadata (localized copy)',
                 '✅ Logo files',

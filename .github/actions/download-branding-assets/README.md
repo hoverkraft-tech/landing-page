@@ -44,7 +44,7 @@ Downloads and organizes branding assets from the branding repository
     # This input is required.
     commit: ""
 
-    # JSON-stringified array of logo objects with paths
+    # JSON-stringified logo collection
     # This input is required.
     logos: ""
 
@@ -58,13 +58,13 @@ Downloads and organizes branding assets from the branding repository
 
 ## Inputs
 
-| **Input**         | **Description**                                   | **Required** | **Default** |
-| ----------------- | ------------------------------------------------- | ------------ | ----------- |
-| **`artifact-id`** | The artifact ID from the branding repository      | **true**     | -           |
-| **`version`**     | The branding version                              | **true**     | -           |
-| **`commit`**      | The commit SHA from the branding repository       | **true**     | -           |
-| **`logos`**       | JSON-stringified array of logo objects with paths | **true**     | -           |
-| **`mascot`**      | JSON-stringified mascot object with path          | **true**     | -           |
+| **Input**         | **Description**                              | **Required** | **Default** |
+| ----------------- | -------------------------------------------- | ------------ | ----------- |
+| **`artifact-id`** | The artifact ID from the branding repository | **true**     | -           |
+| **`version`**     | The branding version                         | **true**     | -           |
+| **`commit`**      | The commit SHA from the branding repository  | **true**     | -           |
+| **`logos`**       | JSON-stringified logo collection             | **true**     | -           |
+| **`mascot`**      | JSON-stringified mascot object with path     | **true**     | -           |
 
 <!-- inputs:end -->
 <!-- secrets:start -->

@@ -1,5 +1,5 @@
 name: "Generate Brand Content"
-description: "Generates TypeScript files for brand colors, mission, usage guidelines, typography, and logos from manifest"
+description: "Generates TypeScript files for brand colors, mission, typography, and logos from manifest"
 inputs:
   version:
     description: "The branding version"
@@ -8,19 +8,16 @@ inputs:
     description: "The commit SHA from the branding repository"
     required: true
   colors:
-    description: "JSON-stringified array of color tokens"
+    description: "JSON-stringified color collection"
     required: true
   brand-mission:
     description: "JSON-stringified localized brand mission entries"
     required: true
-  usage-guidelines:
-    description: "JSON-stringified usage guidelines object"
-    required: true
   logos:
-    description: "JSON-stringified array of logo metadata with localized copy"
+    description: "JSON-stringified logo collection"
     required: true
-  fonts:
-    description: "JSON-stringified fonts object"
+  typography:
+    description: "JSON-stringified typography collection"
     required: false
   output-dir:
     description: "Output directory for generated files"

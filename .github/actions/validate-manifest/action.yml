@@ -15,23 +15,20 @@ outputs:
     description: "The commit SHA from the branding repository"
     value: ${{ steps.parse.outputs.commit }}
   colors:
-    description: "JSON-stringified array of color tokens"
+    description: "JSON-stringified color collection"
     value: ${{ steps.parse.outputs.colors }}
   brand-mission:
     description: "JSON-stringified localized brand mission entries"
     value: ${{ steps.parse.outputs.brand-mission }}
-  usage-guidelines:
-    description: "JSON-stringified usage guidelines object"
-    value: ${{ steps.parse.outputs.usage-guidelines }}
   logos:
-    description: "JSON-stringified array of logo objects"
+    description: "JSON-stringified logo collection"
     value: ${{ steps.parse.outputs.logos }}
   mascot:
     description: "JSON-stringified mascot object"
     value: ${{ steps.parse.outputs.mascot }}
-  fonts:
-    description: "JSON-stringified fonts object (if present)"
-    value: ${{ steps.parse.outputs.fonts }}
+  typography:
+    description: "JSON-stringified typography collection (if present)"
+    value: ${{ steps.parse.outputs.typography }}
   locales:
     description: "JSON-stringified array of locales present in the manifest"
     value: ${{ steps.parse.outputs.locales }}
@@ -72,14 +69,15 @@ runs:
           core.setOutput('commit', manifest.commit);
           core.setOutput('colors', JSON.stringify(manifest.colors));
           core.setOutput('brand-mission', JSON.stringify(manifest.brandMission));
-          core.setOutput('usage-guidelines', JSON.stringify(manifest.usageGuidelines));
           core.setOutput('logos', JSON.stringify(manifest.logos));
           core.setOutput('mascot', JSON.stringify(manifest.mascot));
-          core.setOutput('fonts', manifest.fonts ? JSON.stringify(manifest.fonts) : '{}');
+          core.setOutput('typography', manifest.typography ? JSON.stringify(manifest.typography) : '{}');
 
-          const locales = Object.keys(manifest.brandMission || {});
+          const locales = Object.keys(manifest.brandMission?.title || {});
           core.setOutput('locales', JSON.stringify(locales));
 
-          core.info(`✓ Exported manifest data: ${manifest.colors.length} colors, ${manifest.logos.length} logos, mission locales: ${locales.join(', ')}`);
+          const colorCount = manifest.colors?.items?.length ?? 0;
+          const logoCount = manifest.logos?.items?.length ?? 0;
+          core.info(`✓ Exported manifest data: ${colorCount} colors, ${logoCount} logos, mission locales: ${locales.join(', ')}`);
       env:
         MANIFEST_INPUT: ${{ inputs.manifest }}

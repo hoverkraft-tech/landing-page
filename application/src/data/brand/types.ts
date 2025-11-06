@@ -5,51 +5,54 @@
 
 export type BrandLocale = 'fr' | 'en';
 
+export type LocalizedString = Record<BrandLocale, string>;
+export type LocalizedStringList = Record<BrandLocale, string[]>;
+
 export interface ColorToken {
-  name: string;
+  name: LocalizedString;
   hex: string;
   rgb: string;
-  usage: string;
+  usage: LocalizedString;
+}
+
+export interface ColorCollectionGuidelines {
+  do?: LocalizedStringList;
+  dont?: LocalizedStringList;
+}
+
+export interface ColorCollection extends ColorCollectionGuidelines {
+  items: ColorToken[];
 }
 
 export interface TypographyToken {
   family: string;
   weights: number[];
-  usage: string;
+  usage?: LocalizedString;
   fallback?: string;
 }
 
-export interface LogoAssetCopy {
-  usage: string;
-  minimumSize?: string;
-  clearSpace?: string;
+export interface TypographyCollection {
+  primary?: TypographyToken;
+  monospace?: TypographyToken;
 }
-
-export type LogoAssetLocalizedCopy = Record<BrandLocale, LogoAssetCopy>;
 
 export interface LogoAsset {
   name: string;
   path: string;
-  copy: LogoAssetLocalizedCopy;
   formats: string[];
+  usage: LocalizedString;
 }
 
-export interface GuidelineSet {
-  do: string[];
-  dont: string[];
+export interface LogoCollectionGuidelines {
+  do?: LocalizedStringList;
+  dont?: LocalizedStringList;
 }
 
-export interface UsageGuidelineEntry {
-  overview: string;
-  logo: GuidelineSet;
-  colors: GuidelineSet;
+export interface LogoCollection extends LogoCollectionGuidelines {
+  items: LogoAsset[];
 }
 
-export type UsageGuidelines = Record<BrandLocale, UsageGuidelineEntry>;
-
-export interface BrandMissionEntry {
-  title: string;
-  description: string;
+export interface BrandMission {
+  title: LocalizedString;
+  description: LocalizedString;
 }
-
-export type BrandMission = Record<BrandLocale, BrandMissionEntry>;

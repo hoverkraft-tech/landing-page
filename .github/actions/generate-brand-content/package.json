@@ -1,7 +1,7 @@
 {
   "name": "generate-brand-content",
   "version": "1.0.0",
-  "description": "Generates TypeScript files for brand colors, mission, and usage guidelines",
+  "description": "Generates TypeScript files for brand colors, mission, typography, and logos",
   "main": "index.js",
   "dependencies": {
     "@actions/core": "^1.11.1",

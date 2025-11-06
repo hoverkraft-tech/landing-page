@@ -3,7 +3,7 @@
 # GitHub Workflow: Update Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/b62a6cd4911283bb25fad69fb29a109689ec9c0c35be7cb62cc5513669236fd3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
+  <img src="https://opengraph.githubassets.com/641f294e3cacb0fc951bc56fc7a8be012021d721ab79137394f4f61f98535499/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
 </div>
 
 ---
@@ -18,27 +18,36 @@
 
 <!-- badges:end -->
 <!-- overview:start -->
-<!-- overview:end -->
 
-### Integration Overview
+## Overview
+
+Workflow to update branding assets in the landing-page repository upon receiving a dispatch event from the branding repository.
 
 - Branding repository packages validated assets, emits manifest, and dispatches `branding-update` with `artifact_id` matching the GitHub run ID.
 - Landing-page workflow validates the manifest, downloads `branding-assets-<run_id>` from `hoverkraft-tech/branding`, and refreshes assets plus derived outputs (logo ZIP, brand guide PDF).
 
-Manifest fields capture version metadata, color tokens, logo inventory, mascot path, and font families and must satisfy `.github/schemas/branding-manifest.schema.json`.
+Manifest fields capture version metadata, color tokens, logo inventory, mascot path, and typography tokens and must satisfy `.github/schemas/branding-manifest.schema.json`.
 
-### Workflow Responsibilities
+### Permissions
+
+- **`actions`**: `read`
+- **`contents`**: `write`
+- **`pull-requests`**: `write`
+
+<!-- overview:end -->
+
+## Workflow Responsibilities
 
 - **Branding repository**: keep manifest accurate, bundle every referenced asset, trigger dispatch on `main` and manual runs.
 - **Landing-page repository**: enforce schema validation, safely handle missing files, commit processed assets under `application/public/brand/` with manifest version in the message.
 
-### Validation & Testing
+## Validation & Testing
 
 - `ajv validate -s .github/schemas/branding-manifest.schema.json -d manifest.json` before dispatching real updates.
 - `gh workflow run update-branding-assets.yml --field artifact-id="12345" --field manifest='{"version":"1.0.0"}'` to dry-run the consumer pipeline.
 - Run `npm run lint` and `npm run build` (or `make lint` / `make build`) after asset refreshes.
 
-### Rollback & Monitoring
+## Rollback & Monitoring
 
 - Revert the branding update commit to roll back to the previous asset set.
 - Monitor GitHub Actions runs and commit history; artifacts remain available for 30 days for reprocessing.
@@ -59,7 +68,7 @@ permissions:
   pull-requests: write
 jobs:
   update-branding-assets:
-    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@facfad4e0977e3a62d428578bde186309f0a8434 # 2.0.0
+    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@9aa4e32f0f1afad68084d1dd6ec1dc8c1cc905b3 # refactor/branding-page
     with:
       # JSON manifest describing the branding data (artifact-id comes from manifest)
       #

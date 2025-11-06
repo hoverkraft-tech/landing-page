@@ -11,7 +11,7 @@ inputs:
     description: "The commit SHA from the branding repository"
     required: true
   logos:
-    description: "JSON-stringified array of logo objects with paths"
+    description: "JSON-stringified logo collection"
     required: true
   mascot:
     description: "JSON-stringified mascot object with path"
@@ -36,7 +36,8 @@ runs:
           const path = require('path');
 
           // Parse inputs
-          const logos = JSON.parse(process.env.LOGOS_INPUT);
+          const logoCollection = JSON.parse(process.env.LOGOS_INPUT);
+          const logos = Array.isArray(logoCollection.items) ? logoCollection.items : Array.isArray(logoCollection) ? logoCollection : [];
           const mascot = JSON.parse(process.env.MASCOT_INPUT);
           const version = process.env.VERSION_INPUT;
           const commit = process.env.COMMIT_INPUT;

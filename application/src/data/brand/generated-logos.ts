@@ -4,75 +4,73 @@
  * Last updated: 2025-11-04
  */
 
-import type { LogoAsset } from './types';
+import type { LogoCollection } from './types';
 
-export const logos: LogoAsset[] = [
-  {
-    name: 'Primary Logo',
-    path: '/brand/logos/primary.svg',
-    formats: ['SVG', 'PNG', 'PDF'],
-    copy: {
-      fr: {
-        usage: 'Logo principal pour les fonds clairs.',
-        minimumSize: 'Largeur minimale 120px pour garantir la lisibilité.',
-        clearSpace: 'Laissez un espace libre égal à la hauteur du H tout autour.',
-      },
-      en: {
-        usage: 'Primary logo for light backgrounds.',
-        minimumSize: 'Minimum width 120px to preserve legibility.',
-        clearSpace: 'Maintain clear space equal to the height of the H on all sides.',
+export const logos: LogoCollection = {
+  do: {
+    fr: [
+      'Utilisez uniquement les versions officielles du logo, sans altération.',
+      'Maintenez un espace libre équivalent à la hauteur du H autour du logo.',
+      'Assurez une taille minimale de 120px de largeur pour préserver la lisibilité.',
+      'Sélectionnez la variante claire ou foncée selon le contraste du support.',
+    ],
+    en: [
+      'Use only the approved logo files without altering proportions or colors.',
+      'Maintain clear space equal to the height of the H on every side of the mark.',
+      'Keep a minimum display width of 120px to guarantee legibility.',
+      'Choose the light or dark variant based on the background contrast.',
+    ],
+  },
+  dont: {
+    fr: [
+      "Ne déformez jamais le logo en l'étirant ou en le compressant.",
+      'Ne modifiez pas les couleurs officielles ou leurs proportions.',
+      "N'ajoutez pas d'effets, d'ombres ou de contours non validés.",
+      'Ne placez pas le logo sur des arrière-plans trop chargés ou à faible contraste.',
+    ],
+    en: [
+      'Do not stretch, squash, or rotate the logo in any way.',
+      'Avoid recoloring the logo or swapping the gradients and fills.',
+      'Skip dropshadows, outlines, or other unapproved effects.',
+      'Never place the logo directly on busy or low-contrast backgrounds.',
+    ],
+  },
+  items: [
+    {
+      name: 'Primary Logo',
+      path: '/brand/logos/primary.svg',
+      formats: ['SVG', 'PNG', 'PDF'],
+      usage: {
+        fr: 'Utiliser sur fond clair pour la plupart des supports. Minimum 32 px de hauteur. Espace de 0.5x autour du logo.',
+        en: 'Use on light backgrounds for most applications. Minimum 32 px height. 0.5x clear space around the logo.',
       },
     },
-  },
-  {
-    name: 'Primary Logo (Dark)',
-    path: '/brand/logos/primary-dark.svg',
-    formats: ['SVG', 'PNG', 'PDF'],
-    copy: {
-      fr: {
-        usage: 'Logo principal optimisé pour les fonds sombres.',
-        minimumSize: 'Largeur minimale 120px pour une lisibilité optimale.',
-        clearSpace: 'Respectez un espace libre équivalent à la hauteur du H autour du logo.',
-      },
-      en: {
-        usage: 'Primary logo optimized for dark backgrounds.',
-        minimumSize: 'Minimum width 120px to keep the mark crisp.',
-        clearSpace: 'Keep clear space matching the height of the H on every edge.',
+    {
+      name: 'Primary Logo (Dark)',
+      path: '/brand/logos/primary-dark.svg',
+      formats: ['SVG', 'PNG', 'PDF'],
+      usage: {
+        fr: 'Utiliser sur fond sombre ou pour des visuels haute-contraste. Minimum 32 px de hauteur. Espace de 0.5x autour du logo.',
+        en: 'Use on dark backgrounds or high-contrast visuals. Minimum 32 px height. 0.5x clear space around the logo.',
       },
     },
-  },
-  {
-    name: 'Icon',
-    path: '/brand/logos/icon.svg',
-    formats: ['SVG', 'PNG', 'ICO'],
-    copy: {
-      fr: {
-        usage: 'Icône carrée à utiliser pour les avatars ou les favicons.',
-        minimumSize: 'Hauteur minimale 32px pour conserver le détail.',
-        clearSpace: "Préservez une marge libre équivalente à 25 % de la taille de l'icône.",
-      },
-      en: {
-        usage: 'Square icon suited for avatars and favicons.',
-        minimumSize: 'Minimum height 32px to keep details visible.',
-        clearSpace: 'Leave a safe area equal to 25% of the icon size on each side.',
+    {
+      name: 'Icon',
+      path: '/brand/logos/icon.svg',
+      formats: ['SVG', 'PNG', 'ICO'],
+      usage: {
+        fr: 'Utiliser pour les avatars et favicons. Minimum 24 px de hauteur. Espace de 0.5x autour de l icone.',
+        en: 'Use for avatars and favicons. Minimum 24 px height. 0.5x clear space around the icon.',
       },
     },
-  },
-  {
-    name: 'Wordmark',
-    path: '/brand/logos/wordmark.svg',
-    formats: ['SVG', 'PNG'],
-    copy: {
-      fr: {
-        usage: 'Logotype texte réservé aux compositions horizontales ou éditoriales.',
-        minimumSize: 'Largeur minimale 140px pour garantir la lecture des lettres.',
-        clearSpace: 'Gardez un espace libre égal à la hauteur de la lettre x autour du mot.',
-      },
-      en: {
-        usage: 'Text-only wordmark for horizontal or editorial layouts.',
-        minimumSize: 'Minimum width 140px so the lettering stays readable.',
-        clearSpace: 'Maintain clear space equal to the height of the lowercase letters.',
+    {
+      name: 'Wordmark',
+      path: '/brand/logos/wordmark.svg',
+      formats: ['SVG', 'PNG'],
+      usage: {
+        fr: 'Utiliser dans les compositions editoriales ou horizontales. Minimum 140 px de largeur. Respecter 0.5x d espace libre.',
+        en: 'Use in editorial or horizontal compositions. Minimum 140 px width. Maintain 0.5x clear space.',
       },
     },
-  },
-];
+  ],
+};
