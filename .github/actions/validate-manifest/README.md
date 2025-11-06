@@ -53,18 +53,17 @@ Validates the branding manifest against JSON schema and parses it for use in the
 
 ## Outputs
 
-| **Output**             | **Description**                                           |
-| ---------------------- | --------------------------------------------------------- |
-| **`artifact-id`**      | The artifact ID from the manifest                         |
-| **`version`**          | The branding version from the manifest                    |
-| **`commit`**           | The commit SHA from the branding repository               |
-| **`colors`**           | JSON-stringified array of color tokens                    |
-| **`brand-mission`**    | JSON-stringified localized brand mission entries          |
-| **`usage-guidelines`** | JSON-stringified usage guidelines object                  |
-| **`logos`**            | JSON-stringified array of logo objects                    |
-| **`mascot`**           | JSON-stringified mascot object                            |
-| **`fonts`**            | JSON-stringified fonts object (if present)                |
-| **`locales`**          | JSON-stringified array of locales present in the manifest |
+| **Output**          | **Description**                                           |
+| ------------------- | --------------------------------------------------------- |
+| **`artifact-id`**   | The artifact ID from the manifest                         |
+| **`version`**       | The branding version from the manifest                    |
+| **`commit`**        | The commit SHA from the branding repository               |
+| **`colors`**        | JSON-stringified color collection                         |
+| **`brand-mission`** | JSON-stringified localized brand mission entries          |
+| **`logos`**         | JSON-stringified logo collection                          |
+| **`mascot`**        | JSON-stringified mascot object                            |
+| **`typography`**    | JSON-stringified typography collection (if present)       |
+| **`locales`**       | JSON-stringified array of locales present in the manifest |
 
 <!-- outputs:end -->
 <!-- examples:start -->

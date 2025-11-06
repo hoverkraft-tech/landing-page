@@ -7,14 +7,12 @@
 import type { BrandMission } from './types';
 
 export const brandMission: BrandMission = {
-  fr: {
-    title: 'Notre mission',
-    description:
-      "Libérer les développeurs et accélérer le time-to-market grâce à une méthodologie Platform Engineering orientée connecteurs, ancrée dans l'open source et adaptée aux réalités des PME et ETI françaises.",
+  title: {
+    fr: 'Notre mission',
+    en: 'Our Mission',
   },
-  en: {
-    title: 'Our Mission',
-    description:
-      'Empower engineering teams and speed up time-to-market with a connector-driven Platform Engineering methodology, rooted in open source and tailored to the realities of French SMB and mid-market companies.',
+  description: {
+    fr: "Libérer les développeurs et accélérer le time-to-market grâce à une méthodologie Platform Engineering orientée connecteurs, ancrée dans l'open source et adaptée aux réalités des PME et ETI françaises.",
+    en: 'Empower engineering teams and speed up time-to-market with a connector-driven Platform Engineering methodology, rooted in open source and tailored to the realities of French SMB and mid-market companies.',
   },
 };

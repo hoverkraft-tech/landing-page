@@ -22,7 +22,7 @@
 
 ## Overview
 
-Generates TypeScript files for brand colors, mission, usage guidelines, typography, and logos from manifest
+Generates TypeScript files for brand colors, mission, typography, and logos from manifest
 
 <!-- overview:end -->
 <!-- usage:start -->
@@ -40,7 +40,7 @@ Generates TypeScript files for brand colors, mission, usage guidelines, typograp
     # This input is required.
     commit: ""
 
-    # JSON-stringified array of color tokens
+    # JSON-stringified color collection
     # This input is required.
     colors: ""
 
@@ -48,16 +48,12 @@ Generates TypeScript files for brand colors, mission, usage guidelines, typograp
     # This input is required.
     brand-mission: ""
 
-    # JSON-stringified usage guidelines object
-    # This input is required.
-    usage-guidelines: ""
-
-    # JSON-stringified array of logo metadata with localized copy
+    # JSON-stringified logo collection
     # This input is required.
     logos: ""
 
-    # JSON-stringified fonts object
-    fonts: ""
+    # JSON-stringified typography collection
+    typography: ""
 
     # Output directory for generated files
     # This input is required.
@@ -69,16 +65,15 @@ Generates TypeScript files for brand colors, mission, usage guidelines, typograp
 
 ## Inputs
 
-| **Input**              | **Description**                                             | **Required** | **Default** |
-| ---------------------- | ----------------------------------------------------------- | ------------ | ----------- |
-| **`version`**          | The branding version                                        | **true**     | -           |
-| **`commit`**           | The commit SHA from the branding repository                 | **true**     | -           |
-| **`colors`**           | JSON-stringified array of color tokens                      | **true**     | -           |
-| **`brand-mission`**    | JSON-stringified localized brand mission entries            | **true**     | -           |
-| **`usage-guidelines`** | JSON-stringified usage guidelines object                    | **true**     | -           |
-| **`logos`**            | JSON-stringified array of logo metadata with localized copy | **true**     | -           |
-| **`fonts`**            | JSON-stringified fonts object                               | **false**    | -           |
-| **`output-dir`**       | Output directory for generated files                        | **true**     | -           |
+| **Input**           | **Description**                                  | **Required** | **Default** |
+| ------------------- | ------------------------------------------------ | ------------ | ----------- |
+| **`version`**       | The branding version                             | **true**     | -           |
+| **`commit`**        | The commit SHA from the branding repository      | **true**     | -           |
+| **`colors`**        | JSON-stringified color collection                | **true**     | -           |
+| **`brand-mission`** | JSON-stringified localized brand mission entries | **true**     | -           |
+| **`logos`**         | JSON-stringified logo collection                 | **true**     | -           |
+| **`typography`**    | JSON-stringified typography collection           | **false**    | -           |
+| **`output-dir`**    | Output directory for generated files             | **true**     | -           |
 
 <!-- inputs:end -->
 <!-- secrets:start -->

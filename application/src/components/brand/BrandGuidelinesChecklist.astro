@@ -1,0 +1,36 @@
+---
+interface Props {
+  title: string;
+  items?: string[];
+  tone: 'positive' | 'negative';
+}
+
+const { title, items = [], tone } = Astro.props;
+
+const styles =
+  tone === 'positive'
+    ? {
+        container: 'bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800',
+        heading: 'text-xl font-bold mb-4 text-green-900 dark:text-green-100',
+        bullet: 'text-green-600 dark:text-green-400 mr-2',
+      }
+    : {
+        container: 'bg-red-50 dark:bg-red-900/20 rounded-lg p-6 border border-red-200 dark:border-red-800',
+        heading: 'text-xl font-bold mb-4 text-red-900 dark:text-red-100',
+        bullet: 'text-red-600 dark:text-red-400 mr-2',
+      };
+---
+
+<div class={styles.container}>
+  <h3 class={styles.heading}>{title}</h3>
+  <ul class="space-y-2">
+    {
+      items.map((item) => (
+        <li class="flex items-start">
+          <span class={styles.bullet}>•</span>
+          <span class="text-gray-700 dark:text-gray-300">{item}</span>
+        </li>
+      ))
+    }
+  </ul>
+</div>

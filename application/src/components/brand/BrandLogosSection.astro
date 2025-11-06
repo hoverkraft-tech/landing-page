@@ -1,0 +1,52 @@
+---
+import { Image } from 'astro:assets';
+import BrandGuidelinesChecklist from './BrandGuidelinesChecklist.astro';
+import type { BrandLocale, LogoCollection } from '~/data/brand/tokens';
+
+interface Props {
+  lang: BrandLocale;
+  logos: LogoCollection;
+  title: string;
+  formatsLabel: string;
+  doLabel: string;
+  dontLabel: string;
+}
+
+const { lang, logos, title, formatsLabel, doLabel, dontLabel } = Astro.props as Props;
+const logoItems = logos.items ?? [];
+const logoDo = logos.do?.[lang] ?? [];
+const logoDont = logos.dont?.[lang] ?? [];
+---
+
+<div class="mb-16">
+  <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">{title}</h2>
+
+  <div class="grid md:grid-cols-2 gap-8 mb-12">
+    {
+      logoItems.map((logo) => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+          <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 mb-6 flex items-center justify-center min-h-[200px]">
+            <Image
+              src={import('~/assets/images/logo.png')}
+              alt={logo.name}
+              class="max-w-[200px] h-auto"
+              loading="eager"
+            />
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{logo.name}</h3>
+          <p class="text-gray-600 dark:text-gray-400 mb-4">{logo.usage[lang]}</p>
+          <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+            <p>
+              <strong>{formatsLabel}</strong> {logo.formats.join(', ')}
+            </p>
+          </div>
+        </div>
+      ))
+    }
+  </div>
+
+  <div class="grid md:grid-cols-2 gap-8">
+    <BrandGuidelinesChecklist title={doLabel} items={logoDo} tone="positive" />
+    <BrandGuidelinesChecklist title={dontLabel} items={logoDont} tone="negative" />
+  </div>
+</div>

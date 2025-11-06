@@ -1,9 +1,13 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import { brandColors, typography, logos, brandMission, usageGuidelines } from '~/data/brand/tokens';
-import { Image } from 'astro:assets';
-import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
+import BrandMissionSection from '~/components/brand/BrandMissionSection.astro';
+import BrandLogosSection from '~/components/brand/BrandLogosSection.astro';
+import BrandColorsSection from '~/components/brand/BrandColorsSection.astro';
+import BrandTypographySection from '~/components/brand/BrandTypographySection.astro';
+import BrandDownloadsSection from '~/components/brand/BrandDownloadsSection.astro';
+import BrandLegalSection from '~/components/brand/BrandLegalSection.astro';
+import { brandColors, typography, logos, brandMission } from '~/data/brand/tokens';
 
 const metadata = {
   title: 'Charte graphique Hoverkraft',
@@ -12,255 +16,98 @@ const metadata = {
 };
 
 const lang = 'fr';
-const mission = brandMission[lang];
-const guidelines = usageGuidelines[lang];
+const copy = {
+  hero: {
+    tagline: 'Identité de marque',
+    title: 'Charte graphique Hoverkraft',
+    subtitle:
+      'Directives officielles pour une utilisation cohérente de notre identité visuelle. Téléchargez nos assets et respectez les bonnes pratiques pour garantir une communication professionnelle et harmonieuse.',
+  },
+  logo: {
+    title: 'Logo',
+    formatsLabel: 'Formats :',
+    checklist: {
+      doLabel: 'À faire ✓',
+      dontLabel: 'À ne pas faire ✗',
+    },
+  },
+  colors: {
+    title: 'Palette de couleurs',
+    checklist: {
+      doLabel: 'À faire ✓',
+      dontLabel: 'À ne pas faire ✗',
+    },
+  },
+  typography: {
+    title: 'Typographie',
+    weightsLabel: 'Graisses disponibles :',
+    fallbackLabel: 'Fallback :',
+    sampleText: 'The quick brown fox jumps',
+  },
+  download: {
+    title: 'Centre de téléchargement',
+    subheading: 'Assets officiels',
+    description:
+      'Téléchargez les logos et assets officiels de Hoverkraft dans différents formats. Pour toute question ou demande spécifique, contactez-nous.',
+    logosCta: 'Pack de logos (ZIP)',
+    guideCta: 'Guide complet (PDF)',
+  },
+  legal: {
+    title: 'Informations légales et contact',
+    trademark:
+      'Le nom "Hoverkraft" et le logo Hoverkraft sont des marques déposées. Toute utilisation non autorisée de nos marques est strictement interdite.',
+    contactPrefix:
+      "Pour toute question concernant l'utilisation de notre marque ou pour obtenir des assets personnalisés, veuillez nous contacter à",
+    contactSuffix: undefined,
+    lastUpdated: 'Dernière mise à jour : Novembre 2025',
+  },
+};
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Section -->
-  <Hero tagline="Identité de marque">
-    <Fragment slot="title">Charte graphique Hoverkraft</Fragment>
-    <Fragment slot="subtitle">
-      Directives officielles pour une utilisation cohérente de notre identité visuelle. Téléchargez nos assets et
-      respectez les bonnes pratiques pour garantir une communication professionnelle et harmonieuse.
-    </Fragment>
+  <Hero tagline={copy.hero.tagline}>
+    <Fragment slot="title">{copy.hero.title}</Fragment>
+    <Fragment slot="subtitle">{copy.hero.subtitle}</Fragment>
   </Hero>
 
-  <!-- Brand Mission -->
   <section class="px-4 py-16 sm:px-6 lg:px-8 mx-auto max-w-7xl">
-    <div class="mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">{mission.title}</h2>
-      <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-4xl">
-        {mission.description}
-      </p>
-    </div>
-
-    <!-- Logo Usage -->
-    <div class="mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">Logo</h2>
-
-      <div class="grid md:grid-cols-2 gap-8 mb-12">
-        {
-          logos.map((logo) => {
-            const localizedLogo = logo.copy[lang];
-
-            return (
-              <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
-                <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 mb-6 flex items-center justify-center min-h-[200px]">
-                  <Image
-                    src={import('~/assets/images/logo.png')}
-                    alt={logo.name}
-                    class="max-w-[200px] h-auto"
-                    loading="eager"
-                  />
-                </div>
-                <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">{logo.name}</h3>
-                <p class="text-gray-600 dark:text-gray-400 mb-4">{localizedLogo.usage}</p>
-                <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                  <p>
-                    <strong>Formats :</strong> {logo.formats.join(', ')}
-                  </p>
-                  {localizedLogo.minimumSize && (
-                    <p>
-                      <strong>Taille minimum :</strong> {localizedLogo.minimumSize}
-                    </p>
-                  )}
-                  {localizedLogo.clearSpace && (
-                    <p>
-                      <strong>Espace libre :</strong> {localizedLogo.clearSpace}
-                    </p>
-                  )}
-                </div>
-              </div>
-            );
-          })
-        }
-      </div>
-
-      <!-- Logo Guidelines -->
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800">
-          <h3 class="text-xl font-bold mb-4 text-green-900 dark:text-green-100">À faire ✓</h3>
-          <ul class="space-y-2">
-            {
-              guidelines.logo.do.map((item) => (
-                <li class="flex items-start">
-                  <span class="text-green-600 dark:text-green-400 mr-2">•</span>
-                  <span class="text-gray-700 dark:text-gray-300">{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div class="bg-red-50 dark:bg-red-900/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-          <h3 class="text-xl font-bold mb-4 text-red-900 dark:text-red-100">À ne pas faire ✗</h3>
-          <ul class="space-y-2">
-            {
-              guidelines.logo.dont.map((item) => (
-                <li class="flex items-start">
-                  <span class="text-red-600 dark:text-red-400 mr-2">•</span>
-                  <span class="text-gray-700 dark:text-gray-300">{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Color Palette -->
-    <div class="mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">Palette de couleurs</h2>
-      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-        {
-          brandColors.map((color) => (
-            <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
-              <div
-                class="h-32"
-                style={`background-color: ${color.hex}`}
-                aria-label={`Color swatch for ${color.name}`}
-              />
-              <div class="p-6">
-                <h3 class="text-lg font-bold mb-2 text-gray-900 dark:text-white">{color.name}</h3>
-                <div class="space-y-1 text-sm mb-4">
-                  <p class="font-mono text-gray-700 dark:text-gray-300">HEX: {color.hex}</p>
-                  <p class="font-mono text-gray-700 dark:text-gray-300">RGB: {color.rgb}</p>
-                </div>
-                <p class="text-sm text-gray-600 dark:text-gray-400">{color.usage}</p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-
-      <!-- Color Guidelines -->
-      <div class="grid md:grid-cols-2 gap-8">
-        <div class="bg-green-50 dark:bg-green-900/20 rounded-lg p-6 border border-green-200 dark:border-green-800">
-          <h3 class="text-xl font-bold mb-4 text-green-900 dark:text-green-100">À faire ✓</h3>
-          <ul class="space-y-2">
-            {
-              guidelines.colors.do.map((item) => (
-                <li class="flex items-start">
-                  <span class="text-green-600 dark:text-green-400 mr-2">•</span>
-                  <span class="text-gray-700 dark:text-gray-300">{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-
-        <div class="bg-red-50 dark:bg-red-900/20 rounded-lg p-6 border border-red-200 dark:border-red-800">
-          <h3 class="text-xl font-bold mb-4 text-red-900 dark:text-red-100">À ne pas faire ✗</h3>
-          <ul class="space-y-2">
-            {
-              guidelines.colors.dont.map((item) => (
-                <li class="flex items-start">
-                  <span class="text-red-600 dark:text-red-400 mr-2">•</span>
-                  <span class="text-gray-700 dark:text-gray-300">{item}</span>
-                </li>
-              ))
-            }
-          </ul>
-        </div>
-      </div>
-    </div>
-
-    <!-- Typography -->
-    <div class="mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">Typographie</h2>
-      <div class="grid md:grid-cols-2 gap-8">
-        {
-          typography.map((font) => (
-            <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
-              <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white" style={`font-family: "${font.family}"`}>
-                {font.family}
-              </h3>
-              <p class="text-gray-600 dark:text-gray-400 mb-4">{font.usage}</p>
-              <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
-                <p>
-                  <strong>Graisses disponibles :</strong> {font.weights.join(', ')}
-                </p>
-                {font.fallback && (
-                  <p>
-                    <strong>Fallback :</strong> {font.fallback}
-                  </p>
-                )}
-              </div>
-              <div class="mt-6 space-y-2">
-                {font.weights.slice(0, 4).map((weight) => (
-                  <p
-                    class="text-gray-900 dark:text-white"
-                    style={`font-family: "${font.family}"; font-weight: ${weight}`}
-                  >
-                    The quick brown fox jumps ({weight})
-                  </p>
-                ))}
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-
-    <!-- Download Center -->
-    <div class="mb-16">
-      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">Centre de téléchargement</h2>
-      <div class="bg-blue-50 dark:bg-blue-900/20 rounded-lg p-8 border border-blue-200 dark:border-blue-800">
-        <h3 class="text-xl font-bold mb-4 text-blue-900 dark:text-blue-100">Assets officiels</h3>
-        <p class="text-gray-700 dark:text-gray-300 mb-6">
-          Téléchargez les logos et assets officiels de Hoverkraft dans différents formats. Pour toute question ou
-          demande spécifique, contactez-nous.
-        </p>
-        <div class="grid md:grid-cols-2 gap-4">
-          <a
-            href="/brand/downloads/hoverkraft-logos.zip"
-            download
-            class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
-          >
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-            </svg>
-            Pack de logos (ZIP)
-          </a>
-          <a
-            href="/brand/downloads/hoverkraft-brand-guidelines.pdf"
-            download
-            class="inline-flex items-center justify-center px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-medium transition-colors"
-          >
-            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
-              ></path>
-            </svg>
-            Guide complet (PDF)
-          </a>
-        </div>
-      </div>
-    </div>
-
-    <!-- Legal and Contact -->
-    <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-8">
-      <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">Informations légales et contact</h2>
-      <div class="space-y-4 text-gray-600 dark:text-gray-400">
-        <p>
-          Le nom "Hoverkraft" et le logo Hoverkraft sont des marques déposées. Toute utilisation non autorisée de nos
-          marques est strictement interdite.
-        </p>
-        <p>
-          Pour toute question concernant l'utilisation de notre marque ou pour obtenir des assets personnalisés,
-          veuillez nous contacter à{' '}
-          <ContactEmailLink class="text-blue-600 dark:text-blue-400 hover:underline" />
-        </p>
-        <p class="text-sm">Dernière mise à jour : Novembre 2025</p>
-      </div>
-    </div>
+    <BrandMissionSection lang={lang} mission={brandMission} />
+    <BrandLogosSection
+      lang={lang}
+      logos={logos}
+      title={copy.logo.title}
+      formatsLabel={copy.logo.formatsLabel}
+      doLabel={copy.logo.checklist.doLabel}
+      dontLabel={copy.logo.checklist.dontLabel}
+    />
+    <BrandColorsSection
+      lang={lang}
+      brandColors={brandColors}
+      title={copy.colors.title}
+      doLabel={copy.colors.checklist.doLabel}
+      dontLabel={copy.colors.checklist.dontLabel}
+    />
+    <BrandTypographySection
+      lang={lang}
+      typography={typography}
+      title={copy.typography.title}
+      weightsLabel={copy.typography.weightsLabel}
+      fallbackLabel={copy.typography.fallbackLabel}
+      sampleText={copy.typography.sampleText}
+    />
+    <BrandDownloadsSection
+      title={copy.download.title}
+      subheading={copy.download.subheading}
+      description={copy.download.description}
+      logosCta={copy.download.logosCta}
+      guideCta={copy.download.guideCta}
+    />
+    <BrandLegalSection
+      title={copy.legal.title}
+      trademark={copy.legal.trademark}
+      contactPrefix={copy.legal.contactPrefix}
+      contactSuffix={copy.legal.contactSuffix}
+      lastUpdated={copy.legal.lastUpdated}
+    />
   </section>
 </Layout>

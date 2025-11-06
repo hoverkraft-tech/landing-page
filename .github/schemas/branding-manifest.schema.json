@@ -9,8 +9,7 @@
     "commit",
     "colors",
     "logos",
-    "brandMission",
-    "usageGuidelines"
+    "brandMission"
   ],
   "properties": {
     "version": {
@@ -30,104 +29,58 @@
     },
     "brandMission": {
       "type": "object",
-      "description": "Localized brand mission statements",
-      "required": ["fr", "en"],
+      "description": "Brand mission content localized by language",
+      "required": ["title", "description"],
       "additionalProperties": false,
       "properties": {
-        "fr": { "$ref": "#/definitions/missionEntry" },
-        "en": { "$ref": "#/definitions/missionEntry" }
-      }
-    },
-    "usageGuidelines": {
-      "type": "object",
-      "description": "Localized usage guidelines for the brand",
-      "required": ["fr", "en"],
-      "additionalProperties": false,
-      "properties": {
-        "fr": { "$ref": "#/definitions/usageGuidelinesEntry" },
-        "en": { "$ref": "#/definitions/usageGuidelinesEntry" }
-      }
-    },
-    "colors": {
-      "type": "array",
-      "description": "Brand color definitions",
-      "items": {
-        "type": "object",
-        "required": ["name", "hex", "rgb", "usage"],
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Color name",
-            "example": "Primary Blue"
-          },
-          "hex": {
-            "type": "string",
-            "description": "Hexadecimal color value",
-            "pattern": "^#[0-9A-Fa-f]{6}$",
-            "example": "#1E3A8A"
-          },
-          "rgb": {
-            "type": "string",
-            "description": "RGB color value",
-            "pattern": "^\\d+,\\s*\\d+,\\s*\\d+$",
-            "example": "30, 58, 138"
-          },
-          "usage": {
-            "type": "string",
-            "description": "Usage guidelines for this color",
-            "example": "Primary brand color, main CTAs, key UI elements"
-          }
-        }
-      }
-    },
-    "logos": {
-      "type": "array",
-      "description": "Brand logo assets",
-      "items": {
-        "type": "object",
-        "required": ["name", "path", "formats", "copy"],
-        "additionalProperties": false,
-        "properties": {
-          "name": {
-            "type": "string",
-            "description": "Descriptive name of the logo variant",
-            "example": "Primary Logo"
-          },
-          "path": {
-            "type": "string",
-            "description": "Relative path to the logo file in the artifact",
-            "example": "logo/primary.svg"
-          },
-          "formats": {
-            "type": "array",
-            "description": "Available file formats for this logo variant",
-            "items": {
-              "type": "string"
-            },
-            "minItems": 1
-          },
-          "copy": {
-            "type": "object",
-            "description": "Localized copy for logo usage details",
-            "required": ["fr", "en"],
-            "additionalProperties": false,
-            "properties": {
-              "fr": { "$ref": "#/definitions/logoCopy" },
-              "en": { "$ref": "#/definitions/logoCopy" }
+        "title": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "description": "Mission title localized for each supported language",
+              "properties": {
+                "fr": { "example": "Construire l avenir de la logistique" },
+                "en": { "example": "Building the future of logistics" }
+              }
             }
-          }
+          ]
+        },
+        "description": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "description": "Mission description localized for each supported language",
+              "properties": {
+                "fr": {
+                  "example": "Nous aidons les entreprises a automatiser la logistique avec une technologie fiable et durable."
+                },
+                "en": {
+                  "example": "We help companies automate logistics with reliable, sustainable technology."
+                }
+              }
+            }
+          ]
         }
       }
     },
+    "colors": { "$ref": "#/definitions/colorCollection" },
+    "logos": { "$ref": "#/definitions/logoCollection" },
     "mascot": {
       "type": "object",
       "description": "Brand mascot asset (optional)",
-      "required": ["name", "path"],
+      "required": ["name", "path", "usage"],
       "properties": {
         "name": {
-          "type": "string",
-          "description": "Descriptive name of the mascot",
-          "example": "Hoverkraft Mascot"
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "description": "Localized mascot name",
+              "properties": {
+                "fr": { "example": "Hoverkraft le robot" },
+                "en": { "example": "Hoverkraft the Robot" }
+              }
+            }
+          ]
         },
         "path": {
           "type": "string",
@@ -135,124 +88,229 @@
           "example": "mascot/mascot.png"
         },
         "usage": {
-          "type": "string",
-          "description": "Usage guidelines for the mascot",
-          "example": "Use in playful communications and community content"
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "description": "Localized usage guidelines for the mascot",
+              "properties": {
+                "fr": {
+                  "example": "Utiliser la mascotte dans les materiels marketing pour renforcer l identite de la marque."
+                },
+                "en": {
+                  "example": "Use the mascot in marketing materials to reinforce brand identity."
+                }
+              }
+            }
+          ]
         }
       }
     },
-    "fonts": {
-      "type": "object",
-      "description": "Typography information (optional)",
-      "properties": {
-        "primary": {
-          "type": "object",
-          "properties": {
-            "family": {
-              "type": "string",
-              "example": "Inter Variable"
-            },
-            "weights": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            },
-            "fallback": {
-              "type": "string",
-              "example": "system-ui, sans-serif"
-            }
-          }
-        },
-        "monospace": {
-          "type": "object",
-          "properties": {
-            "family": {
-              "type": "string",
-              "example": "Roboto Mono"
-            },
-            "weights": {
-              "type": "array",
-              "items": {
-                "type": "integer"
-              }
-            }
-          }
-        }
-      }
-    }
+    "typography": { "$ref": "#/definitions/typographyCollection" }
   },
   "definitions": {
-    "missionEntry": {
+    "localizedObject": {
       "type": "object",
-      "required": ["title", "description"],
+      "required": ["fr", "en"],
+      "additionalProperties": false
+    },
+    "localizedString": {
+      "allOf": [
+        { "$ref": "#/definitions/localizedObject" },
+        {
+          "properties": {
+            "fr": { "type": "string" },
+            "en": { "type": "string" }
+          }
+        }
+      ]
+    },
+    "localizedStringArray": {
+      "allOf": [
+        { "$ref": "#/definitions/localizedObject" },
+        {
+          "properties": {
+            "fr": {
+              "type": "array",
+              "items": { "type": "string" }
+            },
+            "en": {
+              "type": "array",
+              "items": { "type": "string" }
+            }
+          }
+        }
+      ]
+    },
+    "colorItem": {
+      "type": "object",
+      "required": ["name", "hex", "rgb", "usage"],
       "additionalProperties": false,
       "properties": {
-        "title": {
-          "type": "string",
-          "description": "Localized mission title"
+        "name": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "description": "Localized color name",
+              "properties": {
+                "fr": { "example": "Bleu principal" },
+                "en": { "example": "Primary Blue" }
+              }
+            }
+          ]
         },
-        "description": {
+        "hex": {
           "type": "string",
-          "description": "Localized mission description"
+          "description": "Hexadecimal color value",
+          "pattern": "^#[0-9A-Fa-f]{6}$",
+          "example": "#1E3A8A"
+        },
+        "rgb": {
+          "type": "string",
+          "description": "RGB color value",
+          "pattern": "^\\d+,\\s*\\d+,\\s*\\d+$",
+          "example": "30, 58, 138"
+        },
+        "usage": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "description": "Localized usage guidance for this color"
+            }
+          ]
         }
       }
     },
-    "guidelineSet": {
+    "colorCollection": {
       "type": "object",
-      "required": ["do", "dont"],
+      "description": "Brand color definitions and usage guidance",
+      "required": ["items"],
       "additionalProperties": false,
       "properties": {
         "do": {
-          "type": "array",
-          "description": "List of recommended practices",
-          "items": {
-            "type": "string"
-          }
+          "allOf": [
+            { "$ref": "#/definitions/localizedStringArray" },
+            {
+              "description": "Localized list of recommended color usage practices"
+            }
+          ]
         },
         "dont": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedStringArray" },
+            {
+              "description": "Localized list of color usage practices to avoid"
+            }
+          ]
+        },
+        "items": {
           "type": "array",
-          "description": "List of practices to avoid",
+          "description": "Localized color palette entries",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/colorItem"
           }
         }
       }
     },
-    "usageGuidelinesEntry": {
+    "logoItem": {
       "type": "object",
-      "required": ["overview", "logo", "colors"],
+      "required": ["name", "path", "formats", "usage"],
       "additionalProperties": false,
       "properties": {
-        "overview": {
+        "name": {
           "type": "string",
-          "description": "Overview of brand usage guidelines"
+          "description": "Descriptive name of the logo variant",
+          "example": "Primary Logo"
         },
-        "logo": {
-          "$ref": "#/definitions/guidelineSet"
+        "path": {
+          "type": "string",
+          "description": "Relative path to the logo file in the artifact",
+          "example": "logo/primary.svg"
         },
-        "colors": {
-          "$ref": "#/definitions/guidelineSet"
+        "formats": {
+          "type": "array",
+          "description": "Available file formats for this logo variant",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
+        "usage": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "description": "Localized usage guidance for the logo variant"
+            }
+          ]
         }
       }
     },
-    "logoCopy": {
+    "logoCollection": {
       "type": "object",
-      "required": ["usage"],
+      "description": "Brand logo assets and usage guidance",
+      "required": ["items"],
       "additionalProperties": false,
       "properties": {
-        "usage": {
-          "type": "string",
-          "description": "Usage guidance for the logo variant"
+        "do": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedStringArray" },
+            {
+              "description": "Localized list of recommended logo usage practices"
+            }
+          ]
         },
-        "minimumSize": {
-          "type": "string",
-          "description": "Minimum size instructions"
+        "dont": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedStringArray" },
+            {
+              "description": "Localized list of logo usage practices to avoid"
+            }
+          ]
         },
-        "clearSpace": {
-          "type": "string",
-          "description": "Clear space guidance around the logo"
+        "items": {
+          "type": "array",
+          "description": "Logo asset entries",
+          "items": {
+            "$ref": "#/definitions/logoItem"
+          }
         }
+      }
+    },
+    "typographyToken": {
+      "type": "object",
+      "required": ["family", "weights"],
+      "additionalProperties": false,
+      "properties": {
+        "family": {
+          "type": "string",
+          "example": "Inter Variable"
+        },
+        "weights": {
+          "type": "array",
+          "items": {
+            "type": "integer"
+          }
+        },
+        "fallback": {
+          "type": "string",
+          "example": "system-ui, sans-serif"
+        },
+        "usage": {
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "description": "Localized usage guidance for this font family"
+            }
+          ]
+        }
+      }
+    },
+    "typographyCollection": {
+      "type": "object",
+      "description": "Typography information (optional)",
+      "additionalProperties": false,
+      "properties": {
+        "primary": { "$ref": "#/definitions/typographyToken" },
+        "monospace": { "$ref": "#/definitions/typographyToken" }
       }
     }
   }

@@ -1,0 +1,50 @@
+---
+import type { BrandLocale, TypographyCollection, TypographyToken } from '~/data/brand/tokens';
+
+interface Props {
+  lang: BrandLocale;
+  typography: TypographyCollection;
+  title: string;
+  weightsLabel: string;
+  fallbackLabel: string;
+  sampleText: string;
+}
+
+const { lang, typography, title, weightsLabel, fallbackLabel, sampleText } = Astro.props as Props;
+const typographyEntries = (Object.values(typography ?? {}) as TypographyToken[]).filter(
+  (value): value is TypographyToken => Boolean(value)
+);
+---
+
+<div class="mb-16">
+  <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">{title}</h2>
+  <div class="grid md:grid-cols-2 gap-8">
+    {
+      typographyEntries.map((font) => (
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+          <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white" style={`font-family: "${font.family}"`}>
+            {font.family}
+          </h3>
+          {font.usage && <p class="text-gray-600 dark:text-gray-400 mb-4">{font.usage[lang]}</p>}
+          <div class="space-y-2 text-sm text-gray-600 dark:text-gray-400">
+            <p>
+              <strong>{weightsLabel}</strong> {font.weights.join(', ')}
+            </p>
+            {font.fallback && (
+              <p>
+                <strong>{fallbackLabel}</strong> {font.fallback}
+              </p>
+            )}
+          </div>
+          <div class="mt-6 space-y-2">
+            {font.weights.slice(0, 4).map((weight) => (
+              <p class="text-gray-900 dark:text-white" style={`font-family: "${font.family}"; font-weight: ${weight}`}>
+                {sampleText} ({weight})
+              </p>
+            ))}
+          </div>
+        </div>
+      ))
+    }
+  </div>
+</div>

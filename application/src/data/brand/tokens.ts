@@ -7,22 +7,34 @@
  */
 
 // Import type definitions
-export type { ColorToken, TypographyToken, LogoAsset, UsageGuidelines } from './types';
+export type {
+  BrandLocale,
+  ColorToken,
+  ColorCollection,
+  TypographyToken,
+  TypographyCollection,
+  LogoAsset,
+  LogoCollection,
+  BrandMission,
+  LocalizedString,
+  LocalizedStringList,
+} from './types';
 
 // Import generated data from branding repository
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- generated modules are emitted at build time
 // @ts-ignore - These files are generated during the build process
 const generatedColors = await import('./generated-colors.ts');
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- generated modules are emitted at build time
+// @ts-ignore - Generated at build time
 const generatedMission = await import('./generated-mission.ts');
-// @ts-ignore
-const generatedGuidelines = await import('./generated-guidelines.ts');
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- generated modules are emitted at build time
+// @ts-ignore - Generated at build time
 const generatedTypography = await import('./generated-typography.ts');
-// @ts-ignore
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- generated modules are emitted at build time
+// @ts-ignore - Generated at build time
 const generatedLogos = await import('./generated-logos.ts');
 
 export const brandColors = generatedColors.brandColors;
 export const brandMission = generatedMission.brandMission;
-export const usageGuidelines = generatedGuidelines.usageGuidelines;
 export const typography = generatedTypography.typography;
 export const logos = generatedLogos.logos;
