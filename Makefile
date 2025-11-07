@@ -10,6 +10,9 @@ include .env
 
 prepare: ## Prepare stack to run
 	cd application && npm install
+	cd .github/actions/generate-brand-content && npm install
+	cd .github/actions/generate-brand-pdfs && npm install
+	cd .github/actions/validate-manifest && npm install
 
 start: ## Start application in dev mode
 	cd application && npm run start
@@ -26,9 +29,16 @@ lint-fix: ## Run linters
 build: ## Build libs and applications
 	cd application && npm run build
 
+test: ## Run tests
+	cd application && npm run test:ci
+	cd .github/actions/generate-brand-content && npm run test:ci
+	cd .github/actions/generate-brand-pdfs && npm run test:ci
+	cd .github/actions/validate-manifest && npm run test:ci
+
 ci: ## Run tests in CI mode
 	$(MAKE) lint
 	$(MAKE) build
+	$(MAKE) test
 
 linter-fix: ## Execute linting and fix
 	$(call run_linter, \

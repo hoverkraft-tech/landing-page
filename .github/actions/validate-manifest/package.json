@@ -1,15 +1,16 @@
 {
-  "name": "generate-brand-pdfs-action",
+  "name": "validate-branding-manifest",
   "version": "1.0.0",
   "private": true,
-  "description": "GitHub Action to prepare and generate localized brand guideline PDFs",
+  "description": "Validates branding manifest inputs for workflows",
   "main": "index.js",
   "scripts": {
     "test": "node --test",
     "test:ci": "node --test"
   },
   "dependencies": {
-    "puppeteer": "^24.28.0"
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1"
   },
   "devDependencies": {
     "mock-fs": "^5.4.0"

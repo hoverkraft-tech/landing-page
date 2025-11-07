@@ -1,12 +1,14 @@
 {
   "name": "generate-brand-content",
   "version": "1.0.0",
+  "private": true,
   "description": "Generates TypeScript files for brand colors, mission, typography, and logos",
   "main": "index.js",
-  "dependencies": {
-    "@actions/core": "^1.11.1",
-    "@actions/io": "^2.0.0",
-    "ajv": "^8.17.1",
-    "ajv-formats": "^3.0.1"
+  "scripts": {
+    "test": "node --test",
+    "test:ci": "node --test"
+  },
+  "devDependencies": {
+    "mock-fs": "^5.4.0"
   }
 }
