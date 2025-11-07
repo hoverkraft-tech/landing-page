@@ -1,0 +1,32 @@
+---
+import BrandGuidelinesView from '../views/brand-guidelines.astro';
+import MethodologyView from '../views/methodology.astro';
+import OffersView from '../views/offers.astro';
+import ResourcesView from '../views/resources.astro';
+
+const localizedViews = {
+  methodologie: MethodologyView,
+  offres: OffersView,
+  ressources: ResourcesView,
+  'charte-graphique': BrandGuidelinesView,
+} as const;
+
+export function getStaticPaths() {
+  return [
+    { params: { slug: 'methodologie' } },
+    { params: { slug: 'offres' } },
+    { params: { slug: 'ressources' } },
+    { params: { slug: 'charte-graphique' } },
+  ];
+}
+
+const slugParam = Astro.params.slug;
+
+if (!slugParam || !(slugParam in localizedViews)) {
+  throw new Error(`Unknown localized page slug: ${slugParam ?? 'undefined'}`);
+}
+
+const View = localizedViews[slugParam as keyof typeof localizedViews];
+---
+
+<View />

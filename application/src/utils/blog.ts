@@ -64,6 +64,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     draft = false,
     metadata = {},
     lang = defaultLang,
+    translationKey: rawTranslationKey,
   } = data;
 
   const slug = cleanSlug(id); // cleanSlug(rawSlug.split('/').pop());
@@ -81,6 +82,9 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     slug: cleanSlug(tag),
     title: tag,
   }));
+
+  const translationKey =
+    typeof rawTranslationKey === 'string' && rawTranslationKey.length > 0 ? rawTranslationKey : slug;
 
   return {
     id: id,
@@ -102,6 +106,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
 
     metadata,
     lang,
+    translationKey,
 
     Content: Content,
     // or 'content' in case you consume from API

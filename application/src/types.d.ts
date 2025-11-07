@@ -34,6 +34,9 @@ export interface Post {
   lang?: 'fr' | 'en';
 
   /**  */
+  translationKey?: string;
+
+  /**  */
   metadata?: MetaData;
 
   /**  */
