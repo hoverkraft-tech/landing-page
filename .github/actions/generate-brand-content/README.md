@@ -3,7 +3,7 @@
 # GitHub Action: Generate Brand Content
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/38fa3a28347ed1669c7af405c9a8b9b90d463540f2ceaa6c5511bf073d5d9800/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
+  <img src="https://opengraph.githubassets.com/5b08002c56a695503645d04c58e8ede12861328e7b99d7709e7be1fc8de75303/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
 </div>
 
 ---
@@ -53,6 +53,7 @@ Generates TypeScript files for brand colors, mission, typography, and logos from
     logos: ""
 
     # JSON-stringified typography collection
+    # This input is required.
     typography: ""
 
     # Output directory for generated files
@@ -72,7 +73,7 @@ Generates TypeScript files for brand colors, mission, typography, and logos from
 | **`colors`**        | JSON-stringified color collection                | **true**     | -           |
 | **`brand-mission`** | JSON-stringified localized brand mission entries | **true**     | -           |
 | **`logos`**         | JSON-stringified logo collection                 | **true**     | -           |
-| **`typography`**    | JSON-stringified typography collection           | **false**    | -           |
+| **`typography`**    | JSON-stringified typography collection           | **true**     | -           |
 | **`output-dir`**    | Output directory for generated files             | **true**     | -           |
 
 <!-- inputs:end -->
