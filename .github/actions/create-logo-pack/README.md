@@ -3,7 +3,7 @@
 # GitHub Action: Create Logo Pack
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/c0c1890f8241741ba0ad73842de870840e26dc032599124a8250b2fee3fac67b/hoverkraft-tech/landing-page" width="60px" align="center" alt="Create Logo Pack" />
+  <img src="https://opengraph.githubassets.com/5061885d11d116d872f80c15e99aecae96c502981617afad0705fd584391f9d3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Create Logo Pack" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Creates a ZIP archive of all brand logos
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/create-logo-pack@0af6364ee92db51ed9b84797fae8a17dfdcc011a # 2.1.0
+- uses: hoverkraft-tech/landing-page/.github/actions/create-logo-pack@bc4af01f3c8044653e42fa5340ccde671aa30a77 # 2.2.0
   with:
     # Directory containing logos
     # This input is required.

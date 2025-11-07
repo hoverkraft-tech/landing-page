@@ -3,7 +3,7 @@
 # GitHub Action: Generate Brand PDFs
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/c0c1890f8241741ba0ad73842de870840e26dc032599124a8250b2fee3fac67b/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand PDFs" />
+  <img src="https://opengraph.githubassets.com/5061885d11d116d872f80c15e99aecae96c502981617afad0705fd584391f9d3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand PDFs" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Resolves localized brand guideline routes and generates PDFs for each locale
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-pdfs@0af6364ee92db51ed9b84797fae8a17dfdcc011a # 2.1.0
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-pdfs@bc4af01f3c8044653e42fa5340ccde671aa30a77 # 2.2.0
   with:
     # JSON array of locale codes provided by the branding manifest
     # This input is required.
