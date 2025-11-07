@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   continuous-integration-actions:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@4d7c1ed87c18493fc4c2dbae4dbde46cf251c9a7 # 0.16.1
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@23af54bc615d657aa9c13c472ae701445c1811a6 # 0.17.1
     strategy:
       matrix:
         working-directory:
@@ -26,7 +26,7 @@ jobs:
       dependency-review: false
 
   continuous-integration:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@4d7c1ed87c18493fc4c2dbae4dbde46cf251c9a7 # 0.16.1
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@23af54bc615d657aa9c13c472ae701445c1811a6 # 0.17.1
     with:
       working-directory: application
       build: |
