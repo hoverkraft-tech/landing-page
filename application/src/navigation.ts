@@ -85,12 +85,16 @@ export function getLocalizedFooterData(url: URL) {
           { text: t('footer.docs'), href: 'https://docs.hoverkraft.cloud' },
         ],
       },
+      {
+        title: t('footer.about'),
+        links: [
+          { text: t('footer.terms'), href: translatePath('/terms') },
+          { text: t('footer.privacy'), href: translatePath('/privacy') },
+          { text: t('nav.brand'), href: translatePath('/charte-graphique') },
+        ],
+      },
     ],
-    secondaryLinks: [
-      { text: t('footer.terms'), href: translatePath('/terms') },
-      { text: t('footer.privacy'), href: translatePath('/privacy') },
-      { text: t('nav.brand'), href: translatePath('/charte-graphique') },
-    ],
+    secondaryLinks: [],
     socialLinks: [
       {
         ariaLabel: 'LinkedIn',
