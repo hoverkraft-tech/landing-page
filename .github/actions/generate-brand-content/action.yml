@@ -18,10 +18,33 @@ inputs:
     required: true
   typography:
     description: "JSON-stringified typography collection"
-    required: false
+    required: true
   output-dir:
     description: "Output directory for generated files"
     required: true
 runs:
-  using: "node20"
-  main: "index.js"
+  using: "composite"
+  steps:
+    - uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+      env:
+        VERSION_INPUT: ${{ inputs.version }}
+        COMMIT_INPUT: ${{ inputs.commit }}
+        COLORS_INPUT: ${{ inputs.colors }}
+        BRAND_MISSION_INPUT: ${{ inputs['brand-mission'] }}
+        LOGOS_INPUT: ${{ inputs.logos }}
+        TYPOGRAPHY_INPUT: ${{ inputs.typography }}
+        OUTPUT_DIR_INPUT: ${{ inputs['output-dir'] }}
+      with:
+        script: |
+          const { run } = require('${{ github.action_path }}/index.js');
+          await run({ 
+            core,
+            io,
+            version: process.env.VERSION_INPUT,
+            commit: process.env.COMMIT_INPUT,
+            colors: process.env.COLORS_INPUT,
+            brandMission: process.env.BRAND_MISSION_INPUT,
+            logos: process.env.LOGOS_INPUT,
+            typography: process.env.TYPOGRAPHY_INPUT,
+            outputDir: process.env.OUTPUT_DIR_INPUT,
+          });

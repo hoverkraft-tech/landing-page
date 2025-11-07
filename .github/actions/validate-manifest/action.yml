@@ -7,77 +7,46 @@ inputs:
 outputs:
   artifact-id:
     description: "The artifact ID from the manifest"
-    value: ${{ steps.parse.outputs.artifact-id }}
+    value: ${{ steps.validate.outputs.artifact-id }}
   version:
     description: "The branding version from the manifest"
-    value: ${{ steps.parse.outputs.version }}
+    value: ${{ steps.validate.outputs.version }}
   commit:
     description: "The commit SHA from the branding repository"
-    value: ${{ steps.parse.outputs.commit }}
+    value: ${{ steps.validate.outputs.commit }}
   colors:
     description: "JSON-stringified color collection"
-    value: ${{ steps.parse.outputs.colors }}
+    value: ${{ steps.validate.outputs.colors }}
   brand-mission:
     description: "JSON-stringified localized brand mission entries"
-    value: ${{ steps.parse.outputs.brand-mission }}
+    value: ${{ steps.validate.outputs.brand-mission }}
   logos:
     description: "JSON-stringified logo collection"
-    value: ${{ steps.parse.outputs.logos }}
+    value: ${{ steps.validate.outputs.logos }}
   mascot:
     description: "JSON-stringified mascot object"
-    value: ${{ steps.parse.outputs.mascot }}
+    value: ${{ steps.validate.outputs.mascot }}
   typography:
     description: "JSON-stringified typography collection (if present)"
-    value: ${{ steps.parse.outputs.typography }}
+    value: ${{ steps.validate.outputs.typography }}
   locales:
     description: "JSON-stringified array of locales present in the manifest"
-    value: ${{ steps.parse.outputs.locales }}
+    value: ${{ steps.validate.outputs.locales }}
 runs:
   using: "composite"
   steps:
-    - name: Validate and parse manifest
-      id: parse
-      uses: actions/github-script@60a0d83039c74a4aee543508d2ffcb1c3799cdea # v7.0.1
+    - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@0264395060bbde4ec3276b6dca84f0db828070f3 # 0.17.0
+      with:
+        working-directory: ${{ github.action_path }}
+
+    - name: Validate manifest
+      id: validate
+      uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+      env:
+        NODE_PATH: ${{ github.action_path }}/node_modules
+        MANIFEST_INPUT: ${{ inputs.manifest }}
+        SCHEMA_PATH: ${{ github.action_path }}/../../schemas/branding-manifest.schema.json
       with:
         script: |
-          const fs = require('fs');
-          const Ajv = require('ajv');
-          const addFormats = require('ajv-formats');
-
-          // Parse manifest from input
-          const manifest = JSON.parse(process.env.MANIFEST_INPUT);
-
-          // Load and validate against schema
-          const schema = JSON.parse(fs.readFileSync('.github/schemas/branding-manifest.schema.json', 'utf8'));
-
-          const ajv = new Ajv();
-          addFormats(ajv);
-
-          const validate = ajv.compile(schema);
-          const valid = validate(manifest);
-
-          if (!valid) {
-            core.setFailed(`Manifest validation failed: ${JSON.stringify(validate.errors, null, 2)}`);
-            return;
-          }
-
-          core.info('✓ Manifest validation passed');
-
-          // Extract and output all values needed by downstream actions
-          core.setOutput('artifact-id', manifest.artifactId || '');
-          core.setOutput('version', manifest.version);
-          core.setOutput('commit', manifest.commit);
-          core.setOutput('colors', JSON.stringify(manifest.colors));
-          core.setOutput('brand-mission', JSON.stringify(manifest.brandMission));
-          core.setOutput('logos', JSON.stringify(manifest.logos));
-          core.setOutput('mascot', JSON.stringify(manifest.mascot));
-          core.setOutput('typography', manifest.typography ? JSON.stringify(manifest.typography) : '{}');
-
-          const locales = Object.keys(manifest.brandMission?.title || {});
-          core.setOutput('locales', JSON.stringify(locales));
-
-          const colorCount = manifest.colors?.items?.length ?? 0;
-          const logoCount = manifest.logos?.items?.length ?? 0;
-          core.info(`✓ Exported manifest data: ${colorCount} colors, ${logoCount} logos, mission locales: ${locales.join(', ')}`);
-      env:
-        MANIFEST_INPUT: ${{ inputs.manifest }}
+          const { run } = require('${{ github.action_path }}/index.js');
+          await run({ core, manifest: process.env.MANIFEST_INPUT, schemaPath: process.env.SCHEMA_PATH });
