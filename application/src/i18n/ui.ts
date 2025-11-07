@@ -12,7 +12,7 @@ export const ui = {
     'nav.brand': 'Charte graphique',
     'footer.company': 'Entreprise',
     'footer.support': 'Support',
-    'footer.about': 'A propos',
+    'footer.about': 'À propos',
     'footer.docs': 'Documentation',
     'footer.terms': 'Conditions',
     'footer.privacy': 'Politique de confidentialité',
