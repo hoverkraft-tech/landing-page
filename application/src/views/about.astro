@@ -1,0 +1,208 @@
+---
+import Features3 from '~/components/widgets/Features3.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'À propos de HoverKraft',
+  description:
+    'Découvrez la vision, les valeurs et l’équipe derrière la méthodologie HoverKraft et son approche orientée connecteurs.',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero Widget ******************* -->
+
+  <Hero
+    tagline="Notre ADN"
+    image={{
+      src: '~/assets/images/tired-of-writing.webp',
+      alt: 'Développeur libéré grâce à HoverKraft',
+    }}
+  >
+    <Fragment slot="title">Une équipe de Platform Engineers obsédés par la libération des développeurs</Fragment>
+
+    <Fragment slot="subtitle">
+      HoverKraft est née d'un constat simple : sans connecteurs solides, les meilleurs outils ne suffisent pas. Nous
+      concevons une méthodologie orientée preuves, ancrée dans l’open source et adaptée aux réalités des PME/ETI
+      françaises.
+    </Fragment>
+  </Hero>
+
+  <!-- Stats Widget ****************** -->
+
+  <Stats
+    title="Ce que nous mesurons"
+    subtitle="Nos engagements se vérifient par les métriques DORA, SPACE et Lean sur chaque mission."
+    stats={[
+      { title: 'Lead time médian', amount: '-76%' },
+      { title: 'Fréquence de déploiement', amount: '×3' },
+      { title: 'MTTR moyen', amount: '-81%' },
+      { title: 'Score bien-être SPACE', amount: '+1,7 pts' },
+    ]}
+  />
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    title="Pourquoi nous existons"
+    subtitle="Une conviction forgée sur le terrain : la plateforme doit être un accélérateur, pas un centre de coût."
+    columns={3}
+    isBeforeContent
+    items={[
+      {
+        title: 'Vision',
+        description:
+          'Libérer les développeurs pour qu’ils livrent la valeur métier attendue, sans friction opérationnelle.',
+        icon: 'tabler:target',
+      },
+      {
+        title: 'Approche orientée connecteurs',
+        description:
+          'Nous orchestrons vos outils existants via une glue open source pour éviter le lock-in et maximiser la réversibilité.',
+        icon: 'tabler:puzzle',
+      },
+      {
+        title: 'Mesure continue',
+        description:
+          'DORA, SPACE et Lean : nos décisions et priorités sont guidées par des métriques partagées avec vos équipes.',
+        icon: 'tabler:report-analytics',
+      },
+    ]}
+  />
+
+  <!-- Features3 Widget ************** -->
+
+  <Features3
+    columns={3}
+    isAfterContent
+    items={[
+      {
+        title: 'Manifeste HoverKraft',
+        description: 'Un cadre publié et mis à jour pour aligner toutes les parties prenantes sur la plateforme cible.',
+        icon: 'tabler:book',
+      },
+      {
+        title: 'Formations & certification',
+        description: 'Parcours certifiants pour faire monter vos équipes en maturité platform engineering.',
+        icon: 'tabler:sparkles',
+      },
+      {
+        title: 'Kraft Builders',
+        description:
+          'Une task-force de Platform Engineers qui co-construit, transmet et sécurise vos chantiers critiques.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'OpenKraft',
+        description: 'Des connecteurs open source maintenus, des dashboards DORA et une communauté active.',
+        icon: 'tabler:brand-github',
+      },
+      {
+        title: 'Transparence totale',
+        description: 'Code ouvert, documentation complète, reporting régulier et gouvernance partagée.',
+        icon: 'tabler:eye',
+      },
+      {
+        title: 'Souveraineté by design',
+        description: 'Infrastructure compatible cloud européen et exigences réglementaires (SecNumCloud, ISO, RGPD).',
+        icon: 'tabler:shield-star',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/open-source.webp',
+      alt: 'Illustration de la communauté OpenKraft',
+    }}
+  />
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Nos valeurs"
+    subtitle="Elles guident chaque décision, de la roadmap produit aux interactions avec vos équipes."
+    items={[
+      {
+        title: 'Franchise radicale',
+        description:
+          'Nous disons ce qui bloque réellement vos équipes, chiffres à l’appui, quitte à bousculer l’ordre établi.',
+      },
+      {
+        title: 'Transfert de compétences',
+        description:
+          'La mission n’est réussie que lorsque vos équipes peuvent continuer sans nous, outillées et formées.',
+      },
+      {
+        title: 'Impact mesurable',
+        description:
+          'Pas de slideware : chaque livrable s’accompagne d’indicateurs DORA/SPACE et de feedbacks terrain.',
+      },
+    ]}
+  />
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Ce qui nous différencie"
+    subtitle="Une méthodologie propriétaire, une posture d’ingénieurs et une exigence de preuve continue."
+    isReversed
+    items={[
+      {
+        title: 'Méthode HoverKraft',
+        description: 'Un blueprint complet qui va du diagnostic au run quotidien, documenté et partagé.',
+        icon: 'tabler:manual-gearbox',
+      },
+      {
+        title: 'Glue open source',
+        description: 'Nous publions nos connecteurs pour éviter l’effet boîte noire et accélérer la contribution.',
+        icon: 'tabler:brand-github',
+      },
+      {
+        title: 'Kraft Builders',
+        description:
+          'Une équipe senior, hybride conseil + delivery, capable de piloter et d’exécuter en contexte complexe.',
+        icon: 'tabler:users',
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    title="Une équipe hybride"
+    subtitle="Des profils ayant vécu la douleur des équipes plate-forme, des product managers et des coachs Lean."
+    items={[
+      {
+        title: 'Ingénieurs plateforme',
+        description: 'Experts Kubernetes, GitOps, observabilité, sécurité et automatisation Laptop to Prod.',
+      },
+      {
+        title: 'Coachs transformation',
+        description: 'Specialistes Lean/DORA/SPACE pour accompagner le changement culturel et organisationnel.',
+      },
+      {
+        title: 'Product & Ops',
+        description:
+          'Pilotage des chantiers, garantie de l’alignement business et animation de la communauté OpenKraft.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/application-configuration-management.png',
+      alt: 'Collectif HoverKraft pilotant la plateforme',
+    }}
+  />
+
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Rencontrer un Kraft Builder', href: '/contact' },
+      { text: 'Lire le manifeste', href: '/methodology' },
+    ]}
+  >
+    <Fragment slot="title">Prêts à libérer vos développeurs ?</Fragment>
+    <Fragment slot="subtitle"
+      >Explorons ensemble comment la méthode HoverKraft peut transformer votre chaîne de delivery.</Fragment
+    >
+  </CallToAction>
+</Layout>

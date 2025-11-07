@@ -1,7 +1,23 @@
-import { ui, defaultLang, showDefaultLang, routes } from './ui';
+import { BLOG_BASE } from '~/utils/permalinks';
+import { BLOG_TRANSLATIONS_BY_KEY, BLOG_TRANSLATION_KEY_BY_PATH } from './path-translations';
+import { ui, defaultLang, routes } from './ui';
 
 const trimSlashes = (value: string) => value.replace(/^\/+|\/+$/g, '');
 const routesByLang = routes as Record<string, Record<string, string>>;
+
+const buildLocalizedPath = (segments: string[], targetLang: keyof typeof ui) => {
+  const translatedPath = segments.length > 0 ? `/${segments.join('/')}` : '/';
+
+  if (targetLang === defaultLang) {
+    return translatedPath;
+  }
+
+  if (translatedPath === '/') {
+    return `/${targetLang}`;
+  }
+
+  return `/${targetLang}${translatedPath}`;
+};
 
 export function getLangFromUrl(url: URL) {
   const [, lang] = url.pathname.split('/');
@@ -22,61 +38,37 @@ export function useTranslatedPath(lang: keyof typeof ui) {
     const segments = cleanedPath ? cleanedPath.split('/').filter(Boolean) : [];
 
     if (segments.length > 0) {
-      const [firstSegment, ...rest] = segments;
+      const blogTranslationKey = BLOG_TRANSLATION_KEY_BY_PATH[cleanedPath];
 
-      let defaultSegment = firstSegment;
-      const currentRoutes = routesByLang[lang as string];
+      if (blogTranslationKey) {
+        const translationsForKey = BLOG_TRANSLATIONS_BY_KEY[blogTranslationKey] ?? {};
+        const normalizedPath =
+          translationsForKey[targetLang] ?? translationsForKey[defaultLang] ?? (BLOG_BASE ? BLOG_BASE : '');
 
-      if (lang !== defaultLang && currentRoutes) {
-        const match = Object.entries(currentRoutes).find(([, value]) => value === firstSegment);
-        if (match) {
-          defaultSegment = match[0];
+        if (typeof normalizedPath === 'string') {
+          const translatedSegments = normalizedPath.split('/').filter(Boolean);
+          return buildLocalizedPath(translatedSegments, targetLang);
         }
       }
 
-      if (lang === defaultLang) {
-        defaultSegment = firstSegment;
-      }
+      const [firstSegment, ...rest] = segments;
+      const defaultRoutes = routesByLang[defaultLang as string] ?? {};
+      const currentRoutes = routesByLang[lang as string] ?? {};
 
-      let translatedFirstSegment = defaultSegment;
-      const targetRoutes = routesByLang[targetLang as string];
-      const hasTargetTranslation = Boolean(targetRoutes && targetRoutes[defaultSegment] !== undefined);
+      const defaultKey =
+        defaultRoutes[firstSegment] !== undefined
+          ? firstSegment
+          : (Object.entries(currentRoutes).find(([, value]) => value === firstSegment)?.[0] ?? firstSegment);
 
-      if (targetLang !== defaultLang && targetRoutes) {
-        translatedFirstSegment = targetRoutes[defaultSegment] ?? defaultSegment;
-      }
-
-      if (targetLang === defaultLang) {
-        translatedFirstSegment = defaultSegment;
-      }
+      const targetRoutes = routesByLang[targetLang as string] ?? {};
+      const hasTargetTranslation = targetRoutes[defaultKey] !== undefined;
+      const translatedFirstSegment = hasTargetTranslation ? targetRoutes[defaultKey] : defaultKey;
 
       const translatedSegments = [translatedFirstSegment, ...rest];
-      const translatedPath = `/${translatedSegments.join('/')}`;
-
-      if (!showDefaultLang && targetLang === defaultLang) {
-        return translatedPath;
-      }
-
-      if (targetLang === defaultLang) {
-        return translatedPath;
-      }
-
-      if (hasTargetTranslation) {
-        return translatedPath === '/' ? `/${targetLang}` : `/${targetLang}${translatedPath}`;
-      }
-
-      return translatedPath;
+      return buildLocalizedPath(translatedSegments, targetLang);
     }
 
-    if (!showDefaultLang && targetLang === defaultLang) {
-      return '/';
-    }
-
-    if (targetLang === defaultLang) {
-      return '/';
-    }
-
-    return `/${targetLang}`;
+    return buildLocalizedPath([], targetLang);
   };
 }
 
@@ -90,17 +82,32 @@ export function getRouteFromUrl(url: URL): string | undefined {
   }
 
   const currentLang = getLangFromUrl(url);
-
-  if (defaultLang === currentLang) {
-    const route = Object.values(routes)[0];
-    return route[path] !== undefined ? route[path] : undefined;
-  }
-
   const getKeyByValue = (obj: Record<string, string>, value: string): string | undefined => {
     return Object.keys(obj).find((key) => obj[key] === value);
   };
 
-  const reversedKey = getKeyByValue(routes[currentLang], path);
+  if (defaultLang === currentLang) {
+    const defaultRoutes = routes[currentLang] ?? Object.values(routes)[0];
+
+    if (!defaultRoutes) {
+      return undefined;
+    }
+
+    const key = getKeyByValue(defaultRoutes, path);
+    if (key !== undefined) {
+      return key;
+    }
+
+    return defaultRoutes[path] !== undefined ? path : undefined;
+  }
+
+  const currentRoutes = routes[currentLang];
+
+  if (!currentRoutes) {
+    return undefined;
+  }
+
+  const reversedKey = getKeyByValue(currentRoutes, path);
 
   if (reversedKey !== undefined) {
     return reversedKey;

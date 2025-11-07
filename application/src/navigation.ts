@@ -1,6 +1,5 @@
 import { getAsset } from './utils/permalinks';
 import { getLangFromUrl, useTranslatedPath, useTranslations } from './i18n/utils';
-import { defaultLang } from './i18n/ui';
 import type { CallToAction } from '~/types';
 
 type HeaderNavigationLink = {
@@ -23,7 +22,7 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
   const translatePath = useTranslatedPath(lang);
   const t = useTranslations(lang);
 
-  const blogHref = lang === defaultLang ? translatePath('/blog') : translatePath('/blog', defaultLang);
+  const blogHref = translatePath('/blog');
 
   return {
     homeHref: translatePath('/'),
@@ -34,15 +33,15 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
       },
       {
         text: t('nav.methodology'),
-        href: translatePath('/methodologie'),
+        href: translatePath('/methodology'),
       },
       {
         text: t('nav.offers'),
-        href: translatePath('/offres'),
+        href: translatePath('/offers'),
       },
       {
         text: t('nav.resources'),
-        href: translatePath('/ressources'),
+        href: translatePath('/resources'),
       },
       {
         text: t('nav.blog'),
@@ -63,7 +62,7 @@ export function getLocalizedFooterData(url: URL) {
   const lang = getLangFromUrl(url);
   const translatePath = useTranslatedPath(lang);
   const t = useTranslations(lang);
-  const blogHref = lang === defaultLang ? translatePath('/blog') : translatePath('/blog', defaultLang);
+  const blogHref = translatePath('/blog');
 
   return {
     links: [
@@ -71,26 +70,25 @@ export function getLocalizedFooterData(url: URL) {
         title: t('footer.company'),
         links: [
           { text: t('nav.about'), href: translatePath('/about') },
-          { text: t('nav.methodology'), href: translatePath('/methodologie') },
-          { text: t('nav.offers'), href: translatePath('/offres') },
+          { text: t('nav.methodology'), href: translatePath('/methodology') },
+          { text: t('nav.offers'), href: translatePath('/offers') },
           { text: t('nav.contact'), href: translatePath('/contact') },
         ],
       },
       {
         title: t('footer.support'),
         links: [
-          { text: t('nav.offers'), href: translatePath('/offres') },
-          { text: t('nav.resources'), href: translatePath('/ressources') },
+          { text: t('nav.resources'), href: translatePath('/resources') },
           { text: t('nav.blog'), href: blogHref },
           { text: t('footer.docs'), href: 'https://docs.hoverkraft.cloud' },
         ],
       },
       {
-        title: t('footer.about'),
+        title: t('footer.legal'),
         links: [
           { text: t('footer.terms'), href: translatePath('/terms') },
           { text: t('footer.privacy'), href: translatePath('/privacy') },
-          { text: t('nav.brand'), href: translatePath('/charte-graphique') },
+          { text: t('nav.brand'), href: translatePath('/brand-guidelines') },
         ],
       },
     ],

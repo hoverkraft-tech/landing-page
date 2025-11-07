@@ -32,7 +32,7 @@ env:
   BRAND_DOWNLOADS_DIR: application/public/brand/downloads
   BRAND_LOGO_PACK_FILE: application/public/brand/downloads/hoverkraft-logos.zip
   BRAND_GUIDELINES_BASE_URL: http://localhost:4321
-  BRAND_GUIDELINES_DEFAULT_SLUG: charte-graphique
+  BRAND_GUIDELINES_DEFAULT_SLUG: brand-guidelines
   BRAND_GUIDELINES_ROUTES_FILE: application/src/i18n/ui.ts
 
 jobs:

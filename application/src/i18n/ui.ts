@@ -13,6 +13,7 @@ export const ui = {
     'footer.company': 'Entreprise',
     'footer.support': 'Support',
     'footer.about': 'À propos',
+    'footer.legal': 'Mentions légales',
     'footer.docs': 'Documentation',
     'footer.terms': 'Conditions',
     'footer.privacy': 'Politique de confidentialité',
@@ -47,6 +48,7 @@ export const ui = {
     'footer.company': 'Company',
     'footer.support': 'Support',
     'footer.about': 'About',
+    'footer.legal': 'Legal',
     'footer.docs': 'Docs',
     'footer.terms': 'Terms',
     'footer.privacy': 'Privacy Policy',
@@ -72,16 +74,22 @@ export const ui = {
 } as const;
 
 export const routes = {
+  fr: {
+    methodology: 'methodologie',
+    offers: 'offres',
+    resources: 'ressources',
+    'brand-guidelines': 'charte-graphique',
+  },
   en: {
-    'a-propos': 'about',
-    methodologie: 'methodology',
-    offres: 'services',
-    ressources: 'resources',
+    about: 'about',
+    methodology: 'methodology',
+    offers: 'services',
+    resources: 'resources',
     contact: 'contact',
     blog: 'blog',
     privacy: 'privacy',
     terms: 'terms',
-    'charte-graphique': 'brand-guidelines',
+    'brand-guidelines': 'brand-guidelines',
   },
 };
 

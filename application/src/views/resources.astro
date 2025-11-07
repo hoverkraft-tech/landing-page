@@ -1,0 +1,135 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'OpenKraft — Ressources',
+  description:
+    'Accédez aux connecteurs open source HoverKraft, à la communauté et aux ressources pour accélérer votre plateforme.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="OpenKraft"
+    actions={[
+      { variant: 'primary', text: 'Accéder au GitHub', href: 'https://github.com/hoverkraft-tech', target: '_blank' },
+      { text: 'Consulter la documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank' },
+    ]}
+    image={{
+      src: '~/assets/images/open-source.webp',
+      alt: 'Communauté OpenKraft',
+    }}
+  >
+    <Fragment slot="title">Le hub open source pour vos connecteurs plateforme</Fragment>
+
+    <Fragment slot="subtitle">
+      OpenKraft rassemble nos templates, dashboards, playbooks et retours d’expérience. Un espace pensé pour les
+      développeurs, les teams plateforme et les leaders qui veulent accélérer sans perdre en souveraineté.
+    </Fragment>
+  </Hero>
+
+  <Note
+    title="Philosophie"
+    description="Le savoir qui ne circule pas s’éteint. Nous publions en open source les briques nécessaires pour faire vivre la méthode HoverKraft dans n’importe quel contexte."
+  />
+
+  <Content
+    isReversed
+    title="Les briques disponibles"
+    items={[
+      {
+        title: 'Connecteurs CI/CD',
+        description: 'Pipelines prêts à l’emploi pour GitHub Actions, GitLab CI et ArgoCD avec promotion automatique.',
+      },
+      {
+        title: 'Observabilité intégrée',
+        description: 'Dashboards Grafana, alerting Prometheus et traces OpenTelemetry déjà orchestrés.',
+      },
+      {
+        title: 'Sécurité by design',
+        description: 'Playbooks IAM, gestion des secrets et conformité adaptés à vos contraintes réglementaires.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/security-compliance.png',
+      alt: 'Connecteurs OpenKraft prêts à l’emploi',
+    }}
+  />
+
+  <Features2
+    title="Pourquoi contribuer ?"
+    subtitle="Un écosystème open source entretenu par la communauté."
+    columns={2}
+    items={[
+      {
+        title: 'Retours d’expérience terrain',
+        description: 'Chaque contribution est adossée à un use case réel, documenté sur la plateforme.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Qualité certifiée HoverKraft',
+        description: 'Notre équipe révise, teste et valide chaque nouveau connecteur avant publication.',
+        icon: 'tabler:certificate',
+      },
+      {
+        title: 'Support communautaire',
+        description: 'Accès à notre serveur communautaire pour échanger bonnes pratiques et retours d’expérience.',
+        icon: 'tabler:messages',
+      },
+      {
+        title: 'Feuille de route collaborative',
+        description: 'Votez pour les prochains connecteurs à prioriser selon vos besoins.',
+        icon: 'tabler:road',
+      },
+    ]}
+  />
+
+  <Steps
+    title="Comment contribuer"
+    items={[
+      {
+        title: '1. Forkez le dépôt',
+        description: 'Sélectionnez le connecteur à enrichir ou créez-en un nouveau depuis nos templates.',
+        icon: 'tabler:git-branch',
+      },
+      {
+        title: '2. Suivez le guide',
+        description: 'Chaque repo inclut un guide de contribution et des tests automatisés prêts à l’emploi.',
+        icon: 'tabler:book',
+      },
+      {
+        title: '3. Ouvrez une Pull Request',
+        description: 'Soumettez votre connecteur, notre équipe vous accompagne jusqu’à la validation.',
+        icon: 'tabler:git-pull-request',
+      },
+      {
+        title: '4. Partagez la mise en prod',
+        description: 'Présentez votre implémentation lors d’un live communautaire et documentez les résultats obtenus.',
+        icon: 'tabler:microphone',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/technical-support.png',
+      alt: 'Communauté de contributeurs HoverKraft',
+    }}
+  />
+
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Rejoindre le GitHub', href: 'https://github.com/hoverkraft-tech', target: '_blank' },
+      { text: 'Accéder à la documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank' },
+    ]}
+  >
+    <Fragment slot="title">Prêt à enrichir la communauté OpenKraft ?</Fragment>
+    <Fragment slot="subtitle"
+      >Partagez vos connecteurs, documentez vos retours d’expérience et aidez d’autres équipes à accélérer leur
+      plateforme.</Fragment
+    >
+  </CallToAction>
+</Layout>
