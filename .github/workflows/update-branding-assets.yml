@@ -71,8 +71,8 @@ jobs:
 
             if (context.eventName === 'repository_dispatch') {
               repository = context.payload.client_payload.repository;
-              runId = context.payload.client_payload.run_id;
-              artifactId = context.payload.client_payload.artifact_id;
+              runId = context.payload.client_payload.run-id;
+              artifactId = context.payload.client_payload.artifact-id;
               manifest = context.payload.client_payload.manifest;
 
             } else {
@@ -82,9 +82,24 @@ jobs:
               manifest = JSON.parse(process.env.MANIFEST_INPUT);
             }
 
+            if (!repository) {
+              return core.setFailed('Repository is required');
+            }
             core.setOutput('repository', repository);
+
+            if (!runId) {
+              return core.setFailed('Run ID is required');
+            }
             core.setOutput('run-id', runId);
+
+            if (!artifactId) {
+              return core.setFailed('Artifact ID is required');
+            }
             core.setOutput('artifact-id', artifactId);
+
+            if (!manifest) {
+              return core.setFailed('Manifest is required');
+            }
             core.setOutput('manifest', JSON.stringify(manifest));
 
             core.info('📦 Branding update received:');
