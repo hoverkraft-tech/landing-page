@@ -77,7 +77,6 @@ describe("validate-manifest action", () => {
     mockFs({});
     try {
       const manifest = {
-        artifactId: "branding",
         version: "1.2.3",
         commit: "abc123",
         colors: { items: [1, 2] },
@@ -86,7 +85,6 @@ describe("validate-manifest action", () => {
       };
 
       const outputs = buildOutputs(manifest);
-      assert.equal(outputs["artifact-id"], "branding");
       assert.equal(outputs.version, "1.2.3");
       assert.equal(outputs.commit, "abc123");
       assert.equal(outputs.locales, JSON.stringify(["fr", "en"]));

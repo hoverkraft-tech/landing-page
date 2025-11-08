@@ -28,12 +28,6 @@
       "description": "Git commit SHA of the branding repository",
       "pattern": "^[0-9a-f]{40}$"
     },
-    "artifactId": {
-      "type": "string",
-      "description": "Identifier of the branding artifact (camelCase variant)",
-      "pattern": "^[A-Za-z0-9._-]+$",
-      "examples": ["4506823456"]
-    },
     "brandMission": {
       "type": "object",
       "description": "Brand mission content localized by language",

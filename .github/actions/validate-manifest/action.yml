@@ -5,9 +5,6 @@ inputs:
     description: "The manifest JSON string from the repository dispatch event"
     required: true
 outputs:
-  artifact-id:
-    description: "The artifact ID from the manifest"
-    value: ${{ steps.validate.outputs.artifact-id }}
   version:
     description: "The branding version from the manifest"
     value: ${{ steps.validate.outputs.version }}

@@ -14,9 +14,21 @@ on:
   workflow_dispatch:
     inputs:
       #checkov:skip=CKV_GHA_7: required
+      repository:
+        description: "The repository where to download the branding artifact from"
+        required: true
+        type: string
+      run-id:
+        description: "The run ID from the branding repository"
+        required: true
+        type: string
+      artifact-id:
+        description: "The artifact ID from the branding repository"
+        required: true
+        type: string
       manifest:
         description: |
-          JSON manifest describing the branding data (artifact-id comes from manifest)
+          JSON manifest describing the branding data
         required: true
         type: string
 
@@ -47,22 +59,40 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           MANIFEST_INPUT: ${{ inputs.manifest }}
+          REPOSITORY_INPUT: ${{ inputs.repository }}
+          RUN_ID_INPUT: ${{ inputs.run-id }}
+          ARTIFACT_ID_INPUT: ${{ inputs.artifact-id }}
         with:
           script: |
+            let repository;
+            let runId;
+            let artifactId;
             let manifest;
 
             if (context.eventName === 'repository_dispatch') {
+              repository = context.payload.client_payload.repository;
+              runId = context.payload.client_payload.run_id;
+              artifactId = context.payload.client_payload.artifact_id;
               manifest = context.payload.client_payload.manifest;
+
             } else {
+              repository = process.env.REPOSITORY_INPUT;
+              runId = process.env.RUN_ID_INPUT;
+              artifactId = process.env.ARTIFACT_ID_INPUT;
               manifest = JSON.parse(process.env.MANIFEST_INPUT);
             }
 
+            core.setOutput('repository', repository);
+            core.setOutput('run-id', runId);
+            core.setOutput('artifact-id', artifactId);
             core.setOutput('manifest', JSON.stringify(manifest));
 
             core.info('📦 Branding update received:');
+            core.info(`  Artifact ID: ${artifactId}`);
+            core.info(`  Repository: ${repository}`);
+            core.info(`  Run ID: ${runId}`);
             core.info(`  Version: ${manifest.version}`);
             core.info(`  Commit: ${manifest.commit}`);
-            core.info(`  Artifact ID: ${manifest.artifactId}`);
 
       - name: Validate and parse manifest
         id: validate-manifest
@@ -73,9 +103,10 @@ jobs:
       - name: Download and organize branding assets
         uses: ./.github/actions/download-branding-assets
         with:
-          artifact-id: ${{ steps.validate-manifest.outputs.artifact-id }}
-          version: ${{ steps.validate-manifest.outputs.version }}
-          commit: ${{ steps.validate-manifest.outputs.commit }}
+          artifact-id: ${{ steps.parse-inputs.outputs.artifact-id }}
+          repository: ${{ steps.parse-inputs.outputs.repository }}
+          run-id: ${{ steps.parse-inputs.outputs.run-id }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
           mascot: ${{ steps.validate-manifest.outputs.mascot }}
 
@@ -113,16 +144,12 @@ jobs:
           branch: branding-update-${{ steps.validate-manifest.outputs.version }}
           commit-message: |
             chore: update branding assets to version ${{ steps.validate-manifest.outputs.version }}
-
-            Branding repository commit: ${{ steps.validate-manifest.outputs.commit }}
-            Artifact ID: ${{ steps.validate-manifest.outputs.artifact-id }}
           title: "chore: update branding assets to v${{ steps.validate-manifest.outputs.version }}"
           body: |
             ## Branding Assets Updated 🎨
 
             **Version:** ${{ steps.validate-manifest.outputs.version }}
             **Branding Commit:** `${{ steps.validate-manifest.outputs.commit }}`
-            **Artifact ID:** ${{ steps.validate-manifest.outputs.artifact-id }}
 
             ### Assets Updated (${{ steps.validate-manifest.outputs.locales }})
             - ✅ Brand colors (from manifest)
@@ -143,7 +170,6 @@ jobs:
         env:
           VERSION: ${{ steps.validate-manifest.outputs.version }}
           COMMIT: ${{ steps.validate-manifest.outputs.commit }}
-          ARTIFACT_ID: ${{ steps.validate-manifest.outputs.artifact-id }}
           LOCALES: ${{ steps.validate-manifest.outputs.locales }}
         with:
           script: |
@@ -152,7 +178,6 @@ jobs:
               .addTable([
                 [{ data: 'Version', header: true }, process.env.VERSION],
                 [{ data: 'Branding Commit', header: true }, `\`${process.env.COMMIT}\``],
-                [{ data: 'Artifact ID', header: true }, process.env.ARTIFACT_ID],
                 [{ data: 'Locales', header: true }, process.env.LOCALES]
               ])
               .addHeading('Assets Updated', 3)

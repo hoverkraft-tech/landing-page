@@ -1,14 +1,17 @@
 name: "Download Branding Assets"
 description: "Downloads and organizes branding assets from the branding repository"
 inputs:
+  repository:
+    description: "The repository where to download the branding artifact from"
+    required: true
   artifact-id:
     description: "The artifact ID from the branding repository"
     required: true
-  version:
-    description: "The branding version"
-    required: true
-  commit:
-    description: "The commit SHA from the branding repository"
+  run-id:
+    description: "The run ID from the branding repository"
+    required: false
+  github-token:
+    description: "GitHub token to access the branding repository artifact"
     required: true
   logos:
     description: "JSON-stringified logo collection"
@@ -22,11 +25,11 @@ runs:
     - name: Download branding artifact
       uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
+        repository: ${{ inputs.repository }}
+        run-id: ${{ inputs.run-id }}
         artifact-ids: ${{ inputs.artifact-id }}
+        github-token: ${{ inputs.github-token }}
         path: /tmp/branding-assets
-        github-token: ${{ github.token }}
-        repository: hoverkraft-tech/branding
-        run-id: ${{ inputs.artifact-id }}
 
     - name: Extract and organize assets
       uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
@@ -39,10 +42,8 @@ runs:
           const logoCollection = JSON.parse(process.env.LOGOS_INPUT);
           const logos = Array.isArray(logoCollection.items) ? logoCollection.items : Array.isArray(logoCollection) ? logoCollection : [];
           const mascot = JSON.parse(process.env.MASCOT_INPUT);
-          const version = process.env.VERSION_INPUT;
-          const commit = process.env.COMMIT_INPUT;
 
-          core.info(`📦 Processing branding assets v${version} (${commit})`);
+          core.info(`📦 Processing branding assets`);
 
           // Create target directories
           const dirs = [
@@ -90,5 +91,3 @@ runs:
       env:
         LOGOS_INPUT: ${{ inputs.logos }}
         MASCOT_INPUT: ${{ inputs.mascot }}
-        VERSION_INPUT: ${{ inputs.version }}
-        COMMIT_INPUT: ${{ inputs.commit }}
