@@ -3,7 +3,7 @@
 # GitHub Action: Generate Brand Content
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/2b2744fa542393ba441f7002b4051f68055703a95339062ab797d6ba30442d16/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
+  <img src="https://opengraph.githubassets.com/b219c7d8f42294b5602596f129e9e1464598a322399038aa2e3982f75de31a09/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Generates TypeScript files for brand colors, mission, typography, and logos from
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-content@bc4af01f3c8044653e42fa5340ccde671aa30a77 # 2.2.0
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-content@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
   with:
     # The branding version
     # This input is required.
@@ -51,6 +51,10 @@ Generates TypeScript files for brand colors, mission, typography, and logos from
     # JSON-stringified logo collection
     # This input is required.
     logos: ""
+
+    # JSON-stringified mascot metadata
+    # This input is required.
+    mascot: ""
 
     # JSON-stringified typography collection
     # This input is required.
@@ -73,6 +77,7 @@ Generates TypeScript files for brand colors, mission, typography, and logos from
 | **`colors`**        | JSON-stringified color collection                | **true**     | -           |
 | **`brand-mission`** | JSON-stringified localized brand mission entries | **true**     | -           |
 | **`logos`**         | JSON-stringified logo collection                 | **true**     | -           |
+| **`mascot`**        | JSON-stringified mascot metadata                 | **true**     | -           |
 | **`typography`**    | JSON-stringified typography collection           | **true**     | -           |
 | **`output-dir`**    | Output directory for generated files             | **true**     | -           |
 

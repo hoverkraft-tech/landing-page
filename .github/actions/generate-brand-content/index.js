@@ -34,7 +34,7 @@ function createFileContent({
   commit,
   timestamp,
 }) {
-  const serializedPayload = JSON.stringify(payload, null, 2);
+  const serializedPayload = serializePayload(payload);
 
   return `/**
  * Auto-generated ${description} from branding repository
@@ -51,6 +51,124 @@ export const ${exportName}: ${typeName} = ${serializedPayload};
 `;
 }
 
+const INDENT = "  ";
+
+function serializePayload(payload) {
+  return formatValue(payload, 0);
+}
+
+function formatValue(value, level) {
+  const primitive = formatPrimitiveValue(value);
+  if (primitive !== null) {
+    return primitive;
+  }
+
+  if (Array.isArray(value)) {
+    return formatArray(value, level);
+  }
+
+  if (typeof value === "object") {
+    return formatObject(value, level);
+  }
+
+  throw new TypeError(`Unsupported value type: ${typeof value}`);
+}
+
+function formatArray(values, level) {
+  if (!values.length) {
+    return "[]";
+  }
+
+  const inline = tryFormatInlineArray(values, level);
+  if (inline) {
+    return inline;
+  }
+
+  const nextLevel = level + 1;
+  const indent = INDENT.repeat(level);
+  const childIndent = INDENT.repeat(nextLevel);
+  const items = values
+    .map((item) => `${childIndent}${formatValue(item, nextLevel)},`)
+    .join("\n");
+
+  return `[\n${items}\n${indent}]`;
+}
+
+function tryFormatInlineArray(values, level) {
+  const parts = [];
+
+  for (const value of values) {
+    const primitive = formatPrimitiveValue(value);
+    if (primitive === null) {
+      return null;
+    }
+
+    parts.push(primitive);
+  }
+
+  const inlineContent = `[${parts.join(", ")}]`;
+  const inlineLength = INDENT.length * level + inlineContent.length;
+
+  if (inlineLength <= 120) {
+    return inlineContent;
+  }
+
+  return null;
+}
+
+function formatObject(object, level) {
+  const entries = Object.entries(object);
+
+  if (!entries.length) {
+    return "{}";
+  }
+
+  const nextLevel = level + 1;
+  const indent = INDENT.repeat(level);
+  const childIndent = INDENT.repeat(nextLevel);
+
+  const lines = entries.map(([key, val]) => {
+    return `${childIndent}${formatPropertyKey(key)}: ${formatValue(val, nextLevel)},`;
+  });
+
+  return `{
+${lines.join("\n")}
+${indent}}`;
+}
+
+function formatString(value) {
+  const json = JSON.stringify(value);
+  let body = json.slice(1, -1);
+  body = body.replace(/(^|[^\\])\\"/g, (match, prefix) => `${prefix}"`);
+  body = body.replace(/'/g, "\\'");
+
+  return `'${body}'`;
+}
+
+function formatPropertyKey(key) {
+  if (/^[$A-Z_][0-9A-Z_$]*$/i.test(key)) {
+    return key;
+  }
+
+  return formatString(key);
+}
+
+function formatPrimitiveValue(value) {
+  if (value === null) {
+    return "null";
+  }
+
+  switch (typeof value) {
+    case "string":
+      return formatString(value);
+    case "number":
+    case "boolean":
+      return String(value);
+    default:
+      return null;
+  }
+}
+
 async function writeFile(io, outputDir, filename, content) {
   await io.mkdirP(outputDir);
   fs.writeFileSync(path.join(outputDir, filename), content);
@@ -64,6 +182,7 @@ async function run({
   colors,
   brandMission,
   logos,
+  mascot,
   typography,
   outputDir,
 }) {
@@ -83,6 +202,7 @@ async function run({
   const parsedColors = parseJsonInput("colors", colors);
   const parsedBrandMission = parseJsonInput("brand-mission", brandMission);
   const parsedLogos = parseJsonInput("logos", logos);
+  const parsedMascot = parseJsonInput("mascot", mascot);
   const parsedTypography = parseJsonInput("typography", typography);
 
   const resolvedOutputDir = (outputDir ?? "").trim();
@@ -120,6 +240,13 @@ async function run({
       typeName: "LogoCollection",
       exportName: "logos",
       payload: parsedLogos,
+    },
+    {
+      filename: "generated-mascot.ts",
+      description: "mascot asset",
+      typeName: "MascotAsset",
+      exportName: "mascot",
+      payload: parsedMascot,
     },
   ];
 

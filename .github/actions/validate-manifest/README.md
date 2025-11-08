@@ -3,7 +3,7 @@
 # GitHub Action: Validate Branding Manifest
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/2b2744fa542393ba441f7002b4051f68055703a95339062ab797d6ba30442d16/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
+  <img src="https://opengraph.githubassets.com/b219c7d8f42294b5602596f129e9e1464598a322399038aa2e3982f75de31a09/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Validates the branding manifest against JSON schema and parses it for use in the
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/validate-manifest@bc4af01f3c8044653e42fa5340ccde671aa30a77 # 2.2.0
+- uses: hoverkraft-tech/landing-page/.github/actions/validate-manifest@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
   with:
     # The manifest JSON string from the repository dispatch event
     # This input is required.
@@ -55,7 +55,6 @@ Validates the branding manifest against JSON schema and parses it for use in the
 
 | **Output**          | **Description**                                           |
 | ------------------- | --------------------------------------------------------- |
-| **`artifact-id`**   | The artifact ID from the manifest                         |
 | **`version`**       | The branding version from the manifest                    |
 | **`commit`**        | The commit SHA from the branding repository               |
 | **`colors`**        | JSON-stringified color collection                         |

@@ -37,7 +37,7 @@ export interface TypographyCollection {
 }
 
 export interface LogoAsset {
-  name: string;
+  name: LocalizedString;
   path: string;
   formats: string[];
   usage: LocalizedString;
@@ -55,4 +55,10 @@ export interface LogoCollection extends LogoCollectionGuidelines {
 export interface BrandMission {
   title: LocalizedString;
   description: LocalizedString;
+}
+
+export interface MascotAsset {
+  name: LocalizedString;
+  path: string;
+  usage: LocalizedString;
 }

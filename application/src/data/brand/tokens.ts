@@ -18,6 +18,7 @@ export type {
   BrandMission,
   LocalizedString,
   LocalizedStringList,
+  MascotAsset,
 } from './types';
 
 // Import generated data from branding repository
@@ -33,8 +34,12 @@ const generatedTypography = await import('./generated-typography.ts');
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment -- generated modules are emitted at build time
 // @ts-ignore - Generated at build time
 const generatedLogos = await import('./generated-logos.ts');
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment -- generated modules are emitted at build time
+// @ts-ignore - Generated at build time
+const generatedMascot = await import('./generated-mascot.ts');
 
 export const brandColors = generatedColors.brandColors;
 export const brandMission = generatedMission.brandMission;
 export const typography = generatedTypography.typography;
 export const logos = generatedLogos.logos;
+export const mascot = generatedMascot.mascot;

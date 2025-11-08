@@ -1,28 +1,31 @@
 /**
- * Generated typography tokens from branding repository
- * Auto-generated file - DO NOT EDIT MANUALLY
- * Last updated: 2025-11-04
+ * Auto-generated typography tokens from branding repository
+ * DO NOT EDIT - This file is generated during the build process
+ * Source: @hoverkraft-tech/branding
+ * Version: 0.1.0
+ * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
+ * Generated: 2025-11-09T09:58:56.200Z
  */
 
 import type { TypographyCollection } from './types';
 
 export const typography: TypographyCollection = {
-  primary: {
-    family: 'Inter Variable',
-    weights: [400, 500, 600, 700],
-    usage: {
-      fr: 'Utiliser pour les titres et le texte principal.',
-      en: 'Use for headings and main body text.',
-    },
-    fallback: 'system-ui, -apple-system, sans-serif',
-  },
   monospace: {
+    fallback: 'ui-monospace, monospace',
     family: 'Roboto Mono',
-    weights: [400, 500],
     usage: {
-      fr: 'Utiliser pour le code et les elements techniques.',
-      en: 'Use for code snippets and technical elements.',
+      en: 'Monospaced typography for code samples and serials',
+      fr: 'Typographie à chasse fixe pour les exemples de code et numérotations',
     },
-    fallback: 'Consolas, Monaco, monospace',
+    weights: [100, 200, 400],
+  },
+  primary: {
+    fallback: 'system-ui, sans-serif',
+    family: 'Inter',
+    usage: {
+      en: 'Primary typography for headings, body copy, and CTAs',
+      fr: 'Typographie principale pour les titres, paragraphes et CTA',
+    },
+    weights: [100, 200, 400],
   },
 };

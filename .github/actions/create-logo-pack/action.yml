@@ -13,6 +13,9 @@ runs:
     - name: Verify logos exist
       id: verify
       uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+      env:
+        OUTPUT_FILE: ${{ inputs.output-file }}
+        LOGOS_DIR: ${{ inputs.logos-dir }}
       with:
         script: |
           const fs = require('fs');
@@ -34,17 +37,27 @@ runs:
 
           core.setOutput('has-logos', 'true');
           core.info(`✓ Found ${files.length} logos in ${logosDir}`);
-      env:
-        LOGOS_DIR: ${{ inputs.logos-dir }}
+
+          // Ensure output dir exists
+          const outputFile = path.resolve(process.env.OUTPUT_FILE);
+          core.debug(`Output file resolved to: ${outputFile}`);
+
+          const outputDir = require('path').dirname(outputFile);
+          await io.mkdirP(outputDir);
+          core.info(`✓ Ensured output directory exists: ${outputDir}`);
+
+          // Define filename (relative to logo dir)
+          const relativeOutputFile = path.relative(logosDir, outputFile);
+          core.setOutput('relative-output-file', relativeOutputFile);
+          core.debug(`Relative output file: ${relativeOutputFile}`);
 
     - name: Create logo pack using zip-release
       if: steps.verify.outputs.has-logos == 'true'
       uses: TheDoctor0/zip-release@b57d897cb5d60cb78b51a507f63fa184cfe35554 # v0.7.6
       with:
         type: "zip"
-        filename: "${{ inputs.output-file }}"
+        filename: "${{ steps.verify.outputs.relative-output-file }}"
         directory: "${{ inputs.logos-dir }}"
-        path: "."
 
     - name: Verify ZIP created
       if: steps.verify.outputs.has-logos == 'true'

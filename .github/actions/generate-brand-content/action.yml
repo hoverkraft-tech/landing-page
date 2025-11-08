@@ -16,6 +16,9 @@ inputs:
   logos:
     description: "JSON-stringified logo collection"
     required: true
+  mascot:
+    description: "JSON-stringified mascot metadata"
+    required: true
   typography:
     description: "JSON-stringified typography collection"
     required: true
@@ -32,6 +35,7 @@ runs:
         COLORS_INPUT: ${{ inputs.colors }}
         BRAND_MISSION_INPUT: ${{ inputs['brand-mission'] }}
         LOGOS_INPUT: ${{ inputs.logos }}
+        MASCOT_INPUT: ${{ inputs.mascot }}
         TYPOGRAPHY_INPUT: ${{ inputs.typography }}
         OUTPUT_DIR_INPUT: ${{ inputs['output-dir'] }}
       with:
@@ -45,6 +49,7 @@ runs:
             colors: process.env.COLORS_INPUT,
             brandMission: process.env.BRAND_MISSION_INPUT,
             logos: process.env.LOGOS_INPUT,
+            mascot: process.env.MASCOT_INPUT,
             typography: process.env.TYPOGRAPHY_INPUT,
             outputDir: process.env.OUTPUT_DIR_INPUT,
           });

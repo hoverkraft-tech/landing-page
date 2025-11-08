@@ -55,7 +55,6 @@ function buildOutputs(manifest) {
   const locales = Object.keys(manifest?.brandMission?.title || {});
 
   return {
-    "artifact-id": manifest.artifactId || "",
     version: manifest.version,
     commit: manifest.commit,
     colors: JSON.stringify(manifest.colors ?? {}),

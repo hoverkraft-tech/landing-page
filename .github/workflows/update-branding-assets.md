@@ -3,7 +3,7 @@
 # GitHub Workflow: Update Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/2b2744fa542393ba441f7002b4051f68055703a95339062ab797d6ba30442d16/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
+  <img src="https://opengraph.githubassets.com/b219c7d8f42294b5602596f129e9e1464598a322399038aa2e3982f75de31a09/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
 </div>
 
 ---
@@ -30,9 +30,7 @@ Manifest fields capture version metadata, color tokens, logo inventory, mascot p
 
 ### Permissions
 
-- **`actions`**: `read`
-- **`contents`**: `write`
-- **`pull-requests`**: `write`
+- **`contents`**: `read`
 
 <!-- overview:end -->
 
@@ -63,14 +61,24 @@ on:
     types:
       - branding-update
 permissions:
-  contents: write
-  actions: read
-  pull-requests: write
+  contents: read
 jobs:
   update-branding-assets:
-    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@bc4af01f3c8044653e42fa5340ccde671aa30a77 # 2.2.0
+    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
     with:
-      # JSON manifest describing the branding data (artifact-id comes from manifest)
+      # The repository where to download the branding artifact from
+      # This input is required.
+      repository: ""
+
+      # The run ID from the branding repository
+      # This input is required.
+      run-id: ""
+
+      # The artifact ID from the branding repository
+      # This input is required.
+      artifact-id: ""
+
+      # JSON manifest describing the branding data
       #
       # This input is required.
       manifest: ""
@@ -83,9 +91,12 @@ jobs:
 
 ### Workflow Dispatch Inputs
 
-| **Input**      | **Description**                                                              | **Required** | **Type**   | **Default** |
-| -------------- | ---------------------------------------------------------------------------- | ------------ | ---------- | ----------- |
-| **`manifest`** | JSON manifest describing the branding data (artifact-id comes from manifest) | **true**     | **string** | -           |
+| **Input**         | **Description**                                             | **Required** | **Type**   | **Default** |
+| ----------------- | ----------------------------------------------------------- | ------------ | ---------- | ----------- |
+| **`repository`**  | The repository where to download the branding artifact from | **true**     | **string** | -           |
+| **`run-id`**      | The run ID from the branding repository                     | **true**     | **string** | -           |
+| **`artifact-id`** | The artifact ID from the branding repository                | **true**     | **string** | -           |
+| **`manifest`**    | JSON manifest describing the branding data                  | **true**     | **string** | -           |
 
 <!-- inputs:end -->
 <!-- secrets:start -->

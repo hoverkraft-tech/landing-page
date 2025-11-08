@@ -14,21 +14,32 @@ on:
   workflow_dispatch:
     inputs:
       #checkov:skip=CKV_GHA_7: required
+      repository:
+        description: "The repository where to download the branding artifact from"
+        required: true
+        type: string
+      run-id:
+        description: "The run ID from the branding repository"
+        required: true
+        type: string
+      artifact-id:
+        description: "The artifact ID from the branding repository"
+        required: true
+        type: string
       manifest:
         description: |
-          JSON manifest describing the branding data (artifact-id comes from manifest)
+          JSON manifest describing the branding data
         required: true
         type: string
 
 permissions:
-  contents: write
-  actions: read
-  pull-requests: write
+  contents: read
 
 env:
   APPLICATION_DIR: application
   BRAND_DIR: application/src/data/brand
   BRAND_LOGO_DIR: application/public/brand/logo
+  BRAND_MASCOT_DIR: application/public/brand/mascot
   BRAND_DOWNLOADS_DIR: application/public/brand/downloads
   BRAND_LOGO_PACK_FILE: application/public/brand/downloads/hoverkraft-logos.zip
   BRAND_GUIDELINES_BASE_URL: http://localhost:4321
@@ -47,22 +58,55 @@ jobs:
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           MANIFEST_INPUT: ${{ inputs.manifest }}
+          REPOSITORY_INPUT: ${{ inputs.repository }}
+          RUN_ID_INPUT: ${{ inputs.run-id }}
+          ARTIFACT_ID_INPUT: ${{ inputs.artifact-id }}
         with:
           script: |
+            let repository;
+            let runId;
+            let artifactId;
             let manifest;
 
             if (context.eventName === 'repository_dispatch') {
+              repository = context.payload.client_payload.repository;
+              runId = context.payload.client_payload["run-id"];
+              artifactId = context.payload.client_payload["artifact-id"];
               manifest = context.payload.client_payload.manifest;
+
             } else {
+              repository = process.env.REPOSITORY_INPUT;
+              runId = process.env.RUN_ID_INPUT;
+              artifactId = process.env.ARTIFACT_ID_INPUT;
               manifest = JSON.parse(process.env.MANIFEST_INPUT);
             }
 
+            if (!repository) {
+              return core.setFailed('Repository is required');
+            }
+            core.setOutput('repository', repository);
+
+            if (!runId) {
+              return core.setFailed('Run ID is required');
+            }
+            core.setOutput('run-id', runId);
+
+            if (!artifactId) {
+              return core.setFailed('Artifact ID is required');
+            }
+            core.setOutput('artifact-id', artifactId);
+
+            if (!manifest) {
+              return core.setFailed('Manifest is required');
+            }
             core.setOutput('manifest', JSON.stringify(manifest));
 
             core.info('📦 Branding update received:');
+            core.info(`  Artifact ID: ${artifactId}`);
+            core.info(`  Repository: ${repository}`);
+            core.info(`  Run ID: ${runId}`);
             core.info(`  Version: ${manifest.version}`);
             core.info(`  Commit: ${manifest.commit}`);
-            core.info(`  Artifact ID: ${manifest.artifactId}`);
 
       - name: Validate and parse manifest
         id: validate-manifest
@@ -70,14 +114,24 @@ jobs:
         with:
           manifest: ${{ steps.parse-inputs.outputs.manifest }}
 
+      - uses: actions/create-github-app-token@67018539274d69449ef7c02e8e71183d1719ab42 # v2.1.4
+        id: generate-token
+        with:
+          app-id: ${{ vars.CI_BOT_APP_ID }}
+          private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
       - name: Download and organize branding assets
         uses: ./.github/actions/download-branding-assets
         with:
-          artifact-id: ${{ steps.validate-manifest.outputs.artifact-id }}
-          version: ${{ steps.validate-manifest.outputs.version }}
-          commit: ${{ steps.validate-manifest.outputs.commit }}
+          artifact-id: ${{ steps.parse-inputs.outputs.artifact-id }}
+          repository: ${{ steps.parse-inputs.outputs.repository }}
+          run-id: ${{ steps.parse-inputs.outputs.run-id }}
+          github-token: ${{ steps.generate-token.outputs.token }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
           mascot: ${{ steps.validate-manifest.outputs.mascot }}
+          logos-dir: ${{ env.BRAND_LOGO_DIR }}
+          mascot-dir: ${{ env.BRAND_MASCOT_DIR }}
 
       - name: Generate brand content (mission, colors, typography, logos)
         uses: ./.github/actions/generate-brand-content
@@ -87,6 +141,7 @@ jobs:
           colors: ${{ steps.validate-manifest.outputs.colors }}
           brand-mission: ${{ steps.validate-manifest.outputs.brand-mission }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
+          mascot: ${{ steps.validate-manifest.outputs.mascot }}
           typography: ${{ steps.validate-manifest.outputs.typography }}
           output-dir: ${{ env.BRAND_DIR }}
 
@@ -96,33 +151,19 @@ jobs:
           logos-dir: ${{ env.BRAND_LOGO_DIR }}
           output-file: ${{ env.BRAND_LOGO_PACK_FILE }}
 
-      - name: Generate brand guidelines PDFs
-        id: generate-brand-pdfs
-        uses: ./.github/actions/generate-brand-pdfs
-        with:
-          locales: ${{ steps.validate-manifest.outputs.locales }}
-          default-slug: ${{ env.BRAND_GUIDELINES_DEFAULT_SLUG }}
-          routes-file: ${{ env.BRAND_GUIDELINES_ROUTES_FILE }}
-          base-url: ${{ env.BRAND_GUIDELINES_BASE_URL }}
-          downloads-dir: ${{ env.BRAND_DOWNLOADS_DIR }}
-          working-directory: ${{ env.APPLICATION_DIR }}
-
       - name: Create pull request with updated assets
         uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@5f11437c716059f30c635f90055060e4ef8b31a0 # 0.28.0
         with:
+          github-token: ${{ steps.generate-token.outputs.token }}
           branch: branding-update-${{ steps.validate-manifest.outputs.version }}
           commit-message: |
             chore: update branding assets to version ${{ steps.validate-manifest.outputs.version }}
-
-            Branding repository commit: ${{ steps.validate-manifest.outputs.commit }}
-            Artifact ID: ${{ steps.validate-manifest.outputs.artifact-id }}
           title: "chore: update branding assets to v${{ steps.validate-manifest.outputs.version }}"
           body: |
             ## Branding Assets Updated 🎨
 
             **Version:** ${{ steps.validate-manifest.outputs.version }}
             **Branding Commit:** `${{ steps.validate-manifest.outputs.commit }}`
-            **Artifact ID:** ${{ steps.validate-manifest.outputs.artifact-id }}
 
             ### Assets Updated (${{ steps.validate-manifest.outputs.locales }})
             - ✅ Brand colors (from manifest)
@@ -136,14 +177,12 @@ jobs:
 
             ### Next Steps
             The brand guidelines pages will be updated with the new assets on the next deployment.
-          github-token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create summary
         uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
         env:
           VERSION: ${{ steps.validate-manifest.outputs.version }}
           COMMIT: ${{ steps.validate-manifest.outputs.commit }}
-          ARTIFACT_ID: ${{ steps.validate-manifest.outputs.artifact-id }}
           LOCALES: ${{ steps.validate-manifest.outputs.locales }}
         with:
           script: |
@@ -152,7 +191,6 @@ jobs:
               .addTable([
                 [{ data: 'Version', header: true }, process.env.VERSION],
                 [{ data: 'Branding Commit', header: true }, `\`${process.env.COMMIT}\``],
-                [{ data: 'Artifact ID', header: true }, process.env.ARTIFACT_ID],
                 [{ data: 'Locales', header: true }, process.env.LOCALES]
               ])
               .addHeading('Assets Updated', 3)

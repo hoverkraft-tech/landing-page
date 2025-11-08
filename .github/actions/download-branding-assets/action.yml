@@ -1,14 +1,17 @@
 name: "Download Branding Assets"
 description: "Downloads and organizes branding assets from the branding repository"
 inputs:
+  repository:
+    description: "The repository where to download the branding artifact from"
+    required: true
   artifact-id:
     description: "The artifact ID from the branding repository"
     required: true
-  version:
-    description: "The branding version"
-    required: true
-  commit:
-    description: "The commit SHA from the branding repository"
+  run-id:
+    description: "The run ID from the branding repository"
+    required: false
+  github-token:
+    description: "GitHub token to access the branding repository artifact"
     required: true
   logos:
     description: "JSON-stringified logo collection"
@@ -16,79 +19,95 @@ inputs:
   mascot:
     description: "JSON-stringified mascot object with path"
     required: true
+  logos-dir:
+    description: "Directory containing logos"
+    required: true
+  mascot-dir:
+    description: "Directory to place mascot asset"
+    required: true
 runs:
   using: "composite"
   steps:
     - name: Download branding artifact
+      id: download-artifact
       uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
-        name: branding-assets-${{ inputs.artifact-id }}
-        path: /tmp/branding-assets
-        github-token: ${{ github.token }}
-        repository: hoverkraft-tech/branding
-        run-id: ${{ inputs.artifact-id }}
+        repository: ${{ inputs.repository }}
+        run-id: ${{ inputs.run-id }}
+        artifact-ids: ${{ inputs.artifact-id }}
+        github-token: ${{ inputs.github-token }}
+        path: ${{ runner.temp }}/branding-assets-${{ inputs.run-id }}-${{ inputs.artifact-id }}
 
     - name: Extract and organize assets
       uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+      env:
+        DOWNLOADED_PATH: ${{ steps.download-artifact.outputs.download-path }}
+        LOGOS_DIR: ${{ inputs.logos-dir }}
+        LOGOS_INPUT: ${{ inputs.logos }}
+        MASCOT_INPUT: ${{ inputs.mascot }}
+        MASCOT_DIR: ${{ inputs.mascot-dir }}
       with:
         script: |
           const fs = require('fs');
           const path = require('path');
 
-          // Parse inputs
-          const logoCollection = JSON.parse(process.env.LOGOS_INPUT);
-          const logos = Array.isArray(logoCollection.items) ? logoCollection.items : Array.isArray(logoCollection) ? logoCollection : [];
-          const mascot = JSON.parse(process.env.MASCOT_INPUT);
-          const version = process.env.VERSION_INPUT;
-          const commit = process.env.COMMIT_INPUT;
-
-          core.info(`📦 Processing branding assets v${version} (${commit})`);
-
-          // Create target directories
-          const dirs = [
-            'application/src/data/brand',
-            'application/public/brand/logos',
-            'application/public/brand/mascot',
-            'application/public/brand/downloads'
-          ];
-
-          for (const dir of dirs) {
-            await io.mkdirP(dir);
+          core.debug("Listing downloaded files:");
+          const downloadedFiles = fs.readdirSync(process.env.DOWNLOADED_PATH);
+          for (const file of downloadedFiles) {
+            core.debug(`- ${file}`);
           }
+
+          core.info(`📦 Processing branding assets`);
 
           // Copy logos based on paths from manifest
+          const logoCollection = JSON.parse(process.env.LOGOS_INPUT);
+          const logos = Array.isArray(logoCollection.items) ? logoCollection.items : Array.isArray(logoCollection) ? logoCollection : [];
+          core.debug(`Logos: ${JSON.stringify(logos, null, 2)}`);
           for (const logo of logos) {
-            const sourcePath = path.join('/tmp/branding-assets', logo.path);
-            const targetPath = path.join('application/public/brand', logo.path);
-            
-            if (fs.existsSync(sourcePath)) {
-              const targetDir = path.dirname(targetPath);
-              await io.mkdirP(targetDir);
-              await io.cp(sourcePath, targetPath);
-              core.info(`✓ Copied logo: ${logo.name} (${logo.path})`);
-            } else {
-              core.setFailed(`Logo file not found: ${logo.path}`);
-            }
+            await copyAsset(getDisplayName(logo.name), logo.path, process.env.LOGOS_DIR);
           }
 
-          // Copy mascot (if present)
-          if (mascot && mascot.path) {
-            const mascotSource = path.join('/tmp/branding-assets', mascot.path);
-            const mascotTarget = path.join('application/public/brand', mascot.path);
-            
-            if (fs.existsSync(mascotSource)) {
-              const targetDir = path.dirname(mascotTarget);
-              await io.mkdirP(targetDir);
-              await io.cp(mascotSource, mascotTarget);
-              core.info(`✓ Copied mascot: ${mascot.name} (${mascot.path})`);
-            } else {
-              core.setFailed(`Mascot file not found: ${mascot.path}`);
-            }
-          }
+          // Copy mascot
+          const mascot = JSON.parse(process.env.MASCOT_INPUT);
+          await copyAsset(getDisplayName(mascot.name), mascot.path, process.env.MASCOT_DIR);
 
           core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
-      env:
-        LOGOS_INPUT: ${{ inputs.logos }}
-        MASCOT_INPUT: ${{ inputs.mascot }}
-        VERSION_INPUT: ${{ inputs.version }}
-        COMMIT_INPUT: ${{ inputs.commit }}
+
+          async function copyAsset(name, source, targetRootDir) {
+            if (!source) {
+              return core.setFailed(`Asset path is missing for asset "${name}": ${source}`);
+            }
+
+            if (!targetRootDir ) {
+              return core.setFailed(`Target directory is not defined for asset "${name}".`);
+            }
+
+            const baseFolder = path.basename(targetRootDir);
+            if (!source.startsWith(`${baseFolder}/`)) {
+              return core.setFailed(`Asset path must start with logos directory for asset "${name}": ${source}`);
+            }
+
+            const sourcePath = path.join(process.env.DOWNLOADED_PATH, source);
+
+            if (fs.existsSync(sourcePath)) {
+              const targetPath = path.join(targetRootDir, source.replace(`${baseFolder}/`, ''));
+              const targetDir = path.dirname(targetPath);
+              core.info(`Copying asset "${name}" from "${sourcePath}" to "${targetPath}"`);
+              await io.mkdirP(targetDir);
+              await io.cp(sourcePath, targetPath);
+              core.info(`✓ Copied asset: ${name} (${source})`);
+            } else {
+              throw new Error(`Asset file not found for asset "${name}": ${sourcePath}`);
+            }
+          }
+
+          function getDisplayName(name) {
+            if (typeof name === 'string') {
+              return name;
+            }
+
+            if (name && typeof name === 'object') {
+              return getDisplayName(name.en);
+            }
+            return 'unknown asset';
+          }
