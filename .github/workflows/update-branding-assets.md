@@ -3,7 +3,7 @@
 # GitHub Workflow: Update Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/ed160027df444269461d420334c1fa190b22ff5290244bf3210a20af60de0b74/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
+  <img src="https://opengraph.githubassets.com/103cb6a43294cf46113aaddf4c7fb31b50de7e198be647715c711634424f9c47/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
 </div>
 
 ---
@@ -30,9 +30,7 @@ Manifest fields capture version metadata, color tokens, logo inventory, mascot p
 
 ### Permissions
 
-- **`actions`**: `read`
-- **`contents`**: `write`
-- **`pull-requests`**: `write`
+- **`contents`**: `read`
 
 <!-- overview:end -->
 
@@ -63,9 +61,7 @@ on:
     types:
       - branding-update
 permissions:
-  contents: write
-  actions: read
-  pull-requests: write
+  contents: read
 jobs:
   update-branding-assets:
     uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
