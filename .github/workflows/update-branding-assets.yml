@@ -71,8 +71,8 @@ jobs:
 
             if (context.eventName === 'repository_dispatch') {
               repository = context.payload.client_payload.repository;
-              runId = context.payload.client_payload.run-id;
-              artifactId = context.payload.client_payload.artifact-id;
+              runId = context.payload.client_payload["run-id"];
+              artifactId = context.payload.client_payload["artifact-id"];
               manifest = context.payload.client_payload.manifest;
 
             } else {
