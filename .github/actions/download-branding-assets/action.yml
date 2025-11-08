@@ -84,7 +84,7 @@ runs:
               await io.cp(sourcePath, targetPath);
               core.info(`✓ Copied asset: ${name} (${source})`);
             } else {
-              throw new Error(`Asset file not found for asset "${name}": ${source}`);
+              throw new Error(`Asset file not found for asset "${name}": ${sourcePath}`);
             }
           }
 
