@@ -7,9 +7,10 @@
     "version",
     "timestamp",
     "commit",
+    "brandMission",
     "colors",
     "logos",
-    "brandMission"
+    "mascot"
   ],
   "properties": {
     "version": {
@@ -74,8 +75,9 @@
     "logos": { "$ref": "#/definitions/logoCollection" },
     "mascot": {
       "type": "object",
-      "description": "Brand mascot asset (optional)",
+      "description": "Brand mascot asset metadata",
       "required": ["name", "path", "usage"],
+      "additionalProperties": false,
       "properties": {
         "name": {
           "allOf": [

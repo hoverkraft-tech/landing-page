@@ -52,6 +52,10 @@ Generates TypeScript files for brand colors, mission, typography, and logos from
     # This input is required.
     logos: ""
 
+    # JSON-stringified mascot metadata
+    # This input is required.
+    mascot: ""
+
     # JSON-stringified typography collection
     # This input is required.
     typography: ""
@@ -73,6 +77,7 @@ Generates TypeScript files for brand colors, mission, typography, and logos from
 | **`colors`**        | JSON-stringified color collection                | **true**     | -           |
 | **`brand-mission`** | JSON-stringified localized brand mission entries | **true**     | -           |
 | **`logos`**         | JSON-stringified logo collection                 | **true**     | -           |
+| **`mascot`**        | JSON-stringified mascot metadata                 | **true**     | -           |
 | **`typography`**    | JSON-stringified typography collection           | **true**     | -           |
 | **`output-dir`**    | Output directory for generated files             | **true**     | -           |
 

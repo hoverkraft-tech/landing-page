@@ -56,3 +56,9 @@ export interface BrandMission {
   title: LocalizedString;
   description: LocalizedString;
 }
+
+export interface MascotAsset {
+  name: LocalizedString;
+  path: string;
+  usage: LocalizedString;
+}

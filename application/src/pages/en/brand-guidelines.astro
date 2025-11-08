@@ -3,11 +3,12 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import BrandMissionSection from '~/components/brand/BrandMissionSection.astro';
 import BrandLogosSection from '~/components/brand/BrandLogosSection.astro';
+import BrandMascotSection from '~/components/brand/BrandMascotSection.astro';
 import BrandColorsSection from '~/components/brand/BrandColorsSection.astro';
 import BrandTypographySection from '~/components/brand/BrandTypographySection.astro';
 import BrandDownloadsSection from '~/components/brand/BrandDownloadsSection.astro';
 import BrandLegalSection from '~/components/brand/BrandLegalSection.astro';
-import { brandColors, typography, logos, brandMission } from '~/data/brand/tokens';
+import { brandColors, typography, logos, mascot, brandMission } from '~/data/brand/tokens';
 
 const metadata = {
   title: 'Hoverkraft Brand Guidelines',
@@ -30,6 +31,11 @@ const copy = {
       doLabel: 'Do ✓',
       dontLabel: "Don't ✗",
     },
+  },
+  mascot: {
+    title: 'Mascot',
+    description: 'Meet the official Hoverkraft mascot, crafted to embody our product-led and platform-focused mindset.',
+    usageLabel: 'Usage guidelines',
   },
   colors: {
     title: 'Color Palette',
@@ -78,6 +84,13 @@ const copy = {
       formatsLabel={copy.logo.formatsLabel}
       doLabel={copy.logo.checklist.doLabel}
       dontLabel={copy.logo.checklist.dontLabel}
+    />
+    <BrandMascotSection
+      lang={lang}
+      mascot={mascot}
+      title={copy.mascot.title}
+      description={copy.mascot.description}
+      usageLabel={copy.mascot.usageLabel}
     />
     <BrandColorsSection
       lang={lang}

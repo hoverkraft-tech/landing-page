@@ -64,6 +64,7 @@ async function run({
   colors,
   brandMission,
   logos,
+  mascot,
   typography,
   outputDir,
 }) {
@@ -83,6 +84,7 @@ async function run({
   const parsedColors = parseJsonInput("colors", colors);
   const parsedBrandMission = parseJsonInput("brand-mission", brandMission);
   const parsedLogos = parseJsonInput("logos", logos);
+  const parsedMascot = parseJsonInput("mascot", mascot);
   const parsedTypography = parseJsonInput("typography", typography);
 
   const resolvedOutputDir = (outputDir ?? "").trim();
@@ -120,6 +122,13 @@ async function run({
       typeName: "LogoCollection",
       exportName: "logos",
       payload: parsedLogos,
+    },
+    {
+      filename: "generated-mascot.ts",
+      description: "mascot asset",
+      typeName: "MascotAsset",
+      exportName: "mascot",
+      payload: parsedMascot,
     },
   ];
 

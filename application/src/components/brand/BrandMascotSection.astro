@@ -1,0 +1,49 @@
+---
+import type { BrandLocale, MascotAsset } from '~/data/brand/tokens';
+
+interface Props {
+  lang: BrandLocale;
+  mascot: MascotAsset;
+  title: string;
+  description: string;
+  usageLabel: string;
+}
+
+const { lang, mascot, title, description, usageLabel } = Astro.props as Props;
+const localizedName = mascot?.name?.[lang] ?? mascot?.name?.fr ?? mascot?.name?.en ?? '';
+const localizedUsage = mascot?.usage?.[lang] ?? mascot?.usage?.fr ?? mascot?.usage?.en ?? '';
+const mascotPath = mascot?.path ?? '';
+---
+
+{
+  !mascotPath ? null : (
+    <div class="mb-16">
+      <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">{title}</h2>
+      <div class="grid lg:grid-cols-[2fr,3fr] gap-8 items-center">
+        <div class="bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 p-8 flex items-center justify-center min-h-[280px]">
+          <img
+            src={mascotPath}
+            alt={localizedName || title}
+            width={360}
+            height={360}
+            loading="lazy"
+            decoding="async"
+            class="w-full max-w-sm h-auto"
+          />
+        </div>
+        <div class="space-y-4">
+          {localizedName ? <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">{localizedName}</h3> : null}
+          <p class="text-gray-700 dark:text-gray-300">{description}</p>
+          {localizedUsage ? (
+            <div class="bg-gray-50 dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
+              <h4 class="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">
+                {usageLabel}
+              </h4>
+              <p class="mt-2 text-gray-700 dark:text-gray-300">{localizedUsage}</p>
+            </div>
+          ) : null}
+        </div>
+      </div>
+    </div>
+  )
+}

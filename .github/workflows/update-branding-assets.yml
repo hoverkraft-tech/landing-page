@@ -139,6 +139,7 @@ jobs:
           colors: ${{ steps.validate-manifest.outputs.colors }}
           brand-mission: ${{ steps.validate-manifest.outputs.brand-mission }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
+          mascot: ${{ steps.validate-manifest.outputs.mascot }}
           typography: ${{ steps.validate-manifest.outputs.typography }}
           output-dir: ${{ env.BRAND_DIR }}
 

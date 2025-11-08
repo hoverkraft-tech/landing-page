@@ -38,6 +38,11 @@ describe("generate-brand-content run", () => {
       }),
       brandMission: JSON.stringify({ statement: "Empower builders" }),
       logos: JSON.stringify({ items: [{ id: "primary", format: "svg" }] }),
+      mascot: JSON.stringify({
+        name: { fr: "Mascotte", en: "Mascot" },
+        path: "logo/mascot.svg",
+        usage: { fr: "Utilisation", en: "Usage" },
+      }),
       typography: JSON.stringify({
         items: [{ id: "heading", family: "HK Grotesk" }],
       }),
@@ -81,11 +86,18 @@ describe("generate-brand-content run", () => {
       /export const typography: TypographyCollection =/,
     );
 
+    const mascotFile = fs.readFileSync(
+      path.join(outputDir, "generated-mascot.ts"),
+      "utf8",
+    );
+    assert.match(mascotFile, /export const mascot: MascotAsset =/);
+
     assert.deepEqual(messages, [
       "\u2713 Generated generated-colors.ts (2 items)",
       "\u2713 Generated generated-mission.ts",
       "\u2713 Generated generated-typography.ts (1 items)",
       "\u2713 Generated generated-logos.ts (1 items)",
+      "\u2713 Generated generated-mascot.ts",
       "\u2705 All brand content files generated successfully",
     ]);
   });
