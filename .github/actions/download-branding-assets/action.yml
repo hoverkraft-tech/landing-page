@@ -41,7 +41,7 @@ runs:
     - name: Extract and organize assets
       uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
       env:
-        DOWNLOADED_PATH: ${{ steps.download-artifact.outputs.path }}
+        DOWNLOADED_PATH: ${{ steps.download-artifact.outputs.download-path }}
         LOGOS_DIR: ${{ inputs.logos-dir }}
         LOGOS_INPUT: ${{ inputs.logos }}
         MASCOT_INPUT: ${{ inputs.mascot }}
