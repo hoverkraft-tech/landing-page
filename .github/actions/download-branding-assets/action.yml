@@ -24,7 +24,7 @@ inputs:
     required: true
   mascot-dir:
     description: "Directory to place mascot asset"
-    required: false
+    required: true
 runs:
   using: "composite"
   steps:
@@ -45,6 +45,7 @@ runs:
         LOGOS_DIR: ${{ inputs.logos-dir }}
         LOGOS_INPUT: ${{ inputs.logos }}
         MASCOT_INPUT: ${{ inputs.mascot }}
+        MASCOT_DIR: ${{ inputs.mascot-dir }}
       with:
         script: |
           const fs = require('fs');
