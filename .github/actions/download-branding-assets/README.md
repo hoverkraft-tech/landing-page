@@ -3,7 +3,7 @@
 # GitHub Action: Download Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/40280ea4b59a0d9c148996ec2d68f554f056c3d673811eea810b967308fc2896/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
+  <img src="https://opengraph.githubassets.com/d72b0dc37ee6ff1332982c4eea1de7fd51e7b7701e102f7d730b607e0c7df5da/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
 </div>
 
 ---
@@ -32,17 +32,20 @@ Downloads and organizes branding assets from the branding repository
 ```yaml
 - uses: hoverkraft-tech/landing-page/.github/actions/download-branding-assets@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
   with:
+    # The repository where to download the branding artifact from
+    # This input is required.
+    repository: ""
+
     # The artifact ID from the branding repository
     # This input is required.
     artifact-id: ""
 
-    # The branding version
-    # This input is required.
-    version: ""
+    # The run ID from the branding repository
+    run-id: ""
 
-    # The commit SHA from the branding repository
+    # GitHub token to access the branding repository artifact
     # This input is required.
-    commit: ""
+    github-token: ""
 
     # JSON-stringified logo collection
     # This input is required.
@@ -58,13 +61,14 @@ Downloads and organizes branding assets from the branding repository
 
 ## Inputs
 
-| **Input**         | **Description**                              | **Required** | **Default** |
-| ----------------- | -------------------------------------------- | ------------ | ----------- |
-| **`artifact-id`** | The artifact ID from the branding repository | **true**     | -           |
-| **`version`**     | The branding version                         | **true**     | -           |
-| **`commit`**      | The commit SHA from the branding repository  | **true**     | -           |
-| **`logos`**       | JSON-stringified logo collection             | **true**     | -           |
-| **`mascot`**      | JSON-stringified mascot object with path     | **true**     | -           |
+| **Input**          | **Description**                                             | **Required** | **Default** |
+| ------------------ | ----------------------------------------------------------- | ------------ | ----------- |
+| **`repository`**   | The repository where to download the branding artifact from | **true**     | -           |
+| **`artifact-id`**  | The artifact ID from the branding repository                | **true**     | -           |
+| **`run-id`**       | The run ID from the branding repository                     | **false**    | -           |
+| **`github-token`** | GitHub token to access the branding repository artifact     | **true**     | -           |
+| **`logos`**        | JSON-stringified logo collection                            | **true**     | -           |
+| **`mascot`**       | JSON-stringified mascot object with path                    | **true**     | -           |
 
 <!-- inputs:end -->
 <!-- secrets:start -->
