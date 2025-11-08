@@ -3,7 +3,7 @@
 # GitHub Action: Validate Branding Manifest
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/40280ea4b59a0d9c148996ec2d68f554f056c3d673811eea810b967308fc2896/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
+  <img src="https://opengraph.githubassets.com/d72b0dc37ee6ff1332982c4eea1de7fd51e7b7701e102f7d730b607e0c7df5da/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
 </div>
 
 ---
@@ -55,7 +55,6 @@ Validates the branding manifest against JSON schema and parses it for use in the
 
 | **Output**          | **Description**                                           |
 | ------------------- | --------------------------------------------------------- |
-| **`artifact-id`**   | The artifact ID from the manifest                         |
 | **`version`**       | The branding version from the manifest                    |
 | **`commit`**        | The commit SHA from the branding repository               |
 | **`colors`**        | JSON-stringified color collection                         |
