@@ -20,12 +20,19 @@
     "timestamp": {
       "type": "string",
       "description": "ISO 8601 timestamp when the branding data was generated",
-      "format": "date-time"
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}(\\.\\d+)?(Z|[+-]\\d{2}:\\d{2})$",
+      "examples": ["2025-11-08T07:50:00.427Z", "2025-11-08T07:50:00+01:00"]
     },
     "commit": {
       "type": "string",
       "description": "Git commit SHA of the branding repository",
       "pattern": "^[0-9a-f]{40}$"
+    },
+    "artifactId": {
+      "type": "string",
+      "description": "Identifier of the branding artifact (camelCase variant)",
+      "pattern": "^[A-Za-z0-9._-]+$",
+      "examples": ["4506823456"]
     },
     "brandMission": {
       "type": "object",
@@ -37,10 +44,11 @@
           "allOf": [
             { "$ref": "#/definitions/localizedString" },
             {
+              "type": "object",
               "description": "Mission title localized for each supported language",
               "properties": {
-                "fr": { "example": "Construire l avenir de la logistique" },
-                "en": { "example": "Building the future of logistics" }
+                "fr": { "examples": ["Construire l avenir de la logistique"] },
+                "en": { "examples": ["Building the future of logistics"] }
               }
             }
           ]
@@ -49,13 +57,18 @@
           "allOf": [
             { "$ref": "#/definitions/localizedString" },
             {
+              "type": "object",
               "description": "Mission description localized for each supported language",
               "properties": {
                 "fr": {
-                  "example": "Nous aidons les entreprises a automatiser la logistique avec une technologie fiable et durable."
+                  "examples": [
+                    "Nous aidons les entreprises a automatiser la logistique avec une technologie fiable et durable."
+                  ]
                 },
                 "en": {
-                  "example": "We help companies automate logistics with reliable, sustainable technology."
+                  "examples": [
+                    "We help companies automate logistics with reliable, sustainable technology."
+                  ]
                 }
               }
             }
@@ -74,10 +87,11 @@
           "allOf": [
             { "$ref": "#/definitions/localizedString" },
             {
+              "type": "object",
               "description": "Localized mascot name",
               "properties": {
-                "fr": { "example": "Hoverkraft le robot" },
-                "en": { "example": "Hoverkraft the Robot" }
+                "fr": { "examples": ["Hoverkraft le robot"] },
+                "en": { "examples": ["Hoverkraft the Robot"] }
               }
             }
           ]
@@ -85,19 +99,24 @@
         "path": {
           "type": "string",
           "description": "Relative path to the mascot file in the artifact",
-          "example": "mascot/mascot.png"
+          "examples": ["mascot/mascot.png"]
         },
         "usage": {
           "allOf": [
             { "$ref": "#/definitions/localizedString" },
             {
+              "type": "object",
               "description": "Localized usage guidelines for the mascot",
               "properties": {
                 "fr": {
-                  "example": "Utiliser la mascotte dans les materiels marketing pour renforcer l identite de la marque."
+                  "examples": [
+                    "Utiliser la mascotte dans les materiels marketing pour renforcer l identite de la marque."
+                  ]
                 },
                 "en": {
-                  "example": "Use the mascot in marketing materials to reinforce brand identity."
+                  "examples": [
+                    "Use the mascot in marketing materials to reinforce brand identity."
+                  ]
                 }
               }
             }
@@ -111,12 +130,17 @@
     "localizedObject": {
       "type": "object",
       "required": ["fr", "en"],
+      "properties": {
+        "fr": {},
+        "en": {}
+      },
       "additionalProperties": false
     },
     "localizedString": {
       "allOf": [
         { "$ref": "#/definitions/localizedObject" },
         {
+          "type": "object",
           "properties": {
             "fr": { "type": "string" },
             "en": { "type": "string" }
@@ -128,6 +152,7 @@
       "allOf": [
         { "$ref": "#/definitions/localizedObject" },
         {
+          "type": "object",
           "properties": {
             "fr": {
               "type": "array",
@@ -150,10 +175,11 @@
           "allOf": [
             { "$ref": "#/definitions/localizedString" },
             {
+              "type": "object",
               "description": "Localized color name",
               "properties": {
-                "fr": { "example": "Bleu principal" },
-                "en": { "example": "Primary Blue" }
+                "fr": { "examples": ["Bleu principal"] },
+                "en": { "examples": ["Primary Blue"] }
               }
             }
           ]
@@ -162,18 +188,19 @@
           "type": "string",
           "description": "Hexadecimal color value",
           "pattern": "^#[0-9A-Fa-f]{6}$",
-          "example": "#1E3A8A"
+          "examples": ["#1E3A8A"]
         },
         "rgb": {
           "type": "string",
           "description": "RGB color value",
           "pattern": "^\\d+,\\s*\\d+,\\s*\\d+$",
-          "example": "30, 58, 138"
+          "examples": ["30, 58, 138"]
         },
         "usage": {
           "allOf": [
             { "$ref": "#/definitions/localizedString" },
             {
+              "type": "object",
               "description": "Localized usage guidance for this color"
             }
           ]
@@ -190,6 +217,7 @@
           "allOf": [
             { "$ref": "#/definitions/localizedStringArray" },
             {
+              "type": "object",
               "description": "Localized list of recommended color usage practices"
             }
           ]
@@ -198,7 +226,8 @@
           "allOf": [
             { "$ref": "#/definitions/localizedStringArray" },
             {
-              "description": "Localized list of color usage practices to avoid"
+              "type": "object",
+              "description": "Localized list of logo usage practices to avoid"
             }
           ]
         },
@@ -219,12 +248,12 @@
         "name": {
           "type": "string",
           "description": "Descriptive name of the logo variant",
-          "example": "Primary Logo"
+          "examples": ["Primary Logo"]
         },
         "path": {
           "type": "string",
           "description": "Relative path to the logo file in the artifact",
-          "example": "logo/primary.svg"
+          "examples": ["logo/primary.svg"]
         },
         "formats": {
           "type": "array",
@@ -238,6 +267,7 @@
           "allOf": [
             { "$ref": "#/definitions/localizedString" },
             {
+              "type": "object",
               "description": "Localized usage guidance for the logo variant"
             }
           ]
@@ -254,6 +284,7 @@
           "allOf": [
             { "$ref": "#/definitions/localizedStringArray" },
             {
+              "type": "object",
               "description": "Localized list of recommended logo usage practices"
             }
           ]
@@ -262,6 +293,7 @@
           "allOf": [
             { "$ref": "#/definitions/localizedStringArray" },
             {
+              "type": "object",
               "description": "Localized list of logo usage practices to avoid"
             }
           ]
@@ -282,7 +314,7 @@
       "properties": {
         "family": {
           "type": "string",
-          "example": "Inter Variable"
+          "examples": ["Inter Variable"]
         },
         "weights": {
           "type": "array",
@@ -292,12 +324,13 @@
         },
         "fallback": {
           "type": "string",
-          "example": "system-ui, sans-serif"
+          "examples": ["system-ui, sans-serif"]
         },
         "usage": {
           "allOf": [
             { "$ref": "#/definitions/localizedString" },
             {
+              "type": "object",
               "description": "Localized usage guidance for this font family"
             }
           ]
