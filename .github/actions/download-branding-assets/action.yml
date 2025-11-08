@@ -50,11 +50,18 @@ runs:
           const fs = require('fs');
           const path = require('path');
 
+          core.debug("Listing downloaded files:");
+          const downloadedFiles = fs.readdirSync(process.env.DOWNLOADED_PATH);
+          for (const file of downloadedFiles) {
+            core.debug(`- ${file}`);
+          }
+
           core.info(`📦 Processing branding assets`);
 
           // Copy logos based on paths from manifest
           const logoCollection = JSON.parse(process.env.LOGOS_INPUT);
           const logos = Array.isArray(logoCollection.items) ? logoCollection.items : Array.isArray(logoCollection) ? logoCollection : [];
+          core.debug(`Logos: ${JSON.stringify(logos, null, 2)}`);
           for (const logo of logos) {
             await copyAsset(logo.name, logo.path);
           }
@@ -80,6 +87,7 @@ runs:
             if (fs.existsSync(sourcePath)) {
               const targetPath = path.join(process.env.LOGOS_DIR, name.replace(`${logosDirBaseFolder}/`, ''));
               const targetDir = path.dirname(targetPath);
+              core.info(`Copying asset "${name}" from "${sourcePath}" to "${targetPath}"`);
               await io.mkdirP(targetDir);
               await io.cp(sourcePath, targetPath);
               core.info(`✓ Copied asset: ${name} (${source})`);
