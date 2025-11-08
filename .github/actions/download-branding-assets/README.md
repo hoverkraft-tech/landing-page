@@ -3,7 +3,7 @@
 # GitHub Action: Download Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/77ca93ad175bc7912feb93bc0b99f50c43d35a20d50fc48f679ccfaa1105ba6a/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
+  <img src="https://opengraph.githubassets.com/f47bb0062b60bd19a4e8ca75a3fecda9fa38db824f5cbfed076c79810878fdda/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
 </div>
 
 ---
@@ -60,6 +60,7 @@ Downloads and organizes branding assets from the branding repository
     logos-dir: ""
 
     # Directory to place mascot asset
+    # This input is required.
     mascot-dir: ""
 ```
 
@@ -77,7 +78,7 @@ Downloads and organizes branding assets from the branding repository
 | **`logos`**        | JSON-stringified logo collection                            | **true**     | -           |
 | **`mascot`**       | JSON-stringified mascot object with path                    | **true**     | -           |
 | **`logos-dir`**    | Directory containing logos                                  | **true**     | -           |
-| **`mascot-dir`**   | Directory to place mascot asset                             | **false**    | -           |
+| **`mascot-dir`**   | Directory to place mascot asset                             | **true**     | -           |
 
 <!-- inputs:end -->
 <!-- secrets:start -->
