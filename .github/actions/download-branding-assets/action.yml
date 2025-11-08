@@ -67,12 +67,12 @@ runs:
 
           async function copyAsset(name, source) {
             if (!source) {
-              return core.setFailed(`Asset path is missing for asset: ${name}`);
+              return core.setFailed(`Asset path is missing for asset "${name}": ${source}`);
             }
 
             const logosDirBaseFolder = path.basename(process.env.LOGOS_DIR);
             if (!source.startsWith(`${logosDirBaseFolder}/`)) {
-              return core.setFailed(`Asset path must start with logos directory: ${source}`);
+              return core.setFailed(`Asset path must start with logos directory for asset "${name}": ${source}`);
             }
 
             const sourcePath = path.join(process.env.DOWNLOADED_PATH, source);
@@ -84,7 +84,7 @@ runs:
               await io.cp(sourcePath, targetPath);
               core.info(`✓ Copied asset: ${name} (${source})`);
             } else {
-              core.setFailed(`Asset file not found: ${name}`);
+              throw new Error(`Asset file not found for asset "${name}": ${source}`);
             }
           }
 
