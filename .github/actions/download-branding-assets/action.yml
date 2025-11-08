@@ -72,12 +72,12 @@ runs:
 
           core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
 
-          async function copyAsset(name, source, targetDir) {
+          async function copyAsset(name, source, targetRootDir) {
             if (!source) {
               return core.setFailed(`Asset path is missing for asset "${name}": ${source}`);
             }
 
-            const baseFolder = path.basename(targetDir);
+            const baseFolder = path.basename(targetRootDir);
             if (!source.startsWith(`${baseFolder}/`)) {
               return core.setFailed(`Asset path must start with logos directory for asset "${name}": ${source}`);
             }
@@ -85,7 +85,7 @@ runs:
             const sourcePath = path.join(process.env.DOWNLOADED_PATH, source);
 
             if (fs.existsSync(sourcePath)) {
-              const targetPath = path.join(targetDir, name.replace(`${baseFolder}/`, ''));
+              const targetPath = path.join(targetRootDir, name.replace(`${baseFolder}/`, ''));
               const targetDir = path.dirname(targetPath);
               core.info(`Copying asset "${name}" from "${sourcePath}" to "${targetPath}"`);
               await io.mkdirP(targetDir);
