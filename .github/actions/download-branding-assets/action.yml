@@ -63,29 +63,29 @@ runs:
           const logos = Array.isArray(logoCollection.items) ? logoCollection.items : Array.isArray(logoCollection) ? logoCollection : [];
           core.debug(`Logos: ${JSON.stringify(logos, null, 2)}`);
           for (const logo of logos) {
-            await copyAsset(logo.name, logo.path);
+            await copyAsset(logo.name, logo.path, process.env.LOGOS_DIR);
           }
 
-          // Copy mascot (if present)
+          // Copy mascot
           const mascot = JSON.parse(process.env.MASCOT_INPUT);
-          if (mascot) {
-             await copyAsset(mascot.name, mascot.path);
-          }
+          await copyAsset(mascot.name, mascot.path, process.env.MASCOT_DIR);
 
-          async function copyAsset(name, source) {
+          core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
+
+          async function copyAsset(name, source, targetDir) {
             if (!source) {
               return core.setFailed(`Asset path is missing for asset "${name}": ${source}`);
             }
 
-            const logosDirBaseFolder = path.basename(process.env.LOGOS_DIR);
-            if (!source.startsWith(`${logosDirBaseFolder}/`)) {
+            const baseFolder = path.basename(targetDir);
+            if (!source.startsWith(`${baseFolder}/`)) {
               return core.setFailed(`Asset path must start with logos directory for asset "${name}": ${source}`);
             }
 
             const sourcePath = path.join(process.env.DOWNLOADED_PATH, source);
 
             if (fs.existsSync(sourcePath)) {
-              const targetPath = path.join(process.env.LOGOS_DIR, name.replace(`${logosDirBaseFolder}/`, ''));
+              const targetPath = path.join(targetDir, name.replace(`${baseFolder}/`, ''));
               const targetDir = path.dirname(targetPath);
               core.info(`Copying asset "${name}" from "${sourcePath}" to "${targetPath}"`);
               await io.mkdirP(targetDir);
@@ -95,5 +95,3 @@ runs:
               throw new Error(`Asset file not found for asset "${name}": ${sourcePath}`);
             }
           }
-
-          core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
