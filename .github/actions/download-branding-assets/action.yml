@@ -22,7 +22,7 @@ runs:
     - name: Download branding artifact
       uses: actions/download-artifact@018cc2cf5baa6db3ef3c5f8a56943fffe632ef53 # v6.0.0
       with:
-        name: ${{ inputs.artifact-id }}
+        artifact-ids: ${{ inputs.artifact-id }}
         path: /tmp/branding-assets
         github-token: ${{ github.token }}
         repository: hoverkraft-tech/branding
