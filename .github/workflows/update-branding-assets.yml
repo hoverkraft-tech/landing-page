@@ -129,6 +129,7 @@ jobs:
           github-token: ${{ steps.generate-token.outputs.token }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
           mascot: ${{ steps.validate-manifest.outputs.mascot }}
+          logos-dir: ${{ env.BRAND_LOGO_DIR }}
 
       - name: Generate brand content (mission, colors, typography, logos)
         uses: ./.github/actions/generate-brand-content
