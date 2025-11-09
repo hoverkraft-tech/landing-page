@@ -63,8 +63,21 @@ runs:
           const logoCollection = JSON.parse(process.env.LOGOS_INPUT);
           const logos = Array.isArray(logoCollection.items) ? logoCollection.items : Array.isArray(logoCollection) ? logoCollection : [];
           core.debug(`Logos: ${JSON.stringify(logos, null, 2)}`);
+
+          // Empty dir before copying
+          if (fs.existsSync(process.env.LOGOS_DIR)) {
+            core.info(`Emptying logos directory: ${process.env.LOGOS_DIR}`);
+            await io.rmRF(process.env.LOGOS_DIR);
+          }
+
           for (const logo of logos) {
             await copyAsset(getDisplayName(logo.name), logo.path, process.env.LOGOS_DIR);
+          }
+
+          // Empty dir before copying
+          if (fs.existsSync(process.env.MASCOT_DIR)) {
+            core.info(`Emptying mascot directory: ${process.env.MASCOT_DIR}`);
+            await io.rmRF(process.env.MASCOT_DIR);
           }
 
           // Copy mascot
