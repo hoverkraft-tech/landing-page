@@ -3,7 +3,7 @@
 # GitHub Action: Generate Brand PDFs
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/b219c7d8f42294b5602596f129e9e1464598a322399038aa2e3982f75de31a09/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand PDFs" />
+  <img src="https://opengraph.githubassets.com/819ebf82beb005b1703274fae4b61acaaace4e1ac8a91d695a447f0bd8233625/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand PDFs" />
 </div>
 
 ---
