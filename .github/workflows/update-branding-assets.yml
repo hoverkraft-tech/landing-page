@@ -39,6 +39,7 @@ env:
   APPLICATION_DIR: application
   BRAND_DIR: application/src/data/brand
   BRAND_LOGO_DIR: application/public/brand/logo
+  BRAND_MASCOT_DIR: application/public/brand/mascot
   BRAND_DOWNLOADS_DIR: application/public/brand/downloads
   BRAND_LOGO_PACK_FILE: application/public/brand/downloads/hoverkraft-logos.zip
   BRAND_GUIDELINES_BASE_URL: http://localhost:4321
@@ -130,6 +131,7 @@ jobs:
           logos: ${{ steps.validate-manifest.outputs.logos }}
           mascot: ${{ steps.validate-manifest.outputs.mascot }}
           logos-dir: ${{ env.BRAND_LOGO_DIR }}
+          mascot-dir: ${{ env.BRAND_MASCOT_DIR }}
 
       - name: Generate brand content (mission, colors, typography, logos)
         uses: ./.github/actions/generate-brand-content
