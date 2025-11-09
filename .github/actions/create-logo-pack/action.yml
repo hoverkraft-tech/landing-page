@@ -39,16 +39,24 @@ runs:
           core.info(`✓ Found ${files.length} logos in ${logosDir}`);
 
           // Ensure output dir exists
-          const outputDir = require('path').dirname(process.env.OUTPUT_FILE);
+          const outputFile = path.resolve(process.env.OUTPUT_FILE);
+          core.debug(`Output file resolved to: ${outputFile}`);
+
+          const outputDir = require('path').dirname(outputFile);
           await io.mkdirP(outputDir);
           core.info(`✓ Ensured output directory exists: ${outputDir}`);
+
+          // Define filename (relative to logo dir)
+          const relativeOutputFile = path.relative(logosDir, outputFile);
+          core.setOutput('relative-output-file', relativeOutputFile);
+          core.debug(`Relative output file: ${relativeOutputFile}`);
 
     - name: Create logo pack using zip-release
       if: steps.verify.outputs.has-logos == 'true'
       uses: TheDoctor0/zip-release@b57d897cb5d60cb78b51a507f63fa184cfe35554 # v0.7.6
       with:
         type: "zip"
-        filename: "${{ inputs.output-file }}"
+        filename: "${{ steps.verify.outputs.relative-output-file }}"
         directory: "${{ inputs.logos-dir }}"
 
     - name: Verify ZIP created
