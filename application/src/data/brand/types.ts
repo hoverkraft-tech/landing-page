@@ -38,8 +38,7 @@ export interface TypographyCollection {
 
 export interface LogoAsset {
   name: LocalizedString;
-  path: string;
-  formats: string[];
+  formats: Record<string, string>;
   usage: LocalizedString;
 }
 
@@ -59,6 +58,6 @@ export interface BrandMission {
 
 export interface MascotAsset {
   name: LocalizedString;
-  path: string;
+  formats: Record<string, string>;
   usage: LocalizedString;
 }

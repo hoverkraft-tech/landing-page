@@ -4,7 +4,7 @@
  * Source: @hoverkraft-tech/branding
  * Version: 0.1.0
  * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
- * Generated: 2025-11-09T09:58:56.200Z
+ * Generated: 2025-11-09T17:28:17.175Z
  */
 
 import type { LogoCollection } from './types';
@@ -40,84 +40,55 @@ export const logos: LogoCollection = {
   },
   items: [
     {
-      formats: ['svg'],
+      formats: {
+        svg: 'logo/logo-text-dark.svg',
+        png: 'logo/logo-text-dark.png',
+      },
       name: {
         en: 'Text Logo Dark',
         fr: 'Logo texte sombre',
       },
-      path: 'logo/logo-text-dark.svg',
       usage: {
         en: 'Use on light backgrounds in most communications',
         fr: 'À utiliser sur fonds clairs pour la plupart des communications',
       },
     },
     {
-      formats: ['png'],
-      name: {
-        en: 'Text Logo Dark',
-        fr: 'Logo texte sombre',
+      formats: {
+        svg: 'logo/logo-text-light.svg',
+        png: 'logo/logo-text-light.png',
       },
-      path: 'logo/logo-text-dark.png',
-      usage: {
-        en: 'Use on light backgrounds in most communications',
-        fr: 'À utiliser sur fonds clairs pour la plupart des communications',
-      },
-    },
-    {
-      formats: ['svg'],
       name: {
         en: 'Text Logo Light',
         fr: 'Logo texte clair',
       },
-      path: 'logo/logo-text-light.svg',
       usage: {
         en: 'Use on dark backgrounds and dark mode interfaces',
         fr: 'À utiliser sur fonds sombres et interfaces en mode sombre',
       },
     },
     {
-      formats: ['png'],
-      name: {
-        en: 'Text Logo Light',
-        fr: 'Logo texte clair',
+      formats: {
+        svg: 'logo/logo-icon.svg',
+        png: 'logo/logo-icon.png',
       },
-      path: 'logo/logo-text-light.png',
-      usage: {
-        en: 'Use on dark backgrounds and dark mode interfaces',
-        fr: 'À utiliser sur fonds sombres et interfaces en mode sombre',
-      },
-    },
-    {
-      formats: ['svg'],
       name: {
         en: 'Pictogram Icon',
         fr: 'Icône pictogramme',
       },
-      path: 'logo/logo-icon.svg',
       usage: {
         en: 'Use for favicons, social profiles, and small spaces',
         fr: 'À utiliser pour les favicons, profils sociaux et petits espaces',
       },
     },
     {
-      formats: ['png'],
-      name: {
-        en: 'Pictogram Icon',
-        fr: 'Icône pictogramme',
+      formats: {
+        svg: 'logo/logo-project.svg',
       },
-      path: 'logo/logo-icon.png',
-      usage: {
-        en: 'Use for favicons, social profiles, and small spaces',
-        fr: 'À utiliser pour les favicons, profils sociaux et petits espaces',
-      },
-    },
-    {
-      formats: ['svg'],
       name: {
         en: 'Project Logo',
         fr: 'Logo projet',
       },
-      path: 'logo/logo-project.svg',
       usage: {
         en: 'Use for GitHub repositories and open source projects',
         fr: 'À utiliser pour les dépôts GitHub et les projets open source',
