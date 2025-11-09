@@ -1,19 +1,22 @@
 /**
- * Generated mascot asset from branding repository
- * Auto-generated file - DO NOT EDIT MANUALLY
- * Last updated: 2025-11-04
+ * Auto-generated mascot asset from branding repository
+ * DO NOT EDIT - This file is generated during the build process
+ * Source: @hoverkraft-tech/branding
+ * Version: 0.1.0
+ * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
+ * Generated: 2025-11-09T09:58:56.200Z
  */
 
 import type { MascotAsset } from './types';
 
 export const mascot: MascotAsset = {
-  name: {
-    fr: 'Hoverkraft le robot',
-    en: 'Hoverkraft the Robot',
+  "name": {
+    "en": "Hoverbuddy",
+    "fr": "Hoverbuddy"
   },
-  path: '/brand/mascot/hoverkraft-mascot.svg',
-  usage: {
-    fr: "Utilisez la mascotte pour illustrer l'approche produit et créer un lien empathique dans vos presentations.",
-    en: 'Use the mascot to illustrate our product mindset and add a friendly tone to presentations.',
-  },
+  "path": "mascot/mascot.png",
+  "usage": {
+    "en": "Use the mascot in marketing materials to reinforce brand identity.",
+    "fr": "Utiliser la mascotte dans les materiels marketing pour renforcer l identite de la marque.."
+  }
 };

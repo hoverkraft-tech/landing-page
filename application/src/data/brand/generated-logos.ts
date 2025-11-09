@@ -1,88 +1,141 @@
 /**
- * Generated logo assets from branding repository
- * Auto-generated file - DO NOT EDIT MANUALLY
- * Last updated: 2025-11-04
+ * Auto-generated logo assets from branding repository
+ * DO NOT EDIT - This file is generated during the build process
+ * Source: @hoverkraft-tech/branding
+ * Version: 0.1.0
+ * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
+ * Generated: 2025-11-09T09:58:56.200Z
  */
 
 import type { LogoCollection } from './types';
 
 export const logos: LogoCollection = {
-  do: {
-    fr: [
-      'Utilisez uniquement les versions officielles du logo, sans altération.',
-      'Maintenez un espace libre équivalent à la hauteur du H autour du logo.',
-      'Assurez une taille minimale de 120px de largeur pour préserver la lisibilité.',
-      'Sélectionnez la variante claire ou foncée selon le contraste du support.',
+  "do": {
+    "en": [
+      "Always use the official logo files provided",
+      "Maintain a minimum clear space equivalent to the height of the 'H' around the logo",
+      "Ensure the logo remains clearly visible and legible",
+      "Select the light or dark logo variant based on background contrast"
     ],
-    en: [
-      'Use only the approved logo files without altering proportions or colors.',
-      'Maintain clear space equal to the height of the H on every side of the mark.',
-      'Keep a minimum display width of 120px to guarantee legibility.',
-      'Choose the light or dark variant based on the background contrast.',
-    ],
+    "fr": [
+      "Toujours utiliser les fichiers de logo officiels fournis",
+      "Maintenir un espace de protection minimal égal à la hauteur du 'H' autour du logo",
+      "Garantir la visibilité et la lisibilité du logo",
+      "Choisir la variante claire ou sombre selon le contraste du fond"
+    ]
   },
-  dont: {
-    fr: [
-      "Ne déformez jamais le logo en l'étirant ou en le compressant.",
-      'Ne modifiez pas les couleurs officielles ou leurs proportions.',
-      "N'ajoutez pas d'effets, d'ombres ou de contours non validés.",
-      'Ne placez pas le logo sur des arrière-plans trop chargés ou à faible contraste.',
+  "dont": {
+    "en": [
+      "Do not distort, stretch, or modify the logo proportions",
+      "Do not apply effects, shadows, or gradients to the logo",
+      "Do not use unauthorized colors for the logo",
+      "Do not place the logo on complex backgrounds that reduce legibility"
     ],
-    en: [
-      'Do not stretch, squash, or rotate the logo in any way.',
-      'Avoid recoloring the logo or swapping the gradients and fills.',
-      'Skip dropshadows, outlines, or other unapproved effects.',
-      'Never place the logo directly on busy or low-contrast backgrounds.',
-    ],
+    "fr": [
+      "Ne pas déformer, étirer ou modifier les proportions du logo",
+      "Ne pas appliquer d'effets, d'ombres ou de dégradés au logo",
+      "Ne pas utiliser de couleurs non autorisées pour le logo",
+      "Ne pas placer le logo sur des fonds complexes réduisant la lisibilité"
+    ]
   },
-  items: [
+  "items": [
     {
-      name: {
-        fr: 'Logo principal',
-        en: 'Primary Logo',
+      "formats": [
+        "svg"
+      ],
+      "name": {
+        "en": "Text Logo Dark",
+        "fr": "Logo texte sombre"
       },
-      path: 'logo/primary.svg',
-      formats: ['SVG', 'PNG', 'PDF'],
-      usage: {
-        fr: 'Utiliser sur fond clair pour la plupart des supports. Minimum 32 px de hauteur. Espace de 0.5x autour du logo.',
-        en: 'Use on light backgrounds for most applications. Minimum 32 px height. 0.5x clear space around the logo.',
-      },
+      "path": "logo/logo-text-dark.svg",
+      "usage": {
+        "en": "Use on light backgrounds in most communications",
+        "fr": "À utiliser sur fonds clairs pour la plupart des communications"
+      }
     },
     {
-      name: {
-        fr: 'Logo principal (sombre)',
-        en: 'Primary Logo (Dark)',
+      "formats": [
+        "png"
+      ],
+      "name": {
+        "en": "Text Logo Dark",
+        "fr": "Logo texte sombre"
       },
-      path: 'logo/primary-dark.svg',
-      formats: ['SVG', 'PNG', 'PDF'],
-      usage: {
-        fr: 'Utiliser sur fond sombre ou pour des visuels haute-contraste. Minimum 32 px de hauteur. Espace de 0.5x autour du logo.',
-        en: 'Use on dark backgrounds or high-contrast visuals. Minimum 32 px height. 0.5x clear space around the logo.',
-      },
+      "path": "logo/logo-text-dark.png",
+      "usage": {
+        "en": "Use on light backgrounds in most communications",
+        "fr": "À utiliser sur fonds clairs pour la plupart des communications"
+      }
     },
     {
-      name: {
-        fr: 'Icône',
-        en: 'Icon',
+      "formats": [
+        "svg"
+      ],
+      "name": {
+        "en": "Text Logo Light",
+        "fr": "Logo texte clair"
       },
-      path: 'logo/icon.svg',
-      formats: ['SVG', 'PNG', 'ICO'],
-      usage: {
-        fr: 'Utiliser pour les avatars et favicons. Minimum 24 px de hauteur. Espace de 0.5x autour de l icone.',
-        en: 'Use for avatars and favicons. Minimum 24 px height. 0.5x clear space around the icon.',
-      },
+      "path": "logo/logo-text-light.svg",
+      "usage": {
+        "en": "Use on dark backgrounds and dark mode interfaces",
+        "fr": "À utiliser sur fonds sombres et interfaces en mode sombre"
+      }
     },
     {
-      name: {
-        fr: 'Logotype',
-        en: 'Wordmark',
+      "formats": [
+        "png"
+      ],
+      "name": {
+        "en": "Text Logo Light",
+        "fr": "Logo texte clair"
       },
-      path: 'logo/wordmark.svg',
-      formats: ['SVG', 'PNG'],
-      usage: {
-        fr: 'Utiliser dans les compositions editoriales ou horizontales. Minimum 140 px de largeur. Respecter 0.5x d espace libre.',
-        en: 'Use in editorial or horizontal compositions. Minimum 140 px width. Maintain 0.5x clear space.',
-      },
+      "path": "logo/logo-text-light.png",
+      "usage": {
+        "en": "Use on dark backgrounds and dark mode interfaces",
+        "fr": "À utiliser sur fonds sombres et interfaces en mode sombre"
+      }
     },
-  ],
+    {
+      "formats": [
+        "svg"
+      ],
+      "name": {
+        "en": "Pictogram Icon",
+        "fr": "Icône pictogramme"
+      },
+      "path": "logo/logo-icon.svg",
+      "usage": {
+        "en": "Use for favicons, social profiles, and small spaces",
+        "fr": "À utiliser pour les favicons, profils sociaux et petits espaces"
+      }
+    },
+    {
+      "formats": [
+        "png"
+      ],
+      "name": {
+        "en": "Pictogram Icon",
+        "fr": "Icône pictogramme"
+      },
+      "path": "logo/logo-icon.png",
+      "usage": {
+        "en": "Use for favicons, social profiles, and small spaces",
+        "fr": "À utiliser pour les favicons, profils sociaux et petits espaces"
+      }
+    },
+    {
+      "formats": [
+        "svg"
+      ],
+      "name": {
+        "en": "Project Logo",
+        "fr": "Logo projet"
+      },
+      "path": "logo/logo-project.svg",
+      "usage": {
+        "en": "Use for GitHub repositories and open source projects",
+        "fr": "À utiliser pour les dépôts GitHub et les projets open source"
+      }
+    }
+  ]
 };
