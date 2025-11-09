@@ -4,7 +4,7 @@
  * Source: @hoverkraft-tech/branding
  * Version: 0.1.0
  * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
- * Generated: 2025-11-09T09:58:56.200Z
+ * Generated: 2025-11-09T17:28:17.175Z
  */
 
 import type { LogoCollection } from './types';
@@ -13,13 +13,13 @@ export const logos: LogoCollection = {
   do: {
     en: [
       'Always use the official logo files provided',
-      "Maintain a minimum clear space equivalent to the height of the 'H' around the logo",
+      'Maintain a minimum clear space equivalent to the height of the \'H\' around the logo',
       'Ensure the logo remains clearly visible and legible',
       'Select the light or dark logo variant based on background contrast',
     ],
     fr: [
       'Toujours utiliser les fichiers de logo officiels fournis',
-      "Maintenir un espace de protection minimal égal à la hauteur du 'H' autour du logo",
+      'Maintenir un espace de protection minimal égal à la hauteur du \'H\' autour du logo',
       'Garantir la visibilité et la lisibilité du logo',
       'Choisir la variante claire ou sombre selon le contraste du fond',
     ],
@@ -33,7 +33,7 @@ export const logos: LogoCollection = {
     ],
     fr: [
       'Ne pas déformer, étirer ou modifier les proportions du logo',
-      "Ne pas appliquer d'effets, d'ombres ou de dégradés au logo",
+      'Ne pas appliquer d\'effets, d\'ombres ou de dégradés au logo',
       'Ne pas utiliser de couleurs non autorisées pour le logo',
       'Ne pas placer le logo sur des fonds complexes réduisant la lisibilité',
     ],
