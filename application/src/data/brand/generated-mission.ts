@@ -1,18 +1,21 @@
 /**
- * Generated brand mission from branding repository
- * Auto-generated file - DO NOT EDIT MANUALLY
- * Last updated: 2025-11-04
+ * Auto-generated brand mission from branding repository
+ * DO NOT EDIT - This file is generated during the build process
+ * Source: @hoverkraft-tech/branding
+ * Version: 0.1.0
+ * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
+ * Generated: 2025-11-09T09:58:56.200Z
  */
 
 import type { BrandMission } from './types';
 
 export const brandMission: BrandMission = {
-  title: {
-    fr: 'Notre mission',
-    en: 'Our Mission',
+  "description": {
+    "en": "Hoverkraft revolutionizes cloud development by making technology accessible, intelligent, and collaborative. We create tools that simplify complex workflows and enable teams to focus on innovation.",
+    "fr": "Hoverkraft révolutionne le développement cloud en rendant la technologie accessible, intelligente et collaborative. Nous créons des outils qui simplifient les workflows complexes et permettent aux équipes de se concentrer sur l'innovation."
   },
-  description: {
-    fr: "Libérer les développeurs et accélérer le time-to-market grâce à une méthodologie Platform Engineering orientée connecteurs, ancrée dans l'open source et adaptée aux réalités des PME et ETI françaises.",
-    en: 'Empower engineering teams and speed up time-to-market with a connector-driven Platform Engineering methodology, rooted in open source and tailored to the realities of French SMB and mid-market companies.',
-  },
+  "title": {
+    "en": "Our Mission",
+    "fr": "Notre mission"
+  }
 };

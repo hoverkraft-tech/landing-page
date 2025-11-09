@@ -1,112 +1,147 @@
 /**
- * Generated brand colors from branding repository
- * Auto-generated file - DO NOT EDIT MANUALLY
- * Last updated: 2025-11-04
+ * Auto-generated brand colors from branding repository
+ * DO NOT EDIT - This file is generated during the build process
+ * Source: @hoverkraft-tech/branding
+ * Version: 0.1.0
+ * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
+ * Generated: 2025-11-09T09:58:56.200Z
  */
 
 import type { ColorCollection } from './types';
 
 export const brandColors: ColorCollection = {
-  do: {
-    fr: [
-      'Respectez les codes HEX et RGB fournis pour chaque teinte.',
-      "Assurez un contraste suffisant afin de respecter les critères d'accessibilité.",
-      'Utilisez les couleurs secondaires pour compléter la palette sur le print et le digital.',
-      'Ajustez les nuances avec modération pour conserver la hiérarchie visuelle.',
+  "do": {
+    "en": [
+      "Use the exact brand colors specified in the palette",
+      "Maintain sufficient contrast for accessibility (WCAG AA minimum)",
+      "Use colors consistently across all materials"
     ],
-    en: [
-      'Apply the official HEX and RGB values for each brand color.',
-      'Maintain sufficient contrast to meet accessibility requirements.',
-      'Use secondary shades to support the primary palette across print and web.',
-      'Tune accent colors carefully so the visual hierarchy stays clear.',
-    ],
+    "fr": [
+      "Utiliser exactement les couleurs de la palette de marque",
+      "Maintenir un contraste suffisant pour l'accessibilité (WCAG AA minimum)",
+      "Employer les couleurs de manière cohérente sur tous les supports"
+    ]
   },
-  dont: {
-    fr: [
-      "N'introduisez pas de nouvelles couleurs sans validation de l'équipe marque.",
-      'Ne combinez pas plus de trois teintes principales dans une même composition.',
-      'Ne diminuez pas le contraste du bleu primaire sur des fonds similaires.',
-      "N'oubliez pas d'appliquer les codes couleur sur les supports externes.",
+  "dont": {
+    "en": [
+      "Do not use variations or tints of the brand colors",
+      "Do not use unapproved colors as primary colors",
+      "Do not compromise readability for aesthetic choices"
     ],
-    en: [
-      'Do not introduce new colors without approval from the brand team.',
-      'Avoid combining more than three primary tones in the same layout.',
-      'Do not place the primary blue on backgrounds with similar luminosity.',
-      'Never ignore the color specifications when working with external vendors.',
-    ],
+    "fr": [
+      "Ne pas utiliser de variations ou de nuances des couleurs de la marque",
+      "Ne pas utiliser des couleurs non approuvées comme couleurs principales",
+      "Ne pas sacrifier la lisibilité au profit de considérations esthétiques"
+    ]
   },
-  items: [
+  "items": [
     {
-      name: {
-        fr: 'Bleu principal',
-        en: 'Primary Blue',
+      "hex": "#1D2026",
+      "name": {
+        "en": "Primary",
+        "fr": "Principale"
       },
-      hex: '#1E88E5',
-      rgb: '30, 136, 229',
-      usage: {
-        fr: 'Couleur principale de la marque pour les CTA, boutons et elements clefs de l interface',
-        en: 'Primary brand color for main CTAs, buttons, and key UI elements',
-      },
+      "rgb": "29, 32, 38",
+      "usage": {
+        "en": "Primary brand color for text, headers, and main UI elements",
+        "fr": "Couleur principale pour le texte, les en-têtes et les éléments d'interface majeurs"
+      }
     },
     {
-      name: {
-        fr: 'Bleu secondaire',
-        en: 'Secondary Blue',
+      "hex": "#1998FF",
+      "name": {
+        "en": "Secondary",
+        "fr": "Secondaire"
       },
-      hex: '#1565C0',
-      rgb: '21, 101, 192',
-      usage: {
-        fr: 'Couleur secondaire pour les etats hover et les accents visuels',
-        en: 'Secondary brand color for hover states and accents',
-      },
+      "rgb": "25, 152, 255",
+      "usage": {
+        "en": "Secondary brand color for links, interactive elements, and accents",
+        "fr": "Couleur secondaire pour les liens, éléments interactifs et accents"
+      }
     },
     {
-      name: {
-        fr: 'Bleu clair',
-        en: 'Light Blue',
+      "hex": "#FF5A02",
+      "name": {
+        "en": "Accent",
+        "fr": "Accent"
       },
-      hex: '#42A5F5',
-      rgb: '66, 165, 245',
-      usage: {
-        fr: 'Variante claire pour les fonds et les rehauts subtils',
-        en: 'Light variant for backgrounds and subtle highlights',
-      },
+      "rgb": "255, 90, 2",
+      "usage": {
+        "en": "Accent color for call-to-action buttons and highlights",
+        "fr": "Couleur d'accent pour les boutons d'appel à l'action et les mises en avant"
+      }
     },
     {
-      name: {
-        fr: 'Bleu fonce',
-        en: 'Dark Blue',
+      "hex": "#00B3FF",
+      "name": {
+        "en": "Info",
+        "fr": "Information"
       },
-      hex: '#0D47A1',
-      rgb: '13, 71, 161',
-      usage: {
-        fr: 'Variante foncee pour les textes sur fonds clairs',
-        en: 'Dark variant for text on light backgrounds',
-      },
+      "rgb": "0, 179, 255",
+      "usage": {
+        "en": "Informational messages and informative UI elements",
+        "fr": "Messages d'information et éléments d'interface informatifs"
+      }
     },
     {
-      name: {
-        fr: 'Gris neutre',
-        en: 'Neutral Gray',
+      "hex": "#FFE671",
+      "name": {
+        "en": "Warning",
+        "fr": "Avertissement"
       },
-      hex: '#78909C',
-      rgb: '120, 144, 156',
-      usage: {
-        fr: 'Couleur neutre pour les textes secondaires et les bordures',
-        en: 'Neutral color for secondary text and borders',
-      },
+      "rgb": "255, 230, 113",
+      "usage": {
+        "en": "Warning messages and cautionary indicators",
+        "fr": "Messages d'avertissement et indicateurs de prudence"
+      }
     },
     {
-      name: {
-        fr: 'Vert succes',
-        en: 'Success Green',
+      "hex": "#FF696D",
+      "name": {
+        "en": "Danger",
+        "fr": "Danger"
       },
-      hex: '#43A047',
-      rgb: '67, 160, 71',
-      usage: {
-        fr: 'Couleur de succes pour les confirmations et retours positifs',
-        en: 'Success states and positive feedback',
-      },
+      "rgb": "255, 105, 109",
+      "usage": {
+        "en": "Error messages and critical alerts",
+        "fr": "Messages d'erreur et alertes critiques"
+      }
     },
-  ],
+    {
+      "hex": "#00D663",
+      "name": {
+        "en": "Success",
+        "fr": "Succès"
+      },
+      "rgb": "0, 214, 99",
+      "usage": {
+        "en": "Success messages and positive feedback",
+        "fr": "Messages de succès et retours positifs"
+      }
+    },
+    {
+      "hex": "#506690",
+      "name": {
+        "en": "Neutral Light",
+        "fr": "Neutre clair"
+      },
+      "rgb": "80, 102, 144",
+      "usage": {
+        "en": "Light theme backgrounds and secondary text",
+        "fr": "Fonds clairs et texte secondaire pour le thème clair"
+      }
+    },
+    {
+      "hex": "#000000",
+      "name": {
+        "en": "Neutral Dark",
+        "fr": "Neutre foncé"
+      },
+      "rgb": "0, 0, 0",
+      "usage": {
+        "en": "Dark theme backgrounds and high contrast text",
+        "fr": "Fonds sombres et texte à fort contraste"
+      }
+    }
+  ]
 };
