@@ -151,17 +151,6 @@ jobs:
           logos-dir: ${{ env.BRAND_LOGO_DIR }}
           output-file: ${{ env.BRAND_LOGO_PACK_FILE }}
 
-      - name: Generate brand guidelines PDFs
-        id: generate-brand-pdfs
-        uses: ./.github/actions/generate-brand-pdfs
-        with:
-          locales: ${{ steps.validate-manifest.outputs.locales }}
-          default-slug: ${{ env.BRAND_GUIDELINES_DEFAULT_SLUG }}
-          routes-file: ${{ env.BRAND_GUIDELINES_ROUTES_FILE }}
-          base-url: ${{ env.BRAND_GUIDELINES_BASE_URL }}
-          downloads-dir: ${{ env.BRAND_DOWNLOADS_DIR }}
-          working-directory: ${{ env.APPLICATION_DIR }}
-
       - name: Create pull request with updated assets
         uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@5f11437c716059f30c635f90055060e4ef8b31a0 # 0.28.0
         with:
