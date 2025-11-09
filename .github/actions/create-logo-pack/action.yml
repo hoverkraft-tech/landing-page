@@ -33,6 +33,11 @@ runs:
           }
 
           core.setOutput('has-logos', 'true');
+
+          // Ensure output dir exists
+          const outputDir = require('path').dirname(process.env.OUTPUT_FILE);
+          await io.mkdirP(outputDir);
+
           core.info(`✓ Found ${files.length} logos in ${logosDir}`);
       env:
         LOGOS_DIR: ${{ inputs.logos-dir }}
@@ -44,7 +49,6 @@ runs:
         type: "zip"
         filename: "${{ inputs.output-file }}"
         directory: "${{ inputs.logos-dir }}"
-        path: "."
 
     - name: Verify ZIP created
       if: steps.verify.outputs.has-logos == 'true'
