@@ -37,7 +37,7 @@ export interface TypographyCollection {
 }
 
 export interface LogoAsset {
-  name: string;
+  name: LocalizedString;
   path: string;
   formats: string[];
   usage: LocalizedString;

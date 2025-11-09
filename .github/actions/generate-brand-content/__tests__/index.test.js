@@ -37,7 +37,16 @@ describe("generate-brand-content run", () => {
         ],
       }),
       brandMission: JSON.stringify({ statement: "Empower builders" }),
-      logos: JSON.stringify({ items: [{ id: "primary", format: "svg" }] }),
+      logos: JSON.stringify({
+        items: [
+          {
+            name: { fr: "Logo principal", en: "Primary Logo" },
+            path: "logos/primary.svg",
+            formats: ["svg"],
+            usage: { fr: "Utilisation", en: "Usage" },
+          },
+        ],
+      }),
       mascot: JSON.stringify({
         name: { fr: "Mascotte", en: "Mascot" },
         path: "logo/mascot.svg",

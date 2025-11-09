@@ -37,8 +37,11 @@ export const logos: LogoCollection = {
   },
   items: [
     {
-      name: 'Primary Logo',
-      path: '/brand/logos/primary.svg',
+      name: {
+        fr: 'Logo principal',
+        en: 'Primary Logo',
+      },
+      path: 'logo/primary.svg',
       formats: ['SVG', 'PNG', 'PDF'],
       usage: {
         fr: 'Utiliser sur fond clair pour la plupart des supports. Minimum 32 px de hauteur. Espace de 0.5x autour du logo.',
@@ -46,8 +49,11 @@ export const logos: LogoCollection = {
       },
     },
     {
-      name: 'Primary Logo (Dark)',
-      path: '/brand/logos/primary-dark.svg',
+      name: {
+        fr: 'Logo principal (sombre)',
+        en: 'Primary Logo (Dark)',
+      },
+      path: 'logo/primary-dark.svg',
       formats: ['SVG', 'PNG', 'PDF'],
       usage: {
         fr: 'Utiliser sur fond sombre ou pour des visuels haute-contraste. Minimum 32 px de hauteur. Espace de 0.5x autour du logo.',
@@ -55,8 +61,11 @@ export const logos: LogoCollection = {
       },
     },
     {
-      name: 'Icon',
-      path: '/brand/logos/icon.svg',
+      name: {
+        fr: 'Icône',
+        en: 'Icon',
+      },
+      path: 'logo/icon.svg',
       formats: ['SVG', 'PNG', 'ICO'],
       usage: {
         fr: 'Utiliser pour les avatars et favicons. Minimum 24 px de hauteur. Espace de 0.5x autour de l icone.',
@@ -64,8 +73,11 @@ export const logos: LogoCollection = {
       },
     },
     {
-      name: 'Wordmark',
-      path: '/brand/logos/wordmark.svg',
+      name: {
+        fr: 'Logotype',
+        en: 'Wordmark',
+      },
+      path: 'logo/wordmark.svg',
       formats: ['SVG', 'PNG'],
       usage: {
         fr: 'Utiliser dans les compositions editoriales ou horizontales. Minimum 140 px de largeur. Respecter 0.5x d espace libre.',

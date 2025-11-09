@@ -64,18 +64,22 @@ runs:
           const logos = Array.isArray(logoCollection.items) ? logoCollection.items : Array.isArray(logoCollection) ? logoCollection : [];
           core.debug(`Logos: ${JSON.stringify(logos, null, 2)}`);
           for (const logo of logos) {
-            await copyAsset(logo.name, logo.path, process.env.LOGOS_DIR);
+            await copyAsset(getDisplayName(logo.name), logo.path, process.env.LOGOS_DIR);
           }
 
           // Copy mascot
           const mascot = JSON.parse(process.env.MASCOT_INPUT);
-          await copyAsset(mascot.name, mascot.path, process.env.MASCOT_DIR);
+          await copyAsset(getDisplayName(mascot.name), mascot.path, process.env.MASCOT_DIR);
 
           core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
 
           async function copyAsset(name, source, targetRootDir) {
             if (!source) {
               return core.setFailed(`Asset path is missing for asset "${name}": ${source}`);
+            }
+
+            if (!targetRootDir ) {
+              return core.setFailed(`Target directory is not defined for asset "${name}".`);
             }
 
             const baseFolder = path.basename(targetRootDir);
@@ -86,7 +90,7 @@ runs:
             const sourcePath = path.join(process.env.DOWNLOADED_PATH, source);
 
             if (fs.existsSync(sourcePath)) {
-              const targetPath = path.join(targetRootDir, name.replace(`${baseFolder}/`, ''));
+              const targetPath = path.join(targetRootDir, source.replace(`${baseFolder}/`, ''));
               const targetDir = path.dirname(targetPath);
               core.info(`Copying asset "${name}" from "${sourcePath}" to "${targetPath}"`);
               await io.mkdirP(targetDir);
@@ -95,4 +99,15 @@ runs:
             } else {
               throw new Error(`Asset file not found for asset "${name}": ${sourcePath}`);
             }
+          }
+
+          function getDisplayName(name) {
+            if (typeof name === 'string') {
+              return name;
+            }
+
+            if (name && typeof name === 'object') {
+              return getDisplayName(name.en);
+            }
+            return 'unknown asset';
           }

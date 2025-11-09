@@ -242,9 +242,17 @@
       "additionalProperties": false,
       "properties": {
         "name": {
-          "type": "string",
-          "description": "Descriptive name of the logo variant",
-          "examples": ["Primary Logo"]
+          "allOf": [
+            { "$ref": "#/definitions/localizedString" },
+            {
+              "type": "object",
+              "description": "Localized name of the logo variant",
+              "properties": {
+                "fr": { "examples": ["Logo principal"] },
+                "en": { "examples": ["Primary Logo"] }
+              }
+            }
+          ]
         },
         "path": {
           "type": "string",
