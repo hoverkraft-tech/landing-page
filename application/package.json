@@ -9,9 +9,9 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev --host",
-    "prebuild": "node ./scripts/download-assets.mjs prepare",
+    "prebuild": "node ./scripts/generate-downloadable-assets/index.mjs prepare",
     "build": "astro check && astro build",
-    "postbuild": "node ./scripts/download-assets.mjs finalize",
+    "postbuild": "node ./scripts/generate-downloadable-assets/index.mjs finalize",
     "preview": "astro preview",
     "astro": "ASTRO_TELEMETRY_DISABLED=1 astro",
     "format": "prettier -w .",

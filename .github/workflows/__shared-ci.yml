@@ -16,7 +16,6 @@ jobs:
       matrix:
         working-directory:
           - .github/actions/generate-brand-content
-          - .github/actions/generate-brand-pdfs
           - .github/actions/validate-manifest
     with:
       working-directory: ${{ matrix.working-directory }}

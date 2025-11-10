@@ -1,6 +1,7 @@
 ---
 import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
+import { getAsset } from '~/utils/permalinks';
+import { getBrandAssetMetadata, getBrandDownloadLabel } from '~/utils/brand-assets';
 import type { BrandLocale, MascotAsset } from '~/data/brand/tokens';
 
 interface Props {
@@ -17,11 +18,7 @@ const localizedName = mascot?.name?.[lang] ?? mascot?.name?.fr ?? mascot?.name?.
 const localizedUsage = mascot?.usage?.[lang] ?? mascot?.usage?.fr ?? mascot?.usage?.en ?? '';
 const mascotFormats = Object.entries(mascot?.formats ?? {});
 const readableMascotName = localizedName || title || 'Mascot asset';
-const downloadLinkLabelByLocale: Record<BrandLocale, string> = {
-  en: 'Download',
-  fr: 'Télécharger',
-};
-const downloadLinkLabel = downloadLinkLabelByLocale[lang] ?? downloadLinkLabelByLocale.en;
+const downloadLinkLabel = getBrandDownloadLabel(lang);
 
 if (!mascotFormats.length) {
   throw new Error(`Mascot "${readableMascotName}" must define at least one format.`);
@@ -35,31 +32,10 @@ if (typeof primaryPathRaw !== 'string' || primaryPathRaw.length === 0) {
   );
 }
 
-const mascotAssetModules = import.meta.glob<ImageMetadata>('~/assets/images/brand/**/*.{png,svg,webp}', {
-  eager: true,
-  import: 'default',
-});
-
-const mascotAssetMap = new Map<string, ImageMetadata>();
-
-for (const [fullPath, metadata] of Object.entries(mascotAssetModules)) {
-  const normalizedPath = fullPath.split('/assets/images/brand/')[1];
-
-  if (normalizedPath && metadata) {
-    mascotAssetMap.set(normalizedPath, metadata);
-  }
-}
-
-const normalizeAssetPath = (rawPath: string) => rawPath.replace(/^\.\//, '').replace(/^\//, '');
-const normalizedPrimaryPath = normalizeAssetPath(primaryPathRaw);
-const mascotAssetMetadata = mascotAssetMap.get(normalizedPrimaryPath);
-
-if (!mascotAssetMetadata) {
-  throw new Error(
-    `Mascot "${readableMascotName}" asset file "${primaryPathRaw}" was not found under assets/images/brand.`
-  );
-}
-
+const mascotAssetMetadata = getBrandAssetMetadata(
+  primaryPathRaw,
+  `Mascot "${readableMascotName}" primary format "${primaryFormat ?? 'unknown'}"`
+);
 const mascotAsset = mascotAssetMetadata;
 
 const mascotDownloads = mascotFormats.map(([format, path]) => {
@@ -67,12 +43,12 @@ const mascotDownloads = mascotFormats.map(([format, path]) => {
     throw new Error(`Mascot "${readableMascotName}" format "${format}" is missing a valid asset path.`);
   }
 
-  const normalizedPath = normalizeAssetPath(path);
+  const formatMetadata = getBrandAssetMetadata(path, `Mascot "${readableMascotName}" format "${format}"`);
   const uppercaseFormat = format.toUpperCase();
 
   return {
     format,
-    href: `/${normalizedPath}`,
+    href: getAsset(formatMetadata.src),
     text: `${downloadLinkLabel} ${uppercaseFormat}`.trim(),
     ariaLabel: `${downloadLinkLabel} ${readableMascotName} (${uppercaseFormat})`,
   };

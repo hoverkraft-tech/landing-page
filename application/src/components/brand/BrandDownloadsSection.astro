@@ -1,13 +1,23 @@
 ---
+import { defaultLang } from '~/i18n/ui';
+import { getAsset } from '~/utils/permalinks';
+
 interface Props {
   title: string;
   subheading: string;
   description: string;
   logosCta: string;
   guideCta: string;
+  lang?: string;
 }
 
-const { title, subheading, description, logosCta, guideCta } = Astro.props as Props;
+const { title, subheading, description, logosCta, guideCta, lang: providedLang } = Astro.props as Props;
+const activeLang =
+  typeof providedLang === 'string' && providedLang.trim().length > 0 ? providedLang.trim() : defaultLang;
+const logosHref = getAsset('/brand/downloads/hoverkraft-logos.zip');
+const guideFilename =
+  activeLang === defaultLang ? 'hoverkraft-brand-guidelines.pdf' : `hoverkraft-brand-guidelines-${activeLang}.pdf`;
+const guideHref = getAsset(`/brand/downloads/${guideFilename}`);
 ---
 
 <div class="mb-16">
@@ -17,7 +27,7 @@ const { title, subheading, description, logosCta, guideCta } = Astro.props as Pr
     <p class="text-gray-700 dark:text-gray-300 mb-6">{description}</p>
     <div class="grid md:grid-cols-2 gap-4">
       <a
-        href="/brand/downloads/hoverkraft-logos.zip"
+        href={logosHref}
         download
         class="inline-flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-lg font-medium transition-colors"
       >
@@ -31,7 +41,7 @@ const { title, subheading, description, logosCta, guideCta } = Astro.props as Pr
         {logosCta}
       </a>
       <a
-        href="/brand/downloads/hoverkraft-brand-guidelines.pdf"
+        href={guideHref}
         download
         class="inline-flex items-center justify-center px-6 py-3 bg-gray-200 hover:bg-gray-300 dark:bg-gray-700 dark:hover:bg-gray-600 text-gray-900 dark:text-white rounded-lg font-medium transition-colors"
       >

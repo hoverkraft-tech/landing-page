@@ -11,7 +11,6 @@ include .env
 prepare: ## Prepare stack to run
 	cd application && npm install
 	cd .github/actions/generate-brand-content && npm install
-	cd .github/actions/generate-brand-pdfs && npm install
 	cd .github/actions/validate-manifest && npm install
 
 start: ## Start application in dev mode
@@ -32,7 +31,6 @@ build: ## Build libs and applications
 test: ## Run tests
 	cd application && npm run test:ci
 	cd .github/actions/generate-brand-content && npm run test:ci
-	cd .github/actions/generate-brand-pdfs && npm run test:ci
 	cd .github/actions/validate-manifest && npm run test:ci
 
 ci: ## Run tests in CI mode

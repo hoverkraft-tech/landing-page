@@ -1,7 +1,8 @@
 ---
 import { Image } from 'astro:assets';
-import type { ImageMetadata } from 'astro';
 import BrandGuidelinesChecklist from './BrandGuidelinesChecklist.astro';
+import { getAsset } from '~/utils/permalinks';
+import { getBrandAssetMetadata, getBrandDownloadLabel } from '~/utils/brand-assets';
 import type { BrandLocale, LogoCollection } from '~/data/brand/tokens';
 
 interface Props {
@@ -12,33 +13,11 @@ interface Props {
   doLabel: string;
   dontLabel: string;
 }
-
 const { lang, logos, title, formatsLabel, doLabel, dontLabel } = Astro.props as Props;
 const logoItems = logos.items ?? [];
 const logoDo = logos.do?.[lang] ?? [];
 const logoDont = logos.dont?.[lang] ?? [];
-const downloadLinkLabelByLocale: Record<BrandLocale, string> = {
-  en: 'Download',
-  fr: 'Télécharger',
-};
-const downloadLinkLabel = downloadLinkLabelByLocale[lang] ?? downloadLinkLabelByLocale.en;
-
-const logoAssetModules = import.meta.glob<ImageMetadata>('~/assets/images/brand/**/*.{png,svg,webp}', {
-  eager: true,
-  import: 'default',
-});
-
-const logoAssetMap = new Map<string, ImageMetadata>();
-
-for (const [fullPath, metadata] of Object.entries(logoAssetModules)) {
-  const normalizedPath = fullPath.split('/assets/images/brand/')[1];
-
-  if (normalizedPath && metadata) {
-    logoAssetMap.set(normalizedPath, metadata);
-  }
-}
-
-const normalizeAssetPath = (rawPath: string) => rawPath.replace(/^\.\//, '').replace(/^\//, '');
+const downloadLinkLabel = getBrandDownloadLabel(lang);
 
 const resolvedLogos = logoItems.map((logo) => {
   const localizedName = logo.name?.[lang] ?? logo.name?.fr ?? logo.name?.en ?? 'Logo asset';
@@ -57,24 +36,23 @@ const resolvedLogos = logoItems.map((logo) => {
     );
   }
 
-  const normalizedPrimaryPath = normalizeAssetPath(primaryPathRaw);
-  const assetMetadata = logoAssetMap.get(normalizedPrimaryPath);
-
-  if (!assetMetadata) {
-    throw new Error(`Logo "${localizedName}" asset file "${primaryPathRaw}" was not found under assets/images/brand.`);
-  }
+  const assetMetadata = getBrandAssetMetadata(
+    primaryPathRaw,
+    `Logo "${localizedName}" primary format "${primaryFormat ?? 'unknown'}"`
+  );
 
   const downloads = formatEntries.map(([format, path]) => {
     if (typeof path !== 'string' || path.length === 0) {
       throw new Error(`Logo "${localizedName}" format "${format}" is missing a valid asset path.`);
     }
 
-    const normalizedPath = normalizeAssetPath(path);
+    const formatMetadata = getBrandAssetMetadata(path, `Logo "${localizedName}" format "${format}"`);
     const uppercaseFormat = format.toUpperCase();
+    const href = getAsset(formatMetadata.src);
 
     return {
       format,
-      href: `/${normalizedPath}`,
+      href,
       text: `${downloadLinkLabel} ${uppercaseFormat}`.trim(),
       ariaLabel: `${downloadLinkLabel} ${localizedName} (${uppercaseFormat})`,
       formatLabel: uppercaseFormat,
