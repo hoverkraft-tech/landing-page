@@ -14,7 +14,9 @@ export const mascot: MascotAsset = {
     en: 'Hoverbuddy',
     fr: 'Hoverbuddy',
   },
-  path: 'mascot/mascot.png',
+  formats: {
+    png: 'mascot/mascot.png',
+  },
   usage: {
     en: 'Use the mascot in marketing materials to reinforce brand identity.',
     fr: 'Utiliser la mascotte dans les materiels marketing pour renforcer l identite de la marque..',

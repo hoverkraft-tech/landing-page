@@ -76,7 +76,7 @@
     "mascot": {
       "type": "object",
       "description": "Brand mascot asset metadata",
-      "required": ["name", "path", "usage"],
+      "required": ["name", "formats", "usage"],
       "additionalProperties": false,
       "properties": {
         "name": {
@@ -92,10 +92,19 @@
             }
           ]
         },
-        "path": {
-          "type": "string",
-          "description": "Relative path to the mascot file in the artifact",
-          "examples": ["mascot/mascot.png"]
+        "formats": {
+          "type": "object",
+          "description": "Map of mascot asset formats to their file paths",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string"
+          },
+          "examples": [
+            {
+              "webp": "mascot/mascot.webp",
+              "png": "mascot/mascot.png"
+            }
+          ]
         },
         "usage": {
           "allOf": [
@@ -238,7 +247,7 @@
     },
     "logoItem": {
       "type": "object",
-      "required": ["name", "path", "formats", "usage"],
+      "required": ["name", "formats", "usage"],
       "additionalProperties": false,
       "properties": {
         "name": {
@@ -254,18 +263,19 @@
             }
           ]
         },
-        "path": {
-          "type": "string",
-          "description": "Relative path to the logo file in the artifact",
-          "examples": ["logo/primary.svg"]
-        },
         "formats": {
-          "type": "array",
-          "description": "Available file formats for this logo variant",
-          "items": {
+          "type": "object",
+          "description": "Map of file formats to the corresponding logo file paths",
+          "minProperties": 1,
+          "additionalProperties": {
             "type": "string"
           },
-          "minItems": 1
+          "examples": [
+            {
+              "svg": "logo/primary.svg",
+              "png": "logo/primary.png"
+            }
+          ]
         },
         "usage": {
           "allOf": [
