@@ -3,7 +3,7 @@
 # GitHub Action: Create Logo Pack
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/36ed7872e7ca90713494d4c70c539de721bb2925675ecb1dddaa87b0abbaf2e3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Create Logo Pack" />
+  <img src="https://opengraph.githubassets.com/f19934ec17487e2f263511c514a3632e45d9400798fa24e007b475886f77206b/hoverkraft-tech/landing-page" width="60px" align="center" alt="Create Logo Pack" />
 </div>
 
 ---
