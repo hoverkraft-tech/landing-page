@@ -1,0 +1,52 @@
+---
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Widget } from '~/types';
+
+interface Props extends Widget {
+  title?: string;
+  subtitle?: string;
+  tagline?: string;
+  bookingUrl?: string;
+  description?: string;
+}
+
+const {
+  title = await Astro.slots.render('title'),
+  subtitle = await Astro.slots.render('subtitle'),
+  tagline = await Astro.slots.render('tagline'),
+  bookingUrl,
+  description,
+
+  id,
+  isDark = false,
+  classes = {},
+  bg = await Astro.slots.render('bg'),
+} = Astro.props;
+---
+
+<WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
+  <Headline title={title} subtitle={subtitle} tagline={tagline} />
+
+  {
+    bookingUrl && (
+      <div class="flex flex-col max-w-4xl mx-auto">
+        <div class="rounded-lg backdrop-blur border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow overflow-hidden">
+          <iframe
+            src={bookingUrl}
+            style="border: 0"
+            width="100%"
+            height="600"
+            title="Réservez un rendez-vous"
+            class="w-full"
+          />
+        </div>
+        {description && (
+          <div class="mt-4 text-center">
+            <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
+          </div>
+        )}
+      </div>
+    )
+  }
+</WidgetWrapper>
