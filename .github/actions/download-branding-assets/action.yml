@@ -71,7 +71,7 @@ runs:
           }
 
           for (const logo of logos) {
-            await copyAsset(getDisplayName(logo.name), logo.path, process.env.LOGOS_DIR);
+            await copyAssetFormats(logo.name, logo.formats, process.env.LOGOS_DIR);
           }
 
           // Empty dir before copying
@@ -82,11 +82,22 @@ runs:
 
           // Copy mascot
           const mascot = JSON.parse(process.env.MASCOT_INPUT);
-          await copyAsset(getDisplayName(mascot.name), mascot.path, process.env.MASCOT_DIR);
+          await copyAssetFormats(mascot.name, mascot.formats, process.env.MASCOT_DIR);
 
           core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
 
+          async function copyAssetFormats(name, formats, targetRootDir) {
+            if (!Array.isArray(formats)) {
+              return core.setFailed(`Formats is not an array for asset "${name}": ${formats}`);
+            }
+
+            for (const format of formats) {
+              await copyAsset(name, format.path, targetRootDir);
+            }
+          }
+
           async function copyAsset(name, source, targetRootDir) {
+            name = getDisplayName(name);
             if (!source) {
               return core.setFailed(`Asset path is missing for asset "${name}": ${source}`);
             }
