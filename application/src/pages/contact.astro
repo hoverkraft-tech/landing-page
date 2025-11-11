@@ -1,7 +1,7 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
+import BookingLink from '~/components/widgets/BookingLink.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import { SITE } from 'astrowind:config';
 
@@ -17,19 +17,12 @@ const contactEmail = SITE?.contactEmail ?? '';
 
   <HeroText tagline="Contact" title="Contactez notre équipe" />
 
-  <ContactUs
-    id="form"
-    title="Demandez une démo ou contactez les ventes"
-    subtitle="Parlez-nous de vos besoins et nous vous proposerons l'offre et les étapes suivantes."
-    inputs={[
-      { type: 'text', name: 'name', label: 'Nom complet' },
-      { type: 'email', name: 'email', label: 'Email professionnel' },
-      { type: 'text', name: 'company', label: 'Entreprise' },
-    ]}
-    textarea={{ label: 'Message / besoins' }}
-    disclaimer={{ label: 'Nous ne partagerons jamais vos données. Consultez notre politique de confidentialité.' }}
-    description="Notre équipe répond sous un jour ouvré. Pour une demande urgente, utilisez l’un des canaux ci-dessous."
-    button="Envoyer"
+  <BookingLink
+    id="booking"
+    title="Réservez un rendez-vous avec notre équipe"
+    subtitle="Choisissez un créneau qui vous convient pour échanger avec nous sur vos besoins."
+    bookingUrl="https://calendar.app.google/3t2J2Cu8FFtzoqoX8"
+    description="Notre équipe est disponible pour discuter de vos projets et répondre à vos questions. Pour une demande urgente, utilisez l'un des canaux ci-dessous."
   />
 
   <!-- Widget Features2 ************** -->
