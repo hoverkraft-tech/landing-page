@@ -18,7 +18,7 @@ export const brandColors: ColorCollection = {
     ],
     fr: [
       'Utiliser exactement les couleurs de la palette de marque',
-      'Maintenir un contraste suffisant pour l\'accessibilité (WCAG AA minimum)',
+      "Maintenir un contraste suffisant pour l'accessibilité (WCAG AA minimum)",
       'Employer les couleurs de manière cohérente sur tous les supports',
     ],
   },
@@ -44,7 +44,7 @@ export const brandColors: ColorCollection = {
       rgb: '29, 32, 38',
       usage: {
         en: 'Primary brand color for text, headers, and main UI elements',
-        fr: 'Couleur principale pour le texte, les en-têtes et les éléments d\'interface majeurs',
+        fr: "Couleur principale pour le texte, les en-têtes et les éléments d'interface majeurs",
       },
     },
     {
@@ -68,7 +68,7 @@ export const brandColors: ColorCollection = {
       rgb: '255, 90, 2',
       usage: {
         en: 'Accent color for call-to-action buttons and highlights',
-        fr: 'Couleur d\'accent pour les boutons d\'appel à l\'action et les mises en avant',
+        fr: "Couleur d'accent pour les boutons d'appel à l'action et les mises en avant",
       },
     },
     {
@@ -80,7 +80,7 @@ export const brandColors: ColorCollection = {
       rgb: '0, 179, 255',
       usage: {
         en: 'Informational messages and informative UI elements',
-        fr: 'Messages d\'information et éléments d\'interface informatifs',
+        fr: "Messages d'information et éléments d'interface informatifs",
       },
     },
     {
@@ -92,7 +92,7 @@ export const brandColors: ColorCollection = {
       rgb: '255, 230, 113',
       usage: {
         en: 'Warning messages and cautionary indicators',
-        fr: 'Messages d\'avertissement et indicateurs de prudence',
+        fr: "Messages d'avertissement et indicateurs de prudence",
       },
     },
     {
@@ -104,7 +104,7 @@ export const brandColors: ColorCollection = {
       rgb: '255, 105, 109',
       usage: {
         en: 'Error messages and critical alerts',
-        fr: 'Messages d\'erreur et alertes critiques',
+        fr: "Messages d'erreur et alertes critiques",
       },
     },
     {

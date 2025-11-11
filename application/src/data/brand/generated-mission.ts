@@ -12,7 +12,7 @@ import type { BrandMission } from './types';
 export const brandMission: BrandMission = {
   description: {
     en: 'Hoverkraft revolutionizes cloud development by making technology accessible, intelligent, and collaborative. We create tools that simplify complex workflows and enable teams to focus on innovation.',
-    fr: 'Hoverkraft révolutionne le développement cloud en rendant la technologie accessible, intelligente et collaborative. Nous créons des outils qui simplifient les workflows complexes et permettent aux équipes de se concentrer sur l\'innovation.',
+    fr: "Hoverkraft révolutionne le développement cloud en rendant la technologie accessible, intelligente et collaborative. Nous créons des outils qui simplifient les workflows complexes et permettent aux équipes de se concentrer sur l'innovation.",
   },
   title: {
     en: 'Our Mission',

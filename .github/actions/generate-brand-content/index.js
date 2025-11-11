@@ -137,12 +137,19 @@ ${indent}}`;
 }
 
 function formatString(value) {
-  const json = JSON.stringify(value);
-  let body = json.slice(1, -1);
-  body = body.replace(/(^|[^\\])\\"/g, (match, prefix) => `${prefix}"`);
-  body = body.replace(/'/g, "\\'");
+  // If the string contains a single quote, use double quotes to avoid escaping
+  if (value.includes("'")) {
+    return JSON.stringify(value);
+  }
 
-  return `'${body}'`;
+  // Otherwise, use single quotes (escape backslashes and control characters)
+  const escaped = value
+    .replace(/\\/g, "\\\\")
+    .replace(/\n/g, "\\n")
+    .replace(/\r/g, "\\r")
+    .replace(/\t/g, "\\t");
+
+  return `'${escaped}'`;
 }
 
 function formatPropertyKey(key) {
@@ -265,7 +272,7 @@ async function run({
 
     if (Array.isArray(file.payload?.items)) {
       core.info(
-        `✓ Generated ${file.filename} (${file.payload.items.length} items)`,
+        `✓ Generated ${file.filename} (${file.payload.items.length} items)`
       );
     } else {
       core.info(`✓ Generated ${file.filename}`);
