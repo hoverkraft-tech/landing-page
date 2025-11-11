@@ -3,10 +3,13 @@ import Layout from '~/layouts/PageLayout.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import BookingLink from '~/components/widgets/BookingLink.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import { SITE } from 'astrowind:config';
 
 const metadata = {
   title: 'Contact',
 };
+
+const bookingUrl = SITE?.bookingUrl ?? '';
 ---
 
 <Layout metadata={metadata}>
@@ -18,7 +21,7 @@ const metadata = {
     id="booking"
     title="Schedule a meeting with our team"
     subtitle="Choose a time that works for you to discuss your needs with us."
-    bookingUrl="https://calendar.app.google/3t2J2Cu8FFtzoqoX8"
+    bookingUrl={bookingUrl}
     description="Our team is available to discuss your projects and answer your questions. For urgent requests, please use one of the channels below."
   />
 

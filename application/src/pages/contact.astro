@@ -10,6 +10,7 @@ const metadata = {
 };
 
 const contactEmail = SITE?.contactEmail ?? '';
+const bookingUrl = SITE?.bookingUrl ?? '';
 ---
 
 <Layout metadata={metadata}>
@@ -21,7 +22,7 @@ const contactEmail = SITE?.contactEmail ?? '';
     id="booking"
     title="Réservez un rendez-vous avec notre équipe"
     subtitle="Choisissez un créneau qui vous convient pour échanger avec nous sur vos besoins."
-    bookingUrl="https://calendar.app.google/3t2J2Cu8FFtzoqoX8"
+    bookingUrl={bookingUrl}
     description="Notre équipe est disponible pour discuter de vos projets et répondre à vos questions. Pour une demande urgente, utilisez l'un des canaux ci-dessous."
   />
 

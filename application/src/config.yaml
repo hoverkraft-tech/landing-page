@@ -6,6 +6,7 @@ site:
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
   contactEmail: 'contact@hoverkraft.cloud'
+  bookingUrl: 'https://calendar.app.google/3t2J2Cu8FFtzoqoX8'
 
 # Default SEO metadata
 metadata:
