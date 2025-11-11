@@ -21,7 +21,7 @@ const typographyEntries = (Object.values(typography ?? {}) as TypographyToken[])
   <div class="grid md:grid-cols-2 gap-8">
     {
       typographyEntries.map((font) => (
-        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 pdf-break-avoid">
           <h3 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white" style={`font-family: "${font.family}"`}>
             {font.family}
           </h3>

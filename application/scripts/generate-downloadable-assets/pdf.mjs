@@ -4,6 +4,7 @@ import { distDir } from './paths.mjs';
 import { ensureDir } from './fs-utils.mjs';
 import { getSiteOrigin } from './config.mjs';
 import { startStaticServer } from './http-server.mjs';
+import { getPdfTransformSource } from './pdf-transform.mjs';
 
 async function generatePdf(routePath, outputFile) {
   const staticServer = await startStaticServer(distDir);
@@ -33,48 +34,79 @@ async function generatePdf(routePath, outputFile) {
         content: `body.pdf-export #header,
 body.pdf-export footer { display: none !important; }
 
-body.pdf-export section > * {
+body.pdf-export .pdf-break-avoid {
   break-inside: avoid;
   page-break-inside: avoid;
+  -webkit-column-break-inside: avoid;
 }
 
-body.pdf-export section > *:not(:last-child) {
-  break-after: page;
-  page-break-after: always;
+body.pdf-export .pdf-grid {
+  display: block;
+}
+
+body.pdf-export section {
+  margin-top: 1.5rem !important;
+  margin-bottom: 1.5rem !important;
+  padding-top: 1rem !important;
+  padding-bottom: 1rem !important;
+}
+
+body.pdf-export h2 {
+  margin-top: 1rem !important;
+  margin-bottom: 0.75rem !important;
+  font-size: 1.5rem !important;
+}
+
+body.pdf-export h3 {
+  margin-top: 0.75rem !important;
+  margin-bottom: 0.5rem !important;
+  font-size: 1.25rem !important;
+}
+
+body.pdf-export p {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.4 !important;
+}
+
+body.pdf-export ul, body.pdf-export ol {
+  margin-top: 0.5rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+body.pdf-export li {
+  margin-top: 0.25rem !important;
+  margin-bottom: 0.25rem !important;
+}
+
+body.pdf-export .grid {
+  gap: 0.75rem !important;
+}
+
+body.pdf-export img {
+  max-height: 200px !important;
+  max-width: 200px !important;
+  width: auto !important;
+  height: auto !important;
+  object-fit: contain !important;
 }
 `,
       });
-      await page.evaluate((origin) => {
-        try {
-          localStorage.setItem('theme', 'light');
-        } catch {
-          /* ignore storage access issues */
-        }
-        document.documentElement.classList.remove('dark');
-        document.body.classList.add('pdf-export');
-        document.querySelectorAll('a[href]').forEach((anchor) => {
-          const href = anchor.getAttribute('href');
-          if (!href) {
-            return;
-          }
-
-          if (
-            href.startsWith('#') ||
-            href.startsWith('mailto:') ||
-            href.startsWith('tel:') ||
-            href.startsWith('javascript:')
-          ) {
-            return;
-          }
-
+      const pdfTransformSource = getPdfTransformSource();
+      await page.evaluate(
+        async (origin, transformationSource) => {
           try {
-            const absoluteHref = new URL(href, origin).toString();
-            anchor.setAttribute('href', absoluteHref);
+            const runTransform = new Function(`return ${transformationSource};`)();
+            if (typeof runTransform === 'function') {
+              await runTransform(origin);
+            }
           } catch {
-            /* ignore invalid urls */
+            /* ignore transformation issues */
           }
-        });
-      }, publicOrigin);
+        },
+        publicOrigin,
+        pdfTransformSource
+      );
       await page.waitForFunction(() => !document.documentElement.classList.contains('dark'), { timeout: 5000 });
       await new Promise((resolve) => setTimeout(resolve, 1500));
 
@@ -84,10 +116,10 @@ body.pdf-export section > *:not(:last-child) {
         format: 'A4',
         printBackground: true,
         margin: {
-          top: '15mm',
-          right: '12mm',
-          bottom: '15mm',
-          left: '12mm',
+          top: '10mm',
+          right: '10mm',
+          bottom: '10mm',
+          left: '10mm',
         },
       });
     } finally {

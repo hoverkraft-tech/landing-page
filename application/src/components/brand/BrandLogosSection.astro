@@ -76,7 +76,7 @@ const resolvedLogos = logoItems.map((logo) => {
   <div class="grid md:grid-cols-2 gap-8 mb-12">
     {
       resolvedLogos.map((logo) => (
-        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700">
+        <div class="bg-white dark:bg-gray-800 rounded-lg p-8 border border-gray-200 dark:border-gray-700 pdf-break-avoid">
           <div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 mb-6 flex items-center justify-center min-h-[200px]">
             <Image src={logo.asset} alt={logo.localizedName} class="max-w-[200px] h-auto" loading="eager" />
           </div>

@@ -12,7 +12,7 @@ interface Props {
 const { title, trademark, contactPrefix, contactSuffix, lastUpdated } = Astro.props as Props;
 ---
 
-<div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-8">
+<div class="bg-gray-50 dark:bg-gray-900 rounded-lg p-8 pdf-break-avoid">
   <h2 class="text-2xl font-bold mb-4 text-gray-900 dark:text-white">{title}</h2>
   <div class="space-y-4 text-gray-600 dark:text-gray-400">
     <p>{trademark}</p>

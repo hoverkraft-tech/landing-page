@@ -21,9 +21,9 @@ const colorDont = brandColors.dont?.[lang] ?? [];
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
     {
       colorItems.map((color) => (
-        <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700">
+        <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 pdf-break-avoid">
           <div
-            class="h-32"
+            class="h-32 pdf-break-avoid"
             style={`background-color: ${color.hex}`}
             aria-label={`Color swatch for ${color.name[lang]}`}
           />
