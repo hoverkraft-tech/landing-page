@@ -3,7 +3,7 @@
 # GitHub Action: Download Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/8c0b2ca308cef84b99ffafefe584399eeea852ab542ded21fbcdbfdf52e5bbea/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
+  <img src="https://opengraph.githubassets.com/e6bc0cd7aced0af5072dc062947d72d0af2aa86ca10f36e59aaeceea4836bd95/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
 </div>
 
 ---
