@@ -4,7 +4,7 @@
  * Source: @hoverkraft-tech/branding
  * Version: 0.1.0
  * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
- * Generated: 2025-11-11T08:02:50.561Z
+ * Generated: 2025-11-11T08:48:58.942Z
  */
 
 import type { ColorCollection } from './types';
