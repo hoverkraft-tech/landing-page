@@ -87,12 +87,13 @@ runs:
           core.info(`✓ Successfully organized ${logos.length} logos and 1 mascot`);
 
           async function copyAssetFormats(name, formats, targetRootDir) {
-            if (!Array.isArray(formats)) {
-              return core.setFailed(`Formats is not an array for asset "${name}": ${formats}`);
+            if (!formats || typeof formats !== 'object') {
+              return core.setFailed(`Formats is not an object for asset "${getDisplayName(name)}": ${JSON.stringify(formats)}`);
             }
 
-            for (const format of formats) {
-              await copyAsset(name, format.path, targetRootDir);
+            const formatPaths = Object.values(formats);
+            for (const formatPath of formatPaths) {
+              await copyAsset(name, formatPath, targetRootDir);
             }
           }
 
