@@ -272,7 +272,7 @@ async function run({
 
     if (Array.isArray(file.payload?.items)) {
       core.info(
-        `✓ Generated ${file.filename} (${file.payload.items.length} items)`
+        `✓ Generated ${file.filename} (${file.payload.items.length} items)`,
       );
     } else {
       core.info(`✓ Generated ${file.filename}`);

@@ -241,6 +241,38 @@ Reference:
 - [ ] All paragraphs ≤4 sentences
 - [ ] No filler content or redundant explanations
 
+### 8. Validate Before Committing
+
+**MANDATORY**: Before committing any blog post changes, run linting and fix issues automatically:
+
+```bash
+make lint-fix
+```
+
+**Process**:
+
+1. After completing all content and images, run `make lint-fix` from the repository root
+2. Review the output for any errors or warnings
+3. If errors remain after autofix, manually correct them:
+   - **Frontmatter issues**: Check YAML syntax, required fields, date format
+   - **Markdown issues**: Fix heading structure, list formatting, code block languages
+   - **MDX issues**: Verify component imports, prop syntax, closing tags
+   - **Image issues**: Ensure all referenced images exist at specified paths
+4. Re-run `make lint-fix` until all checks pass
+5. Verify changes with `make lint` (read-only check)
+6. Only commit when all validation passes
+
+**Common Issues**:
+
+- Missing frontmatter fields → Add required fields
+- Invalid date format → Use ISO 8601 (YYYY-MM-DDTHH:MM:SSZ)
+- Unclosed MDX components → Add closing tags
+- Image paths incorrect → Fix import paths or file locations
+- Inconsistent heading levels → Ensure logical H2→H3→H4 hierarchy
+- Code blocks without language → Add language specifier
+
+**If validation fails repeatedly**: Review existing valid posts in `/application/src/data/post/` for correct patterns.
+
 ## File Structure
 
 ```txt
