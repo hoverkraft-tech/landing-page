@@ -1,5 +1,5 @@
 import { z, defineCollection } from 'astro:content';
-import { glob } from 'astro/loaders';
+import { blogPostLoader } from '~/loaders/blog-post-loader';
 
 const metadataDefinition = () =>
   z
@@ -47,7 +47,7 @@ const metadataDefinition = () =>
     .optional();
 
 const postCollection = defineCollection({
-  loader: glob({ pattern: ['**/*.md', '**/*.mdx'], base: 'src/data/post' }),
+  loader: blogPostLoader(),
   schema: z.object({
     publishDate: z.date().optional(),
     updateDate: z.date().optional(),
@@ -60,6 +60,7 @@ const postCollection = defineCollection({
     category: z.string().optional(),
     tags: z.array(z.string()).optional(),
     author: z.string().optional(),
+    slug: z.string().optional(),
     lang: z.enum(['fr', 'en']).optional().default('fr'), // Default language is French
     translationKey: z.string().optional(),
 

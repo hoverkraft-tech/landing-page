@@ -1,0 +1,124 @@
+---
+title: "Devcontainers et asdf : hoverkraft répare l'intégration indispensable"
+excerpt: "Suite au breaking change d'asdf v0.16.0, l'équipe hoverkraft remet sur pied l'intégration devcontainer pour Azure et partage son guide d'adoption."
+slug: devcontainer-asdf-feature
+author: 'Équipe HoverKraft'
+lang: fr
+---
+
+import Image from '~/components/common/Image.astro';
+import codeSnippet from '~/assets/images/blog/devcontainer-asdf-feature/code-snippet.png';
+
+> 🚀 Bonne nouvelle pour celles et ceux qui utilisent Devcontainers avec asdf !
+
+Lorsque la version v0.16.0 d'asdf est sortie, un breaking change a cassé la feature « base » fournie par Microsoft dans les devcontainers. Résultat : impossible d'initialiser automatiquement vos runtimes préférés lors de l'ouverture d'un projet. L'équipe hoverkraft a retroussé ses manches pour reconstruire une intégration fiable et vous éviter de bricoler chaque nouveau container.
+
+## Pourquoi ça bloquait ?
+
+asdf est un gestionnaire de versions multi-langages très populaire dans les équipes cloud et IaC. La mise à jour 0.16.0 a modifié la façon dont les plugins sont détectés et initialisés. Les scripts génériques embarqués dans l'image `devcontainers/base` s'attendaient à l'ancien comportement et ne provisionnaient plus les runtimes déclarés dans `.tool-versions`.
+
+Conséquence directe : un développeur ouvrant un repo reposant sur asdf se retrouvait avec une image saine… mais sans Node, Python, Terraform ou Azure CLI configurés. Dans un environnement d'infrastructure-as-code, c'est synonyme de frictions, d'erreurs CI/CD et d'onboarding pénible.
+
+## Ce que nous avons reconstruit
+
+Pour rétablir l'expérience « ça marche dès l'ouverture du container », nous avons :
+
+1. **Retiré la dépendance** au script déprécié en recréant une feature devcontainer spécifique à asdf.
+2. **Aligné l'installation** sur le nouveau comportement d'asdf, en générant les hooks et chemins attendus par la v0.16.0 et suivantes.
+3. **Automatisé l'installation de plugins** courants (Terraform, Azure CLI, Node.js…) dès la phase `postCreateCommand` pour que le container soit opérationnel en moins d'une minute.
+4. **Documenté l'usage** dans un dépôt public afin que vous puissiez l'intégrer en copiant-collant trois fichiers.
+
+📦 Le dépôt est disponible ici : [hoverkraft-tech/devcontainers](https://github.com/hoverkraft-tech/devcontainers)
+
+## Guide express pour adopter la feature
+
+### 1. Ajouter la feature devcontainer asdf
+
+Dans votre `.devcontainer/devcontainer.json`, référencez l'image hoverkraft :
+
+```json
+{
+  "name": "infra-azure",
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+  "features": {
+    "ghcr.io/hoverkraft-tech/devcontainers/asdf:latest": {}
+  }
+}
+```
+
+### 2. Lister vos runtimes dans `.tool-versions`
+
+Exemple utilisé en production pour un projet IaC Azure :
+
+```
+terraform 1.8.4
+python 3.12.2
+nodejs 20.11.1
+azure-cli 2.61.0
+```
+
+À l'ouverture du container, la feature installera automatiquement la version demandée de chaque outil, en tirant parti des plugins maintenus par la communauté.
+
+### 3. Tirer parti des hooks post-installation
+
+Nous avons inclus un script `post-start.sh` qui :
+
+- met à jour les plugins si une version plus récente est disponible ;
+- configure les variables d'environnement (`ASDF_DATA_DIR`, `PATH`) pour que vos scripts `make`, `taskfile` ou `terraform` fonctionnent immédiatement ;
+- expose des logs clairs dans la console VS Code pour diagnostiquer un éventuel plugin manquant.
+
+Adaptez-le à votre contexte (ajout d'outils internes, vérifications de modules Terraform, etc.).
+
+## Pour celles et ceux qui découvrent les devcontainers
+
+Les devcontainers encapsulent votre stack de développement dans un container Docker reproductible. Chez hoverkraft, nous les utilisons pour :
+
+- **Garantir la portabilité** de l'environnement Terraform/Azure d'un projet à l'autre.
+- **Sécuriser l'onboarding** : un nouveau·elle arrivant·e obtient un environnement prêt en un clic.
+- **Validations CI locales** : les mêmes outils et versions tournent en local et dans vos pipelines.
+
+Si vous n'en avez jamais créé, voici notre trame minimaliste :
+
+```json
+{
+  "name": "iac-azure",
+  "image": "mcr.microsoft.com/devcontainers/base:bullseye",
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/hoverkraft-tech/devcontainers/asdf:latest": {}
+  },
+  "postCreateCommand": "./.devcontainer/scripts/post-start.sh"
+}
+```
+
+Ajoutez ensuite vos configurations VS Code (`extensions.json`, `settings.json`) pour partager le même linting, les snippets Terraform, etc.
+
+<figure>
+  <Image
+    src={codeSnippet}
+    width={codeSnippet.width}
+    height={codeSnippet.height}
+    alt="Illustration de la configuration devcontainer.json avec la feature asdf maintenue par hoverkraft"
+    loading="lazy"
+  />
+  <figcaption>Configuration devcontainer.json mise à jour pour assurer la compatibilité avec asdf v0.16+</figcaption>
+</figure>
+
+## Résultat : un workflow IaC fluide sur Azure
+
+En combinant devcontainers, asdf et cette feature maison, nous avons :
+
+- supprimé les discrepancies entre macOS, Windows et Linux ;
+- réduit le temps d'onboarding de 45 minutes à moins de 5 minutes ;
+- fiabilisé nos pipelines, car les mêmes versions d'outils tournent partout.
+
+Et parce qu'on aime aller plus loin, nous réfléchissons déjà à :
+
+- ajouter des tests automatiques de compatibilité lorsqu'une nouvelle version d'asdf sort ;
+- publier une image de base spécialisée « IaC Azure » avec Terraform, Bicep, Packer et Azure Developer CLI déjà préinstallés.
+
+## Partagez vos retours
+
+Nous espérons que cette brique vous fera gagner du temps. Clonez le dépôt, branchez la feature dans vos projets et dites-nous si tout fonctionne dans vos contextes (mono-repo, projets data, plateformes internes…).
+
+À très vite pour la suite !

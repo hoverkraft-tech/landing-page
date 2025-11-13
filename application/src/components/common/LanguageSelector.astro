@@ -15,7 +15,8 @@ const translatePath = useTranslatedPath(currentLang);
 
 // Get current path without language prefix
 const pathname = Astro.url.pathname;
-const pathWithoutLang = pathname.replace(/^\/(en|fr)(\/|$)/, '/');
+// Remove language prefix if present (e.g., /en/blog/... or /fr/blog/...)
+const pathWithoutLang = pathname.replace(/^\/(en|fr)(?:\/|$)/, '');
 const normalizedPath = pathWithoutLang === '' ? '/' : pathWithoutLang;
 
 // Function to get the equivalent path in the target language
