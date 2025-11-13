@@ -46,9 +46,20 @@ Période dense chez HoverKraft.
 - Partagez vos retours`;
 
       const responses = [mockAIContent, mockClosingContent];
-      mockOpenAIService.generateText.mock.mockImplementation(async () => {
-        return responses.length ? responses.shift() : "";
-      });
+      mockOpenAIService.generateText.mock.mockImplementation(
+        async (messages) => {
+          const userPrompt = messages.find(
+            (msg) => msg.role === "user",
+          )?.content;
+
+          if (userPrompt?.startsWith("Translate the following Markdown")) {
+            const markdown = userPrompt.split(/\n\n/).slice(1).join("\n\n");
+            return markdown.trim();
+          }
+
+          return responses.length ? responses.shift() : "";
+        },
+      );
 
       const result = await contentGenerator.generateFrenchContent(
         mockReleasesData,
@@ -71,7 +82,7 @@ Période dense chez HoverKraft.
       );
       assert.ok(result.data.closingMarkdown?.includes("Nous clôturons"));
       assert.ok(result.data.closingMarkdown?.includes("Partagez vos retours"));
-      assert.strictEqual(mockOpenAIService.generateText.mock.calls.length, 2);
+      assert.strictEqual(mockOpenAIService.generateText.mock.calls.length, 6);
     });
   });
 
