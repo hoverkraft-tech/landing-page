@@ -3,15 +3,16 @@ name: Common Continuous Integration tasks
 on:
   workflow_call:
 
-permissions:
-  contents: read
-  security-events: write
-  # FIXME: This is a workaround for having workflow ref. See https://github.com/orgs/community/discussions/38659
-  id-token: write
+permissions: {}
 
 jobs:
   continuous-integration-actions:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@23af54bc615d657aa9c13c472ae701445c1811a6 # 0.17.1
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@32a69b7b8fd5f7ab7bf656e7e88aa90ad235cf8d # 0.18.0
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+      security-events: write
     strategy:
       matrix:
         working-directory:
@@ -21,15 +22,27 @@ jobs:
     with:
       working-directory: ${{ matrix.working-directory }}
       build: null
-      lint: false
-      coverage: null
+      lint: null
       dependency-review: false
+      test: |
+        {
+          "coverage": null
+        }
 
   continuous-integration:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@23af54bc615d657aa9c13c472ae701445c1811a6 # 0.17.1
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@32a69b7b8fd5f7ab7bf656e7e88aa90ad235cf8d # 0.18.0
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+      security-events: write
     with:
       working-directory: application
       build: |
         {
           "artifact": ["dist"]
+        }
+      test: |
+        {
+          "coverage": "codecov"
         }

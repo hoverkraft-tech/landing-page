@@ -5,11 +5,7 @@ on:
     branches: [main]
     tags: ["*"]
 
-permissions:
-  contents: read
-  id-token: write
-  pages: write
-  security-events: write
+permissions: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -21,16 +17,15 @@ jobs:
     secrets: inherit
     permissions:
       contents: read
-      security-events: write
-      # FIXME: This is a workaround for having workflow ref. See https://github.com/orgs/community/discussions/38659
       id-token: write
+      pull-requests: write
+      security-events: write
 
   generate-docs:
     name: Generate Documentation
     runs-on: ubuntu-latest
     permissions:
       contents: write
-
     steps:
       - name: Checkout repository
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
@@ -50,7 +45,7 @@ jobs:
           app-id: ${{ vars.CI_BOT_APP_ID }}
           private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
 
-      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@5f11437c716059f30c635f90055060e4ef8b31a0 # 0.28.0
+      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@753288393de1f3d92f687a6761d236ca800f5306 # 0.28.1
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: docs/action-documentation-update
