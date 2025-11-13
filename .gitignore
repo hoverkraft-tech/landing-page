@@ -5,6 +5,7 @@ application/.output/
 # dependencies
 application/node_modules/
 .github/actions/**/node_modules/
+.github/actions/**/coverage/
 
 # logs
 application/npm-debug.log*

@@ -10,6 +10,7 @@ include .env
 
 prepare: ## Prepare stack to run
 	cd application && npm install
+	cd .github/actions/generate-blog-post && npm install
 	cd .github/actions/generate-brand-content && npm install
 	cd .github/actions/validate-manifest && npm install
 
@@ -30,6 +31,7 @@ build: ## Build libs and applications
 
 test: ## Run tests
 	cd application && npm run test:ci
+	cd .github/actions/generate-blog-post && npm run test:ci
 	cd .github/actions/generate-brand-content && npm run test:ci
 	cd .github/actions/validate-manifest && npm run test:ci
 
