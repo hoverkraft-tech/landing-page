@@ -1,9 +1,11 @@
 import { defaultLang } from './ui';
 import { cleanSlug, trimSlash, POST_PERMALINK_PATTERN } from '~/utils/permalinks';
+import yaml from 'js-yaml';
 
 interface Frontmatter {
   publishDate?: Date | string;
   category?: string;
+  slug?: string;
   translationKey?: string;
   lang?: string;
   draft?: boolean;
@@ -11,6 +13,13 @@ interface Frontmatter {
 
 interface PostModule {
   frontmatter?: Frontmatter & Record<string, unknown>;
+}
+
+interface CommonData {
+  publishDate?: Date | string;
+  category?: string;
+  translationKey?: string;
+  draft?: boolean;
 }
 
 const toDate = (value: Date | string | undefined): Date | undefined => {
@@ -67,6 +76,24 @@ const postModules = import.meta.glob<PostModule>('../data/post/**/*.{md,mdx}', {
   eager: true,
 });
 
+const commonModules = import.meta.glob<string>('../data/post/**/common.yaml', {
+  eager: true,
+  query: '?raw',
+  import: 'default',
+});
+
+// Build a map of folder -> common data
+const commonDataByFolder: Record<string, CommonData> = {};
+for (const [modulePath, yamlContent] of Object.entries(commonModules)) {
+  const folderName = modulePath.replace(/^\.\.\/data\/post\//, '').replace(/\/common\.yaml$/, '');
+  try {
+    const commonData = yaml.load(yamlContent) as CommonData;
+    commonDataByFolder[folderName] = commonData;
+  } catch (error) {
+    console.error(`Failed to parse common.yaml for ${folderName}:`, error);
+  }
+}
+
 const blogTranslationsByKey: Record<string, Record<string, string>> = {};
 const blogTranslationKeyByPath: Record<string, string> = {};
 
@@ -78,16 +105,32 @@ for (const [modulePath, module] of Object.entries(postModules)) {
   }
 
   const relativePath = modulePath.replace(/^\.\.\/data\/post\//, '').replace(/\.(md|mdx)$/, '');
+  const folderName = relativePath.includes('/') ? relativePath.split('/')[0] : relativePath;
+
+  // Get common data for this folder
+  const commonData = commonDataByFolder[folderName];
+
+  // Check draft status from common data
+  if (commonData?.draft) {
+    continue;
+  }
 
   const id = cleanSlug(relativePath);
   const slug = cleanSlug(String(frontmatter.slug ?? relativePath.split('/').pop() ?? relativePath));
-  const categorySlug = frontmatter.category ? cleanSlug(frontmatter.category) : undefined;
-  const publishDate = toDate(frontmatter.publishDate);
+  const categorySlug =
+    (frontmatter.category ?? commonData?.category)
+      ? cleanSlug(String(frontmatter.category ?? commonData?.category))
+      : undefined;
+  const publishDate = toDate(frontmatter.publishDate ?? commonData?.publishDate);
   const lang = typeof frontmatter.lang === 'string' && frontmatter.lang.length > 0 ? frontmatter.lang : defaultLang;
+
+  // Use translationKey from common.yaml if available, otherwise fall back to frontmatter or id
   const translationKey =
-    typeof frontmatter.translationKey === 'string' && frontmatter.translationKey.length > 0
-      ? frontmatter.translationKey
-      : id;
+    typeof commonData?.translationKey === 'string' && commonData.translationKey.length > 0
+      ? commonData.translationKey
+      : typeof frontmatter.translationKey === 'string' && frontmatter.translationKey.length > 0
+        ? frontmatter.translationKey
+        : id;
 
   const normalizedPath = buildNormalizedPermalink({ id, slug, publishDate, category: categorySlug });
 

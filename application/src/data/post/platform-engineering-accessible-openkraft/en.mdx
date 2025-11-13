@@ -1,0 +1,91 @@
+---
+title: 'Platform Engineering for everyone: democratizing technical excellence'
+excerpt: 'Platform Engineering is no longer reserved for cloud giants. Discover how Openkraft makes these practices accessible with transparency and open source.'
+slug: platform-engineering-accessible-openkraft
+author: 'Hoverkraft Team'
+lang: en
+---
+
+import Image from '~/components/common/Image.astro';
+import architectureModules from '~/assets/images/blog/platform-engineering-accessible-openkraft/architecture-modules.webp';
+import adoptionSprints from '~/assets/images/blog/platform-engineering-accessible-openkraft/adoption-sprints.webp';
+
+> 🚀 Technical excellence does not wait for 100 developers.
+
+Platform Engineering is often associated with digital giants. This perception holds back CTOs of SMEs who fear out-of-reach investments. Yet the blockers that slow down production releases are identical for all teams: lack of automation, documentation debt, fragmented observability.
+
+Openkraft is our open-source answer to make these practices pragmatic. We have condensed our technical building blocks, playbooks, and metrics into a connector-first approach that you activate at your own pace.
+
+## Why platforms still seem inaccessible
+
+- **Team size**: myth of the 50-developer threshold when 8 to 12 are enough to justify an internal portal.
+- **Budget**: projection of 6 to 12 months of build when an MVP foundation can be achieved in 6 to 8 weeks by leveraging ready-to-use connectors.
+- **Complexity**: tool stacking without governance when workflows are not mapped.
+
+DORA metrics show that deployment frequency is multiplied by 2.4 on average when a team activates a self-service pipeline + IaC + shared observability. The goal is not to copy Netflix, but to eliminate measurable frictions: change lead time, failure rate, restoration time.
+
+## Openkraft in three directly usable modules
+
+- **CI/CD**: GitHub Actions and GitLab workflows, pipeline templates, and domain-specific triggers.
+- **Infrastructure as Code**: Terraform modules, Crossplane compositions, OPA policies to ensure compliance.
+- **Observability & security**: Prometheus/Loki stack, OpenTelemetry collection, Trivy/Snyk scanners, and Vault secrets management.
+
+Each module is published under MIT or Apache 2.0 license, accompanied by runbook guides to accelerate adoption. The diagram below illustrates the interconnection of these blocks around an Openkraft core.
+
+<Image
+  src={architectureModules}
+  alt="Isometric diagram showing the Openkraft core connected to CI/CD, IaC, observability, and security modules"
+  loading="lazy"
+/>
+
+## Openkraft versus market solutions
+
+The Platform Engineering ecosystem already offers several recognized tools:
+
+- **Backstage** (Spotify): unified developer portal, service catalog, project templates. Excellent for centralizing discovery but requires significant investment in plugins and maintenance.
+- **Port.io**: commercial platform with no-code interface, ready-to-use integrations. SaaS model that can create proprietary lock-in and escalating costs.
+- **CNOE** (Cloud Native Operational Excellence): CNCF initiative that standardizes platform patterns on Kubernetes. Complementary community approach but less operational as-is.
+
+**Openkraft positions itself differently**: we do not build a monolithic portal but a collection of modular connectors that you assemble according to your constraints.
+
+You can combine Backstage as UI and Openkraft for pipelines, or use only our Terraform modules if you already have a CI/CD stack. The goal is to accelerate your delivery without imposing a complete framework.
+
+Unlike proprietary solutions, each Openkraft building block is auditable, forkable, and deployable on-premise. You keep control of your technical trajectory.
+
+## 3 sprints to launch the approach
+
+We structure support over three two-week sprints to obtain visible results without immobilizing your teams.
+
+1. **Explore**: rapid audit, delivery flow mapping, connector prioritization, and target metric definition.
+2. **Experiment**: pilot project deployment, self-service portal activation, baseline DORA metrics collection.
+3. **Industrialize**: extension to other teams, security control automation, living documentation, and lightweight governance.
+
+<Image
+  src={adoptionSprints}
+  alt="Timeline of three Openkraft sprints aligning exploration, experimentation, and industrialization with DORA indicators"
+  loading="lazy"
+/>
+
+## Measure to learn
+
+- **Change lead time**: target < 48h between merge and production on the pilot.
+- **Failure rate**: limit rollbacks to < 10% through automated validations.
+- **Restoration time**: integrate runbooks into Grafana and aim for < 1h on critical incidents.
+- **Developer experience**: internal NPS measured at 30 days, tracked in our SPACE dashboard.
+
+We deliver a shared dashboard (Grafana + GitHub Insights) to quickly visualize gains and identify next levers.
+
+## What you gain concretely
+
+- **Startups (5-30 devs)**: self-service portal operational in 10 days, deployment frequency x2.
+- **Scale-ups (30-150 devs)**: homogeneous environments, 40% reduced onboarding, documented compliance.
+- **Mature platform teams**: 3 to 6 months of build saved, governance clarified via API contracts and policies-as-code.
+
+These results come from missions carried out in 2024-2025 with SaaS, fintech, and industry players, measured via DORA/SPACE.
+
+## Move from talk to impact
+
+Platform Engineering is no longer a luxury. With Openkraft, you activate a modular, measurable, and open platform that aligns your product, dev, and ops teams around shared indicators.
+
+👉 [Explore Openkraft on GitHub](https://github.com/hoverkraft-tech)
+👉 [Contact us](/contact)

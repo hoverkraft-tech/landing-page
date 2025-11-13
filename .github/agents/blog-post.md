@@ -74,22 +74,99 @@ Follow [../AGENTS.md](../AGENTS.md) before working in this repository.
 - Clarify: **Audience** (Platform engineers? SREs? CTOs?) | **Goal** (what action?) | **Angle** (unique perspective?)
 - Research: 3-5 key points, DORA/SPACE data, code examples, Hoverkraft services to link
 
-### 2. Frontmatter
+### 2. Structure & Frontmatter
+
+**Folder Structure**: Each blog post lives in its own folder with separate language files and shared metadata.
+
+```txt
+/application/src/data/post/{translation-key}/
+  fr.mdx        # French content
+  en.mdx        # English content
+  common.yaml   # Shared metadata
+```
+
+**common.yaml** (shared metadata):
+
+```yaml
+publishDate: 2025-01-15T00:00:00Z
+translationKey: "translation-key" # Same as folder name - identifier for translation mapping
+image: ~/assets/images/blog/{translation-key}/preview.png
+tags: [platform-engineering, kubernetes, dora] # 3-6 tags, lowercase-hyphenated
+category: "Platform Engineering" # or "DevOps & SRE", "Cloud Native", "Developer Experience", "Open Source"
+```
+
+**fr.mdx** frontmatter:
 
 ```yaml
 ---
-publishDate: 2025-01-15T00:00:00Z
-title: "Compelling title <60 chars" # FR: conversational; EN: direct, benefit-focused
-excerpt: "One-sentence summary with value/metric (140-160 chars)"
-image: ~/assets/images/blog/post-slug/preview.png
-tags: [platform-engineering, kubernetes, dora] # 3-6 tags, lowercase-hyphenated
-category: "Platform Engineering" # or "DevOps & SRE", "Cloud Native", "Developer Experience", "Open Source"
-author: "Équipe HoverKraft" # or "Hoverkraft Team" for EN
-lang: fr # or "en"
+title: "Titre accrocheur <60 caractères"
+excerpt: "Résumé en une phrase avec valeur/métrique (140-160 caractères)"
+author: "Équipe HoverKraft"
+lang: fr
+slug: "titre-francais-du-post"
 ---
 ```
 
+**en.mdx** frontmatter:
+
+```yaml
+---
+title: "Compelling title <60 chars"
+excerpt: "One-sentence summary with value/metric (140-160 chars)"
+author: "Hoverkraft Team"
+lang: en
+slug: "english-post-title"
+---
+```
+
+**Critical Fields**:
+
+- `slug`: **Localized** URL slug in MDX files (different per language)
+- `translationKey`: **Shared** identifier in `common.yaml` (folder name, same across languages) for translation mapping
+- `lang`: Language code in MDX files (`fr` or `en`)
+- All other metadata in `common.yaml` is shared between languages
+
+**fr.mdx** frontmatter:
+
+```yaml
+---
+title: "Titre accrocheur <60 caractères"
+excerpt: "Résumé en une phrase avec valeur/métrique (140-160 caractères)"
+author: "Équipe HoverKraft"
+lang: fr
+slug: "titre-francais-du-post"
+translationKey: "translation-key" # Same as folder name
+---
+```
+
+**en.mdx** frontmatter:
+
+```yaml
+---
+title: "Compelling title <60 chars"
+excerpt: "One-sentence summary with value/metric (140-160 chars)"
+author: "Hoverkraft Team"
+lang: en
+slug: "english-post-title"
+translationKey: "translation-key" # Same as folder name
+---
+```
+
+**Critical Fields**:
+
+- `slug`: **Localized** URL slug (different per language)
+- `translationKey`: **Shared** identifier (folder name, same across languages) for translation mapping
+- `lang`: Language code (`fr` or `en`)
+- All other metadata in `common.yaml` is shared between languages
+
 ### 3. Write Content
+
+**Create Folder & Files**: Start by creating the folder structure:
+
+```bash
+mkdir -p /application/src/data/post/{translation-key}
+touch /application/src/data/post/{translation-key}/{fr.mdx,en.mdx,common.yaml}
+```
 
 **French first** (canonical): Use "nous" (we) for Hoverkraft, "vous" (formal) for readers. Keep technical terms in English when standard (Kubernetes, GitOps).
 
@@ -196,18 +273,18 @@ Lighting: flat, clean, no noise.
 - ❌ Do not request screenshots or mimic brand logos
 - ❌ Avoid vague adjectives like “nice” or “cool”
 
-**File Org**: Save to `/application/src/assets/images/blog/{post-slug}/`
+**File Org**: Save to `/application/src/assets/images/blog/{translation-key}/`
 
 - `preview.png` (required, ≤2MB)
 - `descriptive-name.webp` (supporting visuals, 15-35KB target)
-- Use kebab-case, descriptive names
+- Use kebab-case, descriptive names (match `translationKey`, not localized slug)
 
 ### 5. Import Images
 
 ```typescript
 import Image from "~/components/common/Image.astro";
-import preview from "~/assets/images/blog/post-slug/preview.png";
-import diagram from "~/assets/images/blog/post-slug/architecture.webp";
+import preview from "~/assets/images/blog/{translation-key}/preview.png";
+import diagram from "~/assets/images/blog/{translation-key}/architecture.webp";
 ```
 
 Reference:
@@ -226,10 +303,14 @@ Reference:
 
 ### 7. Review Checklist
 
-- [ ] French and English complete and semantically equivalent
-- [ ] Frontmatter valid with all fields (publishDate, title, excerpt, image, tags, category, author, lang)
+- [ ] Folder created with correct `translationKey` as name
+- [ ] `common.yaml` created with shared metadata (publishDate, translationKey, image, tags, category)
+- [ ] `translationKey` in `common.yaml` matches folder name
+- [ ] French (`fr.mdx`) and English (`en.mdx`) files complete and semantically equivalent
+- [ ] Each MDX has all required frontmatter fields (title, excerpt, author, lang, slug)
+- [ ] `slug` is **localized** (different per language) and descriptive
 - [ ] Opening blockquote compelling (<100 chars)
-- [ ] All images generated and saved correctly
+- [ ] All images generated and saved correctly in `/application/src/assets/images/blog/{translationKey}/`
 - [ ] Images imported with descriptive `alt` text
 - [ ] Image prompts produce clean, geometric visuals with Hoverkraft palette (≤3 colors)
 - [ ] Code blocks have language specified
@@ -277,12 +358,27 @@ make lint-fix
 
 ```txt
 /application/src/data/post/
-  {post-slug-fr}.mdx       # French
-  {post-slug-en}.mdx       # English
+  {translation-key}/          # Folder named after shared translation key
+    fr.mdx                    # French content with localized frontmatter
+    en.mdx                    # English content with localized frontmatter
+    common.yaml               # Shared metadata (publishDate, image, tags, category)
 
-/application/src/assets/images/blog/{post-slug}/
-  preview.png              # 1536×1024 social preview (required)
-  *.webp                   # Diagrams, charts (~15-35KB each)
+/application/src/assets/images/blog/{translation-key}/
+  preview.png                 # 1536×1024 social preview (required)
+  *.webp                      # Diagrams, charts (~15-35KB each)
+```
+
+**Example**:
+
+```txt
+/application/src/data/post/modern-platform-characteristics/
+  fr.mdx         # slug: "caracteristiques-plateforme-moderne"
+  en.mdx         # slug: "platform-engineering-modern-characteristics"
+  common.yaml    # publishDate, image, tags, category
+
+/application/src/assets/images/blog/modern-platform-characteristics/
+  preview.png
+  architecture.webp
 ```
 
 ## Resources
