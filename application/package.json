@@ -35,6 +35,7 @@
     "astro-icon": "^1.1.5",
     "limax": "4.2.1",
     "lodash.merge": "^4.6.2",
+    "marked": "^12.0.2",
     "puppeteer": "^24.30.0",
     "unpic": "^4.2.2"
   },

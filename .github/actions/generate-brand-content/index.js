@@ -137,19 +137,74 @@ ${indent}}`;
 }
 
 function formatString(value) {
-  // If the string contains a single quote, use double quotes to avoid escaping
-  if (value.includes("'")) {
-    return JSON.stringify(value);
+  const hasNewline = /[\n\r]/.test(value);
+  const hasSingleQuote = value.includes("'");
+  const hasDoubleQuote = value.includes('"');
+
+  if (hasNewline || (hasSingleQuote && hasDoubleQuote)) {
+    return formatTemplateLiteral(value);
   }
 
-  // Otherwise, use single quotes (escape backslashes and control characters)
+  if (hasSingleQuote) {
+    return `"${escapeForDoubleQuotes(value)}"`;
+  }
+
+  return `'${escapeForSingleQuotes(value)}'`;
+}
+
+function escapeCommonCharacters(value) {
+  return ("" + value).replace(/["'\\\n\r\u2028\u2029]/g, function (character) {
+    // Escape all characters not included in SingleStringCharacters and
+    // DoubleStringCharacters on
+    // http://www.ecma-international.org/ecma-262/5.1/#sec-7.8.4
+    switch (character) {
+      case '"':
+      case "'":
+      case "\\":
+        return "\\" + character;
+      // Four possible LineTerminator characters need to be escaped:
+      case "\n":
+        return "\\n";
+      case "\r":
+        return "\\r";
+      case "\u2028":
+        return "\\u2028";
+      case "\u2029":
+        return "\\u2029";
+    }
+  });
+}
+
+function escapeForSingleQuotes(value) {
+  return escapeCommonCharacters(value);
+}
+
+function escapeForDoubleQuotes(value) {
+  // Escape characters relevant for double-quoted JS string literals.
+  return ("" + value).replace(/["\\\n\r\u2028\u2029]/g, function (character) {
+    switch (character) {
+      case '"':
+      case "\\":
+        return "\\" + character;
+      case "\n":
+        return "\\n";
+      case "\r":
+        return "\\r";
+      case "\u2028":
+        return "\\u2028";
+      case "\u2029":
+        return "\\u2029";
+    }
+  });
+}
+
+function formatTemplateLiteral(value) {
   const escaped = value
     .replace(/\\/g, "\\\\")
-    .replace(/\n/g, "\\n")
-    .replace(/\r/g, "\\r")
-    .replace(/\t/g, "\\t");
+    .replace(/`/g, "\\`")
+    .replace(/\$\{/g, "\\${");
 
-  return `'${escaped}'`;
+  return `\`${escaped}\``;
 }
 
 function formatPropertyKey(key) {

@@ -3,6 +3,7 @@
   "ignore": [
     "**/.astro/**",
     "**/node_modules/**",
+    "**/coverage/**",
     "**/dist/**",
     "**/.git/**",
     "**/.pnpm-store/**",

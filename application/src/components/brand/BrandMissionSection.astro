@@ -1,4 +1,5 @@
 ---
+import { marked } from 'marked';
 import type { BrandLocale, BrandMission } from '~/data/brand/tokens';
 
 interface Props {
@@ -7,11 +8,10 @@ interface Props {
 }
 
 const { lang, mission } = Astro.props as Props;
+const descriptionHtml = marked.parse(mission.description[lang]);
 ---
 
 <div class="mb-16">
   <h2 class="text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white">{mission.title[lang]}</h2>
-  <p class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-4xl">
-    {mission.description[lang]}
-  </p>
+  <div class="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-4xl" set:html={descriptionHtml} />
 </div>
