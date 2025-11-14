@@ -147,7 +147,7 @@ jobs:
           branch: branding-update-${{ steps.validate-manifest.outputs.version }}
           commit-message: |
             chore: update branding assets to version ${{ steps.validate-manifest.outputs.version }}
-          title: "chore: update branding assets to v${{ steps.validate-manifest.outputs.version }}"
+          title: "chore: update branding assets to ${{ steps.validate-manifest.outputs.version }}"
           body: |
             ## Branding Assets Updated 🎨
 

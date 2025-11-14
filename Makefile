@@ -34,7 +34,7 @@ test: ## Run tests
 	cd .github/actions/validate-manifest && npm run test:ci
 
 ci: ## Run tests in CI mode
-	$(MAKE) lint
+	$(MAKE) lint-fix
 	$(MAKE) build
 	$(MAKE) test
 

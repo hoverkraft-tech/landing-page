@@ -36,7 +36,13 @@ describe("generate-brand-content run", () => {
           { id: "secondary", value: "#ffffff" },
         ],
       }),
-      brandMission: JSON.stringify({ statement: "Empower builders" }),
+      brandMission: JSON.stringify({
+        title: { en: "Mission", fr: "Mission" },
+        description: {
+          en: "Line 1\n\n**Bold** text",
+          fr: 'Ligne 1\nLigne 2 avec "citations" et apostrophes \' plus markdown',
+        },
+      }),
       logos: JSON.stringify({
         items: [
           {
@@ -85,6 +91,10 @@ describe("generate-brand-content run", () => {
       "utf8",
     );
     assert.match(missionFile, /export const brandMission: BrandMission =/);
+    assert.match(missionFile, /en: `Line 1/);
+    assert.ok(missionFile.includes("**Bold** text"));
+    assert.ok(missionFile.includes('Ligne 2 avec "citations" et apostrophes '));
+    assert.doesNotMatch(missionFile, /\\n/);
 
     const typographyFile = fs.readFileSync(
       path.join(outputDir, "generated-typography.ts"),
@@ -145,7 +155,6 @@ describe("generate-brand-content run", () => {
       /Failed to parse colors input/,
     );
   });
-
   it("throws when core toolkit is missing", async () => {
     await assert.rejects(
       () =>
