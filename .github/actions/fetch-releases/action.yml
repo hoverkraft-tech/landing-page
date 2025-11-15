@@ -42,9 +42,9 @@ runs:
           if (process.env.SINCE_DATE_INPUT) {
             sinceDate = new Date(process.env.SINCE_DATE_INPUT);
           } else {
-            // Default: last 30 days
+            // Default: last 7 days (weekly check)
             sinceDate = new Date();
-            sinceDate.setDate(sinceDate.getDate() - 30);
+            sinceDate.setDate(sinceDate.getDate() - 7);
           }
 
           let untilDate;
