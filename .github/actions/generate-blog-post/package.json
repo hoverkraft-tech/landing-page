@@ -4,9 +4,9 @@
   "description": "GitHub Action to generate bilingual blog posts from release data",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:coverage": "jest --coverage"
+    "test": "node --test __tests__/*.test.js",
+    "test:watch": "node --test --watch __tests__/*.test.js",
+    "test:coverage": "node --test --experimental-test-coverage __tests__/*.test.js"
   },
   "keywords": [
     "github-action",
@@ -16,8 +16,5 @@
   "author": "HoverKraft Tech",
   "license": "0BSD",
   "dependencies": {},
-  "devDependencies": {
-    "@jest/globals": "^29.7.0",
-    "jest": "^29.7.0"
-  }
+  "devDependencies": {}
 }

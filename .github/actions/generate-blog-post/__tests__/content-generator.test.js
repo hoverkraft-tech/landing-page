@@ -1,4 +1,5 @@
-const { describe, it, expect, beforeEach } = require("@jest/globals");
+const { describe, it, beforeEach, mock } = require("node:test");
+const assert = require("node:assert");
 const { ContentGenerator } = require("../src/content-generator");
 
 describe("ContentGenerator", () => {
@@ -7,7 +8,7 @@ describe("ContentGenerator", () => {
 
   beforeEach(() => {
     mockOpenAIService = {
-      generateText: jest.fn(),
+      generateText: mock.fn(),
     };
     contentGenerator = new ContentGenerator(mockOpenAIService);
   });
@@ -31,7 +32,9 @@ describe("ContentGenerator", () => {
       ];
 
       const mockAIContent = "> 🚀 Innovation\n\n## Test Content";
-      mockOpenAIService.generateText.mockResolvedValue(mockAIContent);
+      mockOpenAIService.generateText.mock.mockImplementation(
+        async () => mockAIContent,
+      );
 
       const result = await contentGenerator.generateFrenchContent(
         mockReleasesData,
@@ -42,10 +45,10 @@ describe("ContentGenerator", () => {
         },
       );
 
-      expect(result).toContain("title: 'Releases HoverKraft Tech");
-      expect(result).toContain("lang: fr");
-      expect(result).toContain(mockAIContent);
-      expect(mockOpenAIService.generateText).toHaveBeenCalledTimes(1);
+      assert.ok(result.includes("title: 'Releases HoverKraft Tech"));
+      assert.ok(result.includes("lang: fr"));
+      assert.ok(result.includes(mockAIContent));
+      assert.strictEqual(mockOpenAIService.generateText.mock.calls.length, 1);
     });
   });
 
@@ -68,7 +71,9 @@ describe("ContentGenerator", () => {
       ];
 
       const mockAIContent = "> 🚀 Innovation\n\n## Test Content";
-      mockOpenAIService.generateText.mockResolvedValue(mockAIContent);
+      mockOpenAIService.generateText.mock.mockImplementation(
+        async () => mockAIContent,
+      );
 
       const result = await contentGenerator.generateEnglishContent(
         mockReleasesData,
@@ -79,10 +84,10 @@ describe("ContentGenerator", () => {
         },
       );
 
-      expect(result).toContain("title: 'HoverKraft Tech Releases");
-      expect(result).toContain("lang: en");
-      expect(result).toContain(mockAIContent);
-      expect(mockOpenAIService.generateText).toHaveBeenCalledTimes(1);
+      assert.ok(result.includes("title: 'HoverKraft Tech Releases"));
+      assert.ok(result.includes("lang: en"));
+      assert.ok(result.includes(mockAIContent));
+      assert.strictEqual(mockOpenAIService.generateText.mock.calls.length, 1);
     });
   });
 
@@ -92,8 +97,8 @@ describe("ContentGenerator", () => {
         "2025-11-01T00:00:00Z",
         "fr-FR",
       );
-      expect(result).toContain("2025");
-      expect(result).toContain("novembre");
+      assert.ok(result.includes("2025"));
+      assert.ok(result.includes("novembre"));
     });
 
     it("should format date in English", () => {
@@ -101,8 +106,8 @@ describe("ContentGenerator", () => {
         "2025-11-01T00:00:00Z",
         "en-US",
       );
-      expect(result).toContain("2025");
-      expect(result).toContain("November");
+      assert.ok(result.includes("2025"));
+      assert.ok(result.includes("November"));
     });
   });
 
@@ -117,12 +122,12 @@ describe("ContentGenerator", () => {
         content: "Test content",
       });
 
-      expect(result).toContain("title: 'Test Title'");
-      expect(result).toContain("excerpt: 'Test excerpt'");
-      expect(result).toContain("slug: test-slug");
-      expect(result).toContain("author: 'Test Author'");
-      expect(result).toContain("lang: fr");
-      expect(result).toContain("Test content");
+      assert.ok(result.includes("title: 'Test Title'"));
+      assert.ok(result.includes("excerpt: 'Test excerpt'"));
+      assert.ok(result.includes("slug: test-slug"));
+      assert.ok(result.includes("author: 'Test Author'"));
+      assert.ok(result.includes("lang: fr"));
+      assert.ok(result.includes("Test content"));
     });
   });
 });

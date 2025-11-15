@@ -8,7 +8,7 @@ GitHub Action to generate bilingual blog posts from release data using OpenAI.
 - **Bilingual**: Generates both French and English versions
 - **Image Generation**: Creates preview images with DALL-E 3
 - **SOLID Principles**: Clean, modular, testable code architecture
-- **Comprehensive Tests**: Full test coverage with Jest
+- **Comprehensive Tests**: Full test coverage with Node.js test runner
 
 ## Inputs
 
