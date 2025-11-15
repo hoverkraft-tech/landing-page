@@ -11,11 +11,11 @@ name: Generate Release Blog Post
 on:
   schedule:
     # Run on the 1st of every month at 9:00 AM UTC
-    - cron: '0 9 1 * *'
+    - cron: "0 9 1 * *"
   workflow_dispatch:
     inputs:
       since-date:
-        description: 'Fetch releases since this date (ISO 8601 format, e.g., 2025-01-01T00:00:00Z)'
+        description: "Fetch releases since this date (ISO 8601 format, e.g., 2025-01-01T00:00:00Z)"
         required: false
         type: string
 
@@ -34,7 +34,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Check for new releases
         id: check
@@ -44,7 +44,7 @@ jobs:
         with:
           script: |
             const owner = 'hoverkraft-tech';
-            
+
             // Determine the date range
             let sinceDate;
             if (process.env.SINCE_DATE_INPUT) {
@@ -54,23 +54,23 @@ jobs:
               sinceDate = new Date();
               sinceDate.setDate(sinceDate.getDate() - 30);
             }
-            
+
             const untilDate = new Date();
-            
+
             core.info(`Checking for releases from ${sinceDate.toISOString()} to ${untilDate.toISOString()}`);
-            
+
             // Get all public repos for the organization
             const repos = await github.paginate(github.rest.repos.listForOrg, {
               org: owner,
               type: 'public',
               per_page: 100
             });
-            
+
             core.info(`Found ${repos.length} public repositories`);
-            
+
             // Fetch releases for each repo
             const releasesData = [];
-            
+
             for (const repo of repos) {
               try {
                 const releases = await github.paginate(github.rest.repos.listReleases, {
@@ -106,12 +106,12 @@ jobs:
                 core.warning(`Failed to fetch releases for ${repo.name}: ${error.message}`);
               }
             }
-            
+
             core.setOutput('has-releases', releasesData.length > 0 ? 'true' : 'false');
             core.setOutput('releases-data', JSON.stringify(releasesData));
             core.setOutput('since-date', sinceDate.toISOString());
             core.setOutput('until-date', untilDate.toISOString());
-            
+
             if (releasesData.length === 0) {
               core.info('No new releases found in the specified period');
             } else {
@@ -127,6 +127,7 @@ jobs:
           RELEASES_DATA: ${{ steps.check.outputs.releases-data }}
           SINCE_DATE: ${{ steps.check.outputs.since-date }}
           UNTIL_DATE: ${{ steps.check.outputs.until-date }}
+          OPENAI_API_KEY: ${{ secrets.COPILOT_MCP_OPENAI_API_KEY }}
 
       - name: Generate slug for outputs
         if: steps.check.outputs.has-releases == 'true'
@@ -169,7 +170,7 @@ jobs:
             This PR adds a bilingual blog post summarizing the latest releases from Hoverkraft Tech public repositories.
 
             **Period**: ${{ steps.check.outputs.since-date }} to ${{ steps.check.outputs.until-date }}
-            
+
             ### Files Created
             - `application/src/data/post/${{ steps.generate-slug.outputs.slug }}/common.yaml`
             - `application/src/data/post/${{ steps.generate-slug.outputs.slug }}/fr.mdx`
@@ -196,7 +197,7 @@ jobs:
         with:
           script: |
             const hasReleases = process.env.HAS_RELEASES === 'true';
-            
+
             if (!hasReleases) {
               await core.summary
                 .addHeading('No New Releases Found', 2)
