@@ -1,0 +1,151 @@
+---
+import { marked } from 'marked';
+import type { ReleaseSummaryData } from '~/types';
+import type { SupportedLanguage } from '~/i18n/ui';
+import releaseSummaryConfigModule from '~/data/release-summary-config.js';
+
+interface Props {
+  data: ReleaseSummaryData;
+}
+
+const { data } = Astro.props as Props;
+const releaseSummaryConfig = releaseSummaryConfigModule as {
+  locales: Record<SupportedLanguage, { locale: string }>;
+  ui: Record<SupportedLanguage, Record<string, any>>;
+};
+
+const lang = data?.lang === 'en' ? 'en' : 'fr';
+const t = releaseSummaryConfig.ui[lang];
+const locale = releaseSummaryConfig.locales[lang]?.locale ?? 'fr-FR';
+
+const formatDate = (value?: string) => {
+  if (!value) return '';
+  return new Intl.DateTimeFormat(locale, {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(new Date(value));
+};
+
+const formatPeriod = () => {
+  const since = data?.stats?.period?.since;
+  const until = data?.stats?.period?.until;
+  if (!since || !until) return '';
+  return `${formatDate(since)} – ${formatDate(until)}`;
+};
+
+const formatNumber = (value?: number) => {
+  if (typeof value !== 'number') return '0';
+  return value.toLocaleString(locale);
+};
+
+const normalizeMarkdown = (value?: string | null) => (typeof value === 'string' ? value.trim() : '');
+const introMarkdown = normalizeMarkdown(data?.introMarkdown ?? '');
+const introHtml = introMarkdown ? marked.parse(introMarkdown) : '';
+const repositories = data?.repositories ?? [];
+const busiest = data?.stats?.busiestRepo;
+const mostRecent = data?.stats?.mostRecentRelease;
+const closingMarkdown = normalizeMarkdown(data?.closingMarkdown ?? null);
+const closingHtml = closingMarkdown ? marked.parse(closingMarkdown) : '';
+const showClosingSection = Boolean(closingHtml);
+---
+
+<section class="space-y-10">
+  <section>
+    <h2>{t.intro.heading}</h2>
+    {introHtml && <div class="space-y-4" set:html={introHtml} />}
+  </section>
+
+  <section>
+    <h2>{t.stats.title}</h2>
+    <ul>
+      <li>
+        <strong>{t.stats.period}:</strong>
+        {formatPeriod()}
+      </li>
+      <li>
+        <strong>{t.stats.repositories}:</strong>
+        {formatNumber(data?.stats?.totalRepos)}
+      </li>
+      <li>
+        <strong>{t.stats.releases}:</strong>
+        {formatNumber(data?.stats?.totalReleases)}
+      </li>
+      <li>
+        <strong>{t.stats.busiest}:</strong>{' '}
+        {busiest ? `${busiest.name} (${busiest.count})` : t.stats.busiestFallback}
+      </li>
+      <li>
+        <strong>{t.stats.latest}:</strong>{' '}
+        {
+          mostRecent
+            ? `${mostRecent.repo} ${mostRecent.name} (${formatDate(mostRecent.publishedAt)})`
+            : t.stats.latestFallback
+        }
+      </li>
+    </ul>
+  </section>
+
+  {
+    repositories.map((repo) => (
+      <section>
+        <h2>{repo.name}</h2>
+        <p>{repo.description?.trim() || t.repo.descriptionFallback}</p>
+        <ul>
+          <li>
+            <strong>{t.repo.starsLabel}:</strong> {formatNumber(repo.stars)}
+          </li>
+          <li>
+            <strong>{t.repo.repoLinkLabel}:</strong>{' '}
+            <a href={repo.url} target="_blank" rel="noopener noreferrer">
+              {t.repo.repoLinkCta}
+            </a>
+          </li>
+          <li>
+            <strong>{t.repo.releaseCountLabel}:</strong> {formatNumber(repo.releases?.length)}
+          </li>
+        </ul>
+        <h3>{t.repo.releasesHeading}</h3>
+        {(repo.releases || []).map((release) => (
+          <article class="space-y-3">
+            <h4>{release.name || release.tag}</h4>
+            <ul>
+              <li>
+                <strong>{t.release.version}:</strong> <code>{release.tag}</code>
+              </li>
+              <li>
+                <strong>{t.release.publishedOn}:</strong> {formatDate(release.publishedAt)}
+              </li>
+              <li>
+                <strong>{t.release.linkLabel}:</strong>{' '}
+                <a href={release.url} target="_blank" rel="noopener noreferrer">
+                  {t.release.linkCta}
+                </a>
+              </li>
+            </ul>
+            <div>
+              <strong>{t.release.highlights}:</strong>
+              <ul>
+                {release.highlights?.length ? (
+                  release.highlights.map((highlight) => <li>{highlight}</li>)
+                ) : (
+                  <li>{t.release.highlightsFallback}</li>
+                )}
+              </ul>
+            </div>
+          </article>
+        ))}
+      </section>
+    ))
+  }
+
+  {
+    showClosingSection && (
+      <section>
+        <h2>{t.closing.title}</h2>
+        {closingHtml && <div class="space-y-4" set:html={closingHtml} />}
+        <p class="font-semibold">{t.closing.signature}</p>
+      </section>
+    )
+  }
+</section>

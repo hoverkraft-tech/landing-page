@@ -6,7 +6,7 @@
   "main": "index.js",
   "scripts": {
     "test": "node --test",
-    "test:ci": "node --test"
+    "test:ci": "node --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info --test"
   },
   "dependencies": {
     "ajv": "^8.17.1",

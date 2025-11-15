@@ -12,7 +12,7 @@ inputs:
     required: true
 outputs:
   releases-data:
-    description: "JSON-stringified array of releases data"
+    description: "JSON-stringified array of releases data. If no releases are found, this will be null."
     value: ${{ steps.fetch.outputs.releases-data }}
 runs:
   using: "composite"
@@ -23,10 +23,11 @@ runs:
       env:
         SINCE_DATE_INPUT: ${{ inputs.since-date }}
         UNTIL_DATE_INPUT: ${{ inputs.until-date }}
+        OWNER: ${{ github.repository_owner }}
       with:
         github-token: ${{ inputs.github-token }}
         script: |
-          const owner = 'hoverkraft-tech';
+          const owner = process.env.OWNER;
 
           // Parse date range from required inputs
           const sinceDate = new Date(process.env.SINCE_DATE_INPUT);
@@ -47,45 +48,40 @@ runs:
           const releasesData = [];
 
           for (const repo of repos) {
-            try {
-              const releases = await github.paginate(github.rest.repos.listReleases, {
-                owner,
+            const releases = await github.paginate(github.rest.repos.listReleases, {
+              owner,
+              repo: repo.name,
+              per_page: 100
+            });
+            
+            // Filter releases by date
+            const recentReleases = releases.filter(release => {
+              const publishedAt = new Date(release.published_at);
+              return publishedAt >= sinceDate && publishedAt <= untilDate && !release.draft;
+            });
+            
+            if (recentReleases.length > 0) {
+              core.info(`Found ${recentReleases.length} release(s) for ${repo.name}`);
+              
+              releasesData.push({
                 repo: repo.name,
-                per_page: 100
+                description: repo.description,
+                url: repo.html_url,
+                stars: repo.stargazers_count,
+                releases: recentReleases.map(r => ({
+                  name: r.name,
+                  tag: r.tag_name,
+                  publishedAt: r.published_at,
+                  url: r.html_url,
+                  body: r.body
+                }))
               });
-              
-              // Filter releases by date
-              const recentReleases = releases.filter(release => {
-                const publishedAt = new Date(release.published_at);
-                return publishedAt >= sinceDate && publishedAt <= untilDate && !release.draft;
-              });
-              
-              if (recentReleases.length > 0) {
-                core.info(`Found ${recentReleases.length} release(s) for ${repo.name}`);
-                
-                releasesData.push({
-                  repo: repo.name,
-                  description: repo.description,
-                  url: repo.html_url,
-                  stars: repo.stargazers_count,
-                  releases: recentReleases.map(r => ({
-                    name: r.name,
-                    tag: r.tag_name,
-                    publishedAt: r.published_at,
-                    url: r.html_url,
-                    body: r.body
-                  }))
-                });
-              }
-            } catch (error) {
-              core.warning(`Failed to fetch releases for ${repo.name}: ${error.message}`);
             }
           }
-
-          core.setOutput('releases-data', JSON.stringify(releasesData));
 
           if (releasesData.length === 0) {
             core.info('No new releases found in the specified period');
           } else {
             core.info(`Found releases from ${releasesData.length} repositories`);
+            core.setOutput('releases-data', JSON.stringify(releasesData));
           }
