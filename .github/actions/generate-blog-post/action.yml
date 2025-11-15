@@ -1,0 +1,63 @@
+name: "Generate Blog Post"
+description: "Generates bilingual blog post content using OpenAI"
+inputs:
+  releases-data:
+    description: "JSON-stringified array of releases data"
+    required: true
+  since-date:
+    description: "Start date for the release period (ISO 8601)"
+    required: true
+  until-date:
+    description: "End date for the release period (ISO 8601)"
+    required: true
+  openai-api-key:
+    description: "OpenAI API key for content generation"
+    required: true
+  output-dir:
+    description: "Output directory for generated files"
+    required: true
+    default: "application"
+outputs:
+  slug:
+    description: "Generated slug for the blog post"
+    value: ${{ steps.generate.outputs.slug }}
+  post-dir:
+    description: "Directory where post files were created"
+    value: ${{ steps.generate.outputs.post-dir }}
+  image-dir:
+    description: "Directory where image files were created"
+    value: ${{ steps.generate.outputs.image-dir }}
+  image-generated:
+    description: "Whether preview image was generated (true/false)"
+    value: ${{ steps.generate.outputs.image-generated }}
+runs:
+  using: "composite"
+  steps:
+    - name: Generate blog post
+      id: generate
+      uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+      env:
+        NODE_PATH: ${{ github.action_path }}
+        RELEASES_DATA: ${{ inputs.releases-data }}
+        SINCE_DATE: ${{ inputs.since-date }}
+        UNTIL_DATE: ${{ inputs.until-date }}
+        OPENAI_API_KEY: ${{ inputs.openai-api-key }}
+        OUTPUT_DIR: ${{ inputs.output-dir }}
+      with:
+        script: |
+          const { run } = require('${{ github.action_path }}/index.js');
+
+          const releasesData = JSON.parse(process.env.RELEASES_DATA);
+          const sinceDate = process.env.SINCE_DATE;
+          const untilDate = process.env.UNTIL_DATE;
+          const openAIKey = process.env.OPENAI_API_KEY;
+          const outputDir = process.env.OUTPUT_DIR;
+
+          await run({
+            core,
+            releasesData,
+            sinceDate,
+            untilDate,
+            outputDir,
+            openAIKey
+          });

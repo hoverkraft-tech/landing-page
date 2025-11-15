@@ -1,0 +1,116 @@
+name: "Fetch Releases from Hoverkraft Tech Repos"
+description: "Fetches releases from all public Hoverkraft Tech repositories within a date range"
+inputs:
+  since-date:
+    description: "Fetch releases since this date (ISO 8601 format)"
+    required: false
+  until-date:
+    description: "Fetch releases until this date (ISO 8601 format)"
+    required: false
+  github-token:
+    description: "GitHub token for API access"
+    required: true
+outputs:
+  has-releases:
+    description: "Whether any releases were found (true/false)"
+    value: ${{ steps.fetch.outputs.has-releases }}
+  releases-data:
+    description: "JSON-stringified array of releases data"
+    value: ${{ steps.fetch.outputs.releases-data }}
+  since-date:
+    description: "Actual since date used"
+    value: ${{ steps.fetch.outputs.since-date }}
+  until-date:
+    description: "Actual until date used"
+    value: ${{ steps.fetch.outputs.until-date }}
+runs:
+  using: "composite"
+  steps:
+    - name: Fetch releases
+      id: fetch
+      uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+      env:
+        SINCE_DATE_INPUT: ${{ inputs.since-date }}
+        UNTIL_DATE_INPUT: ${{ inputs.until-date }}
+      with:
+        github-token: ${{ inputs.github-token }}
+        script: |
+          const owner = 'hoverkraft-tech';
+
+          // Determine the date range
+          let sinceDate;
+          if (process.env.SINCE_DATE_INPUT) {
+            sinceDate = new Date(process.env.SINCE_DATE_INPUT);
+          } else {
+            // Default: last 30 days
+            sinceDate = new Date();
+            sinceDate.setDate(sinceDate.getDate() - 30);
+          }
+
+          let untilDate;
+          if (process.env.UNTIL_DATE_INPUT) {
+            untilDate = new Date(process.env.UNTIL_DATE_INPUT);
+          } else {
+            untilDate = new Date();
+          }
+
+          core.info(`Checking for releases from ${sinceDate.toISOString()} to ${untilDate.toISOString()}`);
+
+          // Get all public repos for the organization
+          const repos = await github.paginate(github.rest.repos.listForOrg, {
+            org: owner,
+            type: 'public',
+            per_page: 100
+          });
+
+          core.info(`Found ${repos.length} public repositories`);
+
+          // Fetch releases for each repo
+          const releasesData = [];
+
+          for (const repo of repos) {
+            try {
+              const releases = await github.paginate(github.rest.repos.listReleases, {
+                owner,
+                repo: repo.name,
+                per_page: 100
+              });
+              
+              // Filter releases by date
+              const recentReleases = releases.filter(release => {
+                const publishedAt = new Date(release.published_at);
+                return publishedAt >= sinceDate && publishedAt <= untilDate && !release.draft;
+              });
+              
+              if (recentReleases.length > 0) {
+                core.info(`Found ${recentReleases.length} release(s) for ${repo.name}`);
+                
+                releasesData.push({
+                  repo: repo.name,
+                  description: repo.description,
+                  url: repo.html_url,
+                  stars: repo.stargazers_count,
+                  releases: recentReleases.map(r => ({
+                    name: r.name,
+                    tag: r.tag_name,
+                    publishedAt: r.published_at,
+                    url: r.html_url,
+                    body: r.body
+                  }))
+                });
+              }
+            } catch (error) {
+              core.warning(`Failed to fetch releases for ${repo.name}: ${error.message}`);
+            }
+          }
+
+          core.setOutput('has-releases', releasesData.length > 0 ? 'true' : 'false');
+          core.setOutput('releases-data', JSON.stringify(releasesData));
+          core.setOutput('since-date', sinceDate.toISOString());
+          core.setOutput('until-date', untilDate.toISOString());
+
+          if (releasesData.length === 0) {
+            core.info('No new releases found in the specified period');
+          } else {
+            core.info(`Found releases from ${releasesData.length} repositories`);
+          }
