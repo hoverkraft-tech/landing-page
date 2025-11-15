@@ -16,17 +16,10 @@ inputs:
   output-dir:
     description: "Output directory for generated files"
     required: true
-    default: "application"
 outputs:
   slug:
     description: "Generated slug for the blog post"
     value: ${{ steps.generate.outputs.slug }}
-  post-dir:
-    description: "Directory where post files were created"
-    value: ${{ steps.generate.outputs.post-dir }}
-  image-dir:
-    description: "Directory where image files were created"
-    value: ${{ steps.generate.outputs.image-dir }}
   image-generated:
     description: "Whether preview image was generated (true/false)"
     value: ${{ steps.generate.outputs.image-generated }}
