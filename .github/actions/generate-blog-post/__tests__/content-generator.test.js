@@ -14,7 +14,7 @@ describe("ContentGenerator", () => {
   });
 
   describe("generateFrenchContent", () => {
-    it("should generate French content with AI", async () => {
+    it("should return frontmatter and Markdown intro/closing", async () => {
       const mockReleasesData = [
         {
           repo: "test-repo",
@@ -25,16 +25,30 @@ describe("ContentGenerator", () => {
             {
               name: "v1.0.0",
               tag: "v1.0.0",
-              body: "Test release notes",
+              publishedAt: "2025-10-15T00:00:00Z",
+              url: "https://github.com/test/repo/releases/v1.0.0",
+              body: "Première version stable\n- Ajout d'une API\n- Documentation enrichie",
             },
           ],
         },
       ];
 
-      const mockAIContent = "> 🚀 Innovation\n\n## Test Content";
-      mockOpenAIService.generateText.mock.mockImplementation(
-        async () => mockAIContent,
-      );
+      const mockAIContent = `> 🚀 Innovation partagée
+
+Période dense chez HoverKraft.
+
+- Insight 1
+- Insight 2`;
+
+      const mockClosingContent = `Nous clôturons cette période avec une belle dynamique.
+
+- Testez les nouveautés
+- Partagez vos retours`;
+
+      const responses = [mockAIContent, mockClosingContent];
+      mockOpenAIService.generateText.mock.mockImplementation(async () => {
+        return responses.length ? responses.shift() : "";
+      });
 
       const result = await contentGenerator.generateFrenchContent(
         mockReleasesData,
@@ -45,89 +59,81 @@ describe("ContentGenerator", () => {
         },
       );
 
-      assert.ok(result.includes("title: 'Releases HoverKraft Tech"));
-      assert.ok(result.includes("lang: fr"));
-      assert.ok(result.includes(mockAIContent));
-      assert.strictEqual(mockOpenAIService.generateText.mock.calls.length, 1);
+      assert.match(result.frontmatter, /lang: fr/);
+      assert.match(result.frontmatter, /title: 'Releases HoverKraft Tech/);
+      assert.deepStrictEqual(result.data.lang, "fr");
+      assert.strictEqual(result.data.repositories.length, 1);
+      assert.ok(result.data.introMarkdown.startsWith("> 🚀 Innovation"));
+      assert.ok(result.data.introMarkdown.includes("Insight 2"));
+      assert.strictEqual(
+        result.data.repositories[0].releases[0].highlights[0],
+        "Première version stable",
+      );
+      assert.ok(result.data.closingMarkdown?.includes("Nous clôturons"));
+      assert.ok(result.data.closingMarkdown?.includes("Partagez vos retours"));
+      assert.strictEqual(mockOpenAIService.generateText.mock.calls.length, 2);
     });
   });
 
   describe("generateEnglishContent", () => {
-    it("should generate English content with AI", async () => {
+    it("should fallback when AI summary is empty", async () => {
       const mockReleasesData = [
         {
           repo: "test-repo",
           description: "Test description",
-          stars: 42,
+          stars: 10,
           url: "https://github.com/test/repo",
           releases: [
             {
-              name: "v1.0.0",
-              tag: "v1.0.0",
-              body: "Test release notes",
+              name: "v0.1.0",
+              tag: "v0.1.0",
+              publishedAt: "2025-09-01T00:00:00Z",
+              url: "https://github.com/test/repo/releases/v0.1.0",
+              body: "",
             },
           ],
         },
       ];
 
-      const mockAIContent = "> 🚀 Innovation\n\n## Test Content";
-      mockOpenAIService.generateText.mock.mockImplementation(
-        async () => mockAIContent,
-      );
+      mockOpenAIService.generateText.mock.mockImplementation(async () => "");
 
       const result = await contentGenerator.generateEnglishContent(
         mockReleasesData,
         {
-          sinceDate: "2025-10-01T00:00:00Z",
-          untilDate: "2025-11-01T00:00:00Z",
-          slug: "releases-2025-11",
+          sinceDate: "2025-08-01T00:00:00Z",
+          untilDate: "2025-09-30T00:00:00Z",
+          slug: "releases-2025-09",
         },
       );
 
-      assert.ok(result.includes("title: 'HoverKraft Tech Releases"));
-      assert.ok(result.includes("lang: en"));
-      assert.ok(result.includes(mockAIContent));
-      assert.strictEqual(mockOpenAIService.generateText.mock.calls.length, 1);
-    });
-  });
-
-  describe("formatDate", () => {
-    it("should format date in French", () => {
-      const result = contentGenerator.formatDate(
-        "2025-11-01T00:00:00Z",
-        "fr-FR",
+      assert.match(result.frontmatter, /lang: en/);
+      assert.strictEqual(result.data.lang, "en");
+      assert.strictEqual(result.data.introMarkdown, "");
+      assert.deepStrictEqual(
+        result.data.repositories[0].releases[0].highlights,
+        [],
       );
-      assert.ok(result.includes("2025"));
-      assert.ok(result.includes("novembre"));
-    });
-
-    it("should format date in English", () => {
-      const result = contentGenerator.formatDate(
-        "2025-11-01T00:00:00Z",
-        "en-US",
-      );
-      assert.ok(result.includes("2025"));
-      assert.ok(result.includes("November"));
+      assert.strictEqual(result.data.closingMarkdown, null);
     });
   });
 
   describe("buildFrontmatter", () => {
-    it("should build frontmatter with content", () => {
+    it("should build valid frontmatter block", () => {
       const result = contentGenerator.buildFrontmatter({
         title: "Test Title",
         excerpt: "Test excerpt",
         slug: "test-slug",
         author: "Test Author",
         lang: "fr",
-        content: "Test content",
       });
 
+      assert.ok(result.startsWith("---"));
       assert.ok(result.includes("title: 'Test Title'"));
       assert.ok(result.includes("excerpt: 'Test excerpt'"));
       assert.ok(result.includes("slug: test-slug"));
       assert.ok(result.includes("author: 'Test Author'"));
       assert.ok(result.includes("lang: fr"));
-      assert.ok(result.includes("Test content"));
+      assert.ok(result.trim().endsWith("---"));
     });
   });
 });

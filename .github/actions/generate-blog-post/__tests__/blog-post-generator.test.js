@@ -7,6 +7,32 @@ describe("BlogPostGenerator", () => {
   let mockOpenAIService;
   let mockFileSystemService;
   let blogPostGenerator;
+  const buildLocalizedPayload = (lang) => ({
+    frontmatter: `---\nlang: ${lang}\n---\n\n`,
+    data: {
+      lang,
+      intro: {
+        quote: null,
+        summary: `${lang} summary`,
+        takeaways: [],
+      },
+      closing: {
+        summary: `${lang} closing`,
+        actions: [],
+      },
+      stats: {
+        period: {
+          since: "2025-10-01T00:00:00Z",
+          until: "2025-11-01T00:00:00Z",
+        },
+        totalRepos: 1,
+        totalReleases: 1,
+        busiestRepo: null,
+        mostRecentRelease: null,
+      },
+      repositories: [],
+    },
+  });
 
   beforeEach(() => {
     mockContentGenerator = {
@@ -41,10 +67,10 @@ describe("BlogPostGenerator", () => {
       ];
 
       mockContentGenerator.generateFrenchContent.mock.mockImplementation(
-        async () => "French content",
+        async () => buildLocalizedPayload("fr"),
       );
       mockContentGenerator.generateEnglishContent.mock.mockImplementation(
-        async () => "English content",
+        async () => buildLocalizedPayload("en"),
       );
       mockOpenAIService.generateImage.mock.mockImplementation(
         async () => "https://example.com/image.png",
@@ -66,7 +92,22 @@ describe("BlogPostGenerator", () => {
         mockFileSystemService.ensureDirectory.mock.calls.length,
         2,
       );
-      assert.strictEqual(mockFileSystemService.writeFile.mock.calls.length, 3); // common.yaml, fr.mdx, en.mdx
+      assert.strictEqual(mockFileSystemService.writeFile.mock.calls.length, 5); // common.yaml + per-locale JSON & MDX
+
+      const frenchJsonCall = mockFileSystemService.writeFile.mock.calls.find(
+        (call) => call.arguments?.[0].endsWith("fr.data.json"),
+      );
+      assert.ok(frenchJsonCall);
+      assert.match(frenchJsonCall.arguments[1], /"lang": "fr"/);
+
+      const frenchMdxCall = mockFileSystemService.writeFile.mock.calls.find(
+        (call) => call.arguments?.[0].endsWith("fr.mdx"),
+      );
+      assert.ok(frenchMdxCall);
+      assert.match(
+        frenchMdxCall.arguments[1],
+        /import data from '\.\/fr\.data\.json';/,
+      );
     });
 
     it("should fail when image generation fails", async () => {
@@ -80,10 +121,10 @@ describe("BlogPostGenerator", () => {
       ];
 
       mockContentGenerator.generateFrenchContent.mock.mockImplementation(
-        async () => "French content",
+        async () => buildLocalizedPayload("fr"),
       );
       mockContentGenerator.generateEnglishContent.mock.mockImplementation(
-        async () => "English content",
+        async () => buildLocalizedPayload("en"),
       );
       mockOpenAIService.generateImage.mock.mockImplementation(async () => {
         throw new Error("API error");

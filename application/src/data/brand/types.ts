@@ -3,7 +3,10 @@
  * These types are shared between the main tokens file and generated files
  */
 
-export type BrandLocale = 'fr' | 'en';
+import type { SupportedLanguage } from '~/i18n/ui';
+export type { SupportedLanguage } from '~/i18n/ui';
+
+export type BrandLocale = SupportedLanguage;
 
 export type LocalizedString = Record<BrandLocale, string>;
 export type LocalizedStringList = Record<BrandLocale, string[]>;

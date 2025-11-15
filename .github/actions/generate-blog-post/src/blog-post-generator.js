@@ -47,20 +47,14 @@ class BlogPostGenerator {
       releasesData,
       { sinceDate, untilDate, slug },
     );
-    this.fileSystemService.writeFile(
-      path.join(postDir, "fr.mdx"),
-      frenchContent,
-    );
+    this.writeLocalizedArtifacts(postDir, "fr", frenchContent);
 
     // Generate English content
     const englishContent = await this.contentGenerator.generateEnglishContent(
       releasesData,
       { sinceDate, untilDate, slug },
     );
-    this.fileSystemService.writeFile(
-      path.join(postDir, "en.mdx"),
-      englishContent,
-    );
+    this.writeLocalizedArtifacts(postDir, "en", englishContent);
 
     // Generate preview image (fail if it fails)
     const imagePath = path.join(imageDir, "preview.png");
@@ -87,9 +81,9 @@ class BlogPostGenerator {
       .digest("hex")
       .substring(0, 8);
 
-    const year = until.getFullYear();
-    const month = String(until.getMonth() + 1).padStart(2, "0");
-    const day = String(until.getDate()).padStart(2, "0");
+    const year = until.getUTCFullYear();
+    const month = String(until.getUTCMonth() + 1).padStart(2, "0");
+    const day = String(until.getUTCDate()).padStart(2, "0");
 
     return `releases-${year}-${month}-${day}-${hash}`;
   }
@@ -118,6 +112,30 @@ translationKey: ${slug}
 
     const imageUrl = await this.openAIService.generateImage(prompt);
     await this.fileSystemService.downloadFile(imageUrl, outputPath);
+  }
+
+  /**
+   * Write MDX + JSON data for a locale
+   */
+  writeLocalizedArtifacts(postDir, lang, { frontmatter, data }) {
+    const jsonPath = path.join(postDir, `${lang}.data.json`);
+    const mdxPath = path.join(postDir, `${lang}.mdx`);
+
+    const normalizedFrontmatter = frontmatter.endsWith("\n\n")
+      ? frontmatter
+      : `${frontmatter.trimEnd()}\n\n`;
+
+    const mdxContent = `${normalizedFrontmatter}import ReleaseSummary from '~/components/blog/ReleaseSummary.astro';
+import data from './${lang}.data.json';
+
+<ReleaseSummary data={data} />
+`;
+
+    this.fileSystemService.writeFile(
+      jsonPath,
+      `${JSON.stringify(data, null, 2)}\n`,
+    );
+    this.fileSystemService.writeFile(mdxPath, mdxContent);
   }
 }
 

@@ -1,147 +1,266 @@
 /**
  * Content Generator
- * Responsible for generating blog post content
+ * Generates bilingual release data + AI intro snippets
  */
+
+const path = require("node:path");
+
+const releaseSummaryConfig = require(
+  path.resolve(
+    __dirname,
+    "../../../..",
+    "application/src/data/release-summary-config.js",
+  ),
+);
+
+const RELEASE_HIGHLIGHT_LIMIT = 4;
 
 class ContentGenerator {
   constructor(openAIService) {
     this.openAIService = openAIService;
   }
 
-  /**
-   * Generate French blog post content
-   */
   async generateFrenchContent(releasesData, { sinceDate, untilDate, slug }) {
-    const aiContent = await this.generateBlogContent(
-      releasesData,
+    return this.generateLocalizedContent("fr", releasesData, {
       sinceDate,
       untilDate,
-      "fr",
-    );
-
-    const totalReleases = releasesData.reduce(
-      (sum, repo) => sum + repo.releases.length,
-      0,
-    );
-
-    return this.buildFrontmatter({
-      title: `Releases HoverKraft Tech - ${this.formatDate(untilDate, "fr-FR")}`,
-      excerpt: `Découvrez les dernières mises à jour de nos projets open source : ${totalReleases} nouvelle${totalReleases > 1 ? "s" : ""} release${totalReleases > 1 ? "s" : ""} publiée${totalReleases > 1 ? "s" : ""} en ${this.formatDate(untilDate, "fr-FR")}.`,
       slug,
-      author: "Équipe HoverKraft",
-      lang: "fr",
-      content: `${aiContent}\n\n**HoverKraft Tech** - _Simplifier la complexité, accélérer la delivery_`,
     });
   }
 
-  /**
-   * Generate English blog post content
-   */
   async generateEnglishContent(releasesData, { sinceDate, untilDate, slug }) {
-    const aiContent = await this.generateBlogContent(
-      releasesData,
+    return this.generateLocalizedContent("en", releasesData, {
       sinceDate,
       untilDate,
-      "en",
-    );
-
-    const totalReleases = releasesData.reduce(
-      (sum, repo) => sum + repo.releases.length,
-      0,
-    );
-
-    return this.buildFrontmatter({
-      title: `HoverKraft Tech Releases - ${this.formatDate(untilDate, "en-US")}`,
-      excerpt: `Discover the latest updates from our open source projects: ${totalReleases} new release${totalReleases > 1 ? "s" : ""} published in ${this.formatDate(untilDate, "en-US")}.`,
       slug,
-      author: "HoverKraft Team",
-      lang: "en",
-      content: `${aiContent}\n\n**HoverKraft Tech** - _Simplifying complexity, accelerating delivery_`,
     });
   }
 
-  /**
-   * Generate blog content using AI (factorized for both languages)
-   */
-  async generateBlogContent(releasesData, sinceDate, untilDate, language) {
-    const isFrench = language === "fr";
-    const locale = isFrench ? "fr-FR" : "en-US";
-    const period = `${this.formatDate(sinceDate, locale)} - ${this.formatDate(untilDate, locale)}`;
-    const totalRepos = releasesData.length;
-    const totalReleases = releasesData.reduce(
-      (sum, repo) => sum + repo.releases.length,
-      0,
+  async generateLocalizedContent(
+    language,
+    releasesData,
+    { sinceDate, untilDate, slug },
+  ) {
+    const localeConfig = releaseSummaryConfig.locales[language];
+    if (!localeConfig) {
+      throw new Error(
+        `Missing locale configuration for language "${language}"`,
+      );
+    }
+
+    const stats = this.buildStats(releasesData, {
+      sinceDate,
+      untilDate,
+      locale: localeConfig.locale,
+    });
+
+    const introResponse = await this.generateIntroSummary(
+      language,
+      releasesData,
+      stats,
+    );
+    const introMarkdown = this.normalizeMarkdownResponse(introResponse);
+
+    const closingResponse = await this.generateClosingSummary(
+      language,
+      releasesData,
+      stats,
+    );
+    const closingMarkdown = this.normalizeMarkdownResponse(closingResponse);
+
+    const title = localeConfig.buildTitle(
+      this.formatDate(untilDate, localeConfig.locale),
+    );
+    const excerpt = localeConfig.buildExcerpt(
+      stats.totalReleases,
+      this.formatDate(untilDate, localeConfig.locale),
     );
 
-    const releasesSummary = releasesData
-      .map((repo) => {
-        const releases = repo.releases
-          .map(
-            (r) =>
-              `- ${r.name || r.tag} (${r.tag}): ${r.body ? r.body.substring(0, 300) : isFrench ? "Pas de notes" : "No notes"}`,
-          )
-          .join("\n");
-        return `**${repo.repo}** (${repo.stars} ⭐)\n${repo.description || (isFrench ? "Pas de description" : "No description")}\n${releases}`;
-      })
-      .join("\n\n");
-
-    const prompt = isFrench
-      ? `Tu es un rédacteur technique professionnel pour le blog HoverKraft Tech. Crée un article de blog en français sur les dernières releases de projets open source.
-
-**Contexte:**
-- Période: ${period}
-- ${totalRepos} projet${totalRepos > 1 ? "s" : ""} avec ${totalReleases} release${totalReleases > 1 ? "s" : ""}
-- Style HoverKraft: professionnel mais accessible, orienté action, concis
-
-**Releases:**
-${releasesSummary}
-
-**Instructions:**
-1. Commence par une citation inspirante sur l'innovation (40-80 caractères, format: > citation)
-2. Section d'introduction: résumé enthousiaste de l'activité
-3. Pour chaque projet: titre (##), description, lien, étoiles, et releases (####)
-4. Pour chaque release: version, date, lien GitHub, notes principales (résumées)
-5. Section finale: appel à l'action communautaire (essayer, contribuer, partager)
-6. Garde un ton professionnel mais engageant
-7. Maximum 1 emoji par section
-8. Reste concis et direct
-
-Génère UNIQUEMENT le contenu markdown (sans les métadonnées frontmatter). Commence directement par la citation.`
-      : `You are a professional technical writer for HoverKraft Tech blog. Create a blog post in English about the latest open source project releases.
-
-**Context:**
-- Period: ${period}
-- ${totalRepos} project${totalRepos > 1 ? "s" : ""} with ${totalReleases} release${totalReleases > 1 ? "s" : ""}
-- HoverKraft Style: professional yet accessible, action-oriented, concise
-
-**Releases:**
-${releasesSummary}
-
-**Instructions:**
-1. Start with an inspiring quote about innovation (40-80 chars, format: > quote)
-2. Introduction section: enthusiastic summary of activity
-3. For each project: title (##), description, link, stars, and releases (####)
-4. For each release: version, date, GitHub link, main notes (summarized)
-5. Final section: community call-to-action (try, contribute, share)
-6. Keep a professional but engaging tone
-7. Maximum 1 emoji per section
-8. Stay concise and direct
-
-Generate ONLY the markdown content (without frontmatter metadata). Start directly with the quote.`;
-
-    const systemContent = isFrench
-      ? "Tu es un expert en rédaction technique pour blogs tech français."
-      : "You are an expert technical writer for tech blogs.";
-
-    return await this.openAIService.generateText([
-      { role: "system", content: systemContent },
-      { role: "user", content: prompt },
-    ]);
+    return {
+      frontmatter: this.buildFrontmatter({
+        title,
+        excerpt,
+        slug,
+        author: localeConfig.author,
+        lang: language,
+      }),
+      data: {
+        lang: language,
+        introMarkdown,
+        closingMarkdown: closingMarkdown || null,
+        stats: this.buildStatsPayload(stats),
+        repositories: this.buildRepositoriesData(releasesData),
+      },
+    };
   }
 
-  /**
-   * Format date for locale
-   */
+  buildStats(releasesData, { sinceDate, untilDate, locale }) {
+    const totalRepos = releasesData.length;
+    const releases = releasesData.flatMap((repo) =>
+      repo.releases.map((release) => ({
+        repo: repo.repo,
+        repoStars: repo.stars ?? 0,
+        ...release,
+      })),
+    );
+
+    const sortedByDate = [...releases].sort(
+      (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
+    );
+
+    const busiestRepoEntry = [...releasesData]
+      .map((repo) => ({ name: repo.repo, count: repo.releases.length }))
+      .sort((a, b) => b.count - a.count || a.name.localeCompare(b.name))[0];
+
+    return {
+      totalRepos,
+      totalReleases: releases.length,
+      period: {
+        since: sinceDate,
+        until: untilDate,
+      },
+      periodLabel: `${this.formatFullDate(
+        sinceDate,
+        locale,
+      )} – ${this.formatFullDate(untilDate, locale)}`,
+      mostRecentRelease: sortedByDate[0]
+        ? {
+            repo: sortedByDate[0].repo,
+            name: sortedByDate[0].name || sortedByDate[0].tag,
+            publishedAt: sortedByDate[0].publishedAt,
+            dateLabel: this.formatFullDate(sortedByDate[0].publishedAt, locale),
+          }
+        : null,
+      busiestRepo: busiestRepoEntry ?? null,
+    };
+  }
+
+  async generateIntroSummary(language, releasesData, stats) {
+    const topHighlights = this.buildRepoHighlights(releasesData, language);
+    const prompt = releaseSummaryConfig.prompts.introduction(
+      language,
+      stats,
+      topHighlights,
+    );
+    const systemPrompt = releaseSummaryConfig.prompts.system(language);
+
+    return await this.openAIService.generateText(
+      [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: prompt },
+      ],
+      {
+        temperature: 0.35,
+        max_tokens: 600,
+      },
+    );
+  }
+
+  async generateClosingSummary(language, releasesData, stats) {
+    const repoHighlights = this.buildRepoHighlights(releasesData, language);
+    const prompt = releaseSummaryConfig.prompts.closing(
+      language,
+      stats,
+      repoHighlights,
+    );
+    const systemPrompt = releaseSummaryConfig.prompts.system(language);
+
+    return await this.openAIService.generateText(
+      [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: prompt },
+      ],
+      {
+        temperature: 0.4,
+        max_tokens: 400,
+      },
+    );
+  }
+
+  buildStatsPayload(stats) {
+    return {
+      period: stats.period,
+      totalRepos: stats.totalRepos,
+      totalReleases: stats.totalReleases,
+      busiestRepo: stats.busiestRepo ? { ...stats.busiestRepo } : null,
+      mostRecentRelease: stats.mostRecentRelease
+        ? {
+            repo: stats.mostRecentRelease.repo,
+            name: stats.mostRecentRelease.name,
+            publishedAt: stats.mostRecentRelease.publishedAt,
+          }
+        : null,
+    };
+  }
+
+  buildRepositoriesData(releasesData) {
+    return [...releasesData]
+      .sort((a, b) => a.repo.localeCompare(b.repo))
+      .map((repo) => ({
+        name: repo.repo,
+        description: repo.description?.trim() || "",
+        stars: repo.stars ?? 0,
+        url: repo.url,
+        releases: repo.releases
+          .slice()
+          .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
+          .map((release) => ({
+            name: release.name || "",
+            tag: release.tag,
+            publishedAt: release.publishedAt,
+            url: release.url,
+            highlights: this.extractHighlights(release.body),
+          })),
+      }));
+  }
+
+  extractHighlights(body) {
+    if (!body) {
+      return [];
+    }
+
+    return body
+      .split(/\r?\n+/)
+      .map((line) => line.replace(/^[-*#>\s]+/, "").trim())
+      .filter(Boolean)
+      .slice(0, RELEASE_HIGHLIGHT_LIMIT)
+      .map((line) => this.truncate(line, 160));
+  }
+
+  normalizeMarkdownResponse(raw) {
+    if (typeof raw !== "string") {
+      return "";
+    }
+    const trimmed = raw.trim();
+    if (!trimmed) {
+      return "";
+    }
+
+    const fencedMatch = trimmed.match(/```(?:markdown)?\s*([\s\S]*?)\s*```/i);
+    if (fencedMatch) {
+      return fencedMatch[1].trim();
+    }
+
+    return trimmed;
+  }
+
+  buildRepoHighlights(releasesData, language) {
+    const languageUi = releaseSummaryConfig.ui[language];
+    return [...releasesData]
+      .sort(
+        (a, b) =>
+          (b.stars ?? 0) - (a.stars ?? 0) ||
+          b.releases.length - a.releases.length,
+      )
+      .slice(0, 3)
+      .map(
+        (repo) =>
+          `${repo.repo} (${repo.releases.length} ${
+            languageUi?.repo?.releaseCountShort ?? "releases"
+          }, ${repo.stars ?? 0}⭐)`,
+      );
+  }
+
   formatDate(date, locale = "fr-FR") {
     return new Date(date).toLocaleDateString(locale, {
       year: "numeric",
@@ -149,10 +268,24 @@ Generate ONLY the markdown content (without frontmatter metadata). Start directl
     });
   }
 
-  /**
-   * Build frontmatter with content
-   */
-  buildFrontmatter({ title, excerpt, slug, author, lang, content }) {
+  formatFullDate(date, locale = "fr-FR") {
+    return new Date(date).toLocaleDateString(locale, {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  }
+
+  truncate(value, maxLength) {
+    if (!value) {
+      return value;
+    }
+    return value.length > maxLength
+      ? `${value.slice(0, maxLength - 1)}…`
+      : value;
+  }
+
+  buildFrontmatter({ title, excerpt, slug, author, lang }) {
     return `---
 title: '${title}'
 excerpt: '${excerpt}'
@@ -160,8 +293,6 @@ slug: ${slug}
 author: '${author}'
 lang: ${lang}
 ---
-
-${content}
 `;
   }
 }

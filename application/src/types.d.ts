@@ -1,5 +1,6 @@
 import type { AstroComponentFactory } from 'astro/runtime/server/index.js';
 import type { HTMLAttributes, ImageMetadata } from 'astro/types';
+import type { SupportedLanguage } from '~/i18n/ui';
 
 export interface Post {
   /** A unique ID number that identifies a post. */
@@ -31,7 +32,7 @@ export interface Post {
   author?: string;
 
   /**  */
-  lang?: 'fr' | 'en';
+  lang?: SupportedLanguage;
 
   /**  */
   translationKey?: string;
@@ -48,6 +49,48 @@ export interface Post {
 
   /**  */
   readingTime?: number;
+}
+
+export interface ReleaseSummaryData {
+  lang: SupportedLanguage;
+  stats: ReleaseSummaryStats;
+  introMarkdown: string;
+  closingMarkdown: string | null;
+  repositories: ReleaseSummaryRepository[];
+}
+
+export interface ReleaseSummaryStats {
+  period: {
+    since: string;
+    until: string;
+  };
+  totalRepos: number;
+  totalReleases: number;
+  busiestRepo: {
+    name: string;
+    count: number;
+  } | null;
+  mostRecentRelease: {
+    repo: string;
+    name: string;
+    publishedAt: string;
+  } | null;
+}
+
+export interface ReleaseSummaryRepository {
+  name: string;
+  description: string;
+  stars: number;
+  url: string;
+  releases: ReleaseSummaryRelease[];
+}
+
+export interface ReleaseSummaryRelease {
+  name: string;
+  tag: string;
+  publishedAt: string;
+  url: string;
+  highlights: string[];
 }
 
 export interface Taxonomy {

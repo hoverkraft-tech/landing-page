@@ -1,5 +1,15 @@
 name: "Generate Blog Post"
-description: "Generates bilingual blog post content using OpenAI"
+description: |
+  Generates bilingual blog post content using OpenAI based on provided release data.
+
+  ## Features
+
+  - **AI-Powered Content**: Uses OpenAI GPT-4o-mini for engaging content generation
+  - **Bilingual**: Generates both French and English versions
+  - **Image Generation**: Creates preview images with DALL-E 3
+  - **SOLID Principles**: Clean, modular, testable code architecture
+  - **Comprehensive Tests**: Full test coverage with Node.js test runner
+
 inputs:
   releases-data:
     description: "JSON-stringified array of releases data"
@@ -20,9 +30,6 @@ outputs:
   slug:
     description: "Generated slug for the blog post"
     value: ${{ steps.generate.outputs.slug }}
-  image-generated:
-    description: "Whether preview image was generated (true/false)"
-    value: ${{ steps.generate.outputs.image-generated }}
 runs:
   using: "composite"
   steps:

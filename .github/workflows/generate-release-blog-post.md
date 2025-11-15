@@ -1,79 +1,109 @@
-# Generate Release Blog Post Workflow
+<!-- header:start -->
 
-Automatically generates bilingual blog posts summarizing new releases from all Hoverkraft Tech public repositories.
+# GitHub Workflow: Generate Release Blog Post
 
-## Architecture
+<div align="center">
+  <img src="https://opengraph.githubassets.com/3169f9284c74729752f5f2c3b9b98fee898c232e9e90cadc0665b3bee5234061/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Release Blog Post" />
+</div>
+
+---
+
+<!-- header:end -->
+<!-- badges:start -->
+
+[![Release](https://img.shields.io/github/v/release/hoverkraft-tech/landing-page)](https://github.com/hoverkraft-tech/landing-page/releases)
+[![License](https://img.shields.io/github/license/hoverkraft-tech/landing-page)](http://choosealicense.com/licenses/mit/)
+[![Stars](https://img.shields.io/github/stars/hoverkraft-tech/landing-page?style=social)](https://img.shields.io/github/stars/hoverkraft-tech/landing-page?style=social)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/hoverkraft-tech/landing-page/blob/main/CONTRIBUTING.md)
+
+<!-- badges:end -->
+<!-- overview:start -->
+
+## Overview
+
+Workflow to automatically generate blog posts summarizing new releases from all Hoverkraft Tech public repositories.
+The workflow automatically handles content generation, no manual intervention needed unless the preview image generation fails.
 
 The workflow uses modular GitHub Actions following SOLID principles:
 
-1. **fetch-releases**: Fetches releases from GitHub API
-2. **generate-blog-post**: Generates AI-powered blog content using OpenAI
+- [fetch-releases](./.github/actions/fetch-releases/action.yml): Fetches releases from GitHub API
+- [generate-blog-post](./.github/actions/generate-blog-post/README.md): Generates AI-powered blog content
 
-## Features
+### Permissions
 
-- ✅ **AI-Powered Content**: Uses OpenAI GPT-4o-mini for engaging, professional content
-- ✅ **Automatic Images**: DALL-E 3 generates preview images
-- ✅ **Bilingual**: French and English versions
-- ✅ **SOLID Architecture**: Clean, modular, testable code
-- ✅ **Comprehensive Tests**: Full test coverage with Node.js test runner
-- ✅ **Required API Key**: OpenAI API key is mandatory for quality content
-- ✅ **Smart Detection**: Only creates PR when releases are found
+- **`contents`**: `write`
+- **`pull-requests`**: `write`
 
-## Workflow Execution
+<!-- overview:end -->
+<!-- usage:start -->
 
-### Schedule
+## Usage
 
-- **Automatic**: Every Monday at 9:00 AM UTC
-- **Manual**: Via workflow_dispatch with optional date range
+```yaml
+name: Generate Release Blog Post
+on:
+  schedule:
+    - cron: 0 9 * * 1
+permissions: {}
+jobs:
+  generate-release-blog-post:
+    uses: hoverkraft-tech/landing-page/.github/workflows/generate-release-blog-post.yml@99be2077541795093731fe5938e8d8bc692d522e # copilot/create-scheduled-workflow-for-blog-posts
+    permissions:
+      contents: write
+      pull-requests: write
+    with:
+      # Fetch releases since this date (ISO 8601 format, e.g., 2025-01-01T00:00:00Z)
+      since-date: ""
 
-### Process
-
-1. Fetches all public hoverkraft-tech repositories
-2. Collects releases from the last 7 days (configurable)
-3. If no releases found, workflow completes without action
-4. If releases found:
-   - Generates bilingual blog posts with AI
-   - Creates preview image with DALL-E
-   - Opens PR with generated content
-
-## Dependencies
-
-- **Node.js 20**
-- **GitHub API** (GITHUB_TOKEN)
-- **OpenAI API** (COPILOT_MCP_OPENAI_API_KEY secret) - **Required**
-- **CI Bot** (CI_BOT_APP_ID, CI_BOT_APP_PRIVATE_KEY)
-
-## Generated Files
-
-```
-application/src/data/post/releases-YYYY-MM/
-├── common.yaml    # Metadata
-├── fr.mdx        # French content (AI-generated)
-└── en.mdx        # English content (AI-generated)
-
-application/src/assets/images/blog/releases-YYYY-MM/
-└── preview.png   # Generated with DALL-E 3
+      # Fetch releases until this date (ISO 8601 format, e.g., 2025-01-15T23:59:59Z)
+      until-date: ""
 ```
 
-## Actions Documentation
+<!-- usage:end -->
+<!-- inputs:start -->
 
-- [fetch-releases](./.github/actions/fetch-releases/action.yml) - Fetches release data
-- [generate-blog-post](./.github/actions/generate-blog-post/README.md) - Generates blog content
+## Inputs
 
-## Testing
+### Workflow Dispatch Inputs
 
-Each action includes comprehensive tests using Node.js test runner:
+| **Input**        | **Description**                                                              | **Required** | **Type**   | **Default** |
+| ---------------- | ---------------------------------------------------------------------------- | ------------ | ---------- | ----------- |
+| **`since-date`** | Fetch releases since this date (ISO 8601 format, e.g., 2025-01-01T00:00:00Z) | **false**    | **string** | -           |
+| **`until-date`** | Fetch releases until this date (ISO 8601 format, e.g., 2025-01-15T23:59:59Z) | **false**    | **string** | -           |
 
-```bash
-cd .github/actions/generate-blog-post
-npm test                # Run tests
-npm run test:coverage   # Coverage report
-```
+<!-- inputs:end -->
+<!-- secrets:start -->
+<!-- secrets:end -->
+<!-- outputs:start -->
+<!-- outputs:end -->
+<!-- examples:start -->
+<!-- examples:end -->
+<!-- contributing:start -->
 
-## Post-Generation
+## Contributing
 
-1. Review PR for content accuracy
-2. Verify preview image is appropriate
-3. Merge when ready
+Contributions are welcome! Please see the [contributing guidelines](https://github.com/hoverkraft-tech/landing-page/blob/main/CONTRIBUTING.md) for more details.
 
-The workflow automatically handles content generation, no manual intervention needed unless the preview image generation fails.
+<!-- contributing:end -->
+<!-- security:start -->
+<!-- security:end -->
+<!-- license:start -->
+
+## License
+
+This project is licensed under the MIT License.
+
+SPDX-License-Identifier: MIT
+
+Copyright © 2025 hoverkraft-tech
+
+For more details, see the [license](http://choosealicense.com/licenses/mit/).
+
+<!-- license:end -->
+<!-- generated:start -->
+
+---
+
+This documentation was automatically generated by [CI Dokumentor](https://github.com/hoverkraft-tech/ci-dokumentor).
+
+<!-- generated:end -->

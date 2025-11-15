@@ -93,7 +93,7 @@ export const routes = {
   },
 };
 
-type SupportedLanguage = keyof typeof ui;
+export type SupportedLanguage = keyof typeof ui;
 
 const supportedLanguages = Object.keys(ui) as SupportedLanguage[];
 const configuredLanguageLabels = (I18N?.languages ?? {}) as Record<string, string>;
