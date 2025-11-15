@@ -5,11 +5,7 @@ on:
   pull_request:
     branches: [main]
 
-permissions:
-  contents: read
-  security-events: write
-  # FIXME: This is a workaround for having workflow ref. See https://github.com/orgs/community/discussions/38659
-  id-token: write
+permissions: {}
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -19,3 +15,8 @@ jobs:
   ci:
     uses: ./.github/workflows/__shared-ci.yml
     secrets: inherit
+    permissions:
+      contents: read
+      id-token: write
+      pull-requests: write
+      security-events: write
