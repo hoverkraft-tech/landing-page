@@ -15,23 +15,26 @@ The workflow uses modular GitHub Actions following SOLID principles:
 - ✅ **Automatic Images**: DALL-E 3 generates preview images
 - ✅ **Bilingual**: French and English versions
 - ✅ **SOLID Architecture**: Clean, modular, testable code
-- ✅ **Comprehensive Tests**: Full test coverage with Jest
+- ✅ **Comprehensive Tests**: Full test coverage with Node.js test runner
 - ✅ **Required API Key**: OpenAI API key is mandatory for quality content
+- ✅ **Smart Detection**: Only creates PR when releases are found
 
 ## Workflow Execution
 
 ### Schedule
 
-- **Automatic**: 1st of every month at 9:00 AM UTC
+- **Automatic**: Every Monday at 9:00 AM UTC
 - **Manual**: Via workflow_dispatch with optional date range
 
 ### Process
 
 1. Fetches all public hoverkraft-tech repositories
-2. Collects releases from the last 30 days (configurable)
-3. Generates bilingual blog posts with AI
-4. Creates preview image with DALL-E
-5. Opens PR with generated content
+2. Collects releases from the last 7 days (configurable)
+3. If no releases found, workflow completes without action
+4. If releases found:
+   - Generates bilingual blog posts with AI
+   - Creates preview image with DALL-E
+   - Opens PR with generated content
 
 ## Dependencies
 
@@ -59,7 +62,7 @@ application/src/assets/images/blog/releases-YYYY-MM/
 
 ## Testing
 
-Each action includes comprehensive Jest tests:
+Each action includes comprehensive tests using Node.js test runner:
 
 ```bash
 cd .github/actions/generate-blog-post
