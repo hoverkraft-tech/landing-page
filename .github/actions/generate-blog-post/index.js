@@ -54,11 +54,9 @@ async function run({
 
     // Set outputs
     core.setOutput("slug", result.slug);
-    core.setOutput("image-generated", result.imageGenerated ? "true" : "false");
 
     core.info(`✅ Blog post generated successfully!`);
     core.info(`  Slug: ${result.slug}`);
-    core.info(`  Image generated: ${result.imageGenerated}`);
   } catch (error) {
     core.setFailed(`Action failed: ${error.message}`);
     throw error;

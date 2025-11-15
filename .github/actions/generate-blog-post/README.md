@@ -1,48 +1,94 @@
-# Generate Blog Post Action
+<!-- header:start -->
 
-GitHub Action to generate bilingual blog posts from release data using OpenAI.
+# GitHub Action: Generate Blog Post
 
-## Features
+<div align="center">
+  <img src="https://opengraph.githubassets.com/3169f9284c74729752f5f2c3b9b98fee898c232e9e90cadc0665b3bee5234061/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
+</div>
 
-- **AI-Powered Content**: Uses OpenAI GPT-4o-mini for engaging content generation
-- **Bilingual**: Generates both French and English versions
-- **Image Generation**: Creates preview images with DALL-E 3
-- **SOLID Principles**: Clean, modular, testable code architecture
-- **Comprehensive Tests**: Full test coverage with Node.js test runner
+---
 
-## Inputs
+<!-- header:end -->
+<!-- badges:start -->
 
-| Name             | Description                                  | Required | Default       |
-| ---------------- | -------------------------------------------- | -------- | ------------- |
-| `releases-data`  | JSON-stringified array of releases data      | Yes      | -             |
-| `since-date`     | Start date for the release period (ISO 8601) | Yes      | -             |
-| `until-date`     | End date for the release period (ISO 8601)   | Yes      | -             |
-| `openai-api-key` | OpenAI API key for content generation        | Yes      | -             |
-| `output-dir`     | Output directory for generated files         | Yes      | `application` |
+[![Marketplace](https://img.shields.io/badge/Marketplace-generate--blog--post-blue?logo=github-actions)](https://github.com/marketplace/actions/generate-blog-post)
+[![Release](https://img.shields.io/github/v/release/hoverkraft-tech/landing-page)](https://github.com/hoverkraft-tech/landing-page/releases)
+[![License](https://img.shields.io/github/license/hoverkraft-tech/landing-page)](http://choosealicense.com/licenses/mit/)
+[![Stars](https://img.shields.io/github/stars/hoverkraft-tech/landing-page?style=social)](https://img.shields.io/github/stars/hoverkraft-tech/landing-page?style=social)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](https://github.com/hoverkraft-tech/landing-page/blob/main/CONTRIBUTING.md)
 
-## Outputs
+<!-- badges:end -->
+<!-- overview:start -->
 
-| Name              | Description                                      |
-| ----------------- | ------------------------------------------------ |
-| `slug`            | Generated slug for the blog post                 |
-| `post-dir`        | Directory where post files were created          |
-| `image-dir`       | Directory where image files were created         |
-| `image-generated` | Whether preview image was generated (true/false) |
+## Overview
+
+Generates bilingual blog post content using OpenAI
+
+<!-- overview:end -->
+<!-- usage:start -->
 
 ## Usage
 
 ```yaml
-- name: Generate blog post
-  uses: ./.github/actions/generate-blog-post
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-blog-post@99be2077541795093731fe5938e8d8bc692d522e # copilot/create-scheduled-workflow-for-blog-posts
   with:
-    releases-data: ${{ steps.fetch.outputs.releases-data }}
-    since-date: ${{ steps.fetch.outputs.since-date }}
-    until-date: ${{ steps.fetch.outputs.until-date }}
-    openai-api-key: ${{ secrets.OPENAI_API_KEY }}
-    output-dir: application
+    # JSON-stringified array of releases data
+    # This input is required.
+    releases-data: ""
+
+    # Start date for the release period (ISO 8601)
+    # This input is required.
+    since-date: ""
+
+    # End date for the release period (ISO 8601)
+    # This input is required.
+    until-date: ""
+
+    # OpenAI API key for content generation
+    # This input is required.
+    openai-api-key: ""
+
+    # Output directory for generated files
+    # This input is required.
+    output-dir: ""
 ```
 
-## Architecture
+<!-- usage:end -->
+<!-- inputs:start -->
+
+## Inputs
+
+| **Input**            | **Description**                              | **Required** | **Default** |
+| -------------------- | -------------------------------------------- | ------------ | ----------- |
+| **`releases-data`**  | JSON-stringified array of releases data      | **true**     | -           |
+| **`since-date`**     | Start date for the release period (ISO 8601) | **true**     | -           |
+| **`until-date`**     | End date for the release period (ISO 8601)   | **true**     | -           |
+| **`openai-api-key`** | OpenAI API key for content generation        | **true**     | -           |
+| **`output-dir`**     | Output directory for generated files         | **true**     | -           |
+
+<!-- inputs:end -->
+<!-- secrets:start -->
+<!-- secrets:end -->
+<!-- outputs:start -->
+
+## Outputs
+
+| **Output** | **Description**                  |
+| ---------- | -------------------------------- |
+| **`slug`** | Generated slug for the blog post |
+
+<!-- outputs:end -->
+<!-- examples:start -->
+<!-- examples:end -->
+<!-- contributing:start -->
+
+## Contributing
+
+Contributions are welcome! Please see the [contributing guidelines](https://github.com/hoverkraft-tech/landing-page/blob/main/CONTRIBUTING.md) for more details.
+
+<!-- contributing:end -->
+
+### Architecture
 
 The action follows SOLID principles with separated concerns:
 
@@ -51,7 +97,7 @@ The action follows SOLID principles with separated concerns:
 - **FileSystemService**: Manages file operations
 - **BlogPostGenerator**: Orchestrates the generation process
 
-## Testing
+### Testing
 
 ```bash
 npm test                 # Run tests
@@ -59,11 +105,11 @@ npm run test:watch       # Watch mode
 npm run test:coverage    # Coverage report
 ```
 
-## Development
+### Development
 
 The action is structured for maintainability:
 
-```
+```txt
 .
 ├── src/
 │   ├── openai-service.js          # OpenAI API client
@@ -76,6 +122,25 @@ The action is structured for maintainability:
 └── package.json                   # Dependencies
 ```
 
+<!-- security:start -->
+<!-- security:end -->
+<!-- license:start -->
+
 ## License
 
-0BSD
+This project is licensed under the MIT License.
+
+SPDX-License-Identifier: MIT
+
+Copyright © 2025 hoverkraft-tech
+
+For more details, see the [license](http://choosealicense.com/licenses/mit/).
+
+<!-- license:end -->
+<!-- generated:start -->
+
+---
+
+This documentation was automatically generated by [CI Dokumentor](https://github.com/hoverkraft-tech/ci-dokumentor).
+
+<!-- generated:end -->

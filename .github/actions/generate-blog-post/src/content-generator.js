@@ -85,29 +85,7 @@ class ContentGenerator {
       })
       .join("\n\n");
 
-    const prompt = isFrench
-      ? `Tu es un rédacteur technique professionnel pour le blog HoverKraft Tech. Crée un article de blog en français sur les dernières releases de projets open source.
-
-**Contexte:**
-- Période: ${period}
-- ${totalRepos} projet${totalRepos > 1 ? "s" : ""} avec ${totalReleases} release${totalReleases > 1 ? "s" : ""}
-- Style HoverKraft: professionnel mais accessible, orienté action, concis
-
-**Releases:**
-${releasesSummary}
-
-**Instructions:**
-1. Commence par une citation inspirante sur l'innovation (40-80 caractères, format: > citation)
-2. Section d'introduction: résumé enthousiaste de l'activité
-3. Pour chaque projet: titre (##), description, lien, étoiles, et releases (####)
-4. Pour chaque release: version, date, lien GitHub, notes principales (résumées)
-5. Section finale: appel à l'action communautaire (essayer, contribuer, partager)
-6. Garde un ton professionnel mais engageant
-7. Maximum 1 emoji par section
-8. Reste concis et direct
-
-Génère UNIQUEMENT le contenu markdown (sans les métadonnées frontmatter). Commence directement par la citation.`
-      : `You are a professional technical writer for HoverKraft Tech blog. Create a blog post in English about the latest open source project releases.
+    const prompt = `You are a professional technical writer for HoverKraft Tech blog. Create a blog post in ${isFrench ? "French" : "English"} about the latest open source project releases.
 
 **Context:**
 - Period: ${period}
@@ -129,9 +107,7 @@ ${releasesSummary}
 
 Generate ONLY the markdown content (without frontmatter metadata). Start directly with the quote.`;
 
-    const systemContent = isFrench
-      ? "Tu es un expert en rédaction technique pour blogs tech français."
-      : "You are an expert technical writer for tech blogs.";
+    const systemContent = `You are an expert technical writer for tech blogs. Write in ${isFrench ? "French" : "English"}.`;
 
     return await this.openAIService.generateText([
       { role: "system", content: systemContent },
