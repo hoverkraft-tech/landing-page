@@ -4,7 +4,7 @@
  * Source: @hoverkraft-tech/branding
  * Version: 0.1.0
  * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
- * Generated: 2025-11-14T23:11:53.505Z
+ * Generated: 2025-11-15T06:16:17.519Z
  */
 
 import type { ColorCollection } from './types';
@@ -12,18 +12,26 @@ import type { ColorCollection } from './types';
 export const brandColors: ColorCollection = {
   do: {
     en: [
-      '- Use the exact brand colors specified in the palette\n- Maintain sufficient contrast for accessibility (WCAG AA minimum)\n- Use colors consistently across all materials',
+      `- Use the exact brand colors specified in the palette
+- Maintain sufficient contrast for accessibility (WCAG AA minimum)
+- Use colors consistently across all materials`,
     ],
     fr: [
-      "- Utiliser exactement les couleurs de la palette de marque\n- Maintenir un contraste suffisant pour l'accessibilité (WCAG AA minimum)\n- Employer les couleurs de manière cohérente sur tous les supports",
+      `- Utiliser exactement les couleurs de la palette de marque
+- Maintenir un contraste suffisant pour l'accessibilité (WCAG AA minimum)
+- Employer les couleurs de manière cohérente sur tous les supports`,
     ],
   },
   dont: {
     en: [
-      '- Do not use variations or tints of the brand colors\n- Do not use unapproved colors as primary colors\n- Do not compromise readability for aesthetic choices',
+      `- Do not use variations or tints of the brand colors
+- Do not use unapproved colors as primary colors
+- Do not compromise readability for aesthetic choices`,
     ],
     fr: [
-      '- Ne pas utiliser de variations ou de nuances des couleurs de la marque\n- Ne pas utiliser des couleurs non approuvées comme couleurs principales\n- Ne pas sacrifier la lisibilité au profit de considérations esthétiques',
+      `- Ne pas utiliser de variations ou de nuances des couleurs de la marque
+- Ne pas utiliser des couleurs non approuvées comme couleurs principales
+- Ne pas sacrifier la lisibilité au profit de considérations esthétiques`,
     ],
   },
   items: [
