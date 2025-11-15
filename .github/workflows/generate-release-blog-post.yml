@@ -1,0 +1,235 @@
+# Workflow to automatically generate blog posts summarizing new releases
+# from all Hoverkraft Tech public repositories.
+#
+# This workflow runs on a monthly schedule and checks for new releases
+# since the last check. When releases are found, it uses the blog-post
+# custom agent (via Copilot) to generate bilingual blog content and creates a PR.
+
+---
+name: Generate Release Blog Post
+
+on:
+  schedule:
+    # Run on the 1st of every month at 9:00 AM UTC
+    - cron: '0 9 1 * *'
+  workflow_dispatch:
+    inputs:
+      since-date:
+        description: 'Fetch releases since this date (ISO 8601 format, e.g., 2025-01-01T00:00:00Z)'
+        required: false
+        type: string
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  check-and-generate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcb5dd907a8 # v5.0.0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@39370e3970a6d050c480ffad4ff0ed4d3fdee5af # v4.1.0
+        with:
+          node-version: '20'
+
+      - name: Check for new releases
+        id: check
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          SINCE_DATE_INPUT: ${{ inputs.since-date }}
+        with:
+          script: |
+            const owner = 'hoverkraft-tech';
+            
+            // Determine the date range
+            let sinceDate;
+            if (process.env.SINCE_DATE_INPUT) {
+              sinceDate = new Date(process.env.SINCE_DATE_INPUT);
+            } else {
+              // Default: last 30 days
+              sinceDate = new Date();
+              sinceDate.setDate(sinceDate.getDate() - 30);
+            }
+            
+            const untilDate = new Date();
+            
+            core.info(`Checking for releases from ${sinceDate.toISOString()} to ${untilDate.toISOString()}`);
+            
+            // Get all public repos for the organization
+            const repos = await github.paginate(github.rest.repos.listForOrg, {
+              org: owner,
+              type: 'public',
+              per_page: 100
+            });
+            
+            core.info(`Found ${repos.length} public repositories`);
+            
+            // Fetch releases for each repo
+            const releasesData = [];
+            
+            for (const repo of repos) {
+              try {
+                const releases = await github.paginate(github.rest.repos.listReleases, {
+                  owner,
+                  repo: repo.name,
+                  per_page: 100
+                });
+                
+                // Filter releases by date
+                const recentReleases = releases.filter(release => {
+                  const publishedAt = new Date(release.published_at);
+                  return publishedAt >= sinceDate && publishedAt <= untilDate && !release.draft;
+                });
+                
+                if (recentReleases.length > 0) {
+                  core.info(`Found ${recentReleases.length} release(s) for ${repo.name}`);
+                  
+                  releasesData.push({
+                    repo: repo.name,
+                    description: repo.description,
+                    url: repo.html_url,
+                    stars: repo.stargazers_count,
+                    releases: recentReleases.map(r => ({
+                      name: r.name,
+                      tag: r.tag_name,
+                      publishedAt: r.published_at,
+                      url: r.html_url,
+                      body: r.body
+                    }))
+                  });
+                }
+              } catch (error) {
+                core.warning(`Failed to fetch releases for ${repo.name}: ${error.message}`);
+              }
+            }
+            
+            core.setOutput('has-releases', releasesData.length > 0 ? 'true' : 'false');
+            core.setOutput('releases-data', JSON.stringify(releasesData));
+            core.setOutput('since-date', sinceDate.toISOString());
+            core.setOutput('until-date', untilDate.toISOString());
+            
+            if (releasesData.length === 0) {
+              core.info('No new releases found in the specified period');
+            } else {
+              core.info(`Found releases from ${releasesData.length} repositories`);
+            }
+
+      - name: Create issue with release data
+        if: steps.check.outputs.has-releases == 'true'
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          RELEASES_DATA: ${{ steps.check.outputs.releases-data }}
+          SINCE_DATE: ${{ steps.check.outputs.since-date }}
+          UNTIL_DATE: ${{ steps.check.outputs.until-date }}
+        with:
+          script: |
+            const releasesData = JSON.parse(process.env.RELEASES_DATA);
+            const sinceDate = new Date(process.env.SINCE_DATE);
+            const untilDate = new Date(process.env.UNTIL_DATE);
+            
+            // Format dates for display
+            const formatDate = (date) => {
+              return new Date(date).toLocaleDateString('fr-FR', { 
+                year: 'numeric', 
+                month: 'long',
+                day: 'numeric'
+              });
+            };
+            
+            const sinceDateFormatted = formatDate(sinceDate);
+            const untilDateFormatted = formatDate(untilDate);
+            
+            // Generate a slug based on the date
+            const year = untilDate.getFullYear();
+            const month = String(untilDate.getMonth() + 1).padStart(2, '0');
+            const slug = `releases-${year}-${month}`;
+            
+            // Create a detailed summary of releases
+            const releasesSummary = releasesData.map(repo => {
+              const releasesText = repo.releases.map(r => {
+                const body = r.body ? r.body.split('\n').slice(0, 5).join('\n') : 'No release notes';
+                return `- **${r.name || r.tag}** (${r.tag}) - ${formatDate(r.publishedAt)}\n  ${r.url}\n  \`\`\`\n  ${body}\n  \`\`\``;
+              }).join('\n\n');
+              
+              return `### ${repo.repo}\n\n${repo.description || 'No description'}\n\n${repo.url} | ⭐ ${repo.stars} stars\n\n**Releases:**\n\n${releasesText}`;
+            }).join('\n\n---\n\n');
+            
+            const issueBody = `## 📦 New Releases Detected
+            
+            New releases have been detected from Hoverkraft Tech public repositories for the period:
+            **${sinceDateFormatted}** to **${untilDateFormatted}**
+            
+            ### Summary
+            - **Repositories with releases**: ${releasesData.length}
+            - **Suggested slug**: \`${slug}\`
+            - **Total releases**: ${releasesData.reduce((sum, r) => sum + r.releases.length, 0)}
+            
+            ---
+            
+            ${releasesSummary}
+            
+            ---
+            
+            ### Action Required
+            
+            A Copilot agent should create a bilingual blog post for these releases. The blog post should:
+            
+            1. Be created in \`application/src/data/post/${slug}/\`
+            2. Include \`common.yaml\`, \`fr.mdx\`, and \`en.mdx\`
+            3. Use the category "Open Source"
+            4. Include tags: \`releases\`, \`open-source\`, \`hoverkraft-tech\`
+            5. Highlight key features and improvements
+            6. Encourage community engagement
+            
+            **Note**: This issue was automatically created by the \`generate-release-blog-post\` workflow.`;
+            
+            const issue = await github.rest.issues.create({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              title: `📝 Blog Post: Release Summary ${year}-${month}`,
+              body: issueBody,
+              labels: ['blog', 'automated', 'releases']
+            });
+            
+            core.info(`Created issue #${issue.data.number}`);
+            core.setOutput('issue-number', issue.data.number);
+
+      - name: Create summary
+        if: always()
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          HAS_RELEASES: ${{ steps.check.outputs.has-releases }}
+          SINCE_DATE: ${{ steps.check.outputs.since-date }}
+          UNTIL_DATE: ${{ steps.check.outputs.until-date }}
+        with:
+          script: |
+            const hasReleases = process.env.HAS_RELEASES === 'true';
+            
+            if (!hasReleases) {
+              await core.summary
+                .addHeading('No New Releases Found', 2)
+                .addRaw(`No new releases were found from ${process.env.SINCE_DATE} to ${process.env.UNTIL_DATE}.`)
+                .write();
+            } else {
+              const releasesData = JSON.parse(process.env.RELEASES_DATA || '[]');
+              const totalReleases = releasesData.reduce((sum, r) => sum + r.releases.length, 0);
+              
+              await core.summary
+                .addHeading('Release Blog Post Issue Created ✅', 2)
+                .addTable([
+                  [{ data: 'Period', header: true }, `${process.env.SINCE_DATE} to ${process.env.UNTIL_DATE}`],
+                  [{ data: 'Repositories', header: true }, String(releasesData.length)],
+                  [{ data: 'Total Releases', header: true }, String(totalReleases)]
+                ])
+                .addHeading('Next Steps', 3)
+                .addList([
+                  'An issue has been created with the release data',
+                  'Assign a Copilot agent to generate the blog post',
+                  'Review and merge the resulting PR'
+                ])
+                .write();
+            }
