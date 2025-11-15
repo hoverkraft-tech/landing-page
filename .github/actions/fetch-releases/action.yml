@@ -3,26 +3,17 @@ description: "Fetches releases from all public Hoverkraft Tech repositories with
 inputs:
   since-date:
     description: "Fetch releases since this date (ISO 8601 format)"
-    required: false
+    required: true
   until-date:
     description: "Fetch releases until this date (ISO 8601 format)"
-    required: false
+    required: true
   github-token:
     description: "GitHub token for API access"
     required: true
 outputs:
-  has-releases:
-    description: "Whether any releases were found (true/false)"
-    value: ${{ steps.fetch.outputs.has-releases }}
   releases-data:
     description: "JSON-stringified array of releases data"
     value: ${{ steps.fetch.outputs.releases-data }}
-  since-date:
-    description: "Actual since date used"
-    value: ${{ steps.fetch.outputs.since-date }}
-  until-date:
-    description: "Actual until date used"
-    value: ${{ steps.fetch.outputs.until-date }}
 runs:
   using: "composite"
   steps:
@@ -37,22 +28,9 @@ runs:
         script: |
           const owner = 'hoverkraft-tech';
 
-          // Determine the date range
-          let sinceDate;
-          if (process.env.SINCE_DATE_INPUT) {
-            sinceDate = new Date(process.env.SINCE_DATE_INPUT);
-          } else {
-            // Default: last 7 days (weekly check)
-            sinceDate = new Date();
-            sinceDate.setDate(sinceDate.getDate() - 7);
-          }
-
-          let untilDate;
-          if (process.env.UNTIL_DATE_INPUT) {
-            untilDate = new Date(process.env.UNTIL_DATE_INPUT);
-          } else {
-            untilDate = new Date();
-          }
+          // Parse date range from required inputs
+          const sinceDate = new Date(process.env.SINCE_DATE_INPUT);
+          const untilDate = new Date(process.env.UNTIL_DATE_INPUT);
 
           core.info(`Checking for releases from ${sinceDate.toISOString()} to ${untilDate.toISOString()}`);
 
@@ -104,10 +82,7 @@ runs:
             }
           }
 
-          core.setOutput('has-releases', releasesData.length > 0 ? 'true' : 'false');
           core.setOutput('releases-data', JSON.stringify(releasesData));
-          core.setOutput('since-date', sinceDate.toISOString());
-          core.setOutput('until-date', untilDate.toISOString());
 
           if (releasesData.length === 0) {
             core.info('No new releases found in the specified period');
