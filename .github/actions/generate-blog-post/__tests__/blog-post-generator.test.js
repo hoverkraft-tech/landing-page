@@ -59,7 +59,8 @@ describe("BlogPostGenerator", () => {
         outputDir: "/test",
       });
 
-      assert.strictEqual(result.slug, "releases-2025-11");
+      // Slug now includes date and hash
+      assert.ok(result.slug.startsWith("releases-2025-11-01-"));
       assert.strictEqual(result.imageGenerated, true);
       assert.strictEqual(
         mockFileSystemService.ensureDirectory.mock.calls.length,
@@ -68,7 +69,7 @@ describe("BlogPostGenerator", () => {
       assert.strictEqual(mockFileSystemService.writeFile.mock.calls.length, 3); // common.yaml, fr.mdx, en.mdx
     });
 
-    it("should create README when image generation fails", async () => {
+    it("should fail when image generation fails", async () => {
       const mockReleasesData = [
         {
           repo: "test-repo",
@@ -88,44 +89,63 @@ describe("BlogPostGenerator", () => {
         throw new Error("API error");
       });
 
-      const result = await blogPostGenerator.generate(mockReleasesData, {
-        sinceDate: "2025-10-01T00:00:00Z",
-        untilDate: "2025-11-01T00:00:00Z",
-        outputDir: "/test",
-      });
-
-      assert.strictEqual(result.imageGenerated, false);
-      assert.strictEqual(mockFileSystemService.writeFile.mock.calls.length, 4); // common.yaml, fr.mdx, en.mdx, README.md
+      await assert.rejects(
+        async () => {
+          await blogPostGenerator.generate(mockReleasesData, {
+            sinceDate: "2025-10-01T00:00:00Z",
+            untilDate: "2025-11-01T00:00:00Z",
+            outputDir: "/test",
+          });
+        },
+        {
+          message: "API error",
+        },
+      );
     });
   });
 
   describe("generateSlug", () => {
-    it("should generate correct slug", () => {
-      const result = blogPostGenerator.generateSlug("2025-11-15T00:00:00Z");
-      assert.strictEqual(result, "releases-2025-11");
+    it("should generate correct slug with hash", () => {
+      const result = blogPostGenerator.generateSlug(
+        "2025-11-15T00:00:00Z",
+        "2025-11-15T23:59:59Z",
+      );
+      assert.ok(result.startsWith("releases-2025-11-15-"));
+      assert.strictEqual(result.length, 28); // releases-YYYY-MM-DD-XXXXXXXX (9+5+3+3+8 = 28)
     });
 
-    it("should pad month with zero", () => {
-      const result = blogPostGenerator.generateSlug("2025-01-15T00:00:00Z");
-      assert.strictEqual(result, "releases-2025-01");
+    it("should generate different slugs for different date ranges", () => {
+      const result1 = blogPostGenerator.generateSlug(
+        "2025-11-15T00:00:00Z",
+        "2025-11-15T23:59:59Z",
+      );
+      const result2 = blogPostGenerator.generateSlug(
+        "2025-11-08T00:00:00Z",
+        "2025-11-15T23:59:59Z",
+      );
+      assert.notStrictEqual(result1, result2);
     });
   });
 
   describe("generateCommonYaml", () => {
     it("should generate valid YAML content", () => {
-      const result = blogPostGenerator.generateCommonYaml("releases-2025-11");
+      const result = blogPostGenerator.generateCommonYaml(
+        "releases-2025-11-15-abc123de",
+      );
 
       assert.ok(result.includes("publishDate:"));
       assert.ok(
         result.includes(
-          "image: ~/assets/images/blog/releases-2025-11/preview.png",
+          "image: ~/assets/images/blog/releases-2025-11-15-abc123de/preview.png",
         ),
       );
       assert.ok(result.includes("tags:"));
       assert.ok(result.includes("- releases"));
       assert.ok(result.includes("- open-source"));
       assert.ok(result.includes("category: Open Source"));
-      assert.ok(result.includes("translationKey: releases-2025-11"));
+      assert.ok(
+        result.includes("translationKey: releases-2025-11-15-abc123de"),
+      );
     });
   });
 });

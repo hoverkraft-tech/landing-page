@@ -4,6 +4,7 @@
  */
 
 const path = require("path");
+const crypto = require("crypto");
 
 class BlogPostGenerator {
   constructor(contentGenerator, openAIService, fileSystemService) {
@@ -16,8 +17,8 @@ class BlogPostGenerator {
    * Generate complete blog post
    */
   async generate(releasesData, { sinceDate, untilDate, outputDir }) {
-    // Generate slug
-    const slug = this.generateSlug(untilDate);
+    // Generate unique slug based on dates
+    const slug = this.generateSlug(sinceDate, untilDate);
 
     // Create directories
     const postDir = this.fileSystemService.getAbsolutePath(
@@ -61,38 +62,36 @@ class BlogPostGenerator {
       englishContent,
     );
 
-    // Generate preview image
+    // Generate preview image (fail if it fails)
     const imagePath = path.join(imageDir, "preview.png");
-    const imageGenerated = await this.generatePreviewImage(
-      releasesData,
-      imagePath,
-    );
-
-    if (!imageGenerated) {
-      // Create README with instructions
-      const readmeContent = this.generateImageReadme(slug);
-      this.fileSystemService.writeFile(
-        path.join(imageDir, "README.md"),
-        readmeContent,
-      );
-    }
+    await this.generatePreviewImage(releasesData, imagePath);
 
     return {
       slug,
-      postDir,
-      imageDir,
-      imageGenerated,
+      imageGenerated: true,
     };
   }
 
   /**
-   * Generate slug from date
+   * Generate slug from date range with hash to avoid conflicts
    */
-  generateSlug(date) {
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = String(d.getMonth() + 1).padStart(2, "0");
-    return `releases-${year}-${month}`;
+  generateSlug(sinceDate, untilDate) {
+    const since = new Date(sinceDate);
+    const until = new Date(untilDate);
+
+    // Create a short hash from the date range for uniqueness
+    const dateString = `${since.toISOString()}-${until.toISOString()}`;
+    const hash = crypto
+      .createHash("sha256")
+      .update(dateString)
+      .digest("hex")
+      .substring(0, 8);
+
+    const year = until.getFullYear();
+    const month = String(until.getMonth() + 1).padStart(2, "0");
+    const day = String(until.getDate()).padStart(2, "0");
+
+    return `releases-${year}-${month}-${day}-${hash}`;
   }
 
   /**
@@ -112,34 +111,13 @@ translationKey: ${slug}
   }
 
   /**
-   * Generate preview image
+   * Generate preview image (fails strictly if generation fails)
    */
   async generatePreviewImage(releasesData, outputPath) {
-    try {
-      const prompt = `Create a modern, professional illustration for a tech blog post about software releases. The image should represent open source collaboration, software updates, and innovation. Use geometric shapes, gradients in blue and purple tones, and abstract representations of code, packages, or version control. The style should be clean, minimalist, and tech-forward. No text in the image.`;
+    const prompt = `Create a modern, professional illustration for a tech blog post about software releases. The image should represent open source collaboration, software updates, and innovation. Use geometric shapes, gradients in blue and purple tones, and abstract representations of code, packages, or version control. The style should be clean, minimalist, and tech-forward. No text in the image.`;
 
-      const imageUrl = await this.openAIService.generateImage(prompt);
-      await this.fileSystemService.downloadFile(imageUrl, outputPath);
-      return true;
-    } catch (error) {
-      console.log(`⚠ Image generation failed: ${error.message}`);
-      return false;
-    }
-  }
-
-  /**
-   * Generate README for manual image addition
-   */
-  generateImageReadme(slug) {
-    return `# Preview Image for ${slug}
-
-A preview image should be added here as \`preview.png\`.
-
-This image will be used as the blog post's featured image.
-
-Suggested dimensions: 1200x630px
-Suggested content: Visual representation of software releases, updates, or open source collaboration.
-`;
+    const imageUrl = await this.openAIService.generateImage(prompt);
+    await this.fileSystemService.downloadFile(imageUrl, outputPath);
   }
 }
 
