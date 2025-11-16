@@ -1,0 +1,22 @@
+{
+  "name": "@hoverkraft-tech/generate-blog-post-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to generate bilingual blog posts from release data",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test __tests__/*.test.js",
+    "test:watch": "node --test --watch __tests__/*.test.js",
+    "test:coverage": "node --test --experimental-test-coverage __tests__/*.test.js"
+  },
+  "keywords": [
+    "github-action",
+    "blog",
+    "openai"
+  ],
+  "author": "HoverKraft Tech",
+  "license": "0BSD",
+  "dependencies": {
+    "openai": "^4.77.3"
+  },
+  "devDependencies": {}
+}

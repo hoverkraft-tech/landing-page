@@ -15,6 +15,7 @@ jobs:
     strategy:
       matrix:
         working-directory:
+          - .github/actions/generate-blog-post
           - .github/actions/generate-brand-content
           - .github/actions/validate-manifest
     with:
