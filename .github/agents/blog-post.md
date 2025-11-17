@@ -191,6 +191,12 @@ touch /application/src/data/post/{translation-key}/{fr.mdx,en.mdx,common.yaml}
 - **Active voice**: Direct, punchy sentences
 - **One concept per section**: If section exceeds 200 words, split it
 
+### 3.1 Humanize AI Drafts (mandatory)
+
+- Run every AI-generated paragraph, excerpt, and CTA through `humanize-ai-lib` before editing by hand. Use the helper already available in the workspace (e.g., `humanizeString()`); never ship raw LLM output.
+- If the library surfaces an error, log it, retry once, then polish manually while mirroring Hoverkraft tone.
+- Review the humanized text for meaning shifts—keep metrics, product names, and technical accuracy intact.
+
 ### 4. Generate Images
 
 Always use the `text-to-image` tool (OpenAI `gpt-image-1`). Produce crisp, minimalist visuals that reinforce the article’s key idea.
@@ -321,6 +327,7 @@ Reference:
 - [ ] 600-1200 words per language (prefer concise)
 - [ ] All paragraphs ≤4 sentences
 - [ ] No filler content or redundant explanations
+- [ ] All AI-generated text processed via `humanize-ai-lib` (no raw LLM output)
 
 ### 8. Validate Before Committing
 

@@ -16,7 +16,7 @@
   "author": "HoverKraft Tech",
   "license": "0BSD",
   "dependencies": {
+    "humanize-ai-lib": "^1.0.0",
     "openai": "^4.77.3"
-  },
-  "devDependencies": {}
+  }
 }

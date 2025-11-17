@@ -5,6 +5,7 @@
 
 const path = require("node:path");
 const { pathToFileURL } = require("node:url");
+const { humanizeString } = require("humanize-ai-lib");
 
 const releaseSummaryConfigFileUrl = pathToFileURL(
   path.resolve(
@@ -319,7 +320,7 @@ class ContentGenerator {
       targetLanguage,
     )}. Return Markdown only without commentary.\n\n${markdown}`;
 
-    return await this.openAIService.generateText(
+    const response = await this.openAIService.generateText(
       [
         { role: "system", content: systemPrompt },
         { role: "user", content: userPrompt },
@@ -329,6 +330,43 @@ class ContentGenerator {
         max_tokens: 800,
       },
     );
+
+    if (typeof response !== "string") {
+      return response;
+    }
+
+    return this.humanizeText(response);
+  }
+
+  humanizeText(value) {
+    if (typeof value !== "string") {
+      return value;
+    }
+
+    const trimmed = value.trim();
+    if (!trimmed) {
+      return "";
+    }
+
+    try {
+      const result = humanizeString(trimmed, {
+        transformHidden: true,
+        transformTrailingWhitespace: true,
+        transformNbs: true,
+        transformDashes: true,
+        transformQuotes: true,
+        transformOther: true,
+        keyboardOnly: false,
+      });
+
+      return result?.text ?? trimmed;
+    } catch (error) {
+      console.warn(
+        "[content-generator] Failed to humanize text. Returning original value.",
+        error?.message || error,
+      );
+      return trimmed;
+    }
   }
 
   getLanguageLabel(language) {
@@ -390,10 +428,10 @@ class ContentGenerator {
 
     const fencedMatch = trimmed.match(/```(?:markdown)?\s*([\s\S]*?)\s*```/i);
     if (fencedMatch) {
-      return fencedMatch[1].trim();
+      return this.humanizeText(fencedMatch[1].trim());
     }
 
-    return trimmed;
+    return this.humanizeText(trimmed);
   }
 
   async getReleaseSummaryConfig() {
