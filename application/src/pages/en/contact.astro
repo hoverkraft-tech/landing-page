@@ -9,6 +9,7 @@ const metadata = {
   title: 'Contact',
 };
 
+const contactEmail = SITE?.contactEmail ?? '';
 const bookingUrl = SITE?.bookingUrl ?? '';
 ---
 
@@ -32,17 +33,17 @@ const bookingUrl = SITE?.bookingUrl ?? '';
     items={[
       {
         title: 'General support',
-        description: `Chat with us for inquiries related to account management, website navigation, payment issues, accessing purchased templates or general questions about the website's functionality.`,
+        description: `Contact us with questions about account management, billing, access to services, or any other general enquiries.`,
       },
       {
         title: 'Contact sales',
         description:
-          'Chat with us for questions about purchases, customization options, licensing for commercial use, inquiries about specific template, etc.',
+          'Discuss with our sales team to choose the right offer, understand pricing, or plan a customised launch.',
       },
       {
         title: 'Technical support',
         description:
-          'Chat with us when facing issues like template installation, problems editing difficulties, compatibility issues with software or download errors, or other technical challenges related to using the templates.',
+          'Contact support for integration issues, installation problems, or any technical issues related to the platform.',
       },
       {
         title: 'Phone',
@@ -51,12 +52,12 @@ const bookingUrl = SITE?.bookingUrl ?? '';
       },
       {
         title: 'Email',
-        description: 'contact@support.com',
+        description: contactEmail,
         icon: 'tabler:mail',
       },
       {
         title: 'Location',
-        description: '1234 Lorem Ipsum St, 12345, Miami, EEUU',
+        description: 'Marseille, Aix-en-Provence, France',
         icon: 'tabler:map-pin',
       },
     ]}

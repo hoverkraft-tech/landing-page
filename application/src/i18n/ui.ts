@@ -35,6 +35,7 @@ export const ui = {
     'blog.headline.title': 'Le blog Hoverkraft',
     'blog.headline.subtitle':
       'Actualités, analyses et ressources sur le Platform Engineering souverain, la méthode HoverKraft et OpenKraft.',
+    'booking.button': 'Réserver un rendez-vous',
   },
   en: {
     'nav.home': 'Home',
@@ -70,6 +71,7 @@ export const ui = {
     'blog.headline.title': 'Hoverkraft Blog',
     'blog.headline.subtitle':
       'News, analysis, and resources on sovereign platform engineering, the HoverKraft method, and OpenKraft.',
+    'booking.button': 'Book an appointment',
   },
 } as const;
 
