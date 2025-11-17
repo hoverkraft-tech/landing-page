@@ -1,0 +1,67 @@
+{
+  "lang": "fr",
+  "introMarkdown": "\"Chaque période est une opportunité de croissance et d'innovation.\"\n\nDu 10 au 17 novembre 2025, nous avons suivi deux dépôts et publié trois releases. Le projet le plus actif durant cette période a été ci-github-common, avec deux releases, dont la plus récente, ci-github-common 0.28.2, a été publiée le 17 novembre 2025. Le dépôt ci-github-nodejs a également contribué avec une release.\n\n- Deux dépôts suivis : ci-github-common et ci-github-nodejs.\n- Trois releases publiées au total.\n- ci-github-common a obtenu trois étoiles.",
+  "closingMarkdown": "Période : 10 novembre 2025 – 17 novembre 2025  \nDépôts suivis : 2  \nReleases publiées : 3  \nProjet le plus actif : ci-github-common (2)  \nRelease la plus récente : ci-github-common 0.28.2  \n\nDépôts en lumière :  \n- ci-github-common (2 releases, 3 ⭐)  \n- ci-github-nodejs (1 release, 1 ⭐)  \n\nEn résumé, cette période a été marquée par une activité significative sur le dépôt ci-github-common, avec plusieurs releases publiées. Il est essentiel de continuer à suivre ces projets pour assurer leur évolution et leur succès.\n\n- Évaluer les retours sur les releases publiées.  \n- Planifier des mises à jour pour les dépôts en fonction des besoins des utilisateurs.  \n- Encourager la contribution à ci-github-nodejs pour accroître son activité.",
+  "stats": {
+    "period": {
+      "since": "2025-11-10T13:06:07.818Z",
+      "until": "2025-11-17T13:06:07.818Z"
+    },
+    "totalRepos": 2,
+    "totalReleases": 3,
+    "busiestRepo": {
+      "name": "ci-github-common",
+      "count": 2
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-common",
+      "name": "0.28.2",
+      "publishedAt": "2025-11-17T12:46:43Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.28.2",
+          "tag": "0.28.2",
+          "publishedAt": "2025-11-17T12:46:43Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.28.2",
+          "highlights": [
+            "## Release Summary\n\nDocumentation for GitHub Actions and workflows has been refreshed for clarity and up-to-date guidance.\r\n\r\nInternal: dependencies for GitHub Actions were bumped across one directory via Dependabot.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.28.1",
+          "tag": "0.28.1",
+          "publishedAt": "2025-11-12T06:13:56Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.28.1",
+          "highlights": [
+            "## Release Summary\n\nPublic: documentation for actions and workflows has been refreshed and clarified.\r\n\r\nInternal: CI checks were re-enabled and permissions tightened, GitHub Actions dependencies were updated.\n\n## Breaking change(s)\n\nThere is no breaking change."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.18.0",
+          "tag": "0.18.0",
+          "publishedAt": "2025-11-13T09:51:30Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.18.0",
+          "highlights": [
+            "## Release Summary\n\nIn **continuous-integration**, artifacts are now addressed by id instead of name and reporting for lint and tests has been upgraded with PR annotations, coverage summaries and streamlined composite actions.\r\nInternal changes: documentation for actions/workflows was updated and dependency groups for GitHub Actions and npm were bumped across multiple directories.\n\n## Breaking change(s)\n\nArtifact selection now requires an **id** rather than a **name** in build steps; update workflows accordingly.\r\nIn \"continuous-integration\" workflow, Lint/test were refactored into composite actions with new defaults (e.g., OIDC for Codecov, auto-detected report formats) and some inputs removed; verify your workflow inputs and coverage settings."
+          ]
+        }
+      ]
+    }
+  ]
+}
