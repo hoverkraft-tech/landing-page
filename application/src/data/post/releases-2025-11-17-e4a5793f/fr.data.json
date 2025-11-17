@@ -1,0 +1,67 @@
+{
+  "lang": "fr",
+  "introMarkdown": "\"Du 10 au 17 novembre 2025, l'innovation et l'activité étaient à leur comble dans nos dépôts.\"\n\nAu cours de cette période, deux dépôts ont été suivis, avec un total de trois releases publiées. Le projet le plus actif a été ci-github-common, qui a enregistré deux releases, dont la plus récente, ci-github-common 0.28.2, a été publiée le 17 novembre 2025. Le dépôt ci-github-nodejs a également contribué avec une release.\n\n- Deux dépôts suivis durant cette période.\n- Trois releases publiées, avec une forte activité sur ci-github-common.\n- La release la plus récente est ci-github-common 0.28.2.",
+  "closingMarkdown": "Période : 10 novembre 2025 – 17 novembre 2025  \nDépôts suivis : 2  \nReleases publiées : 3  \nProjet le plus actif : ci-github-common (2)  \nRelease la plus récente : ci-github-common 0.28.2  \n\nDépôts en lumière :  \n- ci-github-common (2 releases, 3 ⭐)  \n- ci-github-nodejs (1 release, 1 ⭐)  \n\nCette période a été marquée par une activité notable sur le dépôt ci-github-common, avec deux releases publiées. Le dépôt ci-github-nodejs a également contribué avec une release. Il est essentiel de continuer à suivre ces projets pour garantir leur évolution et leur succès.\n\n- Évaluer les retours des utilisateurs sur les releases récentes.  \n- Planifier des mises à jour pour les dépôts en fonction des besoins identifiés.  \n- Encourager la contribution de la communauté pour améliorer les projets.",
+  "stats": {
+    "period": {
+      "since": "2025-11-10T14:26:40.160Z",
+      "until": "2025-11-17T14:26:40.160Z"
+    },
+    "totalRepos": 2,
+    "totalReleases": 3,
+    "busiestRepo": {
+      "name": "ci-github-common",
+      "count": 2
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-common",
+      "name": "0.28.2",
+      "publishedAt": "2025-11-17T12:46:43Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions et workflows GitHub opinionnés pour des besoins courants d'intégration continue",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.28.2",
+          "tag": "0.28.2",
+          "publishedAt": "2025-11-17T12:46:43Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.28.2",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation pour GitHub Actions et les workflows a été mise à jour pour plus de clarté et des conseils à jour.\n\nInterne : les dépendances pour GitHub Actions ont été mises à jour dans un répertoire via Dependabot.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.28.1",
+          "tag": "0.28.1",
+          "publishedAt": "2025-11-12T06:13:56Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.28.1",
+          "highlights": [
+            "## Résumé de la version\n\nPublic : la documentation pour les actions et les flux de travail a été mise à jour et clarifiée.\n\nInterne : les vérifications CI ont été réactivées et les autorisations renforcées, les dépendances des actions GitHub ont été mises à jour.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions et workflows Github opinionnés pour l'intégration continue dans un contexte NodeJs",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.18.0",
+          "tag": "0.18.0",
+          "publishedAt": "2025-11-13T09:51:30Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.18.0",
+          "highlights": [
+            "## Résumé de la version\n\nDans **intégration continue**, les artefacts sont désormais adressés par id au lieu de nom et le reporting pour lint et tests a été amélioré avec des annotations PR, des résumés de couverture et des actions composites rationalisées.  \nChangements internes : la documentation pour les actions/workflows a été mise à jour et les groupes de dépendances pour GitHub Actions et npm ont été augmentés dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nLa sélection des artefacts nécessite désormais un **id** plutôt qu'un **nom** dans les étapes de construction ; mettez à jour les workflows en conséquence.  \nDans le workflow \"intégration continue\", Lint/test ont été refactorisés en actions composites avec de nouveaux paramètres par défaut (par exemple, OIDC pour Codecov, formats de rapport détectés automatiquement) et certaines entrées ont été supprimées ; vérifiez vos entrées de workflow et vos paramètres de couverture."
+          ]
+        }
+      ]
+    }
+  ]
+}
