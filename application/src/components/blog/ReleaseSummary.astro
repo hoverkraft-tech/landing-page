@@ -2,21 +2,22 @@
 import { marked } from 'marked';
 import type { ReleaseSummaryData } from '~/types';
 import type { SupportedLanguage } from '~/i18n/ui';
-import releaseSummaryConfigModule from '~/data/release-summary-config.js';
+import { defaultLang } from '~/i18n/ui';
+import releaseSummaryConfig from '~/data/release-summary-config.mjs';
 
 interface Props {
   data: ReleaseSummaryData;
 }
 
 const { data } = Astro.props as Props;
-const releaseSummaryConfig = releaseSummaryConfigModule as {
+const { ui, locales } = releaseSummaryConfig as {
   locales: Record<SupportedLanguage, { locale: string }>;
   ui: Record<SupportedLanguage, Record<string, any>>;
 };
 
-const lang = data?.lang === 'en' ? 'en' : 'fr';
-const t = releaseSummaryConfig.ui[lang];
-const locale = releaseSummaryConfig.locales[lang]?.locale ?? 'fr-FR';
+const lang = data?.lang ?? defaultLang;
+const t = ui[lang];
+const locale = locales[lang]?.locale ?? `${defaultLang}-${defaultLang.toUpperCase()}`;
 
 const formatDate = (value?: string) => {
   if (!value) return '';
@@ -47,6 +48,8 @@ const busiest = data?.stats?.busiestRepo;
 const mostRecent = data?.stats?.mostRecentRelease;
 const closingMarkdown = normalizeMarkdown(data?.closingMarkdown ?? null);
 const closingHtml = closingMarkdown ? marked.parse(closingMarkdown) : '';
+const closingSignatureMarkdown = normalizeMarkdown(t?.closing?.signature ?? null);
+const closingSignature = closingSignatureMarkdown ? marked.parse(closingSignatureMarkdown) : '';
 const showClosingSection = Boolean(closingHtml);
 ---
 
@@ -144,7 +147,7 @@ const showClosingSection = Boolean(closingHtml);
       <section>
         <h2>{t.closing.title}</h2>
         {closingHtml && <div class="space-y-4" set:html={closingHtml} />}
-        <p class="font-semibold">{t.closing.signature}</p>
+        <p class="font-semibold" set:html={closingSignature} />
       </section>
     )
   }

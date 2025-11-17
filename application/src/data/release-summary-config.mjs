@@ -145,7 +145,7 @@ export const prompts = {
 ${copy.highlightHeading}:
 ${highlightBlock}
 
-Write the full response in ${label}. Produce a short update in raw Markdown (no \`\`\` fences): start with a strong hook or quote about the period, follow with one factual paragraph, then optionally add a bulleted list of 2-3 takeaways. No emoji or extra commentary.`;
+Write the full response in ${label}. Produce a short update in raw Markdown (no \`\`\` fences): start with a strong hook or quote about the period, follow with one factual paragraph, then optionally add a bulleted list of 2-3 takeaways. No emoji or extra commentary. Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
   },
   closing: (language, stats, repoHighlights) => {
     const statsLabels = ui[language]?.stats ?? {};
@@ -168,7 +168,7 @@ ${statsLabels.latest}: ${
 ${copy.highlightHeading}:
 ${highlightBlock}
 
-Write the entire response in ${label}. Provide a concise closing paragraph followed by a bulleted list of 2-3 concrete actions in raw Markdown (no \`\`\` fences or commentary).`;
+Write the entire response in ${label}. Provide a concise closing paragraph followed by a bulleted list of 2-3 concrete actions in raw Markdown (no \`\`\` fences or commentary). Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
   },
 };
 

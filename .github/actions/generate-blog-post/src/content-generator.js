@@ -4,20 +4,24 @@
  */
 
 const path = require("node:path");
+const { pathToFileURL } = require("node:url");
 
-const releaseSummaryConfig = require(
+const releaseSummaryConfigFileUrl = pathToFileURL(
   path.resolve(
     __dirname,
     "../../../..",
-    "application/src/data/release-summary-config.js",
+    "application/src/data/release-summary-config.mjs",
   ),
-);
+).href;
 
 const RELEASE_HIGHLIGHT_LIMIT = 4;
+const STRUCTURED_SECTION_HEADINGS = ["Release Summary", "Breaking change(s)"];
 
 class ContentGenerator {
   constructor(openAIService) {
     this.openAIService = openAIService;
+    this.releaseSummaryConfig = null;
+    this.releaseSummaryConfigPromise = null;
   }
 
   async generateFrenchContent(releasesData, { sinceDate, untilDate, slug }) {
@@ -41,6 +45,7 @@ class ContentGenerator {
     releasesData,
     { sinceDate, untilDate, slug },
   ) {
+    const releaseSummaryConfig = await this.getReleaseSummaryConfig();
     const localeConfig = releaseSummaryConfig.locales[language];
     if (!localeConfig) {
       throw new Error(
@@ -136,7 +141,9 @@ class ContentGenerator {
   }
 
   async generateIntroSummary(language, releasesData, stats) {
-    const topHighlights = this.buildRepoHighlights(releasesData, language);
+    const releaseSummaryConfig = await this.getReleaseSummaryConfig();
+    const languageUi = releaseSummaryConfig.ui[language];
+    const topHighlights = this.buildRepoHighlights(releasesData, languageUi);
     const prompt = releaseSummaryConfig.prompts.introduction(
       language,
       stats,
@@ -157,7 +164,9 @@ class ContentGenerator {
   }
 
   async generateClosingSummary(language, releasesData, stats) {
-    const repoHighlights = this.buildRepoHighlights(releasesData, language);
+    const releaseSummaryConfig = await this.getReleaseSummaryConfig();
+    const languageUi = releaseSummaryConfig.ui[language];
+    const repoHighlights = this.buildRepoHighlights(releasesData, languageUi);
     const prompt = releaseSummaryConfig.prompts.closing(
       language,
       stats,
@@ -219,12 +228,43 @@ class ContentGenerator {
       return [];
     }
 
+    const structuredSections = STRUCTURED_SECTION_HEADINGS.map((heading) =>
+      this.extractMarkdownSection(body, heading),
+    ).filter(Boolean);
+
+    if (structuredSections.length) {
+      const combined = structuredSections.join("\n\n").trim();
+      if (combined) {
+        return [combined];
+      }
+    }
+
     return body
       .split(/\r?\n+/)
       .map((line) => line.replace(/^[-*#>\s]+/, "").trim())
       .filter(Boolean)
       .slice(0, RELEASE_HIGHLIGHT_LIMIT)
       .map((line) => this.truncate(line, 160));
+  }
+
+  extractMarkdownSection(body, heading) {
+    if (!body || !heading) {
+      return null;
+    }
+
+    const escapedHeading = heading.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+    const sectionRegex = new RegExp(
+      `(^|\\n)(##\\s+${escapedHeading}\\s*\\n+)([\\s\\S]*?)(?=(\\n##\\s+)|$)`,
+      "i",
+    );
+    const match = body.match(sectionRegex);
+    if (!match) {
+      return null;
+    }
+
+    const headingLine = match[2].trim();
+    const content = match[3].trim();
+    return content ? `${headingLine}\n\n${content}` : headingLine;
   }
 
   normalizeMarkdownResponse(raw) {
@@ -244,8 +284,22 @@ class ContentGenerator {
     return trimmed;
   }
 
-  buildRepoHighlights(releasesData, language) {
-    const languageUi = releaseSummaryConfig.ui[language];
+  async getReleaseSummaryConfig() {
+    if (this.releaseSummaryConfig) {
+      return this.releaseSummaryConfig;
+    }
+
+    if (!this.releaseSummaryConfigPromise) {
+      this.releaseSummaryConfigPromise = import(
+        releaseSummaryConfigFileUrl
+      ).then((module) => module?.default ?? module);
+    }
+
+    this.releaseSummaryConfig = await this.releaseSummaryConfigPromise;
+    return this.releaseSummaryConfig;
+  }
+
+  buildRepoHighlights(releasesData, languageUi) {
     return [...releasesData]
       .sort(
         (a, b) =>
@@ -257,7 +311,7 @@ class ContentGenerator {
         (repo) =>
           `${repo.repo} (${repo.releases.length} ${
             languageUi?.repo?.releaseCountShort ?? "releases"
-          }, ${repo.stars ?? 0}⭐)`,
+          }, ${repo.stars ?? 0} ⭐)`,
       );
   }
 

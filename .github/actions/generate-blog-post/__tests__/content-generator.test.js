@@ -136,4 +136,40 @@ Période dense chez HoverKraft.
       assert.ok(result.trim().endsWith("---"));
     });
   });
+
+  describe("extractHighlights", () => {
+    it("should capture structured release summary sections", () => {
+      const body = `Introduction
+
+## Release Summary
+
+We stabilized the API and improved documentation.
+
+## Breaking change(s)
+
+- API authentication now requires tokens.
+- Deprecated endpoints removed.
+
+## What's changed
+
+- Misc updates`;
+
+      const highlights = contentGenerator.extractHighlights(body);
+
+      assert.strictEqual(highlights.length, 1);
+      assert.ok(highlights[0].includes("## Release Summary"));
+      assert.ok(highlights[0].includes("## Breaking change(s)"));
+      assert.ok(highlights[0].includes("tokens"));
+    });
+
+    it("should fallback to basic bullet extraction when sections missing", () => {
+      const body = `- First improvement\n- Second improvement`;
+      const highlights = contentGenerator.extractHighlights(body);
+
+      assert.deepStrictEqual(highlights, [
+        "First improvement",
+        "Second improvement",
+      ]);
+    });
+  });
 });
