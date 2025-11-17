@@ -1,6 +1,6 @@
 ---
 import { marked } from 'marked';
-import type { ReleaseSummaryData } from '~/types';
+import type { ReleaseSummaryData, ReleaseSummaryRelease, ReleaseSummaryRepository } from '~/types';
 import type { SupportedLanguage } from '~/i18n/ui';
 import { defaultLang } from '~/i18n/ui';
 import releaseSummaryConfig from '~/data/release-summary-config.mjs';
@@ -8,6 +8,11 @@ import releaseSummaryConfig from '~/data/release-summary-config.mjs';
 interface Props {
   data: ReleaseSummaryData;
 }
+
+type ReleaseSummaryReleaseWithHtml = ReleaseSummaryRelease & { highlightHtml: string[] };
+type ReleaseSummaryRepositoryWithHtml = ReleaseSummaryRepository & {
+  releases: ReleaseSummaryReleaseWithHtml[];
+};
 
 const { data } = Astro.props as Props;
 const { ui, locales } = releaseSummaryConfig as {
@@ -51,6 +56,34 @@ const closingHtml = closingMarkdown ? marked.parse(closingMarkdown) : '';
 const closingSignatureMarkdown = normalizeMarkdown(t?.closing?.signature ?? null);
 const closingSignature = closingSignatureMarkdown ? marked.parse(closingSignatureMarkdown) : '';
 const showClosingSection = Boolean(closingHtml);
+
+const repositoriesWithHtml: ReleaseSummaryRepositoryWithHtml[] = await Promise.all(
+  repositories.map(async (repo): Promise<ReleaseSummaryRepositoryWithHtml> => {
+    const releases = await Promise.all(
+      (repo.releases ?? []).map(async (release): Promise<ReleaseSummaryReleaseWithHtml> => {
+        const highlightHtml = (
+          await Promise.all(
+            (release.highlights ?? []).map(async (highlight) => {
+              const normalized = normalizeMarkdown(highlight);
+              if (!normalized) return '';
+              return normalized ? marked.parse(normalized) : '';
+            })
+          )
+        ).filter((value): value is string => Boolean(value));
+
+        return {
+          ...release,
+          highlightHtml,
+        };
+      })
+    );
+
+    return {
+      ...repo,
+      releases,
+    };
+  })
+);
 ---
 
 <section class="space-y-10">
@@ -90,7 +123,7 @@ const showClosingSection = Boolean(closingHtml);
   </section>
 
   {
-    repositories.map((repo) => (
+    repositoriesWithHtml.map((repo: ReleaseSummaryRepositoryWithHtml) => (
       <section>
         <h2>{repo.name}</h2>
         <p>{repo.description?.trim() || t.repo.descriptionFallback}</p>
@@ -109,7 +142,7 @@ const showClosingSection = Boolean(closingHtml);
           </li>
         </ul>
         <h3>{t.repo.releasesHeading}</h3>
-        {(repo.releases || []).map((release) => (
+        {(repo.releases || []).map((release: ReleaseSummaryReleaseWithHtml) => (
           <article class="space-y-3">
             <h4>{release.name || release.tag}</h4>
             <ul>
@@ -128,13 +161,15 @@ const showClosingSection = Boolean(closingHtml);
             </ul>
             <div>
               <strong>{t.release.highlights}:</strong>
-              <ul>
-                {release.highlights?.length ? (
-                  release.highlights.map((highlight) => <li>{highlight}</li>)
-                ) : (
-                  <li>{t.release.highlightsFallback}</li>
-                )}
-              </ul>
+              {release.highlightHtml?.length ? (
+                <div class="mt-3 space-y-2">
+                  {release.highlightHtml.map((highlightHtml) => (
+                    <div class="prose prose-sm dark:prose-invert" set:html={highlightHtml} />
+                  ))}
+                </div>
+              ) : (
+                <p class="mt-3">{t.release.highlightsFallback}</p>
+              )}
             </div>
           </article>
         ))}

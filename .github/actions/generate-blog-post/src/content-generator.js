@@ -16,6 +16,11 @@ const releaseSummaryConfigFileUrl = pathToFileURL(
 
 const RELEASE_HIGHLIGHT_LIMIT = 4;
 const STRUCTURED_SECTION_HEADINGS = ["Release Summary", "Breaking change(s)"];
+const LANGUAGE_LABELS = {
+  en: "English",
+  fr: "French",
+};
+const DEFAULT_SOURCE_LANGUAGE = "en";
 
 class ContentGenerator {
   constructor(openAIService) {
@@ -81,6 +86,11 @@ class ContentGenerator {
       this.formatDate(untilDate, localeConfig.locale),
     );
 
+    const repositories = await this.buildRepositoriesData(
+      releasesData,
+      language,
+    );
+
     return {
       frontmatter: this.buildFrontmatter({
         title,
@@ -94,7 +104,7 @@ class ContentGenerator {
         introMarkdown,
         closingMarkdown: closingMarkdown || null,
         stats: this.buildStatsPayload(stats),
-        repositories: this.buildRepositoriesData(releasesData),
+        repositories,
       },
     };
   }
@@ -202,25 +212,125 @@ class ContentGenerator {
     };
   }
 
-  buildRepositoriesData(releasesData) {
-    return [...releasesData]
-      .sort((a, b) => a.repo.localeCompare(b.repo))
-      .map((repo) => ({
-        name: repo.repo,
-        description: repo.description?.trim() || "",
-        stars: repo.stars ?? 0,
-        url: repo.url,
-        releases: repo.releases
-          .slice()
-          .sort((a, b) => new Date(b.publishedAt) - new Date(a.publishedAt))
-          .map((release) => ({
-            name: release.name || "",
-            tag: release.tag,
-            publishedAt: release.publishedAt,
-            url: release.url,
-            highlights: this.extractHighlights(release.body),
-          })),
-      }));
+  async buildRepositoriesData(releasesData, language) {
+    const shouldTranslate = language !== DEFAULT_SOURCE_LANGUAGE;
+
+    return Promise.all(
+      [...releasesData]
+        .sort((a, b) => a.repo.localeCompare(b.repo))
+        .map(async (repo) => {
+          const description = repo.description?.trim() || "";
+          const localizedDescription =
+            shouldTranslate && description
+              ? await this.translateDescription(description, language)
+              : description;
+
+          return {
+            name: repo.repo,
+            description: localizedDescription,
+            stars: repo.stars ?? 0,
+            url: repo.url,
+            releases: await Promise.all(
+              repo.releases
+                .slice()
+                .sort(
+                  (a, b) => new Date(b.publishedAt) - new Date(a.publishedAt),
+                )
+                .map(async (release) => {
+                  const highlights = this.extractHighlights(release.body);
+                  const localizedHighlights = shouldTranslate
+                    ? await this.translateHighlights(highlights, language)
+                    : highlights;
+
+                  return {
+                    name: release.name || "",
+                    tag: release.tag,
+                    publishedAt: release.publishedAt,
+                    url: release.url,
+                    highlights: localizedHighlights,
+                  };
+                }),
+            ),
+          };
+        }),
+    );
+  }
+
+  async translateDescription(description, targetLanguage) {
+    if (!description?.trim()) {
+      return "";
+    }
+
+    try {
+      return await this.translateMarkdown(description, {
+        sourceLanguage: DEFAULT_SOURCE_LANGUAGE,
+        targetLanguage,
+      });
+    } catch (error) {
+      console.warn(
+        `[content-generator] Failed to translate repo description to ${targetLanguage}. Using source text.`,
+        error?.message || error,
+      );
+      return description;
+    }
+  }
+
+  async translateHighlights(highlights, targetLanguage) {
+    if (!Array.isArray(highlights) || !highlights.length) {
+      return [];
+    }
+
+    return Promise.all(
+      highlights.map(async (highlight) => {
+        const normalized =
+          typeof highlight === "string" ? highlight.trim() : "";
+        if (!normalized) {
+          return "";
+        }
+
+        try {
+          return await this.translateMarkdown(normalized, {
+            sourceLanguage: DEFAULT_SOURCE_LANGUAGE,
+            targetLanguage,
+          });
+        } catch (error) {
+          console.warn(
+            `[content-generator] Failed to translate highlight to ${targetLanguage}. Using source text.`,
+            error?.message || error,
+          );
+          return normalized;
+        }
+      }),
+    );
+  }
+
+  async translateMarkdown(markdown, { sourceLanguage, targetLanguage }) {
+    if (!markdown?.trim() || sourceLanguage === targetLanguage) {
+      return markdown;
+    }
+
+    const systemPrompt =
+      "You are a professional technical translator. Translate Markdown content while preserving structure, emojis, inline formatting, code fences, and URLs. Respond with Markdown only.";
+    const userPrompt = `Translate the following Markdown from ${this.getLanguageLabel(
+      sourceLanguage,
+    )} to ${this.getLanguageLabel(
+      targetLanguage,
+    )}. Return Markdown only without commentary.\n\n${markdown}`;
+
+    return await this.openAIService.generateText(
+      [
+        { role: "system", content: systemPrompt },
+        { role: "user", content: userPrompt },
+      ],
+      {
+        temperature: 0.2,
+        max_tokens: 800,
+      },
+    );
+  }
+
+  getLanguageLabel(language) {
+    return LANGUAGE_LABELS[language] || language;
   }
 
   extractHighlights(body) {
