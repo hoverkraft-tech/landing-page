@@ -58,6 +58,8 @@ class ContentGenerator {
       );
     }
 
+    const localizedSlug = this.buildLocalizedSlug(slug, language);
+
     const stats = this.buildStats(releasesData, {
       sinceDate,
       untilDate,
@@ -95,7 +97,7 @@ class ContentGenerator {
       frontmatter: this.buildFrontmatter({
         title,
         excerpt,
-        slug,
+        slug: localizedSlug,
         author: localeConfig.author,
         lang: language,
       }),
@@ -447,6 +449,14 @@ class ContentGenerator {
     return value.length > maxLength
       ? `${value.slice(0, maxLength - 1)}…`
       : value;
+  }
+
+  buildLocalizedSlug(baseSlug, language) {
+    if (!baseSlug) {
+      return baseSlug;
+    }
+
+    return `${baseSlug}-${language}`;
   }
 
   buildFrontmatter({ title, excerpt, slug, author, lang }) {
