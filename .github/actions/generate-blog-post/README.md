@@ -3,7 +3,7 @@
 # GitHub Action: Generate Blog Post
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/3169f9284c74729752f5f2c3b9b98fee898c232e9e90cadc0665b3bee5234061/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
+  <img src="https://opengraph.githubassets.com/bb445ae9309426b5ce51a7b9b24b8387a14f46791d20c94177bb33335606b099/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
 </div>
 
 ---
@@ -22,7 +22,15 @@
 
 ## Overview
 
-Generates bilingual blog post content using OpenAI
+Generates bilingual blog post content using OpenAI based on provided release data.
+
+## Features
+
+- **AI-Powered Content**: Uses OpenAI GPT-4o-mini for engaging content generation
+- **Bilingual**: Generates both French and English versions
+- **Image Generation**: Creates preview images with DALL-E 3
+- **SOLID Principles**: Clean, modular, testable code architecture
+- **Comprehensive Tests**: Full test coverage with Node.js test runner
 
 <!-- overview:end -->
 <!-- usage:start -->
@@ -30,7 +38,7 @@ Generates bilingual blog post content using OpenAI
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/generate-blog-post@99be2077541795093731fe5938e8d8bc692d522e # copilot/create-scheduled-workflow-for-blog-posts
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-blog-post@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
   with:
     # JSON-stringified array of releases data
     # This input is required.
