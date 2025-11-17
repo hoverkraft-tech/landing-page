@@ -1,0 +1,84 @@
+{
+  "lang": "fr",
+  "introMarkdown": "\"Une période de croissance et d'innovation du 10 au 17 novembre 2025.\" \n\nAu cours de cette semaine, trois dépôts ont été analysés, avec un total de trois releases publiées. Le projet le plus actif a été ci-github-common, qui a enregistré une release et a obtenu trois étoiles. La release la plus récente est celle de ci-github-nodejs, version 0.18.0, publiée le 13 novembre 2025.\n\n- Trois dépôts analysés et trois releases publiées.\n- Le projet ci-github-common a été le plus actif.\n- La release la plus récente est ci-github-nodejs 0.18.0.",
+  "closingMarkdown": "Période d'analyse : du 10 novembre 2025 au 17 novembre 2025. Au cours de cette période, trois dépôts ont été analysés, et trois releases ont été publiées. Le projet le plus actif est ci-github-common, avec une release à son actif. La release la plus récente est ci-github-nodejs version 0.18.0.\n\n**Dépôts en lumière :**\n- ci-github-common (1 release, 3⭐)\n- ci-github-publish (1 release, 2⭐)\n- ci-github-nodejs (1 release, 1⭐)\n\nEn conclusion, cette période a été marquée par une activité soutenue sur plusieurs dépôts, avec une attention particulière portée sur ci-github-common. Il est essentiel de continuer à suivre ces projets pour maximiser leur potentiel.\n\n- Analyser les retours des utilisateurs sur les releases publiées.\n- Planifier des mises à jour régulières pour les dépôts actifs.\n- Encourager la collaboration entre les contributeurs pour améliorer la qualité des projets.",
+  "stats": {
+    "period": {
+      "since": "2025-11-10T10:13:18.125Z",
+      "until": "2025-11-17T10:13:18.125Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 3,
+    "busiestRepo": {
+      "name": "ci-github-common",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-nodejs",
+      "name": "0.18.0",
+      "publishedAt": "2025-11-13T09:51:30Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.28.1",
+          "tag": "0.28.1",
+          "publishedAt": "2025-11-12T06:13:56Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.28.1",
+          "highlights": [
+            "Release Summary",
+            "Public: documentation for actions and workflows has been refreshed and clarified.",
+            "Internal: CI checks were re-enabled and permissions tightened, GitHub Actions dependencies were updated.",
+            "Breaking change(s)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.18.0",
+          "tag": "0.18.0",
+          "publishedAt": "2025-11-13T09:51:30Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.18.0",
+          "highlights": [
+            "Release Summary",
+            "In **continuous-integration**, artifacts are now addressed by id instead of name and reporting for lint and tests has been upgraded with PR annotations, covera…",
+            "Internal changes: documentation for actions/workflows was updated and dependency groups for GitHub Actions and npm were bumped across multiple directories.",
+            "Breaking change(s)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.14.1",
+          "tag": "0.14.1",
+          "publishedAt": "2025-11-10T10:19:24Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.14.1",
+          "highlights": [
+            "Release Summary",
+            "Release actions now include the full documentation set in the published artifact to ensure complete distributions.",
+            "Internal: refreshed GitHub Actions dependencies and updated workflow documentation.",
+            "Breaking change(s)"
+          ]
+        }
+      ]
+    }
+  ]
+}
