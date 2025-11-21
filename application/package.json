@@ -19,6 +19,7 @@
     "lint:astro": "astro check",
     "lint:prettier": "prettier --check .",
     "lint:fix": "npm run lint:fix:prettier",
+    "lint:ci": "npm run lint",
     "lint:fix:prettier": "prettier -w .",
     "test:ci": "echo \"No test specified\" && exit 0"
   },
