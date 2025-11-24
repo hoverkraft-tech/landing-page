@@ -24,12 +24,12 @@ class BlogPostGenerator {
     const postDir = this.fileSystemService.getAbsolutePath(
       outputDir,
       "src/data/post",
-      slug,
+      slug
     );
     const imageDir = this.fileSystemService.getAbsolutePath(
       outputDir,
       "src/assets/images/blog",
-      slug,
+      slug
     );
 
     this.fileSystemService.ensureDirectory(postDir);
@@ -39,26 +39,26 @@ class BlogPostGenerator {
     const commonYaml = this.generateCommonYaml(slug);
     this.fileSystemService.writeFile(
       path.join(postDir, "common.yaml"),
-      commonYaml,
+      commonYaml
     );
 
     // Generate French content
     const frenchContent = await this.contentGenerator.generateFrenchContent(
       releasesData,
-      { sinceDate, untilDate, slug },
+      { sinceDate, untilDate, slug }
     );
     this.writeLocalizedArtifacts(postDir, "fr", frenchContent);
 
     // Generate English content
     const englishContent = await this.contentGenerator.generateEnglishContent(
       releasesData,
-      { sinceDate, untilDate, slug },
+      { sinceDate, untilDate, slug }
     );
     this.writeLocalizedArtifacts(postDir, "en", englishContent);
 
     // Generate preview image (fail if it fails)
     const imagePath = path.join(imageDir, "preview.png");
-    await this.generatePreviewImage(releasesData, imagePath);
+    await this.generatePreviewImage(imagePath);
 
     return {
       slug,
@@ -107,7 +107,7 @@ translationKey: ${slug}
   /**
    * Generate preview image (fails strictly if generation fails)
    */
-  async generatePreviewImage(releasesData, outputPath) {
+  async generatePreviewImage(outputPath) {
     const prompt = `Create a modern, professional illustration for a tech blog post about software releases. The image should represent open source collaboration, software updates, and innovation. Use geometric shapes, gradients in blue and purple tones, and abstract representations of code, packages, or version control. The style should be clean, minimalist, and tech-forward. No text in the image.`;
 
     const imageUrl = await this.openAIService.generateImage(prompt);
@@ -133,7 +133,7 @@ import data from './${lang}.data.json';
 
     this.fileSystemService.writeFile(
       jsonPath,
-      `${JSON.stringify(data, null, 2)}\n`,
+      `${JSON.stringify(data, null, 2)}\n`
     );
     this.fileSystemService.writeFile(mdxPath, mdxContent);
   }
