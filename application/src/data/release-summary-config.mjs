@@ -99,7 +99,7 @@ const promptCopy = {
   fr: {
     contextHeading: 'Données pour ton résumé',
     highlightHeading: 'Dépôts en lumière',
-    periodLabel: 'Période / Period',
+    periodLabel: 'Période',
     noHighlights: 'Aucun dépôt distinct à signaler.',
   },
   en: {
@@ -145,7 +145,7 @@ export const prompts = {
 ${copy.highlightHeading}:
 ${highlightBlock}
 
-Write the full response in ${label}. Produce a short update in raw Markdown (no \`\`\` fences): start with a strong hook or quote about the period, follow with one factual paragraph, then optionally add a bulleted list of 2-3 takeaways. No emoji or extra commentary. Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
+Write the full response in ${label}. Produce a short update in raw Markdown (no \`\`\` fences): start with a strong hook or quote about the period that references a concrete KPI (deploy frequency, MTTR, adoption, etc.), follow with one paragraph that cites specific repositories, components, or architectural patterns that changed, and then add a bulleted list of 2-3 takeaways. Each takeaway must mention a repo or capability and why it matters for platform engineers, SREs, or technical contributors adopting Hoverkraft projects (e.g., latency drop, new connector, Terraform module shipped). Use crisp technical terms, no filler, no emoji, no generic marketing language. Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
   },
   closing: (language, stats, repoHighlights) => {
     const statsLabels = ui[language]?.stats ?? {};
@@ -168,7 +168,7 @@ ${statsLabels.latest}: ${
 ${copy.highlightHeading}:
 ${highlightBlock}
 
-Write the entire response in ${label}. Provide a concise closing paragraph followed by a bulleted list of 2-3 concrete actions in raw Markdown (no \`\`\` fences or commentary). Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
+Write the entire response in ${label}. Provide a concise closing paragraph that summarizes the practical impact for platform engineers, SREs, and other technical users, then add a bulleted list of 2-3 concrete next steps (benchmarks to run, docs to review, components to adopt). Each action must reference a repo or artefact and clarify the expected gain (performance, compliance, automation, etc.). Output raw Markdown with no \`\`\` fences or commentary. Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
   },
 };
 
