@@ -1,0 +1,147 @@
+{
+  "lang": "en",
+  "introMarkdown": "\"Progress is the result of hard work and collaboration.\"\n\nDuring the period from November 17 to November 24, 2025, HoverKraft Tech successfully shipped a total of 11 releases across three repositories. The busiest project was ci-github-common, which accounted for five of those releases, with the most recent being version 0.30.2, released on November 24, 2025.\n\n- ci-github-common led the activity with five releases and three stars.\n- ci-github-publish and ci-github-nodejs each contributed three releases, with two and one star, respectively.\n- Overall, this week showcased significant collaboration and productivity within the teams.",
+  "closingMarkdown": "During the week of November 17 to November 24, 2025, HoverKraft Tech experienced a productive period with a total of 11 releases across three repositories. The busiest project was ci-github-common, which contributed five of the releases, showcasing its importance to our development efforts. The most recent release was ci-github-common version 0.30.2.\n\nKey repositories during this period included:\n- **ci-github-common**: 5 releases, 3 stars\n- **ci-github-publish**: 3 releases, 2 stars\n- **ci-github-nodejs**: 3 releases, 1 star\n\nIn summary, this week demonstrated significant activity and progress in our projects, particularly with ci-github-common leading the way.\n\n- Review the recent changes in ci-github-common for potential improvements.\n- Gather feedback from users on the latest releases to identify areas for enhancement.\n- Plan a meeting to discuss the roadmap for the next quarter based on current project performance.",
+  "stats": {
+    "period": {
+      "since": "2025-11-17T11:37:22.701Z",
+      "until": "2025-11-24T11:37:22.701Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 11,
+    "busiestRepo": {
+      "name": "ci-github-common",
+      "count": 5
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-common",
+      "name": "0.30.2",
+      "publishedAt": "2025-11-24T11:28:17Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.30.2",
+          "tag": "0.30.2",
+          "publishedAt": "2025-11-24T11:28:17Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.30.2",
+          "highlights": [
+            "## Release Summary\n\n**parse-ci-reports:** adds support for Prettier and Astro check outputs and improves the Markdown report for clearer, broader reporting coverage.\r\n**parse-ci-reports:** fixes report discovery by excluding `node_modules` from search patterns to avoid noisy matches.\r\n\r\nPublic vs internal separation:\r\n\r\nInternal: documentation updated for actions/workflows and GitHub Actions dependencies bumped.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.30.1",
+          "tag": "0.30.1",
+          "publishedAt": "2025-11-21T17:02:04Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.30.1",
+          "highlights": [
+            "## Release Summary\n\n**Feature (parse-ci-reports):** added a working directory input to control where reports are parsed, improving flexibility for varied repo layouts.\r\n\r\nInternal changes: fine-grained permissions were improved and documentation for actions and workflows was updated.\n\n## Breaking change(s)\n\nThere is no breaking change."
+          ]
+        },
+        {
+          "name": "0.30.0",
+          "tag": "0.30.0",
+          "publishedAt": "2025-11-20T18:48:04Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.30.0",
+          "highlights": [
+            "## Release Summary\n\nDocumentation for actions and workflows has been updated.  ￼\r\n\r\nInternal: GitHub Actions dependencies were updated across workflows.  ￼\n\n## Breaking change(s)\n\nactions/checkout v6 changes credential persistence and may require Actions Runner v2.329.0 for container-action scenarios, and actions/github-script v8 requires Actions Runner v2.327.1; review upstream release notes before upgrading.  ￼"
+          ]
+        },
+        {
+          "name": "0.29.0",
+          "tag": "0.29.0",
+          "publishedAt": "2025-11-20T13:15:33Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.29.0",
+          "highlights": [
+            "## Release Summary\n\nIntroduces the `parse-ci-reports` action to aggregate CI/CD reports.\r\n\r\nInternal updates include refreshed documentation for actions/workflows and dependency bumps (e.g., `fast-xml-parser` and GitHub Actions groups).\n\n## Breaking change(s)\n\nThere is no breaking change."
+          ]
+        },
+        {
+          "name": "0.28.2",
+          "tag": "0.28.2",
+          "publishedAt": "2025-11-17T12:46:43Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.28.2",
+          "highlights": [
+            "## Release Summary\n\nDocumentation for GitHub Actions and workflows has been refreshed for clarity and up-to-date guidance.\r\n\r\nInternal: dependencies for GitHub Actions were bumped across one directory via Dependabot.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.20.1",
+          "tag": "0.20.1",
+          "publishedAt": "2025-11-23T13:14:10Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.1",
+          "highlights": [
+            "## Release Summary\n\nFix (continuous-integration): working directory is now handled correctly during CI runs.\r\n\r\nInternal: CI permissions refined, documentation for actions/workflows updated, dependencies refreshed, and release-actions workflow bumped to 0.15.2.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.20.0",
+          "tag": "0.20.0",
+          "publishedAt": "2025-11-21T17:47:52Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.0",
+          "highlights": [
+            "## Release Summary\n\n**Feature (continuous-integration):** configurable lint/test commands with sensible defaults and improved container report-path rewriting, increasing CI flexibility and correctness.\r\n\r\nInternal changes: documentation for actions and workflows was refreshed, and GitHub Actions dependencies were bumped across multiple directories.\n\n## Breaking change(s)\n\nThe CI workflow now exposes new command inputs and expects lint/test steps to generate the documented report files and paths (notably when running in containers), which may require updating your workflow configuration; see PR #322 for examples and details.\r\n\r\n**It requires permission `packages: read`**"
+          ]
+        },
+        {
+          "name": "0.19.0",
+          "tag": "0.19.0",
+          "publishedAt": "2025-11-20T17:05:57Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.19.0",
+          "highlights": [
+            "## Release Summary\n\nFeatures (continuous-integration): support all container options including ports, volumes, and credentials.\r\nFixes: has-installed-dependencies now silences command output to reduce noise; setup-node maintains cache for projects outside `GITHUB_WORKSPACE` via symlinks.\r\n\r\nInternal changes: dependency updates across GitHub Actions and npm groups and refreshed documentation for actions and workflows.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.15.2",
+          "tag": "0.15.2",
+          "publishedAt": "2025-11-23T08:46:08Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.15.2",
+          "highlights": [
+            "## Release Summary\n\nFix (release-actions): the release workflow now safely handles missing `CHANGED_FILES` when matching changed files, improving stability.\r\n\r\nInternal: documentation updates refine actions/workflows docs and clarify the deploy/jekyll action behavior and inputs.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.15.1",
+          "tag": "0.15.1",
+          "publishedAt": "2025-11-21T19:30:47Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.15.1",
+          "highlights": [
+            "## Release Summary\n\n**Fix (deploy/github-pages):** corrected the download artifact input to ensure GitHub Pages deployments use the proper parameter for retrieval.\r\n\r\nInternal changes: documentation for actions and workflows was refreshed.\n\n## Breaking change(s)\n\nThere is no breaking change."
+          ]
+        },
+        {
+          "name": "0.15.0",
+          "tag": "0.15.0",
+          "publishedAt": "2025-11-21T18:38:29Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.15.0",
+          "highlights": [
+            "## Release Summary\n\n**Feature (deploy/github-pages):** switched to using `artifact-id` instead of `artifact-name` for deployments, improving reliability.\r\n**Fix (release-actions):** corrected changed-files matching for more accurate release behavior.\r\n\r\nInternal changes: documentation refreshed and GitHub Actions dependencies bumped across multiple directories.\n\n## Breaking change(s)\n\nDeploy to GitHub Pages now requires `artifact-id` instead of `artifact-name`; update your workflows accordingly (see PR #231)."
+          ]
+        }
+      ]
+    }
+  ]
+}
