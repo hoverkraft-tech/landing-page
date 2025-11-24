@@ -25,16 +25,19 @@ on:
         required: false
         type: string
 
-permissions:
-  contents: write
-  pull-requests: write
+permissions: {}
 
 jobs:
   generate-blog-post:
     runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
     steps:
       - name: Checkout repository
         uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
+        with:
+          persist-credentials: false
 
       - name: Calculate date range
         id: dates
