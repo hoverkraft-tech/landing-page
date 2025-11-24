@@ -1,0 +1,147 @@
+{
+  "lang": "fr",
+  "introMarkdown": "\"Entre le 17 et le 24 novembre 2025, l'activité sur nos dépôts a atteint un nouveau sommet.\" Pendant cette période, nous avons suivi trois dépôts et publié un total de onze releases. Le projet le plus actif a été ci-github-common, avec cinq releases à son actif, dont la plus récente, ci-github-common 0.30.2, a été publiée le 24 novembre 2025.\n\n- Dépôts en lumière : ci-github-common (5 releases, 3 ⭐), ci-github-publish (3 releases, 2 ⭐), ci-github-nodejs (3 releases, 1 ⭐).\n- La diversité des projets montre un engagement croissant de la communauté.\n- Les releases fréquentes témoignent d'une amélioration continue et d'une réactivité aux besoins des utilisateurs.",
+  "closingMarkdown": "Période / Period: 17 novembre 2025 - 24 novembre 2025\nDépôts suivis: 3\nReleases publiées: 11\nProjet le plus actif: ci-github-common (5)\nRelease la plus récente: ci-github-common 0.30.2\n\nDépôts en lumière:\n- ci-github-common (5 releases, 3 ⭐)\n- ci-github-publish (3 releases, 2 ⭐)\n- ci-github-nodejs (3 releases, 1 ⭐)\n\nEn résumé, la période a été marquée par une activité soutenue, notamment sur le dépôt ci-github-common, qui a connu le plus grand nombre de releases. Il est essentiel de continuer à suivre ces projets pour en maximiser l'impact et l'engagement de la communauté.\n\n- Évaluer les performances des dépôts en fonction des étoiles et des releases.\n- Encourager les contributions sur les dépôts moins actifs.\n- Préparer une communication pour annoncer la dernière release et ses fonctionnalités.",
+  "stats": {
+    "period": {
+      "since": "2025-11-17T11:37:22.701Z",
+      "until": "2025-11-24T11:37:22.701Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 11,
+    "busiestRepo": {
+      "name": "ci-github-common",
+      "count": 5
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-common",
+      "name": "0.30.2",
+      "publishedAt": "2025-11-24T11:28:17Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions et workflows GitHub opinionnés pour des besoins courants d'intégration continue",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.30.2",
+          "tag": "0.30.2",
+          "publishedAt": "2025-11-24T11:28:17Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.30.2",
+          "highlights": [
+            "## Résumé de la version\n\n**parse-ci-reports :** ajoute le support des sorties de vérification Prettier et Astro et améliore le rapport Markdown pour une couverture de rapport plus claire et plus large.\n**parse-ci-reports :** corrige la découverte des rapports en excluant `node_modules` des motifs de recherche pour éviter les correspondances bruyantes.\n\nSéparation publique vs interne :\n\nInterne : documentation mise à jour pour les actions/workflows et les dépendances de GitHub Actions mises à jour.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.30.1",
+          "tag": "0.30.1",
+          "publishedAt": "2025-11-21T17:02:04Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.30.1",
+          "highlights": [
+            "## Résumé de la version\n\n**Fonctionnalité (parse-ci-reports) :** ajout d'une entrée de répertoire de travail pour contrôler où les rapports sont analysés, améliorant la flexibilité pour les différentes structures de dépôt.\n\nChangements internes : les autorisations détaillées ont été améliorées et la documentation pour les actions et les flux de travail a été mise à jour.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        },
+        {
+          "name": "0.30.0",
+          "tag": "0.30.0",
+          "publishedAt": "2025-11-20T18:48:04Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.30.0",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation pour les actions et les flux de travail a été mise à jour. ￼\n\nInterne : Les dépendances des GitHub Actions ont été mises à jour dans tous les flux de travail. ￼\n\n## Changement(s) majeur(s)\n\nactions/checkout v6 modifie la persistance des identifiants et peut nécessiter Actions Runner v2.329.0 pour les scénarios d'action de conteneur, et actions/github-script v8 nécessite Actions Runner v2.327.1 ; consultez les notes de version en amont avant de mettre à niveau. ￼"
+          ]
+        },
+        {
+          "name": "0.29.0",
+          "tag": "0.29.0",
+          "publishedAt": "2025-11-20T13:15:33Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.29.0",
+          "highlights": [
+            "## Résumé de la version\n\nIntroduit l'action `parse-ci-reports` pour agréger les rapports CI/CD.\n\nLes mises à jour internes incluent une documentation mise à jour pour les actions/workflows et des mises à jour de dépendances (par exemple, `fast-xml-parser` et les groupes d'actions GitHub).\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        },
+        {
+          "name": "0.28.2",
+          "tag": "0.28.2",
+          "publishedAt": "2025-11-17T12:46:43Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.28.2",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation pour GitHub Actions et les workflows a été mise à jour pour plus de clarté et des conseils à jour.\n\nInterne : les dépendances pour GitHub Actions ont été mises à jour dans un répertoire via Dependabot.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions et workflows Github opinionnés pour l'intégration continue dans un contexte NodeJs",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.20.1",
+          "tag": "0.20.1",
+          "publishedAt": "2025-11-23T13:14:10Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.1",
+          "highlights": [
+            "## Résumé de la version\n\nCorrection (intégration continue) : le répertoire de travail est maintenant géré correctement lors des exécutions CI.\n\nInterne : les autorisations CI ont été affinées, la documentation pour les actions/workflows a été mise à jour, les dépendances ont été rafraîchies et le workflow des actions de publication a été porté à 0.15.2.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.20.0",
+          "tag": "0.20.0",
+          "publishedAt": "2025-11-21T17:47:52Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.0",
+          "highlights": [
+            "## Résumé de la version\n\n**Fonctionnalité (intégration continue) :** commandes de lint/test configurables avec des valeurs par défaut sensées et amélioration de la réécriture des chemins de rapport de conteneur, augmentant la flexibilité et la précision de l'intégration continue.\n\nChangements internes : la documentation pour les actions et les flux de travail a été mise à jour, et les dépendances des Actions GitHub ont été mises à jour dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nLe flux de travail CI expose maintenant de nouvelles entrées de commande et s'attend à ce que les étapes de lint/test génèrent les fichiers et chemins de rapport documentés (notamment lors de l'exécution dans des conteneurs), ce qui peut nécessiter une mise à jour de votre configuration de flux de travail ; voir la PR #322 pour des exemples et des détails.\n\n**Cela nécessite la permission `packages: read`**"
+          ]
+        },
+        {
+          "name": "0.19.0",
+          "tag": "0.19.0",
+          "publishedAt": "2025-11-20T17:05:57Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.19.0",
+          "highlights": [
+            "## Résumé de la version\n\nFonctionnalités (intégration continue) : prise en charge de toutes les options de conteneur, y compris les ports, les volumes et les identifiants.\nCorrections : has-installed-dependencies réduit désormais la sortie des commandes pour diminuer le bruit ; setup-node maintient le cache pour les projets en dehors de `GITHUB_WORKSPACE` via des liens symboliques.\n\nChangements internes : mises à jour des dépendances dans les groupes GitHub Actions et npm et documentation mise à jour pour les actions et les flux de travail.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions et workflows GitHub opinionnés pour un déploiement, une publication et une sortie simplifiés.",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.15.2",
+          "tag": "0.15.2",
+          "publishedAt": "2025-11-23T08:46:08Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.15.2",
+          "highlights": [
+            "## Résumé de la version\n\nCorrection (actions de publication) : le flux de travail de publication gère désormais en toute sécurité les `CHANGED_FILES` manquants lors de la correspondance des fichiers modifiés, améliorant ainsi la stabilité.\n\nInterne : les mises à jour de la documentation affinent les documents sur les actions/flux de travail et clarifient le comportement et les entrées de l'action déploiement/jekyll.\n\n## Changements majeurs\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.15.1",
+          "tag": "0.15.1",
+          "publishedAt": "2025-11-21T19:30:47Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.15.1",
+          "highlights": [
+            "## Résumé de la version\n\n**Correction (déploiement/github-pages) :** correction de l'entrée de l'artefact de téléchargement pour s'assurer que les déploiements GitHub Pages utilisent le bon paramètre pour la récupération.\n\nChangements internes : la documentation pour les actions et les workflows a été mise à jour.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        },
+        {
+          "name": "0.15.0",
+          "tag": "0.15.0",
+          "publishedAt": "2025-11-21T18:38:29Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.15.0",
+          "highlights": [
+            "## Résumé de la version\n\n**Fonctionnalité (deploy/github-pages) :** passage à l'utilisation de `artifact-id` au lieu de `artifact-name` pour les déploiements, améliorant la fiabilité.\n**Correction (release-actions) :** correction de la correspondance des fichiers modifiés pour un comportement de version plus précis.\n\nChangements internes : documentation mise à jour et dépendances de GitHub Actions augmentées dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nLe déploiement vers GitHub Pages nécessite désormais `artifact-id` au lieu de `artifact-name` ; mettez à jour vos workflows en conséquence (voir PR #231)."
+          ]
+        }
+      ]
+    }
+  ]
+}
