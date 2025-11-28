@@ -4,7 +4,7 @@
  * Source: @hoverkraft-tech/branding
  * Version: 0.1.0
  * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
- * Generated: 2025-11-15T06:16:17.519Z
+ * Generated: 2025-11-28T11:50:50.972Z
  */
 
 import type { BrandMission } from './types';
