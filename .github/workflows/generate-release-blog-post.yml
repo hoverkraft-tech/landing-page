@@ -97,7 +97,7 @@ jobs:
 
       - name: Create pull request
         if: steps.fetch-releases.outputs.releases-data
-        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@5e8d0e6d1e76d8577a070db6d0128a91b1c9d5ad # 0.30.2
+        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@2d3c39a47c6af3b9d57a230bcaf57d03093e96db # 0.31.2
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: blog/releases-${{ steps.generate.outputs.slug }}
