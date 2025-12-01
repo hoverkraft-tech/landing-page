@@ -41,7 +41,7 @@
     "unpic": "^4.2.2"
   },
   "devDependencies": {
-    "@astrojs/check": "^0.9.5",
+    "@astrojs/check": "^0.9.6",
     "@astrojs/mdx": "^4.3.12",
     "@astrojs/partytown": "^2.1.4",
     "@eslint/js": "^9.39.1",
@@ -62,7 +62,7 @@
     "globals": "^16.5.0",
     "js-yaml": "^4.1.1",
     "mdast-util-to-string": "^4.0.0",
-    "prettier": "^3.6.2",
+    "prettier": "^3.7.3",
     "prettier-plugin-astro": "^0.14.1",
     "reading-time": "^1.5.0",
     "sharp": "0.34.5",
