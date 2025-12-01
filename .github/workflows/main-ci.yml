@@ -47,7 +47,7 @@ jobs:
           app-id: ${{ vars.CI_BOT_APP_ID }}
           private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
 
-      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@5e8d0e6d1e76d8577a070db6d0128a91b1c9d5ad # 0.30.2
+      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@2d3c39a47c6af3b9d57a230bcaf57d03093e96db # 0.31.2
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: docs/action-documentation-update
@@ -71,7 +71,7 @@ jobs:
       url: ${{ steps.deployment.outputs.url }}
     steps:
       - id: deployment
-        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@0.15.2
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@0.17.0
         with:
           build-path: application/dist
           build-artifact-id: ${{ needs.ci.outputs.build-artifact-id }}
