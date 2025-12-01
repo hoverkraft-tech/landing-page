@@ -1,0 +1,278 @@
+{
+  "lang": "fr",
+  "introMarkdown": "\"Entre le 24 novembre et le 1er décembre 2025, nous avons atteint une fréquence de publication impressionnante avec 21 releases, témoignant d'une dynamique forte dans nos dépôts.\"\n\nDurant cette période, le dépôt le plus actif a été **docker-base-images**, avec 9 releases, ce qui souligne l'importance croissante des images de conteneurs dans notre écosystème. La release la plus récente, **ci-github-nodejs 0.20.5**, publiée le 1er décembre, améliore la compatibilité et la performance pour les projets Node.js. D'autres dépôts notables incluent **ci-github-container** et **ci-github-common**, qui ont respectivement publié 1 et 4 releases, renforçant ainsi notre offre pour les intégrations et les fonctionnalités communes.\n\n- **ci-github-container** : La nouvelle release améliore la gestion des conteneurs, essentielle pour les ingénieurs de plateforme cherchant à optimiser les déploiements.\n- **ci-github-common** : Les mises à jour récentes augmentent la réutilisabilité des composants, ce qui est crucial pour les SREs souhaitant réduire le temps de mise en œuvre des solutions.\n- **docker-base-images** : Avec 9 releases, ce dépôt offre des images optimisées, réduisant la latence et améliorant les performances des applications déployées.",
+  "closingMarkdown": "Période: 24 novembre 2025 - 1 décembre 2025\nDépôts suivis: 6\nReleases publiées: 21\nProjet le plus actif: docker-base-images (9)\nRelease la plus récente: ci-github-nodejs 0.20.5\n\nDépôts en lumière:\n- ci-github-container (1 release, 4 ⭐)\n- ci-github-common (4 releases, 3 ⭐)\n- ci-github-publish (2 releases, 2 ⭐)\n\nCette période a été marquée par une activité soutenue, avec un nombre significatif de releases publiées, ce qui témoigne de l'engagement de la communauté à améliorer les outils et les composants disponibles. Pour les ingénieurs de plateforme, les SRE et autres utilisateurs techniques, ces mises à jour apportent des améliorations notables en termes de performance et d'automatisation.\n\n**Prochaines étapes concrètes :**\n- **Exécuter des benchmarks sur le dépôt `docker-base-images`** pour évaluer les performances des nouvelles images et optimiser les temps de déploiement.\n- **Revoir la documentation du dépôt `ci-github-common`** pour s'assurer que toutes les nouvelles fonctionnalités sont bien comprises et intégrées dans les workflows existants, ce qui peut améliorer la conformité.\n- **Adopter les composants du dépôt `ci-github-publish`** pour automatiser le processus de publication, ce qui pourrait réduire le temps nécessaire pour mettre à jour les environnements de production.",
+  "stats": {
+    "period": {
+      "since": "2025-11-24T09:28:48.569Z",
+      "until": "2025-12-01T09:28:48.569Z"
+    },
+    "totalRepos": 6,
+    "totalReleases": 21,
+    "busiestRepo": {
+      "name": "docker-base-images",
+      "count": 9
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-nodejs",
+      "name": "0.20.5",
+      "publishedAt": "2025-12-01T09:28:24Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions et workflows GitHub opinionnés pour des besoins courants d'intégration continue",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.31.2",
+          "tag": "0.31.2",
+          "publishedAt": "2025-12-01T08:13:21Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.31.2",
+          "highlights": [
+            "## Résumé de la version\n\n**Correction (parse-ci-reports) :** élargissement du support des modèles de contenu dans les rapports de vérification Astro pour améliorer la fiabilité de l'analyse.\r\nAucun changement interne.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.31.1",
+          "tag": "0.31.1",
+          "publishedAt": "2025-11-28T08:35:23Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.31.1",
+          "highlights": [
+            "## Résumé de la version\n\nAucune nouvelle fonctionnalité ni correction de bogues n'a été introduite dans cette version.\n\nChangements internes : la documentation pour les actions et les flux de travail a été mise à jour, et `parse-ci-reports` a été refactorisé afin que les modèles de détection automatique soient fournis par des analyseurs individuels.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        },
+        {
+          "name": "0.31.0",
+          "tag": "0.31.0",
+          "publishedAt": "2025-11-27T10:43:31Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.31.0",
+          "highlights": [
+            "## Résumé de la version\n\nFonctionnalité : introduction de l'action `local-workflow-actions` pour simplifier l'utilisation des actions composites locales. Correction (checkout) : `persist-credentials` par défaut est maintenant `false` pour renforcer la sécurité et empêcher la persistance involontaire des tokens.\n\nInterne : la documentation pour les actions et les workflows a été mise à jour.\n\n## Changement(s) majeur(s)\n\nL'étape `checkout` définit maintenant `persist-credentials: false` par défaut ; les workflows qui dépendent des tokens GitHub persistés pour les opérations Git ultérieures doivent explicitement opter pour ou ajuster l'authentification."
+          ]
+        },
+        {
+          "name": "0.30.2",
+          "tag": "0.30.2",
+          "publishedAt": "2025-11-24T11:28:17Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.30.2",
+          "highlights": [
+            "## Résumé de la version\n\n**parse-ci-reports :** ajoute le support des sorties de vérification Prettier et Astro et améliore le rapport Markdown pour une couverture de rapport plus claire et plus large.\n**parse-ci-reports :** corrige la découverte des rapports en excluant `node_modules` des motifs de recherche pour éviter les correspondances bruyantes.\n\nSéparation publique vs interne :\n\nInterne : documentation mise à jour pour les actions/workflows et les dépendances de GitHub Actions mises à jour.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-container",
+      "description": "Opinions sur les GitHub Actions et les workflows pour l'intégration continue dans un contexte de conteneur (OCI)",
+      "stars": 4,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.30.0",
+          "tag": "0.30.0",
+          "publishedAt": "2025-11-24T20:37:33Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.30.0",
+          "highlights": [
+            "## Résumé de la version\n\nFonctionnalités (docker) : mise à niveau de BuildKit et Buildx.\n\nChangements internes : améliorations de la stabilité des tests CI pour les événements de push de tag et workflow_dispatch, mise à jour de la documentation et mises à jour des dépendances des GitHub Actions.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions et workflows GitHub opinionnés pour l'intégration continue dans un contexte NodeJs",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.20.5",
+          "tag": "0.20.5",
+          "publishedAt": "2025-12-01T09:28:24Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.5",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement public.\n\nCorrection : résolu les problèmes GPG de Codecov en mode conteneur en utilisant des helpers github-script. Interne : extrait la logique de Codecov dans une action dédiée avec des corrections de configuration, rafraîchi la documentation des actions/workflows, et mis à jour les dépendances npm et GitHub Actions dans tout le dépôt.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.20.4",
+          "tag": "0.20.4",
+          "publishedAt": "2025-11-24T15:12:22Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.4",
+          "highlights": [
+            "## Résumé de la version\n\nFonctionnalités (cache-des-dépendances) : ajout du support pour Vitest. Corrections (build) : les artefacts téléchargés incluent désormais des fichiers cachés.\n\nChangements internes : la documentation pour les actions et les workflows a été mise à jour.\n\n## Changements majeurs\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.20.3",
+          "tag": "0.20.3",
+          "publishedAt": "2025-11-24T14:25:32Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.3",
+          "highlights": [
+            "## Résumé de la version\n\nFonctionnalités (dépendances-cache) : ajout du support pour Astro et Docusaurus. Corrections (intégration continue) : amélioration du support pour `working-directory`, garantissant que les workflows s'exécutent correctement dans les sous-répertoires.\n\nChangements internes : la documentation pour les actions et les workflows a été mise à jour.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.20.2",
+          "tag": "0.20.2",
+          "publishedAt": "2025-11-24T12:24:59Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.2",
+          "highlights": [
+            "## Résumé de la version\n\nPas de nouvelles fonctionnalités dans cette version. Corrections (intégration continue) : amélioration du support pour `working-directory`, garantissant que les workflows s'exécutent correctement depuis des sous-répertoires.\n\nChangements internes : la documentation pour les actions et les workflows a été mise à jour, et les dépendances des GitHub Actions ont été mises à jour dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nPas de changements majeurs."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions et workflows GitHub opinionnés pour un déploiement, une publication et une sortie simplifiés.",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.17.0",
+          "tag": "0.17.0",
+          "publishedAt": "2025-11-28T12:01:04Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.17.0",
+          "highlights": [
+            "## Résumé de la version\n\nFonctionnalité (version) : support de l'architecture monorepo via une nouvelle capacité de flux de travail de publication, permettant une opération ciblée par sous-dossier.\nCorrections : placement corrigé du plugin de manifeste ArgoCD (deploy/argocd-manifest-files) et permissions et utilisation de prepare-release renforcées.\n\nInterne : configuration de publication rafraîchie, documentation mise à jour pour les actions/flux de travail, et dépendances des Actions GitHub mises à jour.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur.\n\n[1]: https://github.com/hoverkraft-tech/ci-github-publish/pull/263 \"feat(release): ajouter le support de l'architecture monorepo par Copilot · Pull Request #263 · hoverkraft-tech/ci-github-publish · GitHub\"\n[2]: https://github.com/hoverkraft-tech/ci-github-publish/pull/261 \"fix(deploy/argocd-manifest-files): définir le bon emplacement pour le plugin hoverkraft-deployment par neilime · Pull Request #261 · hoverkraft-tech/ci-github-publish · GitHub\"\n[3]: https://github.com/hoverkraft-tech/ci-github-publish/pull/279 \"ci : préparer la configuration de publication par hoverkraft-bot[bot] · Pull Request #279 · hoverkraft-tech/ci-github-publish · GitHub\""
+          ]
+        },
+        {
+          "name": "0.16.0",
+          "tag": "0.16.0",
+          "publishedAt": "2025-11-24T21:53:06Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.16.0",
+          "highlights": [
+            "## Résumé de la version\n\nCorrection : force la synchronisation d'ArgoCD lors des redéploiements en utilisant le plugin hoverkraft-deployment pour garantir des redéploiements fiables sans modifications de code.\n\nInterne : documentation des actions et des workflows mise à jour.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker opinionnées",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version argocd-cmp-hk-deployment - 0.1.0",
+          "tag": "argocd-cmp-hk-deployment-0.1.0",
+          "publishedAt": "2025-12-01T08:49:30Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-0.1.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "feat : ajouter l'argument hk-deployment argocd CMP (#59) @fredleger",
+            "feat : mettre en œuvre le flux de travail de préparation de la version pour les versions d'image individuelles (#70) @[copilot-swe-agent[bot]](https://github.com/apps/copilot-swe-agent)",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/...argocd-cmp-hk-deployment-0.1.0"
+          ]
+        },
+        {
+          "name": "Version mydumper - 0.2.1",
+          "tag": "mydumper-0.2.1",
+          "publishedAt": "2025-12-01T08:49:17Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-0.2.1",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Aucun changement",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/mydumper-0.2.0...mydumper-0.2.1"
+          ]
+        },
+        {
+          "name": "Version ci-helm - 0.2.1",
+          "tag": "ci-helm-0.2.1",
+          "publishedAt": "2025-12-01T08:49:16Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.2.1",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "No changes",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/ci-helm-0.2.0...ci-helm-0.2.1"
+          ]
+        },
+        {
+          "name": "Version mydumper - 0.2.0",
+          "tag": "mydumper-0.2.0",
+          "publishedAt": "2025-11-30T22:49:03Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-0.2.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "feat : ajouter un workflow CI réutilisable avec des jobs de linter, de construction d'images et de tests (#109) @[copilot-swe-agent[bot]](https://github.com/apps/copilot-swe-agent)",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/mydumper-0.1.2...mydumper-0.2.0"
+          ]
+        },
+        {
+          "name": "Version ci-helm - 0.2.0",
+          "tag": "ci-helm-0.2.0",
+          "publishedAt": "2025-11-30T22:49:01Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.2.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "feat : ajouter un workflow CI réutilisable avec linter, construction d'images et jobs de test (#109) @[copilot-swe-agent[bot]](https://github.com/apps/copilot-swe-agent)",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/ci-helm-0.1.3...ci-helm-0.2.0"
+          ]
+        },
+        {
+          "name": "0.2.0",
+          "tag": "0.2.0",
+          "publishedAt": "2025-11-30T22:47:46Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/0.2.0",
+          "highlights": [
+            "## Résumé de la version\n\nLes fonctionnalités ajoutent un ArgoCD CMP hk-deployment et un workflow CI réutilisable. ￼\n\nLes mises à jour internes activent le linter, préparent la configuration de version pour argocd-cmp-hk-deployment, mettent à jour les dépendances des GitHub Actions et rafraîchissent la documentation. ￼"
+          ]
+        },
+        {
+          "name": "0.1.0",
+          "tag": "0.1.0",
+          "publishedAt": "2025-11-27T16:30:02Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/0.1.0",
+          "highlights": [
+            "## Résumé de la version\n\nFonctionnalités : des workflows CI et réutilisables sont introduits, un workflow réutilisable de résumé des images construites est ajouté, et un workflow de préparation de version permet des versions d'images individuelles.\n\nCorrections : aucune impactant les utilisateurs finaux dans cette version.\n\nInterne : mise à jour extensive de la documentation, mises à jour de Dependabot (y compris release-actions.yml à 0.16.0), et configuration de version préparée à travers des portées telles que `images-ci-helm` et `mydumper`.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        },
+        {
+          "name": "Version mydumper - 0.1.2",
+          "tag": "mydumper-0.1.2",
+          "publishedAt": "2025-11-27T16:07:26Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-0.1.2",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "feat : implémenter le workflow de préparation de version pour les sorties d'images individuelles (#70) @[copilot-swe-agent[bot]](https://github.com/apps/copilot-swe-agent)",
+            "feat : implémenter CI et des workflows réutilisables (#60) @neilime",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/mydumper-0.1.1...mydumper-0.1.2"
+          ]
+        },
+        {
+          "name": "Version ci-helm - 0.1.3",
+          "tag": "ci-helm-0.1.3",
+          "publishedAt": "2025-11-27T16:07:26Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.1.3",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "feat : mettre en œuvre le flux de travail de préparation de la version pour les versions d'image individuelles (#70) @[copilot-swe-agent[bot]](https://github.com/apps/copilot-swe-agent)",
+            "feat : implémenter CI et des workflows réutilisables (#60) @neilime",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/ci-helm-0.1.2...ci-helm-0.1.3"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docusaurus-theme",
+      "description": "Thème Hoverkraft pour Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "0.3.2",
+          "tag": "0.3.2",
+          "publishedAt": "2025-11-24T14:15:51Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.3.2",
+          "highlights": [
+            "## Résumé de la version\n\nPas de nouvelles fonctionnalités dans cette version. Corrections (thème) : la visibilité du menu hamburger se comporte désormais correctement.\n\nChangements internes : les dépendances de développement GitHub Actions et npm ont été mises à jour, y compris `ci-github-publish` vers 0.15.2.\n\n## Changements majeurs\n\nPas de changements majeurs."
+          ]
+        }
+      ]
+    }
+  ]
+}
