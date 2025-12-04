@@ -1,0 +1,98 @@
+---
+title: 'Docker Images at Scale: Simplify Your Organization'
+excerpt: 'Learn how to industrialize Docker image management with Hoverkraft reusable workflows. Simpler setup, faster builds, easier maintenance.'
+slug: docker-images-at-scale
+author: 'Hoverkraft Team'
+lang: en
+---
+
+> 📦 Publishing Docker images across an organization should not be hard. With the right tools, it becomes effortless.
+
+## The Problem: Why It Gets Complicated
+
+Setting up Docker image publishing workflows in an organization quickly becomes a headache. Between managing Dockerfiles, maintaining CI/CD pipelines, applying security policies, and synchronizing versions, teams spend more time on plumbing than on business value.
+
+Common pain points:
+
+- **Duplication**: every team reinvents their own pipelines
+- **Inconsistency**: different practices across projects
+- **Maintenance**: dozens of workflows to update when something changes
+- **Security**: vulnerability scans forgotten or misconfigured
+
+## Our Solution: Reusable Workflows
+
+At Hoverkraft, we built a set of reusable GitHub Actions workflows to industrialize Docker image management. The [hoverkraft-tech/docker-base-images](https://github.com/hoverkraft-tech/docker-base-images) project provides a solid foundation to get started.
+
+### What You Get
+
+- **Multi-architecture builds**: native AMD64 and ARM64 support
+- **Security scanning**: Trivy integrated in every pipeline
+- **Automatic versioning**: semantic tags based on Git
+- **Registry agnostic**: GitHub Container Registry, Docker Hub, or your private registry
+- **OCI metadata**: standardized labels for complete traceability
+
+## Getting Started in 3 Steps
+
+### 1. Create Your Base Images Repository
+
+Follow our [Golden Path documentation](https://docs.hoverkraft.cloud/docs/methodology/golden-paths/docker-base-images/) to bootstrap your own Docker images repository.
+
+```yaml
+# .github/workflows/build.yml
+name: Build Docker Images
+on:
+  push:
+    branches: [main]
+  pull_request:
+jobs:
+  build:
+    uses: hoverkraft-tech/docker-base-images/.github/workflows/build.yml@main
+    with:
+      image-name: my-org/my-image
+```
+
+### 2. Configure Your Images
+
+Structure your Dockerfiles in dedicated folders. The workflow automatically detects changes and only rebuilds what changed.
+
+```text
+images/
+├── node/
+│   ├── Dockerfile
+│   └── context/
+├── python/
+│   └── Dockerfile
+└── golang/
+    └── Dockerfile
+```
+
+### 3. Enjoy the Automation
+
+On every push, the workflow:
+
+1. Detects modified images
+2. Builds in parallel across all architectures
+3. Scans for vulnerabilities
+4. Publishes with appropriate tags
+5. Updates metadata
+
+## Measurable Benefits
+
+By adopting this approach, our clients report:
+
+- ⏱️ **Setup time**: from several days to under 30 minutes
+- 🔄 **Maintenance**: single source of truth for all workflows
+- 🔒 **Security**: systematic scanning with zero extra effort
+- 📈 **Scalability**: add a new image in just a few lines
+
+## Go Further
+
+The [complete documentation](https://docs.hoverkraft.cloud/docs/projects/docker-base-images/) covers all configuration options: multi-registry, Cosign signatures, Slack notifications, and more.
+
+This project is open source. Contributions are welcome to enrich features and improve documentation.
+
+---
+
+👉 [Read the documentation](https://docs.hoverkraft.cloud/docs/methodology/golden-paths/docker-base-images/)
+
+👉 [Explore the project on GitHub](https://github.com/hoverkraft-tech/docker-base-images)
