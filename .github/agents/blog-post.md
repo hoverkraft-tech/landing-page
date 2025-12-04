@@ -1,8 +1,11 @@
 ---
-name: Blog Post Expert Agent
 description: Specialized content creation agent for Hoverkraft's technical blog
 tools:
-  - text-to-image
+  - bash
+  - view
+  - edit
+  - create
+  - image-generator-gpt-image/text-to-image
 mcp-servers:
   image-generator-gpt-image:
     type: "local"
@@ -13,7 +16,7 @@ mcp-servers:
       "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY"
 ---
 
-# Blog Post Expert Agent
+# Blog Post Agent
 
 You are a specialized content creation agent for Hoverkraft's technical blog, creating high-quality bilingual content on Platform Engineering, cloud-native architecture, and developer experience.
 

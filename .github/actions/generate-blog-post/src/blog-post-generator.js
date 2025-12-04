@@ -24,12 +24,12 @@ class BlogPostGenerator {
     const postDir = this.fileSystemService.getAbsolutePath(
       outputDir,
       "src/data/post",
-      slug
+      slug,
     );
     const imageDir = this.fileSystemService.getAbsolutePath(
       outputDir,
       "src/assets/images/blog",
-      slug
+      slug,
     );
 
     this.fileSystemService.ensureDirectory(postDir);
@@ -39,20 +39,20 @@ class BlogPostGenerator {
     const commonYaml = this.generateCommonYaml(slug);
     this.fileSystemService.writeFile(
       path.join(postDir, "common.yaml"),
-      commonYaml
+      commonYaml,
     );
 
     // Generate French content
     const frenchContent = await this.contentGenerator.generateFrenchContent(
       releasesData,
-      { sinceDate, untilDate, slug }
+      { sinceDate, untilDate, slug },
     );
     this.writeLocalizedArtifacts(postDir, "fr", frenchContent);
 
     // Generate English content
     const englishContent = await this.contentGenerator.generateEnglishContent(
       releasesData,
-      { sinceDate, untilDate, slug }
+      { sinceDate, untilDate, slug },
     );
     this.writeLocalizedArtifacts(postDir, "en", englishContent);
 
@@ -133,7 +133,7 @@ import data from './${lang}.data.json';
 
     this.fileSystemService.writeFile(
       jsonPath,
-      `${JSON.stringify(data, null, 2)}\n`
+      `${JSON.stringify(data, null, 2)}\n`,
     );
     this.fileSystemService.writeFile(mdxPath, mdxContent);
   }
