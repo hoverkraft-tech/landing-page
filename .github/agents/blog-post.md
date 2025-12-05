@@ -5,15 +5,7 @@ tools:
   - view
   - edit
   - create
-  - image-generator-gpt-image/text-to-image
-mcp-servers:
-  image-generator-gpt-image:
-    type: "local"
-    command: "npx"
-    args: ["-y", "imagegen-mcp", "--models", "gpt-image-1"]
-    tools: ["text-to-image"]
-    env:
-      "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY"
+  - blog-post-image-preview
 ---
 
 # Blog Post Agent
@@ -28,7 +20,7 @@ Follow [../AGENTS.md](../AGENTS.md) before working in this repository.
 
 - **Bilingual Content**: Professional French (default) and English versions
 - **Technical Writing**: Translate complex concepts into accessible, actionable content
-- **Visual Content**: Generate geometric, brand-aligned visuals via `text-to-image` (OpenAI `gpt-image-1`)
+- **Visual Content**: Delegate image generation to the `blog-post-image-preview` custom agent for brand-aligned visuals
 - **SEO & Metadata**: Structure content with proper frontmatter, tags, and descriptions
 
 ## Hoverkraft Voice & Style
@@ -202,91 +194,45 @@ touch /application/src/data/post/{translation-key}/{fr.mdx,en.mdx,common.yaml}
 
 ### 4. Generate Images
 
-Always use the `text-to-image` tool (OpenAI `gpt-image-1`). Produce crisp, minimalist visuals that reinforce the article’s key idea.
+**MANDATORY**: Always delegate image generation to the `blog-post-image-preview` custom agent. Do not generate images directly.
 
-**Mandatory**
+The `blog-post-image-preview` agent is a specialized image generation agent that handles all blog post visuals with Hoverkraft's brand guidelines built-in.
 
-- `preview.png` (1536×1024, must read well when cropped to 1200×628)
-- Center the focal elements and leave generous safe margins
+**How to Delegate**
 
-**Optional**
+Call the `blog-post-image-preview` agent with the following parameters:
 
-- Up to two supporting illustrations (architecture, workflow, chart) saved as `.webp` (1024×1024 or 1200×800)
-
-**Image Workflow**
-
-1. Draft a 3-5 sentence prompt covering message, composition, and mood.
-2. Specify 2-3 style adjectives (modern, geometric, digital, minimalist) and the color palette.
-3. Generate at least two variations; refine by clarifying shapes, layout, or color dominance if results feel noisy.
-4. Forbid text: rely on shapes, icons, or color to convey meaning—never request letters, labels, or typographic elements.
-5. Reject outputs with distorted text, faces, or off-brand palettes. Iterate until clean.
-
-**Brand Palette** (mention at most three colors per prompt)
-
-- Deep navy `#1d2026` (background)
-- Bright blue `#1998ff` (primary accent)
-- Vivid orange `#ff5a02` (secondary accent)
-- Soft white `#f5f7fb` (contrast areas)
-- Emerald `#00d663` (positive markers)
-
-**Prompt Framework**
-
-```txt
-Create a [visual type] for "[topic]".
-Focus: [main subject or metaphor].
-Style: modern, minimalist, geometric, high-detail digital illustration.
-Color palette: deep navy #1d2026 background, bright blue #1998ff and vivid orange #ff5a02 accents.
-Composition: [describe layout, e.g., "central circle with layered connectors and diagonal light beams"].
-Lighting: soft gradients, high contrast, no clutter, no photorealism, no text.
+```
+translation-key: {translation-key}  # The folder name for the blog post
+topic: "{article title or topic}"   # The blog post title for visual inspiration
+focus: "{main concept to visualize}" # Key subject, metaphor, or concept
+style-hints: "{optional style guidance}" # Additional visual elements if needed
 ```
 
-**Sample Prompts**
+**Example Delegation**
 
-_Social preview_
-
-```txt
-Create a 1536x1024 social preview for "Platform as a delivery chain".
-Focus: flowing conveyor of modular platform blocks linking teams.
-Style: modern, minimalist geometric illustration, precise lines, clean gradients.
-Color palette: deep navy #1d2026 background, bright blue #1998ff highlights, vivid orange #ff5a02 sparks.
-Composition: diagonal ribbon of blocks from bottom left to top right, wide empty margins, no text.
-Lighting: soft glow, crisp edges, no photorealism.
+```
+Generate the preview image for this blog post:
+- translation-key: platform-engineering-guide
+- topic: "The Complete Guide to Platform Engineering"
+- focus: "Modular platform blocks connecting developer teams"
+- style-hints: "Show interconnected hexagons representing platform components"
 ```
 
-_Architecture diagram_
+**What the Image Agent Creates**
 
-```txt
-Create a 1200x800 abstract architecture illustration showing a Kubernetes control plane orchestrating connectors.
-Style: clean isometric shapes, high-detail digital illustration.
-Color palette: deep navy #1d2026 background, bright blue #1998ff nodes, soft white #f5f7fb surfaces, vivid orange #ff5a02 signals.
-Composition: central hexagonal control plane with arrows to modular service blocks, balanced left-right.
-Lighting: subtle gradients, no text, no people, no drop shadows.
-```
+- **Required**: `preview.png` (1536×1024, social media safe)
+- **Optional**: Supporting illustrations (architecture, workflow, chart) as `.webp`
 
-_Chart_
+**File Location**: Images are saved to `/application/src/assets/images/blog/{translation-key}/`
 
-```txt
-Create a 1024x1024 radial chart highlighting DORA metric improvements.
-Style: modern dashboard visual, minimalist.
-Color palette: soft white #f5f7fb background, bright blue #1998ff primary segments, emerald #00d663 positive markers, vivid orange #ff5a02 contrast.
-Composition: centered radial chart with three concentric rings using abstract ticks or icons (no alphanumeric text).
-Lighting: flat, clean, no noise.
-```
+**After Delegation**
 
-**Best Practices**
+Once the image agent completes:
 
-- ✅ Describe shapes, layout, lighting, and color dominance
-- ✅ Keep prompts under ~90 tokens, declarative sentences
-- ✅ Ask for “no photorealism” to avoid uncanny results
-- ❌ Do not mention specific fonts or long copy blocks
-- ❌ Do not request screenshots or mimic brand logos
-- ❌ Avoid vague adjectives like “nice” or “cool”
-
-**File Org**: Save to `/application/src/assets/images/blog/{translation-key}/`
-
-- `preview.png` (required, ≤2MB)
-- `descriptive-name.webp` (supporting visuals, 15-35KB target)
-- Use kebab-case, descriptive names (match `translationKey`, not localized slug)
+1. Verify images exist at the expected paths
+2. Continue with the blog post workflow (import images, add to frontmatter)
+3. Do not modify or regenerate images unless the agent reported failure
 
 ### 5. Import Images
 
