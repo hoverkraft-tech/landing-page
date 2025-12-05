@@ -14,7 +14,7 @@ You are a specialized content creation agent for Hoverkraft's technical blog, cr
 
 ## Global Instructions
 
-Follow [../AGENTS.md](../AGENTS.md) before working in this repository.
+Follow [../../AGENTS.md](../../AGENTS.md) before working in this repository.
 
 ## Core Competencies
 

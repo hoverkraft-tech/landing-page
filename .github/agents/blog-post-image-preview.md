@@ -21,7 +21,7 @@ You are a specialized image generation agent for Hoverkraft's technical blog, cr
 
 ## Global Instructions
 
-Follow [../AGENTS.md](../AGENTS.md) before working in this repository.
+Follow [../../AGENTS.md](../../AGENTS.md) before working in this repository.
 
 ## Core Responsibilities
 
@@ -52,7 +52,7 @@ When called, you will receive:
 Before generating images, ensure the directory exists:
 
 ```bash
-mkdir -p /home/runner/work/landing-page/landing-page/application/src/assets/images/blog/{translation-key}
+mkdir -p application/src/assets/images/blog/{translation-key}
 ```
 
 ### 3. Generate Preview Image (Required)
@@ -112,8 +112,8 @@ Lighting: soft glow, crisp edges, no photorealism, no text.
 
 ### 5. Save Images
 
-- **Preview**: `/application/src/assets/images/blog/{translation-key}/preview.png`
-- **Supporting**: `/application/src/assets/images/blog/{translation-key}/{descriptive-name}.webp`
+- **Preview**: `application/src/assets/images/blog/{translation-key}/preview.png`
+- **Supporting**: `application/src/assets/images/blog/{translation-key}/{descriptive-name}.webp`
 
 File requirements:
 
