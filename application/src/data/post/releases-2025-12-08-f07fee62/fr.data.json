@@ -1,0 +1,153 @@
+{
+  "lang": "fr",
+  "introMarkdown": "\"Entre le 1er et le 8 décembre 2025, nous avons observé une fréquence de publication impressionnante avec 9 releases sur 6 dépôts, soulignant une dynamique d'innovation continue au sein de nos projets.\"\n\nDurant cette période, le dépôt le plus actif a été **ci-github-container**, avec 2 releases publiées, témoignant de l'engagement à améliorer nos outils de CI/CD. La release la plus récente, **github-action-ovh-mks-scaling 0.3.0**, a été mise en ligne le 5 décembre 2025, renforçant notre intégration avec les services OVH. D'autres dépôts, tels que **compose-action** et **ci-github-common**, ont également contribué à cette dynamique, avec des améliorations notables dans la gestion des actions GitHub.\n\n- **ci-github-container** : L'augmentation des releases permet aux ingénieurs de plateforme de bénéficier d'outils CI/CD plus robustes, facilitant ainsi des déploiements plus fréquents et fiables.\n- **github-action-ovh-mks-scaling** : Cette release améliore l'évolutivité des applications sur OVH, essentielle pour les SRE cherchant à optimiser les ressources et réduire les coûts.\n- **compose-action** : Avec 193 étoiles, ce dépôt montre une adoption croissante, ce qui indique une valeur ajoutée pour les contributeurs techniques cherchant à simplifier la gestion des conteneurs.",
+  "closingMarkdown": "Période: 1 décembre 2025 - 8 décembre 2025\nDépôts suivis: 6\nReleases publiées: 9\nProjet le plus actif: ci-github-container (2)\nRelease la plus récente: github-action-ovh-mks-scaling 0.3.0\n\nDépôts en lumière:\n- compose-action (1 release, 193 ⭐)\n- ci-github-container (2 releases, 4 ⭐)\n- ci-github-common (1 release, 3 ⭐)\n\nCette période a été marquée par une activité notable, avec un total de 9 releases publiées, ce qui témoigne d'une dynamique de développement soutenue. Le dépôt ci-github-container se distingue par son activité, tandis que la release la plus récente, github-action-ovh-mks-scaling 0.3.0, pourrait offrir des améliorations significatives.\n\nPour les ingénieurs de plateforme, les SRE et autres utilisateurs techniques, ces développements peuvent avoir un impact direct sur l'efficacité et la performance des systèmes. L'adoption des dernières releases et l'exploration des dépôts en lumière peuvent contribuer à améliorer l'automatisation et la conformité des processus.\n\n- **Exécuter des benchmarks sur le dépôt ci-github-container** : Cela permettra d'évaluer les performances des nouvelles fonctionnalités et d'identifier les améliorations possibles.\n- **Consulter la documentation de compose-action** : Une révision de cette documentation peut aider à optimiser les workflows et à tirer parti des meilleures pratiques.\n- **Adopter les composants de github-action-ovh-mks-scaling** : L'intégration de cette release peut améliorer l'automatisation des déploiements et la gestion des ressources.",
+  "stats": {
+    "period": {
+      "since": "2025-12-01T09:28:22.403Z",
+      "until": "2025-12-08T09:28:22.403Z"
+    },
+    "totalRepos": 6,
+    "totalReleases": 9,
+    "busiestRepo": {
+      "name": "ci-github-container",
+      "count": 2
+    },
+    "mostRecentRelease": {
+      "repo": "github-action-ovh-mks-scaling",
+      "name": "0.3.0",
+      "publishedAt": "2025-12-05T15:05:58Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions et workflows GitHub opinionnés pour des besoins courants d'intégration continue",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.31.3",
+          "tag": "0.31.3",
+          "publishedAt": "2025-12-03T07:55:08Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.31.3",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement public.\n\nInterne : documentation des actions/workflows mise à jour et dépendances GitHub Actions mises à jour dans un répertoire.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-container",
+      "description": "Opinions sur les GitHub Actions et les workflows pour l'intégration continue dans un contexte de conteneur (OCI)",
+      "stars": 4,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.30.2",
+          "tag": "0.30.2",
+          "publishedAt": "2025-12-03T08:44:28Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.30.2",
+          "highlights": [
+            "## Résumé de la version\n\n**Correction :** réordonné le traitement Markdown pour exécuter Prettier après Markdownlint afin d'assurer un formatage cohérent pour les documents générés par helm.\nAucun autre changement public.\n\nInterne : documentation mise à jour et dépendances (Express, actions/checkout, @modelcontextprotocol/sdk, npm et groupes GitHub Actions) mises à jour dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.30.1",
+          "tag": "0.30.1",
+          "publishedAt": "2025-12-01T21:13:20Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.30.1",
+          "highlights": [
+            "## Résumé de la version\n\nCorrection (helm/generate-docs) : problèmes de formatage corrigés pour garantir une sortie cohérente. Docs : documentation des actions et des workflows mise à jour.\n\nInterne : mises à jour des dépendances dans GitHub Actions et Prettier.\n\n## Changements majeurs\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions et workflows Github opinionnés pour l'intégration continue dans un contexte NodeJs",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.20.6",
+          "tag": "0.20.6",
+          "publishedAt": "2025-12-03T09:28:43Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.6",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement public.\n\nInterne : documentation des actions/workflows mise à jour et dépendances mises à jour (GitHub Actions dans 4 répertoires avec 11 mises à jour, npm dans 4 répertoires avec 2 mises à jour).\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.20.5",
+          "tag": "0.20.5",
+          "publishedAt": "2025-12-01T09:28:24Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.20.5",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement public.\n\nCorrection : résolu les problèmes GPG de Codecov en mode conteneur en utilisant des helpers github-script. Interne : extrait la logique de Codecov dans une action dédiée avec des corrections de configuration, mis à jour la documentation des actions/workflows, et mis à jour les dépendances npm et GitHub Actions dans tout le dépôt.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions et workflows GitHub avec des opinions pour un déploiement, une publication et une sortie rationalisés.",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.17.3",
+          "tag": "0.17.3",
+          "publishedAt": "2025-12-03T09:00:01Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.17.3",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement public.\n\nInterne : documentation des actions/workflows mise à jour et dépendances GitHub Actions augmentées dans cinq répertoires.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        },
+        {
+          "name": "0.17.1",
+          "tag": "0.17.1",
+          "publishedAt": "2025-12-02T09:16:20Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.17.1",
+          "highlights": [
+            "## Résumé de la version\n\n**Fonctionnalité (deploy/argocd-manifest-files) :** ajoute le support du format source singulier dans l'action des fichiers de manifeste ArgoCD.\n\nInterne : documentation des actions/workflows mise à jour et dépendances GitHub Actions augmentées dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "compose-action",
+      "description": "Cette action exécute votre fichier docker-compose et nettoie avant que l'action ne soit terminée.",
+      "stars": 193,
+      "url": "https://github.com/hoverkraft-tech/compose-action",
+      "releases": [
+        {
+          "name": "v2.4.2",
+          "tag": "v2.4.2",
+          "publishedAt": "2025-12-04T16:01:40Z",
+          "url": "https://github.com/hoverkraft-tech/compose-action/releases/tag/v2.4.2",
+          "highlights": [
+            "## Résumé de la version\n\nCorrection : les objets d'erreur docker-compose sont maintenant formatés en messages lisibles pour un débogage plus clair.\nDocumentation : documentation des Actions et des workflows mise à jour pour refléter le comportement actuel.\n\nInterne : maintenance des dépendances à travers la pile GitHub Actions, y compris le groupe github-actions-dependencies, @octokit/action et js-yaml.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "github-action-ovh-mks-scaling",
+      "description": "Ajuster à la hausse ou à la baisse un pool de nœuds OVH MKS",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling",
+      "releases": [
+        {
+          "name": "0.3.0",
+          "tag": "0.3.0",
+          "publishedAt": "2025-12-05T15:05:58Z",
+          "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling/releases/tag/0.3.0",
+          "highlights": [
+            "## Résumé de la version\n\nDocs : documentation des Actions et des workflows mise à jour pour l'action de mise à l'échelle OVH MKS.\n\nInterne : mise à niveau du CI vers la dernière configuration et mise à jour de la dépendance de développement js-yaml à 3.14.2.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        }
+      ]
+    }
+  ]
+}
