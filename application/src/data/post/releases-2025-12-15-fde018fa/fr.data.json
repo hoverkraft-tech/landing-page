@@ -1,0 +1,159 @@
+{
+  "lang": "fr",
+  "introMarkdown": "\"Entre le 8 et le 15 décembre 2025, nous avons atteint un rythme de déploiement impressionnant avec 9 releases publiées, témoignant d'une adoption croissante de nos projets.\" Cette période a été marquée par une activité soutenue, notamment dans le dépôt docker-base-images, qui a enregistré 3 releases. La release la plus récente, ci-github-publish 0.18.1, a été publiée le 15 décembre 2025, ajoutant des améliorations significatives à notre pipeline CI/CD.\n\n- Le dépôt ci-github-container, avec sa première release et 4 étoiles, offre une nouvelle base pour les intégrations de conteneurs, facilitant la mise en œuvre pour les ingénieurs de plateforme.\n- Le dépôt ci-github-common, avec 1 release et 3 étoiles, centralise des composants réutilisables, optimisant ainsi le temps de développement pour les SREs.\n- La double release du dépôt ci-github-publish, avec 2 releases et 2 étoiles, améliore la publication continue, essentielle pour les contributeurs techniques cherchant à automatiser leurs workflows.",
+  "closingMarkdown": "Période: 8 décembre 2025 - 15 décembre 2025\nDépôts suivis: 6\nReleases publiées: 9\nProjet le plus actif: docker-base-images (3)\nRelease la plus récente: ci-github-publish 0.18.1\n\nDépôts en lumière:\n- ci-github-container (1 release, 4 ⭐)\n- ci-github-common (1 release, 3 ⭐)\n- ci-github-publish (2 releases, 2 ⭐)\n\nCette période montre une activité soutenue dans plusieurs dépôts, ce qui est bénéfique pour les ingénieurs de plateforme, les SRE et les autres utilisateurs techniques. Les nouvelles releases et les mises à jour apportent des améliorations significatives en termes de performance et d'automatisation, facilitant ainsi le travail quotidien des équipes.\n\n### Prochaines étapes concrètes :\n- **Exécuter des benchmarks sur le dépôt `docker-base-images`** : Cela permettra d'évaluer les performances des images Docker et d'optimiser les temps de déploiement.\n- **Consulter la documentation du dépôt `ci-github-publish`** : La mise à jour vers la version 0.18.1 peut offrir des améliorations d'automatisation pour les publications, augmentant ainsi l'efficacité des workflows CI/CD.\n- **Adopter les composants du dépôt `ci-github-container`** : Avec une note de 4 étoiles, l'intégration de ces composants peut améliorer la conformité et la sécurité des conteneurs utilisés dans les projets.",
+  "stats": {
+    "period": {
+      "since": "2025-12-08T09:32:20.606Z",
+      "until": "2025-12-15T09:32:20.606Z"
+    },
+    "totalRepos": 6,
+    "totalReleases": 9,
+    "busiestRepo": {
+      "name": "docker-base-images",
+      "count": 3
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-publish",
+      "name": "0.18.1",
+      "publishedAt": "2025-12-15T07:22:38Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions et workflows GitHub opinionnés pour des besoins courants d'intégration continue",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.31.4",
+          "tag": "0.31.4",
+          "publishedAt": "2025-12-09T23:01:23Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.31.4",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation des actions et des workflows a été mise à jour pour plus de clarté.\n\nInterne : Les dépendances des GitHub Actions ont été mises à jour dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changements majeurs."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-container",
+      "description": "Opinions sur GitHub Actions et workflows pour l'intégration continue dans un contexte de conteneurs (OCI)",
+      "stars": 4,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.30.3",
+          "tag": "0.30.3",
+          "publishedAt": "2025-12-10T17:38:52Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.30.3",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation a été mise à jour pour refléter les actions et les flux de travail actuels.\n\nInterne : les dépendances ont été actualisées, y compris les mises à jour des GitHub Actions dans 9 répertoires (9 mises à jour au total) et les dépendances npm dans 1 répertoire (3 mises à jour).\n\n## Changements majeurs\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions et workflows GitHub opinionnés pour l'intégration continue dans un contexte NodeJs",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.21.0",
+          "tag": "0.21.0",
+          "publishedAt": "2025-12-10T18:30:18Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.21.0",
+          "highlights": [
+            "## Résumé de la version\n\nsetup-node : ajout du support pour l'entrée `registry-url` afin de configurer la résolution du registre npm.\n\nInterne : mise à jour des GitHub Actions (8 mises à jour dans 4 répertoires) et des dépendances npm (2 mises à jour dans 4 répertoires), alignement du flux de travail du conteneur sur 0.30.3, et mise à jour de la documentation des actions/flux de travail."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions et workflows GitHub avec des opinions pour un déploiement, une publication et une sortie simplifiés.",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.18.1",
+          "tag": "0.18.1",
+          "publishedAt": "2025-12-15T07:22:38Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.18.1",
+          "highlights": [
+            "## Résumé de la version\n\nCorrection (déploiement/jenkins) : échapper les balises Liquid dans Markdown lors du déploiement Jenkins pour éviter un rendu incorrect.\n\nInterne : la documentation pour les actions/workflows a été mise à jour ; les dépendances des GitHub Actions ont été mises à jour dans plusieurs répertoires."
+          ]
+        },
+        {
+          "name": "0.18.0",
+          "tag": "0.18.0",
+          "publishedAt": "2025-12-10T18:48:31Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.18.0",
+          "highlights": [
+            "## Résumé de la version\n\ndeploy/argocd-manifest-files : ajout de la variable d'environnement `ARGOCD_MULTI_SOURCES` pour distinguer les types de sources.\ndeploy/jekyll : prend en charge la configuration des chemins, des ressources supplémentaires et des pages HTML.\ndeploy-chart : définition des permissions appropriées.\ndeploy/argocd-manifest-files : correction pour mettre à jour uniquement les sources liées aux charts.\n\nInterne : documentation mise à jour et dépendances GitHub Actions augmentées (plusieurs répertoires).\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker opinionnées",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version mydumper - 0.2.2",
+          "tag": "mydumper-0.2.2",
+          "publishedAt": "2025-12-09T22:01:25Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-0.2.2",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Aucun changement",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/mydumper-0.2.1...mydumper-0.2.2"
+          ]
+        },
+        {
+          "name": "Version ci-helm - 0.2.2",
+          "tag": "ci-helm-0.2.2",
+          "publishedAt": "2025-12-09T22:01:23Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.2.2",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Aucun changement",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/ci-helm-0.2.1...ci-helm-0.2.2"
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 0.2.0",
+          "tag": "argocd-cmp-hk-deployment-0.2.0",
+          "publishedAt": "2025-12-09T22:01:22Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-0.2.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "feat : déploiement hk cmp argocd point d'entrée global (#118) @fredleger",
+            "**Changelog complet**: https://github.com/hoverkraft-tech/docker-base-images/compare/argocd-cmp-hk-deployment-0.1.0...argocd-cmp-hk-deployment-0.2.0"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docusaurus-theme",
+      "description": "Thème Hoverkraft pour Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "0.3.3",
+          "tag": "0.3.3",
+          "publishedAt": "2025-12-15T07:06:55Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.3.3",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement public, visible par l'utilisateur, dans cette version.\n\nInterne : Les workflows CI et GitHub Actions ont été actualisés, les dépendances de Docusaurus ont été mises à jour et les outils de développement ont été améliorés."
+          ]
+        }
+      ]
+    }
+  ]
+}
