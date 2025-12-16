@@ -125,13 +125,13 @@ File requirements:
 
 Use at most three colors per image:
 
-| Color         | Hex       | Usage                    |
-| ------------- | --------- | ------------------------ |
-| Deep navy     | `#1d2026` | Primary background       |
-| Bright blue   | `#1998ff` | Primary accent, nodes    |
-| Vivid orange  | `#ff5a02` | Secondary accent, signals |
-| Soft white    | `#f5f7fb` | Contrast areas, surfaces |
-| Emerald       | `#00d663` | Positive markers only    |
+| Color        | Hex       | Usage                     |
+| ------------ | --------- | ------------------------- |
+| Deep navy    | `#1d2026` | Primary background        |
+| Bright blue  | `#1998ff` | Primary accent, nodes     |
+| Vivid orange | `#ff5a02` | Secondary accent, signals |
+| Soft white   | `#f5f7fb` | Contrast areas, surfaces  |
+| Emerald      | `#00d663` | Positive markers only     |
 
 ## Style Guidelines
 

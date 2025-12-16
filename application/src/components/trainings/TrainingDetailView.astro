@@ -1,0 +1,346 @@
+---
+/**
+ * Reusable component for individual training detail page
+ */
+import type { TrainingCourse } from '~/data/trainings';
+import { useTranslations } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
+import ItemGrid2 from '~/components/ui/ItemGrid2.astro';
+import Timeline from '~/components/ui/Timeline.astro';
+import { Icon } from 'astro-icon/components';
+import { cleanSlug } from '~/utils/permalinks';
+
+interface Props {
+  course: TrainingCourse;
+  metadata: {
+    title: string;
+    description: string;
+  };
+  lang: 'fr' | 'en';
+  contactPath: string;
+  catalogPath: string;
+  termsPath: string;
+}
+
+const { course, metadata, lang, contactPath, catalogPath, termsPath } = Astro.props;
+const t = useTranslations(lang);
+
+const sectionIds = {
+  context: 'context',
+  objectives: 'objectives',
+  outline: 'outline',
+  prerequisites: 'prerequisites',
+  inclusions: 'inclusions',
+} as const;
+
+const summaryRows = [
+  {
+    icon: 'tabler:calendar',
+    label: t('training.detail.duration'),
+    value: course.metadata.duration,
+  },
+  {
+    icon: 'tabler:clock',
+    label: '',
+    value: `${course.metadata.hours} ${t('training.detail.hoursSuffix')}`,
+  },
+  {
+    icon: 'tabler:chalkboard',
+    label: t('training.detail.instructor'),
+    value: course.metadata.instructor,
+  },
+  {
+    icon: 'tabler:users',
+    label: t('training.detail.audience'),
+    value: course.metadata.audience,
+  },
+  {
+    icon: 'tabler:scale',
+    label: '',
+    value: course.metadata.ratio,
+  },
+  {
+    icon: 'tabler:certificate',
+    label: '',
+    value: course.metadata.availability,
+  },
+];
+---
+
+<Layout metadata={metadata}>
+  <!-- Hero (split layout) -->
+  <section class="relative md:-mt-[76px] not-prose">
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6">
+      <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
+      <div class="py-12 md:py-16">
+        <div class="grid lg:grid-cols-12 gap-10 items-center">
+          <div class="lg:col-span-7">
+            <p class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase">
+              {t('training.detail.tagline')}
+            </p>
+            <h1 class="mt-3 text-4xl md:text-6xl font-bold leading-tighter tracking-tighter font-heading text-heading">
+              {course.title}
+            </h1>
+            <p class="mt-4 text-xl text-muted max-w-2xl">{course.description}</p>
+
+            {
+              (course.tags ?? []).length > 0 && (
+                <div class="mt-6 flex flex-wrap gap-2">
+                  {(course.tags ?? []).map((tag) => (
+                    <a
+                      class="inline-flex items-center rounded-full border border-gray-200 dark:border-slate-700 px-3 py-1 text-sm text-default bg-white/70 dark:bg-slate-900/60"
+                      href={`${catalogPath}/tag/${cleanSlug(tag)}`}
+                    >
+                      {tag}
+                    </a>
+                  ))}
+                </div>
+              )
+            }
+
+            <div class="mt-8 flex flex-col sm:flex-row gap-4">
+              <Button variant="primary" text={t('training.detail.contact')} href={`${contactPath}#form`} />
+              <Button text={t('training.detail.viewAll')} href={catalogPath} />
+            </div>
+
+            <div class="mt-10 grid sm:grid-cols-2 gap-3">
+              {
+                summaryRows.slice(0, 4).map((row) => (
+                  <div class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 px-4 py-3">
+                    <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
+                    <div class="leading-snug">
+                      {row.label && <div class="text-sm text-muted">{row.label}</div>}
+                      <div class="font-medium text-default">
+                        <span>{row.value}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="lg:col-span-5">
+            <div
+              class="rounded-lg overflow-hidden border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 shadow-xl dark:shadow-none"
+            >
+              <Image
+                class="w-full"
+                widths={[400, 768, 1024, 2040]}
+                sizes="(max-width: 1023px) 100vw, 520px"
+                loading="eager"
+                width={1024}
+                height={768}
+                src={course.image}
+                alt={metadata.title}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content + sticky summary -->
+  <section class="not-prose">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 py-12 md:py-16">
+      <div class="grid lg:grid-cols-12 gap-10">
+        <div class="lg:col-span-8 space-y-10">
+          <section id={sectionIds.context} class="scroll-mt-[96px]">
+            <div
+              class="rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 md:p-8 shadow-xl dark:shadow-none"
+            >
+              <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">{t('training.detail.context')}</h2>
+              <p class="mt-4 text-lg text-muted whitespace-pre-line">{course.context}</p>
+              <div class="mt-8 grid sm:grid-cols-2 gap-3">
+                {
+                  summaryRows.slice(4).map((row) => (
+                    <div class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-page px-4 py-3">
+                      <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
+                      <div class="leading-snug">
+                        {row.label && <div class="text-sm text-muted">{row.label}</div>}
+                        <div class="font-medium text-default">{row.value}</div>
+                      </div>
+                    </div>
+                  ))
+                }
+              </div>
+            </div>
+          </section>
+
+          <section id={sectionIds.objectives} class="scroll-mt-[96px]">
+            <div
+              class="rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 md:p-8 shadow-xl dark:shadow-none"
+            >
+              <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">
+                {t('training.detail.objectives')}
+              </h2>
+              <div class="mt-6">
+                <ItemGrid2
+                  columns={1}
+                  defaultIcon="tabler:check"
+                  items={course.objectives.map((obj) => ({
+                    title: obj.title,
+                    description: obj.description,
+                  }))}
+                  classes={{
+                    container: 'gap-4',
+                    panel: 'rounded-lg border border-gray-200 dark:border-slate-800 bg-page p-5',
+                    icon: 'w-8 h-8 text-primary',
+                  }}
+                />
+              </div>
+            </div>
+          </section>
+
+          <section id={sectionIds.outline} class="scroll-mt-[96px]">
+            <div
+              class="rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 md:p-8 shadow-xl dark:shadow-none"
+            >
+              <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">{t('training.detail.outline')}</h2>
+              <div class="mt-6">
+                <Timeline
+                  defaultIcon="tabler:circle"
+                  items={course.outline.map((day, index) => ({
+                    title: `${t('training.detail.outlineDesc')} ${index + 1} — ${day.title}`,
+                    description: day.description,
+                    icon: `tabler:number-${index + 1}`,
+                  }))}
+                  classes={{
+                    container: 'mt-2',
+                  }}
+                />
+              </div>
+            </div>
+          </section>
+
+          <section id={sectionIds.prerequisites} class="scroll-mt-[96px]">
+            <div
+              class="rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 md:p-8 shadow-xl dark:shadow-none"
+            >
+              <div class="flex items-start gap-4">
+                <div
+                  class="flex h-10 w-10 items-center justify-center rounded-full bg-page border border-gray-200 dark:border-slate-800"
+                >
+                  <Icon name="tabler:file-check" class="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">
+                    {t('training.detail.prerequisites')}
+                  </h2>
+                  <p class="mt-3 text-lg text-muted whitespace-pre-line">{course.prerequisites}</p>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id={sectionIds.inclusions} class="scroll-mt-[96px]">
+            <div
+              class="rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 md:p-8 shadow-xl dark:shadow-none"
+            >
+              <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">
+                {t('training.detail.inclusions')}
+              </h2>
+              <div class="mt-6">
+                <ItemGrid2
+                  columns={2}
+                  items={course.inclusions.map((inc) => ({
+                    title: inc.title,
+                    icon: inc.icon,
+                  }))}
+                  classes={{
+                    container: 'gap-4 md:gap-6',
+                    panel: 'rounded-lg border border-gray-200 dark:border-slate-800 bg-page p-5',
+                    icon: 'w-8 h-8 text-primary',
+                  }}
+                />
+              </div>
+            </div>
+          </section>
+
+          <section>
+            <div class="rounded-lg border border-gray-200 dark:border-slate-800 bg-page p-6 md:p-8">
+              <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">
+                {t('training.detail.interested')}
+              </h2>
+              <p class="mt-4 text-lg text-muted">
+                {t('training.detail.subtitle')}
+                <br /><br />
+                {t('training.detail.moreDetailsPrefix')}
+                <a href={termsPath} class="underline">{t('training.detail.conditions')}</a>.
+              </p>
+              <div class="mt-8 flex flex-col sm:flex-row gap-4">
+                <Button variant="primary" text={t('training.detail.requestQuote')} href={`${contactPath}#form`} />
+                <Button text={t('training.detail.viewAll')} href={catalogPath} />
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="lg:col-span-4 lg:sticky lg:top-24 self-start">
+          <div
+            class="rounded-lg border border-gray-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-xl dark:shadow-none"
+          >
+            <div class="flex items-center justify-between gap-3">
+              <div class="text-lg font-bold font-heading text-heading">{t('training.detail.plan')}</div>
+              <a class="text-sm text-muted hover:text-primary" href={catalogPath}>{t('training.detail.viewAll')}</a>
+            </div>
+
+            <nav class="mt-4">
+              <ul class="space-y-2">
+                <li>
+                  <a class="text-default hover:text-primary" href={`#${sectionIds.context}`}
+                    >{t('training.detail.context')}</a
+                  >
+                </li>
+                <li>
+                  <a class="text-default hover:text-primary" href={`#${sectionIds.objectives}`}
+                    >{t('training.detail.objectives')}</a
+                  >
+                </li>
+                <li>
+                  <a class="text-default hover:text-primary" href={`#${sectionIds.outline}`}
+                    >{t('training.detail.outline')}</a
+                  >
+                </li>
+                <li>
+                  <a class="text-default hover:text-primary" href={`#${sectionIds.prerequisites}`}
+                    >{t('training.detail.prerequisites')}</a
+                  >
+                </li>
+                <li>
+                  <a class="text-default hover:text-primary" href={`#${sectionIds.inclusions}`}
+                    >{t('training.detail.inclusions')}</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <div class="mt-6 border-t border-gray-200 dark:border-slate-800 pt-6 space-y-3">
+              {
+                summaryRows.map((row) => (
+                  <div class="flex items-start gap-3">
+                    <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
+                    <div class="leading-snug">
+                      {row.label && <div class="text-sm text-muted">{row.label}</div>}
+                      <div class="text-default">
+                        <span>{row.value}</span>
+                      </div>
+                    </div>
+                  </div>
+                ))
+              }
+            </div>
+
+            <div class="mt-8 flex flex-col gap-3">
+              <Button variant="primary" text={t('training.detail.requestQuote')} href={`${contactPath}#form`} />
+              <Button text={t('training.detail.viewAll')} href={catalogPath} />
+            </div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</Layout>

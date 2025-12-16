@@ -32,7 +32,7 @@ const {
         containerClass
       )}
     >
-      {items.map(({ title, description, icon, callToAction, classes: itemClasses = {} }) => (
+      {items.map(({ title, description, icon, badges, callToAction, classes: itemClasses = {} }) => (
         <div
           class={twMerge(
             'relative flex flex-col intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
@@ -46,6 +46,24 @@ const {
           <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
           {description && (
             <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
+          )}
+          {badges && badges.length > 0 && (
+            <div class="mt-4 flex flex-wrap gap-2">
+              {badges.map((badge) =>
+                badge?.href ? (
+                  <a
+                    href={badge.href}
+                    class="inline-flex items-center rounded-full border border-gray-200 dark:border-slate-700 px-3 py-1 text-xs text-default bg-white/70 dark:bg-slate-900/60 hover:text-primary"
+                  >
+                    {badge.text}
+                  </a>
+                ) : (
+                  <span class="inline-flex items-center rounded-full border border-gray-200 dark:border-slate-700 px-3 py-1 text-xs text-default bg-white/70 dark:bg-slate-900/60">
+                    {badge.text}
+                  </span>
+                )
+              )}
+            </div>
           )}
           {callToAction && (
             <div class="mt-2">
