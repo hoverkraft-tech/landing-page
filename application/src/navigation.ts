@@ -40,6 +40,10 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
         href: translatePath('/offers'),
       },
       {
+        text: t('nav.trainings'),
+        href: translatePath('/trainings'),
+      },
+      {
         text: t('nav.resources'),
         href: translatePath('/resources'),
       },
@@ -72,6 +76,7 @@ export function getLocalizedFooterData(url: URL) {
           { text: t('nav.about'), href: translatePath('/about') },
           { text: t('nav.methodology'), href: translatePath('/methodology') },
           { text: t('nav.offers'), href: translatePath('/offers') },
+          { text: t('nav.trainings'), href: translatePath('/trainings') },
           { text: t('nav.contact'), href: translatePath('/contact') },
         ],
       },

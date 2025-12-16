@@ -1,0 +1,204 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Formation DevX - Developer Experience',
+  description:
+    'Apprenez à mesurer et améliorer l\'expérience développeur avec les métriques DORA/SPACE et les Internal Developer Portals.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Formation"
+    actions={[{ variant: 'primary', text: 'Nous contacter', href: '/contact#form' }]}
+    image={{
+      src: '~/assets/images/programming-3.webp',
+      alt: 'Formation DevX',
+    }}
+  >
+    <Fragment slot="title">DevX - Developer Experience</Fragment>
+    <Fragment slot="subtitle">
+      Maîtrisez les outils et méthodes pour mesurer, piloter et améliorer l'expérience développeur au sein de votre
+      organisation.
+    </Fragment>
+  </Hero>
+
+  <Content
+    title="Contexte"
+    items={[
+      {
+        description:
+          'Cette formation vise à former des champions de l\'expérience développeur. Les formés apprendront à identifier les points de friction, mesurer la productivité avec les bonnes métriques, et mettre en place des stratégies d\'amélioration continue centrées sur les besoins des développeurs.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📅</span>
+          <span><strong>Durée :</strong> 2 jour(s)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⏱️</span>
+          <span><strong>14 heures</strong> de formation</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👨‍🏫</span>
+          <span><strong>Formateur :</strong> Frédéric Léger</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👥</span>
+          <span><strong>Public :</strong> Tech leads, managers, platform engineers</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⚖️</span>
+          <span><strong>50% théorique / 50% pratique</strong></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🎓</span>
+          <span><strong>Sur simple demande</strong></span>
+        </div>
+      </div>
+    </Fragment>
+  </Content>
+
+  <Features3
+    title="Objectifs pédagogiques"
+    columns={1}
+    items={[
+      {
+        title: 'Comprendre les enjeux de la Developer Experience',
+        description: 'Impact sur la productivité, rétention et time-to-market',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Mesurer avec les métriques DORA et SPACE',
+        description: 'Collecter, analyser et interpréter les indicateurs clés',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Identifier les points de friction',
+        description: 'Méthodes d\'enquête et d\'analyse qualitative',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Concevoir un Internal Developer Portal',
+        description: 'Architecture, composants et stratégie d\'adoption',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Mettre en place des feedback loops',
+        description: 'Rituels et outils pour capturer les retours développeurs',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Piloter l\'amélioration continue',
+        description: 'Roadmap DevX et gouvernance des initiatives',
+        icon: 'tabler:checklist',
+      },
+    ]}
+  />
+
+  <Steps
+    title="Déroulé pédagogique"
+    items={[
+      {
+        title: 'Journée #1 : Mesure et diagnostic',
+        description:
+          'Introduction à la Developer Experience\nMétriques DORA et framework SPACE\nIdentification des points de friction\nTPs : audit DevX de votre organisation',
+        icon: 'tabler:number-1',
+      },
+      {
+        title: 'Journée #2 : Amélioration et portails',
+        description:
+          'Internal Developer Portals (Backstage, etc.)\nStratégies d\'amélioration et quick wins\nGouvernance et feedback loops\nÉvaluation finale (sur demande)',
+        icon: 'tabler:number-2',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-6.webp',
+      alt: 'Déroulé pédagogique',
+    }}
+  />
+
+  <Content
+    isReversed
+    title="Prérequis"
+    items={[
+      {
+        description:
+          'Avoir une expérience en développement logiciel ou en gestion d\'équipes techniques. Connaissance de base des pratiques DevOps recommandée.',
+        icon: 'tabler:file-check',
+      },
+    ]}
+  />
+
+  <Content
+    title="Plan de formation"
+    items={[
+      {
+        title: 'Contexte',
+      },
+      {
+        title: 'Objectifs pédagogiques',
+      },
+      {
+        title: 'Déroulé pédagogique',
+        description: 'Journée #1\nJournée #2',
+      },
+    ]}
+  />
+
+  <Content
+    isAfterContent
+    title="Inclus dans le prix de la formation"
+    items={[
+      {
+        title: 'Pauses café',
+        icon: 'tabler:coffee',
+      },
+      {
+        title: 'Support de cours format électronique',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Plateforme cloud de travaux pratiques',
+        icon: 'tabler:cloud',
+      },
+      {
+        title: 'Quizz d\'évaluation',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Demander un devis',
+        href: '/contact#form',
+      },
+      {
+        text: 'Voir toutes les formations',
+        href: '/formations',
+      },
+    ]}
+  >
+    <Fragment slot="title">Intéressé par cette formation ?</Fragment>
+    <Fragment slot="subtitle"
+      >Les formations sont réalisées en présentiel ou à distance. Nous vous proposons des formations sur mesure,
+      adaptées à vos besoins. Toutes les formations sont éligibles à un financement par votre OPCO. Nous vous
+      accompagnons dans vos démarches.<br /><br />Pour plus de détails consultez nos <a
+        href="/terms"
+        class="underline">conditions de formations</a
+      >.</Fragment
+    >
+  </CallToAction>
+</Layout>

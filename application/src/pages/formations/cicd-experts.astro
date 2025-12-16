@@ -1,0 +1,210 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Formation CI/CD Experts : Github / Gitlab',
+  description:
+    'Devenez expert des pipelines CI/CD modernes avec GitHub Actions et GitLab CI. Automatisation avancée, sécurité et optimisation.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Formation"
+    actions={[{ variant: 'primary', text: 'Nous contacter', href: '/contact#form' }]}
+    image={{
+      src: '~/assets/images/programming-2.webp',
+      alt: 'Formation CI/CD Experts',
+    }}
+  >
+    <Fragment slot="title">CI/CD Experts : Github / Gitlab</Fragment>
+    <Fragment slot="subtitle">
+      Maîtrisez les pipelines CI/CD modernes avec GitHub Actions et GitLab CI pour automatiser, sécuriser et optimiser
+      vos workflows de déploiement.
+    </Fragment>
+  </Hero>
+
+  <Content
+    title="Contexte"
+    items={[
+      {
+        description:
+          'Cette formation vise à former des experts capables de concevoir, implémenter et optimiser des pipelines CI/CD avancés. Les formés apprendront à automatiser leurs workflows, sécuriser leurs déploiements, et maîtriser les fonctionnalités avancées de GitHub Actions et GitLab CI.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📅</span>
+          <span><strong>Durée :</strong> 3 jour(s)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⏱️</span>
+          <span><strong>21 heures</strong> de formation</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👨‍🏫</span>
+          <span><strong>Formateur :</strong> Frédéric Léger</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👥</span>
+          <span><strong>Public :</strong> DevOps, ops, développeurs</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⚖️</span>
+          <span><strong>50% théorique / 50% pratique</strong></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🎓</span>
+          <span><strong>Sur simple demande</strong></span>
+        </div>
+      </div>
+    </Fragment>
+  </Content>
+
+  <Features3
+    title="Objectifs pédagogiques"
+    columns={1}
+    items={[
+      {
+        title: 'Maîtriser GitHub Actions et GitLab CI',
+        description: 'Syntaxe, concepts avancés et meilleures pratiques',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Concevoir des pipelines optimisés',
+        description: 'Cache, parallélisation et stratégies de build efficaces',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Sécuriser les workflows CI/CD',
+        description: 'Secrets management, signing, SBOM et supply chain security',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Implémenter GitOps et déploiement continu',
+        description: 'Stratégies de déploiement et rollback automatisés',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Créer des actions/jobs réutilisables',
+        description: 'Développer des composants custom pour vos pipelines',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Monitorer et débugger les pipelines',
+        description: 'Observabilité, logging et troubleshooting avancé',
+        icon: 'tabler:checklist',
+      },
+    ]}
+  />
+
+  <Steps
+    title="Déroulé pédagogique"
+    items={[
+      {
+        title: 'Journée #1 : Fondamentaux CI/CD',
+        description:
+          'Introduction aux pipelines modernes\nGitHub Actions : workflows, jobs, steps\nGitLab CI : .gitlab-ci.yml et runners\nTPs : premiers pipelines de build et test',
+        icon: 'tabler:number-1',
+      },
+      {
+        title: 'Journée #2 : Optimisation et sécurité',
+        description:
+          'Stratégies de cache et artifacts\nParallélisation et matrices\nSécurisation : secrets, signing, SBOM\nTPs : optimiser un pipeline existant',
+        icon: 'tabler:number-2',
+      },
+      {
+        title: 'Journée #3 : Déploiement et production',
+        description:
+          'GitOps et déploiement continu\nEnvironnements et stratégies de release\nMonitoring et observabilité\nÉvaluation finale (sur demande)',
+        icon: 'tabler:number-3',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-6.webp',
+      alt: 'Déroulé pédagogique',
+    }}
+  />
+
+  <Content
+    isReversed
+    title="Prérequis"
+    items={[
+      {
+        description:
+          'Être à l\'aise avec un shell, connaître Git et avoir une expérience de base avec CI/CD. Une connaissance de Docker est recommandée.',
+        icon: 'tabler:file-check',
+      },
+    ]}
+  />
+
+  <Content
+    title="Plan de formation"
+    items={[
+      {
+        title: 'Contexte',
+      },
+      {
+        title: 'Objectifs pédagogiques',
+      },
+      {
+        title: 'Déroulé pédagogique',
+        description: 'Journée #1\nJournée #2\nJournée #3',
+      },
+    ]}
+  />
+
+  <Content
+    isAfterContent
+    title="Inclus dans le prix de la formation"
+    items={[
+      {
+        title: 'Pauses café',
+        icon: 'tabler:coffee',
+      },
+      {
+        title: 'Support de cours format électronique',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Plateforme cloud de travaux pratiques',
+        icon: 'tabler:cloud',
+      },
+      {
+        title: 'Quizz d\'évaluation',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Demander un devis',
+        href: '/contact#form',
+      },
+      {
+        text: 'Voir toutes les formations',
+        href: '/formations',
+      },
+    ]}
+  >
+    <Fragment slot="title">Intéressé par cette formation ?</Fragment>
+    <Fragment slot="subtitle"
+      >Les formations sont réalisées en présentiel ou à distance. Nous vous proposons des formations sur mesure,
+      adaptées à vos besoins. Toutes les formations sont éligibles à un financement par votre OPCO. Nous vous
+      accompagnons dans vos démarches.<br /><br />Pour plus de détails consultez nos <a
+        href="/terms"
+        class="underline">conditions de formations</a
+      >.</Fragment
+    >
+  </CallToAction>
+</Layout>
