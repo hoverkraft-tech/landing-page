@@ -1,0 +1,97 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Pagination from '~/components/blog/Pagination.astro';
+
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '~/i18n/utils';
+import { getStaticPathsTrainingsList } from '~/utils/trainings';
+import { cleanSlug } from '~/utils/permalinks';
+
+export const prerender = true;
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return await getStaticPathsTrainingsList({ paginate });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page } = Astro.props as Props;
+const currentPage = page.currentPage ?? 1;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const HERO_IMAGE = '~/assets/images/programming-2.webp';
+
+const metadataTitle = t('training.meta.title');
+const metadata = {
+  title: `${metadataTitle}${currentPage > 1 ? ` — ${t('training.meta.pageLabel')} ${currentPage}` : ''}`,
+  description: t('training.meta.description'),
+};
+
+const hero = {
+  tagline: t('training.hero.tagline'),
+  title: t('training.hero.title'),
+  subtitle: t('training.hero.subtitle'),
+  image: HERO_IMAGE,
+};
+
+const catalog = {
+  title: t('training.catalog.title'),
+  subtitle: t('training.catalog.subtitle'),
+};
+
+const cta = {
+  primaryAction: t('training.cta.primaryAction'),
+};
+
+const contactPath = translatePath('/contact');
+const offersPath = translatePath('/offers');
+const courseBasePath = translatePath('/trainings');
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline={hero.tagline}
+    actions={[
+      { variant: 'primary', text: cta.primaryAction, href: `${contactPath}#form` },
+      { text: t('button.view-offers'), href: offersPath },
+    ]}
+    image={{
+      src: hero.image,
+      alt: hero.tagline,
+    }}
+  >
+    <Fragment slot="title">{hero.title}</Fragment>
+    <Fragment slot="subtitle">{hero.subtitle}</Fragment>
+  </Hero>
+
+  <Features2
+    title={catalog.title}
+    subtitle={catalog.subtitle}
+    columns={3}
+    items={page.data.map((course) => ({
+      title: course.title,
+      description: course.description,
+      icon: course.icon,
+      badges: (course.tags ?? [])
+        .filter((tag): tag is string => Boolean(tag && tag.length > 0))
+        .map((tag) => ({ text: tag, href: `${courseBasePath}/tag/${cleanSlug(tag)}` })),
+      callToAction: {
+        text: t('button.learn-more'),
+        href: `${courseBasePath}/${course.slug}`,
+      },
+    }))}
+  />
+
+  <Pagination
+    prevUrl={page.url.prev}
+    nextUrl={page.url.next}
+    prevText={t('training.pagination.prev')}
+    nextText={t('training.pagination.next')}
+  />
+</Layout>

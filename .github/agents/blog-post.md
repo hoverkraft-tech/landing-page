@@ -202,16 +202,16 @@ The `blog-post-image-preview` agent is a specialized image generation agent that
 
 Call the `blog-post-image-preview` agent with the following parameters:
 
-```
-translation-key: {translation-key}  # The folder name for the blog post
-topic: "{article title or topic}"   # The blog post title for visual inspiration
+```yml
+translation-key: "{translation-key}" # The folder name for the blog post
+topic: "{article title or topic}" # The blog post title for visual inspiration
 focus: "{main concept to visualize}" # Key subject, metaphor, or concept
 style-hints: "{optional style guidance}" # Additional visual elements if needed
 ```
 
 **Example Delegation**
 
-```
+```txt
 Generate the preview image for this blog post:
 - translation-key: platform-engineering-guide
 - topic: "The Complete Guide to Platform Engineering"

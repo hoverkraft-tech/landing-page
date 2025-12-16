@@ -1,0 +1,39 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import TrainingDetailView from '~/components/trainings/TrainingDetailView.astro';
+
+import { getStaticPathsTrainingDetail } from '~/utils/trainings';
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+
+export const prerender = true;
+
+export const getStaticPaths = (async () => {
+  return await getStaticPathsTrainingDetail();
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { course } = Astro.props as Props;
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const metadata = {
+  title: course.title,
+  description: course.description,
+};
+
+const contactPath = translatePath('/contact');
+const catalogPath = translatePath('/trainings');
+const termsPath = translatePath('/terms');
+---
+
+<TrainingDetailView
+  course={course}
+  metadata={metadata}
+  lang={lang}
+  contactPath={contactPath}
+  catalogPath={catalogPath}
+  termsPath={termsPath}
+/>

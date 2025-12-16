@@ -1,0 +1,82 @@
+---
+import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Pagination from '~/components/blog/Pagination.astro';
+
+import { getLangFromUrl, useTranslations, useTranslatedPath } from '~/i18n/utils';
+import { getStaticPathsTrainingsTag } from '~/utils/trainings';
+import { cleanSlug } from '~/utils/permalinks';
+
+export const prerender = true;
+
+export const getStaticPaths = (async ({ paginate }) => {
+  return await getStaticPathsTrainingsTag({ paginate });
+}) satisfies GetStaticPaths;
+
+type Props = InferGetStaticPropsType<typeof getStaticPaths>;
+
+const { page, tag } = Astro.props as Props;
+const currentPage = page.currentPage ?? 1;
+
+const lang = getLangFromUrl(Astro.url);
+const t = useTranslations(lang);
+const translatePath = useTranslatedPath(lang);
+
+const courseBasePath = translatePath('/trainings');
+const contactPath = translatePath('/contact');
+const offersPath = translatePath('/offers');
+
+const HERO_IMAGE = '~/assets/images/programming-2.webp';
+
+const metadata = {
+  title: `${t('nav.trainings')} — ${tag.title}${currentPage > 1 ? ` — ${t('training.meta.pageLabel')} ${currentPage}` : ''}`,
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    actions={[
+      { variant: 'primary', text: t('training.cta.primaryAction'), href: `${contactPath}#form` },
+      { text: t('training.detail.viewAll'), href: courseBasePath },
+    ]}
+  >
+    <Fragment slot="title">{t('nav.trainings')}</Fragment>
+    <Fragment slot="subtitle">
+      {t('training.tag.headlinePrefix')}
+      <strong> {tag.title}</strong>
+      {currentPage > 1 ? ` — ${t('training.meta.pageLabel')} ${currentPage}` : ''}
+    </Fragment>
+  </Hero>
+
+  <section class="not-prose">
+    <div class="max-w-7xl mx-auto">
+      <Features2
+        columns={3}
+        items={page.data.map((course) => ({
+          title: course.title,
+          description: course.description,
+          icon: course.icon,
+          badges: (course.tags ?? [])
+            .filter((t): t is string => Boolean(t && t.length > 0))
+            .map((t) => ({ text: t, href: `${courseBasePath}/tag/${cleanSlug(t)}` })),
+          callToAction: {
+            text: t('button.learn-more'),
+            href: `${courseBasePath}/${course.slug}`,
+          },
+        }))}
+      />
+
+      <div class="mt-10">
+        <Pagination
+          prevUrl={page.url.prev}
+          nextUrl={page.url.next}
+          prevText={t('training.pagination.prev')}
+          nextText={t('training.pagination.next')}
+        />
+      </div>
+    </div>
+  </section>
+</Layout>
