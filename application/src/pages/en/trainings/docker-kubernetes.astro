@@ -1,0 +1,226 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Docker and Kubernetes Training',
+  description:
+    'Master containerization with Docker and orchestration with Kubernetes for production deployment.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Training"
+    actions={[{ variant: 'primary', text: 'Contact us', href: '/en/contact#form' }]}
+    image={{
+      src: '~/assets/images/programming-5.webp',
+      alt: 'Docker and Kubernetes Training',
+    }}
+  >
+    <Fragment slot="title">Docker and Kubernetes</Fragment>
+    <Fragment slot="subtitle">
+      From creating optimized Docker images to deploying and operating Kubernetes workloads in production.
+    </Fragment>
+  </Hero>
+
+  <Content
+    title="Context"
+    items={[
+      {
+        description:
+          'This training aims to help learners understand the concepts behind application containerization. Trainees will learn to build their own containers, work with containers built by others, and manage multi-container applications with Kubernetes.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📅</span>
+          <span><strong>Duration:</strong> 3 day(s)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⏱️</span>
+          <span><strong>21 hours</strong> of training</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👨‍🏫</span>
+          <span><strong>Instructor:</strong> Frédéric Léger</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👥</span>
+          <span><strong>Audience:</strong> Architects, administrators, developers</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⚖️</span>
+          <span><strong>50% theory / 50% hands-on</strong></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🎓</span>
+          <span><strong>On demand</strong></span>
+        </div>
+      </div>
+    </Fragment>
+  </Content>
+
+  <Features3
+    title="Learning objectives"
+    columns={1}
+    items={[
+      {
+        title: 'Know the characteristics of a Linux container',
+        description: 'Namespaces, cgroups, and isolation',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Install and use Docker',
+        description: 'CLI, daemon, and Docker ecosystem',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Master Docker image creation and "Dockerfile"',
+        description: 'Multi-stage builds, optimization, and security',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Integrate with Docker Hub and private registries',
+        description: 'Push, pull, and artifact management',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Master Docker networking (networks, links)',
+        description: 'Networking, DNS, and service exposure',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Master data management with Docker (volumes)',
+        description: 'Persistence, backup, and data sharing',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Use Docker Swarm, Docker Compose, and Docker Machine',
+        description: 'Basic orchestration and composition',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Integrate Docker into your projects',
+        description: 'CI/CD and development workflows',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Deploy Docker in production',
+        description: 'Best practices, monitoring, and troubleshooting',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Master Kubernetes for orchestration',
+        description: 'Pods, services, deployments, and configurations',
+        icon: 'tabler:checklist',
+      },
+    ]}
+  />
+
+  <Steps
+    title="Course outline"
+    items={[
+      {
+        title: 'Day #1: Docker fundamentals',
+        description:
+          'Introduction to software containers\nCreate your first containers\nManaging container images\nCI/CD integration',
+        icon: 'tabler:number-1',
+      },
+      {
+        title: 'Day #2: Advanced Docker',
+        description:
+          'Docker and networking\nDocker and data persistence\nDocker Compose and multi-containers\nDocker in production',
+        icon: 'tabler:number-2',
+      },
+      {
+        title: 'Day #3: Kubernetes',
+        description:
+          'The Docker ecosystem\nAdvanced concepts\nKubernetes: architecture and concepts\nEvaluation (on demand)',
+        icon: 'tabler:number-3',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-6.webp',
+      alt: 'Course outline',
+    }}
+  />
+
+  <Content
+    isReversed
+    title="Prerequisites"
+    items={[
+      {
+        description:
+          'Be comfortable with a shell, know the operating principles of operating systems, and have general web development knowledge.',
+        icon: 'tabler:file-check',
+      },
+    ]}
+  />
+
+  <Content
+    title="Training plan"
+    items={[
+      {
+        title: 'Context',
+      },
+      {
+        title: 'Learning objectives',
+      },
+      {
+        title: 'Course outline',
+        description: 'Day #1\nDay #2\nDay #3',
+      },
+    ]}
+  />
+
+  <Content
+    isAfterContent
+    title="Included in the training price"
+    items={[
+      {
+        title: 'Coffee breaks',
+        icon: 'tabler:coffee',
+      },
+      {
+        title: 'Electronic course materials',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Cloud lab platform',
+        icon: 'tabler:cloud',
+      },
+      {
+        title: 'Assessment quizzes',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Request a quote',
+        href: '/en/contact#form',
+      },
+      {
+        text: 'View all trainings',
+        href: '/en/trainings',
+      },
+    ]}
+  >
+    <Fragment slot="title">Interested in this training?</Fragment>
+    <Fragment slot="subtitle"
+      >Trainings are delivered in-person or remotely. We offer custom training programs tailored to your needs. All
+      trainings are eligible for training funding. We support you in your procedures.<br /><br />For more details,
+      consult our <a href="/en/terms" class="underline">training conditions</a>.</Fragment
+    >
+  </CallToAction>
+</Layout>

@@ -1,0 +1,155 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+
+const metadata = {
+  title: 'Formations HoverKraft',
+  description:
+    'Formations expertes en Platform Engineering, CI/CD, DevX, Cloud Native et conteneurs. Développez les compétences de vos équipes avec nos programmes certifiants.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Formations"
+    actions={[
+      { variant: 'primary', text: 'Nous contacter', href: '/contact#form' },
+      { text: 'Voir nos offres', href: '/offers' },
+    ]}
+    image={{
+      src: '~/assets/images/programming-2.webp',
+      alt: 'Formations HoverKraft',
+    }}
+  >
+    <Fragment slot="title">Formez vos équipes aux pratiques Platform Engineering</Fragment>
+
+    <Fragment slot="subtitle">
+      Nos formations combinent théorie et pratique pour ancrer durablement les compétences essentielles du Platform
+      Engineering moderne. Programmes sur mesure, adaptables à votre contexte et éligibles au financement OPCO.
+    </Fragment>
+  </Hero>
+
+  <Features2
+    title="Notre catalogue de formations"
+    subtitle="Des programmes conçus par des praticiens pour des praticiens"
+    columns={3}
+    items={[
+      {
+        title: 'Platform Engineering',
+        description:
+          'Maîtrisez les fondamentaux du Platform Engineering : architecture, patterns, outillage et gouvernance pour construire une plateforme interne moderne.',
+        icon: 'tabler:building-factory-2',
+        callToAction: { text: 'En savoir plus', href: '/formations/platform-engineering' },
+      },
+      {
+        title: 'CI/CD Experts : Github / Gitlab',
+        description:
+          'Devenez expert des pipelines CI/CD modernes avec GitHub Actions et GitLab CI. Automatisation avancée, sécurité et optimisation de vos workflows.',
+        icon: 'tabler:git-merge',
+        callToAction: { text: 'En savoir plus', href: '/formations/cicd-experts' },
+      },
+      {
+        title: 'DevX - Developer Experience',
+        description:
+          'Apprenez à mesurer et améliorer l\'expérience développeur. Métriques DORA/SPACE, Internal Developer Portals et stratégies d\'adoption.',
+        icon: 'tabler:users-group',
+        callToAction: { text: 'En savoir plus', href: '/formations/devx' },
+      },
+      {
+        title: 'Cloud Native Apps',
+        description:
+          'Concevez et déployez des applications cloud-native résilientes. Architecture distribuée, patterns modernes et observabilité avancée.',
+        icon: 'tabler:cloud',
+        callToAction: { text: 'En savoir plus', href: '/formations/cloud-native' },
+      },
+      {
+        title: 'Docker et Kubernetes',
+        description:
+          'Maîtrisez la conteneurisation et l\'orchestration. De la création d\'images Docker optimisées au déploiement Kubernetes en production.',
+        icon: 'tabler:container',
+        callToAction: { text: 'En savoir plus', href: '/formations/docker-kubernetes' },
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    title="Nos principes pédagogiques"
+    items={[
+      {
+        title: '50% théorie / 50% pratique',
+        description: 'Chaque concept est immédiatement mis en application sur des environnements réels.',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Formateurs experts',
+        description: 'Nos formateurs sont des ingénieurs seniors actifs sur le terrain du Platform Engineering.',
+        icon: 'tabler:user-star',
+      },
+      {
+        title: 'Contenu à jour',
+        description: 'Nos programmes sont actualisés en continu pour refléter les dernières pratiques du marché.',
+        icon: 'tabler:refresh',
+      },
+      {
+        title: 'Sur mesure',
+        description: 'Chaque formation peut être adaptée à votre contexte technique et organisationnel.',
+        icon: 'tabler:adjustments',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-1.webp',
+      alt: 'Pédagogie HoverKraft',
+    }}
+  />
+
+  <Content
+    isAfterContent
+    title="Modalités pratiques"
+    items={[
+      {
+        title: 'En présentiel ou à distance',
+        description: 'Nos formations sont disponibles en inter-entreprises ou en intra sur site.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Financement OPCO',
+        description: 'Toutes nos formations sont éligibles au financement par votre OPCO.',
+        icon: 'tabler:coin',
+      },
+      {
+        title: 'Plateforme de TP',
+        description: 'Accès à notre environnement cloud pour les travaux pratiques, disponible pendant et après la formation.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Support de cours',
+        description: 'Documentation complète fournie en format électronique, avec accès aux dépôts Git des exercices.',
+        icon: 'tabler:file-text',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-5.webp',
+      alt: 'Modalités de formation',
+    }}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Demander un devis',
+        href: '/contact#form',
+      },
+      {
+        text: 'Télécharger le catalogue',
+        href: '/contact',
+      },
+    ]}
+    title="Prêt à former vos équipes ?"
+    subtitle="Contactez-nous pour construire ensemble un programme de formation adapté à vos besoins."
+  />
+</Layout>

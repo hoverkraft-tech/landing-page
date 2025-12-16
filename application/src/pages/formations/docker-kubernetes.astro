@@ -1,0 +1,230 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Formation Docker et Kubernetes',
+  description:
+    'Maîtrisez la conteneurisation avec Docker et l\'orchestration avec Kubernetes pour déployer en production.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Formation"
+    actions={[{ variant: 'primary', text: 'Nous contacter', href: '/contact#form' }]}
+    image={{
+      src: '~/assets/images/programming-5.webp',
+      alt: 'Formation Docker et Kubernetes',
+    }}
+  >
+    <Fragment slot="title">Docker et Kubernetes</Fragment>
+    <Fragment slot="subtitle">
+      De la création d'images Docker optimisées au déploiement et à l'exploitation de workloads Kubernetes en
+      production.
+    </Fragment>
+  </Hero>
+
+  <Content
+    title="Contexte"
+    items={[
+      {
+        description:
+          'Cette formation vise à aider les apprenants à appréhender les concepts derrière la conteneurisation d\'applications. Les formés apprendront à construire leurs propres conteneurs, mettre en œuvre des conteneurs construits par d\'autres, et savoir gérer des applications multi-conteneurs avec Kubernetes.',
+      },
+    ]}
+  >
+    <Fragment slot="content">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">📅</span>
+          <span><strong>Durée :</strong> 3 jour(s)</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⏱️</span>
+          <span><strong>21 heures</strong> de formation</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👨‍🏫</span>
+          <span><strong>Formateur :</strong> Frédéric Léger</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">👥</span>
+          <span><strong>Public :</strong> Architectes, administrateurs, développeurs</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">⚖️</span>
+          <span><strong>50% théorique / 50% pratique</strong></span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-2xl">🎓</span>
+          <span><strong>Sur simple demande</strong></span>
+        </div>
+      </div>
+    </Fragment>
+  </Content>
+
+  <Features3
+    title="Objectifs pédagogiques"
+    columns={1}
+    items={[
+      {
+        title: 'Connaître les caractéristiques d\'un conteneur Linux',
+        description: 'Namespaces, cgroups et isolation',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Installer et utiliser Docker',
+        description: 'CLI, daemon et écosystème Docker',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Maîtriser la création des images Docker et "Dockerfile"',
+        description: 'Multi-stage builds, optimisation et sécurité',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Intégrer avec le Docker Hub et registry privés',
+        description: 'Push, pull et gestion des artifacts',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Maîtriser les notions réseaux de Docker (networks, links)',
+        description: 'Networking, DNS et exposition de services',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Maîtriser la gestion des données avec Docker (volumes)',
+        description: 'Persistence, backup et partage de données',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Utiliser Docker Swarm, Docker Compose et Docker Machine',
+        description: 'Orchestration basique et composition',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Intégrer Docker au sein de vos projets',
+        description: 'CI/CD et workflows de développement',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Déployer Docker en production',
+        description: 'Best practices, monitoring et troubleshooting',
+        icon: 'tabler:checklist',
+      },
+      {
+        title: 'Maîtriser Kubernetes pour l\'orchestration',
+        description: 'Pods, services, deployments et configurations',
+        icon: 'tabler:checklist',
+      },
+    ]}
+  />
+
+  <Steps
+    title="Déroulé pédagogique"
+    items={[
+      {
+        title: 'Journée #1 : Docker fondamentaux',
+        description:
+          'Introduction aux conteneurs logiciels\nCréer ses 1er conteneurs\nGestion des images de conteneurs\nIntégration CI/CD',
+        icon: 'tabler:number-1',
+      },
+      {
+        title: 'Journée #2 : Docker avancé',
+        description:
+          'Docker et le réseau\nDocker et la persistance des données\nDocker Compose et multi-conteneurs\nDocker en production',
+        icon: 'tabler:number-2',
+      },
+      {
+        title: 'Journée #3 : Kubernetes',
+        description:
+          'L\'écosystème Docker\nConcepts avancés\nKubernetes : architecture et concepts\nÉvaluation (sur demande)',
+        icon: 'tabler:number-3',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-6.webp',
+      alt: 'Déroulé pédagogique',
+    }}
+  />
+
+  <Content
+    isReversed
+    title="Prérequis"
+    items={[
+      {
+        description:
+          'Être à l\'aise avec un shell, connaître le principe de fonctionnement des systèmes d\'exploitation, avoir une connaissance du développement web en général.',
+        icon: 'tabler:file-check',
+      },
+    ]}
+  />
+
+  <Content
+    title="Plan de formation"
+    items={[
+      {
+        title: 'Contexte',
+      },
+      {
+        title: 'Objectifs pédagogiques',
+      },
+      {
+        title: 'Déroulé pédagogique',
+        description: 'Journée #1\nJournée #2\nJournée #3',
+      },
+    ]}
+  />
+
+  <Content
+    isAfterContent
+    title="Inclus dans le prix de la formation"
+    items={[
+      {
+        title: 'Pauses café',
+        icon: 'tabler:coffee',
+      },
+      {
+        title: 'Support de cours format électronique',
+        icon: 'tabler:file-text',
+      },
+      {
+        title: 'Plateforme cloud de travaux pratiques',
+        icon: 'tabler:cloud',
+      },
+      {
+        title: 'Quizz d\'évaluation',
+        icon: 'tabler:clipboard-check',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Demander un devis',
+        href: '/contact#form',
+      },
+      {
+        text: 'Voir toutes les formations',
+        href: '/formations',
+      },
+    ]}
+  >
+    <Fragment slot="title">Intéressé par cette formation ?</Fragment>
+    <Fragment slot="subtitle"
+      >Les formations sont réalisées en présentiel ou à distance. Nous vous proposons des formations sur mesure,
+      adaptées à vos besoins. Toutes les formations sont éligibles à un financement par votre OPCO. Nous vous
+      accompagnons dans vos démarches.<br /><br />Pour plus de détails consultez nos <a
+        href="/terms"
+        class="underline">conditions de formations</a
+      >.</Fragment
+    >
+  </CallToAction>
+</Layout>

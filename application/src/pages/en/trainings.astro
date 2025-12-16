@@ -1,0 +1,155 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+
+const metadata = {
+  title: 'HoverKraft Trainings',
+  description:
+    'Expert training programs in Platform Engineering, CI/CD, DevX, Cloud Native, and containers. Develop your team\'s skills with our certified programs.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Trainings"
+    actions={[
+      { variant: 'primary', text: 'Contact us', href: '/en/contact#form' },
+      { text: 'View our offers', href: '/en/services' },
+    ]}
+    image={{
+      src: '~/assets/images/programming-2.webp',
+      alt: 'HoverKraft Trainings',
+    }}
+  >
+    <Fragment slot="title">Train your teams in Platform Engineering practices</Fragment>
+
+    <Fragment slot="subtitle">
+      Our training programs combine theory and practice to durably anchor essential modern Platform Engineering skills.
+      Custom programs, adaptable to your context and eligible for training funding.
+    </Fragment>
+  </Hero>
+
+  <Features2
+    title="Our training catalog"
+    subtitle="Programs designed by practitioners for practitioners"
+    columns={3}
+    items={[
+      {
+        title: 'Platform Engineering',
+        description:
+          'Master the fundamentals of Platform Engineering: architecture, patterns, tooling, and governance to build a modern internal platform.',
+        icon: 'tabler:building-factory-2',
+        callToAction: { text: 'Learn more', href: '/en/trainings/platform-engineering' },
+      },
+      {
+        title: 'CI/CD Experts: Github / Gitlab',
+        description:
+          'Become an expert in modern CI/CD pipelines with GitHub Actions and GitLab CI. Advanced automation, security, and workflow optimization.',
+        icon: 'tabler:git-merge',
+        callToAction: { text: 'Learn more', href: '/en/trainings/cicd-experts' },
+      },
+      {
+        title: 'DevX - Developer Experience',
+        description:
+          'Learn to measure and improve developer experience. DORA/SPACE metrics, Internal Developer Portals, and adoption strategies.',
+        icon: 'tabler:users-group',
+        callToAction: { text: 'Learn more', href: '/en/trainings/devx' },
+      },
+      {
+        title: 'Cloud Native Apps',
+        description:
+          'Design and deploy resilient cloud-native applications. Distributed architecture, modern patterns, and advanced observability.',
+        icon: 'tabler:cloud',
+        callToAction: { text: 'Learn more', href: '/en/trainings/cloud-native' },
+      },
+      {
+        title: 'Docker and Kubernetes',
+        description:
+          'Master containerization and orchestration. From creating optimized Docker images to production Kubernetes deployment.',
+        icon: 'tabler:container',
+        callToAction: { text: 'Learn more', href: '/en/trainings/docker-kubernetes' },
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    title="Our teaching principles"
+    items={[
+      {
+        title: '50% theory / 50% practice',
+        description: 'Every concept is immediately applied in real environments.',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Expert trainers',
+        description: 'Our trainers are senior engineers active in the Platform Engineering field.',
+        icon: 'tabler:user-star',
+      },
+      {
+        title: 'Up-to-date content',
+        description: 'Our programs are continuously updated to reflect the latest market practices.',
+        icon: 'tabler:refresh',
+      },
+      {
+        title: 'Custom-made',
+        description: 'Each training can be adapted to your technical and organizational context.',
+        icon: 'tabler:adjustments',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-1.webp',
+      alt: 'HoverKraft Pedagogy',
+    }}
+  />
+
+  <Content
+    isAfterContent
+    title="Practical arrangements"
+    items={[
+      {
+        title: 'In-person or remote',
+        description: 'Our trainings are available as public courses or on-site private sessions.',
+        icon: 'tabler:map-pin',
+      },
+      {
+        title: 'Training funding',
+        description: 'All our trainings are eligible for training funding programs.',
+        icon: 'tabler:coin',
+      },
+      {
+        title: 'Lab platform',
+        description: 'Access to our cloud environment for hands-on labs, available during and after training.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Course materials',
+        description: 'Complete documentation provided in electronic format, with access to exercise Git repositories.',
+        icon: 'tabler:file-text',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/programming-5.webp',
+      alt: 'Training arrangements',
+    }}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Request a quote',
+        href: '/en/contact#form',
+      },
+      {
+        text: 'Download catalog',
+        href: '/en/contact',
+      },
+    ]}
+    title="Ready to train your teams?"
+    subtitle="Contact us to build together a training program tailored to your needs."
+  />
+</Layout>
