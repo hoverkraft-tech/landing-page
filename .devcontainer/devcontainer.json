@@ -41,7 +41,7 @@
           },
           "image-generator-gpt-image": {
             "command": "npx",
-            "args": ["imagegen-mcp", "--models", "gpt-image-1"],
+            "args": ["imagegen-mcp", "--models", "gpt-image-1.5"],
             "env": {
               "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY"
             }
