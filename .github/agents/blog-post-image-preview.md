@@ -4,15 +4,16 @@ tools:
   - bash
   - view
   - create
-  - image-generator-gpt-image/text-to-image
+  - image-generator-gpt-image/image.generate.openai
 mcp-servers:
   image-generator-gpt-image:
     type: "local"
     command: "npx"
-    args: ["-y", "imagegen-mcp", "--models", "gpt-image-1"]
-    tools: ["text-to-image"]
+    args: ["-y", "imagegen-mcp-server"]
+    tools: ["image.generate.openai"]
     env:
       "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY"
+      "OPENAI_IMAGE_MODEL": "gpt-image-1.5"
 ---
 
 # Blog Post Image Preview Agent
