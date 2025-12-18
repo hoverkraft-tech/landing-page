@@ -1,0 +1,153 @@
+---
+title: "Hoverkraft's Kubernetes probe playbook"
+excerpt: "Liveness, readiness, startup: Hoverkraft's playbook to avoid false positives, protect Kubernetes SLAs, and align probes with your delivery chain."
+slug: kubernetes-probes-playbook
+author: 'Hoverkraft Team'
+lang: en
+translationKey: kubernetes-probes-recommendations
+---
+
+import Image from '~/components/common/Image.astro';
+import preview from '~/assets/images/blog/kubernetes-probes-recommendations/preview.png';
+
+> A sloppy probe is just an incident waiting to happen.
+
+Probes are Kubernetes' truth source to decide if a Pod can serve traffic or must be restarted. Misconfigured, they trigger restart storms, silent degradations, and noisy alerts.
+
+We combined Kubernetes docs, Google Cloud's health check guide, and the gRPC Health Check protocol with our platform engagements. Here is our opinionated approach, measured with DORA/SPACE.
+
+<Image src={preview} alt="Hoverkraft recommendations for Kubernetes probes" loading="lazy" />
+
+## Why precise probes matter
+
+Liveness, readiness, and startup act at different times: liveness detects stuck processes, readiness protects users, startup absorbs initialization latency. Mixing them inflates change failure rate and hides true availability.
+
+- Reduce false positives: never kill a Pod that is still serving.
+- Keep a trustworthy signal for autoscaling, PodDisruptionBudgets, and progressive rollouts.
+- Tie application health to your SLOs instead of raw network heuristics.
+
+## Hoverkraft's framework
+
+We treat the platform as a delivery chain: every probe is a measurable connector. Developer experience is the product, so we ship presets proven on our clusters to keep technical sovereignty.
+
+- Startup probe covers warmup phases (migrations, cache) and shields liveness.
+- Readiness focuses on serviceability, not on every secondary dependency.
+- Liveness stays minimal: check the process, not the world.
+
+## Startup probe: survive warmup
+
+The startup probe prevents heavyweight services from being killed before they are ready. It temporarily replaces liveness during initialization.
+
+### DOs
+
+- Measure real warmup time (logs, traces) and add margin.
+- Use a dedicated command or endpoint proving the app finished bootstrapping.
+- Tune failureThreshold and periodSeconds to cover long migrations.
+
+### Don'ts
+
+- Do not keep the startup probe forever; hand control back to liveness.
+- Avoid external checks (database, third-party API); the goal is local initialization.
+- Do not reuse production timeouts without staging tests.
+
+HTTP example for an app that needs 90 seconds to warm a cache without being killed during startup:
+
+```yaml
+startupProbe:
+  httpGet:
+    path: /startup
+    port: 8080
+  failureThreshold: 18 # 18 * 5s = 90s
+  periodSeconds: 5
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 2
+```
+
+## Readiness probe: protect users
+
+The readiness probe decides if the Pod can take traffic without hurting users.
+
+### DOs
+
+- Test the ability to respond: lightweight HTTP route or gRPC healthz.
+- Include only critical dependencies (primary DB, warm cache), not optional services.
+- Use initialDelaySeconds to let the Pod join the mesh or register routes.
+
+### Don'ts
+
+- Do not mix readiness and liveness; a slow dependency should not reboot the Pod.
+- Skip heavy checks (complex SQL, SaaS calls).
+- Do not return 200 by default; keep 503 until ready.
+
+Readiness example that checks a warm cache while staying lightweight:
+
+```yaml
+readinessProbe:
+  httpGet:
+    path: /ready?cache=warm
+    port: 8080
+  failureThreshold: 3
+  periodSeconds: 5
+  timeoutSeconds: 2
+```
+
+## Liveness probe: catch deadlocks
+
+The liveness probe catches deadlocks and leaks that the process cannot recover from alone.
+
+### DOs
+
+- Use a cheap check (PID file, internal /healthz, gRPC health) with no external dependencies.
+- Choose a more tolerant threshold than readiness to avoid restarts during traffic spikes.
+- Log liveness failures with structure to correlate with MTTR and DORA metrics.
+
+### Don'ts
+
+- Do not point at the database or an external service.
+- Avoid sharing the readiness route if it triggers heavy workloads.
+- Do not ignore CrashLoopBackOff: adjust thresholds instead of disabling the probe.
+
+Minimal liveness example with no external dependency:
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  failureThreshold: 3
+  periodSeconds: 10
+  timeoutSeconds: 1
+```
+
+## Cross-cutting rules
+
+Cross-cutting rules for reliable probes:
+
+- Prefer HTTP or gRPC healthz over expensive exec scripts.
+- Align probes with rollout settings (maxUnavailable, PDB, HPA).
+- Document and test thresholds via load or chaos experiments.
+
+## Sources
+
+- Kubernetes documentation on probes: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+- Google Cloud - Kubernetes best practices for readiness/liveness: https://cloud.google.com/blog/products/gcp/kubernetes-best-practices-setting-up-health-checks-with-readiness-and-liveness-probes
+- gRPC Health Checking Protocol: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
+
+## Conclusion
+
+Well-defined probes keep the delivery chain smooth and observable. They protect users, SRE teams, and your DORA indicators.
+
+👉 Let's tune your probes and SLOs: https://www.hoverkraft.tech/contact
+
+👉 Explore our open-source connectors: https://github.com/hoverkraft-tech
