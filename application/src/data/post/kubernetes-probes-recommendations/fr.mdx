@@ -1,0 +1,153 @@
+---
+title: 'Probes Kubernetes : recommandations Hoverkraft'
+excerpt: 'Liveness, readiness, startup : la grille Hoverkraft pour éviter les faux positifs, protéger vos SLA Kubernetes et aligner les probes sur la chaîne de delivery.'
+slug: recommandations-probes-kubernetes
+author: 'Équipe HoverKraft'
+lang: fr
+translationKey: kubernetes-probes-recommendations
+---
+
+import Image from '~/components/common/Image.astro';
+import preview from '~/assets/images/blog/kubernetes-probes-recommendations/preview.png';
+
+> Une probe mal réglée est un incident en attente.
+
+Les probes Kubernetes sont la ligne officielle pour décider si un Pod peut servir du trafic ou doit être recyclé. Mal calibrées, elles provoquent des boucles de redémarrage, des dégradations silencieuses et des alertes bruyantes.
+
+Nous croisons la documentation Kubernetes, le blog Google Cloud sur les health checks et le protocole gRPC Health Check avec nos missions plateformes. Voici notre approche opinionated, mesurée avec DORA/SPACE.
+
+<Image src={preview} alt="Recommandations Hoverkraft pour les probes Kubernetes" loading="lazy" />
+
+## Pourquoi bien définir ses probes ?
+
+Liveness, readiness et startup ne servent pas au même moment : la première détecte un process bloqué, la deuxième protège vos utilisateurs, la troisième absorbe la latence d'initialisation. Les confondre augmente le change failure rate et masque la vraie disponibilité.
+
+- Limiter les faux positifs : ne jamais tuer un Pod qui sert encore.
+- Garder un signal fiable pour l'autoscaling, les PDB et les déploiements progressifs.
+- Aligner la santé applicative sur vos SLO plutôt que sur des heuristiques réseau.
+
+## Notre grille Hoverkraft
+
+Nous traitons la plateforme comme une chaîne de delivery : chaque probe est un connecteur mesurable. Nous priorisons l'expérience développeur (DX) et la souveraineté technique en proposant des presets testés sur nos clusters.
+
+- Startup probe pour les phases de warmup (migrations, cache) afin de bloquer liveness.
+- Readiness centrée sur la capacité à servir, pas sur la santé des dépendances non critiques.
+- Liveness minimaliste : vérifier le process, pas le monde extérieur.
+
+## Startup probe : absorber le warmup
+
+La startup probe évite qu'un service lourd soit tué avant d'être prêt. Elle remplace temporairement la liveness pendant l'initialisation.
+
+### DOs
+
+- Mesurez le temps de warmup réel (logs, traces) et ajoutez une marge.
+- Utilisez une commande ou un endpoint spécifique qui valide que l'app est initialisée.
+- Ajustez failureThreshold et periodSeconds pour couvrir les migrations longues.
+
+### Don'ts
+
+- Ne laissez pas la startup probe active indéfiniment : elle doit céder la place à la liveness.
+- N'utilisez pas un check externe (base de données, API tierce) : l'objectif est l'initialisation locale.
+- Ne copiez pas les timeouts de production sans tester en staging.
+
+Exemple HTTP pour une appli qui charge un cache en 90 secondes et ne doit pas être tuée pendant ce warmup :
+
+```yaml
+startupProbe:
+  httpGet:
+    path: /startup
+    port: 8080
+  failureThreshold: 18 # 18 * 5s = 90s
+  periodSeconds: 5
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  periodSeconds: 10
+  timeoutSeconds: 2
+readinessProbe:
+  httpGet:
+    path: /ready
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 5
+  timeoutSeconds: 2
+```
+
+## Readiness probe : protéger les utilisateurs
+
+La readiness probe décide si le Pod peut recevoir du trafic sans dégrader l'expérience.
+
+### DOs
+
+- Testez la capacité à répondre : requête HTTP légère sur une route interne ou gRPC healthz.
+- Incluez les dépendances indispensables (DB primaire, cache chaud) mais pas les services secondaires.
+- Utilisez initialDelaySeconds pour laisser le Pod rejoindre le mesh ou enregistrer ses routes.
+
+### Don'ts
+
+- Ne mélangez pas readiness et liveness : une dépendance lente ne doit pas redémarrer le Pod.
+- Évitez les checks lourds (requêtes SQL complexes, appel à des SaaS).
+- Ne laissez pas un code 200 par défaut : retournez 503 tant que le Pod n'est pas prêt.
+
+Exemple readiness qui vérifie un cache chaud mais reste léger :
+
+```yaml
+readinessProbe:
+  httpGet:
+    path: /ready?cache=warm
+    port: 8080
+  failureThreshold: 3
+  periodSeconds: 5
+  timeoutSeconds: 2
+```
+
+## Liveness probe : détecter les blocages
+
+La liveness probe détecte les deadlocks et fuites qui empêchent le process de se soigner seul.
+
+### DOs
+
+- Utilisez un check léger (fichier PID, /healthz interne, gRPC health) sans dépendances externes.
+- Choisissez un délai plus tolérant que la readiness pour éviter les redémarrages pendant un pic.
+- Tracez les échecs de liveness (logs structurés) pour corréler avec vos métriques DORA MTTR.
+
+### Don'ts
+
+- Ne pointez pas vers la base de données ou un service externe.
+- N'utilisez pas la même route que la readiness si elle déclenche des charges lourdes.
+- N'ignorez pas les redémarrages CrashLoopBackOff : ajustez seuils plutôt que de désactiver la probe.
+
+Exemple liveness minimaliste sans dépendance externe :
+
+```yaml
+livenessProbe:
+  httpGet:
+    path: /healthz
+    port: 8080
+  failureThreshold: 3
+  periodSeconds: 10
+  timeoutSeconds: 1
+```
+
+## Règles transverses
+
+Quelques règles transverses pour des probes fiables :
+
+- Préférez HTTP ou gRPC healthz aux exec scripts coûteux.
+- Synchronisez les probes avec vos stratégies de déploiement (maxUnavailable, PDB, HPA).
+- Documentez et testez vos seuils via des tests de charge ou de chaos engineering.
+
+## Sources
+
+- Documentation Kubernetes sur les probes : https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
+- Google Cloud - Kubernetes best practices pour readiness/liveness : https://cloud.google.com/blog/products/gcp/kubernetes-best-practices-setting-up-health-checks-with-readiness-and-liveness-probes
+- gRPC Health Checking Protocol : https://github.com/grpc/grpc/blob/master/doc/health-checking.md
+
+## Conclusion
+
+Des probes bien définies maintiennent la chaîne de delivery fluide et mesurée. Elles protègent vos utilisateurs, vos équipes SRE et vos indicateurs DORA.
+
+👉 Discutons de vos probes et SLO : https://www.hoverkraft.tech/contact
+
+👉 Explorez nos connecteurs open source : https://github.com/hoverkraft-tech
