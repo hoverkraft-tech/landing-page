@@ -1,0 +1,68 @@
+name: "Share posts via Postiz"
+description: "Publish blog posts to social networks via Postiz using OpenAI for snippets."
+inputs:
+  posts:
+    description: "Newline-separated list of post folder names to share"
+    required: true
+  language:
+    description: "Language for the generated social post (e.g. 'en', 'fr')"
+    required: true
+  site-base-url:
+    description: "Site base URL"
+    required: true
+  blog-base-path:
+    description: "Blog base path"
+    required: true
+  postiz-api-key:
+    description: "Postiz API key"
+    required: true
+  postiz-api-url:
+    description: "Postiz API base URL"
+    required: true
+  postiz-integrations:
+    description: |
+      JSON object mapping Postiz platform -> Postiz integration id.
+      See https://docs.postiz.com/public-api/posts/create#all-27-supported-platforms.
+      Example:
+
+      ```json      
+      { "bluesky": "xyz" }
+      ```
+    required: true
+  openai-api-key:
+    description: "OpenAI API key"
+    required: true
+runs:
+  using: "composite"
+  steps:
+    - uses: hoverkraft-tech/ci-github-nodejs/actions/setup-node@25ef8d971c0a866fb9e5d90130c7aaa084619df6 # 0.21.0
+      with:
+        working-directory: ${{ github.action_path }}
+
+    - name: Share posts
+      uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+      env:
+        NODE_PATH: ${{ github.action_path }}/node_modules
+        POSTS_RAW: ${{ inputs.posts }}
+        LANGUAGE: ${{ inputs.language }}
+        SITE_BASE_URL: ${{ inputs["site-base-url"] }}
+        BLOG_BASE_PATH: ${{ inputs["blog-base-path"] }}
+        POSTIZ_API_KEY: ${{ inputs["postiz-api-key"] }}
+        POSTIZ_API_URL: ${{ inputs["postiz-api-url"] }}
+        POSTIZ_INTEGRATIONS: ${{ inputs["postiz-integrations"] }}
+        OPENAI_API_KEY: ${{ inputs["openai-api-key"] }}
+      with:
+        script: |
+          const { run } = require('${{ github.action_path }}/index.js');
+
+          await run({
+            core,
+            postsRaw: process.env.POSTS_RAW,
+            language: process.env.LANGUAGE,
+            siteBaseUrl: process.env.SITE_BASE_URL,
+            blogBasePath: process.env.BLOG_BASE_PATH,
+            postizApiKey: process.env.POSTIZ_API_KEY,
+            postizApiUrl: process.env.POSTIZ_API_URL,
+            postizIntegrations: process.env.POSTIZ_INTEGRATIONS,
+            openAIKey: process.env.OPENAI_API_KEY,
+          });

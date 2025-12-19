@@ -1,0 +1,25 @@
+{
+  "name": "@hoverkraft-tech/share-blog-post-action",
+  "version": "1.0.0",
+  "description": "GitHub Action to share new blog posts via Postiz using OpenAI-generated snippets",
+  "main": "index.js",
+  "scripts": {
+    "test": "node --test __tests__/*.test.js",
+    "test:watch": "node --test --watch __tests__/*.test.js",
+    "test:ci": "node --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info --test"
+  },
+  "keywords": [
+    "github-action",
+    "blog",
+    "openai",
+    "postiz"
+  ],
+  "author": "HoverKraft Tech",
+  "license": "0BSD",
+  "dependencies": {
+    "gray-matter": "^4.0.3",
+    "humanize-ai-lib": "^1.0.0",
+    "js-yaml": "^4.1.0",
+    "openai": "^6.10.0"
+  }
+}

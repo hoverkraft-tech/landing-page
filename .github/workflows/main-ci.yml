@@ -69,9 +69,15 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.url }}
+    outputs:
+      url: ${{ steps.deployment.outputs.url }}
     steps:
       - id: deployment
         uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@0.18.2
         with:
           build-path: application/dist
           build-artifact-id: ${{ needs.ci.outputs.build-artifact-id }}
+
+  share-new-blog-posts:
+    needs: deploy
+    uses: ./.github/workflows/share-new-blog-posts.yml

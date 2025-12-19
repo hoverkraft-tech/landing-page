@@ -2,70 +2,144 @@
 name: Share new blog posts
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - "application/src/data/post/**"
-  workflow_dispatch: {}
+  workflow_dispatch:
+    inputs:
+      #checkov:skip=CKV_GHA_7: required
+      post-folder:
+        description: "Blog post folder name under application/src/data/post/<folder>"
+        required: true
+        type: string
+  workflow_call:
 
 permissions:
   contents: read
+  pages: read
 
 jobs:
   announce:
     runs-on: ubuntu-latest
-    env:
-      POSTIZ_API_URL: https://api.postiz.com/public/v1/posts
-
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
+          persist-credentials: false
           fetch-depth: 0
+
+      - name: Detect new blog posts (changed-files)
+        id: changes
+        uses: tj-actions/changed-files@e0021407031f5be11a464abee9a0776171c79891 # v47.0.1
+        with:
+          files: |
+            application/src/data/post/**/common.yaml
+          since_last_remote_commit: true
 
       - name: Detect new blog posts
         id: detect
-        run: |
-          set -euo pipefail
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        env:
+          ADDED_FILES: ${{ steps.changes.outputs.added_files }}
+          MANUAL_POST_FOLDER: ${{ github.event.inputs.post-folder }}
+        with:
+          script: |
+            const addedFilesRaw = process.env.ADDED_FILES || '';
+            const manualPostFolderRaw = process.env.MANUAL_POST_FOLDER || '';
 
-          BEFORE="${{ github.event.before }}"
-          AFTER="${{ github.sha }}"
+            const uniquePreserveOrder = (items) => {
+              const seen = new Set();
+              const result = [];
+              for (const item of items) {
+                if (!item || seen.has(item)) continue;
+                seen.add(item);
+                result.push(item);
+              }
+              return result;
+            };
 
-          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
-            BEFORE="$(git rev-list --max-parents=0 "$AFTER" | tail -n 1)"
-          fi
+            const parseManualPostFolder = (raw) => {
+              const folder = `${raw || ''}`.trim();
+              if (!folder) return [];
+              return uniquePreserveOrder([folder]);
+            };
 
-          new_files=$(git diff --name-status "$BEFORE" "$AFTER" \
-            -- "application/src/data/post/**/common.yaml" |
-            awk '$1=="A"{print $2}')
+            const parseFoldersFromChangedFiles = (raw) => {
+              const lines = raw
+                .split(/\r?\n/)
+                .map((line) => line.trim())
+                .filter(Boolean);
 
-          if [ -z "$new_files" ]; then
-            echo "found=false" >> "$GITHUB_OUTPUT"
-            exit 0
-          fi
+              const folders = [];
+              const folderRegex = /\/post\/([^/]+)\/common\.yaml$/;
 
-          posts=()
-          while IFS= read -r file; do
-            folder=$(echo "$file" | sed -E 's#.*/post/([^/]+)/common.yaml#\1#')
-            posts+=("$folder")
-          done <<< "$new_files"
+              for (const filePath of lines) {
+                const match = filePath.match(folderRegex);
+                if (match) {
+                  folders.push(match[1]);
+                }
+              }
 
-          {
-            echo "found=true"
-            echo "posts<<'EOF'"
-            printf "%s\n" "${posts[@]}"
-            echo "EOF"
-            echo "count=${#posts[@]}"
-          } >>"$GITHUB_OUTPUT"
+              return uniquePreserveOrder(folders);
+            };
+
+            const manualPosts = parseManualPostFolder(manualPostFolderRaw);
+            const detectedPosts = parseFoldersFromChangedFiles(addedFilesRaw);
+
+            const posts = manualPosts.length > 0 ? manualPosts : detectedPosts;
+            core.setOutput('posts', posts.join('\n'));
+            core.setOutput('count', `${posts.length}`);
+
+      - name: Resolve site base URL
+        id: site
+        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        with:
+          script: |
+            const { owner, repo } = context.repo;
+
+            const normalizeUrl = (value) => {
+              const url = `${value || ''}`.trim();
+              if (!url) return '';
+              if (!/^https?:\/\//i.test(url)) {
+                throw new Error(`Resolved site URL must start with http(s)://, got: ${url}`);
+              }
+              return url.replace(/\/$/, '');
+            };
+
+            let siteBaseUrl = '';
+
+            try {
+              const { data } = await github.rest.repos.getPages({ owner, repo });
+              siteBaseUrl = data?.html_url || '';
+              core.info(`Using GitHub Pages URL: ${siteBaseUrl}`);
+            } catch (error) {
+              core.info('No GitHub Pages URL found via API; falling back to repository homepage.');
+            }
+
+            if (!siteBaseUrl) {
+              const { data: repoData } = await github.rest.repos.get({ owner, repo });
+              siteBaseUrl = repoData?.homepage || '';
+              if (siteBaseUrl) {
+                core.info(`Using repository homepage URL: ${siteBaseUrl}`);
+              }
+            }
+
+            siteBaseUrl = normalizeUrl(siteBaseUrl);
+            if (!siteBaseUrl) {
+              core.setFailed(
+                'Unable to resolve site base URL from GitHub Pages or repository homepage. Enable GitHub Pages or set the repository homepage URL.'
+              );
+              return;
+            }
+
+            core.setOutput('site_base_url', siteBaseUrl);
 
       - name: Share posts via Postiz
-        if: steps.detect.outputs.found == 'true'
-        env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
-          POSTIZ_API_KEY: ${{ secrets.POSTIZ_API_KEY }}
-          POSTIZ_INTEGRATION_IDS: ${{ secrets.POSTIZ_INTEGRATION_IDS }}
-          POSTIZ_INTEGRATIONS_JSON: ${{ secrets.POSTIZ_INTEGRATIONS_JSON }}
-          SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
-          BLOG_BASE_PATH: ${{ vars.BLOG_BASE_PATH }}
-          POSTS_RAW: ${{ steps.detect.outputs.posts }}
-        run: bash .github/scripts/share-posts.sh
+        if: steps.detect.outputs.count != '0'
+        uses: ./.github/actions/share-blog-post
+        with:
+          posts: ${{ steps.detect.outputs.posts }}
+          language: fr
+          site-base-url: ${{ steps.site.outputs.site_base_url }}
+          blog-base-path: /blog
+          postiz-api-key: ${{ secrets.POSTIZ_API_KEY }}
+          postiz-integrations: ${{ vars.POSTIZ_INTEGRATIONS }}
+          openai-api-key: ${{ secrets.COPILOT_MCP_OPENAI_API_KEY }}
+          postiz-api-url: ${{ vars.POSTIZ_API_URL }}
