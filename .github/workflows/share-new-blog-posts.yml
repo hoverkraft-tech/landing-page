@@ -1,0 +1,71 @@
+---
+name: Share new blog posts
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "application/src/data/post/**"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    env:
+      POSTIZ_API_URL: https://api.postiz.com/public/v1/posts
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Detect new blog posts
+        id: detect
+        run: |
+          set -euo pipefail
+
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            BEFORE="$(git rev-list --max-parents=0 "$AFTER" | tail -n 1)"
+          fi
+
+          new_files=$(git diff --name-status "$BEFORE" "$AFTER" \
+            -- "application/src/data/post/**/common.yaml" |
+            awk '$1=="A"{print $2}')
+
+          if [ -z "$new_files" ]; then
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          posts=()
+          while IFS= read -r file; do
+            folder=$(echo "$file" | sed -E 's#.*/post/([^/]+)/common.yaml#\1#')
+            posts+=("$folder")
+          done <<< "$new_files"
+
+          {
+            echo "found=true"
+            echo "posts<<'EOF'"
+            printf "%s\n" "${posts[@]}"
+            echo "EOF"
+            echo "count=${#posts[@]}"
+          } >>"$GITHUB_OUTPUT"
+
+      - name: Share posts via Postiz
+        if: steps.detect.outputs.found == 'true'
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          POSTIZ_API_KEY: ${{ secrets.POSTIZ_API_KEY }}
+          POSTIZ_INTEGRATION_IDS: ${{ secrets.POSTIZ_INTEGRATION_IDS }}
+          POSTIZ_INTEGRATIONS_JSON: ${{ secrets.POSTIZ_INTEGRATIONS_JSON }}
+          SITE_BASE_URL: ${{ vars.SITE_BASE_URL }}
+          BLOG_BASE_PATH: ${{ vars.BLOG_BASE_PATH }}
+          POSTS_RAW: ${{ steps.detect.outputs.posts }}
+        run: bash .github/scripts/share-posts.sh
