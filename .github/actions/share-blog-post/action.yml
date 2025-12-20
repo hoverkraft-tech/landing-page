@@ -45,12 +45,12 @@ runs:
         NODE_PATH: ${{ github.action_path }}/node_modules
         POSTS_RAW: ${{ inputs.posts }}
         LANGUAGE: ${{ inputs.language }}
-        SITE_BASE_URL: ${{ inputs["site-base-url"] }}
-        BLOG_BASE_PATH: ${{ inputs["blog-base-path"] }}
-        POSTIZ_API_KEY: ${{ inputs["postiz-api-key"] }}
-        POSTIZ_API_URL: ${{ inputs["postiz-api-url"] }}
-        POSTIZ_INTEGRATIONS: ${{ inputs["postiz-integrations"] }}
-        OPENAI_API_KEY: ${{ inputs["openai-api-key"] }}
+        SITE_BASE_URL: ${{ inputs.site-base-url }}
+        BLOG_BASE_PATH: ${{ inputs.blog-base-path }}
+        POSTIZ_API_KEY: ${{ inputs.postiz-api-key }}
+        POSTIZ_API_URL: ${{ inputs.postiz-api-url }}
+        POSTIZ_INTEGRATIONS: ${{ inputs.postiz-integrations }}
+        OPENAI_API_KEY: ${{ inputs.openai-api-key }}
       with:
         script: |
           const { run } = require('${{ github.action_path }}/index.js');

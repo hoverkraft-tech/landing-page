@@ -129,7 +129,7 @@ jobs:
               return;
             }
 
-            core.setOutput('site_base_url', siteBaseUrl);
+            core.setOutput('site-base-url', siteBaseUrl);
 
       - name: Share posts via Postiz
         if: steps.detect.outputs.count != '0'
@@ -137,7 +137,7 @@ jobs:
         with:
           posts: ${{ steps.detect.outputs.posts }}
           language: fr
-          site-base-url: ${{ steps.site.outputs.site_base_url }}
+          site-base-url: ${{ steps.site.outputs.site-base-url }}
           blog-base-path: /blog
           postiz-api-key: ${{ secrets.POSTIZ_API_KEY }}
           postiz-integrations: ${{ vars.POSTIZ_INTEGRATIONS }}
