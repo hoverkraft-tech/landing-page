@@ -21,6 +21,9 @@ describe("PostizService", () => {
           statusText: "OK",
           text: async () => "",
           json: async () => ({}),
+          clone: function () {
+            return this;
+          },
         };
       };
 
@@ -58,6 +61,9 @@ describe("PostizService", () => {
           statusText: "OK",
           text: async () => "",
           json: async () => ({}),
+          clone: function () {
+            return this;
+          },
         };
       };
 
@@ -87,6 +93,9 @@ describe("PostizService", () => {
           statusText: "OK",
           text: async () => "",
           json: async () => ({}),
+          clone: function () {
+            return this;
+          },
         };
       };
 

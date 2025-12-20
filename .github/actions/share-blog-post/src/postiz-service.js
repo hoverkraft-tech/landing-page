@@ -40,7 +40,10 @@ class PostizService {
       );
     }
 
-    return response.json();
+    return response
+      .clone()
+      .json()
+      .catch(() => response.text());
   }
 }
 
