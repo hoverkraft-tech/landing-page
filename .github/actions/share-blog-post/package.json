@@ -17,6 +17,7 @@
   "author": "HoverKraft Tech",
   "license": "0BSD",
   "dependencies": {
+    "@postiz/node": "^1.0.8",
     "gray-matter": "^4.0.3",
     "humanize-ai-lib": "^1.0.0",
     "js-yaml": "^4.1.0",

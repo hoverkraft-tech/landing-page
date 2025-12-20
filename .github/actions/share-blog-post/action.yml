@@ -17,7 +17,7 @@ inputs:
     description: "Postiz API key"
     required: true
   postiz-api-url:
-    description: "Postiz API base URL"
+    description: "Postiz API base URL (e.g. https://api.postiz.com)"
     required: true
   postiz-integrations:
     description: |

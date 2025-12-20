@@ -1,10 +1,19 @@
+const Postiz = require("@postiz/node").default;
+
 class PostizService {
-  constructor({ apiKey, apiUrl }) {
+  constructor({ apiKey, apiUrl, client } = {}) {
     this.apiKey = apiKey;
     this.apiUrl = apiUrl;
+
+    this.client =
+      client ??
+      new Postiz({
+        apiKey: this.apiKey,
+        baseUrl: this.getBaseUrl(),
+      });
   }
 
-  getPostsUrl() {
+  getBaseUrl() {
     const baseUrl = String(this.apiUrl ?? "").trim();
     if (!baseUrl) {
       throw new Error("Postiz apiUrl is required");
@@ -16,34 +25,33 @@ class PostizService {
       normalizedBaseUrl = normalizedBaseUrl.slice(0, -1);
     }
 
-    if (normalizedBaseUrl.toLowerCase().endsWith("/posts")) {
-      return normalizedBaseUrl;
-    }
-
-    return `${normalizedBaseUrl}/posts`;
+    return normalizedBaseUrl;
   }
 
   async createPost(payload) {
-    const response = await fetch(this.getPostsUrl(), {
-      method: "POST",
-      headers: {
-        Authorization: this.apiKey,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(payload),
-    });
+    const result = await this.client.post(payload);
 
-    if (!response.ok) {
-      const body = await response.text().catch(() => "");
-      throw new Error(
-        `Postiz API error (${response.status}): ${body || response.statusText}`,
-      );
+    // The SDK currently returns `.json()` without checking HTTP status.
+    // Postiz commonly returns NestJS-like error payloads; detect them and throw.
+    if (result && typeof result === "object") {
+      const statusCode = result.statusCode;
+      const error = result.error;
+      const message = result.message;
+
+      if (
+        (typeof statusCode === "number" || typeof error === "string") &&
+        (typeof message === "string" || Array.isArray(message))
+      ) {
+        const normalizedMessage = Array.isArray(message)
+          ? message.join(", ")
+          : message;
+        throw new Error(
+          `Postiz API error (${statusCode ?? "unknown"}): ${normalizedMessage}`,
+        );
+      }
     }
 
-    return response
-      .clone()
-      .json()
-      .catch(() => response.text());
+    return result;
   }
 }
 
