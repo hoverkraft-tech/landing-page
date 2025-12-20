@@ -4,10 +4,11 @@ const assert = require("node:assert/strict");
 const { SharePostsService } = require("../src/share-posts-service");
 
 function createCoreSpy() {
-  const calls = { info: [], warning: [] };
+  const calls = { info: [], debug: [], warning: [] };
   return {
     calls,
     info: (message) => calls.info.push(message),
+    debug: (message) => calls.debug.push(message),
     warning: (message) => calls.warning.push(message),
     setFailed: () => {},
   };

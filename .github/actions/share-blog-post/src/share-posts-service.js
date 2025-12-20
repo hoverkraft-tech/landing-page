@@ -79,7 +79,7 @@ class SharePostsService {
       }
 
       const content = `${description} ${this.getReadMoreLabel(
-        language
+        language,
       )} ${url}`;
 
       const payload = {
@@ -94,10 +94,13 @@ class SharePostsService {
       };
 
       this.core.debug(
-        `Postiz payload for ${folder}: ${JSON.stringify(payload)}`
+        `Postiz payload for ${folder}: ${JSON.stringify(payload)}`,
       );
 
-      await this.postizService.createPost(payload);
+      const response = await this.postizService.createPost(payload);
+      this.core.debug(
+        `Postiz response for ${folder}: ${JSON.stringify(response)}`,
+      );
       this.core.info(`✅ Shared ${folder}`);
     }
   }

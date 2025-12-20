@@ -39,6 +39,8 @@ class PostizService {
         `Postiz API error (${response.status}): ${body || response.statusText}`,
       );
     }
+
+    return response.json();
   }
 }
 

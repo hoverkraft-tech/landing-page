@@ -29,6 +29,9 @@
         "esbenp.prettier-vscode",
         "bradlc.vscode-tailwindcss"
       ],
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "zsh"
+      },
       "mcp": {
         "servers": {
           "playwright": {

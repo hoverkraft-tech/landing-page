@@ -20,6 +20,7 @@ describe("PostizService", () => {
           status: 200,
           statusText: "OK",
           text: async () => "",
+          json: async () => ({}),
         };
       };
 
@@ -29,7 +30,7 @@ describe("PostizService", () => {
           apiUrl: "https://postiz.example/api",
         });
 
-        await service.createPost({ hello: "world" });
+        const response = await service.createPost({ hello: "world" });
 
         assert.equal(captured.url, "https://postiz.example/api/posts");
         assert.equal(captured.options.method, "POST");
@@ -38,6 +39,8 @@ describe("PostizService", () => {
           captured.options.headers["Content-Type"],
           "application/json",
         );
+        assert.equal(captured.options.body, JSON.stringify({ hello: "world" }));
+        assert.deepEqual(response, {});
       } finally {
         global.fetch = originalFetch;
       }
@@ -54,6 +57,7 @@ describe("PostizService", () => {
           status: 200,
           statusText: "OK",
           text: async () => "",
+          json: async () => ({}),
         };
       };
 
@@ -63,8 +67,9 @@ describe("PostizService", () => {
           apiUrl: "https://postiz.example/api/",
         });
 
-        await service.createPost({});
+        const response = await service.createPost({});
         assert.equal(calledUrl, "https://postiz.example/api/posts");
+        assert.deepEqual(response, {});
       } finally {
         global.fetch = originalFetch;
       }
@@ -81,6 +86,7 @@ describe("PostizService", () => {
           status: 200,
           statusText: "OK",
           text: async () => "",
+          json: async () => ({}),
         };
       };
 
@@ -90,8 +96,9 @@ describe("PostizService", () => {
           apiUrl: "https://postiz.example/api/posts",
         });
 
-        await service.createPost({});
+        const response = await service.createPost({});
         assert.equal(calledUrl, "https://postiz.example/api/posts");
+        assert.deepEqual(response, {});
       } finally {
         global.fetch = originalFetch;
       }
