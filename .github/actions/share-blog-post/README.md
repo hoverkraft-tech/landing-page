@@ -3,7 +3,7 @@
 # GitHub Action: Share posts via Postiz
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/ad382d0ddb7ef937d382796b1d1c873636472382a035021b5ac727c7282d5f44/hoverkraft-tech/landing-page" width="60px" align="center" alt="Share posts via Postiz" />
+  <img src="https://opengraph.githubassets.com/46c3ccd8de38cd2d8f1baeb9aebb773b25648974e6fb4aaca24852bdb6fe210b/hoverkraft-tech/landing-page" width="60px" align="center" alt="Share posts via Postiz" />
 </div>
 
 ---
@@ -52,7 +52,7 @@ Publish blog posts to social networks via Postiz using OpenAI for snippets.
     # This input is required.
     postiz-api-key: ""
 
-    # Postiz API base URL
+    # Postiz API base URL (e.g. https://api.postiz.com)
     # This input is required.
     postiz-api-url: ""
 
@@ -84,8 +84,8 @@ Publish blog posts to social networks via Postiz using OpenAI for snippets.
 | **`site-base-url`**       | Site base URL                                                                                | **true**     | -           |
 | **`blog-base-path`**      | Blog base path                                                                               | **true**     | -           |
 | **`postiz-api-key`**      | Postiz API key                                                                               | **true**     | -           |
-| **`postiz-api-url`**      | Postiz API base URL                                                                          | **true**     | -           |
-| **`postiz-integrations`** | JSON object mapping Postiz platform -> Postiz integration ID.                                | **true**     | -           |
+| **`postiz-api-url`**      | Postiz API base URL (e.g. <https://api.postiz.com>)                                          | **true**     | -           |
+| **`postiz-integrations`** | JSON object mapping Postiz platform -> Postiz integration id.                                | **true**     | -           |
 |                           | See <https://docs.postiz.com/public-api/posts/create#all-27-supported-platforms>.            |              |             |
 |                           | Example:                                                                                     |              |             |
 |                           |                                                                                              |              |             |
