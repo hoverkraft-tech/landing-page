@@ -9,7 +9,7 @@ mcp-servers:
   image-generator-gpt-image:
     type: "local"
     command: "npx"
-    args: ["-y", "imagegen-mcp", "--models", "gpt-image-1.5"]
+    args: ["-y", "imagegen-mcp", "--models", "gpt-image-1"]
     tools: ["text-to-image"]
     env:
       "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY"
