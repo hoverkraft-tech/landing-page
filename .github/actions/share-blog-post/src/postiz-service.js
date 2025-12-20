@@ -8,7 +8,7 @@ class PostizService {
     this.client =
       client ??
       new Postiz({
-        apiKey: this.apiKey,
+        apiKey: this.getApiKey(),
         baseUrl: this.getBaseUrl(),
       });
   }
@@ -19,13 +19,19 @@ class PostizService {
       throw new Error("Postiz apiUrl is required");
     }
 
-    // Avoid regex on uncontrolled input (CodeQL ReDoS rule); strip trailing slashes safely.
     let normalizedBaseUrl = baseUrl;
     while (normalizedBaseUrl.endsWith("/")) {
       normalizedBaseUrl = normalizedBaseUrl.slice(0, -1);
     }
 
     return normalizedBaseUrl;
+  }
+
+  getApiKey() {
+    if (!this.apiKey) {
+      throw new Error("Postiz apiKey is required");
+    }
+    return this.apiKey;
   }
 
   async createPost(payload) {

@@ -135,11 +135,11 @@ jobs:
         if: steps.detect.outputs.count != '0'
         uses: ./.github/actions/share-blog-post
         with:
-          posts: ${{ steps.detect.outputs.posts }}
           language: fr
+          posts: ${{ steps.detect.outputs.posts }}
           site-base-url: ${{ steps.site.outputs.site-base-url }}
           blog-base-path: /blog
-          postiz-api-key: ${{ secrets.POSTIZ_API_KEY }}
-          postiz-integrations: ${{ vars.POSTIZ_INTEGRATIONS }}
           openai-api-key: ${{ secrets.COPILOT_MCP_OPENAI_API_KEY }}
           postiz-api-url: ${{ vars.POSTIZ_API_URL }}
+          postiz-api-key: ${{ secrets.POSTIZ_API_KEY }}
+          postiz-integrations: ${{ vars.POSTIZ_INTEGRATIONS }}
