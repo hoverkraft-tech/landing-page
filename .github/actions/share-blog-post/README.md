@@ -85,7 +85,7 @@ Publish blog posts to social networks via Postiz using OpenAI for snippets.
 | **`blog-base-path`**      | Blog base path                                                                               | **true**     | -           |
 | **`postiz-api-key`**      | Postiz API key                                                                               | **true**     | -           |
 | **`postiz-api-url`**      | Postiz API base URL (e.g. <https://api.postiz.com>)                                          | **true**     | -           |
-| **`postiz-integrations`** | JSON object mapping Postiz platform -> Postiz integration id.                                | **true**     | -           |
+| **`postiz-integrations`** | JSON object mapping Postiz platform -> Postiz integration ID.                                | **true**     | -           |
 |                           | See <https://docs.postiz.com/public-api/posts/create#all-27-supported-platforms>.            |              |             |
 |                           | Example:                                                                                     |              |             |
 |                           |                                                                                              |              |             |

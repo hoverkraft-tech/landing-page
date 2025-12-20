@@ -28,10 +28,11 @@ class PostizService {
   }
 
   getApiKey() {
-    if (!this.apiKey) {
+    const apiKey = String(this.apiKey ?? "").trim();
+    if (!apiKey) {
       throw new Error("Postiz apiKey is required");
     }
-    return this.apiKey;
+    return apiKey;
   }
 
   async createPost(payload) {
