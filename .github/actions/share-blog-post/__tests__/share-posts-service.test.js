@@ -26,6 +26,7 @@ describe("SharePostsService", () => {
         },
         openAIService: { generateSocialSnippet: async () => "" },
         postizService: { createDraftPost: async () => {} },
+        socialImageUrlService: { resolveFromTildePath: () => undefined },
       });
 
       await service.sharePosts({
@@ -57,6 +58,7 @@ describe("SharePostsService", () => {
         postizService: {
           createDraftPost: async (data) => postizCalls.push(data),
         },
+        socialImageUrlService: { resolveFromTildePath: () => undefined },
       });
 
       await service.sharePosts({
@@ -67,6 +69,7 @@ describe("SharePostsService", () => {
       });
 
       assert.equal(postizCalls.length, 1);
+      assert.equal(postizCalls[0].postId, "s");
       assert.match(postizCalls[0].content, /Read more:/);
       assert.equal(postizCalls[0].socialImageUrl, undefined);
     });
@@ -92,6 +95,7 @@ describe("SharePostsService", () => {
         postizService: {
           createDraftPost: async (data) => postizCalls.push(data),
         },
+        socialImageUrlService: { resolveFromTildePath: () => undefined },
       });
 
       await service.sharePosts({
@@ -101,6 +105,7 @@ describe("SharePostsService", () => {
         blogBasePath: "blog",
       });
 
+      assert.equal(postizCalls[0].postId, "s");
       assert.match(postizCalls[0].content, /Lire la suite :/);
     });
   });

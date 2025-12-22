@@ -73,6 +73,7 @@ class SharePostsService {
       );
 
       const response = await this.postizService.createDraftPost({
+        postId: metadata.slug,
         content,
         socialImageUrl,
       });

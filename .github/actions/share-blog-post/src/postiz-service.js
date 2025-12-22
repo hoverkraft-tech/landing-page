@@ -31,10 +31,25 @@ class PostizService {
     return apiKey;
   }
 
-  buildDraftPayload({ content, socialImageUrl }) {
+  async createDraftPost({ postId, content, socialImageUrl } = {}) {
+    const payload = this.buildDraftPayload({
+      postId,
+      content,
+      socialImageUrl,
+    });
+
+    return this.createPost(payload);
+  }
+
+  buildDraftPayload({ postId, content, socialImageUrl }) {
     const integrations = this.integrations;
     if (!Array.isArray(integrations) || integrations.length === 0) {
       throw new Error("No Postiz integrations configured");
+    }
+
+    const normalizedPostId = String(postId ?? "").trim();
+    if (!normalizedPostId) {
+      throw new Error("Blog post id is required");
     }
 
     const normalizedContent = String(content ?? "").trim();
@@ -42,32 +57,27 @@ class PostizService {
       throw new Error("Post content is required");
     }
 
-    const images = socialImageUrl
+    const normalizedSocialImageUrl = String(socialImageUrl ?? "").trim();
+    const images = normalizedSocialImageUrl
       ? [
           {
-            type: "url",
-            url: String(socialImageUrl),
+            id: `${normalizedPostId}-preview`,
+            path: normalizedSocialImageUrl,
           },
         ]
       : [];
 
     return {
+      id: normalizedPostId,
       type: "draft",
+      date: new Date().toISOString(),
+      shortLink: false,
       posts: integrations.map((integration) => ({
         integration: { id: integration.id },
         value: [{ content: normalizedContent, image: images }],
         settings: { __type: integration.type },
       })),
     };
-  }
-
-  async createDraftPost({ content, socialImageUrl } = {}) {
-    const payload = this.buildDraftPayload({
-      content,
-      socialImageUrl,
-    });
-
-    return this.createPost(payload);
   }
 
   async createPost(payload) {

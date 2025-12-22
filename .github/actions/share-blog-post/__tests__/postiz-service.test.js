@@ -37,17 +37,17 @@ describe("PostizService", () => {
       });
 
       const response = await service.createDraftPost({
+        postId: "my-post",
         content: "Hello world",
         socialImageUrl: "https://example.com/social.png",
-        date: "2025-01-01T00:00:00.000Z",
-        shortLink: false,
       });
 
       assert.deepEqual(response, { id: "created" });
 
+      assert.equal(captured.payload.id, "my-post");
       assert.equal(captured.payload.type, "draft");
       assert.equal(captured.payload.shortLink, false);
-      assert.equal(captured.payload.date, "2025-01-01T00:00:00.000Z");
+      assert.equal(typeof captured.payload.date, "string");
       assert.equal(captured.payload.posts.length, 2);
       assert.deepEqual(captured.payload.posts[0].integration, { id: "a" });
       assert.deepEqual(captured.payload.posts[0].settings, {
@@ -58,7 +58,10 @@ describe("PostizService", () => {
         "Hello world",
       );
       assert.deepEqual(captured.payload.posts[0].value[0].image, [
-        { type: "url", url: "https://example.com/social.png" },
+        {
+          id: "my-post-preview",
+          path: "https://example.com/social.png",
+        },
       ]);
     });
   });
