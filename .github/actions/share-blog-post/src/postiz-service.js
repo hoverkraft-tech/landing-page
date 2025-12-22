@@ -72,6 +72,7 @@ class PostizService {
       type: "draft",
       date: new Date().toISOString(),
       shortLink: false,
+      tags: [],
       posts: integrations.map((integration) => ({
         integration: { id: integration.id },
         value: [{ content: normalizedContent, image: images }],
