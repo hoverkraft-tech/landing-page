@@ -73,6 +73,47 @@ describe("SharePostsService", () => {
       assert.match(postizCalls[0].content, /Read more:/);
       assert.equal(postizCalls[0].socialImageUrl, undefined);
     });
+
+    it("does not duplicate URL if snippet already contains it", async () => {
+      const core = createCoreSpy();
+      const postizCalls = [];
+
+      const service = new SharePostsService({
+        core,
+        postMetadataService: {
+          readPostMetadata: async () => ({
+            title: "T",
+            excerpt: "E",
+            slug: "s",
+            publishDate: "2025-01-01T00:00:00Z",
+          }),
+          buildPostUrl: () => "https://example.com/blog/s",
+        },
+        openAIService: {
+          generateSocialSnippet: async () =>
+            "Check this out https://example.com/blog/s #tag",
+        },
+        postizService: {
+          createDraftPost: async (data) => postizCalls.push(data),
+        },
+        socialImageUrlService: { resolveFromTildePath: () => undefined },
+      });
+
+      await service.sharePosts({
+        postsRaw: "post-1",
+        language: "en",
+        siteBaseUrl: "https://example.com",
+        blogBasePath: "blog",
+      });
+
+      assert.equal(postizCalls.length, 1);
+      assert.equal(postizCalls[0].postId, "s");
+      assert.equal(
+        postizCalls[0].content.match(/https:\/\/example\.com\/blog\/s/g).length,
+        1,
+      );
+      assert.doesNotMatch(postizCalls[0].content, /Read more:/);
+    });
   });
 
   describe("getReadMoreLabel", () => {

@@ -8,6 +8,30 @@ function splitLines(value) {
     .filter((line) => line.length > 0);
 }
 
+function buildPostContent({ description, url, readMoreLabel }) {
+  const normalizedDescription = String(description ?? "").trim();
+  const normalizedUrl = String(url ?? "").trim();
+  const normalizedLabel = String(readMoreLabel ?? "").trim();
+
+  if (!normalizedDescription) {
+    return normalizedUrl;
+  }
+
+  if (normalizedUrl && normalizedDescription.includes(normalizedUrl)) {
+    return normalizedDescription;
+  }
+
+  if (!normalizedUrl) {
+    return normalizedDescription;
+  }
+
+  if (!normalizedLabel) {
+    return `${normalizedDescription} ${normalizedUrl}`.trim();
+  }
+
+  return `${normalizedDescription} ${normalizedLabel} ${normalizedUrl}`.trim();
+}
+
 class SharePostsService {
   constructor({
     core,
@@ -64,9 +88,11 @@ class SharePostsService {
         description = metadata.excerpt;
       }
 
-      const content = `${description} ${this.getReadMoreLabel(
-        language,
-      )} ${url}`;
+      const content = buildPostContent({
+        description,
+        url,
+        readMoreLabel: this.getReadMoreLabel(language),
+      });
 
       const socialImageUrl = this.socialImageUrlService.resolveFromTildePath(
         metadata.socialImage,
