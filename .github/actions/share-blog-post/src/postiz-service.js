@@ -31,17 +31,28 @@ class PostizService {
     return apiKey;
   }
 
-  async createDraftPost({ postId, content, socialImageUrl } = {}) {
+  async createDraftPost({
+    postId,
+    content,
+    contentByIntegrationType,
+    socialImageUrl,
+  } = {}) {
     const payload = this.buildDraftPayload({
       postId,
       content,
+      contentByIntegrationType,
       socialImageUrl,
     });
 
     return this.createPost(payload);
   }
 
-  buildDraftPayload({ postId, content, socialImageUrl }) {
+  buildDraftPayload({
+    postId,
+    content,
+    contentByIntegrationType,
+    socialImageUrl,
+  }) {
     const integrations = this.integrations;
     if (!Array.isArray(integrations) || integrations.length === 0) {
       throw new Error("No Postiz integrations configured");
@@ -52,9 +63,22 @@ class PostizService {
       throw new Error("Blog post id is required");
     }
 
-    const normalizedContent = String(content ?? "").trim();
-    if (!normalizedContent) {
-      throw new Error("Post content is required");
+    const normalizedFallbackContent = String(content ?? "").trim();
+
+    const normalizedContentByIntegrationType =
+      contentByIntegrationType && typeof contentByIntegrationType === "object"
+        ? Object.fromEntries(
+            Object.entries(contentByIntegrationType).map(([key, value]) => [
+              String(key ?? "").trim(),
+              String(value ?? "").trim(),
+            ]),
+          )
+        : null;
+
+    if (!normalizedFallbackContent && !normalizedContentByIntegrationType) {
+      throw new Error(
+        "Either 'content' or 'contentByIntegrationType' must be provided",
+      );
     }
 
     const normalizedSocialImageUrl = String(socialImageUrl ?? "").trim();
@@ -74,9 +98,23 @@ class PostizService {
       shortLink: false,
       tags: [],
       posts: integrations.map((integration) => ({
-        integration: { id: integration.id },
-        value: [{ content: normalizedContent, image: images }],
-        settings: { __type: integration.type },
+        ...(function () {
+          const perIntegrationContent =
+            normalizedContentByIntegrationType?.[integration.type] ??
+            normalizedFallbackContent;
+
+          if (!perIntegrationContent) {
+            throw new Error(
+              `Missing content for integration type '${integration.type}' (and no fallback content provided)`,
+            );
+          }
+
+          return {
+            integration: { id: integration.id },
+            value: [{ content: perIntegrationContent, image: images }],
+            settings: { __type: integration.type },
+          };
+        })(),
       })),
     };
   }

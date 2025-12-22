@@ -24,9 +24,11 @@ describe("SharePostsService", () => {
           readPostMetadata: async () => null,
           buildPostUrl: () => "",
         },
-        openAIService: { generateSocialSnippet: async () => "" },
         postizService: { createDraftPost: async () => {} },
         socialImageUrlService: { resolveFromTildePath: () => undefined },
+        socialCopyService: {
+          buildContentByIntegrationType: async () => ({ linkedin: "x" }),
+        },
       });
 
       await service.sharePosts({
@@ -42,6 +44,7 @@ describe("SharePostsService", () => {
     it("builds payload and calls Postiz", async () => {
       const core = createCoreSpy();
       const postizCalls = [];
+      const socialCopyCalls = [];
 
       const service = new SharePostsService({
         core,
@@ -54,11 +57,18 @@ describe("SharePostsService", () => {
           }),
           buildPostUrl: () => "https://example.com/blog/s",
         },
-        openAIService: { generateSocialSnippet: async () => "Hi" },
         postizService: {
           createDraftPost: async (data) => postizCalls.push(data),
         },
         socialImageUrlService: { resolveFromTildePath: () => undefined },
+        socialCopyService: {
+          buildContentByIntegrationType: async (args) => {
+            socialCopyCalls.push(args);
+            return {
+              linkedin: "Hi LinkedIn Read more: https://example.com/blog/s",
+            };
+          },
+        },
       });
 
       await service.sharePosts({
@@ -70,84 +80,13 @@ describe("SharePostsService", () => {
 
       assert.equal(postizCalls.length, 1);
       assert.equal(postizCalls[0].postId, "s");
-      assert.match(postizCalls[0].content, /Read more:/);
-      assert.equal(postizCalls[0].socialImageUrl, undefined);
-    });
-
-    it("does not duplicate URL if snippet already contains it", async () => {
-      const core = createCoreSpy();
-      const postizCalls = [];
-
-      const service = new SharePostsService({
-        core,
-        postMetadataService: {
-          readPostMetadata: async () => ({
-            title: "T",
-            excerpt: "E",
-            slug: "s",
-            publishDate: "2025-01-01T00:00:00Z",
-          }),
-          buildPostUrl: () => "https://example.com/blog/s",
-        },
-        openAIService: {
-          generateSocialSnippet: async () =>
-            "Check this out https://example.com/blog/s #tag",
-        },
-        postizService: {
-          createDraftPost: async (data) => postizCalls.push(data),
-        },
-        socialImageUrlService: { resolveFromTildePath: () => undefined },
-      });
-
-      await service.sharePosts({
-        postsRaw: "post-1",
-        language: "en",
-        siteBaseUrl: "https://example.com",
-        blogBasePath: "blog",
-      });
-
-      assert.equal(postizCalls.length, 1);
-      assert.equal(postizCalls[0].postId, "s");
-      assert.equal(
-        postizCalls[0].content.match(/https:\/\/example\.com\/blog\/s/g).length,
-        1,
+      assert.ok(postizCalls[0].contentByIntegrationType);
+      assert.match(
+        postizCalls[0].contentByIntegrationType.linkedin,
+        /Read more:/,
       );
-      assert.doesNotMatch(postizCalls[0].content, /Read more:/);
-    });
-  });
-
-  describe("getReadMoreLabel", () => {
-    it("uses French read-more label", async () => {
-      const core = createCoreSpy();
-      const postizCalls = [];
-
-      const service = new SharePostsService({
-        core,
-        postMetadataService: {
-          readPostMetadata: async () => ({
-            title: "T",
-            excerpt: "E",
-            slug: "s",
-            publishDate: "2025-01-01T00:00:00Z",
-          }),
-          buildPostUrl: () => "https://example.com/blog/s",
-        },
-        openAIService: { generateSocialSnippet: async () => "Bonjour" },
-        postizService: {
-          createDraftPost: async (data) => postizCalls.push(data),
-        },
-        socialImageUrlService: { resolveFromTildePath: () => undefined },
-      });
-
-      await service.sharePosts({
-        postsRaw: "post-1",
-        language: "fr",
-        siteBaseUrl: "https://example.com",
-        blogBasePath: "blog",
-      });
-
-      assert.equal(postizCalls[0].postId, "s");
-      assert.match(postizCalls[0].content, /Lire la suite :/);
+      assert.equal(socialCopyCalls.length, 1);
+      assert.equal(postizCalls[0].socialImageUrl, undefined);
     });
   });
 });

@@ -10,6 +10,7 @@ const { IntegrationsService } = require("./src/integrations-service");
 const { PostizService } = require("./src/postiz-service");
 const { SharePostsService } = require("./src/share-posts-service");
 const { SocialImageUrlService } = require("./src/social-image-url-service");
+const { SocialCopyService } = require("./src/social-copy-service");
 
 async function run({
   core,
@@ -93,9 +94,12 @@ async function run({
     const sharePostsService = new SharePostsService({
       core,
       postMetadataService,
-      openAIService,
       postizService,
       socialImageUrlService,
+      socialCopyService: new SocialCopyService({
+        openAIService,
+        integrations,
+      }),
     });
 
     await sharePostsService.sharePosts({

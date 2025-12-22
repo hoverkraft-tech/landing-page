@@ -38,7 +38,10 @@ describe("PostizService", () => {
 
       const response = await service.createDraftPost({
         postId: "my-post",
-        content: "Hello world",
+        contentByIntegrationType: {
+          linkedin: "Hello LinkedIn",
+          bluesky: "Hello Bluesky",
+        },
         socialImageUrl: "https://example.com/social.png",
       });
 
@@ -55,7 +58,11 @@ describe("PostizService", () => {
       });
       assert.deepEqual(
         captured.payload.posts[0].value[0].content,
-        "Hello world",
+        "Hello LinkedIn",
+      );
+      assert.deepEqual(
+        captured.payload.posts[1].value[0].content,
+        "Hello Bluesky",
       );
       assert.deepEqual(captured.payload.posts[0].value[0].image, [
         {

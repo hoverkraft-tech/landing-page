@@ -1,5 +1,6 @@
 const OpenAI = require("openai");
 const { humanizeString } = require("humanize-ai-lib");
+const { getPlatformSpec } = require("./social-platforms");
 
 function humanizeText(value) {
   if (typeof value !== "string") {
@@ -51,21 +52,48 @@ class OpenAIService {
     return `Write the post in ${normalized}.`;
   }
 
-  async generateSocialSnippet({ title, excerpt, url, language }) {
-    const prompt =
-      "Write one short, engaging social post." +
-      " Max 240 characters promoting a tech blog article." +
-      ` ${this.getLanguageInstruction(language)}`;
+  normalizeModelText(text, { preserveNewlines }) {
+    if (typeof text !== "string") {
+      return "";
+    }
+
+    const raw = text.replace(/\r\n/g, "\n");
+    if (!preserveNewlines) {
+      return humanizeText(raw.replace(/\s+/g, " ").trim());
+    }
+
+    // Keep paragraphs/bullets but avoid excessive blank lines.
+    const compacted = raw
+      .split("\n")
+      .map((line) => line.trimEnd())
+      .join("\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+
+    return humanizeText(compacted);
+  }
+
+  async generateSocialSnippet({
+    title,
+    excerpt,
+    url,
+    language,
+    integrationType,
+  }) {
+    const spec = getPlatformSpec(integrationType);
+    const prompt = `${spec.openAI.instruction} ${this.getLanguageInstruction(
+      language,
+    )}`;
 
     const response = await this.client.chat.completions.create({
       model: "gpt-4o-mini",
       temperature: 0.5,
-      max_tokens: 120,
+      max_tokens: spec.openAI.maxTokens,
       messages: [
         { role: "system", content: prompt },
         {
           role: "user",
-          content: `Title: ${title}\nExcerpt: ${excerpt}\nLink: ${url}`,
+          content: `Title: ${title}\nExcerpt: ${excerpt}\nLink (for context only, do not repeat): ${url}`,
         },
       ],
     });
@@ -75,7 +103,9 @@ class OpenAIService {
       return "";
     }
 
-    return humanizeText(content.replace(/\s+/g, " "));
+    return this.normalizeModelText(content, {
+      preserveNewlines: spec.openAI.preserveNewlines,
+    });
   }
 }
 

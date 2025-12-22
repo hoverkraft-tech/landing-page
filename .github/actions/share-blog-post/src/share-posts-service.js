@@ -8,51 +8,19 @@ function splitLines(value) {
     .filter((line) => line.length > 0);
 }
 
-function buildPostContent({ description, url, readMoreLabel }) {
-  const normalizedDescription = String(description ?? "").trim();
-  const normalizedUrl = String(url ?? "").trim();
-  const normalizedLabel = String(readMoreLabel ?? "").trim();
-
-  if (!normalizedDescription) {
-    return normalizedUrl;
-  }
-
-  if (normalizedUrl && normalizedDescription.includes(normalizedUrl)) {
-    return normalizedDescription;
-  }
-
-  if (!normalizedUrl) {
-    return normalizedDescription;
-  }
-
-  if (!normalizedLabel) {
-    return `${normalizedDescription} ${normalizedUrl}`.trim();
-  }
-
-  return `${normalizedDescription} ${normalizedLabel} ${normalizedUrl}`.trim();
-}
-
 class SharePostsService {
   constructor({
     core,
     postMetadataService,
-    openAIService,
     postizService,
     socialImageUrlService,
+    socialCopyService,
   }) {
     this.core = core;
     this.postMetadataService = postMetadataService;
-    this.openAIService = openAIService;
     this.postizService = postizService;
     this.socialImageUrlService = socialImageUrlService;
-  }
-
-  getReadMoreLabel(language) {
-    const normalized = `${language || ""}`.trim().toLowerCase();
-    if (normalized === "fr") {
-      return "Lire la suite :";
-    }
-    return "Read more:";
+    this.socialCopyService = socialCopyService;
   }
 
   async sharePosts({ postsRaw, language, siteBaseUrl, blogBasePath }) {
@@ -77,22 +45,17 @@ class SharePostsService {
         slug: metadata.slug,
       });
 
-      let description = await this.openAIService.generateSocialSnippet({
-        title: metadata.title,
-        excerpt: metadata.excerpt,
-        url,
-        language,
-      });
-
-      if (!description) {
-        description = metadata.excerpt;
+      if (!this.socialCopyService) {
+        throw new Error("socialCopyService is required");
       }
 
-      const content = buildPostContent({
-        description,
-        url,
-        readMoreLabel: this.getReadMoreLabel(language),
-      });
+      const contentByIntegrationType =
+        await this.socialCopyService.buildContentByIntegrationType({
+          title: metadata.title,
+          excerpt: metadata.excerpt,
+          url,
+          language,
+        });
 
       const socialImageUrl = this.socialImageUrlService.resolveFromTildePath(
         metadata.socialImage,
@@ -100,7 +63,7 @@ class SharePostsService {
 
       const response = await this.postizService.createDraftPost({
         postId: metadata.slug,
-        content,
+        contentByIntegrationType,
         socialImageUrl,
       });
 
