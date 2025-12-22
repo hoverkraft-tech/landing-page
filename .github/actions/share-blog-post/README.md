@@ -3,7 +3,7 @@
 # GitHub Action: Share posts via Postiz
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/4b6bd6376dc333a604e616f87f614a757d67ceb049832429c18483292bac1a6f/hoverkraft-tech/landing-page" width="60px" align="center" alt="Share posts via Postiz" />
+  <img src="https://opengraph.githubassets.com/e5f204ffc020a418581344842a989598746814b5bab5476eb5592497e94dadee/hoverkraft-tech/landing-page" width="60px" align="center" alt="Share posts via Postiz" />
 </div>
 
 ---
@@ -56,7 +56,7 @@ Publish blog posts to social networks via Postiz using OpenAI for snippets.
     # This input is required.
     postiz-api-url: ""
 
-    # JSON object mapping Postiz platform -> Postiz integration id.
+    # JSON object mapping Postiz platform -> Postiz integration ID.
     # See https://docs.postiz.com/public-api/posts/create#all-27-supported-platforms.
     # Example:
     #
