@@ -24,9 +24,8 @@ describe("SharePostsService", () => {
           readPostMetadata: async () => null,
           buildPostUrl: () => "",
         },
-        integrationsService: { parse: () => [{ id: "1", type: "linkedin" }] },
         openAIService: { generateSocialSnippet: async () => "" },
-        postizService: { createPost: async () => {} },
+        postizService: { createDraftPost: async () => {} },
       });
 
       await service.sharePosts({
@@ -34,36 +33,9 @@ describe("SharePostsService", () => {
         language: "en",
         siteBaseUrl: "https://example.com",
         blogBasePath: "blog",
-        postizIntegrations: "",
       });
 
       assert.equal(core.calls.info[0], "No new posts to share");
-    });
-
-    it("throws if no integrations", async () => {
-      const core = createCoreSpy();
-      const service = new SharePostsService({
-        core,
-        postMetadataService: {
-          readPostMetadata: async () => null,
-          buildPostUrl: () => "",
-        },
-        integrationsService: { parse: () => [] },
-        openAIService: { generateSocialSnippet: async () => "" },
-        postizService: { createPost: async () => {} },
-      });
-
-      await assert.rejects(
-        () =>
-          service.sharePosts({
-            postsRaw: "post-1",
-            language: "en",
-            siteBaseUrl: "https://example.com",
-            blogBasePath: "blog",
-            postizIntegrations: "",
-          }),
-        /No Postiz integrations configured/,
-      );
     });
 
     it("builds payload and calls Postiz", async () => {
@@ -81,15 +53,9 @@ describe("SharePostsService", () => {
           }),
           buildPostUrl: () => "https://example.com/blog/s",
         },
-        integrationsService: {
-          parse: () => [
-            { id: "a", type: "linkedin" },
-            { id: "b", type: "linkedin" },
-          ],
-        },
         openAIService: { generateSocialSnippet: async () => "Hi" },
         postizService: {
-          createPost: async (payload) => postizCalls.push(payload),
+          createDraftPost: async (data) => postizCalls.push(data),
         },
       });
 
@@ -98,14 +64,11 @@ describe("SharePostsService", () => {
         language: "en",
         siteBaseUrl: "https://example.com",
         blogBasePath: "blog",
-        postizIntegrations: "",
       });
 
       assert.equal(postizCalls.length, 1);
-      assert.equal(postizCalls[0].type, "draft");
-      assert.equal("date" in postizCalls[0], false);
-      assert.equal(postizCalls[0].posts.length, 2);
-      assert.match(postizCalls[0].posts[0].value[0].content, /Read more:/);
+      assert.match(postizCalls[0].content, /Read more:/);
+      assert.equal(postizCalls[0].socialImageUrl, undefined);
     });
   });
 
@@ -125,12 +88,9 @@ describe("SharePostsService", () => {
           }),
           buildPostUrl: () => "https://example.com/blog/s",
         },
-        integrationsService: {
-          parse: () => [{ id: "a", type: "linkedin" }],
-        },
         openAIService: { generateSocialSnippet: async () => "Bonjour" },
         postizService: {
-          createPost: async (payload) => postizCalls.push(payload),
+          createDraftPost: async (data) => postizCalls.push(data),
         },
       });
 
@@ -139,12 +99,9 @@ describe("SharePostsService", () => {
         language: "fr",
         siteBaseUrl: "https://example.com",
         blogBasePath: "blog",
-        postizIntegrations: "",
       });
 
-      assert.equal(postizCalls[0].type, "draft");
-      assert.equal("date" in postizCalls[0], false);
-      assert.match(postizCalls[0].posts[0].value[0].content, /Lire la suite :/);
+      assert.match(postizCalls[0].content, /Lire la suite :/);
     });
   });
 });

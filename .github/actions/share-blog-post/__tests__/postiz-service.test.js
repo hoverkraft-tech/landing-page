@@ -16,44 +16,50 @@ describe("PostizService", () => {
     });
   });
 
-  describe("createPost", () => {
-    it("calls the Postiz SDK client and returns JSON", async () => {
+  describe("createDraftPost", () => {
+    it("should create a draft post", async () => {
       /** @type {{ payload?: any }} */
       const captured = {};
 
       const service = new PostizService({
         apiKey: "secret",
         apiUrl: "https://postiz.example/api",
+        integrations: [
+          { id: "a", type: "linkedin" },
+          { id: "b", type: "bluesky" },
+        ],
         client: {
           post: async (payload) => {
             captured.payload = payload;
-            return { ok: true };
+            return { id: "created" };
           },
         },
       });
 
-      const response = await service.createPost({ hello: "world" });
-      assert.deepEqual(captured.payload, { hello: "world" });
-      assert.deepEqual(response, { ok: true });
-    });
-
-    it("throws a helpful error when the API returns an error-shaped JSON", async () => {
-      const service = new PostizService({
-        apiKey: "secret",
-        apiUrl: "https://postiz.example/api",
-        client: {
-          post: async () => ({
-            statusCode: 400,
-            message: "invalid payload",
-            error: "Bad Request",
-          }),
-        },
+      const response = await service.createDraftPost({
+        content: "Hello world",
+        socialImageUrl: "https://example.com/social.png",
+        date: "2025-01-01T00:00:00.000Z",
+        shortLink: false,
       });
 
-      await assert.rejects(
-        () => service.createPost({}),
-        /Postiz API error \(400\): invalid payload/,
+      assert.deepEqual(response, { id: "created" });
+
+      assert.equal(captured.payload.type, "draft");
+      assert.equal(captured.payload.shortLink, false);
+      assert.equal(captured.payload.date, "2025-01-01T00:00:00.000Z");
+      assert.equal(captured.payload.posts.length, 2);
+      assert.deepEqual(captured.payload.posts[0].integration, { id: "a" });
+      assert.deepEqual(captured.payload.posts[0].settings, {
+        __type: "linkedin",
+      });
+      assert.deepEqual(
+        captured.payload.posts[0].value[0].content,
+        "Hello world",
       );
+      assert.deepEqual(captured.payload.posts[0].value[0].image, [
+        { type: "url", url: "https://example.com/social.png" },
+      ]);
     });
   });
 });
