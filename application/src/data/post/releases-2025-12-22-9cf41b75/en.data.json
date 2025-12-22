@@ -1,0 +1,155 @@
+{
+  "lang": "en",
+  "introMarkdown": "\"During the week of December 15-22, 2025, we achieved a remarkable deploy frequency with 11 releases across 4 repositories, underscoring our commitment to rapid iteration and improvement.\"\n\nIn this period, the ci-github-publish repository led the charge with 4 releases, including the most recent version 0.20.1, which introduced enhancements to our publishing workflow. The ci-github-container and ci-github-common repositories also contributed with 3 and 2 releases, respectively, focusing on stability and performance improvements. Notably, ci-github-container's updates enhance container deployment efficiency, while ci-github-common's changes streamline shared functionalities across projects.\n\n- ci-github-publish's new release (0.20.1) optimizes the publishing process, reducing deployment times for platform engineers.\n- ci-github-container's enhancements improve container orchestration, crucial for SREs managing scalable applications.\n- ci-github-common's updates provide reusable components, accelerating development cycles for technical contributors.",
+  "closingMarkdown": "**Period Overview: December 15, 2025 - December 22, 2025**\n\nDuring this period, a total of 4 repositories were actively managed, resulting in the shipment of 11 releases. The busiest project was **ci-github-publish**, which accounted for 4 of these releases. The most recent release was **ci-github-publish 0.20.1**.\n\n**Repositories to Note:**\n- **ci-github-container**: 3 releases, 4 ⭐\n- **ci-github-common**: 2 releases, 3 ⭐\n- **ci-github-publish**: 4 releases, 2 ⭐\n\nThis week's activity highlights significant advancements in our repositories, particularly with **ci-github-publish**, which continues to be a key focus area. The releases across all repositories indicate ongoing improvements and enhancements that are crucial for our platform engineers, SREs, and other technical users.\n\n**Next Steps:**\n- **Run benchmarks on ci-github-publish**: Evaluate the performance improvements from version 0.20.1 to ensure optimal functionality and identify any areas for further enhancement.\n- **Review documentation for ci-github-common**: Familiarize yourself with the latest features and compliance updates to ensure that your implementations are up-to-date and secure.\n- **Adopt components from ci-github-container**: Integrate the latest features to improve automation processes, which can lead to increased efficiency in deployment workflows.",
+  "stats": {
+    "period": {
+      "since": "2025-12-15T09:28:40.369Z",
+      "until": "2025-12-22T09:28:40.369Z"
+    },
+    "totalRepos": 4,
+    "totalReleases": 11,
+    "busiestRepo": {
+      "name": "ci-github-publish",
+      "count": 4
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-publish",
+      "name": "0.20.1",
+      "publishedAt": "2025-12-19T16:31:10Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.31.6",
+          "tag": "0.31.6",
+          "publishedAt": "2025-12-19T13:27:34Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.31.6",
+          "highlights": [
+            "## Release Summary\n\nNo user-facing changes in this release.\r\n\r\nInternal: resolved lint issues to standardize code quality, refreshed actions/workflows documentation, and bumped GitHub Actions dependencies in 2 directories to keep CI stable.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.31.5",
+          "tag": "0.31.5",
+          "publishedAt": "2025-12-19T07:21:15Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.31.5",
+          "highlights": [
+            "## Release Summary\n\nDocumentation for actions and workflows has been refreshed to improve clarity and usage guidance.\r\n\r\nInternal: GitHub Actions dependencies were updated across multiple directories and `fast-xml-parser` was patched to 5.3.3 in `actions/parse-ci-reports` to pick up bug fixes and performance improvements.\n\n## Breaking change(s)\n\nNo breaking changes were introduced"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-container",
+      "description": "Opinionated GitHub Actions and workflows for continuous integration in container (OCI) context",
+      "stars": 4,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.30.6",
+          "tag": "0.30.6",
+          "publishedAt": "2025-12-19T14:00:49Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.30.6",
+          "highlights": [
+            "## Release Summary\n\nActions and workflows documentation has been refreshed to improve clarity and usage guidance.\r\n\r\nInternal: Updated the GitHub Actions dependencies across 8 directories to keep CI stable and secure.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.30.5",
+          "tag": "0.30.5",
+          "publishedAt": "2025-12-19T07:40:56Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.30.5",
+          "highlights": [
+            "## Release Summary\n\nNo user-facing changes in this release.\r\n\r\nInternal: Updated the GitHub Actions release workflow to 0.18.2 and refreshed the github-actions-dependencies group across 7 directories to keep CI stable and secure.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.30.4",
+          "tag": "0.30.4",
+          "publishedAt": "2025-12-15T09:39:52Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.30.4",
+          "highlights": [
+            "## Release Summary\n\nfix(helm/release-chart): update dependencies only when present to avoid release failures and improve chart stability.\r\n\r\nDocs refreshed for actions and workflows; dependencies for GitHub Actions bumped across multiple directories via Dependabot."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.21.2",
+          "tag": "0.21.2",
+          "publishedAt": "2025-12-19T14:49:17Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.21.2",
+          "highlights": [
+            "## Release Summary\n\nNo user-facing changes in this release.\r\n\r\nInternal: GitHub Actions dependencies were updated across 3 directories and actions/workflows documentation was refreshed.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.21.1",
+          "tag": "0.21.1",
+          "publishedAt": "2025-12-19T08:51:58Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.21.1",
+          "highlights": [
+            "## Release Summary\n\nNo user-facing changes in this release.\r\n\r\nInternal: npm dependencies were refreshed across several directories and GitHub Actions dependencies were updated to keep CI stable and secure; documentation for actions and workflows was also refreshed.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.20.1",
+          "tag": "0.20.1",
+          "publishedAt": "2025-12-19T16:31:10Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.20.1",
+          "highlights": [
+            "## Release Summary\n\nFix(deploy-finish): properly passes the `runs-on` input to ensure correct runner selection during the finalize step.\r\n\r\nInternal: actions and workflows documentation has been refreshed.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        },
+        {
+          "name": "0.20.0",
+          "tag": "0.20.0",
+          "publishedAt": "2025-12-19T15:13:49Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.20.0",
+          "highlights": [
+            "## Release Summary\n\nFix(deploy): resolved permissions issues in deploy workflows, ensuring deployments succeed with correct token scopes.\r\n\r\nInternal: refreshed actions/workflows documentation and updated GitHub Actions dependencies across the repository.\n\n## Breaking change(s)\n\nDeploy workflows now require explicit permissions on `contents` (read), `deployments` (write), `id-token` (write), `issues` (write), and `pull-requests` (write); update your workflow `permissions` accordingly (see PR #316)."
+          ]
+        },
+        {
+          "name": "0.19.0",
+          "tag": "0.19.0",
+          "publishedAt": "2025-12-19T08:12:48Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.19.0",
+          "highlights": [
+            "## Release Summary\n\nFixed deploy/report by using the correct absolute path for the action script and corrected prepare-release permissions to reliably create the release config. Documentation for actions and workflows has been refreshed for clarity.\r\n\r\nInternal: Updated the GitHub Actions dependencies across 4 directories to keep CI stable and secure.\n\n## Breaking change(s)\n\nPrepare-release now requires stricter GitHub token permissions to create the release configuration; ensure your workflow permissions align with the new requirements (see PR #312)."
+          ]
+        },
+        {
+          "name": "0.18.2",
+          "tag": "0.18.2",
+          "publishedAt": "2025-12-15T10:55:04Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.18.2",
+          "highlights": [
+            "## Release Summary\n\nActions and workflows documentation has been refreshed for clarity and accuracy.\r\n\r\nInternal: GitHub Actions dependencies were updated in one directory (2 updates) via Dependabot to keep the pipeline current.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    }
+  ]
+}
