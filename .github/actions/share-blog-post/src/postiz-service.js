@@ -1,16 +1,12 @@
 const Postiz = require("@postiz/node").default;
 
 class PostizService {
-  constructor({ apiKey, apiUrl, client } = {}) {
+  constructor({ apiKey, apiUrl, integrations, client } = {}) {
     this.apiKey = apiKey;
     this.apiUrl = apiUrl;
+    this.integrations = integrations;
 
-    this.client =
-      client ??
-      new Postiz({
-        apiKey: this.getApiKey(),
-        baseUrl: this.getBaseUrl(),
-      });
+    this.client = client ?? new Postiz(this.getApiKey(), this.getBaseUrl());
   }
 
   getBaseUrl() {
@@ -33,6 +29,45 @@ class PostizService {
       throw new Error("Postiz apiKey is required");
     }
     return apiKey;
+  }
+
+  buildDraftPayload({ content, socialImageUrl }) {
+    const integrations = this.integrations;
+    if (!Array.isArray(integrations) || integrations.length === 0) {
+      throw new Error("No Postiz integrations configured");
+    }
+
+    const normalizedContent = String(content ?? "").trim();
+    if (!normalizedContent) {
+      throw new Error("Post content is required");
+    }
+
+    const images = socialImageUrl
+      ? [
+          {
+            type: "url",
+            url: String(socialImageUrl),
+          },
+        ]
+      : [];
+
+    return {
+      type: "draft",
+      posts: integrations.map((integration) => ({
+        integration: { id: integration.id },
+        value: [{ content: normalizedContent, image: images }],
+        settings: { __type: integration.type },
+      })),
+    };
+  }
+
+  async createDraftPost({ content, socialImageUrl } = {}) {
+    const payload = this.buildDraftPayload({
+      content,
+      socialImageUrl,
+    });
+
+    return this.createPost(payload);
   }
 
   async createPost(payload) {

@@ -12,15 +12,15 @@ class SharePostsService {
   constructor({
     core,
     postMetadataService,
-    integrationsService,
     openAIService,
     postizService,
+    socialImageUrlService,
   }) {
     this.core = core;
     this.postMetadataService = postMetadataService;
-    this.integrationsService = integrationsService;
     this.openAIService = openAIService;
     this.postizService = postizService;
+    this.socialImageUrlService = socialImageUrlService;
   }
 
   getReadMoreLabel(language) {
@@ -31,25 +31,11 @@ class SharePostsService {
     return "Read more:";
   }
 
-  async sharePosts({
-    postsRaw,
-    language,
-    siteBaseUrl,
-    blogBasePath,
-    postizIntegrations,
-  }) {
+  async sharePosts({ postsRaw, language, siteBaseUrl, blogBasePath }) {
     const folders = splitLines(postsRaw);
     if (folders.length === 0) {
       this.core.info("No new posts to share");
       return;
-    }
-
-    const integrations = this.integrationsService.parse({
-      integrationsRaw: postizIntegrations,
-    });
-
-    if (!integrations || integrations.length === 0) {
-      throw new Error("No Postiz integrations configured");
     }
 
     for (const folder of folders) {
@@ -82,26 +68,16 @@ class SharePostsService {
         language,
       )} ${url}`;
 
-      const payload = {
-        type: "draft",
-        shortLink: false,
-        tags: ["blog"],
-        posts: integrations.map((integration) => ({
-          integration: { id: integration.id },
-          value: [{ content }],
-          settings: { __type: integration.type },
-        })),
-      };
-
-      this.core.debug(
-        `Postiz payload for ${folder}: ${JSON.stringify(payload)}`,
+      const socialImageUrl = this.socialImageUrlService.resolveFromTildePath(
+        metadata.socialImage,
       );
 
-      const response = await this.postizService.createPost(payload);
-      this.core.debug(
-        `Postiz response for ${folder}: ${JSON.stringify(response)}`,
-      );
-      this.core.info(`✅ Shared ${folder}`);
+      const response = await this.postizService.createDraftPost({
+        content,
+        socialImageUrl,
+      });
+
+      this.core.info(`✅ Shared ${folder}: ${JSON.stringify(response)}`);
     }
   }
 }

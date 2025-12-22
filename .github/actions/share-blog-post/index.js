@@ -9,6 +9,7 @@ const { PostMetadataService } = require("./src/post-metadata-service");
 const { IntegrationsService } = require("./src/integrations-service");
 const { PostizService } = require("./src/postiz-service");
 const { SharePostsService } = require("./src/share-posts-service");
+const { SocialImageUrlService } = require("./src/social-image-url-service");
 
 async function run({
   core,
@@ -16,6 +17,8 @@ async function run({
   language,
   siteBaseUrl,
   blogBasePath,
+  githubRepository,
+  githubSha,
   postizApiKey,
   postizApiUrl,
   postizIntegrations,
@@ -54,21 +57,45 @@ async function run({
       throw new Error("POSTIZ_INTEGRATIONS is required");
     }
 
+    if (!githubRepository) {
+      throw new Error("githubRepository is required");
+    }
+
+    if (!githubSha) {
+      throw new Error("githubSha is required");
+    }
+
     const fileSystemService = new FileSystemService();
     const postMetadataService = new PostMetadataService(fileSystemService);
     const integrationsService = new IntegrationsService();
     const openAIService = new OpenAIService(openAIKey);
+
+    const integrations = integrationsService.parse({
+      integrationsRaw: postizIntegrations,
+    });
+
+    if (!integrations || integrations.length === 0) {
+      throw new Error("No Postiz integrations configured");
+    }
+
     const postizService = new PostizService({
       apiKey: postizApiKey,
       apiUrl: postizApiUrl,
+      integrations,
+    });
+
+    const socialImageUrlService = new SocialImageUrlService({
+      core,
+      githubRepository,
+      githubSha,
     });
 
     const sharePostsService = new SharePostsService({
       core,
       postMetadataService,
-      integrationsService,
       openAIService,
       postizService,
+      socialImageUrlService,
     });
 
     await sharePostsService.sharePosts({
@@ -76,7 +103,6 @@ async function run({
       language,
       siteBaseUrl,
       blogBasePath,
-      postizIntegrations,
     });
   } catch (error) {
     core.setFailed(`Action failed: ${error.message}`);

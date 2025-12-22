@@ -6,6 +6,15 @@ function toIsoUtcNow() {
   return new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
 }
 
+function normalizeOptionalString(value) {
+  const normalized = typeof value === "string" ? value.trim() : "";
+  return normalized.length > 0 ? normalized : null;
+}
+
+function isTildeAssetPath(value) {
+  return typeof value === "string" && value.startsWith("~/");
+}
+
 function trimSlashes(value, { leading, trailing }) {
   if (typeof value !== "string" || value.length === 0) {
     return "";
@@ -86,6 +95,7 @@ class PostMetadataService {
         : folder;
 
     let publishDate = toIsoUtcNow();
+    let imageFromCommon = null;
     if (await this.fileSystemService.fileExists(commonPath)) {
       const commonRaw = await this.fileSystemService.readFile(commonPath);
       const common = yaml.load(commonRaw);
@@ -94,10 +104,26 @@ class PostMetadataService {
         if (typeof publishDateRaw === "string" && publishDateRaw.trim()) {
           publishDate = publishDateRaw.trim();
         }
+
+        imageFromCommon = normalizeOptionalString(common.image);
       }
     }
 
-    return { title, excerpt, slug, publishDate };
+    if (!imageFromCommon) {
+      throw new Error(
+        `Missing social image for ${folder}: define common.yaml "image" (~/assets/...)`,
+      );
+    }
+
+    if (!isTildeAssetPath(imageFromCommon)) {
+      throw new Error(
+        `Invalid social image for ${folder}: common.yaml "image" must start with "~/"`,
+      );
+    }
+
+    const socialImage = imageFromCommon;
+
+    return { title, excerpt, slug, publishDate, socialImage };
   }
 
   buildPostUrl({ siteBaseUrl, blogBasePath, slug }) {

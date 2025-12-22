@@ -21,7 +21,7 @@ inputs:
     required: true
   postiz-integrations:
     description: |
-      JSON object mapping Postiz platform -> Postiz integration id.
+      JSON object mapping Postiz platform -> Postiz integration ID.
       See https://docs.postiz.com/public-api/posts/create#all-27-supported-platforms.
       Example:
 
@@ -61,6 +61,8 @@ runs:
             language: process.env.LANGUAGE,
             siteBaseUrl: process.env.SITE_BASE_URL,
             blogBasePath: process.env.BLOG_BASE_PATH,
+            githubRepository: process.env.GITHUB_REPOSITORY,
+            githubSha: process.env.GITHUB_SHA,
             postizApiKey: process.env.POSTIZ_API_KEY,
             postizApiUrl: process.env.POSTIZ_API_URL,
             postizIntegrations: process.env.POSTIZ_INTEGRATIONS,
