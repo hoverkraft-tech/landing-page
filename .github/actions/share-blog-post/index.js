@@ -9,6 +9,7 @@ const { PostMetadataService } = require("./src/post-metadata-service");
 const { IntegrationsService } = require("./src/integrations-service");
 const { PostizService } = require("./src/postiz-service");
 const { SharePostsService } = require("./src/share-posts-service");
+const { PostDateService } = require("./src/post-date-service");
 const { SocialImageUrlService } = require("./src/social-image-url-service");
 const { SocialCopyService } = require("./src/social-copy-service");
 
@@ -96,6 +97,7 @@ async function run({
       postMetadataService,
       postizService,
       socialImageUrlService,
+      postDateService: new PostDateService(),
       socialCopyService: new SocialCopyService({
         openAIService,
         integrations,
