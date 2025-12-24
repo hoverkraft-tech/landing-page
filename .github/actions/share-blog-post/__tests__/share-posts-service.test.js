@@ -29,6 +29,10 @@ describe("SharePostsService", () => {
         socialCopyService: {
           buildContentByIntegrationType: async () => ({ linkedin: "x" }),
         },
+        postDateService: {
+          buildRandomAtLeast24HoursAwayInBusinessHoursIso: () =>
+            "2025-12-24T10:00:00Z",
+        },
       });
 
       await service.sharePosts({
@@ -69,6 +73,10 @@ describe("SharePostsService", () => {
             };
           },
         },
+        postDateService: {
+          buildRandomAtLeast24HoursAwayInBusinessHoursIso: () =>
+            "2025-12-24T10:00:00Z",
+        },
       });
 
       await service.sharePosts({
@@ -81,6 +89,7 @@ describe("SharePostsService", () => {
       assert.equal(postizCalls.length, 1);
       assert.equal(postizCalls[0].postId, "s");
       assert.ok(postizCalls[0].contentByIntegrationType);
+      assert.equal(postizCalls[0].date, "2025-12-24T10:00:00Z");
       assert.match(
         postizCalls[0].contentByIntegrationType.linkedin,
         /Read more:/,

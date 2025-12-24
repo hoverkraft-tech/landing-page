@@ -43,6 +43,7 @@ describe("PostizService", () => {
           bluesky: "Hello Bluesky",
         },
         socialImageUrl: "https://example.com/social.png",
+        date: "2025-12-24T10:00:00Z",
       });
 
       assert.deepEqual(response, { id: "created" });
@@ -50,7 +51,7 @@ describe("PostizService", () => {
       assert.equal(captured.payload.id, "my-post");
       assert.equal(captured.payload.type, "draft");
       assert.equal(captured.payload.shortLink, false);
-      assert.equal(typeof captured.payload.date, "string");
+      assert.equal(captured.payload.date, "2025-12-24T10:00:00.000Z");
       assert.equal(captured.payload.posts.length, 2);
       assert.deepEqual(captured.payload.posts[0].integration, { id: "a" });
       assert.deepEqual(captured.payload.posts[0].settings, {
@@ -70,6 +71,25 @@ describe("PostizService", () => {
           path: "https://example.com/social.png",
         },
       ]);
+    });
+
+    it("should reject invalid dates", async () => {
+      const service = new PostizService({
+        apiKey: "secret",
+        apiUrl: "https://postiz.example/api",
+        integrations: [{ id: "a", type: "linkedin" }],
+        client: { post: async () => ({ id: "created" }) },
+      });
+
+      await assert.rejects(
+        () =>
+          service.createDraftPost({
+            postId: "my-post",
+            content: "Hello",
+            date: "not-a-date",
+          }),
+        /Invalid date 'not-a-date'/,
+      );
     });
   });
 });

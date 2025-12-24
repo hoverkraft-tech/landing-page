@@ -36,12 +36,14 @@ class PostizService {
     content,
     contentByIntegrationType,
     socialImageUrl,
+    date,
   } = {}) {
     const payload = this.buildDraftPayload({
       postId,
       content,
       contentByIntegrationType,
       socialImageUrl,
+      date,
     });
 
     return this.createPost(payload);
@@ -52,6 +54,7 @@ class PostizService {
     content,
     contentByIntegrationType,
     socialImageUrl,
+    date,
   }) {
     const integrations = this.integrations;
     if (!Array.isArray(integrations) || integrations.length === 0) {
@@ -91,10 +94,12 @@ class PostizService {
         ]
       : [];
 
+    const normalizedDate = this.normalizePostDate(date);
+
     return {
       id: normalizedPostId,
       type: "draft",
-      date: new Date().toISOString(),
+      date: normalizedDate,
       shortLink: false,
       tags: [],
       posts: integrations.map((integration) => ({
@@ -117,6 +122,32 @@ class PostizService {
         })(),
       })),
     };
+  }
+
+  normalizePostDate(date) {
+    if (date === undefined || date === null) {
+      return new Date().toISOString();
+    }
+
+    if (date instanceof Date) {
+      if (Number.isNaN(date.getTime())) {
+        throw new Error("Invalid date provided");
+      }
+      return date.toISOString();
+    }
+
+    const normalized = String(date).trim();
+    if (!normalized || normalized.toLowerCase() === "now") {
+      return new Date().toISOString();
+    }
+
+    const parsed = new Date(normalized);
+    if (Number.isNaN(parsed.getTime())) {
+      throw new Error(
+        `Invalid date '${normalized}'. Use an ISO 8601 string like '2025-12-24T10:00:00Z'.`,
+      );
+    }
+    return parsed.toISOString();
   }
 
   async createPost(payload) {

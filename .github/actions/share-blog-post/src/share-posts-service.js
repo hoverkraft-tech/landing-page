@@ -15,12 +15,18 @@ class SharePostsService {
     postizService,
     socialImageUrlService,
     socialCopyService,
+    postDateService,
   }) {
     this.core = core;
     this.postMetadataService = postMetadataService;
     this.postizService = postizService;
     this.socialImageUrlService = socialImageUrlService;
     this.socialCopyService = socialCopyService;
+
+    if (!postDateService) {
+      throw new Error("postDateService is required");
+    }
+    this.postDateService = postDateService;
   }
 
   async sharePosts({ postsRaw, language, siteBaseUrl, blogBasePath }) {
@@ -29,6 +35,13 @@ class SharePostsService {
       this.core.info("No new posts to share");
       return;
     }
+
+    const resolvedPostDate =
+      this.postDateService.buildRandomAtLeast24HoursAwayInBusinessHoursIso({
+        timeZone: "Europe/Paris",
+        startHourInclusive: 9,
+        endHourExclusive: 18,
+      });
 
     for (const folder of folders) {
       const metadata = await this.postMetadataService.readPostMetadata(folder, {
@@ -65,6 +78,7 @@ class SharePostsService {
         postId: metadata.slug,
         contentByIntegrationType,
         socialImageUrl,
+        date: resolvedPostDate,
       });
 
       this.core.info(`✅ Shared ${folder}: ${JSON.stringify(response)}`);
