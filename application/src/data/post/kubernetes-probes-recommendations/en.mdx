@@ -33,6 +33,7 @@ We treat the platform as a delivery chain: every probe is a measurable connector
 - Startup probe covers warmup phases (migrations, cache) and shields liveness.
 - Readiness focuses on serviceability, not on every secondary dependency.
 - Liveness stays minimal: check the process, not the world.
+- Hoverkraft guide distilled: startup absorbs warmup, readiness only checks critical dependencies, liveness stays local and light, and thresholds are validated with PDB/HPA plus load or chaos tests (https://docs.hoverkraft.cloud/docs/methodology/best-practices/kubernetes-probes/).
 
 ## Startup probe: survive warmup
 
@@ -143,6 +144,7 @@ Cross-cutting rules for reliable probes:
 - Kubernetes documentation on probes: https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/
 - Google Cloud - Kubernetes best practices for readiness/liveness: https://cloud.google.com/blog/products/gcp/kubernetes-best-practices-setting-up-health-checks-with-readiness-and-liveness-probes
 - gRPC Health Checking Protocol: https://github.com/grpc/grpc/blob/master/doc/health-checking.md
+- Hoverkraft probe best practices: https://docs.hoverkraft.cloud/docs/methodology/best-practices/kubernetes-probes/
 
 ## Conclusion
 
