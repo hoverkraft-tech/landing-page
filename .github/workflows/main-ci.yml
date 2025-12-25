@@ -84,3 +84,4 @@ jobs:
     permissions:
       contents: read
       pages: read
+    secrets: inherit
