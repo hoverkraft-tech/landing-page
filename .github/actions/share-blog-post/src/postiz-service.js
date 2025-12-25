@@ -98,7 +98,7 @@ class PostizService {
 
     return {
       id: normalizedPostId,
-      type: "draft",
+      type: "schedule",
       date: normalizedDate,
       shortLink: false,
       tags: [],

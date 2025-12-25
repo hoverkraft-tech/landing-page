@@ -49,7 +49,7 @@ describe("PostizService", () => {
       assert.deepEqual(response, { id: "created" });
 
       assert.equal(captured.payload.id, "my-post");
-      assert.equal(captured.payload.type, "draft");
+      assert.equal(captured.payload.type, "schedule");
       assert.equal(captured.payload.shortLink, false);
       assert.equal(captured.payload.date, "2025-12-24T10:00:00.000Z");
       assert.equal(captured.payload.posts.length, 2);

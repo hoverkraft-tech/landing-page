@@ -5,6 +5,20 @@ class PostDateService {
     this.random = random ?? Math.random;
   }
 
+  static getWeekdayInTimeZone(date, timeZone) {
+    const parts = new Intl.DateTimeFormat("en-US", {
+      timeZone,
+      weekday: "short",
+    }).formatToParts(date);
+
+    const weekday = parts.find((p) => p.type === "weekday")?.value;
+    if (!weekday) {
+      throw new Error(`Unable to resolve weekday for ${timeZone}`);
+    }
+
+    return weekday;
+  }
+
   static getDatePartsInTimeZone(date, timeZone) {
     const parts = new Intl.DateTimeFormat("en-CA", {
       timeZone,
@@ -177,6 +191,14 @@ class PostDateService {
         dayNoonUtc,
         normalizedTimeZone,
       );
+
+      const weekday = PostDateService.getWeekdayInTimeZone(
+        dayNoonUtc,
+        normalizedTimeZone,
+      );
+      if (weekday === "Sat" || weekday === "Sun") {
+        continue;
+      }
 
       if (PostDateService.compareYmd(dayInTz, minLocalYmd) < 0) {
         continue;
