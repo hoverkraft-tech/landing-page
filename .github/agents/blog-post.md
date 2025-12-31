@@ -194,9 +194,9 @@ touch /application/src/data/post/{translation-key}/{fr.mdx,en.mdx,common.yaml}
 
 ### 4. Generate Images
 
-**MANDATORY**: Always delegate image generation to the `blog-post-image-preview` custom agent. Do not generate images directly.
+**MANDATORY**: Always call the `blog-post-image-preview` agent skill to generate visuals—do not generate images directly. Invoke the skill with the post title (and optional mood) so it returns a brand-safe preview aligned to Hoverkraft guidelines.
 
-The `blog-post-image-preview` agent is a specialized image generation agent that handles all blog post visuals with Hoverkraft's brand guidelines built-in.
+The `blog-post-image-preview` agent skill is specialized for Hoverkraft blog visuals and already embeds the brand guardrails.
 
 **How to Delegate**
 
