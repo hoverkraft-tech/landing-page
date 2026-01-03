@@ -3,7 +3,7 @@
 # GitHub Action: Fetch Releases from Hoverkraft Tech Repos
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/a9a555b2d12d3649c972a481f2ddbee03c22163e52209ce37c8a72e5c2bb414d/hoverkraft-tech/landing-page" width="60px" align="center" alt="Fetch Releases from Hoverkraft Tech Repos" />
+  <img src="https://opengraph.githubassets.com/d8b091b4018b9713bfb9e28e4100b5d02753f5e06b10afb742e8ed6f9f90e2dc/hoverkraft-tech/landing-page" width="60px" align="center" alt="Fetch Releases from Hoverkraft Tech Repos" />
 </div>
 
 ---
@@ -87,7 +87,7 @@ This project is licensed under the MIT License.
 
 SPDX-License-Identifier: MIT
 
-Copyright © 2025 hoverkraft-tech
+Copyright © 2026 hoverkraft-tech
 
 For more details, see the [license](http://choosealicense.com/licenses/mit/).
 
