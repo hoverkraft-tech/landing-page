@@ -32,7 +32,7 @@
     "@fontsource/roboto-mono": "^5.2.8",
     "archiver": "^7.0.1",
     "astro": "^5.16.6",
-    "astro-embed": "^0.9.2",
+    "astro-embed": "^0.10.0",
     "astro-icon": "^1.1.5",
     "limax": "4.2.1",
     "lodash.merge": "^4.6.2",
