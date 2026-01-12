@@ -3,7 +3,7 @@
 # GitHub Action: Validate Branding Manifest
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/55eb86e05c5f934cf65367391f24836c03b6bb05e8e64fef5ce643c8b7b32a7e/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
+  <img src="https://opengraph.githubassets.com/85e557ed64fdedc95e3545acd14724d92468ab40cdd3697c2310a79ec3e600ee/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
 </div>
 
 ---
