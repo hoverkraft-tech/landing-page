@@ -84,6 +84,7 @@ export function getLocalizedFooterData(url: URL) {
         title: t('footer.support'),
         links: [
           { text: t('nav.resources'), href: translatePath('/resources') },
+          { text: t('nav.maturity-assessment'), href: translatePath('/maturity-assessment') },
           { text: t('nav.blog'), href: blogHref },
           { text: t('footer.docs'), href: 'https://docs.hoverkraft.cloud' },
         ],

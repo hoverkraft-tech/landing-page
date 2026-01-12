@@ -9,6 +9,11 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
 const metadata = {
   title: 'Offres HoverKraft',
   description:
@@ -34,6 +39,13 @@ const metadata = {
       De l’audit express à l’exécution managée (PEaaS), chaque offre HoverKraft combine méthodologie, connecteurs open
       source et accompagnement senior. Sélectionnez le pack qui correspond à votre niveau de maturité et à vos objectifs
       business.
+      <span class="block mt-2 text-sm">
+        Vous hésitez ? Faites d’abord le{' '}
+        <a href={translatePath('/maturity-assessment')} class="font-semibold text-primary underline underline-offset-4">
+          radar de maturité
+        </a>
+        (5 min).
+      </span>
     </Fragment>
   </Hero>
 

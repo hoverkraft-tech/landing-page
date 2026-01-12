@@ -1,0 +1,169 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import Note from '~/components/widgets/Note.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import MaturityAssessmentWidget from '~/components/maturity-assessment/MaturityAssessment.astro';
+import { getMaturityAssessmentAxes } from '~/data/maturity-assessment';
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const metadata = {
+  title: 'Platform Engineering maturity assessment — Hoverkraft',
+  description:
+    'Self-assess your platform engineering maturity in 5 minutes across 7 pillars. Visualize your profile and identify improvement levers.',
+};
+
+const axes = getMaturityAssessmentAxes('en');
+---
+
+<Layout metadata={metadata}>
+  <div data-maturity-assessment-hero>
+    <HeroText
+      tagline="Maturity radar"
+      title="Platform Engineering maturity assessment"
+      subtitle="In 5 minutes, score your team across 7 key pillars (DevX, environments, CI/CD, containerization, observability, security, continuous improvement) and visualize your current profile."
+      callToAction={{
+        variant: 'primary',
+        text: 'Start the self-assessment',
+        href: '#self-assessment',
+      }}
+      callToAction2={{
+        text: 'Contact us',
+        href: translatePath('/contact#form'),
+      }}
+    />
+  </div>
+
+  <div data-maturity-assessment-no-print>
+    <Note
+      title="Why this self-assessment?"
+      description="Platform Engineering only works if you can measure it. This radar helps you objectify your baseline, align stakeholders, and prioritize high-impact actions (DORA, SPACE, security)."
+    />
+  </div>
+
+  <section id="self-assessment" class="relative py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6">
+      <header class="mb-8 text-center" data-maturity-assessment-intro>
+        <h2 class="text-3xl md:text-4xl font-bold tracking-tighter text-heading">Your self-assessment</h2>
+        <p class="mt-3 text-lg text-muted">Pick a level (1 to 5) for each criterion. The radar updates instantly.</p>
+      </header>
+
+      <style is:inline>
+        @media print {
+          /* Print should contain only the report itself */
+          #header,
+          body > footer {
+            display: none !important;
+          }
+
+          [data-maturity-assessment-hero] {
+            display: none !important;
+          }
+
+          [data-maturity-assessment-intro] {
+            display: none !important;
+          }
+
+          [data-maturity-assessment-no-print] {
+            display: none !important;
+          }
+        }
+      </style>
+
+      <MaturityAssessmentWidget
+        id="maturity-assessment-en"
+        axes={axes}
+        strings={{
+          currentProfileTitle: 'Your current profile',
+          scoreLabel: 'Overall score',
+          progressLabel: 'Progress',
+          printTagline: 'Maturity radar',
+          printTitle: 'Platform Engineering maturity assessment',
+          printAnswersTitle: 'Answers',
+          printInterpretationTitle: 'Interpretation',
+          printFooterUrl: 'https://hoverkraft.tech',
+          shareLabel: 'Share',
+          sharePrintLabel: 'Print',
+          shareCopyLabel: 'Copy link',
+          shareCopySuccessLabel: 'Copied',
+          shareMailLabel: 'Share via email',
+          shareMailSubject: 'Maturity assessment results',
+          shareTextWithInterpretation:
+            'My Platform Engineering maturity score: {score} ({interpretation}) — Assessment by Hoverkraft',
+          shareTextWithoutInterpretation: 'My Platform Engineering maturity score: {score} — Assessment by Hoverkraft',
+          shareMailBodyWithInterpretation:
+            'Hi,\n\nHere are my Platform Engineering maturity assessment results:\n- Score: {score}\n- Level: {interpretation}\n\nAssessment link (includes my answers):\n{url}\n\nAssessment by Hoverkraft — https://hoverkraft.tech\n',
+          shareMailBodyWithoutInterpretation:
+            'Hi,\n\nHere are my Platform Engineering maturity assessment results:\n- Score: {score}\n\nAssessment link (includes my answers):\n{url}\n\nAssessment by Hoverkraft — https://hoverkraft.tech\n',
+          shareLinkedInLabel: 'Share on LinkedIn',
+          shareDevtoPostTitle: 'Platform Engineering maturity assessment results',
+          shareDevtoLinkLabel: 'Assessment link',
+          shareDevtoLabel: 'Share on dev.to',
+          shareBlueskyLabel: 'Share on Bluesky',
+          resetLabel: 'Reset',
+          editLabel: 'Edit',
+          levelPrefix: 'Level',
+          interpretation: {
+            initial: 'Initial',
+            repeatable: 'Repeatable',
+            defined: 'Defined',
+            managed: 'Managed',
+            optimizing: 'Optimizing',
+          },
+        }}
+      />
+
+      <div class="mt-8 max-w-3xl mx-auto text-sm text-muted" data-maturity-assessment-no-print>
+        <p class="font-semibold text-heading">Result interpretation (CMM)</p>
+        <p class="mt-2">
+          These interpretation levels are based on the <span class="font-semibold">Capability Maturity Model</span>:
+        </p>
+        <ul class="mt-3 space-y-2">
+          <li>
+            <span class="font-semibold text-heading">Initial</span>: The software process is characterised as ad hoc,
+            and occasionally even chaotic. Few processes are defined, and success depends on individual effort.
+          </li>
+          <li>
+            <span class="font-semibold text-heading">Repeatable</span>: Basic project management processes are
+            established to track cost, schedule and functionality. The necessary process discipline is in place to
+            repeat earlier successes on projects with similar applications.
+          </li>
+          <li>
+            <span class="font-semibold text-heading">Defined</span>: The software process for both management and
+            engineering activities is documented, standardised and integrated into all processes for the organisation.
+            All projects use an approved version of the organisation’s standard software process for developing and
+            maintaining software.
+          </li>
+          <li>
+            <span class="font-semibold text-heading">Managed</span>: Detailed measures of the software process and
+            product quality are collected. Both the software process and products are quantitatively understood and
+            controlled.
+          </li>
+          <li>
+            <span class="font-semibold text-heading">Optimizing</span>: Continuous process improvement is enabled by
+            quantitative feedback from the process and from piloting innovative ideas and technologies.
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <div data-maturity-assessment-no-print>
+    <CallToAction
+      actions={[
+        { variant: 'primary', text: 'Book a debrief (30 min)', href: translatePath('/contact#form') },
+        { text: 'Explore our offers', href: translatePath('/offers') },
+      ]}
+    >
+      <Fragment slot="title">Want to go further?</Fragment>
+      <Fragment slot="subtitle">
+        This radar is a first step. Let’s review your results together to understand your context and identify your top
+        improvement levers.
+      </Fragment>
+    </CallToAction>
+  </div>
+</Layout>
