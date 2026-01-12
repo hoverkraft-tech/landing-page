@@ -8,6 +8,11 @@ import Features2 from '~/components/widgets/Features2.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
 const metadata = {
   title: 'Methodology — HoverKraft',
   description:
@@ -32,6 +37,13 @@ const metadata = {
     <Fragment slot="subtitle">
       Our method combines DORA, SPACE, and Lean to drive your platform transformation. Each step is documented, tooled,
       and measured to create a predictable and sovereign delivery chain.
+      <span class="block mt-2 text-sm">
+        To get a quick baseline, try our{' '}
+        <a href={translatePath('/maturity-assessment')} class="font-semibold text-primary underline underline-offset-4">
+          maturity radar
+        </a>
+        .
+      </span>
     </Fragment>
   </Hero>
 

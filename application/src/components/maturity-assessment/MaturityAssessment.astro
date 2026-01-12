@@ -1,0 +1,1331 @@
+---
+import { Icon } from 'astro-icon/components';
+import Logo from '~/components/Logo.astro';
+import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
+
+export interface Props {
+  id?: string;
+  axes: MaturityAssessmentAxis[];
+  strings: {
+    currentProfileTitle: string;
+    scoreLabel: string;
+    progressLabel: string;
+    printTagline?: string;
+    printTitle: string;
+    printAnswersTitle: string;
+    printInterpretationTitle: string;
+    printFooterUrl: string;
+    shareLabel: string;
+    sharePrintLabel: string;
+    shareCopyLabel: string;
+    shareCopySuccessLabel: string;
+    shareMailLabel: string;
+    shareMailSubject: string;
+    shareTextWithInterpretation: string;
+    shareTextWithoutInterpretation: string;
+    shareMailBodyWithInterpretation: string;
+    shareMailBodyWithoutInterpretation: string;
+    shareLinkedInLabel: string;
+    shareDevtoPostTitle: string;
+    shareDevtoLinkLabel: string;
+    shareDevtoLabel: string;
+    shareBlueskyLabel: string;
+    resetLabel: string;
+    editLabel: string;
+    levelPrefix: string;
+    interpretation: {
+      initial: string;
+      repeatable: string;
+      defined: string;
+      managed: string;
+      optimizing: string;
+    };
+  };
+}
+
+const { id = 'maturity-assessment', axes, strings } = Astro.props;
+---
+
+<form id={id} data-maturity-assessment data-form class="grid gap-8 lg:grid-cols-2" novalidate>
+  <div class="space-y-6" data-maturity-questions>
+    {
+      axes.map((axis, axisIndex) => (
+        <section class="rounded-2xl border border-gray-200/60 bg-page p-5 md:p-6">
+          <h3 class="mb-4 text-sm font-semibold tracking-wide text-heading uppercase" data-axis-title tabindex="-1">
+            {axisIndex + 1}. {axis.label}
+          </h3>
+
+          <div class="space-y-6">
+            {axis.questions.map((question) => (
+              <fieldset class="space-y-3" data-question-id={question.id}>
+                <legend class="text-base font-semibold text-heading cursor-pointer" data-question-legend tabindex="-1">
+                  <span class="inline-flex w-full items-start justify-between gap-3">
+                    <span class="min-w-0">{question.text}</span>
+                    <button
+                      type="button"
+                      class="shrink-0 inline-flex items-center gap-1 cursor-pointer text-sm font-semibold text-primary"
+                      data-question-toggle
+                    >
+                      <Icon
+                        name="tabler:chevron-down"
+                        class="h-5 w-5 hidden"
+                        data-toggle-icon-collapsed
+                        aria-hidden="true"
+                      />
+                      <Icon name="tabler:chevron-up" class="h-5 w-5" data-toggle-icon-expanded aria-hidden="true" />
+                      <span class="underline underline-offset-4" data-toggle-label hidden>
+                        {strings.editLabel}
+                      </span>
+                    </button>
+                  </span>
+                </legend>
+                <div class="text-sm text-muted" data-selected-summary hidden />
+
+                <div class="grid gap-2" data-options>
+                  {([1, 2, 3, 4, 5] as const).map((level) => {
+                    const inputId = `${id}-${question.id}-${level}`;
+                    return (
+                      <label
+                        for={inputId}
+                        data-level={level}
+                        class="group flex cursor-pointer gap-3 rounded-xl border border-gray-200/60 bg-white/40 p-3 transition hover:bg-white/60 dark:bg-white/5 dark:hover:bg-white/10"
+                      >
+                        <input
+                          id={inputId}
+                          class="peer mt-1 size-4 shrink-0 cursor-pointer"
+                          style="accent-color: var(--color-secondary);"
+                          type="radio"
+                          name={question.id}
+                          value={level}
+                        />
+                        <div class="min-w-0">
+                          <div class="flex items-baseline gap-2">
+                            <span class="text-xs font-semibold tracking-wide text-primary uppercase">
+                              {strings.levelPrefix} {level}
+                            </span>
+                          </div>
+                          <p class="mt-1 text-sm text-default/90">{question.levels[level]}</p>
+                        </div>
+                      </label>
+                    );
+                  })}
+                </div>
+              </fieldset>
+            ))}
+          </div>
+        </section>
+      ))
+    }
+  </div>
+
+  <aside class="sticky top-24 lg:top-28 self-start h-fit" data-maturity-sidebar>
+    <div class="rounded-2xl border border-gray-200/60 bg-white/40 p-5 text-center backdrop-blur dark:bg-white/5">
+      <header class="hidden" data-print-header>
+        {
+          strings.printTagline ? (
+            <p class="text-sm font-semibold tracking-wide text-muted uppercase">{strings.printTagline}</p>
+          ) : null
+        }
+        <h1 class="text-2xl font-bold tracking-tighter text-heading">{strings.printTitle}</h1>
+      </header>
+
+      <h3 class="text-base font-semibold text-heading" data-current-profile-title>{strings.currentProfileTitle}</h3>
+
+      <div class="mx-auto mt-4 w-full max-w-[420px]">
+        <svg
+          data-radar
+          viewBox="0 0 500 500"
+          class="h-auto w-full text-secondary"
+          role="img"
+          aria-label="Radar de maturité"
+        >
+          <defs>
+            <linearGradient id={`${id}-polyGradient`} x1="0" x2="0" y1="0" y2="1">
+              <stop offset="0%" stop-color="currentColor" stop-opacity="0.55"></stop>
+              <stop offset="100%" stop-color="currentColor" stop-opacity="0.15"></stop>
+            </linearGradient>
+          </defs>
+        </svg>
+      </div>
+
+      <div class="mt-5">
+        <div class="font-mono text-5xl font-bold text-heading">
+          <span data-score>0.0</span>
+          <span class="text-base font-medium text-muted">/ 5</span>
+        </div>
+        <div class="mt-1 text-xs font-semibold tracking-widest text-muted uppercase">{strings.scoreLabel}</div>
+
+        <div class="mt-4 text-left" data-progress-section>
+          <div class="flex items-center justify-between text-xs font-semibold tracking-widest text-muted uppercase">
+            <span>{strings.progressLabel}</span>
+            <span data-progress-count>0/0</span>
+          </div>
+          <div
+            class="mt-2 h-2 w-full rounded-full bg-gray-200/60 dark:bg-white/10"
+            data-progress-bar-wrapper
+            role="progressbar"
+            aria-label={strings.progressLabel}
+            aria-valuemin="0"
+            aria-valuemax="100"
+            aria-valuenow="0"
+          >
+            <div
+              class="h-full rounded-full bg-secondary transition-[width] duration-300"
+              data-progress-bar
+              style="width: 0%"
+            >
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-4 hidden" data-print-interpretation-title>
+          <div class="text-xs font-semibold tracking-widest text-muted uppercase">
+            {strings.printInterpretationTitle}
+          </div>
+        </div>
+
+        <div class="mt-3 text-sm font-semibold" data-interpretation>
+          {strings.interpretation.initial}
+        </div>
+
+        <div class="mt-4 flex justify-center" data-reset-section>
+          <button
+            type="reset"
+            class="btn btn-tertiary px-4 disabled:opacity-50 disabled:cursor-not-allowed"
+            data-reset-button
+            disabled
+          >
+            {strings.resetLabel}
+          </button>
+        </div>
+
+        <div class="mt-4 text-left" data-share-section>
+          <div class="flex items-center justify-between text-xs font-semibold tracking-widest text-muted uppercase">
+            <span>{strings.shareLabel}</span>
+            <Icon name="tabler:share" class="h-4 w-4" aria-hidden="true" />
+          </div>
+          <div class="mt-2 flex flex-nowrap items-stretch gap-2">
+            <button
+              type="button"
+              class="btn group shrink-0 justify-center gap-2 border-gray-200/60 bg-white/40 px-4 py-3 text-sm font-semibold text-heading hover:bg-white/60 hover:border-gray-300/80 disabled:cursor-not-allowed disabled:opacity-50 sm:px-6 dark:border-gray-700/60 dark:bg-white/5 dark:text-white/90 dark:hover:bg-white/10"
+              data-share-print
+              disabled
+            >
+              <Icon
+                name="tabler:printer"
+                class="h-5 w-5 text-muted transition-colors group-hover:text-primary"
+                aria-hidden="true"
+              />
+              <span class="hidden sm:inline">{strings.sharePrintLabel}</span>
+              <span class="sr-only sm:hidden">{strings.sharePrintLabel}</span>
+            </button>
+
+            <div class="min-w-0 flex-1" data-share-pill>
+              <div
+                class="group/sharepill relative flex w-full items-center overflow-hidden rounded-full border border-gray-200/60 bg-white/40 px-2 py-2 transition-transform duration-200 ease-out hover:scale-[1.02] focus-within:scale-[1.02] dark:border-gray-700/60 dark:bg-white/5"
+                data-share-pill-wrap
+              >
+                <div class="flex w-full items-center justify-evenly gap-1">
+                  <button
+                    type="button"
+                    class="ma-share-action group/shareaction relative inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full text-heading opacity-0 scale-75 transition-[transform,opacity,color] duration-300 ease-out delay-150 hover:bg-white/70 hover:text-primary focus-visible:bg-white/70 focus-visible:text-primary disabled:cursor-not-allowed disabled:opacity-50 dark:text-white/90 dark:hover:bg-white/10 dark:focus-visible:bg-white/10"
+                    data-share-copy
+                    disabled
+                    title={strings.shareCopyLabel}
+                  >
+                    <Icon
+                      name="tabler:copy"
+                      class="ma-copy-icon h-5 w-5 transition-transform duration-200 ease-out group-hover/shareaction:scale-110 group-focus-visible/shareaction:scale-110"
+                      aria-hidden="true"
+                    />
+                    <Icon name="tabler:check" class="ma-copy-check h-5 w-5 text-primary" aria-hidden="true" />
+                    <span class="sr-only" data-share-copy-label>{strings.shareCopyLabel}</span>
+                  </button>
+
+                  <a
+                    class="ma-share-action group/shareaction inline-flex h-11 w-11 items-center justify-center rounded-full text-heading opacity-0 scale-75 transition-[transform,opacity,color] duration-300 ease-out delay-200 hover:bg-white/70 hover:text-primary focus-visible:bg-white/70 focus-visible:text-primary dark:text-white/90 dark:hover:bg-white/10 dark:focus-visible:bg-white/10"
+                    data-share-mail
+                    href="#"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    title={strings.shareMailLabel}
+                  >
+                    <Icon
+                      name="tabler:mail"
+                      class="h-5 w-5 transition-transform duration-200 ease-out group-hover/shareaction:scale-110 group-focus-visible/shareaction:scale-110"
+                      aria-hidden="true"
+                    />
+                    <span class="sr-only">{strings.shareMailLabel}</span>
+                  </a>
+
+                  <a
+                    class="ma-share-action group/shareaction inline-flex h-11 w-11 items-center justify-center rounded-full text-heading opacity-0 scale-75 transition-[transform,opacity,color] duration-300 ease-out delay-250 hover:bg-white/70 hover:text-primary focus-visible:bg-white/70 focus-visible:text-primary dark:text-white/90 dark:hover:bg-white/10 dark:focus-visible:bg-white/10"
+                    data-share-linkedin
+                    href="#"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    title={strings.shareLinkedInLabel}
+                  >
+                    <Icon
+                      name="tabler:brand-linkedin"
+                      class="h-5 w-5 transition-transform duration-200 ease-out group-hover/shareaction:scale-110 group-focus-visible/shareaction:scale-110"
+                      aria-hidden="true"
+                    />
+                    <span class="sr-only">{strings.shareLinkedInLabel}</span>
+                  </a>
+
+                  <a
+                    class="ma-share-action group/shareaction inline-flex h-11 w-11 items-center justify-center rounded-full text-heading opacity-0 scale-75 transition-[transform,opacity,color] duration-300 ease-out delay-300 hover:bg-white/70 hover:text-primary focus-visible:bg-white/70 focus-visible:text-primary dark:text-white/90 dark:hover:bg-white/10 dark:focus-visible:bg-white/10"
+                    data-share-devto
+                    href="#"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    title={strings.shareDevtoLabel}
+                  >
+                    <Icon
+                      name="tabler:device-imac-code"
+                      class="h-5 w-5 transition-transform duration-200 ease-out group-hover/shareaction:scale-110 group-focus-visible/shareaction:scale-110"
+                      aria-hidden="true"
+                    />
+                    <span class="sr-only">{strings.shareDevtoLabel}</span>
+                  </a>
+
+                  <a
+                    class="ma-share-action group/shareaction inline-flex h-11 w-11 items-center justify-center rounded-full text-heading opacity-0 scale-75 transition-[transform,opacity,color] duration-300 ease-out delay-350 hover:bg-white/70 hover:text-primary focus-visible:bg-white/70 focus-visible:text-primary dark:text-white/90 dark:hover:bg-white/10 dark:focus-visible:bg-white/10"
+                    data-share-bluesky
+                    href="#"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    title={strings.shareBlueskyLabel}
+                  >
+                    <Icon
+                      name="tabler:brand-bluesky"
+                      class="h-5 w-5 transition-transform duration-200 ease-out group-hover/shareaction:scale-110 group-focus-visible/shareaction:scale-110"
+                      aria-hidden="true"
+                    />
+                    <span class="sr-only">{strings.shareBlueskyLabel}</span>
+                  </a>
+                </div>
+
+                <span
+                  class="pointer-events-none absolute inset-0 z-10 flex items-center justify-center rounded-full bg-secondary px-6 text-sm font-semibold tracking-widest text-white uppercase transition-transform duration-700 ease-out group-hover/sharepill:-translate-x-[115%] group-focus-within/sharepill:-translate-x-[115%]"
+                  aria-hidden="true"
+                >
+                  {strings.shareLabel}
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-6 border-t border-gray-200/60 pt-6 hidden" data-print-summary>
+          <div class="text-left">
+            <div class="text-xs font-semibold tracking-widest text-muted uppercase">{strings.printAnswersTitle}</div>
+            <div class="mt-3 space-y-4">
+              {
+                axes.map((axis) => (
+                  <section>
+                    <h4 class="text-sm font-semibold text-heading">{axis.label}</h4>
+                    <ul class="mt-2 space-y-1">
+                      {axis.questions.map((question) => (
+                        <li class="flex items-start justify-between gap-3">
+                          <span class="min-w-0 text-sm text-default/90">{question.text}</span>
+                          <span
+                            class="shrink-0 text-sm font-semibold text-heading"
+                            data-print-answer
+                            data-question-id={question.id}
+                          >
+                            —
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </section>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+
+        <footer class="mt-8 hidden" data-print-footer>
+          <div class="flex items-center justify-between gap-4">
+            <div class="scale-90 origin-left">
+              <Logo />
+            </div>
+            <div class="text-sm font-semibold text-muted">{strings.printFooterUrl}</div>
+          </div>
+        </footer>
+      </div>
+    </div>
+  </aside>
+
+  <style is:inline>
+    @media print {
+      @page {
+        /* Leave room for the repeating (fixed) print header */
+        margin: 22mm 14mm 18mm 14mm;
+      }
+
+      [data-maturity-assessment] {
+        color-scheme: light;
+        --aw-color-text-heading: rgb(29 32 38);
+        --aw-color-text-default: rgb(80 102 144);
+        --aw-color-text-muted: rgb(80 102 144 / 70%);
+        --aw-color-bg-page: rgb(255 255 255);
+
+        /* Tailwind v4 maps utilities to these variables (see tailwind.css) */
+        --color-default: var(--aw-color-text-default);
+        --color-muted: var(--aw-color-text-muted);
+      }
+
+      /* Make the report background deterministic (avoid dark-mode translucent backgrounds in print/PDF). */
+      [data-maturity-sidebar] > div {
+        background-color: var(--aw-color-bg-page) !important;
+        backdrop-filter: none !important;
+        -webkit-backdrop-filter: none !important;
+        /* Make room for the fixed page header */
+        padding-top: 5.75rem !important;
+        /* Make room for the fixed page footer */
+        padding-bottom: 4.75rem !important;
+      }
+
+      /* Repeat a basic header on every printed page */
+      [data-print-header] {
+        position: fixed !important;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        padding: 12px 14mm;
+        background: var(--aw-color-bg-page) !important;
+        border-bottom: 1px solid color-mix(in srgb, var(--aw-color-text-default) 22%, transparent);
+      }
+
+      /* Repeat a basic footer on every printed page */
+      [data-print-footer] {
+        position: fixed !important;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        padding: 10px 14mm;
+        background: var(--aw-color-bg-page) !important;
+        border-top: 1px solid color-mix(in srgb, var(--aw-color-text-default) 22%, transparent);
+        margin-top: 0 !important;
+      }
+
+      [data-maturity-sidebar] > div {
+        text-align: left !important;
+      }
+
+      [data-current-profile-title] {
+        display: none !important;
+      }
+
+      [data-print-header],
+      [data-print-footer],
+      [data-print-interpretation-title] {
+        display: block !important;
+      }
+
+      [data-maturity-questions] {
+        display: none !important;
+      }
+
+      [data-maturity-sidebar] {
+        position: static !important;
+        top: auto !important;
+      }
+
+      [data-maturity-sidebar] > div {
+        page-break-inside: avoid;
+      }
+
+      [data-progress-section],
+      [data-reset-section],
+      [data-share-section] {
+        display: none !important;
+      }
+
+      [data-share-print],
+      [data-share-linkedin],
+      [data-share-devto],
+      [data-share-bluesky] {
+        display: none !important;
+      }
+
+      [data-print-summary] {
+        display: block !important;
+      }
+
+      [data-print-summary] section {
+        page-break-inside: avoid;
+      }
+
+      [data-print-header],
+      svg[data-radar],
+      [data-print-footer] {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+
+      [data-print-header] {
+        break-after: avoid;
+        page-break-after: avoid;
+      }
+    }
+
+    @media (hover: hover) {
+      [data-share-pill] [data-share-pill-wrap]:hover .ma-share-action,
+      [data-share-pill] [data-share-pill-wrap]:focus-within .ma-share-action {
+        opacity: 1;
+        transform: scale(1);
+      }
+    }
+
+    [data-share-copy] .ma-copy-check {
+      display: none;
+    }
+
+    [data-share-copy][data-copied='true'] .ma-copy-icon {
+      display: none;
+    }
+
+    [data-share-copy][data-copied='true'] .ma-copy-check {
+      display: block;
+      animation: ma-copy-pop 420ms ease-out;
+    }
+
+    @keyframes ma-copy-pop {
+      0% {
+        transform: scale(0.6);
+        opacity: 0;
+      }
+      60% {
+        transform: scale(1.15);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
+    }
+
+    @media (hover: none) {
+      [data-share-pill] .ma-share-action {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      [data-share-pill] [aria-hidden='true'] {
+        display: none;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      [data-share-pill] .ma-share-action {
+        transition: none !important;
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      [data-share-copy][data-copied='true'] .ma-copy-check {
+        animation: none;
+      }
+
+      [data-share-pill] [aria-hidden='true'] {
+        display: none;
+      }
+    }
+  </style>
+  <script type="application/json" data-axes-json is:inline set:html={JSON.stringify(axes)} />
+  <script type="application/json" data-strings-json is:inline set:html={JSON.stringify(strings)} />
+
+  <script is:inline type="module">
+    const init = (root) => {
+      if (!(root instanceof HTMLElement)) return;
+      if (root.dataset.maturityAssessmentInitialized === 'true') return;
+      root.dataset.maturityAssessmentInitialized = 'true';
+
+      const axesScript = root.querySelector('script[data-axes-json]');
+      const stringsScript = root.querySelector('script[data-strings-json]');
+
+      const axes = JSON.parse(axesScript?.textContent ?? '[]');
+      const strings = JSON.parse(stringsScript?.textContent ?? '{}');
+
+      const gradientId = `${root.id}-polyGradient`;
+
+      const svg = root.querySelector('svg[data-radar]');
+      const scoreEl = root.querySelector('[data-score]');
+      const interpretationEl = root.querySelector('[data-interpretation]');
+      const fieldsets = Array.from(root.querySelectorAll('fieldset[data-question-id]'));
+      const resetButton = root.querySelector('[data-reset-button]');
+      const progressCountEl = root.querySelector('[data-progress-count]');
+      const progressWrapperEl = root.querySelector('[data-progress-bar-wrapper]');
+      const progressBarEl = root.querySelector('[data-progress-bar]');
+      const sharePrintButton = root.querySelector('[data-share-print]');
+      const shareCopyButton = root.querySelector('[data-share-copy]');
+      const shareMailLink = root.querySelector('[data-share-mail]');
+      const shareLinkedInLink = root.querySelector('[data-share-linkedin]');
+      const shareDevtoLink = root.querySelector('[data-share-devto]');
+      const shareBlueskyLink = root.querySelector('[data-share-bluesky]');
+      const printAnswerEls = Array.from(root.querySelectorAll('[data-print-answer][data-question-id]'));
+
+      if (!(svg instanceof SVGSVGElement)) throw new Error('MaturityAssessment: radar svg not found');
+      if (!(scoreEl instanceof HTMLElement)) throw new Error('MaturityAssessment: score element not found');
+      if (!(interpretationEl instanceof HTMLElement))
+        throw new Error('MaturityAssessment: interpretation element not found');
+
+      const totalQuestions = axes.reduce((acc, axis) => acc + (axis.questions?.length ?? 0), 0);
+
+      const orderedQuestions = axes
+        .flatMap((axis) => axis.questions)
+        .slice()
+        .sort((a, b) => (a.shareId ?? 0) - (b.shareId ?? 0) || String(a.id).localeCompare(String(b.id)));
+      const orderedQuestionIds = orderedQuestions.map((q) => q.id);
+
+      const encodeAnswersToParam = () => {
+        const digits = orderedQuestionIds.map((questionId) => {
+          const checked = root.querySelector(`input[name="${CSS.escape(questionId)}"]:checked`);
+          if (!(checked instanceof HTMLInputElement)) return 0;
+          const value = Number(checked.value);
+          if (!Number.isFinite(value)) return 0;
+          if (value < 1 || value > 5) return 0;
+          return value;
+        });
+
+        // v2: pack 2 base-6 digits into one base36 char => 6^2 = 36
+        let packed = '';
+        for (let i = 0; i < digits.length; i += 2) {
+          const hi = digits[i] ?? 0;
+          const lo = digits[i + 1] ?? 0;
+          const n = hi * 6 + lo;
+          packed += n.toString(36);
+        }
+        return `2${packed}`;
+      };
+
+      const decodeAnswersFromParam = (param) => {
+        if (typeof param !== 'string') return null;
+
+        // v2: base36 packed
+        if (param.startsWith('2')) {
+          const payload = param.slice(1);
+          if (!payload) return null;
+          if (!/^[0-9a-z]+$/.test(payload)) return null;
+
+          const digits = [];
+          for (const ch of payload) {
+            const n = Number.parseInt(ch, 36);
+            if (!Number.isFinite(n) || n < 0 || n > 35) return null;
+            digits.push(Math.floor(n / 6));
+            digits.push(n % 6);
+          }
+
+          return digits.slice(0, orderedQuestionIds.length);
+        }
+
+        // v1 (legacy): one digit per question
+        if (param.startsWith('1')) {
+          const digits = param.slice(1);
+          if (digits.length !== orderedQuestionIds.length) return null;
+          if (!/^[0-5]+$/.test(digits)) return null;
+          return digits.split('').map((d) => Number(d));
+        }
+
+        return null;
+      };
+
+      const applyDecodedAnswers = (decoded) => {
+        if (!Array.isArray(decoded)) return false;
+        if (decoded.length !== orderedQuestionIds.length) return false;
+
+        for (let i = 0; i < orderedQuestionIds.length; i += 1) {
+          const questionId = orderedQuestionIds[i];
+          const value = decoded[i];
+          if (value === 0) continue;
+          const input = root.querySelector(
+            `input[name="${CSS.escape(questionId)}"][value="${CSS.escape(String(value))}"]`
+          );
+          if (input instanceof HTMLInputElement) input.checked = true;
+        }
+
+        return true;
+      };
+
+      const storageKey = `maturity-assessment:${root.id}:${window.location.pathname}`;
+
+      const getStorageSnapshot = () => {
+        try {
+          const raw = window.localStorage.getItem(storageKey);
+          if (!raw) return null;
+          const parsed = JSON.parse(raw);
+          if (!parsed || typeof parsed !== 'object') return null;
+          return parsed;
+        } catch {
+          return null;
+        }
+      };
+
+      const saveStorageSnapshot = () => {
+        try {
+          const answers = {};
+          for (const axis of axes) {
+            for (const question of axis.questions) {
+              const checked = root.querySelector(`input[name="${CSS.escape(question.id)}"]:checked`);
+              if (checked instanceof HTMLInputElement) answers[question.id] = checked.value;
+            }
+          }
+          window.localStorage.setItem(storageKey, JSON.stringify({ v: 1, answers }));
+        } catch {
+          // ignore persistence failures (privacy mode, disabled storage, etc.)
+        }
+      };
+
+      const clearStorageSnapshot = () => {
+        try {
+          window.localStorage.removeItem(storageKey);
+        } catch {
+          // ignore
+        }
+      };
+
+      const cx = 250;
+      const cy = 250;
+      const radius = 180;
+      const levels = 5;
+
+      const updateResetButtonState = () => {
+        if (!(resetButton instanceof HTMLButtonElement)) return;
+        const hasAnySelection = root.querySelector('input[type="radio"]:checked') !== null;
+        resetButton.disabled = !hasAnySelection;
+      };
+
+      const getFieldsetState = (fieldset) => {
+        const checked = fieldset.querySelector('input[type="radio"]:checked');
+        return checked instanceof HTMLInputElement ? checked : null;
+      };
+
+      const restoreOptionsOrder = (fieldset) => {
+        const optionsEl = fieldset.querySelector('[data-options]');
+        if (!(optionsEl instanceof HTMLElement)) return;
+
+        const labels = Array.from(optionsEl.querySelectorAll('label[data-level]'));
+        labels.sort((a, b) => Number(a.dataset.level) - Number(b.dataset.level));
+        for (const label of labels) optionsEl.appendChild(label);
+      };
+
+      const updateFieldsetSummaryAndOrder = (fieldset) => {
+        const summaryEl = fieldset.querySelector('[data-selected-summary]');
+        if (!(summaryEl instanceof HTMLElement)) return;
+
+        const selected = getFieldsetState(fieldset);
+        if (!selected) {
+          summaryEl.textContent = '';
+          summaryEl.hidden = true;
+          restoreOptionsOrder(fieldset);
+          return;
+        }
+
+        const selectedLabel = selected.closest('label');
+        const description = selectedLabel?.querySelector('p')?.textContent?.trim() ?? '';
+        const level = selected.value;
+
+        summaryEl.textContent = `${strings.levelPrefix} ${level}${description ? ` — ${description}` : ''}`;
+        summaryEl.hidden = false;
+
+        const optionsEl = fieldset.querySelector('[data-options]');
+        if (optionsEl instanceof HTMLElement && selectedLabel instanceof HTMLElement) {
+          optionsEl.prepend(selectedLabel);
+        }
+      };
+
+      const setCollapsed = (fieldset, collapsed) => {
+        const optionsEl = fieldset.querySelector('[data-options]');
+        if (optionsEl instanceof HTMLElement) optionsEl.hidden = collapsed;
+
+        const toggleEl = fieldset.querySelector('[data-question-toggle]');
+        if (toggleEl instanceof HTMLButtonElement) {
+          const toggleLabel = toggleEl.querySelector('[data-toggle-label]');
+          if (toggleLabel instanceof HTMLElement) toggleLabel.hidden = !collapsed;
+
+          const iconCollapsed = toggleEl.querySelector('[data-toggle-icon-collapsed]');
+          if (iconCollapsed instanceof Element) iconCollapsed.classList.toggle('hidden', !collapsed);
+
+          const iconExpanded = toggleEl.querySelector('[data-toggle-icon-expanded]');
+          if (iconExpanded instanceof Element) iconExpanded.classList.toggle('hidden', collapsed);
+        }
+
+        fieldset.dataset.collapsed = collapsed ? 'true' : 'false';
+      };
+
+      const getStickyHeaderOffset = () => {
+        const header = document.querySelector('[data-aw-sticky-header]');
+        if (!(header instanceof HTMLElement)) return 0;
+
+        const position = getComputedStyle(header).position;
+        if (position !== 'fixed' && position !== 'sticky') return 0;
+
+        return header.getBoundingClientRect().height;
+      };
+
+      const smoothScrollToElement = (element) => {
+        if (!(element instanceof HTMLElement)) return;
+
+        const headerOffset = getStickyHeaderOffset();
+        const gap = 16;
+        const top = element.getBoundingClientRect().top + window.scrollY - headerOffset - gap;
+        window.scrollTo({ top: Math.max(0, top), behavior: 'smooth' });
+      };
+
+      const expandFieldset = (fieldset, focusTarget = 'input') => {
+        setCollapsed(fieldset, false);
+        const legend = fieldset.querySelector('[data-question-legend]');
+        smoothScrollToElement(legend instanceof HTMLElement ? legend : fieldset);
+
+        requestAnimationFrame(() => {
+          if (focusTarget === 'title') {
+            if (legend instanceof HTMLElement) {
+              legend.focus({ preventScroll: true });
+              return;
+            }
+          }
+
+          const firstInput = fieldset.querySelector('input[type="radio"]');
+          if (firstInput instanceof HTMLInputElement) firstInput.focus({ preventScroll: true });
+        });
+      };
+
+      const collapseFieldset = (fieldset, preserveScroll = false) => {
+        const anchorEl = preserveScroll ? (fieldset.querySelector('[data-question-legend]') ?? fieldset) : null;
+        const anchorTop = anchorEl ? anchorEl.getBoundingClientRect().top : 0;
+        const startScrollY = preserveScroll ? window.scrollY : 0;
+
+        updateFieldsetSummaryAndOrder(fieldset);
+        setCollapsed(fieldset, true);
+
+        if (anchorEl) {
+          requestAnimationFrame(() => {
+            const nextAnchorTop = anchorEl.getBoundingClientRect().top;
+            const delta = nextAnchorTop - anchorTop;
+            if (Math.abs(delta) < 1) return;
+            window.scrollTo({ top: startScrollY + delta, behavior: 'smooth' });
+          });
+        }
+      };
+
+      const findNextUnansweredFieldset = (startIndex) => {
+        for (let i = startIndex + 1; i < fieldsets.length; i++) {
+          if (!getFieldsetState(fieldsets[i])) return fieldsets[i];
+        }
+        return null;
+      };
+
+      const computeState = () => {
+        const questionValues = {};
+        let answeredQuestions = 0;
+        for (const axis of axes) {
+          for (const question of axis.questions) {
+            const checked = root.querySelector(`input[name="${CSS.escape(question.id)}"]:checked`);
+            if (checked) answeredQuestions += 1;
+            questionValues[question.id] = checked ? Number(checked.value) : 0;
+          }
+        }
+
+        const axisValues = {};
+        for (const axis of axes) {
+          const sum = axis.questions.reduce((acc, q) => acc + (questionValues[q.id] ?? 1), 0);
+          axisValues[axis.id] = sum / axis.questions.length;
+        }
+
+        const total = axes.reduce((acc, axis) => acc + (axisValues[axis.id] ?? 0), 0);
+        const globalAvg = total / axes.length;
+
+        return { axisValues, globalAvg, answeredQuestions };
+      };
+
+      const clearSvg = () => {
+        const defs = svg.querySelector('defs');
+        while (svg.lastChild) svg.removeChild(svg.lastChild);
+        if (defs) svg.appendChild(defs);
+      };
+
+      const createSvgEl = (name) => document.createElementNS('http://www.w3.org/2000/svg', name);
+
+      let latestShareUrl = null;
+      let latestShareText = null;
+      let lastSyncedUrl = null;
+      const formatTemplate = (template, vars) =>
+        String(template)
+          .replaceAll('{score}', String(vars.score ?? ''))
+          .replaceAll('{interpretation}', String(vars.interpretation ?? ''))
+          .replaceAll('{url}', String(vars.url ?? ''));
+
+      const renderRadar = () => {
+        const { axisValues, globalAvg, answeredQuestions } = computeState();
+
+        const isComplete = totalQuestions > 0 && answeredQuestions === totalQuestions;
+
+        if (sharePrintButton instanceof HTMLButtonElement) {
+          sharePrintButton.disabled = !isComplete;
+        }
+
+        if (shareCopyButton instanceof HTMLButtonElement) {
+          shareCopyButton.disabled = !isComplete;
+        }
+
+        if (shareMailLink instanceof HTMLAnchorElement) {
+          shareMailLink.setAttribute('aria-disabled', (!isComplete).toString());
+          shareMailLink.classList.toggle('pointer-events-none', !isComplete);
+          shareMailLink.classList.toggle('opacity-50', !isComplete);
+          if (!isComplete) shareMailLink.setAttribute('tabindex', '-1');
+          else shareMailLink.removeAttribute('tabindex');
+        }
+
+        if (shareLinkedInLink instanceof HTMLAnchorElement) {
+          shareLinkedInLink.setAttribute('aria-disabled', (!isComplete).toString());
+          shareLinkedInLink.classList.toggle('pointer-events-none', !isComplete);
+          shareLinkedInLink.classList.toggle('opacity-50', !isComplete);
+          if (!isComplete) shareLinkedInLink.setAttribute('tabindex', '-1');
+          else shareLinkedInLink.removeAttribute('tabindex');
+        }
+
+        for (const shareLink of [shareDevtoLink, shareBlueskyLink]) {
+          if (!(shareLink instanceof HTMLAnchorElement)) continue;
+          shareLink.setAttribute('aria-disabled', (!isComplete).toString());
+          shareLink.classList.toggle('pointer-events-none', !isComplete);
+          shareLink.classList.toggle('opacity-50', !isComplete);
+          if (!isComplete) shareLink.setAttribute('tabindex', '-1');
+          else shareLink.removeAttribute('tabindex');
+        }
+
+        for (const el of printAnswerEls) {
+          if (!(el instanceof HTMLElement)) continue;
+          const questionId = el.dataset.questionId;
+          if (!questionId) continue;
+          const checked = root.querySelector(`input[name="${CSS.escape(questionId)}"]:checked`);
+          el.textContent = checked instanceof HTMLInputElement ? checked.value : '—';
+        }
+
+        if (progressCountEl instanceof HTMLElement) {
+          progressCountEl.textContent = `${answeredQuestions}/${totalQuestions}`;
+        }
+
+        const progressPercent = totalQuestions > 0 ? Math.round((answeredQuestions / totalQuestions) * 100) : 0;
+
+        if (progressWrapperEl instanceof HTMLElement) {
+          progressWrapperEl.setAttribute('aria-valuenow', String(progressPercent));
+        }
+
+        if (progressBarEl instanceof HTMLElement) {
+          progressBarEl.style.width = `${progressPercent}%`;
+        }
+
+        scoreEl.textContent = globalAvg.toFixed(1);
+
+        // Interpretation
+        if (answeredQuestions === 0) {
+          interpretationEl.textContent = '';
+          interpretationEl.hidden = true;
+        } else {
+          interpretationEl.hidden = false;
+        }
+
+        const danger = 'var(--aw-color-danger)';
+        const warning = 'var(--aw-color-warning)';
+        const primary = 'var(--aw-color-secondary)';
+        const success = 'var(--aw-color-success)';
+
+        if (answeredQuestions > 0) {
+          if (globalAvg < 2) {
+            interpretationEl.textContent = strings.interpretation.initial;
+            interpretationEl.style.color = danger;
+          } else if (globalAvg < 3) {
+            interpretationEl.textContent = strings.interpretation.repeatable;
+            interpretationEl.style.color = 'var(--aw-color-accent)';
+          } else if (globalAvg < 4) {
+            interpretationEl.textContent = strings.interpretation.defined;
+            interpretationEl.style.color = warning;
+          } else if (globalAvg < 4.8) {
+            interpretationEl.textContent = strings.interpretation.managed;
+            interpretationEl.style.color = primary;
+          } else {
+            interpretationEl.textContent = strings.interpretation.optimizing;
+            interpretationEl.style.color = success;
+          }
+        }
+
+        // Keep the URL in sync with the current answers as the form changes.
+        // This enables refresh + link sharing with state (even before completion).
+        try {
+          if (typeof window !== 'undefined' && typeof window.history?.replaceState === 'function') {
+            const pageUrl = new URL(window.location.href);
+            pageUrl.hash = '';
+
+            if (answeredQuestions > 0) {
+              pageUrl.searchParams.set('ma', encodeAnswersToParam());
+            } else {
+              pageUrl.searchParams.delete('ma');
+            }
+
+            const nextUrl = pageUrl.toString();
+            if (lastSyncedUrl !== nextUrl) {
+              window.history.replaceState(window.history.state, '', nextUrl);
+              lastSyncedUrl = nextUrl;
+            }
+          }
+        } catch {
+          // ignore
+        }
+
+        if (isComplete) {
+          const pageUrl = new URL(window.location.href);
+          pageUrl.hash = '';
+          pageUrl.searchParams.set('ma', encodeAnswersToParam());
+          const shareUrl = pageUrl.toString();
+          latestShareUrl = shareUrl;
+
+          const scoreText = globalAvg.toFixed(1);
+          const interpretationText = interpretationEl.textContent?.trim() ?? '';
+          const scoreLabel = `${scoreText}/5`;
+          const baseText = interpretationText
+            ? formatTemplate(strings.shareTextWithInterpretation, {
+                score: scoreLabel,
+                interpretation: interpretationText,
+                url: shareUrl,
+              })
+            : formatTemplate(strings.shareTextWithoutInterpretation, {
+                score: scoreLabel,
+                interpretation: '',
+                url: shareUrl,
+              });
+
+          const shareText = `${baseText}\n${shareUrl}`;
+          latestShareText = shareText;
+
+          if (shareLinkedInLink instanceof HTMLAnchorElement) {
+            shareLinkedInLink.href = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(shareUrl)}`;
+          }
+
+          if (shareBlueskyLink instanceof HTMLAnchorElement) {
+            shareBlueskyLink.href = `https://bsky.app/intent/compose?text=${encodeURIComponent(shareText)}`;
+          }
+
+          if (shareDevtoLink instanceof HTMLAnchorElement) {
+            const title = strings.shareDevtoPostTitle;
+            const body = `${baseText}\n\n${strings.shareDevtoLinkLabel}: ${shareUrl}`;
+            const prefill = `---\ntitle: ${title}\npublished: false\n---\n\n${body}\n`;
+            shareDevtoLink.href = `https://dev.to/new?prefill=${encodeURIComponent(prefill)}`;
+          }
+
+          if (shareMailLink instanceof HTMLAnchorElement) {
+            const subject = strings.shareMailSubject;
+            const body = interpretationText
+              ? formatTemplate(strings.shareMailBodyWithInterpretation, {
+                  score: scoreLabel,
+                  interpretation: interpretationText,
+                  url: shareUrl,
+                })
+              : formatTemplate(strings.shareMailBodyWithoutInterpretation, {
+                  score: scoreLabel,
+                  interpretation: '',
+                  url: shareUrl,
+                });
+            shareMailLink.href = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          }
+        } else {
+          latestShareUrl = null;
+          latestShareText = null;
+        }
+
+        const numAxes = axes.length;
+        const angleSlice = (Math.PI * 2) / numAxes;
+
+        clearSvg();
+
+        // Grid (spider web)
+        for (let level = 1; level <= levels; level++) {
+          const factor = level / levels;
+          const points = [];
+
+          for (let i = 0; i < numAxes; i++) {
+            const angle = i * angleSlice - Math.PI / 2;
+            const x = cx + radius * factor * Math.cos(angle);
+            const y = cy + radius * factor * Math.sin(angle);
+            points.push(`${x},${y}`);
+          }
+
+          const poly = createSvgEl('polygon');
+          poly.setAttribute('points', points.join(' '));
+          poly.setAttribute('fill', 'none');
+          poly.setAttribute('stroke', 'var(--aw-color-text-muted)');
+          poly.setAttribute('stroke-opacity', '0.35');
+          poly.setAttribute('stroke-width', '1');
+          svg.appendChild(poly);
+        }
+
+        // Axes lines + labels
+        axes.forEach((axis, i) => {
+          const angle = i * angleSlice - Math.PI / 2;
+          const x2 = cx + radius * Math.cos(angle);
+          const y2 = cy + radius * Math.sin(angle);
+
+          const line = createSvgEl('line');
+          line.setAttribute('x1', String(cx));
+          line.setAttribute('y1', String(cy));
+          line.setAttribute('x2', String(x2));
+          line.setAttribute('y2', String(y2));
+          line.setAttribute('stroke', 'var(--aw-color-text-muted)');
+          line.setAttribute('stroke-opacity', '0.35');
+          line.setAttribute('stroke-width', '1');
+          svg.appendChild(line);
+
+          const labelRadius = radius + 28;
+          const lx = cx + labelRadius * Math.cos(angle);
+          const ly = cy + labelRadius * Math.sin(angle);
+
+          const text = createSvgEl('text');
+          text.setAttribute('x', String(lx));
+          text.setAttribute('y', String(ly));
+          text.setAttribute('text-anchor', 'middle');
+          text.setAttribute('dominant-baseline', 'middle');
+          text.setAttribute('fill', 'var(--aw-color-text-muted)');
+          text.setAttribute('font-size', '11px');
+          text.setAttribute('font-weight', '600');
+
+          const parts = String(axis.label).split(' ').filter(Boolean);
+          if (parts.length > 1) {
+            parts.forEach((part, idx) => {
+              const tspan = createSvgEl('tspan');
+              tspan.textContent = part;
+              tspan.setAttribute('x', String(lx));
+              tspan.setAttribute('dy', idx === 0 ? '-0.4em' : '1.1em');
+              text.appendChild(tspan);
+            });
+          } else {
+            text.textContent = axis.label;
+          }
+
+          svg.appendChild(text);
+        });
+
+        // Data polygon
+        const dataPoints = axes.map((axis, i) => {
+          const angle = i * angleSlice - Math.PI / 2;
+          const value = axisValues[axis.id] ?? 0;
+          const factor = value / 5;
+          const x = cx + radius * factor * Math.cos(angle);
+          const y = cy + radius * factor * Math.sin(angle);
+          return `${x},${y}`;
+        });
+
+        const dataPoly = createSvgEl('polygon');
+        dataPoly.setAttribute('points', dataPoints.join(' '));
+        dataPoly.setAttribute('fill', `url(#${gradientId})`);
+        dataPoly.setAttribute('stroke', 'currentColor');
+        dataPoly.setAttribute('stroke-width', '2');
+        dataPoly.setAttribute('opacity', '0.95');
+        svg.appendChild(dataPoly);
+
+        // Dots
+        dataPoints.forEach((point) => {
+          const [x, y] = point.split(',');
+          const circle = createSvgEl('circle');
+          circle.setAttribute('cx', x);
+          circle.setAttribute('cy', y);
+          circle.setAttribute('r', '4');
+          circle.setAttribute('fill', 'var(--aw-color-bg-page)');
+          circle.setAttribute('stroke', 'currentColor');
+          circle.setAttribute('stroke-width', '2');
+          svg.appendChild(circle);
+        });
+      };
+
+      let raf = 0;
+      const scheduleRender = () => {
+        if (raf) cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(() => {
+          raf = 0;
+          renderRadar();
+        });
+      };
+
+      root.addEventListener('change', (event) => {
+        const target = event.target;
+        if (!(target instanceof HTMLInputElement) || target.type !== 'radio') return;
+
+        const fieldset = target.closest('fieldset[data-question-id]');
+        if (!(fieldset instanceof HTMLFieldSetElement)) return;
+
+        updateFieldsetSummaryAndOrder(fieldset);
+        setCollapsed(fieldset, true);
+
+        const currentIndex = fieldsets.indexOf(fieldset);
+        const nextFieldset =
+          findNextUnansweredFieldset(currentIndex) ?? (currentIndex >= 0 ? fieldsets[currentIndex + 1] : null);
+
+        if (nextFieldset) {
+          const currentSection = fieldset.closest('section');
+          const nextSection = nextFieldset.closest('section');
+          const isCategoryChange = currentSection !== nextSection;
+
+          if (isCategoryChange) {
+            setCollapsed(nextFieldset, false);
+            const nextAxisTitle = nextSection?.querySelector('[data-axis-title]');
+            if (nextAxisTitle instanceof HTMLElement) {
+              smoothScrollToElement(nextAxisTitle);
+              requestAnimationFrame(() => {
+                nextAxisTitle.focus({ preventScroll: true });
+              });
+            } else {
+              expandFieldset(nextFieldset, 'title');
+            }
+          } else {
+            expandFieldset(nextFieldset, 'title');
+          }
+        }
+
+        updateResetButtonState();
+        saveStorageSnapshot();
+        scheduleRender();
+      });
+
+      root.addEventListener('click', (event) => {
+        const target = event.target;
+        if (!(target instanceof Element)) return;
+
+        const toggle = target.closest('[data-question-toggle]');
+        const legend = target.closest('[data-question-legend]');
+        if (!toggle && !legend) return;
+
+        const fieldset = (toggle ?? legend)?.closest('fieldset[data-question-id]');
+        if (!(fieldset instanceof HTMLFieldSetElement)) return;
+
+        const isCollapsed = fieldset.dataset.collapsed === 'true';
+
+        if (isCollapsed) {
+          expandFieldset(fieldset);
+          return;
+        }
+
+        const hasSelection = getFieldsetState(fieldset) !== null;
+        if (hasSelection) {
+          collapseFieldset(fieldset, true);
+          return;
+        }
+
+        expandFieldset(fieldset);
+      });
+
+      root.addEventListener('reset', () => {
+        queueMicrotask(() => {
+          for (const fieldset of fieldsets) {
+            restoreOptionsOrder(fieldset);
+            setCollapsed(fieldset, false);
+            const summaryEl = fieldset.querySelector('[data-selected-summary]');
+            if (summaryEl instanceof HTMLElement) {
+              summaryEl.textContent = '';
+              summaryEl.hidden = true;
+            }
+          }
+
+          updateResetButtonState();
+          clearStorageSnapshot();
+          scheduleRender();
+        });
+      });
+
+      // Restore previous answers (if any)
+      const shareParam = new URLSearchParams(window.location.search).get('ma');
+      const decodedFromUrl = shareParam ? decodeAnswersFromParam(shareParam) : null;
+
+      if (decodedFromUrl && applyDecodedAnswers(decodedFromUrl)) {
+        saveStorageSnapshot();
+      } else {
+        const snapshot = getStorageSnapshot();
+        const savedAnswers = snapshot && typeof snapshot === 'object' ? snapshot.answers : null;
+        if (savedAnswers && typeof savedAnswers === 'object') {
+          for (const axis of axes) {
+            for (const question of axis.questions) {
+              const value = savedAnswers[question.id];
+              if (value === undefined || value === null) continue;
+              const input = root.querySelector(
+                `input[name="${CSS.escape(question.id)}"][value="${CSS.escape(String(value))}"]`
+              );
+              if (input instanceof HTMLInputElement) input.checked = true;
+            }
+          }
+        }
+      }
+
+      for (const fieldset of fieldsets) {
+        updateFieldsetSummaryAndOrder(fieldset);
+        setCollapsed(fieldset, false);
+      }
+
+      if (sharePrintButton instanceof HTMLButtonElement) {
+        sharePrintButton.addEventListener('click', () => {
+          window.print();
+        });
+      }
+
+      if (shareCopyButton instanceof HTMLButtonElement) {
+        const labelEl = shareCopyButton.querySelector('[data-share-copy-label]');
+        const defaultLabel = labelEl instanceof HTMLElement ? (labelEl.textContent ?? '') : '';
+        let copiedTimeoutId;
+
+        const copyText = async (text) => {
+          try {
+            await navigator.clipboard.writeText(text);
+            return true;
+          } catch {
+            // ignore
+          }
+
+          try {
+            window.prompt(strings.shareCopyLabel, text);
+            return false;
+          } catch {
+            return false;
+          }
+        };
+
+        shareCopyButton.addEventListener('click', async () => {
+          const textToCopy =
+            typeof latestShareText === 'string' && latestShareText
+              ? latestShareText
+              : typeof latestShareUrl === 'string' && latestShareUrl
+                ? latestShareUrl
+                : null;
+          if (!textToCopy) return;
+
+          const ok = await copyText(textToCopy);
+          if (!ok) return;
+
+          shareCopyButton.dataset.copied = 'true';
+          if (typeof copiedTimeoutId === 'number') window.clearTimeout(copiedTimeoutId);
+          copiedTimeoutId = window.setTimeout(() => {
+            delete shareCopyButton.dataset.copied;
+          }, 900);
+
+          if (labelEl instanceof HTMLElement) {
+            labelEl.textContent = strings.shareCopySuccessLabel;
+            window.setTimeout(() => {
+              labelEl.textContent = defaultLabel;
+            }, 2000);
+          }
+        });
+      }
+
+      // Share URLs are updated dynamically in renderRadar (to include score text and to gate until complete).
+
+      updateResetButtonState();
+
+      renderRadar();
+    };
+
+    for (const root of document.querySelectorAll('[data-maturity-assessment]')) {
+      init(root);
+    }
+  </script>
+</form>

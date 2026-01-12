@@ -5,6 +5,7 @@ export const ui = {
     'nav.home': 'Accueil',
     'nav.about': 'À propos',
     'nav.methodology': 'Méthodologie',
+    'nav.maturity-assessment': 'Radar de maturité',
     'nav.offers': 'Offres',
     'nav.trainings': 'Formations',
     'nav.resources': 'OpenKraft',
@@ -113,6 +114,7 @@ export const ui = {
     'nav.home': 'Home',
     'nav.about': 'About',
     'nav.methodology': 'Methodology',
+    'nav.maturity-assessment': 'Maturity assessment',
     'nav.offers': 'Offers',
     'nav.trainings': 'Trainings',
     'nav.resources': 'OpenKraft',
@@ -225,6 +227,7 @@ export const routes = {
     trainings: 'formations',
     resources: 'ressources',
     'brand-guidelines': 'charte-graphique',
+    'maturity-assessment': 'radar-maturite',
   },
   en: {
     about: 'about',
@@ -237,6 +240,7 @@ export const routes = {
     privacy: 'privacy',
     terms: 'terms',
     'brand-guidelines': 'brand-guidelines',
+    'maturity-assessment': 'maturity-assessment',
   },
 };
 
