@@ -6,8 +6,6 @@ layout: '~/layouts/MarkdownLayout.astro'
 import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 import SiteLink from '~/components/common/SiteLink.astro';
 
-_Last updated_: September 27, 2025
-
 This privacy policy (the "Policy") describes how Hoverkraft collects, uses, and protects your personal data when you visit the site <SiteLink /> (the "Site") or interact with us through our forms and content.
 
 ## 1. Data Controller

@@ -14,7 +14,7 @@ import cliScreenshot from '~/assets/images/blog/ci-dokumentor/cli-usage-screensh
 
 > 📖 La documentation de vos pipelines CI/CD ne devrait jamais être obsolète. Elle devrait se générer automatiquement depuis vos fichiers de configuration.
 
-Dans l'écosystème DevOps moderne, les pipelines CI/CD sont au cœur de la delivery. GitHub Actions, GitLab CI, Azure DevOps, CircleCI… chaque plateforme a son format, ses spécificités, ses conventions. Mais un problème reste universel : **comment maintenir une documentation à jour de vos composants CI/CD sans effort manuel ?**
+Dans l'écosystème DevOps moderne, les pipelines CI/CD sont au cœur de la delivery. GitHub Actions, GitLab CI, Azure DevOps, CircleCI... chaque plateforme a son format, ses spécificités, ses conventions. Mais un problème reste universel : **comment maintenir une documentation à jour de vos composants CI/CD sans effort manuel ?**
 
 Chez HoverKraft, nous avons développé **CI Dokumentor**, un générateur automatique de documentation pour vos actions GitHub, templates GitLab, ou tout autre composant CI/CD réutilisable. L'outil est open source, gratuit, et disponible en ligne de commande, Docker, GitHub Action, et même intégré dans Dagger.io.
 
@@ -51,9 +51,9 @@ Cette documentation vit **dans le dépôt**, est **versionnée avec le code**, e
 
 ### 1. Documentation de GitHub Actions
 
-Vous maintenez une bibliothèque de GitHub Actions réutilisables (déploiement Terraform, scan de sécurité, notifications Slack…). Avec CI Dokumentor, chaque `action.yml` génère automatiquement son README.
+Vous maintenez une bibliothèque de GitHub Actions réutilisables (déploiement Terraform, scan de sécurité, notifications Slack...). Avec CI Dokumentor, chaque `action.yml` génère automatiquement son README.
 
-**Avant** : 30 minutes pour rédiger manuellement un README incomplet.  
+**Avant** : 30 minutes pour rédiger manuellement un README incomplet.
 **Après** : 10 secondes pour générer une doc complète et structurée.
 
 ### 2. Catalogue de templates GitLab CI
@@ -206,7 +206,7 @@ CI Dokumentor s'inscrit dans notre approche **connector-first** : plutôt que de
 Nous avons conçu CI Dokumentor pour qu'il soit :
 
 - **Rapide** : génération en moins de 2 secondes pour un fichier action.yml complexe
-- **Sans configuration** : détection automatique du format (GitHub Action, GitLab CI…)
+- **Sans configuration** : détection automatique du format (GitHub Action, GitLab CI...)
 - **Multi-plateformes** : fonctionne sur macOS, Linux, Windows, conteneurs
 - **Léger** : image Docker de 50 MB, dépendances minimales
 
@@ -334,7 +334,7 @@ CI Dokumentor est un projet open source maintenu par HoverKraft et la communaut�
 1. **Reporter des bugs** : utilisez les [GitHub Issues](https://github.com/hoverkraft-tech/ci-dokumentor/issues)
 2. **Proposer des fonctionnalités** : ouvrez une discussion dans [GitHub Discussions](https://github.com/hoverkraft-tech/ci-dokumentor/discussions)
 3. **Soumettre des pull requests** : consultez le [guide de contribution](https://github.com/hoverkraft-tech/ci-dokumentor/blob/main/CONTRIBUTING.md)
-4. **Améliorer la documentation** : la doc est générée… par CI Dokumentor lui-même !
+4. **Améliorer la documentation** : la doc est générée... par CI Dokumentor lui-même !
 
 ### Roadmap
 
@@ -355,7 +355,7 @@ Chez HoverKraft, nous croyons à la **souveraineté technique**. Publier CI Doku
 - Vous n'êtes **pas dépendant** d'un éditeur commercial qui pourrait changer de stratégie
 - Vous pouvez **contribuer** et améliorer l'outil pour toute la communauté
 
-C'est aussi une manière de **rendre à la communauté** : nous utilisons quotidiennement des outils open source (Kubernetes, Terraform, GitHub Actions…), il est naturel de contribuer en retour.
+C'est aussi une manière de **rendre à la communauté** : nous utilisons quotidiennement des outils open source (Kubernetes, Terraform, GitHub Actions...), il est naturel de contribuer en retour.
 
 ## Conclusion : documentez une fois, profitez partout
 
@@ -363,26 +363,26 @@ CI Dokumentor résout un problème simple mais universel : **maintenir une docum
 
 En automatisant cette tâche ingrate, vous libérez du temps pour ce qui compte vraiment :
 
-✅ **Améliorer la vélocité** de vos équipes  
-✅ **Réduire les frictions** d'onboarding  
-✅ **Garantir la qualité** de vos pipelines  
+✅ **Améliorer la vélocité** de vos équipes
+✅ **Réduire les frictions** d'onboarding
+✅ **Garantir la qualité** de vos pipelines
 ✅ **Partager les bonnes pratiques** via un catalogue centralisé
 
 L'outil est gratuit, open source, et prêt à l'emploi. Testez-le sur vos projets et partagez vos retours.
 
 ---
 
-**Envie de tester CI Dokumentor sur vos composants CI/CD ?**  
+**Envie de tester CI Dokumentor sur vos composants CI/CD ?**
 Installez l'outil en 30 secondes et générez votre première documentation.
 
 👉 [Documentation complète](https://hoverkraft-tech.github.io/ci-dokumentor)
 
-**Vous souhaitez contribuer au projet ?**  
+**Vous souhaitez contribuer au projet ?**
 Rejoignez la communauté sur GitHub et participez au développement.
 
 👉 [Contribuer sur GitHub](https://github.com/hoverkraft-tech/ci-dokumentor)
 
-**Besoin d'aide pour industrialiser vos pipelines CI/CD ?**  
+**Besoin d'aide pour industrialiser vos pipelines CI/CD ?**
 HoverKraft accompagne les équipes Platform Engineering dans la mise en place de pratiques DevOps modernes.
 
 👉 [Nous contacter](/contact)
