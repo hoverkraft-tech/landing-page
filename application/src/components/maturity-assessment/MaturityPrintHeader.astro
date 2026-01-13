@@ -1,0 +1,18 @@
+---
+import type { MaturityAssessmentStrings } from './types';
+
+export interface Props {
+  strings: Pick<MaturityAssessmentStrings, 'printTagline' | 'printTitle'>;
+}
+
+const { strings } = Astro.props;
+---
+
+<header class="hidden" data-print-header>
+  {
+    strings.printTagline ? (
+      <p class="text-sm font-semibold tracking-wide text-muted uppercase">{strings.printTagline}</p>
+    ) : null
+  }
+  <h1 class="text-2xl font-bold tracking-tighter text-heading">{strings.printTitle}</h1>
+</header>

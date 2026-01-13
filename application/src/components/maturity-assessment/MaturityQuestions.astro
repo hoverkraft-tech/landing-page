@@ -1,0 +1,84 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
+import type { MaturityAssessmentStrings } from './types';
+
+export interface Props {
+  id: string;
+  axes: MaturityAssessmentAxis[];
+  strings: MaturityAssessmentStrings;
+}
+
+const { id, axes, strings } = Astro.props;
+---
+
+<div class="space-y-6" data-maturity-questions>
+  {
+    axes.map((axis, axisIndex) => (
+      <section class="rounded-2xl border border-gray-200/60 bg-page p-5 md:p-6">
+        <h3 class="mb-4 text-sm font-semibold tracking-wide text-heading uppercase" data-axis-title tabindex="-1">
+          {axisIndex + 1}. {axis.label}
+        </h3>
+
+        <div class="space-y-6">
+          {axis.questions.map((question) => (
+            <fieldset class="space-y-3" data-question-id={question.id}>
+              <legend class="text-base font-semibold text-heading cursor-pointer" data-question-legend tabindex="-1">
+                <span class="inline-flex w-full items-start justify-between gap-3">
+                  <span class="min-w-0">{question.text}</span>
+                  <button
+                    type="button"
+                    class="shrink-0 inline-flex items-center gap-1 cursor-pointer text-sm font-semibold text-primary"
+                    data-question-toggle
+                  >
+                    <Icon
+                      name="tabler:chevron-down"
+                      class="h-5 w-5 hidden"
+                      data-toggle-icon-collapsed
+                      aria-hidden="true"
+                    />
+                    <Icon name="tabler:chevron-up" class="h-5 w-5" data-toggle-icon-expanded aria-hidden="true" />
+                    <span class="underline underline-offset-4" data-toggle-label hidden>
+                      {strings.editLabel}
+                    </span>
+                  </button>
+                </span>
+              </legend>
+              <div class="text-sm text-muted" data-selected-summary hidden />
+
+              <div class="grid gap-2" data-options>
+                {([1, 2, 3, 4, 5] as const).map((level) => {
+                  const inputId = `${id}-${question.id}-${level}`;
+                  return (
+                    <label
+                      for={inputId}
+                      data-level={level}
+                      class="group flex cursor-pointer gap-3 rounded-xl border border-gray-200/60 bg-white/40 p-3 transition hover:bg-white/60 dark:bg-white/5 dark:hover:bg-white/10"
+                    >
+                      <input
+                        id={inputId}
+                        class="peer mt-1 size-4 shrink-0 cursor-pointer"
+                        style="accent-color: var(--color-secondary);"
+                        type="radio"
+                        name={question.id}
+                        value={level}
+                      />
+                      <div class="min-w-0">
+                        <div class="flex items-baseline gap-2">
+                          <span class="text-xs font-semibold tracking-wide text-primary uppercase">
+                            {strings.levelPrefix} {level}
+                          </span>
+                        </div>
+                        <p class="mt-1 text-sm text-default/90">{question.levels[level]}</p>
+                      </div>
+                    </label>
+                  );
+                })}
+              </div>
+            </fieldset>
+          ))}
+        </div>
+      </section>
+    ))
+  }
+</div>

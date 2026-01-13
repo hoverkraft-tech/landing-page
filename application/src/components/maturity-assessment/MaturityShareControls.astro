@@ -1,0 +1,123 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+import type { MaturityAssessmentStrings } from './types';
+
+export interface Props {
+  strings: Pick<
+    MaturityAssessmentStrings,
+    | 'shareLabel'
+    | 'sharePrintLabel'
+    | 'shareCopyLabel'
+    | 'shareCopySuccessLabel'
+    | 'shareMailLabel'
+    | 'shareLinkedInLabel'
+    | 'shareDevtoLabel'
+    | 'shareBlueskyLabel'
+  >;
+}
+
+const { strings } = Astro.props;
+---
+
+<div class="mt-4 text-left" data-share-section>
+  <div class="flex items-center justify-between text-xs font-semibold tracking-widest text-muted uppercase">
+    <span>{strings.shareLabel}</span>
+    <Icon name="tabler:share" class="h-4 w-4" aria-hidden="true" />
+  </div>
+  <div class="mt-2 flex flex-nowrap items-stretch gap-2">
+    <Button
+      variant="secondary"
+      type="button"
+      class="shrink-0 justify-center px-4 sm:px-6 disabled:opacity-50 disabled:cursor-not-allowed"
+      data-share-print
+      disabled
+    >
+      <Icon name="tabler:printer" class="h-5 w-5 sm:mr-2" aria-hidden="true" />
+      <span class="hidden sm:inline">{strings.sharePrintLabel}</span>
+      <span class="sr-only sm:hidden">{strings.sharePrintLabel}</span>
+    </Button>
+
+    <div class="min-w-0 flex-1" data-share-pill>
+      <div
+        class="group/sharepill relative flex w-full items-center overflow-hidden rounded-full border border-gray-200/60 bg-white/40 px-2 py-2 transition-transform duration-200 ease-out dark:border-gray-700/60 dark:bg-white/5"
+        data-share-pill-wrap
+      >
+        <div class="flex w-full items-center justify-evenly gap-1">
+          <button
+            type="button"
+            class="ma-share-action group/shareaction relative inline-flex items-center opacity-0 scale-75 transition-[transform,opacity] duration-300 ease-out delay-150 text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 disabled:cursor-not-allowed"
+            data-share-copy
+            disabled
+            title={strings.shareCopyLabel}
+          >
+            <Icon name="tabler:copy" class="ma-copy-icon w-5 h-5" aria-hidden="true" />
+            <Icon name="tabler:check" class="ma-copy-check w-5 h-5 text-primary" aria-hidden="true" />
+            <span class="sr-only" data-share-copy-label>
+              {strings.shareCopyLabel}
+            </span>
+          </button>
+
+          <a
+            class="ma-share-action group/shareaction inline-flex items-center opacity-0 scale-75 transition-[transform,opacity] duration-300 ease-out delay-200 text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+            data-share-mail
+            href="#"
+            target="_blank"
+            rel="noreferrer noopener"
+            title={strings.shareMailLabel}
+          >
+            <Icon name="tabler:mail" class="w-5 h-5" aria-hidden="true" />
+            <span class="sr-only">{strings.shareMailLabel}</span>
+          </a>
+
+          <a
+            class="ma-share-action group/shareaction inline-flex items-center opacity-0 scale-75 transition-[transform,opacity] duration-300 ease-out delay-250 text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+            data-share-linkedin
+            href="#"
+            target="_blank"
+            rel="noreferrer noopener"
+            title={strings.shareLinkedInLabel}
+          >
+            <Icon name="tabler:brand-linkedin" class="w-5 h-5" aria-hidden="true" />
+            <span class="sr-only">{strings.shareLinkedInLabel}</span>
+          </a>
+
+          <a
+            class="ma-share-action group/shareaction inline-flex items-center opacity-0 scale-75 transition-[transform,opacity] duration-300 ease-out delay-300 text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+            data-share-devto
+            href="#"
+            target="_blank"
+            rel="noreferrer noopener"
+            title={strings.shareDevtoLabel}
+          >
+            <Icon name="tabler:device-imac-code" class="w-5 h-5" aria-hidden="true" />
+            <span class="sr-only">{strings.shareDevtoLabel}</span>
+          </a>
+
+          <a
+            class="ma-share-action group/shareaction inline-flex items-center opacity-0 scale-75 transition-[transform,opacity] duration-300 ease-out delay-350 text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5"
+            data-share-bluesky
+            href="#"
+            target="_blank"
+            rel="noreferrer noopener"
+            title={strings.shareBlueskyLabel}
+          >
+            <Icon name="tabler:brand-bluesky" class="w-5 h-5" aria-hidden="true" />
+            <span class="sr-only">{strings.shareBlueskyLabel}</span>
+          </a>
+        </div>
+
+        <Button
+          variant="primary"
+          type="button"
+          class="pointer-events-none absolute inset-0 z-10 flex items-center justify-center px-6 text-sm font-semibold tracking-widest uppercase transition-transform duration-700 ease-out"
+          data-share-pill-label
+          aria-hidden="true"
+          tabindex="-1"
+        >
+          {strings.shareLabel}
+        </Button>
+      </div>
+    </div>
+  </div>
+</div>

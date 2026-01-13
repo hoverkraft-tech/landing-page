@@ -1,0 +1,83 @@
+---
+import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
+import type { MaturityAssessmentStrings } from './types';
+import MaturityPrintHeader from './MaturityPrintHeader.astro';
+import MaturityPrintFooter from './MaturityPrintFooter.astro';
+import MaturityPrintSummary from './MaturityPrintSummary.astro';
+import MaturityRadar from './MaturityRadar.astro';
+import MaturityShareControls from './MaturityShareControls.astro';
+
+export interface Props {
+  id: string;
+  axes: MaturityAssessmentAxis[];
+  strings: MaturityAssessmentStrings;
+}
+
+const { id, axes, strings } = Astro.props;
+---
+
+<aside class="sticky top-24 lg:top-28 self-start h-fit" data-maturity-sidebar>
+  <div class="rounded-2xl border border-gray-200/60 bg-white/40 p-5 text-center backdrop-blur dark:bg-white/5">
+    <MaturityPrintHeader strings={strings} />
+
+    <h3 class="text-base font-semibold text-heading" data-current-profile-title>{strings.currentProfileTitle}</h3>
+
+    <MaturityRadar id={id} />
+
+    <div class="mt-5">
+      <div class="font-mono text-5xl font-bold text-heading">
+        <span data-score>0.0</span>
+        <span class="text-base font-medium text-muted">/ 5</span>
+      </div>
+      <div class="mt-1 text-xs font-semibold tracking-widest text-muted uppercase">{strings.scoreLabel}</div>
+
+      <div class="mt-4 text-left" data-progress-section>
+        <div class="flex items-center justify-between text-xs font-semibold tracking-widest text-muted uppercase">
+          <span>{strings.progressLabel}</span>
+          <span data-progress-count>0/0</span>
+        </div>
+        <div
+          class="mt-2 h-2 w-full rounded-full bg-gray-200/60 dark:bg-white/10"
+          data-progress-bar-wrapper
+          role="progressbar"
+          aria-label={strings.progressLabel}
+          aria-valuemin="0"
+          aria-valuemax="100"
+          aria-valuenow="0"
+        >
+          <div
+            class="h-full rounded-full bg-secondary transition-[width] duration-300"
+            data-progress-bar
+            style="width: 0%"
+          >
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-4 hidden" data-print-interpretation-title>
+        <div class="text-xs font-semibold tracking-widest text-muted uppercase">{strings.printInterpretationTitle}</div>
+      </div>
+
+      <div class="mt-3 text-sm font-semibold" data-interpretation>
+        {strings.interpretation.initial}
+      </div>
+
+      <div class="mt-4 flex justify-center" data-reset-section>
+        <button
+          type="reset"
+          class="btn btn-tertiary px-4 disabled:opacity-50 disabled:cursor-not-allowed"
+          data-reset-button
+          disabled
+        >
+          {strings.resetLabel}
+        </button>
+      </div>
+
+      <MaturityShareControls strings={strings} />
+
+      <MaturityPrintSummary axes={axes} strings={strings} />
+
+      <MaturityPrintFooter strings={strings} />
+    </div>
+  </div>
+</aside>
