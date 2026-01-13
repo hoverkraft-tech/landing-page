@@ -14,7 +14,7 @@ import cliScreenshot from '~/assets/images/blog/ci-dokumentor/cli-usage-screensh
 
 > 📖 Your CI/CD pipeline documentation should never be outdated. It should generate automatically from your configuration files.
 
-In the modern DevOps ecosystem, CI/CD pipelines are at the heart of delivery. GitHub Actions, GitLab CI, Azure DevOps, CircleCI… each platform has its own format, specifics, and conventions. But one problem remains universal: **how do you maintain up-to-date documentation for your CI/CD components without manual effort?**
+In the modern DevOps ecosystem, CI/CD pipelines are at the heart of delivery. GitHub Actions, GitLab CI, Azure DevOps, CircleCI... each platform has its own format, specifics, and conventions. But one problem remains universal: **how do you maintain up-to-date documentation for your CI/CD components without manual effort?**
 
 At Hoverkraft, we built **CI Dokumentor**, an automated documentation generator for your GitHub Actions, GitLab templates, or any other reusable CI/CD component. The tool is open source, free, and available as a CLI, Docker image, GitHub Action, and even integrated with Dagger.io.
 
@@ -51,9 +51,9 @@ This documentation **lives in the repository**, is **versioned with the code**, 
 
 ### 1. GitHub Actions documentation
 
-You maintain a library of reusable GitHub Actions (Terraform deployment, security scans, Slack notifications…). With CI Dokumentor, each `action.yml` automatically generates its README.
+You maintain a library of reusable GitHub Actions (Terraform deployment, security scans, Slack notifications...). With CI Dokumentor, each `action.yml` automatically generates its README.
 
-**Before**: 30 minutes to manually write an incomplete README.  
+**Before**: 30 minutes to manually write an incomplete README.
 **After**: 10 seconds to generate complete, structured documentation.
 
 ### 2. GitLab CI template catalog
@@ -193,7 +193,7 @@ CI Dokumentor embodies our **connector-first** approach: instead of building a m
 
 - **No vendor lock-in**: the tool analyzes standard formats (YAML, JSON) and produces portable Markdown
 - **Interchangeable**: you can replace CI Dokumentor with another generator without rewriting your pipelines
-- **Extensible**: the code is open source—you can fork, contribute, adapt
+- **Extensible**: the code is open source-you can fork, contribute, adapt
 
 <Image
   src={integrationEcosystem}
@@ -206,7 +206,7 @@ CI Dokumentor embodies our **connector-first** approach: instead of building a m
 We designed CI Dokumentor to be:
 
 - **Fast**: generates documentation in under 2 seconds for a complex action.yml file
-- **Zero configuration**: automatic format detection (GitHub Action, GitLab CI…)
+- **Zero configuration**: automatic format detection (GitHub Action, GitLab CI...)
 - **Cross-platform**: works on macOS, Linux, Windows, containers
 - **Lightweight**: 50 MB Docker image, minimal dependencies
 
@@ -334,7 +334,7 @@ CI Dokumentor is an open-source project maintained by Hoverkraft and the communi
 1. **Report bugs**: use [GitHub Issues](https://github.com/hoverkraft-tech/ci-dokumentor/issues)
 2. **Propose features**: open a discussion in [GitHub Discussions](https://github.com/hoverkraft-tech/ci-dokumentor/discussions)
 3. **Submit pull requests**: check the [contribution guide](https://github.com/hoverkraft-tech/ci-dokumentor/blob/main/CONTRIBUTING.md)
-4. **Improve documentation**: the docs are generated… by CI Dokumentor itself!
+4. **Improve documentation**: the docs are generated... by CI Dokumentor itself!
 
 ### Roadmap
 
@@ -355,7 +355,7 @@ At Hoverkraft, we believe in **technical sovereignty**. Publishing CI Dokumentor
 - You're **not dependent** on a commercial vendor who might change strategy
 - You can **contribute** and improve the tool for the entire community
 
-It's also a way to **give back to the community**: we use open-source tools daily (Kubernetes, Terraform, GitHub Actions…), so it's natural to contribute in return.
+It's also a way to **give back to the community**: we use open-source tools daily (Kubernetes, Terraform, GitHub Actions...), so it's natural to contribute in return.
 
 ## Conclusion: document once, benefit everywhere
 
@@ -363,26 +363,26 @@ CI Dokumentor solves a simple but universal problem: **maintaining quality docum
 
 By automating this tedious task, you free time for what really matters:
 
-✅ **Improve team velocity**  
-✅ **Reduce onboarding friction**  
-✅ **Ensure pipeline quality**  
+✅ **Improve team velocity**
+✅ **Reduce onboarding friction**
+✅ **Ensure pipeline quality**
 ✅ **Share best practices** via a centralized catalog
 
 The tool is free, open source, and ready to use. Test it on your projects and share your feedback.
 
 ---
 
-**Want to test CI Dokumentor on your CI/CD components?**  
+**Want to test CI Dokumentor on your CI/CD components?**
 Install the tool in 30 seconds and generate your first documentation.
 
 👉 [Complete documentation](https://hoverkraft-tech.github.io/ci-dokumentor)
 
-**Want to contribute to the project?**  
+**Want to contribute to the project?**
 Join the community on GitHub and participate in development.
 
 👉 [Contribute on GitHub](https://github.com/hoverkraft-tech/ci-dokumentor)
 
-**Need help industrializing your CI/CD pipelines?**  
+**Need help industrializing your CI/CD pipelines?**
 Hoverkraft supports Platform Engineering teams in implementing modern DevOps practices.
 
 👉 [Contact us](/contact)

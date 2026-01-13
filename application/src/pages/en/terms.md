@@ -6,8 +6,6 @@ layout: '~/layouts/MarkdownLayout.astro'
 import ContactEmailLink from '~/components/common/ContactEmailLink.astro';
 import SiteLink from '~/components/common/SiteLink.astro';
 
-_Last updated_: September 27, 2025
-
 Please read these terms of use carefully before browsing the site or using services offered by Hoverkraft.
 
 ## 1. Purpose and Scope

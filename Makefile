@@ -23,6 +23,7 @@ lint: ## Run linters
 
 lint-fix: ## Run linters
 	cd application && npm audit fix
+	cd application && npm run humanize:fix
 	cd application && npm run lint:fix
 	$(MAKE) linter-fix
 

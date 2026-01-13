@@ -11,21 +11,21 @@ import codeSnippet from '~/assets/images/blog/devcontainer-asdf-feature/code-sni
 
 > 🚀 Bonne nouvelle pour celles et ceux qui utilisent Devcontainers avec asdf !
 
-Lorsque la version v0.16.0 d'asdf est sortie, un breaking change a cassé la feature « base » fournie par Microsoft dans les devcontainers. Résultat : impossible d'initialiser automatiquement vos runtimes préférés lors de l'ouverture d'un projet. L'équipe hoverkraft a retroussé ses manches pour reconstruire une intégration fiable et vous éviter de bricoler chaque nouveau container.
+Lorsque la version v0.16.0 d'asdf est sortie, un breaking change a cassé la feature " base " fournie par Microsoft dans les devcontainers. Résultat : impossible d'initialiser automatiquement vos runtimes préférés lors de l'ouverture d'un projet. L'équipe hoverkraft a retroussé ses manches pour reconstruire une intégration fiable et vous éviter de bricoler chaque nouveau container.
 
 ## Pourquoi ça bloquait ?
 
 asdf est un gestionnaire de versions multi-langages très populaire dans les équipes cloud et IaC. La mise à jour 0.16.0 a modifié la façon dont les plugins sont détectés et initialisés. Les scripts génériques embarqués dans l'image `devcontainers/base` s'attendaient à l'ancien comportement et ne provisionnaient plus les runtimes déclarés dans `.tool-versions`.
 
-Conséquence directe : un développeur ouvrant un repo reposant sur asdf se retrouvait avec une image saine… mais sans Node, Python, Terraform ou Azure CLI configurés. Dans un environnement d'infrastructure-as-code, c'est synonyme de frictions, d'erreurs CI/CD et d'onboarding pénible.
+Conséquence directe : un développeur ouvrant un repo reposant sur asdf se retrouvait avec une image saine... mais sans Node, Python, Terraform ou Azure CLI configurés. Dans un environnement d'infrastructure-as-code, c'est synonyme de frictions, d'erreurs CI/CD et d'onboarding pénible.
 
 ## Ce que nous avons reconstruit
 
-Pour rétablir l'expérience « ça marche dès l'ouverture du container », nous avons :
+Pour rétablir l'expérience " ça marche dès l'ouverture du container ", nous avons :
 
 1. **Retiré la dépendance** au script déprécié en recréant une feature devcontainer spécifique à asdf.
 2. **Aligné l'installation** sur le nouveau comportement d'asdf, en générant les hooks et chemins attendus par la v0.16.0 et suivantes.
-3. **Automatisé l'installation de plugins** courants (Terraform, Azure CLI, Node.js…) dès la phase `postCreateCommand` pour que le container soit opérationnel en moins d'une minute.
+3. **Automatisé l'installation de plugins** courants (Terraform, Azure CLI, Node.js...) dès la phase `postCreateCommand` pour que le container soit opérationnel en moins d'une minute.
 4. **Documenté l'usage** dans un dépôt public afin que vous puissiez l'intégrer en copiant-collant trois fichiers.
 
 📦 Le dépôt est disponible ici : [hoverkraft-tech/devcontainers](https://github.com/hoverkraft-tech/devcontainers)
@@ -115,10 +115,10 @@ En combinant devcontainers, asdf et cette feature maison, nous avons :
 Et parce qu'on aime aller plus loin, nous réfléchissons déjà à :
 
 - ajouter des tests automatiques de compatibilité lorsqu'une nouvelle version d'asdf sort ;
-- publier une image de base spécialisée « IaC Azure » avec Terraform, Bicep, Packer et Azure Developer CLI déjà préinstallés.
+- publier une image de base spécialisée " IaC Azure " avec Terraform, Bicep, Packer et Azure Developer CLI déjà préinstallés.
 
 ## Partagez vos retours
 
-Nous espérons que cette brique vous fera gagner du temps. Clonez le dépôt, branchez la feature dans vos projets et dites-nous si tout fonctionne dans vos contextes (mono-repo, projets data, plateformes internes…).
+Nous espérons que cette brique vous fera gagner du temps. Clonez le dépôt, branchez la feature dans vos projets et dites-nous si tout fonctionne dans vos contextes (mono-repo, projets data, plateformes internes...).
 
 À très vite pour la suite !

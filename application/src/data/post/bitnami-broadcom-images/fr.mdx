@@ -5,13 +5,13 @@ slug: images-bitnami-broadcom
 lang: fr
 ---
 
-> ⚠️ Retour de vacances mouvementé pour les équipes plateformes : Broadcom retire les images Docker Bitnami de l'accès public.
+> ⚠️ Retour de vacances mouvementé pour les équipes plateformes : Broadcom retire les images Docker Bitnami de l'accès public.
 
 ## Ce qui vient de changer
 
-Le 25 août 2025, Broadcom a officialisé la fin de la disponibilité publique des images Bitnami. Jusqu'ici, ces images maintenues par l'ex-VMware figuraient parmi les briques les plus utilisées pour déployer rapidement des middlewares (PostgreSQL, Redis, Keycloak, etc.) sur Kubernetes.
+Le 25 août 2025, Broadcom a officialisé la fin de la disponibilité publique des images Bitnami. Jusqu'ici, ces images maintenues par l'ex-VMware figuraient parmi les briques les plus utilisées pour déployer rapidement des middlewares (PostgreSQL, Redis, Keycloak, etc.) sur Kubernetes.
 
-Pour les admins et SRE, l'annonce est tombée à la reprise : plus de pull anonyme possible, et donc un risque immédiat de blocage des pipelines CI/CD, des clusters de staging et des démos commerciales.
+Pour les admins et SRE, l'annonce est tombée à la reprise : plus de pull anonyme possible, et donc un risque immédiat de blocage des pipelines CI/CD, des clusters de staging et des démos commerciales.
 
 ## Pourquoi c'est critique pour les admins k8s
 
@@ -19,13 +19,13 @@ Pour les admins et SRE, l'annonce est tombée à la reprise : plus de pull anon
 - **Endettement opérationnel** avec des versions figées, faute de pouvoir récupérer des correctifs de sécurité.
 - **Pression sur les migrations** qui doivent soudainement être menées dans l'urgence.
 
-Bref : pas le « welcome back » rêvé après les congés.
+Bref : pas le " welcome back " rêvé après les congés.
 
 ## Notre réponse immédiate
 
 Plutôt que d'attendre les premiers incidents de production, nous avons monté un dépôt communautaire pour préserver l'accès aux images critiques et laisser aux équipes le temps de s'adapter.
 
-➡️ Le dépôt est disponible ici : [hoverkraft-tech/bitnami-depreciation](https://github.com/hoverkraft-tech/bitnami-depreciation)
+➡️ Le dépôt est disponible ici : [hoverkraft-tech/bitnami-depreciation](https://github.com/hoverkraft-tech/bitnami-depreciation)
 
 ### Ce que vous y trouverez
 
@@ -43,9 +43,9 @@ Nous avons documenté chaque étape afin que la bascule se fasse en quelques min
 
 ## Gagner en sérénité pendant la migration
 
-Ce miroir n'est pas une fin en soi : il offre une fenêtre de tir pour planifier l'adoption d'images alternatives (mainteneurs upstream, distributions Linux officielles, charts certifiés, etc.) sans subir la pression d'une coupure brutale.
+Ce miroir n'est pas une fin en soi : il offre une fenêtre de tir pour planifier l'adoption d'images alternatives (mainteneurs upstream, distributions Linux officielles, charts certifiés, etc.) sans subir la pression d'une coupure brutale.
 
-Nous recommandons de profiter de ce délai pour :
+Nous recommandons de profiter de ce délai pour :
 
 - **Cartographier toutes vos dépendances Bitnami** grâce à un scan automatisé (Helm, Terraform, Argo CD).
 - **Qualifier des remplacements** compatibles avec vos exigences de sécurité et de support.
@@ -53,12 +53,12 @@ Nous recommandons de profiter de ce délai pour :
 
 ## Contribuez, partagez, alertez
 
-Ce dépôt est conçu comme une ressource communautaire. Vos contributions sont bienvenues : ajout d'images manquantes, scripts de synchronisation, retours sur d'éventuelles ruptures.
+Ce dépôt est conçu comme une ressource communautaire. Vos contributions sont bienvenues : ajout d'images manquantes, scripts de synchronisation, retours sur d'éventuelles ruptures.
 
 Si vous êtes concernés, n'hésitez pas à :
 
-- partager l'information dans vos équipes SRE/plateforme ;
-- proposer des améliorations via issues ou pull requests ;
+- partager l'information dans vos équipes SRE/plateforme ;
+- proposer des améliorations via issues ou pull requests ;
 - relayer toute nouvelle annonce pouvant impacter la roadmap.
 
 En agissant collectivement, on réduit le risque opérationnel et on garde la main sur notre supply chain logicielle.
