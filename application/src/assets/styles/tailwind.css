@@ -90,7 +90,7 @@
 }
 
 @utility btn-secondary {
-  @apply btn font-semibold bg-secondary text-white border-secondary hover:bg-accent hover:border-accent focus:ring-3 focus:ring-secondary;
+  @apply btn font-semibold bg-secondary text-white border-secondary hover:bg-accent hover:border-accent focus:ring-3 focus:ring-secondary dark:hover:brightness-125 dark:hover:ring-2 dark:hover:ring-secondary/60;
 }
 
 @utility btn-tertiary {

@@ -1,0 +1,203 @@
+@media print {
+  @page {
+    /* Leave room for the repeating (fixed) print header */
+    margin: 22mm 14mm 18mm 14mm;
+  }
+
+  [data-maturity-assessment] {
+    color-scheme: light;
+    --aw-color-text-heading: rgb(29 32 38);
+    --aw-color-text-default: rgb(80 102 144);
+    --aw-color-text-muted: rgb(80 102 144 / 70%);
+    /* Keep radar chart blue in print even if the site is in dark mode (where secondary becomes accent). */
+    --aw-color-secondary: rgb(25 152 255);
+    --aw-color-bg-page: rgb(255 255 255);
+
+    /* Tailwind v4 maps utilities to these variables (see tailwind.css) */
+    --color-default: var(--aw-color-text-default);
+    --color-muted: var(--aw-color-text-muted);
+    --color-secondary: var(--aw-color-secondary);
+  }
+
+  /* Make the report background deterministic (avoid dark-mode translucent backgrounds in print/PDF). */
+  [data-maturity-sidebar] > div {
+    background-color: var(--aw-color-bg-page) !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+    /* Make room for the fixed page header */
+    padding-top: 5.75rem !important;
+    /* Make room for the fixed page footer */
+    padding-bottom: 4.75rem !important;
+  }
+
+  /* Repeat a basic header on every printed page */
+  [data-print-header] {
+    position: fixed !important;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 12px 14mm;
+    background: var(--aw-color-bg-page) !important;
+    border-bottom: 1px solid color-mix(in srgb, var(--aw-color-text-default) 22%, transparent);
+  }
+
+  /* Repeat a basic footer on every printed page */
+  [data-print-footer] {
+    position: fixed !important;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 50;
+    padding: 10px 14mm;
+    background: var(--aw-color-bg-page) !important;
+    border-top: 1px solid color-mix(in srgb, var(--aw-color-text-default) 22%, transparent);
+    margin-top: 0 !important;
+  }
+
+  [data-maturity-sidebar] > div {
+    text-align: left !important;
+  }
+
+  [data-current-profile-title] {
+    display: none !important;
+  }
+
+  [data-print-header],
+  [data-print-footer],
+  [data-print-interpretation-title] {
+    display: block !important;
+  }
+
+  [data-maturity-questions] {
+    display: none !important;
+  }
+
+  [data-maturity-sidebar] {
+    position: static !important;
+    top: auto !important;
+  }
+
+  [data-maturity-sidebar] > div {
+    page-break-inside: avoid;
+  }
+
+  [data-progress-section],
+  [data-reset-section],
+  [data-share-section] {
+    display: none !important;
+  }
+
+  [data-share-print],
+  [data-share-linkedin],
+  [data-share-devto],
+  [data-share-bluesky] {
+    display: none !important;
+  }
+
+  [data-print-summary] {
+    display: block !important;
+  }
+
+  [data-print-summary] section {
+    page-break-inside: avoid;
+  }
+
+  [data-print-header],
+  svg[data-radar],
+  [data-print-footer] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  [data-print-header] {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+}
+
+@media (hover: hover) {
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:hover,
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:focus-within {
+    transform: scale(1.02);
+  }
+
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:hover [data-share-pill-label],
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:focus-within [data-share-pill-label] {
+    transform: translateX(-115%);
+  }
+
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:hover .ma-share-action,
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:focus-within .ma-share-action {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+[data-share-pill] [data-share-pill-wrap][data-share-enabled='false'] [data-share-pill-label] {
+  transform: translateX(0) !important;
+  opacity: 1;
+  filter: grayscale(0.65);
+  transition: none !important;
+}
+
+[data-share-pill] [data-share-pill-wrap][data-share-enabled='false'] .ma-share-action {
+  opacity: 0 !important;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+[data-share-copy] .ma-copy-check {
+  display: none;
+}
+
+[data-share-copy][data-copied='true'] .ma-copy-icon {
+  display: none;
+}
+
+[data-share-copy][data-copied='true'] .ma-copy-check {
+  display: block;
+  animation: ma-copy-pop 420ms ease-out;
+}
+
+@keyframes ma-copy-pop {
+  0% {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  60% {
+    transform: scale(1.15);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@media (hover: none) {
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true'] .ma-share-action {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true'] [data-share-pill-label] {
+    display: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true'] .ma-share-action {
+    transition: none !important;
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  [data-share-copy][data-copied='true'] .ma-copy-check {
+    animation: none;
+  }
+
+  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true'] [data-share-pill-label] {
+    display: none;
+  }
+}
