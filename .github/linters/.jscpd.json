@@ -1,13 +1,11 @@
 {
   "threshold": 5,
+  "gitignore": true,
   "ignore": [
-    "**/.astro/**",
     "**/node_modules/**",
-    "**/coverage/**",
     "**/dist/**",
-    "**/.git/**",
-    "**/.pnpm-store/**",
-    "**/pnpm-lock.yaml",
-    "**/application/src/assets/images/brand/logo/**"
+    "**/.astro/**",
+    "**/coverage/**",
+    "application/public/brand/**"
   ]
 }

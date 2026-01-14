@@ -23,7 +23,8 @@
     "lint:fix": "npm run lint:fix:prettier",
     "lint:ci": "npm run lint",
     "lint:fix:prettier": "prettier -w .",
-    "test:ci": "echo \"No test specified\" && exit 0"
+    "test": "vitest run",
+    "test:ci": "npm run test -- --reporter=default --reporter=junit --outputFile=junit.xml --coverage.enabled --coverage.reporter=lcov --coverage.reporter=text"
   },
   "dependencies": {
     "@astrojs/rss": "^4.0.14",
@@ -58,6 +59,7 @@
     "@types/mdx": "^2.0.13",
     "@typescript-eslint/eslint-plugin": "^8.53.0",
     "@typescript-eslint/parser": "^8.53.0",
+    "@vitest/coverage-v8": "^4.0.17",
     "astro-compress": "2.3.9",
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.39.2",
@@ -74,6 +76,7 @@
     "tailwindcss": "^4.1.16",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.0",
-    "unist-util-visit": "^5.0.0"
+    "unist-util-visit": "^5.0.0",
+    "vitest": "^4.0.17"
   }
 }

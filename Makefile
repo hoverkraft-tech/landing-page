@@ -57,15 +57,16 @@ define run_linter
 	VOLUME="$$DEFAULT_WORKSPACE:$$DEFAULT_WORKSPACE"; \
 	docker build --build-arg UID=$(shell id -u) --build-arg GID=$(shell id -g) --tag $$LINTER_IMAGE .; \
 	docker run \
+		-v $$VOLUME \
+		--rm \
+		-w "$$DEFAULT_WORKSPACE" \
 		-e DEFAULT_WORKSPACE="$$DEFAULT_WORKSPACE" \
+		-e GITHUB_WORKSPACE="$$DEFAULT_WORKSPACE" \
 		-e FILTER_REGEX_INCLUDE="$(filter-out $@,$(MAKECMDGOALS))" \
-		-e IGNORE_GITIGNORED_FILES=true \
 		-e VALIDATE_TYPESCRIPT_PRETTIER=false \
 		-e VALIDATE_TYPESCRIPT_ES=false \
         -e VALIDATE_CSS=false \
 		$(1) \
-		-v $$VOLUME \
-		--rm \
 		$$LINTER_IMAGE
 endef
 
