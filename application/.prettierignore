@@ -3,3 +3,5 @@ node_modules
 .github
 .changeset
 .astro
+coverage
+junit.xml

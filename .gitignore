@@ -2,6 +2,10 @@
 application/dist/
 application/.output/
 
+# test output
+application/junit.xml
+application/coverage/
+
 # dependencies
 application/node_modules/
 .github/actions/**/node_modules/

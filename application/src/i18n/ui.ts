@@ -40,6 +40,15 @@ export const ui = {
       'Actualités, analyses et ressources sur le Platform Engineering souverain, la méthode HoverKraft et OpenKraft.',
     'booking.button': 'Réserver un rendez-vous',
 
+    'social.share': 'Partager',
+    'social.copy': 'Copier le lien',
+    'social.copied': 'Lien copié',
+    'social.email': 'Partager par email',
+    'social.linkedin': 'Partager sur LinkedIn',
+    'social.bluesky': 'Partager sur Bluesky',
+    'social.devto': 'Partager sur dev.to',
+    'social.print': 'Imprimer',
+
     'training.meta.title': 'Formations HoverKraft',
     'training.meta.description':
       'Formations expertes en Platform Engineering, CI/CD, DevX, Cloud Native et conteneurs. Développez les compétences de vos équipes avec nos programmes certifiants.',
@@ -148,6 +157,15 @@ export const ui = {
     'blog.headline.subtitle':
       'News, analysis, and resources on sovereign platform engineering, the HoverKraft method, and OpenKraft.',
     'booking.button': 'Book an appointment',
+
+    'social.share': 'Share',
+    'social.copy': 'Copy link',
+    'social.copied': 'Copied',
+    'social.email': 'Share via email',
+    'social.linkedin': 'Share on LinkedIn',
+    'social.bluesky': 'Share on Bluesky',
+    'social.devto': 'Share on dev.to',
+    'social.print': 'Print',
 
     'training.meta.title': 'HoverKraft Trainings',
     'training.meta.description':
