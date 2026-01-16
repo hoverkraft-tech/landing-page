@@ -46,7 +46,6 @@ export const ui = {
     'social.email': 'Partager par email',
     'social.linkedin': 'Partager sur LinkedIn',
     'social.bluesky': 'Partager sur Bluesky',
-    'social.devto': 'Partager sur dev.to',
     'social.print': 'Imprimer',
 
     'training.meta.title': 'Formations HoverKraft',
@@ -164,7 +163,6 @@ export const ui = {
     'social.email': 'Share via email',
     'social.linkedin': 'Share on LinkedIn',
     'social.bluesky': 'Share on Bluesky',
-    'social.devto': 'Share on dev.to',
     'social.print': 'Print',
 
     'training.meta.title': 'HoverKraft Trainings',

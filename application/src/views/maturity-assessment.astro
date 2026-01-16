@@ -4,7 +4,7 @@ import HeroText from '~/components/widgets/HeroText.astro';
 import Note from '~/components/widgets/Note.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
-import MaturityAssessmentWidget from '~/components/maturity-assessment/MaturityAssessment.astro';
+import MaturityAssessmentWidget from '~/components/maturity-assessment/MaturityAssessment.tsx';
 import { getMaturityAssessmentAxes } from '~/data/maturity-assessment';
 import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
 
@@ -27,6 +27,43 @@ const metadata = {
 };
 
 const axes = getMaturityAssessmentAxes('fr');
+const formId = 'maturity-assessment-fr';
+const strings = {
+  currentProfileTitle: 'Votre profil actuel',
+  scoreLabel: 'Score global',
+  progressLabel: 'Avancement',
+  printTagline: 'Radar de maturité',
+  printTitle: 'Évaluation de maturité Platform Engineering',
+  printAnswersTitle: 'Réponses',
+  printInterpretationTitle: 'Interprétation',
+  printFooterUrl: 'https://hoverkraft.tech',
+  shareLabel: 'Partager',
+  sharePrintLabel: 'Imprimer',
+  shareCopyLabel: 'Copier le lien',
+  shareCopySuccessLabel: 'Lien copié',
+  shareMailLabel: 'Partager par email',
+  shareMailSubject: 'Radar de maturité Platform Engineering - évaluation',
+  shareTextWithInterpretation:
+    'Mon score de maturité Platform Engineering : {score} ({interpretation}) - Diagnostic proposé par Hoverkraft',
+  shareTextWithoutInterpretation:
+    'Mon score de maturité Platform Engineering : {score} - Diagnostic proposé par Hoverkraft',
+  shareMailBodyWithInterpretation:
+    "Bonjour,\\n\\nVoici l'évaluation de maturité Platform Engineering :\\n- Score : {score}\\n- Niveau : {interpretation}\\n\\nLien du diagnostic (inclut mes réponses) :\\n{url}\\n\\nDiagnostic proposé par Hoverkraft — https://hoverkraft.tech\\n",
+  shareMailBodyWithoutInterpretation:
+    "Bonjour,\\n\\nVoici l'évaluation de maturité Platform Engineering :\\n- Score : {score}\\n\\nLien du diagnostic (inclut mes réponses) :\\n{url}\\n\\nDiagnostic proposé par Hoverkraft — https://hoverkraft.tech\\n",
+  shareLinkedInLabel: 'Partager sur LinkedIn',
+  shareBlueskyLabel: 'Partager sur Bluesky',
+  resetLabel: 'Réinitialiser',
+  editLabel: 'Modifier',
+  levelPrefix: 'Niveau',
+  interpretation: {
+    initial: 'Initial',
+    repeatable: 'Géré',
+    defined: 'Défini',
+    managed: 'Quantifié',
+    optimizing: 'Optimisé',
+  },
+};
 ---
 
 <Layout metadata={metadata}>
@@ -86,47 +123,12 @@ const axes = getMaturityAssessmentAxes('fr');
       </style>
 
       <MaturityAssessmentWidget
-        id="maturity-assessment-fr"
+        id={formId}
         axes={axes}
-        strings={{
-          currentProfileTitle: 'Votre profil actuel',
-          scoreLabel: 'Score global',
-          progressLabel: 'Avancement',
-          printTagline: 'Radar de maturité',
-          printTitle: 'Évaluation de maturité Platform Engineering',
-          printAnswersTitle: 'Réponses',
-          printInterpretationTitle: 'Interprétation',
-          printFooterUrl: 'https://hoverkraft.tech',
-          shareLabel: 'Partager',
-          sharePrintLabel: 'Imprimer',
-          shareCopyLabel: 'Copier le lien',
-          shareCopySuccessLabel: 'Lien copié',
-          shareMailLabel: 'Partager par email',
-          shareMailSubject: 'Radar de maturité Platform Engineering - évaluation',
-          shareTextWithInterpretation:
-            'Mon score de maturité Platform Engineering : {score} ({interpretation}) - Diagnostic proposé par Hoverkraft',
-          shareTextWithoutInterpretation:
-            'Mon score de maturité Platform Engineering : {score} - Diagnostic proposé par Hoverkraft',
-          shareMailBodyWithInterpretation:
-            "Bonjour,\n\nVoici l'évaluation de maturité Platform Engineering :\n- Score : {score}\n- Niveau : {interpretation}\n\nLien du diagnostic (inclut mes réponses) :\n{url}\n\nDiagnostic proposé par Hoverkraft — https://hoverkraft.tech\n",
-          shareMailBodyWithoutInterpretation:
-            "Bonjour,\n\nVoici l'évaluation de maturité Platform Engineering :\n- Score : {score}\n\nLien du diagnostic (inclut mes réponses) :\n{url}\n\nDiagnostic proposé par Hoverkraft — https://hoverkraft.tech\n",
-          shareLinkedInLabel: 'Partager sur LinkedIn',
-          shareDevtoPostTitle: 'Evaluation du diagnostic de maturité Platform Engineering',
-          shareDevtoLinkLabel: 'Lien du diagnostic',
-          shareDevtoLabel: 'Partager sur dev.to',
-          shareBlueskyLabel: 'Partager sur Bluesky',
-          resetLabel: 'Réinitialiser',
-          editLabel: 'Modifier',
-          levelPrefix: 'Niveau',
-          interpretation: {
-            initial: 'Initial',
-            repeatable: 'Géré',
-            defined: 'Défini',
-            managed: 'Quantifié',
-            optimizing: 'Optimisé',
-          },
-        }}
+        strings={strings}
+        pageUrl={Astro.url.toString()}
+        lang={lang}
+        client:load
       />
 
       <div class="mt-8 w-full text-sm text-muted" data-maturity-assessment-no-print>

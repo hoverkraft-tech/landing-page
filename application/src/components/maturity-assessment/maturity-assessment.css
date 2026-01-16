@@ -1,7 +1,22 @@
+[data-maturity-questions] fieldset {
+  border-radius: 0.75rem;
+  transition:
+    box-shadow 0.2s ease,
+    outline-color 0.2s ease,
+    outline-offset 0.2s ease;
+  outline: 2px solid transparent;
+  outline-offset: 4px;
+}
+
+[data-maturity-questions] fieldset:focus-within {
+  outline-color: color-mix(in srgb, var(--aw-color-secondary) 60%, transparent);
+  box-shadow: none;
+}
+
 @media print {
   @page {
     /* Leave room for the repeating (fixed) print header */
-    margin: 22mm 14mm 18mm 14mm;
+    margin: 26mm 14mm 54mm 14mm;
   }
 
   [data-maturity-assessment] {
@@ -17,6 +32,7 @@
     --color-default: var(--aw-color-text-default);
     --color-muted: var(--aw-color-text-muted);
     --color-secondary: var(--aw-color-secondary);
+    display: block !important;
   }
 
   /* Make the report background deterministic (avoid dark-mode translucent backgrounds in print/PDF). */
@@ -24,10 +40,8 @@
     background-color: var(--aw-color-bg-page) !important;
     backdrop-filter: none !important;
     -webkit-backdrop-filter: none !important;
-    /* Make room for the fixed page header */
-    padding-top: 5.75rem !important;
-    /* Make room for the fixed page footer */
-    padding-bottom: 4.75rem !important;
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
   }
 
   /* Repeat a basic header on every printed page */
@@ -49,7 +63,7 @@
     left: 0;
     right: 0;
     z-index: 50;
-    padding: 10px 14mm;
+    padding: 6px 14mm;
     background: var(--aw-color-bg-page) !important;
     border-top: 1px solid color-mix(in srgb, var(--aw-color-text-default) 22%, transparent);
     margin-top: 0 !important;
@@ -76,10 +90,12 @@
   [data-maturity-sidebar] {
     position: static !important;
     top: auto !important;
+    width: 100% !important;
   }
 
   [data-maturity-sidebar] > div {
-    page-break-inside: avoid;
+    break-inside: auto;
+    page-break-inside: auto;
   }
 
   [data-progress-section],
@@ -88,19 +104,56 @@
     display: none !important;
   }
 
-  [data-share-print],
-  [data-share-linkedin],
-  [data-share-devto],
-  [data-share-bluesky] {
-    display: none !important;
-  }
-
   [data-print-summary] {
     display: block !important;
   }
 
+  [data-print-summary] ul {
+    display: block !important;
+  }
+
+  [data-print-summary] li {
+    display: block !important;
+  }
+
+  [data-print-summary] li > span {
+    display: block;
+  }
+
   [data-print-summary] section {
+    break-inside: avoid;
     page-break-inside: avoid;
+  }
+
+  [data-print-summary] li {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  [data-print-summary] section {
+    break-inside: auto;
+    page-break-inside: auto;
+  }
+
+  [data-print-summary] li,
+  [data-print-summary] h4,
+  [data-print-summary] [data-print-answer] {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+
+  [data-print-summary] h4 {
+    break-after: avoid;
+    page-break-after: avoid;
+  }
+
+  [data-print-summary] ul {
+    break-before: avoid;
+    page-break-before: avoid;
+  }
+
+  [data-print-summary] li {
+    padding-bottom: 12mm;
   }
 
   [data-print-header],
@@ -113,91 +166,5 @@
   [data-print-header] {
     break-after: avoid;
     page-break-after: avoid;
-  }
-}
-
-@media (hover: hover) {
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:hover,
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:focus-within {
-    transform: scale(1.02);
-  }
-
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:hover [data-share-pill-label],
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:focus-within [data-share-pill-label] {
-    transform: translateX(-115%);
-  }
-
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:hover .ma-share-action,
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true']:focus-within .ma-share-action {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-
-[data-share-pill] [data-share-pill-wrap][data-share-enabled='false'] [data-share-pill-label] {
-  transform: translateX(0) !important;
-  opacity: 1;
-  filter: grayscale(0.65);
-  transition: none !important;
-}
-
-[data-share-pill] [data-share-pill-wrap][data-share-enabled='false'] .ma-share-action {
-  opacity: 0 !important;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-[data-share-copy] .ma-copy-check {
-  display: none;
-}
-
-[data-share-copy][data-copied='true'] .ma-copy-icon {
-  display: none;
-}
-
-[data-share-copy][data-copied='true'] .ma-copy-check {
-  display: block;
-  animation: ma-copy-pop 420ms ease-out;
-}
-
-@keyframes ma-copy-pop {
-  0% {
-    transform: scale(0.6);
-    opacity: 0;
-  }
-  60% {
-    transform: scale(1.15);
-    opacity: 1;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@media (hover: none) {
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true'] .ma-share-action {
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true'] [data-share-pill-label] {
-    display: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true'] .ma-share-action {
-    transition: none !important;
-    opacity: 1;
-    transform: scale(1);
-  }
-
-  [data-share-copy][data-copied='true'] .ma-copy-check {
-    animation: none;
-  }
-
-  [data-share-pill] [data-share-pill-wrap][data-share-enabled='true'] [data-share-pill-label] {
-    display: none;
   }
 }

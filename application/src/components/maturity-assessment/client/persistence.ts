@@ -1,4 +1,4 @@
-import type { MaturityAssessmentAxis } from './types';
+import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
 
 type StorageSnapshot = {
   v: number;

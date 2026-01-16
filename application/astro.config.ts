@@ -6,6 +6,7 @@ import { defineConfig } from 'astro/config';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import mdx from '@astrojs/mdx';
+import react from '@astrojs/react';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
@@ -30,6 +31,7 @@ export default defineConfig({
   integrations: [
     sitemap(),
     mdx(),
+    react(),
     icon({
       include: {
         tabler: ['*'],

@@ -27,12 +27,14 @@
     "test:ci": "npm run test -- --reporter=default --reporter=junit --outputFile=junit.xml --coverage.enabled --coverage.reporter=lcov --coverage.reporter=text"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.15",
     "@astrojs/sitemap": "^3.7.0",
     "@astrolib/analytics": "^0.6.1",
     "@astrolib/seo": "^1.0.0-beta.8",
     "@fontsource-variable/inter": "^5.2.8",
     "@fontsource/roboto-mono": "^5.2.8",
+    "@iconify-json/tabler": "^1.2.26",
     "archiver": "^7.0.1",
     "astro": "^5.16.9",
     "astro-embed": "^0.12.0",
@@ -41,6 +43,8 @@
     "lodash.merge": "^4.6.2",
     "marked": "^17.0.1",
     "puppeteer": "^24.35.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "unpic": "^4.2.2"
   },
   "devDependencies": {
@@ -50,7 +54,6 @@
     "@astrojs/partytown": "^2.1.4",
     "@eslint/js": "^9.39.2",
     "@iconify-json/flat-color-icons": "^1.2.3",
-    "@iconify-json/tabler": "^1.2.26",
     "@tailwindcss/typography": "^0.5.19",
     "@tailwindcss/vite": "^4.1.18",
     "@types/archiver": "^7.0.0",
