@@ -27,6 +27,7 @@
     "test:ci": "npm run test -- --reporter=default --reporter=junit --outputFile=junit.xml --coverage.enabled --coverage.reporter=lcov --coverage.reporter=text"
   },
   "dependencies": {
+    "@astrojs/react": "^4.4.2",
     "@astrojs/rss": "^4.0.14",
     "@astrojs/sitemap": "^3.6.1",
     "@astrolib/analytics": "^0.6.1",
@@ -41,6 +42,8 @@
     "lodash.merge": "^4.6.2",
     "marked": "^17.0.1",
     "puppeteer": "^24.35.0",
+    "react": "^19.2.3",
+    "react-dom": "^19.2.3",
     "unpic": "^4.2.2"
   },
   "devDependencies": {

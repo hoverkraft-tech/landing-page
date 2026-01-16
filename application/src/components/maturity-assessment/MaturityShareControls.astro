@@ -1,5 +1,5 @@
 ---
-import SocialShare from '~/components/common/SocialShare.astro';
+import SocialShare from '~/components/common/SocialShare.tsx';
 import type { MaturityAssessmentStrings } from './types';
 
 export interface Props {
@@ -35,6 +35,6 @@ const { strings } = Astro.props;
       bluesky: strings.shareBlueskyLabel,
     }}
     networks={['print', 'copy', 'email', 'linkedin', 'bluesky', 'devto']}
-    class="inline-flex items-center"
+    className="inline-flex items-center"
   />
 </div>
