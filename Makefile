@@ -8,7 +8,7 @@ help: ## Show help message
 
 include .env
 
-prepare: ## Prepare stack to run
+install: ## Prepare stack to run
 	cd application && npm install
 	cd .github/actions/generate-blog-post && npm install
 	cd .github/actions/generate-brand-content && npm install
@@ -22,7 +22,7 @@ lint: ## Run linters
 	$(call run_linter,)
 
 lint-fix: ## Run linters
-	cd application && npm audit fix
+	cd application && npm audit --omit=dev
 	cd application && npm run humanize:fix
 	cd application && npm run lint:fix
 	$(MAKE) linter-fix

@@ -11,7 +11,7 @@ Marketing site for Hoverkraft, built with [Astro](https://astro.build/) 5 and Ta
 ## Getting Started
 
 ```bash
-make prepare   # Install npm dependencies in application/
+make install   # Prepare stack to run
 make start     # Run Astro dev server on http://localhost:4321
 ```
 
