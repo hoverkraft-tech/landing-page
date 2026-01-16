@@ -103,6 +103,7 @@ const axes = getMaturityAssessmentAxes('fr');
           shareMailBodyWithoutInterpretation:
             "Bonjour,\n\nVoici l'évaluation de maturité Platform Engineering :\n- Score : {score}\n\nLien du diagnostic (inclut mes réponses) :\n{url}\n\nDiagnostic proposé par Hoverkraft — https://hoverkraft.tech\n",
           shareLinkedInLabel: 'Partager sur LinkedIn',
+          shareHoverkraftLabel: "Partager avec l'équipe Hoverkraft",
           shareDevtoPostTitle: 'Evaluation du diagnostic de maturité Platform Engineering',
           shareDevtoLinkLabel: 'Lien du diagnostic',
           shareDevtoLabel: 'Partager sur dev.to',
@@ -153,6 +154,27 @@ const axes = getMaturityAssessmentAxes('fr');
             du livrable.
           </li>
         </ul>
+      </div>
+
+      <div
+        id="share-with-hoverkraft"
+        class="mt-10 w-full rounded-2xl border border-gray-200/60 bg-white/40 p-6 text-left backdrop-blur dark:bg-white/5 pointer-events-none opacity-50"
+        data-maturity-assessment-no-print
+        data-share-hoverkraft-section
+        aria-disabled="true"
+      >
+        <p class="text-sm font-semibold text-heading">Partager vos résultats avec l'équipe Hoverkraft</p>
+        <p class="mt-2 text-sm text-muted">Pour que nous puissions préparer un débrief personnalisé.</p>
+        <div class="mt-4">
+          <script src="https://js-eu1.hsforms.net/forms/embed/147601161.js" defer></script>
+          <div
+            class="hs-form-frame"
+            data-region="eu1"
+            data-form-id="b3290f73-2d7a-4052-8637-5158d38713e8"
+            data-portal-id="147601161"
+          >
+          </div>
+        </div>
       </div>
     </div>
   </section>

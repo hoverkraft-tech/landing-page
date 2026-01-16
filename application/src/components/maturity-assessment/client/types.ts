@@ -22,4 +22,6 @@ export type MaturityAssessmentStrings = {
   shareTextWithInterpretation: string;
   shareTextWithoutInterpretation: string;
   shareMailSubject: string;
+  shareMailBodyWithInterpretation: string;
+  shareMailBodyWithoutInterpretation: string;
 };
