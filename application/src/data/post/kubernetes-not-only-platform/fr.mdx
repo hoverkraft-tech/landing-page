@@ -1,0 +1,81 @@
+---
+title: "Non, Kubernetes n'est pas la seule plateforme possible"
+excerpt: "Kubernetes n'est pas une obligation, mais c'est un socle éprouvé pour accélérer vos plateformes, structurer la delivery et mesurer l'impact avec DORA/SPACE."
+slug: kubernetes-pas-seule-plateforme
+author: 'Équipe HoverKraft'
+lang: fr
+translationKey: kubernetes-not-only-platform
+---
+
+import Image from '~/components/common/Image.astro';
+import preview from '~/assets/images/blog/kubernetes-not-only-platform/preview.png';
+import connectorArchitecture from '~/assets/images/blog/kubernetes-not-only-platform/connector-architecture.webp';
+import multicloudArchitecture from '~/assets/images/blog/kubernetes-not-only-platform/kubernetes-multicloud-architecture.webp';
+
+> Kubernetes n'est pas une religion, c'est un levier.
+
+On peut construire une excellente plateforme sans Kubernetes. D'ailleurs, certaines organisations n'en ont pas besoin aujourd'hui. Mais dès que l'objectif est d'industrialiser la delivery cloud-native, Kubernetes reste la base la plus stable pour créer une platform as a delivery chain mesurée avec [DORA](https://dora.dev) et [SPACE](https://queue.acm.org/detail.cfm?id=3454124).
+
+<Image src={preview} alt="Aperçu d'une plateforme Kubernetes structurée" loading="lazy" />
+
+## Un socle solide pour accélérer la plateforme
+
+Kubernetes n'est pas magique, mais il offre un socle robuste pour construire vos abstractions sans perdre de temps. C'est la base technique qui permet au platform engineering de passer à l'échelle sans réinventer l'orchestration.
+
+- **Standard du marché** : un nouvel arrivant comprend immédiatement la structure des workloads, des namespaces aux manifests.
+- **Technologies éprouvées** : autoscaling, service discovery, RBAC, observabilité native dans l'écosystème [CNCF](https://www.cncf.io/).
+- **Modèle partagé** : les fournisseurs cloud, les outils GitOps et les catalogues de services parlent le même langage.
+
+Ce socle commun réduit le lead time de mise en production et la charge cognitive. Il permet de concentrer l'effort sur la valeur produit plutôt que sur l'infrastructure.
+
+## Extensible et connector-first par design
+
+Le pari gagnant n'est pas de tout standardiser, mais de créer vos propres abstractions au bon endroit. Kubernetes offre un noyau stable et extensible pour bâtir une connector-first architecture, alignée sur votre produit et votre souveraineté technique.
+
+- CRDs pour encapsuler vos patterns métiers.
+- Operators pour automatiser des workflows spécifiques.
+- Catalogues de services pour guider les équipes avec des templates sûrs.
+
+<Image src={connectorArchitecture} alt="Architecture connector-first avec des abstractions Kubernetes" loading="lazy" />
+
+## Un lieu d'innovation qui pose les bonnes questions
+
+Kubernetes oblige à clarifier vos attentes : qui déploie, qui observe, qui supporte. C'est un moment pour redéfinir l'expérience développeur et rappeler que developer experience is the product.
+
+- Automatiser la chaîne de delivery plutôt que multiplier les tickets.
+- Exposer des métriques DORA/SPACE à chaque équipe.
+- Documenter le standard et responsabiliser les squads.
+
+## Une difficulté ajustable, du simple au sophistiqué
+
+On peut commencer petit, puis complexifier au fur et à mesure. L'objectif est de garder la plateforme fluide, pas d'atteindre une perfection théorique dès le premier sprint.
+
+L'important est de livrer vite et d'augmenter progressivement la sophistication. Une trajectoire claire rassure les équipes et sécurise l'investissement.
+
+1. Démarrer avec un cluster managé, quelques namespaces et un pipeline CI/CD simple.
+2. Ajouter GitOps, des environnements éphémères et un portail développeur.
+3. Formaliser des abstractions, des guardrails sécurité et de l'observabilité distribuée.
+
+## Quand Kubernetes n'est pas la bonne option
+
+Il existe des contextes où Kubernetes apporte plus de friction que de valeur. Ce n'est pas grave : l'important est de répondre au besoin client, pas à la hype.
+
+- Équipe très réduite sans expertise ops.
+- Produit simple qui tient sur un PaaS classique.
+- Organisation qui n'est pas prête pour une gouvernance de plateforme.
+
+## Quand il devient la voie royale
+
+Dès que vous devez itérer plus vite que vos concurrents, sécuriser la delivery et garder la maîtrise de votre stack, Kubernetes devient la voie royale pour les apps cloud-native. Ne pas s'y intéresser dans ces contextes, c'est accepter un retard technologique qui se voit dans vos métriques.
+
+<Image
+  src={multicloudArchitecture}
+  alt="Architecture Kubernetes multi-cloud pour des applications cloud-native"
+  loading="lazy"
+/>
+
+Kubernetes n'est pas la seule voie, mais il reste la meilleure base pour industrialiser une plateforme, innover en sécurité et délivrer plus vite. Nous partageons nos retours d'expérience sur https://www.hoverkraft.tech/blog.
+
+👉 Parlons de votre plateforme : https://www.hoverkraft.tech/contact
+
+👉 Suivez nos connecteurs open source : https://github.com/hoverkraft-tech

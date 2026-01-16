@@ -1,0 +1,85 @@
+---
+title: "Kubernetes isn't the only platform, but it matters"
+excerpt: 'Kubernetes is not mandatory, yet it is the most proven base to accelerate platform delivery, align teams, and improve DORA/SPACE outcomes in cloud-native stacks.'
+slug: kubernetes-not-only-platform
+author: 'Hoverkraft Team'
+lang: en
+translationKey: kubernetes-not-only-platform
+---
+
+import Image from '~/components/common/Image.astro';
+import preview from '~/assets/images/blog/kubernetes-not-only-platform/preview.png';
+import connectorArchitecture from '~/assets/images/blog/kubernetes-not-only-platform/connector-architecture.webp';
+import multicloudArchitecture from '~/assets/images/blog/kubernetes-not-only-platform/kubernetes-multicloud-architecture.webp';
+
+> Kubernetes is not a religion, it is a delivery lever.
+
+You can build a strong platform without Kubernetes, and some teams should. Still, when the goal is to industrialize cloud-native delivery, Kubernetes remains the most stable foundation for a platform as a delivery chain, measured with [DORA](https://dora.dev) and [SPACE](https://queue.acm.org/detail.cfm?id=3454124).
+
+<Image src={preview} alt="Preview of a structured Kubernetes platform" loading="lazy" />
+
+## A solid base for platform acceleration
+
+Kubernetes is not magic, but it offers a consistent base to build abstractions without wasting time. It is the platform engineering backbone that scales delivery without reinventing orchestration.
+
+- **Market standard**: new engineers recognize the structure immediately, from namespaces to manifests.
+- **Battle-tested tech**: autoscaling, service discovery, RBAC, and observability are first-class in the [CNCF](https://www.cncf.io/) ecosystem.
+- **Shared operating model**: cloud providers, GitOps tools, and service catalogs speak the same language.
+
+This shared foundation cuts lead time and reduces cognitive load. Teams can focus on product value instead of rebuilding infrastructure patterns.
+
+## Extensible and connector-first by design
+
+The winning bet is not uniformity, it is building the right abstractions for your product. Kubernetes gives you a stable core to craft a connector-first architecture that supports technical sovereignty.
+
+- CRDs to wrap product-specific patterns.
+- Operators to automate repeatable workflows.
+- Service catalogs to guide teams with safe templates.
+
+<Image src={connectorArchitecture} alt="Connector-first architecture built on Kubernetes abstractions" loading="lazy" />
+
+## A place for innovation and better questions
+
+Kubernetes forces clarity: who deploys, who observes, who owns the on-call. It is the right moment to reshape developer experience and remember that developer experience is the product.
+
+- Automate the delivery chain instead of multiplying tickets.
+- Expose DORA/SPACE metrics to every squad.
+- Document the standard and make teams autonomous.
+
+## Adjustable difficulty, from simple to sophisticated
+
+You can start simple and iterate. The goal is a smooth platform, not theoretical perfection in the first sprint.
+
+Delivery should stay fast while the platform matures. A visible path to improvement keeps stakeholders aligned and budgets predictable.
+
+1. Start with a managed cluster, a few namespaces, and a basic CI/CD pipeline.
+2. Add GitOps, ephemeral environments, and a developer portal.
+3. Formalize abstractions, security guardrails, and distributed observability.
+
+## When Kubernetes is the wrong choice
+
+There are contexts where Kubernetes adds more friction than value. That is fine: the real goal is customer value, not the hype cycle.
+
+- Very small teams without operations capacity.
+- Products that fit comfortably on a managed PaaS.
+- Organizations not ready for platform governance.
+
+In those cases, a smaller stack is often the smartest move until the need shifts.
+
+## When it becomes the royal path
+
+When you must iterate faster than competitors, secure delivery, and keep control of your stack, Kubernetes is the royal path for cloud-native apps. Ignoring it in those contexts means accepting a visible tech lag in your metrics.
+
+For regulated sectors, it preserves technical sovereignty without blocking innovation. The payoff shows up in deployment frequency, change failure rate, and MTTR.
+
+<Image
+  src={multicloudArchitecture}
+  alt="Multi-cloud Kubernetes architecture for cloud-native applications"
+  loading="lazy"
+/>
+
+Kubernetes is not the only way, yet it remains the best foundation to industrialize a platform, innovate safely, and ship faster. We share more field notes on https://www.hoverkraft.tech/blog.
+
+👉 Talk to us about your platform: https://www.hoverkraft.tech/contact
+
+👉 Explore our open-source connectors: https://github.com/hoverkraft-tech
