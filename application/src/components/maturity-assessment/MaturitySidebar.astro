@@ -93,6 +93,9 @@ const { id, axes, strings } = Astro.props;
           networks={['print', 'copy', 'email', 'linkedin', 'bluesky', 'devto']}
           class="inline-flex items-center"
         />
+        <a class="btn-primary mt-4 w-full justify-center" href="#share-with-hoverkraft" data-share-hoverkraft>
+          {strings.shareHoverkraftLabel}
+        </a>
       </div>
 
       <MaturityPrintSummary axes={axes} strings={strings} />

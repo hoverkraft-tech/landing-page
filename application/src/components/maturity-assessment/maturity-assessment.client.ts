@@ -66,8 +66,11 @@ const init = (root: Element) => {
   const shareLinkedInLink = root.querySelector('[data-share-linkedin]');
   const shareDevtoLink = root.querySelector('[data-share-devto]');
   const shareBlueskyLink = root.querySelector('[data-share-bluesky]');
+  const shareHoverkraftLink = root.querySelector('[data-share-hoverkraft]');
+  const shareHoverkraftSection = document.querySelector('[data-share-hoverkraft-section]');
   const socialShareRoot = root.querySelector('[data-social-share]');
   const printAnswerEls = Array.from(root.querySelectorAll('[data-print-answer][data-question-id]'));
+  const currentProfileTitle = root.querySelector('[data-current-profile-title]');
 
   if (!(svg instanceof SVGSVGElement)) throw new Error('MaturityAssessment: radar svg not found');
   if (!(scoreEl instanceof HTMLElement)) throw new Error('MaturityAssessment: score element not found');
@@ -87,9 +90,49 @@ const init = (root: Element) => {
     shareLinkedInLink: shareLinkedInLink instanceof HTMLAnchorElement ? shareLinkedInLink : null,
     shareDevtoLink: shareDevtoLink instanceof HTMLAnchorElement ? shareDevtoLink : null,
     shareBlueskyLink: shareBlueskyLink instanceof HTMLAnchorElement ? shareBlueskyLink : null,
+    shareHoverkraftLink: shareHoverkraftLink instanceof HTMLAnchorElement ? shareHoverkraftLink : null,
+    shareHoverkraftSection: shareHoverkraftSection instanceof HTMLElement ? shareHoverkraftSection : null,
     socialShareRoot: socialShareRoot instanceof HTMLElement ? socialShareRoot : null,
     printAnswerEls: printAnswerEls.filter((el): el is HTMLElement => el instanceof HTMLElement),
   };
+
+  if (shareHoverkraftLink instanceof HTMLAnchorElement) {
+    shareHoverkraftLink.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const shareUrl = shareHoverkraftLink.dataset.shareUrl ?? '';
+      const hiddenField = document.querySelector(
+        '#share-with-hoverkraft input[name="maturity_assessment"]'
+      );
+
+      if (hiddenField instanceof HTMLInputElement && shareUrl) {
+        hiddenField.value = shareUrl;
+      }
+
+      const target = document.getElementById('share-with-hoverkraft');
+      if (target instanceof HTMLElement) {
+        smoothScrollToElement(target);
+      }
+    });
+  }
+
+  if (shareMailLink instanceof HTMLAnchorElement) {
+    shareMailLink.addEventListener('click', (event) => {
+      event.preventDefault();
+
+      const isDisabled = shareMailLink.getAttribute('aria-disabled') === 'true';
+      if (isDisabled) return;
+
+      const subject = shareMailLink.getAttribute('data-subject') ?? '';
+      const body = shareMailLink.getAttribute('data-body');
+      const url = shareMailLink.getAttribute('data-url') ?? '';
+      const title = shareMailLink.getAttribute('data-title') ?? '';
+
+      const bodyText = body ?? [title, url].filter(Boolean).join('\n\n');
+      const mailto = `mailto:?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(bodyText)}`;
+      window.location.href = mailto;
+    });
+  }
 
   const totalQuestions = axes.reduce((acc, axis) => acc + (axis.questions?.length ?? 0), 0);
   const orderedQuestionIds = buildOrderedQuestionIds(axes);
@@ -201,6 +244,16 @@ const init = (root: Element) => {
     };
   })();
 
+  let wasComplete = false;
+
+  const focusRadarPanel = () => {
+    const target = currentProfileTitle instanceof HTMLElement ? currentProfileTitle : null;
+    if (!target) return;
+    if (!target.hasAttribute('tabindex')) target.setAttribute('tabindex', '-1');
+    target.focus({ preventScroll: true });
+    smoothScrollToElement(target);
+  };
+
   const render = () => {
     const { globalAvg, answeredQuestions } = computeState(root, axes);
     const isComplete = totalQuestions > 0 && answeredQuestions === totalQuestions;
@@ -257,6 +310,12 @@ const init = (root: Element) => {
       shareUrl,
       shareText,
     });
+
+    if (isComplete && !wasComplete) {
+      focusRadarPanel();
+    }
+
+    wasComplete = isComplete;
   };
 
   root.addEventListener('change', (event) => {

@@ -13,6 +13,8 @@ export type RadarElements = {
   shareLinkedInLink: HTMLAnchorElement | null;
   shareDevtoLink: HTMLAnchorElement | null;
   shareBlueskyLink: HTMLAnchorElement | null;
+  shareHoverkraftLink: HTMLAnchorElement | null;
+  shareHoverkraftSection: HTMLElement | null;
   socialShareRoot: HTMLElement | null;
   printAnswerEls: HTMLElement[];
 };
@@ -112,6 +114,8 @@ export const renderRadar = (params: {
     shareLinkedInLink,
     shareDevtoLink,
     shareBlueskyLink,
+    shareHoverkraftLink,
+    shareHoverkraftSection,
     socialShareRoot,
     printAnswerEls,
   } = elements;
@@ -119,8 +123,18 @@ export const renderRadar = (params: {
   const { axisValues, globalAvg, answeredQuestions } = computeState(root, axes);
   const isComplete = totalQuestions > 0 && answeredQuestions === totalQuestions;
 
-  if (sharePrintButton) sharePrintButton.disabled = !isComplete;
-  if (shareCopyButton) shareCopyButton.disabled = !isComplete;
+  if (sharePrintButton) {
+    sharePrintButton.disabled = !isComplete;
+    sharePrintButton.setAttribute('aria-disabled', (!isComplete).toString());
+    sharePrintButton.classList.toggle('pointer-events-none', !isComplete);
+    sharePrintButton.classList.toggle('opacity-50', !isComplete);
+  }
+  if (shareCopyButton) {
+    shareCopyButton.disabled = !isComplete;
+    shareCopyButton.setAttribute('aria-disabled', (!isComplete).toString());
+    shareCopyButton.classList.toggle('pointer-events-none', !isComplete);
+    shareCopyButton.classList.toggle('opacity-50', !isComplete);
+  }
 
   const shareLinks = [shareMailLink, shareLinkedInLink, shareDevtoLink, shareBlueskyLink];
   for (const link of shareLinks) {
@@ -130,6 +144,20 @@ export const renderRadar = (params: {
     link.classList.toggle('opacity-50', !isComplete);
     if (!isComplete) link.setAttribute('tabindex', '-1');
     else link.removeAttribute('tabindex');
+  }
+
+  if (shareHoverkraftLink) {
+    shareHoverkraftLink.setAttribute('aria-disabled', (!isComplete).toString());
+    shareHoverkraftLink.classList.toggle('pointer-events-none', !isComplete);
+    shareHoverkraftLink.classList.toggle('opacity-50', !isComplete);
+    if (!isComplete) shareHoverkraftLink.setAttribute('tabindex', '-1');
+    else shareHoverkraftLink.removeAttribute('tabindex');
+  }
+
+  if (shareHoverkraftSection) {
+    shareHoverkraftSection.setAttribute('aria-disabled', (!isComplete).toString());
+    shareHoverkraftSection.classList.toggle('pointer-events-none', !isComplete);
+    shareHoverkraftSection.classList.toggle('opacity-50', !isComplete);
   }
 
   for (const el of printAnswerEls) {
@@ -154,6 +182,19 @@ export const renderRadar = (params: {
   interpretationEl.hidden = interpretation.hidden;
   if (interpretation.color) interpretationEl.style.color = interpretation.color;
 
+  const scoreLabel = `${globalAvg.toFixed(1)}/5`;
+  const mailBody = interpretation.text
+    ? formatTemplate(strings.shareMailBodyWithInterpretation, {
+      score: scoreLabel,
+      interpretation: interpretation.text,
+      url: params.shareUrl ?? '',
+    })
+    : formatTemplate(strings.shareMailBodyWithoutInterpretation, {
+      score: scoreLabel,
+      interpretation: '',
+      url: params.shareUrl ?? '',
+    });
+
   if (isComplete && params.shareUrl && params.shareText) {
     if (socialShareRoot) {
       socialShareRoot.dataset.shareUrl = params.shareUrl;
@@ -165,6 +206,7 @@ export const renderRadar = (params: {
       shareMailLink.setAttribute('data-url', params.shareUrl);
       shareMailLink.setAttribute('data-title', params.shareText);
       shareMailLink.setAttribute('data-subject', strings.shareMailSubject);
+      shareMailLink.setAttribute('data-body', mailBody);
     }
 
     for (const el of [shareLinkedInLink, shareBlueskyLink]) {
@@ -177,6 +219,11 @@ export const renderRadar = (params: {
     if (shareDevtoLink) {
       shareDevtoLink.href = '#';
     }
+
+    if (shareHoverkraftLink) {
+      shareHoverkraftLink.href = '#share-with-hoverkraft';
+      shareHoverkraftLink.dataset.shareUrl = params.shareUrl;
+    }
   } else {
     if (socialShareRoot) {
       delete socialShareRoot.dataset.shareUrl;
@@ -188,6 +235,7 @@ export const renderRadar = (params: {
       shareMailLink.removeAttribute('data-url');
       shareMailLink.removeAttribute('data-title');
       shareMailLink.removeAttribute('data-subject');
+      shareMailLink.removeAttribute('data-body');
     }
 
     for (const el of [shareLinkedInLink, shareBlueskyLink]) {
@@ -199,6 +247,11 @@ export const renderRadar = (params: {
 
     if (shareDevtoLink) {
       shareDevtoLink.href = '#';
+    }
+
+    if (shareHoverkraftLink) {
+      shareHoverkraftLink.href = '#share-with-hoverkraft';
+      delete shareHoverkraftLink.dataset.shareUrl;
     }
   }
 

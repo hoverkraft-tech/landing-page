@@ -20,6 +20,7 @@ export interface MaturityAssessmentStrings {
   shareMailBodyWithInterpretation: string;
   shareMailBodyWithoutInterpretation: string;
   shareLinkedInLabel: string;
+  shareHoverkraftLabel: string;
   shareDevtoPostTitle: string;
   shareDevtoLinkLabel: string;
   shareDevtoLabel: string;
