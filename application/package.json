@@ -27,8 +27,8 @@
     "test:ci": "npm run test -- --reporter=default --reporter=junit --outputFile=junit.xml --coverage.enabled --coverage.reporter=lcov --coverage.reporter=text"
   },
   "dependencies": {
-    "@astrojs/rss": "^4.0.14",
-    "@astrojs/sitemap": "^3.6.1",
+    "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
     "@astrolib/analytics": "^0.6.1",
     "@astrolib/seo": "^1.0.0-beta.8",
     "@fontsource-variable/inter": "^5.2.8",
