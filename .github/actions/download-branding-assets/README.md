@@ -3,7 +3,7 @@
 # GitHub Action: Download Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/a6e620f9cb4f100948400c4a625c9f3f6fbe163fbe86e30ac29ed4484a543881/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
+  <img src="https://opengraph.githubassets.com/6b0462cd6e077d9713d8f879c3e0b089db590447302aa8731ea34282da6a3abe/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
 </div>
 
 ---
@@ -62,6 +62,9 @@ Downloads and organizes branding assets from the branding repository
     # Directory to place mascot asset
     # This input is required.
     mascot-dir: ""
+
+    # Root folder inside the artifact where branding assets live
+    assets-root-dir: ""
 ```
 
 <!-- usage:end -->
@@ -69,16 +72,17 @@ Downloads and organizes branding assets from the branding repository
 
 ## Inputs
 
-| **Input**          | **Description**                                             | **Required** | **Default** |
-| ------------------ | ----------------------------------------------------------- | ------------ | ----------- |
-| **`repository`**   | The repository where to download the branding artifact from | **true**     | -           |
-| **`artifact-id`**  | The artifact ID from the branding repository                | **true**     | -           |
-| **`run-id`**       | The run ID from the branding repository                     | **false**    | -           |
-| **`github-token`** | GitHub token to access the branding repository artifact     | **true**     | -           |
-| **`logos`**        | JSON-stringified logo collection                            | **true**     | -           |
-| **`mascot`**       | JSON-stringified mascot object with path                    | **true**     | -           |
-| **`logos-dir`**    | Directory containing logos                                  | **true**     | -           |
-| **`mascot-dir`**   | Directory to place mascot asset                             | **true**     | -           |
+| **Input**             | **Description**                                             | **Required** | **Default** |
+| --------------------- | ----------------------------------------------------------- | ------------ | ----------- |
+| **`repository`**      | The repository where to download the branding artifact from | **true**     | -           |
+| **`artifact-id`**     | The artifact ID from the branding repository                | **true**     | -           |
+| **`run-id`**          | The run ID from the branding repository                     | **false**    | -           |
+| **`github-token`**    | GitHub token to access the branding repository artifact     | **true**     | -           |
+| **`logos`**           | JSON-stringified logo collection                            | **true**     | -           |
+| **`mascot`**          | JSON-stringified mascot object with path                    | **true**     | -           |
+| **`logos-dir`**       | Directory containing logos                                  | **true**     | -           |
+| **`mascot-dir`**      | Directory to place mascot asset                             | **true**     | -           |
+| **`assets-root-dir`** | Root folder inside the artifact where branding assets live  | **false**    | -           |
 
 <!-- inputs:end -->
 <!-- secrets:start -->
