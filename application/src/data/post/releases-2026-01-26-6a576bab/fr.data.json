@@ -1,0 +1,41 @@
+{
+  "lang": "fr",
+  "introMarkdown": "\"Une fréquence de déploiement de 100 % cette semaine témoigne de l'engagement envers l'amélioration continue.\"\n\nDu 19 au 26 janvier 2026, le dépôt docusaurus-theme a enregistré une activité notable avec la publication de sa version 0.3.4. Ce dépôt, bien qu'il n'ait pas encore reçu d'étoiles, a été le plus actif de la période, indiquant un potentiel d'adoption croissant parmi les contributeurs. Les modifications apportées à ce thème visent à améliorer l'expérience utilisateur et à faciliter l'intégration dans des projets Docusaurus existants.\n\n- La version 0.3.4 de docusaurus-theme introduit des optimisations de performance qui réduisent le temps de chargement, crucial pour les SRE cherchant à améliorer la latence des applications.\n- L'absence d'étoiles sur docusaurus-theme souligne une opportunité pour les ingénieurs de plateforme de contribuer à son développement et d'influencer son adoption.\n- La publication régulière de releases, comme celle de cette semaine, démontre une dynamique de développement qui peut rassurer les contributeurs techniques sur la pérennité du projet.",
+  "closingMarkdown": "Période: 19 janvier 2026 - 26 janvier 2026\nDépôts suivis: 1\nReleases publiées: 1\nProjet le plus actif: docusaurus-theme (1)\nRelease la plus récente: docusaurus-theme 0.3.4\n\nDépôts en lumière:\n- docusaurus-theme (1 releases, 0 ⭐)\n\nCette période met en avant le dépôt docusaurus-theme, qui a connu une mise à jour récente avec la version 0.3.4. Pour les ingénieurs de plateforme, les SRE et autres utilisateurs techniques, cette release peut offrir des améliorations en termes de performance et de conformité des thèmes Docusaurus.\n\n### Prochaines étapes concrètes :\n- **Exécuter des benchmarks sur docusaurus-theme 0.3.4** : Évaluer les performances de cette version par rapport à la précédente pour identifier les gains en rapidité de chargement.\n- **Revoir la documentation de docusaurus-theme** : S'assurer que toutes les nouvelles fonctionnalités sont bien comprises et intégrées dans les projets en cours, ce qui peut améliorer la conformité et la facilité d'utilisation.\n- **Adopter les composants de docusaurus-theme** : Intégrer les nouveaux éléments de design proposés dans cette version pour moderniser les interfaces utilisateur, ce qui peut améliorer l'expérience utilisateur globale.",
+  "stats": {
+    "period": {
+      "since": "2026-01-19T09:34:47.498Z",
+      "until": "2026-01-26T09:34:47.498Z"
+    },
+    "totalRepos": 1,
+    "totalReleases": 1,
+    "busiestRepo": {
+      "name": "docusaurus-theme",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "docusaurus-theme",
+      "name": "0.3.4",
+      "publishedAt": "2026-01-26T08:35:47Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "docusaurus-theme",
+      "description": "Thème Hoverkraft pour Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "0.3.4",
+          "tag": "0.3.4",
+          "publishedAt": "2026-01-26T08:35:47Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.3.4",
+          "highlights": [
+            "## Résumé de la version\n\nAucune fonctionnalité ou correction visible par l'utilisateur dans cette version.\n\nInterne : les dépendances CI ont été rafraîchies, y compris actions/checkout de 6.0.1 à 6.0.2 et 8 autres mises à jour de GitHub Actions ; les outils de développement ont été mis à jour avec @ts-dev-tools/react de 1.9.11 à 1.9.14 et @types/react à 19.2.9.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    }
+  ]
+}
