@@ -28,7 +28,7 @@ const metadata = {
       { text: 'View our offers', href: '/en/offers' },
     ]}
     image={{
-      src: '~/assets/images/programming-4.webp',
+      src: '~/assets/images/pages/methodology/programming-5.webp',
       alt: 'Connector-oriented HoverKraft process',
     }}
   >
@@ -72,7 +72,7 @@ const metadata = {
       },
     ]}
     image={{
-      src: '~/assets/images/application-configuration-management.png',
+      src: '~/assets/images/pages/methodology/application-configuration-management.png',
       alt: 'HoverKraft methodological support',
     }}
   />
@@ -95,43 +95,45 @@ const metadata = {
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=1600&q=80',
+      src: '~/assets/images/pages/methodology/optimized-out-of-the-box.webp',
       alt: 'Open source HoverKraft connectors',
     }}
   />
 
   <Steps
-    title="The 4 phases of HoverKraft implementation"
+    title="The HoverKraft journey"
     items={[
       {
-        title: 'Phase 1: <span class="font-medium">Audit & framing</span>',
-        description:
-          'DORA/SPACE assessment, architecture mapping, and bottleneck identification. Co-construction of the target vision and associated roadmap.',
-        icon: 'tabler:clipboard-check',
+        title: '1. Alignment',
+        description: 'Strategic framing with sponsors and definition of DORA/SPACE objectives.',
+        icon: 'tabler:compass',
       },
       {
-        title: 'Phase 2: <span class="font-medium">Design & Architecture</span>',
-        description:
-          'Definition of the target architecture, selection of connectors, ADRs (Architecture Decision Records), and construction of the integration backlog.',
-        icon: 'tabler:building-arch',
+        title: '2. Field audit',
+        description: 'Interviews, technical audits, and mapping of existing connectors.',
+        icon: 'tabler:clipboard-text',
       },
       {
-        title: 'Phase 3: <span class="font-medium">Integration & onboarding</span>',
-        description:
-          'Deployment of the first connectors, onboarding of pilot teams, implementation of DORA/SPACE observability, and training of champions.',
-        icon: 'tabler:rocket',
+        title: '3. Target design',
+        description: 'Definition of the platform blueprint and selection of quick wins.',
+        icon: 'tabler:layout-board',
       },
       {
-        title: 'Phase 4: <span class="font-medium">Run & continuous improvement</span>',
-        description:
-          'Scaling across all teams, measured kaizen process, community forum setup, and quarterly monitoring.',
-        icon: 'tabler:chart-line',
+        title: '4. Glue integration',
+        description: 'Deployment of HoverKraft connectors with your teams in pairing.',
+        icon: 'tabler:puzzle',
+      },
+      {
+        title: '5. Continuous measurement',
+        description: 'Dashboards setup, rituals, and DORA/SPACE reviews.',
+        icon: 'tabler:chart-dots',
+      },
+      {
+        title: '6. Transfer & autonomy',
+        description: 'Certification, complete documentation, and secure handover.',
+        icon: 'tabler:users',
       },
     ]}
-    image={{
-      src: '~/assets/images/hoverkraft-journey-timeline.png',
-      alt: 'HoverKraft transformation timeline',
-    }}
   />
 
   <Features2
