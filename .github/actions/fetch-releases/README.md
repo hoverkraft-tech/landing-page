@@ -3,7 +3,7 @@
 # GitHub Action: Fetch Releases from Hoverkraft Tech Repos
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/f1d7fddc8d58ad81e8088903f3993177ea0d0f3464fc5bb66f5815d3cc0df23b/hoverkraft-tech/landing-page" width="60px" align="center" alt="Fetch Releases from Hoverkraft Tech Repos" />
+  <img src="https://opengraph.githubassets.com/2fdbc621ab92592ba4e5e3c69a6dac4e3539872ee9baa0d2b1137967ea0418c9/hoverkraft-tech/landing-page" width="60px" align="center" alt="Fetch Releases from Hoverkraft Tech Repos" />
 </div>
 
 ---
