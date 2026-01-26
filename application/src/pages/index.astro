@@ -25,7 +25,7 @@ const metadata = {
   <Hero
     tagline="Platform Engineering souverain"
     actions={[
-      { variant: 'primary', text: 'Planifier un diagnostic', href: '/contact#form' },
+      { variant: 'primary', text: 'Planifier un audit', href: '/contact#form' },
       { text: 'Explorer la méthodologie', href: '/methodology' },
     ]}
     image={{ src: '~/assets/images/hero-image.png', alt: 'Illustration de la plateforme Hoverkraft' }}
@@ -144,13 +144,13 @@ const metadata = {
     title="Comment nous faisons décoller votre plateforme"
     items={[
       {
-        title: 'Étape 1 : <span class="font-medium">Diagnostic HoverKraft</span>',
+        title: 'Étape 1 : <span class="font-medium">Audit Hoverkraft</span>',
         description:
-          '2 jours d’analyse DORA/SPACE, interviews terrain et cartographie des connecteurs pour objectiver les irritants.',
+          "2 jours d'analyse DORA/SPACE, interviews terrain et cartographie des connecteurs pour objectiver les irritants.",
         icon: 'tabler:search',
       },
       {
-        title: 'Étape 2 : <span class="font-medium">Plan d’action</span>',
+        title: 'Étape 2 : <span class="font-medium">Plan d\'action</span>',
         description:
           'Priorisation sur 6 mois : quick wins, chantiers structurants et trajectoire de maturité adaptée à votre contexte.',
         icon: 'tabler:timeline',
@@ -296,7 +296,7 @@ const metadata = {
       {
         title: 'Combien de temps pour voir les premiers résultats ?',
         description:
-          'Suite au diagnostic, nous activons un plan 6 mois avec quick wins dès les 4 premières semaines : automatisation des déploiements critiques et pilotage par métriques.',
+          'Suite à l’audit, nous activons un plan 6 mois avec quick wins dès les 4 premières semaines : automatisation des déploiements critiques et pilotage par métriques.',
       },
       {
         title: 'Sommes-nous dépendants de HoverKraft après la mission ?',
@@ -321,10 +321,9 @@ const metadata = {
   <Stats
     title="Impacts mesurés chez nos clients"
     stats={[
-      { title: 'Fréquence de déploiement', amount: '×3' },
-      { title: 'Lead time moyen', amount: '-76%' },
-      { title: 'MTTR', amount: '-81%' },
-      { title: 'Satisfaction développeurs', amount: '+1,7 pts' },
+      { title: 'Gain de time-to-market', amount: '40-60%' },
+      { title: 'Incidents en moins', amount: '60-80%' },
+      { title: 'Satisfaction équipes', amount: '+40-60%' },
     ]}
   />
 
@@ -332,13 +331,13 @@ const metadata = {
 
   <CallToAction
     actions={[
-      { variant: 'primary', text: 'Réserver un diagnostic HoverKraft', href: '/contact#form' },
+      { variant: 'primary', text: 'Réserver un audit Hoverkraft', href: '/contact#form' },
       { text: 'Découvrir nos offres', href: '/offers' },
     ]}
   >
     <Fragment slot="title">On craque le lifecycle de votre chaîne de valeur</Fragment>
     <Fragment slot="subtitle"
-      >Parlons de vos irritants actuels et dessinons le plan d’action HoverKraft adapté à votre contexte.</Fragment
+      >Parlons de vos irritants actuels et dessinons le plan d'action HoverKraft adapté à votre contexte.</Fragment
     >
   </CallToAction>
 </Layout>

@@ -204,7 +204,7 @@ const summaryRows = [
                 <Timeline
                   defaultIcon="tabler:circle"
                   items={course.outline.map((day, index) => ({
-                    title: `${t('training.detail.outlineDesc')} ${index + 1} — ${day.title}`,
+                    title: `${t('training.detail.outlineDesc')} ${index + 1} - ${day.title}`,
                     description: day.description,
                     icon: `tabler:number-${index + 1}`,
                   }))}

@@ -25,6 +25,8 @@ inputs:
   mascot-dir:
     description: "Directory to place mascot asset"
     required: true
+  assets-root-dir:
+    description: "Root folder inside the artifact where branding assets live"
 runs:
   using: "composite"
   steps:
@@ -46,10 +48,12 @@ runs:
         LOGOS_INPUT: ${{ inputs.logos }}
         MASCOT_INPUT: ${{ inputs.mascot }}
         MASCOT_DIR: ${{ inputs.mascot-dir }}
+        ASSETS_ROOT_DIR: ${{ inputs.assets-root-dir }}
       with:
         script: |
           const fs = require('fs');
           const path = require('path');
+          const assetsRootDir = process.env.ASSETS_ROOT_DIR;
 
           core.debug("Listing downloaded files:");
           const downloadedFiles = fs.readdirSync(process.env.DOWNLOADED_PATH);
@@ -108,14 +112,15 @@ runs:
             }
 
             const baseFolder = path.basename(targetRootDir);
-            if (!source.startsWith(`${baseFolder}/`)) {
-              return core.setFailed(`Asset path must start with logos directory for asset "${name}": ${source}`);
+            const expectedPrefix = `${assetsRootDir}/${baseFolder}/`;
+            if (!source.startsWith(expectedPrefix)) {
+              return core.setFailed(`Asset path must start with "${expectedPrefix}" for asset "${name}": ${source}`);
             }
 
             const sourcePath = path.join(process.env.DOWNLOADED_PATH, source);
 
             if (fs.existsSync(sourcePath)) {
-              const targetPath = path.join(targetRootDir, source.replace(`${baseFolder}/`, ''));
+              const targetPath = path.join(targetRootDir, source.replace(expectedPrefix, ''));
               const targetDir = path.dirname(targetPath);
               core.info(`Copying asset "${name}" from "${sourcePath}" to "${targetPath}"`);
               await io.mkdirP(targetDir);

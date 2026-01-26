@@ -121,7 +121,7 @@ const buildHighlightBlock = (language, repoHighlights) => {
 export const prompts = {
   system: (language) => {
     const label = languageLabels[language] ?? language;
-    return `You are a senior technical writer for HoverKraft Tech. Always write in ${label}.`;
+    return `You are a senior technical writer for HoverKraft Tech. Always write in ${label}. Keep the tone pragmatic, matter-of-fact, and restrained. Avoid hype, sensational claims, or superlatives.`;
   },
   introduction: (language, stats, repoHighlights) => {
     const statsLabels = ui[language]?.stats ?? {};
@@ -145,7 +145,7 @@ export const prompts = {
 ${copy.highlightHeading}:
 ${highlightBlock}
 
-Write the full response in ${label}. Produce a short update in raw Markdown (no \`\`\` fences): start with a strong hook or quote about the period that references a concrete KPI (deploy frequency, MTTR, adoption, etc.), follow with one paragraph that cites specific repositories, components, or architectural patterns that changed, and then add a bulleted list of 2-3 takeaways. Each takeaway must mention a repo or capability and why it matters for platform engineers, SREs, or technical contributors adopting Hoverkraft projects (e.g., latency drop, new connector, Terraform module shipped). Use crisp technical terms, no filler, no emoji, no generic marketing language. Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
+Write the full response in ${label}. Produce a short update in raw Markdown (no \`\`\` fences): open with one factual sentence about the period that references a concrete KPI (deploy frequency, MTTR, adoption, etc.), follow with one paragraph that cites specific repositories, components, or architectural patterns that changed, and then add a bulleted list of 2-3 takeaways. Each takeaway must mention a repo or capability and why it matters for platform engineers, SREs, or technical contributors adopting Hoverkraft projects (e.g., latency drop, new connector, Terraform module shipped). Keep it pragmatic and specific: no hype, no sensational language, no emojis, no generic marketing phrases. Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
   },
   closing: (language, stats, repoHighlights) => {
     const statsLabels = ui[language]?.stats ?? {};
@@ -168,7 +168,7 @@ ${statsLabels.latest}: ${
 ${copy.highlightHeading}:
 ${highlightBlock}
 
-Write the entire response in ${label}. Provide a concise closing paragraph that summarizes the practical impact for platform engineers, SREs, and other technical users, then add a bulleted list of 2-3 concrete next steps (benchmarks to run, docs to review, components to adopt). Each action must reference a repo or artefact and clarify the expected gain (performance, compliance, automation, etc.). Output raw Markdown with no \`\`\` fences or commentary. Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
+Write the entire response in ${label}. Provide a concise closing paragraph that summarizes the practical impact for platform engineers, SREs, and other technical users, then add a bulleted list of 2-3 concrete next steps (benchmarks to run, docs to review, components to adopt). Each action must reference a repo or artefact and clarify the expected gain (performance, compliance, automation, etc.). Keep the tone pragmatic and restrained, avoiding hype or sensational phrasing. Output raw Markdown with no \`\`\` fences or commentary. Never use the French past participle of « analyser » nor the English past-tense form of “to analyze”.`;
   },
 };
 

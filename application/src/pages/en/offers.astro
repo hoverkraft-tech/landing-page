@@ -17,7 +17,7 @@ const translatePath = useTranslatedPath(lang);
 const metadata = {
   title: 'HoverKraft offers',
   description:
-    'Choose the HoverKraft offer that matches your platform maturity: assessment, coaching, restart or Platform Engineering as a Service.',
+    'Choose the Hoverkraft offer that matches your platform maturity: audit, autonomy, restart or Platform Engineer as a Service.',
 };
 ---
 
@@ -53,61 +53,65 @@ const metadata = {
     subtitle="Clear commitments, concrete deliverables, measurable outcomes."
     prices={[
       {
-        title: 'HoverKraft Assessment',
+        title: 'Hoverkraft Audit',
         subtitle: 'Two-day mapping to objectify your pain points',
-        price: '2 500',
+        price: '2 500',
         currency: '€',
-        period: 'excl. VAT (2 on-site days)',
+        period: 'excl. VAT (2 days, indicative)',
         items: [
           { description: 'Interviews with dev/ops/product teams and review of your assets' },
           { description: 'Map of existing connectors and friction points' },
           { description: 'Initial DORA/SPACE score + prioritized recommendations' },
         ],
-        callToAction: { text: 'Schedule the assessment', href: '/contact#form' },
+        callToAction: { text: 'Schedule the audit', href: '/contact#form' },
       },
       {
-        title: 'Autonomy Pack',
-        subtitle: 'Targeted coaching to anchor the HoverKraft method',
+        title: 'Autonomy Package',
+        subtitle: 'Workshop, kit, and follow-up to anchor the Hoverkraft method',
         price: '1 800',
         currency: '€',
-        period: 'excl. VAT / day (minimum 5 days)',
+        period: 'excl. VAT (5h format, indicative)',
         items: [
-          { description: 'Detailed 6-month roadmap and DORA milestones' },
-          { description: 'Weekly pairing with a Kraft Builder' },
-          { description: 'Implement open-source glue on a critical flow' },
+          { description: 'Structuring workshop + Hoverkraft tooling kit' },
+          { description: '6-month roadmap and DORA/SPACE milestones' },
+          { description: 'Follow-up session to secure execution' },
         ],
         callToAction: { text: 'Build the plan', href: '/contact' },
         hasRibbon: true,
         ribbonTitle: 'Popular',
       },
       {
-        title: 'Restart Platform',
-        subtitle: 'Reboot your value chain and onboard the teams',
-        price: '4 000',
+        title: 'Restart (Full transformation)',
+        subtitle: 'Audit + 6-month roadmap, then 6-12 months of support',
+        price: '25 000',
         currency: '€',
-        period: 'excl. VAT + 6 months of coaching',
+        period: 'excl. VAT + follow-up (indicative, adjusted to context)',
         items: [
-          { description: '6-month transformation program with shared governance' },
-          { description: 'Full deployment of HoverKraft glue (CI/CD, observability, IAM)' },
+          { description: 'Transformation program with shared governance' },
+          { description: 'Full deployment of Hoverkraft glue (CI/CD, observability, IAM)' },
           { description: 'Certified training and DORA/SPACE rituals' },
         ],
         callToAction: { text: 'Launch the restart', href: '/contact' },
       },
       {
-        title: 'Platform Engineering as a Service',
-        subtitle: 'Your embedded HoverKraft platform team over time',
-        price: '8 000',
+        title: 'Platform Engineer as a Service',
+        subtitle: 'Continuous resources to operate your platform',
+        price: '3 000',
         currency: '€',
-        period: 'excl. VAT / month (6-month commitment)',
+        period: 'excl. VAT / month (indicative)',
         items: [
-          { description: 'Dedicated HoverKraft squad (Platform + Product + Lean Coach)' },
-          { description: 'Continuous roadmap, shared run and monthly executive reporting' },
-          { description: 'Priority access to the OpenKraft community and connector releases' },
+          { description: 'Dedicated resources and joint prioritization' },
+          { description: 'Continuous roadmap, shared run, and executive reporting' },
+          { description: 'Access to the OpenKraft community and connectors' },
         ],
         callToAction: { text: 'Discuss PEaaS', href: '/contact' },
       },
     ]}
   />
+
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 text-sm text-muted">
+    Audit fees are deducted if a Restart contract is signed afterwards.
+  </div>
 
   <Content
     isReversed
@@ -138,17 +142,17 @@ const metadata = {
     columns={2}
     items={[
       {
-        title: 'HoverKraft Assessment',
+        title: 'Hoverkraft Audit',
         description: 'Ideal to get a clear picture of your delivery chain and convince leadership.',
         icon: 'tabler:search',
       },
       {
-        title: 'Autonomy Pack',
+        title: 'Autonomy Package',
         description: 'You have a motivated team and want to grow fast while keeping control.',
         icon: 'tabler:road',
       },
       {
-        title: 'Restart Platform',
+        title: 'Restart',
         description: 'You need to relaunch your platform initiative with coaching, delivery and change management.',
         icon: 'tabler:refresh',
       },
@@ -203,7 +207,7 @@ const metadata = {
     title="One consistent framework for every offer"
     items={[
       {
-        title: '1. Structured assessment',
+        title: '1. Structured audit',
         description: 'Interviews, metric collection and review of your existing pipelines.',
         icon: 'tabler:clipboard-text',
       },
@@ -235,7 +239,7 @@ const metadata = {
     isReversed
     items={[
       {
-        title: '1. Complimentary flash assessment',
+        title: '1. Complimentary flash audit',
         description: '30 minutes to understand your current challenges and validate the right pack.',
         icon: 'tabler:phone',
       },
@@ -267,9 +271,9 @@ const metadata = {
     columns={1}
     items={[
       {
-        title: 'Can we start with the assessment before committing?',
+        title: 'Can we start with the audit before committing?',
         description:
-          'Yes. The assessment is often the entry point. It can be deducted from the chosen pack if the mission starts within 60 days.',
+          'Yes. The audit is often the entry point. It can be deducted from the chosen pack if the mission starts within 60 days.',
       },
       {
         title: 'Are the listed prices before tax?',
@@ -282,7 +286,7 @@ const metadata = {
       },
       {
         title: 'What are the payment terms?',
-        description: 'Per-mission invoicing for the assessment and autonomy pack, monthly for Restart and PEaaS.',
+        description: 'Per-mission invoicing for the audit and autonomy package, monthly for Restart and PEaaS.',
       },
       {
         title: 'Is there a subscription option?',
@@ -299,7 +303,7 @@ const metadata = {
     ]}
   >
     <Fragment slot="title">Need help deciding?</Fragment>
-    <Fragment slot="subtitle">Let’s discuss your context and pick the most relevant HoverKraft offer together.</Fragment
+    <Fragment slot="subtitle">Let's discuss your context and pick the most relevant HoverKraft offer together.</Fragment
     >
   </CallToAction>
 </Layout>

@@ -16,7 +16,7 @@ const translatePath = useTranslatedPath(lang);
 const metadata = {
   title: 'Méthodologie — HoverKraft',
   description:
-    'Notre méthode combine DORA, SPACE et Lean pour piloter votre transformation plateforme : diagnostic, design, intégration et run mesurable.',
+    'Notre méthode combine DORA, SPACE et Lean pour piloter votre transformation plateforme : audit, design, intégration et run mesurable.',
 };
 ---
 
@@ -24,7 +24,7 @@ const metadata = {
   <Hero
     tagline="Méthodologie HoverKraft"
     actions={[
-      { variant: 'primary', text: 'Réserver un diagnostic', href: '/contact#form' },
+      { variant: 'primary', text: 'Réserver un audit', href: '/contact#form' },
       { text: 'Voir nos offres', href: '/offers' },
     ]}
     image={{
@@ -49,7 +49,7 @@ const metadata = {
 
   <Note
     title="Le principe"
-    description="Nous ne vendons pas un outil supplémentaire, mais une méthode qui aligne vos équipes, vos process et vos systèmes autour d’une même vision delivery."
+    description="Nous ne vendons pas un outil supplémentaire, mais une méthode qui aligne vos équipes, vos process et vos systèmes autour d’une même vision delivery. La méthodologie repose sur 7 piliers : DevX, environnements, CI/CD & IaC, Kubernetes, observabilité, sécurité et amélioration continue."
   />
 
   <Content
@@ -59,7 +59,7 @@ const metadata = {
       {
         title: 'Manifeste HoverKraft',
         description:
-          'Un cadre stratégique qui définit l’état futur de votre plateforme et les principes de gouvernance associés.',
+          "Un cadre stratégique qui définit l'état futur de votre plateforme et les principes de gouvernance associés.",
       },
       {
         title: 'Formations & bootcamps',
@@ -95,7 +95,7 @@ const metadata = {
       {
         title: 'Portail développeur',
         description:
-          'Playbooks Backstage / Portainer pour accélérer l’onboarding et rendre visibles les bonnes pratiques.',
+          "Playbooks Backstage / Portainer pour accélérer l'onboarding et rendre visibles les bonnes pratiques.",
       },
     ]}
     image={{
@@ -113,7 +113,7 @@ const metadata = {
         icon: 'tabler:compass',
       },
       {
-        title: '2. Diagnostic terrain',
+        title: '2. Audit terrain',
         description: 'Interviews, audits techniques et cartographie des connecteurs existants.',
         icon: 'tabler:clipboard-text',
       },
@@ -152,12 +152,12 @@ const metadata = {
       },
       {
         title: 'Blueprint plateforme',
-        description: 'Architecture cible, catalogue de services et diagrammes d’intégration.',
+        description: "Architecture cible, catalogue de services et diagrammes d'intégration.",
         icon: 'tabler:layers-linked',
       },
       {
         title: 'Dashboard DORA/SPACE',
-        description: 'Suivi temps réel des métriques, accessible à toute l’équipe.',
+        description: "Suivi temps réel des métriques, accessible à toute l'équipe.",
         icon: 'tabler:report-analytics',
       },
       {
@@ -167,12 +167,12 @@ const metadata = {
       },
       {
         title: 'Runbooks incidents',
-        description: 'Procédures prêtes à l’emploi pour sécuriser votre MTTR.',
+        description: "Procédures prêtes à l'emploi pour sécuriser votre MTTR.",
         icon: 'tabler:alert-triangle',
       },
       {
         title: 'Portail OpenKraft',
-        description: 'Accès à la communauté, aux connecteurs et aux retours d’expérience partagés.',
+        description: "Accès à la communauté, aux connecteurs et aux retours d'expérience partagés.",
         icon: 'tabler:brand-github',
       },
     ]}
@@ -182,22 +182,21 @@ const metadata = {
     title="Résultats observés"
     subtitle="La méthode HoverKraft délivre un impact mesurable."
     stats={[
-      { title: 'Temps de mise en prod', amount: '-76%' },
-      { title: 'Déploiements / semaine', amount: '×3' },
-      { title: 'Incident post-release', amount: '-58%' },
-      { title: 'Satisfaction équipe', amount: '+1,7 pts' },
+      { title: 'Gain de time-to-market', amount: '40-60%' },
+      { title: 'Incidents en moins', amount: '60-80%' },
+      { title: 'Satisfaction équipes', amount: '+40-60%' },
     ]}
   />
 
   <CallToAction
     actions={[
-      { variant: 'primary', text: 'Réserver un diagnostic', href: '/contact#form' },
+      { variant: 'primary', text: 'Réserver un audit', href: '/contact#form' },
       { text: 'Voir nos offres', href: '/offers' },
     ]}
   >
     <Fragment slot="title">Prêt à déployer la méthode HoverKraft ?</Fragment>
     <Fragment slot="subtitle"
-      >Parlons de vos irritants actuels et dessinons un plan d’action adapté à votre contexte.</Fragment
+      >Parlons de vos irritants actuels et dessinons un plan d'action adapté à votre contexte.</Fragment
     >
   </CallToAction>
 </Layout>
