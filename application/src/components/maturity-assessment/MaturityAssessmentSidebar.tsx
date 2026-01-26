@@ -4,6 +4,8 @@ import type { SupportedLanguage } from '~/i18n/ui';
 import { defaultLang } from '~/i18n/ui';
 import { useTranslatedPath } from '~/i18n/utils';
 // eslint-disable-next-line n/no-missing-import
+import { SITE } from 'astrowind:config';
+// eslint-disable-next-line n/no-missing-import
 import SocialShare from '~/components/common/SocialShare';
 import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
 import type { MaturityAssessmentStrings } from './types';
@@ -60,18 +62,22 @@ const MaturityAssessmentSidebar = ({
   const shareFormUrl = React.useMemo(() => {
     const shareFormPath = translatePath('/maturity-assessment-share');
     try {
-      const url = new URL(shareFormPath, pageUrl);
+      const baseUrl = SITE?.site || pageUrl;
+      const url = new URL(shareFormPath, baseUrl);
       url.searchParams.set('maturity_assessment', shareUrlResolved);
       return url.toString();
     } catch {
       return shareFormPath;
     }
   }, [pageUrl, shareUrlResolved, translatePath]);
-  const shareTeamClassName = `btn-primary px-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary disabled:hover:border-primary disabled:hover:brightness-100`;
-  const handleShareTeamClick = () => {
-    if (!isComplete) return;
-    if (typeof window === 'undefined') return;
-    window.location.href = shareFormUrl;
+  const shareTeamClassName = `btn-primary px-4 ${
+    isComplete
+      ? ''
+      : 'opacity-50 cursor-not-allowed hover:bg-primary hover:border-primary hover:brightness-100 pointer-events-none'
+  }`;
+  const handleShareTeamClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
+    if (isComplete) return;
+    event.preventDefault();
   };
 
   return (
@@ -140,16 +146,16 @@ const MaturityAssessmentSidebar = ({
             >
               {strings.resetLabel}
             </button>
-            <button
-              type="button"
+            <a
+              href={shareFormUrl}
               className={shareTeamClassName}
               aria-disabled={!isComplete}
-              disabled={!isComplete}
               onClick={handleShareTeamClick}
               data-share-team-button
+              tabIndex={isComplete ? undefined : -1}
             >
               {strings.shareTeamLabel}
-            </button>
+            </a>
           </div>
 
           <div className="my-4 h-px w-full bg-gray-200/60 dark:bg-gray-700/60" aria-hidden="true"></div>

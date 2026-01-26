@@ -7,10 +7,11 @@ import { humanizeString } from 'humanize-ai-lib';
 const DEFAULT_ROOT = path.resolve(process.cwd(), 'src');
 
 // IMPORTANT:
-// We intentionally scope this script to Markdown/MDX content only.
+// We intentionally scope transformations to content-like files only.
 // Normalizing curly quotes (e.g. ’ -> ') inside JS/TS/Astro frontmatter can
 // break single-quoted string literals and create syntax errors.
-const TEXT_EXTENSIONS = new Set(['.md', '.mdx']);
+// For .astro, we protect tags and script/style blocks to avoid touching code.
+const TEXT_EXTENSIONS = new Set(['.md', '.mdx', '.astro']);
 
 const IGNORE_DIRS = new Set([
   'node_modules',
@@ -103,6 +104,34 @@ function splitMarkdownFrontmatter(text) {
   return { frontmatter: match[0], body: text.slice(match[0].length) };
 }
 
+function protectBlocks(text, pattern, prefix) {
+  const blocks = [];
+  const result = text.replace(pattern, (match) => {
+    const token = `${prefix}${blocks.length}__`;
+    blocks.push(match);
+    return token;
+  });
+  return { text: result, blocks };
+}
+
+function restoreBlocks(text, blocks, prefix) {
+  return blocks.reduce((acc, block, index) => acc.replace(`${prefix}${index}__`, block), text);
+}
+
+function protectTags(text) {
+  const tags = [];
+  const result = text.replace(/<[^>]*>/g, (match) => {
+    const token = `__HK_TAG_${tags.length}__`;
+    tags.push(match);
+    return token;
+  });
+  return { text: result, tags };
+}
+
+function restoreTags(text, tags) {
+  return tags.reduce((acc, tag, index) => acc.replace(`__HK_TAG_${index}__`, tag), text);
+}
+
 function shouldSkipFile(filePath) {
   // Skip known binary-ish text files where changing whitespace could be risky.
   // (We keep this intentionally conservative.)
@@ -116,7 +145,28 @@ async function humanizeFile(filePath) {
 
   const { frontmatter, body } = splitMarkdownFrontmatter(original);
 
-  const result = humanizeString(body, {
+  const ext = path.extname(filePath).toLowerCase();
+  let safeBody = body;
+  let protectedBlocks = null;
+  let protectedTags = null;
+
+  if (ext === '.astro') {
+    const scriptBlocks = protectBlocks(safeBody, /<script\b[^>]*>[\s\S]*?<\/script(?:\s[^>]*)?>/gi, '__HK_SCRIPT_');
+    const styleBlocks = protectBlocks(
+      scriptBlocks.text,
+      /<style\b[^>]*>[\s\S]*?<\/style(?:\s[^>]*)?>/gi,
+      '__HK_STYLE_'
+    );
+    protectedBlocks = {
+      script: scriptBlocks.blocks,
+      style: styleBlocks.blocks,
+    };
+    const tagProtection = protectTags(styleBlocks.text);
+    protectedTags = tagProtection.tags;
+    safeBody = tagProtection.text;
+  }
+
+  const result = humanizeString(safeBody, {
     transformHidden: true,
     transformTrailingWhitespace: true,
     transformNbs: true,
@@ -126,7 +176,14 @@ async function humanizeFile(filePath) {
     keyboardOnly: false,
   });
 
-  const transformed = `${frontmatter}${result.text}`;
+  let finalBody = result.text;
+  if (ext === '.astro' && protectedTags && protectedBlocks) {
+    finalBody = restoreTags(finalBody, protectedTags);
+    finalBody = restoreBlocks(finalBody, protectedBlocks.style, '__HK_STYLE_');
+    finalBody = restoreBlocks(finalBody, protectedBlocks.script, '__HK_SCRIPT_');
+  }
+
+  const transformed = `${frontmatter}${finalBody}`;
   const changed = transformed !== original;
 
   return {

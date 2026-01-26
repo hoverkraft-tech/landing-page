@@ -39,6 +39,7 @@ env:
   BRAND_DIR: application/src/data/brand
   BRAND_LOGO_DIR: application/src/assets/images/brand/logo
   BRAND_MASCOT_DIR: application/src/assets/images/brand/mascot
+  ASSETS_ROOT_DIR: assets
 
 jobs:
   update-branding:
@@ -130,6 +131,7 @@ jobs:
           mascot: ${{ steps.validate-manifest.outputs.mascot }}
           logos-dir: ${{ env.BRAND_LOGO_DIR }}
           mascot-dir: ${{ env.BRAND_MASCOT_DIR }}
+          assets-root-dir: ${{ env.ASSETS_ROOT_DIR }}
 
       - name: Generate brand content (mission, colors, typography, logos)
         uses: ./.github/actions/generate-brand-content
