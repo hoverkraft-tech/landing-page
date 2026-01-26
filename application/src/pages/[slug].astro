@@ -2,6 +2,7 @@
 import BrandGuidelinesView from '../views/brand-guidelines.astro';
 import MethodologyView from '../views/methodology.astro';
 import MaturityAssessmentView from '../views/maturity-assessment.astro';
+import MaturityAssessmentShareView from '../views/maturity-assessment-share.astro';
 import OffersView from '../views/offers.astro';
 import ResourcesView from '../views/resources.astro';
 
@@ -11,6 +12,7 @@ const localizedViews = {
   ressources: ResourcesView,
   'charte-graphique': BrandGuidelinesView,
   'radar-maturite': MaturityAssessmentView,
+  'radar-maturite-partage': MaturityAssessmentShareView,
 } as const;
 
 export function getStaticPaths() {
@@ -20,6 +22,7 @@ export function getStaticPaths() {
     { params: { slug: 'ressources' } },
     { params: { slug: 'charte-graphique' } },
     { params: { slug: 'radar-maturite' } },
+    { params: { slug: 'radar-maturite-partage' } },
   ];
 }
 

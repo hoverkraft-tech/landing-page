@@ -1,0 +1,27 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import MaturityAssessmentShareForm from '~/components/maturity-assessment/MaturityAssessmentShareForm.astro';
+import Button from '~/components/ui/Button.astro';
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+
+const metadata = {
+  title: 'Share your maturity assessment - Hoverkraft',
+  description: 'Send your maturity assessment to the Hoverkraft team for a personalized debrief.',
+};
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline="Maturity radar" title="Share your results with Hoverkraft" />
+
+  <MaturityAssessmentShareForm />
+  <div class="mt-4 flex flex-wrap justify-center gap-4" data-maturity-share-actions>
+    <Button variant="primary" class="text-sm px-4 py-2" href={translatePath('/maturity-assessment')}>
+      Back to the maturity assessment
+    </Button>
+    <Button variant="secondary" class="text-sm px-4 py-2" href={translatePath('/')}> Back to home </Button>
+  </div>
+</Layout>

@@ -1,6 +1,8 @@
 import React from 'react';
 
 import type { SupportedLanguage } from '~/i18n/ui';
+import { defaultLang } from '~/i18n/ui';
+import { useTranslatedPath } from '~/i18n/utils';
 // eslint-disable-next-line n/no-missing-import
 import SocialShare from '~/components/common/SocialShare';
 import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
@@ -54,6 +56,23 @@ const MaturityAssessmentSidebar = ({
   const scoreValue = globalAvg.toFixed(1);
   const shareUrlResolved = shareUrl ?? pageUrl;
   const shareTextResolved = shareUrl ? shareText : '';
+  const translatePath = useTranslatedPath(lang ?? defaultLang);
+  const shareFormUrl = React.useMemo(() => {
+    const shareFormPath = translatePath('/maturity-assessment-share');
+    try {
+      const url = new URL(shareFormPath, pageUrl);
+      url.searchParams.set('maturity_assessment', shareUrlResolved);
+      return url.toString();
+    } catch {
+      return shareFormPath;
+    }
+  }, [pageUrl, shareUrlResolved, translatePath]);
+  const shareTeamClassName = `btn-primary px-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-primary disabled:hover:border-primary disabled:hover:brightness-100`;
+  const handleShareTeamClick = () => {
+    if (!isComplete) return;
+    if (typeof window === 'undefined') return;
+    window.location.href = shareFormUrl;
+  };
 
   return (
     <aside className="sticky top-24 lg:top-28 self-start h-fit" data-maturity-sidebar>
@@ -112,14 +131,24 @@ const MaturityAssessmentSidebar = ({
             {interpretation.text}
           </div>
 
-          <div className="mt-4 flex justify-center" data-reset-section>
+          <div className="mt-4 flex flex-wrap justify-center gap-3" data-reset-share-row>
             <button
               type="reset"
-              className="btn btn-primary px-4 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="btn-secondary px-4 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:bg-secondary disabled:hover:border-secondary disabled:hover:brightness-100"
               data-reset-button
               disabled={answeredQuestions === 0}
             >
               {strings.resetLabel}
+            </button>
+            <button
+              type="button"
+              className={shareTeamClassName}
+              aria-disabled={!isComplete}
+              disabled={!isComplete}
+              onClick={handleShareTeamClick}
+              data-share-team-button
+            >
+              {strings.shareTeamLabel}
             </button>
           </div>
 
