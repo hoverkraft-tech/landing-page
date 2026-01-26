@@ -21,6 +21,7 @@ export interface MaturityAssessmentStrings {
   shareMailBodyWithoutInterpretation: string;
   shareLinkedInLabel: string;
   shareBlueskyLabel: string;
+  shareTeamLabel: string;
   resetLabel: string;
   editLabel: string;
   levelPrefix: string;

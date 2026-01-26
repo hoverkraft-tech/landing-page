@@ -244,11 +244,12 @@ export const routes = {
     resources: 'ressources',
     'brand-guidelines': 'charte-graphique',
     'maturity-assessment': 'radar-maturite',
+    'maturity-assessment-share': 'radar-maturite-partage',
   },
   en: {
     about: 'about',
     methodology: 'methodology',
-    offers: 'services',
+    offers: 'offers',
     trainings: 'trainings',
     resources: 'resources',
     contact: 'contact',
@@ -257,6 +258,7 @@ export const routes = {
     terms: 'terms',
     'brand-guidelines': 'brand-guidelines',
     'maturity-assessment': 'maturity-assessment',
+    'maturity-assessment-share': 'maturity-assessment-share',
   },
 };
 
