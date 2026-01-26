@@ -48,8 +48,8 @@ describe('permalinks', () => {
   });
 
   it('builds asset URLs', () => {
-    expect(getAsset('images/logo.png')).toBe('/images/logo.png');
-    expect(getPermalink('images/logo.png', 'asset')).toBe('/images/logo.png/');
+    expect(getAsset('images/pages/home/hero-image.png')).toBe('/images/pages/home/hero-image.png');
+    expect(getPermalink('images/pages/home/hero-image.png', 'asset')).toBe('/images/pages/home/hero-image.png/');
   });
 
   it('creates canonical URLs from SITE.site', () => {
