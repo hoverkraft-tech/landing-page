@@ -1,13 +1,15 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Pricing from '~/components/widgets/Pricing.astro';
+import Pricing from '~/components/widgets/pricing/Pricing.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import { Icon } from 'astro-icon/components';
 
 import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
 
@@ -110,9 +112,19 @@ const metadata = {
     ]}
   />
 
-  <div class="mx-auto max-w-4xl px-4 sm:px-6 text-sm text-muted">
-    Le coût de l'audit est déduit si un contrat Restart est signé dans la continuité.
-  </div>
+  <aside class="mx-auto mt-6 max-w-4xl px-4 sm:px-6" aria-label="Information tarifaire">
+    <div
+      class="flex items-center gap-3 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-base shadow-sm dark:border-primary/30"
+    >
+      <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <Icon name="tabler:info-circle" class="h-5 w-5" />
+      </div>
+      <p class="text-default font-medium leading-snug">
+        Le coût de l'audit est déduit si un contrat <span class="font-semibold text-default">Restart</span> est signé dans
+        la continuité.
+      </p>
+    </div>
+  </aside>
 
   <Content
     isReversed

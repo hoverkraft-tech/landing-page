@@ -1,0 +1,21 @@
+---
+import Button from '~/components/ui/Button.astro';
+import type { CallToAction } from '~/types';
+
+const { callToAction, hasRibbon = false } = Astro.props as {
+  callToAction?: string | CallToAction;
+  hasRibbon?: boolean;
+};
+---
+
+{
+  callToAction && (
+    <div class="flex justify-center">
+      {typeof callToAction === 'string' ? (
+        <Fragment set:html={callToAction} />
+      ) : (
+        callToAction && callToAction.href && <Button {...(hasRibbon ? { variant: 'primary' } : {})} {...callToAction} />
+      )}
+    </div>
+  )
+}

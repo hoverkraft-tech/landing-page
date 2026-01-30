@@ -1,0 +1,22 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { Item } from '~/types';
+
+const { items } = Astro.props as { items: Item[] };
+---
+
+<ul class="space-y-2 text-left">
+  {
+    items.map(
+      ({ description, icon }) =>
+        description && (
+          <li class="flex items-start space-x-3 leading-5">
+            <div class="mt-0 rounded-full bg-primary">
+              <Icon name={icon ? icon : 'tabler:check'} class="w-5 h-5 font-bold p-1 text-white" />
+            </div>
+            <span>{description}</span>
+          </li>
+        )
+    )
+  }
+</ul>

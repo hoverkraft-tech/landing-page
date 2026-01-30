@@ -1,0 +1,78 @@
+---
+import PricingCTA from './PricingCTA.astro';
+import PricingHeader from './PricingHeader.astro';
+import PricingItems from './PricingItems.astro';
+import PricingPriceRow from './PricingPriceRow.astro';
+import PricingRibbon from './PricingRibbon.astro';
+import type { Price } from '~/types';
+
+const { prices = [] } = Astro.props as { prices?: Price[] };
+---
+
+<div class="flex items-stretch justify-center">
+  <div
+    class="grid grid-cols-1 gap-4 dark:text-white sm:grid-cols-2 lg:grid-cols-none lg:grid-flow-col lg:auto-cols-fr lg:grid-rows-[auto_auto_auto_auto] lg:gap-x-4 lg:gap-y-0"
+  >
+    {
+      prices.map((plan) => {
+        const {
+          title,
+          subtitle,
+          price,
+          period,
+          items,
+          callToAction,
+          hasRibbon = false,
+          ribbonTitle,
+          currency = '€',
+        } = plan;
+
+        const amount = price ?? 'Sur devis';
+        const showCurrency = typeof price === 'number' || (typeof price === 'string' && /[0-9]/.test(price));
+        const showPeriod = Boolean(period);
+
+        const desktopCellBase =
+          'lg:bg-white lg:dark:bg-slate-900 lg:backdrop-blur lg:border-gray-200 lg:dark:border-gray-700 lg:px-5 lg:py-3 lg:text-center';
+
+        return (
+          <div class="relative mx-auto flex w-full max-w-sm flex-col gap-4 rounded-lg border border-gray-200 bg-white px-5 py-5 text-center shadow backdrop-blur dark:border-gray-700 dark:bg-slate-900 lg:contents">
+            <div
+              class:list={[
+                desktopCellBase,
+                'relative flex flex-col items-center justify-start',
+                'lg:border-x lg:border-t lg:rounded-t-lg',
+              ]}
+            >
+              {hasRibbon && ribbonTitle && <PricingRibbon ribbonTitle={ribbonTitle} />}
+              <PricingHeader title={title} subtitle={subtitle} />
+            </div>
+
+            <div class:list={[desktopCellBase, 'flex flex-col items-center justify-start', 'lg:border-x']}>
+              <PricingPriceRow
+                amount={amount}
+                currency={currency}
+                showCurrency={showCurrency}
+                period={period}
+                showPeriod={showPeriod}
+              />
+            </div>
+
+            <div class:list={[desktopCellBase, 'flex flex-col items-stretch justify-start', 'lg:border-x']}>
+              {items && <PricingItems items={items} />}
+            </div>
+
+            <div
+              class:list={[
+                desktopCellBase,
+                'flex flex-col items-center justify-start',
+                'lg:border-x lg:border-b lg:rounded-b-lg',
+              ]}
+            >
+              <PricingCTA callToAction={callToAction} hasRibbon={hasRibbon} />
+            </div>
+          </div>
+        );
+      })
+    }
+  </div>
+</div>

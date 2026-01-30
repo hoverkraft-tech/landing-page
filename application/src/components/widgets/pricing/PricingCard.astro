@@ -1,0 +1,38 @@
+---
+import PricingCTA from './PricingCTA.astro';
+import PricingHeader from './PricingHeader.astro';
+import PricingItems from './PricingItems.astro';
+import PricingRibbon from './PricingRibbon.astro';
+import type { Price } from '~/types';
+
+const { plan } = Astro.props as { plan: Price };
+
+const { title, subtitle, price, period, items, callToAction, hasRibbon = false, ribbonTitle, currency = '€' } = plan;
+
+const amount = price ?? 'Sur devis';
+const showCurrency = typeof price === 'number' || (typeof price === 'string' && /[0-9]/.test(price));
+const showPeriod = Boolean(period);
+---
+
+<div
+  class="col-span-1 mx-auto flex h-full w-full sm:col-span-1 lg:col-span-1 intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
+>
+  <div
+    class="relative rounded-lg backdrop-blur border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900 shadow px-6 py-8 flex h-full w-full max-w-sm flex-col text-center"
+  >
+    {hasRibbon && ribbonTitle && <PricingRibbon ribbonTitle={ribbonTitle} />}
+    <div class="px-2 py-0 flex h-full flex-col">
+      <PricingHeader
+        title={title}
+        subtitle={subtitle}
+        amount={amount}
+        currency={currency}
+        showCurrency={showCurrency}
+        period={period}
+        showPeriod={showPeriod}
+      />
+      {items && <PricingItems items={items} />}
+    </div>
+    <PricingCTA callToAction={callToAction} hasRibbon={hasRibbon} />
+  </div>
+</div>
