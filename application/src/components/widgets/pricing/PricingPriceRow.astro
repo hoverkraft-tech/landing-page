@@ -1,0 +1,17 @@
+---
+const { amount, currency, showCurrency, period, showPeriod } = Astro.props as {
+  amount: string | number;
+  currency: string;
+  showCurrency: boolean;
+  period?: string;
+  showPeriod: boolean;
+};
+---
+
+<div>
+  <div class="mb-0 flex items-baseline justify-center gap-2 whitespace-nowrap text-center">
+    {showCurrency && <span class="text-3xl sm:text-4xl leading-none">{currency}</span>}
+    <span class="text-4xl sm:text-5xl font-extrabold leading-none tabular-nums whitespace-nowrap">{amount}</span>
+  </div>
+  {showPeriod && <span class="text-sm leading-5 lowercase text-muted">{period}</span>}
+</div>

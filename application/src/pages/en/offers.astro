@@ -1,13 +1,15 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Pricing from '~/components/widgets/Pricing.astro';
+import Pricing from '~/components/widgets/pricing/Pricing.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Features3 from '~/components/widgets/Features3.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+
+import { Icon } from 'astro-icon/components';
 
 import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
 
@@ -68,7 +70,7 @@ const metadata = {
       {
         title: 'Autonomy Package',
         subtitle: 'Workshop, kit, and follow-up to anchor the Hoverkraft method',
-        price: '1 800',
+        price: '1 800',
         currency: '€',
         period: 'excl. VAT (5h format, indicative)',
         items: [
@@ -83,7 +85,7 @@ const metadata = {
       {
         title: 'Restart (Full transformation)',
         subtitle: 'Audit + 6-month roadmap, then 6-12 months of support',
-        price: '25 000',
+        price: '25 000',
         currency: '€',
         period: 'excl. VAT + follow-up (indicative, adjusted to context)',
         items: [
@@ -109,9 +111,18 @@ const metadata = {
     ]}
   />
 
-  <div class="mx-auto max-w-4xl px-4 sm:px-6 text-sm text-muted">
-    Audit fees are deducted if a Restart contract is signed afterwards.
-  </div>
+  <aside class="mx-auto mt-6 max-w-4xl px-4 sm:px-6" aria-label="Pricing information">
+    <div
+      class="flex items-center gap-3 rounded-lg border border-primary/20 bg-primary/5 px-4 py-3 text-base shadow-sm dark:border-primary/30"
+    >
+      <div class="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+        <Icon name="tabler:info-circle" class="h-5 w-5" />
+      </div>
+      <p class="text-default font-medium leading-snug">
+        Audit fees are deducted if a <span class="font-semibold text-default">Restart</span> contract is signed afterwards.
+      </p>
+    </div>
+  </aside>
 
   <Content
     isReversed
