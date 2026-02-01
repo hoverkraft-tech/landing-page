@@ -12,7 +12,7 @@ site:
 metadata:
   title:
     default: Hoverkraft
-    template: '%s — Hoverkraft'
+    template: '%s - Hoverkraft'
   description: '🚀 Cloud-native development platform for modern applications. Build, deploy, and scale with confidence.'
   robots:
     index: true
