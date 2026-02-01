@@ -29,7 +29,7 @@ const blogSubtitle = t('blog.headline.subtitle');
 // const allTags = await findTags();
 
 const metadata = {
-  title: `${blogTitle}${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
+  title: `${blogTitle}${currentPage > 1 ? ` - Page ${currentPage}` : ''}`,
   robots: {
     index: blogListRobots?.index && currentPage === 1,
     follow: blogListRobots?.follow,
