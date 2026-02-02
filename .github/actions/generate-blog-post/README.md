@@ -3,7 +3,7 @@
 # GitHub Action: Generate Blog Post
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/3aee95d4585468c00de61ae1ad68d90dbaf2f424c5f50a401ac9019f588c016b/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
+  <img src="https://opengraph.githubassets.com/a17d20276590714a95f563f7eb6a553c6afc859c63dff12be4788bdda2da1bfd/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
 </div>
 
 ---
