@@ -67,7 +67,7 @@
     "astro-eslint-parser": "^1.2.2",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
-    "globals": "^17.1.0",
+    "globals": "^17.3.0",
     "humanize-ai-lib": "^1.0.0",
     "js-yaml": "^4.1.1",
     "mdast-util-to-string": "^4.0.0",
