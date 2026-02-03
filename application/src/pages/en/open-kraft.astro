@@ -18,19 +18,18 @@ const metadata = {
     tagline="OpenKraft"
     actions={[
       {
-        variant: 'primary',
         text: 'Access GitHub',
         href: 'https://github.com/hoverkraft-tech',
         target: '_blank',
         icon: 'tabler:brand-github',
       },
+      { text: 'View documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank', variant: 'primary' },
       {
         text: 'Access GitLab',
         href: 'https://gitlab.com/hoverkraft-tech/',
         target: '_blank',
         icon: 'tabler:brand-gitlab',
       },
-      { text: 'View documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank' },
     ]}
     image={{
       src: '~/assets/images/pages/shared/open-source.webp',
@@ -80,14 +79,13 @@ const metadata = {
     items={[
       {
         title: 'Documentation',
-        description:
-          'Comprehensive documentation portal for all our open source projects: docs.hoverkraft.cloud and github.com/hoverkraft-tech/public-docs',
+        description: 'Comprehensive documentation portal for all our open source projects.',
         icon: 'tabler:book',
       },
       {
         title: 'HoverKraft Glue',
-        description: 'GitHub repositories with connectors, scripts, and integration documentation.',
-        icon: 'tabler:brand-github',
+        description: 'GitHub & GitLab repositories with connectors, scripts, and integration documentation.',
+        icon: 'tabler:brand-open-source',
       },
       {
         title: 'Blog & case studies',
@@ -177,11 +175,19 @@ const metadata = {
         text: 'Explore GitHub',
         href: 'https://github.com/hoverkraft-tech',
         target: '_blank',
+        icon: 'tabler:brand-github',
       },
       {
         text: 'Join the community',
         href: 'https://github.com/orgs/hoverkraft-tech/discussions',
         target: '_blank',
+      },
+      {
+        variant: 'primary',
+        text: 'Explore GitLab',
+        href: 'https://gitlab.com/hoverkraft-tech',
+        target: '_blank',
+        icon: 'tabler:brand-gitlab',
       },
     ]}
   >

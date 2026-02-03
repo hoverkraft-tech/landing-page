@@ -8,7 +8,7 @@ help: ## Show help message
 
 include .env
 
-install: ## Prepare stack to run
+prepare: ## Prepare stack to run
 	cd application && npm install
 	cd .github/actions/generate-blog-post && npm install
 	cd .github/actions/generate-brand-content && npm install
