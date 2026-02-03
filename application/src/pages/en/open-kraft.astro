@@ -1,5 +1,194 @@
 ---
-import View from './resources.astro';
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'OpenKraft - Resources',
+  description: 'Access HoverKraft open source connectors, the community, and resources to accelerate your platform.',
+};
 ---
 
-<View />
+<Layout metadata={metadata}>
+  <Hero
+    tagline="OpenKraft"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Access GitHub',
+        href: 'https://github.com/hoverkraft-tech',
+        target: '_blank',
+        icon: 'tabler:brand-github',
+      },
+      {
+        text: 'Access GitLab',
+        href: 'https://gitlab.com/hoverkraft-tech/',
+        target: '_blank',
+        icon: 'tabler:brand-gitlab',
+      },
+      { text: 'View documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank' },
+    ]}
+    image={{
+      src: '~/assets/images/pages/resources/open-source.webp',
+      alt: 'OpenKraft community',
+    }}
+  >
+    <Fragment slot="title">The open source hub for your platform connectors</Fragment>
+
+    <Fragment slot="subtitle">
+      OpenKraft brings together our templates, dashboards, playbooks, and lessons learned. A space designed for
+      developers, platform teams, and leaders who want to accelerate without sacrificing sovereignty.
+    </Fragment>
+  </Hero>
+
+  <Note
+    title="Philosophy"
+    description="Knowledge that doesn't circulate dies out. We publish open source the building blocks needed to bring the HoverKraft method to life in any context."
+  />
+
+  <Content
+    isReversed
+    title="What you'll find in OpenKraft"
+    items={[
+      {
+        title: 'Laptop-to-prod connectors',
+        description: 'CI/CD, observability, security, provisioning: everything is ready to use and maintained.',
+      },
+      {
+        title: 'DORA/SPACE dashboards',
+        description: 'Grafana/Looker Studio pack to drive your improvements and share results.',
+      },
+      {
+        title: 'IDP templates',
+        description: 'Backstage, Portainer, and UI components to provide a credible developer portal.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
+      alt: 'HoverKraft open source resources',
+    }}
+  />
+
+  <Features2
+    title="Our formats"
+    subtitle="Content to learn, implement, and share."
+    columns={3}
+    items={[
+      {
+        title: 'Documentation',
+        description:
+          'Comprehensive documentation portal for all our open source projects: docs.hoverkraft.cloud and github.com/hoverkraft-tech/public-docs',
+        icon: 'tabler:book',
+      },
+      {
+        title: 'HoverKraft Glue',
+        description: 'GitHub repositories with connectors, scripts, and integration documentation.',
+        icon: 'tabler:brand-github',
+      },
+      {
+        title: 'Blog & case studies',
+        description: 'Real use cases, architecture retrospectives, and lessons learned shared transparently.',
+        icon: 'tabler:article',
+      },
+      {
+        title: 'Webinars',
+        description: 'Monthly sessions on topics such as GitOps, DORA metrics, and platform governance.',
+        icon: 'tabler:video',
+      },
+      {
+        title: 'Community forum',
+        description: 'Discussions on GitHub Discussions for questions, contributions, and collaborations.',
+        icon: 'tabler:message-circle',
+      },
+      {
+        title: 'Templates & starters',
+        description: 'Ready-to-fork repositories to quickly bootstrap your internal platform.',
+        icon: 'tabler:template',
+      },
+    ]}
+  />
+
+  <Steps
+    title="Contribute to OpenKraft"
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Explore</span>',
+        description:
+          'Browse our repositories, test our connectors, and identify those that match your technical stack.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">Adopt</span>',
+        description:
+          'Integrate the chosen connectors into your platform and share your feedback via issues or discussions.',
+        icon: 'tabler:download',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">Contribute</span>',
+        description:
+          'Submit bug fixes, new features, or additional connectors. Every contribution strengthens the ecosystem.',
+        icon: 'tabler:git-pull-request',
+      },
+      {
+        title: 'Step 4: <span class="font-medium">Share</span>',
+        description:
+          'Document your implementation, publish a blog post, or speak at a meetup. The community grows with you.',
+        icon: 'tabler:share',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80',
+      alt: 'Community collaboration',
+    }}
+  />
+
+  <Content
+    isReversed
+    title="Sovereign by design"
+    subtitle="Control and transparency guaranteed"
+    items={[
+      {
+        title: 'MIT/Apache licenses',
+        description: 'All our open source code uses permissive licenses. You can fork, modify, and redistribute.',
+      },
+      {
+        title: 'No vendor lock-in',
+        description: 'Our connectors are cloud-agnostic and designed to interoperate with industry-standard tools.',
+      },
+      {
+        title: 'Full transparency',
+        description: 'Public roadmaps, open changelogs, and accessible discussions for all stakeholders.',
+      },
+    ]}
+    image={{
+      src: '~/assets/images/sovereignty-matrix.png',
+      alt: 'Digital sovereignty matrix',
+    }}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Explore GitHub',
+        href: 'https://github.com/hoverkraft-tech',
+        target: '_blank',
+      },
+      {
+        text: 'Join the community',
+        href: 'https://github.com/orgs/hoverkraft-tech/discussions',
+        target: '_blank',
+      },
+    ]}
+  >
+    <Fragment slot="title">Join the OpenKraft movement</Fragment>
+
+    <Fragment slot="subtitle">
+      Thousands of teams worldwide use our connectors to build sovereign and performant platforms. Join them.
+    </Fragment>
+  </CallToAction>
+</Layout>

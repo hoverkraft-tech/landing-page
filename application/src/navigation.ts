@@ -44,7 +44,7 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
         href: translatePath('/trainings'),
       },
       {
-        text: t('nav.resources'),
+        text: t('nav.open-kraft'),
         href: translatePath('/open-kraft'),
       },
       {
@@ -83,7 +83,7 @@ export function getLocalizedFooterData(url: URL) {
       {
         title: t('footer.support'),
         links: [
-          { text: t('nav.resources'), href: translatePath('/open-kraft') },
+          { text: t('nav.open-kraft'), href: translatePath('/open-kraft') },
           { text: t('nav.maturity-assessment'), href: translatePath('/maturity-assessment') },
           { text: t('nav.blog'), href: blogHref },
           { text: t('footer.docs'), href: 'https://docs.hoverkraft.cloud' },
