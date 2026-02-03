@@ -9,7 +9,7 @@ import ResourcesView from '../views/resources.astro';
 const localizedViews = {
   methodologie: MethodologyView,
   offres: OffersView,
-  ressources: ResourcesView,
+    'open-kraft': ResourcesView,
   'charte-graphique': BrandGuidelinesView,
   'radar-maturite': MaturityAssessmentView,
   'radar-maturite-partage': MaturityAssessmentShareView,
@@ -19,7 +19,7 @@ export function getStaticPaths() {
   return [
     { params: { slug: 'methodologie' } },
     { params: { slug: 'offres' } },
-    { params: { slug: 'ressources' } },
+    { params: { slug: 'open-kraft' } },
     { params: { slug: 'charte-graphique' } },
     { params: { slug: 'radar-maturite' } },
     { params: { slug: 'radar-maturite-partage' } },
