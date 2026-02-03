@@ -8,7 +8,7 @@ import Steps from '~/components/widgets/Steps.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'OpenKraft - Resources',
+  title: 'OpenKraft - Ressources',
   description:
     'Accédez aux connecteurs open source HoverKraft, à la communauté et aux ressources pour accélérer votre plateforme.',
 };
@@ -19,19 +19,23 @@ const metadata = {
     tagline="OpenKraft"
     actions={[
       {
-        variant: 'primary',
-        text: 'Accéder au GitHub',
+        text: 'Accéder à GitHub',
         href: 'https://github.com/hoverkraft-tech',
         target: '_blank',
         icon: 'tabler:brand-github',
       },
       {
-        text: 'Accéder au GitLab',
+        text: 'Consulter la documentation',
+        href: 'https://docs.hoverkraft.cloud',
+        target: '_blank',
+        variant: 'primary',
+      },
+      {
+        text: 'Accéder à GitLab',
         href: 'https://gitlab.com/hoverkraft-tech/',
         target: '_blank',
         icon: 'tabler:brand-gitlab',
       },
-      { text: 'Consulter la documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank' },
     ]}
     image={{
       src: '~/assets/images/pages/shared/open-source.webp',
@@ -134,8 +138,21 @@ const metadata = {
 
   <CallToAction
     actions={[
-      { variant: 'primary', text: 'Rejoindre le GitHub', href: 'https://github.com/hoverkraft-tech', target: '_blank' },
+      {
+        variant: 'primary',
+        text: 'Explorer GitHub',
+        href: 'https://github.com/hoverkraft-tech',
+        target: '_blank',
+        icon: 'tabler:brand-github',
+      },
       { text: 'Accéder à la documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank' },
+      {
+        variant: 'primary',
+        text: 'Explorer GitLab',
+        href: 'https://gitlab.com/hoverkraft-tech',
+        target: '_blank',
+        icon: 'tabler:brand-gitlab',
+      },
     ]}
   >
     <Fragment slot="title">Prêt à enrichir la communauté OpenKraft ?</Fragment>

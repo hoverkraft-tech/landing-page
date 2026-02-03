@@ -65,7 +65,7 @@ Collection, use, and protection of personal data are governed by our Privacy Pol
 
 All intellectual property rights relating to the Site and its content belong to Hoverkraft or its partners. Any unauthorized use may result in civil or criminal prosecution.
 
-Open source content published by Hoverkraft on GitHub or similar platforms is governed by specific licenses (MIT, Apache 2.0, etc.) mentioned in each repository.
+Open source content published by Hoverkraft on GitHub, GitLab, or similar platforms is governed by specific licenses (MIT, Apache 2.0, etc.) mentioned in each repository.
 
 ## 11. Applicable Law and Jurisdiction
 
