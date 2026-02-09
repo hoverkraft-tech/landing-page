@@ -1,0 +1,75 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Au cours de la période du 2 au 9 février 2026, trois releases ont été publiées, ce qui indique une fréquence de déploiement régulière pour les dépôts suivis.\n\nLe dépôt le plus actif durant cette période est le dépôt ci-github-publish, avec la publication de la version 0.21.1 le 4 février 2026. Ce dépôt, bien que moins étoilé, joue un rôle essentiel dans l'intégration continue des projets. Les autres dépôts, comme compose-action et docusaurus-theme, ont également vu des mises à jour, bien que leur impact sur l'écosystème HoverKraft semble limité pour le moment.\n\n- Le dépôt ci-github-publish a introduit des améliorations qui peuvent réduire le temps de déploiement, ce qui est crucial pour les ingénieurs de plateforme et les SRE.\n- La mise à jour de compose-action, bien qu'elle n'ait qu'une seule release, est significative en raison de son adoption croissante, ce qui peut faciliter l'intégration des workflows CI/CD.\n- Le dépôt docusaurus-theme, bien qu'il n'ait pas encore d'étoiles, offre un potentiel pour la documentation technique, ce qui est essentiel pour les contributeurs techniques cherchant à améliorer la clarté et l'accessibilité des projets.",
+  "closingMarkdown": "Période: 2 février 2026 - 9 février 2026\nDépôts suivis: 3\nReleases publiées: 3\nProjet le plus actif: ci-github-publish (1)\nRelease la plus récente: ci-github-publish 0.21.1\n\nDépôts en lumière:\n- compose-action (1 releases, 205 ⭐)\n- ci-github-publish (1 releases, 5 ⭐)\n- docusaurus-theme (1 releases, 0 ⭐)\n\nCette période a vu une activité stable avec trois dépôts suivis et trois releases publiées. Le dépôt ci-github-publish a été le plus actif, ce qui peut indiquer un intérêt croissant pour les intégrations GitHub dans les workflows CI/CD. Les autres dépôts, bien que moins actifs, méritent également une attention particulière pour évaluer leur potentiel d'intégration.\n\nPour les ingénieurs de plateforme, les SRE et les autres utilisateurs techniques, il est essentiel de tirer parti de ces mises à jour pour améliorer les processus existants. Voici quelques étapes concrètes à envisager :\n\n- **Exécuter des benchmarks sur ci-github-publish 0.21.1** : Évaluer les performances de cette version pour identifier les gains potentiels en matière d'automatisation des déploiements.\n\n- **Revoir la documentation de compose-action** : S'assurer que les meilleures pratiques sont suivies pour maximiser l'efficacité des actions dans les workflows CI/CD, ce qui peut conduire à une conformité accrue.\n\n- **Adopter docusaurus-theme pour la documentation** : Évaluer son intégration dans les projets pour améliorer la présentation et l'accessibilité de la documentation technique, ce qui peut faciliter la collaboration au sein des équipes.",
+  "stats": {
+    "period": {
+      "since": "2026-02-02T10:03:10.914Z",
+      "until": "2026-02-09T10:03:10.915Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 3,
+    "busiestRepo": {
+      "name": "ci-github-publish",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-publish",
+      "name": "0.21.1",
+      "publishedAt": "2026-02-04T21:23:16Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-publish",
+      "description": "Actions et workflows GitHub opinionnés pour un déploiement, une publication et une sortie simplifiés.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.21.1",
+          "tag": "0.21.1",
+          "publishedAt": "2026-02-04T21:23:16Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.21.1",
+          "highlights": [
+            "## Résumé de la version\n\nLes workflows de déploiement incluent désormais les autorisations de token GitHub manquantes nécessaires pour récupérer de manière fiable les données des pull requests.\nLa documentation des actions et des workflows a été mise à jour pour refléter les dernières recommandations d'utilisation.\n\nInterne : les dépendances de construction ont été mises à jour (mikefarah/yq 4.50.1 → 4.52.2) dans le groupe de dépendances partagé des GitHub Actions.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "compose-action",
+      "description": "Cette action exécute votre fichier docker-compose et nettoie avant que l'action ne soit terminée.",
+      "stars": 205,
+      "url": "https://github.com/hoverkraft-tech/compose-action",
+      "releases": [
+        {
+          "name": "v2.5.0",
+          "tag": "v2.5.0",
+          "publishedAt": "2026-02-03T15:14:11Z",
+          "url": "https://github.com/hoverkraft-tech/compose-action/releases/tag/v2.5.0",
+          "highlights": [
+            "## Résumé de la version\n\nLe correctif garantit que docker-compose est installé lorsqu'une version de composition est spécifiée, améliorant ainsi la fiabilité, et la documentation pour les actions et les flux de travail a été mise à jour.\n\nInterne : mises à jour de la portée des dépendances (actions/checkout, docker/setup-docker-action, docker-compose, groupes npm/actions) et refactorisation mineure.\n\n## Changement(s) majeur(s)\n\nAucun changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docusaurus-theme",
+      "description": "Thème Hoverkraft pour Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "0.3.5",
+          "tag": "0.3.5",
+          "publishedAt": "2026-02-03T09:59:07Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.3.5",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement visible pour l'utilisateur dans cette version.\n\nInterne : mise à jour des workflows CI (dépendances github-actions, y compris ci-github-common 0.31.7 et ci-github-publish 0.21.0) et mise à jour de React/React DOM à 19.2.4 pour un renforcement de la maintenance.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        }
+      ]
+    }
+  ]
+}
