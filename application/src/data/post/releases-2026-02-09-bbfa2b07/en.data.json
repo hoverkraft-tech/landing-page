@@ -1,0 +1,75 @@
+{
+  "lang": "en",
+  "introMarkdown": "During the period from February 2, 2026, to February 9, 2026, three releases were shipped across three repositories, indicating a steady deployment frequency.\n\nThe ci-github-publish repository was the busiest project, with its most recent release being version 0.21.1 on February 4, 2026. This release, along with the single release from the compose-action and docusaurus-theme repositories, reflects ongoing development efforts. The compose-action repository has gained traction with 205 stars, suggesting increased interest and potential usage among developers. In contrast, the ci-github-publish and docusaurus-theme repositories have fewer stars, indicating a need for further adoption strategies or enhancements.\n\n- The release of ci-github-publish 0.21.1 provides critical updates that enhance integration capabilities, which is essential for platform engineers looking to streamline CI/CD processes.\n- The compose-action repository, with its significant star count, suggests a strong community interest, making it a valuable resource for SREs seeking reliable actions for GitHub workflows.\n- The presence of a release in the docusaurus-theme repository, despite having no stars, indicates ongoing commitment to documentation tools, which can benefit technical contributors focused on improving user experience and documentation quality.",
+  "closingMarkdown": "Period: February 2, 2026 - February 9, 2026\nRepositories covered: 3\nReleases shipped: 3\nBusiest project: ci-github-publish (1)\nMost recent release: ci-github-publish 0.21.1\n\nRepositories to note:\n- compose-action (1 release, 205 ⭐)\n- ci-github-publish (1 release, 5 ⭐)\n- docusaurus-theme (1 release, 0 ⭐)\n\nDuring this period, three repositories were active, resulting in three releases. The ci-github-publish project was the busiest, indicating a focused effort on improving its functionality. The most recent release was version 0.21.1 of ci-github-publish, which may contain important updates for users.\n\nFor platform engineers, SREs, and other technical users, these developments provide opportunities to enhance workflows and improve automation. The releases may also contribute to better compliance and performance in your projects.\n\nNext steps:\n- Review the documentation for ci-github-publish to understand the changes in version 0.21.1, which may enhance automation capabilities.\n- Run benchmarks using compose-action to evaluate its performance improvements, especially as it has garnered significant interest with 205 stars.\n- Explore the docusaurus-theme repository to assess its potential for documentation needs, despite its current lack of stars, which may indicate room for growth and improvement.",
+  "stats": {
+    "period": {
+      "since": "2026-02-02T10:03:10.914Z",
+      "until": "2026-02-09T10:03:10.915Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 3,
+    "busiestRepo": {
+      "name": "ci-github-publish",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-publish",
+      "name": "0.21.1",
+      "publishedAt": "2026-02-04T21:23:16Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.21.1",
+          "tag": "0.21.1",
+          "publishedAt": "2026-02-04T21:23:16Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.21.1",
+          "highlights": [
+            "## Release Summary\n\nDeployment workflows now include the missing GitHub token permissions needed to reliably fetch pull-request data.\r\nActions and workflows documentation was refreshed to reflect the latest recommended usage.\r\n\r\nInternal: build dependencies were updated (mikefarah/yq 4.50.1 → 4.52.2) in the shared GitHub Actions dependency group.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "compose-action",
+      "description": "This action runs your docker-compose file and clean up before action finished",
+      "stars": 205,
+      "url": "https://github.com/hoverkraft-tech/compose-action",
+      "releases": [
+        {
+          "name": "v2.5.0",
+          "tag": "v2.5.0",
+          "publishedAt": "2026-02-03T15:14:11Z",
+          "url": "https://github.com/hoverkraft-tech/compose-action/releases/tag/v2.5.0",
+          "highlights": [
+            "## Release Summary\n\nFix ensures docker-compose is installed when a compose-version is specified, improving reliability, and documentation for actions and workflows has been updated.\r\n\r\nInternal: deps scope updates (actions/checkout, docker/setup-docker-action, docker-compose, npm/actions groups) and minor refactoring.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docusaurus-theme",
+      "description": "Hoverkraft theme for Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "0.3.5",
+          "tag": "0.3.5",
+          "publishedAt": "2026-02-03T09:59:07Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.3.5",
+          "highlights": [
+            "## Release Summary\n\nNo user-facing changes in this release.\r\n\r\nInternal: updated CI workflows (github-actions dependencies, including ci-github-common 0.31.7 and ci-github-publish 0.21.0) and bumped React/React DOM to 19.2.4 for maintenance hardening.\n\n## Breaking change(s)\n\nThere is no breaking change."
+          ]
+        }
+      ]
+    }
+  ]
+}
