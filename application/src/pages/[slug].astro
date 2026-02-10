@@ -4,12 +4,10 @@ import MethodologyView from '../views/methodology.astro';
 import MaturityAssessmentView from '../views/maturity-assessment.astro';
 import MaturityAssessmentShareView from '../views/maturity-assessment-share.astro';
 import OffersView from '../views/offers.astro';
-import OpenKraftView from '../views/open-kraft.astro';
 
 const localizedViews = {
   methodologie: MethodologyView,
   offres: OffersView,
-  'open-kraft': OpenKraftView,
   'charte-graphique': BrandGuidelinesView,
   'radar-maturite': MaturityAssessmentView,
   'radar-maturite-partage': MaturityAssessmentShareView,
@@ -19,7 +17,6 @@ export function getStaticPaths() {
   return [
     { params: { slug: 'methodologie' } },
     { params: { slug: 'offres' } },
-    { params: { slug: 'open-kraft' } },
     { params: { slug: 'charte-graphique' } },
     { params: { slug: 'radar-maturite' } },
     { params: { slug: 'radar-maturite-partage' } },
