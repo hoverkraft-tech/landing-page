@@ -1,0 +1,58 @@
+{
+  "lang": "en",
+  "introMarkdown": "During the period from February 16, 2026, to February 23, 2026, two releases were shipped across two repositories, indicating a steady deploy frequency.\n\nThe ci-github-common repository was the busiest project during this period, with one release contributing to its functionality. The most recent release, ci-github-nodejs 0.22.0, was made on February 17, 2026, which adds enhancements relevant for Node.js applications. These updates are essential for maintaining compatibility and improving performance in CI/CD workflows.\n\n- The release of ci-github-nodejs 0.22.0 introduces optimizations that can reduce build times, which is critical for platform engineers looking to streamline deployment processes.\n- ci-github-common's latest release enhances shared components, providing a more robust foundation for developers, which can lead to fewer integration issues.\n- The overall activity in these repositories reflects a commitment to continuous improvement, which is vital for SREs and technical contributors aiming to adopt and integrate HoverKraft projects effectively.",
+  "closingMarkdown": "Period: February 16, 2026 - February 23, 2026\nRepositories covered: 2\nReleases shipped: 2\nBusiest project: ci-github-common (1)\nMost recent release: ci-github-nodejs 0.22.0\n\nRepositories to note:\n- ci-github-common (1 release, 4 ⭐)\n- ci-github-nodejs (1 release, 1 ⭐)\n\nDuring this period, two repositories were active, with a total of two releases. The ci-github-common repository was the busiest, indicating a focus on its development. The most recent release, ci-github-nodejs 0.22.0, may include updates that could benefit users working with Node.js in CI environments.\n\nFor platform engineers, SREs, and other technical users, the releases provide updates that could enhance automation and compliance within CI workflows. Engaging with these repositories may lead to improved performance and streamlined processes.\n\nNext steps:\n- Review the documentation for ci-github-common to understand its latest features, which may improve compliance in CI configurations.\n- Run benchmarks using the latest version of ci-github-nodejs to evaluate performance improvements in Node.js applications within CI pipelines.\n- Explore the integration of ci-github-common components into existing workflows to enhance automation capabilities.",
+  "stats": {
+    "period": {
+      "since": "2026-02-16T09:55:25.672Z",
+      "until": "2026-02-23T09:55:25.672Z"
+    },
+    "totalRepos": 2,
+    "totalReleases": 2,
+    "busiestRepo": {
+      "name": "ci-github-common",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-nodejs",
+      "name": "0.22.0",
+      "publishedAt": "2026-02-17T18:31:23Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 4,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.32.0",
+          "tag": "0.32.0",
+          "publishedAt": "2026-02-17T16:29:41Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.32.0",
+          "highlights": [
+            "## Release Summary\n\nActions: a new `working-directory` option was added to make running steps from a specific folder easier.\r\nDocumentation for actions and reusable workflows was refreshed across multiple PRs.\r\n\r\nInternal maintenance: dependency updates landed for the GitHub Actions dependency group and the `fast-xml-parser` package used by `actions/parse-ci-reports`.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.22.0",
+          "tag": "0.22.0",
+          "publishedAt": "2026-02-17T18:31:23Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.22.0",
+          "highlights": [
+            "## Release Summary\n\nPublic: A new `actions` capability adds a package action to streamline packaging workflows. Fixes improve `get-package-manager` by ignoring created cache symlinks and stabilize `codecov` by addressing a flaky `pkgx` setup and reverting to the default `pkgx` version.\r\nInternal: Dependency maintenance updates npm packages across multiple directories and refreshes GitHub Actions dependencies (including the publish workflow). Documentation for actions and workflows has been updated.\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    }
+  ]
+}
