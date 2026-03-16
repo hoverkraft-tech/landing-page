@@ -13,6 +13,7 @@ setup: ## Prepare stack to run
 	npm --prefix .github/actions/generate-blog-post install
 	npm --prefix .github/actions/generate-brand-content install
 	npm --prefix .github/actions/validate-manifest install
+	cd application && npx puppeteer browsers install chrome
 
 start: ## Start application in dev mode
 	npm --prefix application run start
@@ -26,6 +27,12 @@ lint-fix: ## Run linters
 	npm --prefix application run lint:fix
 	$(MAKE) linter-fix
 
+audit-fix: ## Run npm audit fix
+	npm --prefix application audit fix || true
+	npm --prefix .github/actions/generate-blog-post audit fix || true
+	npm --prefix .github/actions/generate-brand-content audit fix || true
+	npm --prefix .github/actions/validate-manifest audit fix || true
+
 build: ## Build libs and applications
 	npm --prefix application run build
 
@@ -36,7 +43,8 @@ test: ## Run tests
 	npm --prefix .github/actions/validate-manifest run test:ci
 
 ci: ## Run tests in CI mode
-	npm --prefix application audit fix
+	$(MAKE) setup
+	$(MAKE) audit-fix
 	$(MAKE) lint-fix
 	$(MAKE) build
 	$(MAKE) test

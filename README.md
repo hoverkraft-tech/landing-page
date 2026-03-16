@@ -1,10 +1,10 @@
 # Hoverkraft Landing Page
 
-Marketing site for Hoverkraft, built with [Astro](https://astro.build/) 5 and Tailwind CSS. The production code lives under `application/` and is packaged for deployment as a static site.
+Marketing site for Hoverkraft, built with [Astro](https://astro.build/) 6 and Tailwind CSS. The production code lives under `application/` and is packaged for deployment as a static site.
 
 ## Requirements
 
-- Node.js 18.17+ (or 20.3+/21+)
+- Node.js 22+
 - npm 9+
 - Docker (optional, used by linting workflow)
 
@@ -39,12 +39,13 @@ Most changes should happen inside `application/`. See `AGENTS.md` for detailed a
 - `application/src/i18n/ui.ts` – Shared UI strings for `fr` (default) and `en` locales
 - `application/src/assets/images` – Optimized assets consumed via the shared `Image` component
 - `application/src/content/` and `application/src/data/` – Blog posts and data-driven content
+- `application/src/content.config.ts` – Astro content collections and schema definitions
 
 ## Configuration Notes
 
 - Keep locale strings synchronized in `application/src/i18n/ui.ts`
 - Update metadata and analytics via `application/src/config.yaml` instead of hardcoding values
-- Follow the frontmatter schema in `application/src/content/config.ts` when adding content
+- Follow the frontmatter schema in `application/src/content.config.ts` when adding content
 
 ## Contributing
 
