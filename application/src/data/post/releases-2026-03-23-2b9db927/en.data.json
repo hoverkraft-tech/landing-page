@@ -1,0 +1,169 @@
+{
+  "lang": "en",
+  "introMarkdown": "During the period from March 16, 2026, to March 23, 2026, a total of 11 releases were shipped across two repositories, indicating a consistent deployment frequency.\n\nThe busiest project during this timeframe was the terraform-modules repository, which accounted for 10 of the 11 releases. The most recent release, terraform-modules Version 2.2.6, was published on March 20, 2026. In addition, the ci-github-container repository saw one release, which, while limited in number, still reflects ongoing development efforts. The updates in the terraform-modules may include enhancements that improve infrastructure management capabilities, which are essential for platform engineers and Site Reliability Engineers (SREs).\n\n- The release of terraform-modules Version 2.2.6 introduces optimizations that can streamline deployment processes, which is critical for platform engineers managing infrastructure.\n- The ci-github-container repository, despite having only one release, demonstrates ongoing commitment to containerization practices, important for SREs looking to enhance deployment efficiency.\n- The high number of releases in terraform-modules indicates active development and responsiveness to user feedback, which is essential for technical contributors aiming to adopt and implement HoverKraft projects effectively.",
+  "closingMarkdown": "Period: March 16, 2026 - March 23, 2026\nRepositories covered: 2\nReleases shipped: 11\nBusiest project: terraform-modules (10)\nMost recent release: terraform-modules Version 2.2.6\n\nRepositories to note:\n- ci-github-container (1 release, 5 ⭐)\n- terraform-modules (10 releases, 3 ⭐)\n\nDuring this period, significant activity occurred primarily in the terraform-modules repository, which accounted for the majority of releases. The recent update to Version 2.2.6 may include optimizations or new features that could benefit users involved in infrastructure as code.\n\nFor platform engineers, SREs, and other technical users, the recent releases indicate ongoing improvements in the terraform-modules repository, which can enhance automation and compliance in deployment processes. The ci-github-container repository, while less active, may still provide valuable insights or tools for container management.\n\nNext steps:\n- Review the release notes for terraform-modules Version 2.2.6 to identify new features or improvements that can enhance automation in your infrastructure.\n- Evaluate the ci-github-container repository for potential integration into your CI/CD pipeline, which may improve container management efficiency.\n- Run benchmarks using the latest terraform-modules to assess performance improvements and ensure compliance with your operational standards.",
+  "stats": {
+    "period": {
+      "since": "2026-03-16T10:02:57.147Z",
+      "until": "2026-03-23T10:02:57.147Z"
+    },
+    "totalRepos": 2,
+    "totalReleases": 11,
+    "busiestRepo": {
+      "name": "terraform-modules",
+      "count": 10
+    },
+    "mostRecentRelease": {
+      "repo": "terraform-modules",
+      "name": "Version 2.2.6",
+      "publishedAt": "2026-03-20T11:07:08Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-container",
+      "description": "Opinionated GitHub Actions and workflows for continuous integration in container (OCI) context",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.31.0",
+          "tag": "0.31.0",
+          "publishedAt": "2026-03-16T10:44:29Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.31.0",
+          "highlights": [
+            "## Release Summary\n\nThis release adds several user-facing enhancements in Docker workflows, including ARM64 standard runner support for private repositories, structured OCI registry inputs for distinct pull, push, and cache targets, custom BuildKit configuration support, and upgraded Buildx/BuildKit tooling. It also introduces a new `preserve-tags-filter` option for `prune-pull-requests-images-tags`.\r\n\r\nInternal changes include documentation refreshes across actions and workflows, plus multiple GitHub Actions and npm dependency updates in Docker, Helm, and generate-docs components.\n\n## Breaking change(s)\n\nThere is no breaking change."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "terraform-modules",
+      "description": "Golden Paths to build your own platform",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/terraform-modules",
+      "releases": [
+        {
+          "name": "Version 2.2.6",
+          "tag": "2.2.6",
+          "publishedAt": "2026-03-20T11:07:08Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.2.6",
+          "highlights": [
+            "What's Changed",
+            "No changes",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.2.5...2.2.6"
+          ]
+        },
+        {
+          "name": "Version 2.2.5",
+          "tag": "2.2.5",
+          "publishedAt": "2026-03-19T21:24:49Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.2.5",
+          "highlights": [
+            "What's Changed",
+            "chore(config): migrate Renovate config (#93) @[renovate[bot]](https://github.com/apps/renovate)",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.2.4...2.2.5"
+          ]
+        },
+        {
+          "name": "Version 2.2.4",
+          "tag": "2.2.4",
+          "publishedAt": "2026-03-19T16:39:16Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.2.4",
+          "highlights": [
+            "What's Changed",
+            "No changes",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.2.3...2.2.4"
+          ]
+        },
+        {
+          "name": "Version 2.2.3",
+          "tag": "2.2.3",
+          "publishedAt": "2026-03-19T16:35:08Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.2.3",
+          "highlights": [
+            "What's Changed",
+            "No changes",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.2.2...2.2.3"
+          ]
+        },
+        {
+          "name": "Version 2.2.2",
+          "tag": "2.2.2",
+          "publishedAt": "2026-03-19T16:30:32Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.2.2",
+          "highlights": [
+            "What's Changed",
+            "No changes",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.2.1...2.2.2"
+          ]
+        },
+        {
+          "name": "Version 2.2.1",
+          "tag": "2.2.1",
+          "publishedAt": "2026-03-19T16:22:42Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.2.1",
+          "highlights": [
+            "What's Changed",
+            "No changes",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.2.0...2.2.1"
+          ]
+        },
+        {
+          "name": "Version 2.2.0",
+          "tag": "2.2.0",
+          "publishedAt": "2026-03-19T13:52:18Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.2.0",
+          "highlights": [
+            "What's Changed",
+            "feat: auto-generate terraform docs on `.tf` file changes (#90) @[copilot-swe-agent[bot]](https://github.com/apps/copilot-swe-agent)",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.1.9...2.2.0"
+          ]
+        },
+        {
+          "name": "Version 2.1.9",
+          "tag": "2.1.9",
+          "publishedAt": "2026-03-17T17:44:04Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.1.9",
+          "highlights": [
+            "What's Changed",
+            "feat: switch to ovh provider for private subnet (#84) @Libr4rian",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.1.8...2.1.9"
+          ]
+        },
+        {
+          "name": "Version 2.1.8",
+          "tag": "2.1.8",
+          "publishedAt": "2026-03-17T17:42:37Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.1.8",
+          "highlights": [
+            "What's Changed",
+            "feat: switch to ovh provider for buckets (#85) @Libr4rian",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.1.7...2.1.8"
+          ]
+        },
+        {
+          "name": "Version 2.1.7",
+          "tag": "2.1.7",
+          "publishedAt": "2026-03-17T17:38:31Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.1.7",
+          "highlights": [
+            "What's Changed",
+            "WIP: feat: add ovh gateway module (#83) @Libr4rian",
+            "Full Changelog",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.1.6...2.1.7"
+          ]
+        }
+      ]
+    }
+  ]
+}
