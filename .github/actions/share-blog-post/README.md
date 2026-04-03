@@ -3,7 +3,7 @@
 # GitHub Action: Share posts via Postiz
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/6f21e670fdba31ec90d6d198506161efd906c84300a0bb6e8ca47524f68f9140/hoverkraft-tech/landing-page" width="60px" align="center" alt="Share posts via Postiz" />
+  <img src="https://opengraph.githubassets.com/aea131155b2e09631f321f6746175aac370d39a2eb0dd0d51d410c358397f53f/hoverkraft-tech/landing-page" width="60px" align="center" alt="Share posts via Postiz" />
 </div>
 
 ---
