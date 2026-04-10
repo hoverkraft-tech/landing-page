@@ -41,8 +41,8 @@
     "lodash.merge": "^4.6.2",
     "marked": "^17.0.5",
     "puppeteer": "^24.40.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
     "unpic": "^4.2.2"
   },
   "devDependencies": {
