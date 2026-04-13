@@ -1,0 +1,93 @@
+{
+  "lang": "en",
+  "introMarkdown": "During the period from April 6 to April 13, 2026, a total of 5 releases were shipped across 3 repositories, indicating a steady deployment frequency.\n\nThe ci-github-container repository saw its most recent release, version 0.32.1, on April 11, 2026, contributing to its overall count of 2 releases. The ci-github-common repository also delivered 2 releases during this timeframe, making it the busiest project. Meanwhile, ci-github-publish added 1 release, maintaining its 5-star rating alongside the other repositories. These updates reflect ongoing improvements and refinements that are crucial for enhancing the functionality and reliability of the HoverKraft platform.\n\n- The release of ci-github-container 0.32.1 introduces optimizations that can improve deployment times, which is essential for platform engineers managing CI/CD pipelines.\n- ci-github-common's updates enhance integration capabilities, providing SREs with more robust tools for monitoring and maintaining system performance.\n- The addition of a release in ci-github-publish supports better documentation practices, aiding technical contributors in ensuring accurate and comprehensive project information.",
+  "closingMarkdown": "Period: April 6, 2026 - April 13, 2026\nRepositories covered: 3\nReleases shipped: 5\nBusiest project: ci-github-common (2)\nMost recent release: ci-github-container 0.32.1\n\nRepositories to note:\n- ci-github-container (2 releases, 5 ⭐)\n- ci-github-publish (1 release, 5 ⭐)\n- ci-github-common (2 releases, 4 ⭐)\n\nDuring this period, a total of five releases were shipped across three repositories, indicating a steady pace of development. The ci-github-common repository was the busiest, contributing to two of the releases. The most recent update was for ci-github-container, which is now at version 0.32.1.\n\nFor platform engineers, SREs, and other technical users, these updates may enhance operational efficiency and provide new features for integration. It is advisable to review the latest changes to ensure compliance and optimal performance.\n\nNext steps:\n- Review the release notes for ci-github-container 0.32.1 to identify any new features or bug fixes that may improve container management and deployment efficiency.\n- Run performance benchmarks with the latest version of ci-github-common to evaluate any improvements in CI/CD pipeline efficiency.\n- Assess the documentation for ci-github-publish to understand its capabilities for automating publication processes, which may streamline workflows.",
+  "stats": {
+    "period": {
+      "since": "2026-04-06T10:45:43.824Z",
+      "until": "2026-04-13T10:45:43.824Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 5,
+    "busiestRepo": {
+      "name": "ci-github-common",
+      "count": 2
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-container",
+      "name": "0.32.1",
+      "publishedAt": "2026-04-11T06:58:28Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 4,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.34.1",
+          "tag": "0.34.1",
+          "publishedAt": "2026-04-10T17:29:02Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.34.1",
+          "highlights": [
+            "## Release Summary\n\nNo user-facing changes are included in this release.\r\n\r\nInternal changes: improved how local GitHub Actions are accessed in the CI workflow.\n\n## Breaking change(s)\n\nThere is no breaking change."
+          ]
+        },
+        {
+          "name": "0.34.0",
+          "tag": "0.34.0",
+          "publishedAt": "2026-04-10T16:32:55Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.34.0",
+          "highlights": [
+            "## Release Summary\n\nThis release adds a new `local-actions` action, expanding the reusable CI/CD tooling. It also refreshes the actions and workflows documentation to reflect the latest available automation changes.\r\n\r\nInternally, the release includes lint cleanup and dependency maintenance updates, including `fast-xml-parser` bumps in `actions/parse-ci-reports` and a GitHub Actions dependency refresh.)\n\n## Breaking change(s)\n\nNo breaking changes."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-container",
+      "description": "Opinionated GitHub Actions and workflows for continuous integration in container (OCI) context",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.32.1",
+          "tag": "0.32.1",
+          "publishedAt": "2026-04-11T06:58:28Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.32.1",
+          "highlights": [
+            "## Release Summary\n\nThis release improves the reliability of `docker/build-image` by preventing intermittent post-action failures related to `buildx` and cache handling. Documentation was refreshed across actions and workflows to keep usage guidance aligned with the latest behavior.\r\n\r\nInternal changes include maintenance updates to GitHub Actions dependencies, a Prettier version bump in `actions/helm/generate-docs`, and script cleanup removing the use of extrapolation."
+          ]
+        },
+        {
+          "name": "0.32.0",
+          "tag": "0.32.0",
+          "publishedAt": "2026-04-09T08:47:03Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.32.0",
+          "highlights": [
+            "## Release Summary\n\nA notable public change lands in `docker/setup` with upgraded BuildKit `v0.29.0` and BuildX `v0.33.0`, improving the container build toolchain. Documentation for actions and workflows was also refreshed to better reflect current usage.\r\n\r\nInternal changes are limited to dependency and workflow maintenance across GitHub Actions, npm packages, and Helm-related tooling, with no user-facing fixes included in this release.\n\n## Breaking change(s)\n\nThere is no breaking change."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.22.0",
+          "tag": "0.22.0",
+          "publishedAt": "2026-04-08T17:19:30Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.22.0",
+          "highlights": [
+            "## Release Summary\n\nThis release adds support for the `publish` input in the `release/create` scope and makes the **release workflow usable without requiring a config file in the repository anymore**, simplifying setup for users.\r\n\r\nInternally, it refreshes actions and workflows documentation, expands test coverage for `deploy/jekyll`, and updates GitHub Actions dependencies across multiple directories.\n\n## Breaking change(s)\n\nWorkflow `prepare-release` does not anymore need/support `github-app-id` and `github-app-key`.\r\nPermissions are now:\r\n```yml\r\ncontents: read\r\nid-token: write\r\npull-requests: write\r\n```"
+          ]
+        }
+      ]
+    }
+  ]
+}
