@@ -35,7 +35,7 @@ jobs:
 
       - name: Detect new blog posts
         id: detect
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           ADDED_FILES: ${{ steps.changes.outputs.added_files }}
           MANUAL_POST_FOLDER: ${{ github.event.inputs.post-folder }}
@@ -89,7 +89,7 @@ jobs:
 
       - name: Resolve site base URL
         id: site
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         with:
           script: |
             const { owner, repo } = context.repo;

@@ -54,7 +54,7 @@ jobs:
 
       - name: Parse inputs
         id: parse-inputs
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           MANIFEST_INPUT: ${{ inputs.manifest }}
           REPOSITORY_INPUT: ${{ inputs.repository }}
@@ -113,10 +113,10 @@ jobs:
         with:
           manifest: ${{ steps.parse-inputs.outputs.manifest }}
 
-      - uses: actions/create-github-app-token@f8d387b68d61c58ab83c6c016672934102569859 # v3.0.0
+      - uses: actions/create-github-app-token@1b10c78c7865c340bc4f6099eb2f838309f1e8c3 # v3.1.1
         id: generate-token
         with:
-          app-id: ${{ vars.CI_BOT_APP_ID }}
+          client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
           private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
           owner: ${{ github.repository_owner }}
 
@@ -146,7 +146,7 @@ jobs:
           output-dir: ${{ env.BRAND_DIR }}
 
       - name: Create pull request with updated assets
-        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@4b53189212d5810f710bed89711002626977215b # 0.33.0
+        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@71b85947453f32b5d147ff3ab37351439a92d840 # 0.34.2
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: branding-update-${{ steps.validate-manifest.outputs.version }}
@@ -173,7 +173,7 @@ jobs:
             The brand guidelines pages will be updated with the new assets on the next deployment.
 
       - name: Create summary
-        uses: actions/github-script@ed597411d8f924073f98dfc5c65a23a2325f34cd # v8.0.0
+        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
         env:
           VERSION: ${{ steps.validate-manifest.outputs.version }}
           COMMIT: ${{ steps.validate-manifest.outputs.commit }}
