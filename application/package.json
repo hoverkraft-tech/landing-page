@@ -39,8 +39,8 @@
     "astro-icon": "^1.1.5",
     "limax": "4.2.3",
     "lodash.merge": "^4.6.2",
-    "marked": "^18.0.1",
-    "puppeteer": "^24.41.0",
+    "marked": "^18.0.2",
+    "puppeteer": "^24.42.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "unpic": "^4.2.2"
