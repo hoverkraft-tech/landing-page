@@ -3,7 +3,7 @@
 # GitHub Action: Generate Brand Content
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/ce067acf7f61b942c67f211471136225c291a6055505e854e1f19b37d7fc30f9/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
+  <img src="https://opengraph.githubassets.com/1ef7970b8832b0dc4278f21768e2acbf74be5ef9357f3f03e3c9ea4fabf6236a/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Generates TypeScript files for brand colors, mission, typography, and logos from
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-content@a5a7887e1f222f3fb0f1ed3c64473aee021968d2 # main
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-brand-content@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
   with:
     # The branding version
     # This input is required.
