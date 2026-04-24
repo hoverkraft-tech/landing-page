@@ -3,7 +3,7 @@
 # GitHub Action: Download Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/ce067acf7f61b942c67f211471136225c291a6055505e854e1f19b37d7fc30f9/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
+  <img src="https://opengraph.githubassets.com/1ef7970b8832b0dc4278f21768e2acbf74be5ef9357f3f03e3c9ea4fabf6236a/hoverkraft-tech/landing-page" width="60px" align="center" alt="Download Branding Assets" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Downloads and organizes branding assets from the branding repository
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/download-branding-assets@a5a7887e1f222f3fb0f1ed3c64473aee021968d2 # main
+- uses: hoverkraft-tech/landing-page/.github/actions/download-branding-assets@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
   with:
     # The repository where to download the branding artifact from
     # This input is required.
