@@ -1,0 +1,114 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Du 20 au 27 avril 2026, six releases ont été publiées à partir de trois dépôts, indiquant une fréquence de déploiement soutenue.\n\nLe dépôt le plus actif durant cette période est `docker-base-images`, avec quatre releases publiées. La release la plus récente, `ci-github-container` version 0.33.0, a été publiée le 27 avril 2026, apportant des améliorations notables pour les utilisateurs. Les dépôts `ci-github-container` et `ci-github-common` ont également vu une activité significative avec une release chacun, renforçant ainsi les fonctionnalités disponibles pour les ingénieurs de plateforme et les SRE.\n\n- La release `ci-github-container` 0.33.0 améliore l'intégration continue, ce qui est essentiel pour les équipes cherchant à optimiser leurs cycles de développement.\n- Le dépôt `docker-base-images`, bien que moins étoilé, joue un rôle crucial dans la standardisation des images Docker, facilitant ainsi le déploiement pour les contributeurs techniques.\n- La mise à jour dans `ci-github-common` renforce les outils partagés, ce qui permet aux équipes de réduire le temps de configuration et d'améliorer la cohérence des environnements.",
+  "closingMarkdown": "Période: 20 avril 2026 - 27 avril 2026\nDépôts suivis: 3\nReleases publiées: 6\nProjet le plus actif: docker-base-images (4)\nRelease la plus récente: ci-github-container 0.33.0\n\nDépôts en lumière:\n- ci-github-container (1 releases, 5 ⭐)\n- ci-github-common (1 releases, 4 ⭐)\n- docker-base-images (4 releases, 1 ⭐)\n\nCette période montre une activité soutenue, notamment avec le dépôt docker-base-images qui a enregistré le plus grand nombre de releases. Les utilisateurs techniques, tels que les ingénieurs de plateforme et les SRE, peuvent tirer parti de ces mises à jour pour améliorer l'efficacité et la conformité de leurs environnements.\n\n**Prochaines étapes concrètes :**\n- Exécuter des benchmarks sur les images du dépôt `docker-base-images` pour évaluer les gains de performance et identifier les optimisations possibles.\n- Consulter la documentation du dépôt `ci-github-container` pour intégrer les nouvelles fonctionnalités et automatiser les workflows CI/CD.\n- Évaluer les composants du dépôt `ci-github-common` afin d'assurer la conformité et la sécurité des processus en place.",
+  "stats": {
+    "period": {
+      "since": "2026-04-20T11:04:19.259Z",
+      "until": "2026-04-27T11:04:19.259Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 6,
+    "busiestRepo": {
+      "name": "docker-base-images",
+      "count": 4
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-container",
+      "name": "0.33.0",
+      "publishedAt": "2026-04-27T10:38:45Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions et workflows GitHub opinionnés pour des besoins courants d'intégration continue",
+      "stars": 4,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.35.0",
+          "tag": "0.35.0",
+          "publishedAt": "2026-04-27T09:14:49Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.35.0",
+          "highlights": [
+            "## Résumé de la version\n\nAjoute la prise en charge de la détection du dépôt source des workflows réutilisables directement à partir du contexte de travail dans `local-workflow-actions`. La documentation pour les actions et les workflows a été mise à jour.\n\nLes changements internes incluent des mises à jour de dépendances pour `fast-xml-parser` et les dépendances des Actions GitHub.\n\n## Changement(s) majeur(s)\n\n`local-workflow-actions` ne nécessite plus de récupérer le dépôt source en utilisant un jeton OIDC, donc la permission `id-token: write` n'est plus nécessaire."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-container",
+      "description": "Opinions sur les GitHub Actions et les workflows pour l'intégration continue dans un contexte de conteneur (OCI)",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.33.0",
+          "tag": "0.33.0",
+          "publishedAt": "2026-04-27T10:38:45Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.33.0",
+          "highlights": [
+            "## Résumé de la version\n\n`local-workflow-actions` détecte désormais le dépôt source des workflows réutilisables directement à partir du contexte de l'emploi, et `local-actions` améliore la gestion des chemins de destination et la logique de nettoyage. La documentation pour les actions et les workflows a été mise à jour.\n\nLes changements internes incluent des mises à jour de dépendances de maintenance pour GitHub Actions, les paquets npm, `ci-github-common`, la configuration Docker, Hono, Prettier et markdownlint-cli2.\n\n## Changement(s) majeur(s)\n\nLes configurations doivent remplacer `build-secret-github-app-id` par `build-secret-github-app-client-id` dans `docker-build-images.yml`, et `github-app-id` par `github-app-client-id` dans `actions/helm/generate-docs`. `local-workflow-actions` ne nécessite plus `id-token: write` car la détection du dépôt source utilise désormais le contexte de l'emploi."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker opinionnées",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version testcontainers-node - 0.1.0",
+          "tag": "testcontainers-node-0.1.0",
+          "publishedAt": "2026-04-21T15:59:46Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/testcontainers-node-0.1.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 1 répertoire avec 12 mises à jour (#162) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps) : mettre à jour le groupe github-actions-dependencies dans 3 répertoires avec 1 mise à jour (#159) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 1 répertoire avec 5 mises à jour (#158) @[dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 0.3.0-rc.0",
+          "tag": "argocd-cmp-hk-deployment-0.3.0-rc.0",
+          "publishedAt": "2026-04-21T15:59:40Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-0.3.0-rc.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "build(deps) : mise à jour de nginx de 1.16.0 à 1.29.8 dans /images/argocd-cmp-hk-deployment/tests (#170) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "feat(argocd-cmp-hk-deployment-upgrade-deps) : mise à jour des dépendances (#166) @neilime",
+            "build(deps) : mettre à jour le groupe github-actions-dependencies dans 1 répertoire avec 12 mises à jour (#162) @[dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version mydumper - 0.2.3-rc.0",
+          "tag": "mydumper-0.2.3-rc.0",
+          "publishedAt": "2026-04-21T15:59:36Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-0.2.3-rc.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 1 répertoire avec 12 mises à jour (#162) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps) : mettre à jour le groupe github-actions-dependencies dans 3 répertoires avec 1 mise à jour (#159) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps) : mettre à jour le groupe github-actions-dependencies dans 1 répertoire avec 5 mises à jour (#158) @[dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version ci-helm - 0.2.3-rc.0",
+          "tag": "ci-helm-0.2.3-rc.0",
+          "publishedAt": "2026-04-21T15:59:35Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.2.3-rc.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "build(deps) : mettre à jour le groupe github-actions-dependencies dans 1 répertoire avec 12 mises à jour (#162) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 3 répertoires avec 1 mise à jour (#159) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps) : mettre à jour le groupe github-actions-dependencies dans 1 répertoire avec 5 mises à jour (#158) @[dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        }
+      ]
+    }
+  ]
+}
