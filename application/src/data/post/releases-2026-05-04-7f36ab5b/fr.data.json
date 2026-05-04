@@ -1,0 +1,178 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Au cours de la période du 27 avril 2026 au 4 mai 2026, 11 releases ont été publiées, ce qui indique une fréquence de déploiement soutenue.\n\nLe dépôt le plus actif durant cette période a été \"docker-base-images\" avec 5 releases, la plus récente étant la version 0.4.0 publiée le 4 mai 2026. D'autres dépôts notables incluent \"ci-github-publish\" et \"ci-github-container\", chacun ayant contribué avec des releases et obtenant 5 étoiles, ce qui témoigne de leur adoption par la communauté. Le dépôt \"terraform-modules\" a également publié une release, consolidant son utilité pour les utilisateurs de Terraform.\n\n- Le dépôt \"docker-base-images\" avec sa version 0.4.0 offre des images optimisées, ce qui est essentiel pour réduire le temps de démarrage des conteneurs pour les ingénieurs de plateforme.\n- \"ci-github-publish\" permet une intégration continue efficace, facilitant le déploiement rapide des modifications, ce qui est crucial pour les SREs cherchant à améliorer la résilience des systèmes.\n- La release de \"terraform-modules\" apporte des modules réutilisables, ce qui aide les contributeurs techniques à standardiser et à automatiser leurs infrastructures, réduisant ainsi les erreurs humaines.",
+  "closingMarkdown": "Période: 27 avril 2026 - 4 mai 2026\nDépôts suivis: 5\nReleases publiées: 11\nProjet le plus actif: docker-base-images (5)\nRelease la plus récente: docker-base-images 0.4.0\n\nDépôts en lumière:\n- ci-github-publish (2 releases, 5 ⭐)\n- ci-github-container (1 releases, 5 ⭐)\n- terraform-modules (1 releases, 3 ⭐)\n\nCette période montre une activité soutenue sur plusieurs dépôts, notamment avec la publication de nouvelles versions de l'image de base Docker. Pour les ingénieurs de plateforme, les SRE et d'autres utilisateurs techniques, cela signifie qu'il existe des mises à jour récentes qui peuvent améliorer les processus d'intégration et de déploiement, ainsi que la gestion des infrastructures.\n\nProchaines étapes concrètes :\n- Exécuter des benchmarks avec les nouvelles images du dépôt **docker-base-images** pour évaluer les gains de performance dans vos environnements de développement et de production.\n- Consulter la documentation du dépôt **ci-github-publish** pour optimiser vos workflows CI/CD et améliorer l'automatisation des déploiements.\n- Intégrer les modules du dépôt **terraform-modules** pour renforcer la conformité et la gestion des infrastructures en tant que code.",
+  "stats": {
+    "period": {
+      "since": "2026-04-27T11:04:42.245Z",
+      "until": "2026-05-04T11:04:42.245Z"
+    },
+    "totalRepos": 5,
+    "totalReleases": 11,
+    "busiestRepo": {
+      "name": "docker-base-images",
+      "count": 5
+    },
+    "mostRecentRelease": {
+      "repo": "docker-base-images",
+      "name": "0.4.0",
+      "publishedAt": "2026-05-04T09:23:12Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-container",
+      "description": "Opinions sur les GitHub Actions et les workflows pour l'intégration continue dans un contexte de conteneurs (OCI)",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.33.1",
+          "tag": "0.33.1",
+          "publishedAt": "2026-05-04T08:21:08Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.33.1",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation pour les actions et les flux de travail a été mise à jour.\n\nLes changements internes incluent des mises à jour de dépendances GitHub Actions dans plusieurs répertoires et une augmentation de la dépendance npm `yaml` pour l'action de graphique de version Helm."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions et workflows Github opinionnés pour l'intégration continue dans un contexte NodeJs",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.23.2",
+          "tag": "0.23.2",
+          "publishedAt": "2026-05-04T07:48:15Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.23.2",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation pour les actions et les flux de travail a été mise à jour.\n\nLa maintenance interne a mis à jour les dépendances de GitHub Actions dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        },
+        {
+          "name": "0.23.1",
+          "tag": "0.23.1",
+          "publishedAt": "2026-04-30T14:21:00Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.23.1",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation pour les actions et les flux de travail a été mise à jour pour améliorer l'orientation des utilisateurs.\n\nDes mises à jour de maintenance internes ont mis à jour la fonctionnalité Node du devcontainer et rafraîchi les dépendances des GitHub Actions dans tout le projet.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions et workflows GitHub avec des opinions pour un déploiement, une publication et une sortie simplifiés.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.23.2",
+          "tag": "0.23.2",
+          "publishedAt": "2026-05-04T08:41:13Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.23.2",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation des actions et des workflows a été mise à jour pour refléter l'utilisation actuelle.\n\nLes dépendances internes des actions GitHub ont été mises à jour.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        },
+        {
+          "name": "0.23.1",
+          "tag": "0.23.1",
+          "publishedAt": "2026-04-30T14:54:40Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.23.1",
+          "highlights": [
+            "## Résumé de la publication\n\nLa documentation pour les actions et les flux de travail a été mise à jour.\n\nMises à jour des autorisations, ces flux de travail ne nécessitent plus `id-token: write`.\n\n- .github/workflows/release.yml\n- .github/workflows/prepare-release.yml\n- .github/workflows/finish-deploy-argocd-app-of-apps.yml\n- .github/workflows/deploy-start.yml\n- .github/workflows/deploy-finish.yml\n- .github/workflows/deploy-checks.yml\n- .github/workflows/deploy-argocd-app-of-apps.yml\n- .github/workflows/clean-deploy.yml\n- .github/workflows/clean-deploy-argocd-app-of-apps.yml\n\nLes changements internes incluent des mises à jour de dépendances des GitHub Actions dans plusieurs répertoires.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker opiniâtres",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "0.4.0",
+          "tag": "0.4.0",
+          "publishedAt": "2026-05-04T09:23:12Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/0.4.0",
+          "highlights": [
+            "## Résumé de la version\n\nLe workflow CI réutilisable utilise désormais l'image publiée `testcontainers-node` avec un transfert de balise locale shared-CI pour une réutilisation d'image plus cohérente.\nPour `argocd-cmp-hk-deployment-upgrade-deps`, les dépendances ont été mises à jour, y compris les mises à jour de patch d'Argo CD jusqu'à `v3.3.9`.\nLe processus de publication gère désormais correctement l'entrée `prerelease`.\n\nLes mises à jour internes incluent la documentation des actions/workflows rafraîchie et la maintenance des dépendances pour GitHub Actions, le test `nginx` et les outils de construction."
+          ]
+        },
+        {
+          "name": "Version mydumper - 0.2.3",
+          "tag": "mydumper-0.2.3",
+          "publishedAt": "2026-05-04T09:15:43Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-0.2.3",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "build(deps) : mettre à jour le groupe github-actions-dependencies dans 1 répertoire avec 5 mises à jour (#178) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "fix(release) : définir correctement l'entrée de préversion (#177) @neilime",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 1 répertoire avec 11 mises à jour (#174) @[dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version testcontainers-node - 0.1.0",
+          "tag": "testcontainers-node-0.1.0",
+          "publishedAt": "2026-05-04T09:15:38Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/testcontainers-node-0.1.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "build(deps) : mettre à jour le groupe github-actions-dependencies dans 1 répertoire avec 5 mises à jour (#178) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "fix(release) : définir correctement l'entrée de préversion (#177) @neilime",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 1 répertoire avec 11 mises à jour (#174) @[dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 0.3.0",
+          "tag": "argocd-cmp-hk-deployment-0.3.0",
+          "publishedAt": "2026-05-04T09:15:33Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-0.3.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 1 répertoire avec 5 mises à jour (#178) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps) : mise à jour de argoproj/argocd de v3.3.8 à v3.3.9 dans /images/argocd-cmp-hk-deployment (#176) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "fix(release) : définir correctement l'entrée de préversion (#177) @neilime"
+          ]
+        },
+        {
+          "name": "Version ci-helm - 0.2.3",
+          "tag": "ci-helm-0.2.3",
+          "publishedAt": "2026-05-04T09:15:31Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.2.3",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 1 répertoire avec 5 mises à jour (#178) @[dependabot[bot]](https://github.com/apps/dependabot)",
+            "fix(release) : définir correctement l'entrée de préversion (#177) @neilime",
+            "build(deps) : mise à jour du groupe github-actions-dependencies dans 1 répertoire avec 11 mises à jour (#174) @[dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "terraform-modules",
+      "description": "Chemins dorés pour construire votre propre plateforme",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/terraform-modules",
+      "releases": [
+        {
+          "name": "Version 2.3.0",
+          "tag": "2.3.0",
+          "publishedAt": "2026-04-28T08:24:32Z",
+          "url": "https://github.com/hoverkraft-tech/terraform-modules/releases/tag/2.3.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "feat(aws) : ajouter un module unique pour l'addon EKS (#105) @fredleger",
+            "# Journal des modifications complet",
+            "https://github.com/hoverkraft-tech/terraform-modules/compare/2.2.6...2.3.0"
+          ]
+        }
+      ]
+    }
+  ]
+}
