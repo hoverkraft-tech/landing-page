@@ -87,7 +87,7 @@ export function getRouteFromUrl(url: URL): string | undefined {
   };
 
   if (defaultLang === currentLang) {
-    const defaultRoutes = routes[currentLang] ?? Object.values(routes)[0];
+    const defaultRoutes = routesByLang[currentLang] ?? Object.values(routesByLang)[0];
 
     if (!defaultRoutes) {
       return undefined;
