@@ -4,6 +4,18 @@ import { renderToStaticMarkup } from 'react-dom/server';
 import { describe, expect, it, vi } from 'vitest';
 
 vi.mock('astrowind:config', () => ({
+  SITE: {
+    site: 'https://example.com/',
+    contactEmail: 'hello@example.com',
+    base: '/',
+    trailingSlash: true,
+  },
+  APP_BLOG: {
+    list: { pathname: 'blog' },
+    category: { pathname: 'category' },
+    tag: { pathname: 'tag' },
+    post: { permalink: 'blog/%slug%' },
+  },
   I18N: {
     language: 'fr',
     showDefaultLang: false,
@@ -12,6 +24,31 @@ vi.mock('astrowind:config', () => ({
       en: 'EN',
     },
   },
+}));
+
+vi.mock('~/i18n/utils', () => ({
+  useTranslations: () => (key: string) =>
+    (
+      ({
+        'social.share': 'Partager',
+        'social.copy': 'Copier',
+        'social.copied': 'Copie effectuee',
+        'social.email': 'Email',
+        'social.linkedin': 'LinkedIn',
+        'social.bluesky': 'Bluesky',
+        'social.print': 'Imprimer',
+      }) as const
+    )[
+      key as keyof {
+        'social.share': string;
+        'social.copy': string;
+        'social.copied': string;
+        'social.email': string;
+        'social.linkedin': string;
+        'social.bluesky': string;
+        'social.print': string;
+      }
+    ] ?? key,
 }));
 
 // eslint-disable-next-line n/no-missing-import
@@ -31,7 +68,7 @@ describe('SocialShare', () => {
     const blueskyText = encodeURIComponent(`${title} ${url}`);
 
     expect(html).toContain('Partager:');
-    expect(html).toContain(`href="mailto:?subject=${encodedTitle}&body=${encodedBody}"`);
+    expect(html).toContain(`href="mailto:?subject=${encodedTitle}&amp;body=${encodedBody}"`);
     expect(html).toContain(`href="https://www.linkedin.com/sharing/share-offsite/?url=${encodedUrl}"`);
     expect(html).toContain(`href="https://bsky.app/intent/compose?text=${blueskyText}"`);
   });

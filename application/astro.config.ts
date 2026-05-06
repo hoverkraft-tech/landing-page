@@ -10,7 +10,7 @@ import react from '@astrojs/react';
 import partytown from '@astrojs/partytown';
 import icon from 'astro-icon';
 import compress from 'astro-compress';
-import type { AstroIntegration } from 'astro';
+import type { AstroIntegration, AstroUserConfig } from 'astro';
 
 import astrowind from './vendor/integration';
 
@@ -22,6 +22,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const hasExternalScripts = true;
 const whenExternalScripts = (items: (() => AstroIntegration) | (() => AstroIntegration)[] = []) =>
   hasExternalScripts ? (Array.isArray(items) ? items.map((item) => item()) : [items()]) : [];
+
+type AstroVitePlugins = NonNullable<NonNullable<AstroUserConfig['vite']>['plugins']>;
+
+// Astro and Tailwind currently resolve Vite through different type identities.
+// The plugin is valid at runtime, so we narrow the bridge to this one field.
+const vitePlugins = [tailwindcss()] as unknown as AstroVitePlugins;
 
 process.env.ASTRO_TELEMETRY_DISABLED = '1';
 
@@ -83,7 +89,7 @@ export default defineConfig({
   },
 
   vite: {
-    plugins: [tailwindcss()],
+    plugins: vitePlugins,
     resolve: {
       alias: {
         '~': path.resolve(__dirname, './src'),
