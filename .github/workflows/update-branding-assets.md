@@ -3,7 +3,7 @@
 # GitHub Workflow: Update Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/c52313b3b7813e846965f5d7338d2a9940494180da08725d94193e99a979e7e3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
+  <img src="https://opengraph.githubassets.com/fb4b83fb804837d66ad72ea40d796a70d89cd1c7b504fd995e1cd572d9897d11/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
 </div>
 
 ---
