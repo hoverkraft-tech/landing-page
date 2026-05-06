@@ -4,11 +4,10 @@
     "strictNullChecks": true,
     "allowJs": true,
     "resolveJsonModule": true,
-    "baseUrl": ".",
     "paths": {
-      "~/*": ["src/*"]
+      "~/*": ["./src/*"]
     }
   },
   "include": [".astro/types.d.ts", "**/*"],
-  "exclude": ["dist/"]
+  "exclude": ["dist/", "coverage/"]
 }

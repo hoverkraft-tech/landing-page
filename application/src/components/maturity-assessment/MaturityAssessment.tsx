@@ -276,10 +276,10 @@ export default function MaturityAssessment({ id = 'maturity-assessment', axes, s
   }, [axes, initialCollapsed, resetAnswers]);
 
   const handleFormReset = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    ((event) => {
       event.preventDefault();
       handleReset();
-    },
+    }) satisfies NonNullable<React.ComponentProps<'form'>['onReset']>,
     [handleReset]
   );
 
