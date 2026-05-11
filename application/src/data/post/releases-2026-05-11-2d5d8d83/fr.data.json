@@ -1,0 +1,76 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Au cours de la période du 4 mai 2026 au 11 mai 2026, quatre releases ont été publiées, indiquant une fréquence de déploiement régulière.\n\nLe dépôt le plus actif durant cette période a été \"docker-base-images\", avec trois releases. La release la plus récente, \"ci-dokumentor 0.3.0\", a été publiée le 5 mai 2026 et a introduit des améliorations notables dans la documentation continue. Les deux dépôts en lumière, \"ci-dokumentor\" et \"docker-base-images\", montrent un engagement vers l'amélioration des outils de documentation et des images de base, respectivement.\n\n- La release \"ci-dokumentor 0.3.0\" apporte des améliorations qui facilitent la documentation pour les ingénieurs de plateforme, ce qui peut réduire le temps nécessaire à la mise à jour des documents.\n- Le dépôt \"docker-base-images\" continue de recevoir des mises à jour, ce qui est essentiel pour les SREs cherchant à maintenir des environnements de conteneurs sécurisés et à jour.\n- L'augmentation de l'activité dans ces dépôts souligne l'importance de la collaboration et de l'itération continue pour les contributeurs techniques adoptant les projets HoverKraft.",
+  "closingMarkdown": "Période: 4 mai 2026 - 11 mai 2026\nDépôts suivis: 2\nReleases publiées: 4\nProjet le plus actif: docker-base-images (3)\nRelease la plus récente: ci-dokumentor 0.3.0\n\nDépôts en lumière:\n- ci-dokumentor (1 release, 5 ⭐)\n- docker-base-images (3 releases, 1 ⭐)\n\nAu cours de cette période, les dépôts ci-dokumentor et docker-base-images ont montré une activité notable, avec une mise à jour significative dans le dépôt ci-dokumentor. Cela pourrait avoir des implications pratiques pour les ingénieurs de plateforme, les SRE et d'autres utilisateurs techniques, notamment en matière d'automatisation et de conformité.\n\n### Prochaines étapes concrètes :\n- **Exécuter des benchmarks avec ci-dokumentor** : Évaluer les performances de la version 0.3.0 pour identifier les gains en automatisation des processus de documentation.\n- **Revoir la documentation de docker-base-images** : S'assurer que les meilleures pratiques sont respectées et que les images sont conformes aux exigences de sécurité, ce qui peut améliorer la conformité des déploiements.\n- **Adopter les nouvelles releases de docker-base-images** : Intégrer les mises à jour récentes pour bénéficier d'améliorations en termes de performance et de sécurité lors de l'utilisation des images Docker.",
+  "stats": {
+    "period": {
+      "since": "2026-05-04T12:10:09.765Z",
+      "until": "2026-05-11T12:10:09.765Z"
+    },
+    "totalRepos": 2,
+    "totalReleases": 4,
+    "busiestRepo": {
+      "name": "docker-base-images",
+      "count": 3
+    },
+    "mostRecentRelease": {
+      "repo": "ci-dokumentor",
+      "name": "0.3.0",
+      "publishedAt": "2026-05-05T19:03:59Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-dokumentor",
+      "description": "Générateur de documentation automatisé pour les composants CI/CD",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-dokumentor",
+      "releases": [
+        {
+          "name": "0.3.0",
+          "tag": "0.3.0",
+          "publishedAt": "2026-05-05T19:03:59Z",
+          "url": "https://github.com/hoverkraft-tech/ci-dokumentor/releases/tag/0.3.0",
+          "highlights": [
+            "## Résumé de la version\n\nLe support de GitLab est désormais disponible via un nouveau fournisseur de dépôt et un générateur de documentation CI/CD, tandis que les exemples d'actions GitHub gèrent mieux les autorisations au niveau des tâches.\n\nLa génération de markdown de base est plus fiable pour le code en ligne, les blocs de code de tableau, le contenu multiligne, les caractères spéciaux et le contenu supplémentaire d'aperçu.\n\nLes changements internes incluent le refactoring du générateur de sections partagées, le rafraîchissement de la documentation, les mises à jour de dépendances et la maintenance CI."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker avec opinions",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "0.4.3",
+          "tag": "0.4.3",
+          "publishedAt": "2026-05-05T07:46:54Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/0.4.3",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation sur les actions et les flux de travail a été mise à jour.\n\nEn interne, le flux de travail de publication utilise désormais les autorisations et le jeton corrects pour créer des versions de manière fiable."
+          ]
+        },
+        {
+          "name": "0.4.2",
+          "tag": "0.4.2",
+          "publishedAt": "2026-05-04T15:37:30Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/0.4.2",
+          "highlights": [
+            "## Résumé de la version\n\nLa documentation a été mise à jour pour les actions et les flux de travail.\n\nLes flux de travail CI internes utilisent désormais la référence d'image de test par défaut correcte.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        },
+        {
+          "name": "0.4.1",
+          "tag": "0.4.1",
+          "publishedAt": "2026-05-04T15:02:21Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/0.4.1",
+          "highlights": [
+            "## Résumé de la version\n\nLes tests d'image ont été améliorés pour renforcer la validation des images de base Docker publiées.\n\nL'exécution et le reporting des tests CI internes ont été affinés pour les vérifications d'image.\n\n## Changement(s) majeur(s)\n\nIl n'y a pas de changement majeur."
+          ]
+        }
+      ]
+    }
+  ]
+}
