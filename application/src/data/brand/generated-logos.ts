@@ -4,7 +4,7 @@
  * Source: @hoverkraft-tech/branding
  * Version: 0.1.0
  * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
- * Generated: 2026-01-26T09:46:11.797Z
+ * Generated: 2026-05-12T11:07:25.547Z
  */
 
 import type { LogoCollection } from './types';
@@ -41,8 +41,8 @@ export const logos: LogoCollection = {
   items: [
     {
       formats: {
-        png: 'logo/logo-icon.png',
-        svg: 'logo/logo-icon.svg',
+        png: 'assets/logo/logo-icon.png',
+        svg: 'assets/logo/logo-icon.svg',
       },
       name: {
         en: 'Pictogram Icon',
@@ -55,8 +55,8 @@ export const logos: LogoCollection = {
     },
     {
       formats: {
-        png: 'logo/logo-text-dark.png',
-        svg: 'logo/logo-text-dark.svg',
+        png: 'assets/logo/logo-text-dark.png',
+        svg: 'assets/logo/logo-text-dark.svg',
       },
       name: {
         en: 'Text Logo Dark',
@@ -69,8 +69,8 @@ export const logos: LogoCollection = {
     },
     {
       formats: {
-        png: 'logo/logo-text-light.png',
-        svg: 'logo/logo-text-light.svg',
+        png: 'assets/logo/logo-text-light.png',
+        svg: 'assets/logo/logo-text-light.svg',
       },
       name: {
         en: 'Text Logo Light',
@@ -83,7 +83,7 @@ export const logos: LogoCollection = {
     },
     {
       formats: {
-        svg: 'logo/logo-project.svg',
+        svg: 'assets/logo/logo-project.svg',
       },
       name: {
         en: 'Project Logo',
