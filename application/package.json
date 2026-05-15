@@ -58,12 +58,12 @@
     "@types/js-yaml": "^4.0.9",
     "@types/lodash.merge": "^4.6.9",
     "@types/mdx": "^2.0.13",
-    "@typescript-eslint/eslint-plugin": "^8.59.2",
-    "@typescript-eslint/parser": "^8.59.2",
-    "@vitest/coverage-v8": "4.1.5",
+    "@typescript-eslint/eslint-plugin": "^8.59.3",
+    "@typescript-eslint/parser": "^8.59.3",
+    "@vitest/coverage-v8": "4.1.6",
     "astro-compress": "2.4.1",
     "astro-eslint-parser": "^1.4.0",
-    "eslint": "^10.3.0",
+    "eslint": "^10.4.0",
     "eslint-plugin-astro": "^1.7.0",
     "globals": "^17.6.0",
     "humanize-ai-lib": "^1.0.0",
@@ -76,8 +76,8 @@
     "tailwind-merge": "^3.5.0",
     "tailwindcss": "^4.2.4",
     "typescript": "^6.0.3",
-    "typescript-eslint": "^8.59.2",
+    "typescript-eslint": "^8.59.3",
     "unist-util-visit": "^5.1.0",
-    "vitest": "4.1.5"
+    "vitest": "4.1.6"
   }
 }
