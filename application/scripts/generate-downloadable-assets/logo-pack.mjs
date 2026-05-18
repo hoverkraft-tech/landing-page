@@ -1,7 +1,7 @@
 import { createWriteStream } from 'node:fs';
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import archiver from 'archiver';
+import { ZipArchive } from 'archiver';
 import { collectFiles, ensureDir } from './fs-utils.mjs';
 import { logosDir } from './paths.mjs';
 
@@ -16,7 +16,7 @@ async function createLogoPack(outputFile) {
   await fs.rm(outputFile, { force: true });
 
   const output = createWriteStream(outputFile);
-  const archive = archiver('zip', { zlib: { level: 9 } });
+  const archive = new ZipArchive({ zlib: { level: 9 } });
 
   const finalizePromise = new Promise((resolve, reject) => {
     archive.on('error', reject);

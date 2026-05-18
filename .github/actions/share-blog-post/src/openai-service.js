@@ -85,20 +85,15 @@ class OpenAIService {
       language,
     )}`;
 
-    const response = await this.client.chat.completions.create({
-      model: "gpt-4o-mini",
+    const response = await this.client.responses.create({
+      model: "gpt-5.4-nano",
+      instructions: prompt,
+      input: `Title: ${title}\nExcerpt: ${excerpt}\nLink (for context only, do not repeat): ${url}`,
       temperature: 0.5,
       max_tokens: spec.openAI.maxTokens,
-      messages: [
-        { role: "system", content: prompt },
-        {
-          role: "user",
-          content: `Title: ${title}\nExcerpt: ${excerpt}\nLink (for context only, do not repeat): ${url}`,
-        },
-      ],
     });
 
-    const content = response?.choices?.[0]?.message?.content;
+    const content = response?.output_text;
     if (!content) {
       return "";
     }
