@@ -47,15 +47,19 @@ describe("generate-brand-content run", () => {
         items: [
           {
             name: { fr: "Logo principal", en: "Primary Logo" },
-            path: "logos/primary.svg",
-            formats: ["svg"],
+            formats: {
+              svg: "assets/logo/primary.svg",
+              png: "assets/logo/primary.png",
+            },
             usage: { fr: "Utilisation", en: "Usage" },
           },
         ],
       }),
       mascot: JSON.stringify({
         name: { fr: "Mascotte", en: "Mascot" },
-        path: "logo/mascot.svg",
+        formats: {
+          svg: "assets/mascot/mascot.svg",
+        },
         usage: { fr: "Utilisation", en: "Usage" },
       }),
       typography: JSON.stringify({
@@ -110,12 +114,17 @@ describe("generate-brand-content run", () => {
       "utf8",
     );
     assert.match(mascotFile, /export const mascot: MascotAsset =/);
+    assert.match(
+      mascotFile,
+      /svg: 'assets\/images\/brand\/mascot\/mascot\.svg'/,
+    );
 
     const logosFile = fs.readFileSync(
       path.join(outputDir, "generated-logos.ts"),
       "utf8",
     );
-    assert.match(logosFile, /formats: \['svg'\],/);
+    assert.match(logosFile, /svg: 'assets\/images\/brand\/logo\/primary\.svg'/);
+    assert.match(logosFile, /png: 'assets\/images\/brand\/logo\/primary\.png'/);
     assert.doesNotMatch(logosFile, /\\"/);
 
     assert.deepEqual(messages, [

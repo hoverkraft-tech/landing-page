@@ -41,8 +41,8 @@ export const logos: LogoCollection = {
   items: [
     {
       formats: {
-        png: 'assets/logo/logo-icon.png',
-        svg: 'assets/logo/logo-icon.svg',
+        png: 'assets/images/brand/logo/logo-icon.png',
+        svg: 'assets/images/brand/logo/logo-icon.svg',
       },
       name: {
         en: 'Pictogram Icon',
@@ -55,8 +55,8 @@ export const logos: LogoCollection = {
     },
     {
       formats: {
-        png: 'assets/logo/logo-text-dark.png',
-        svg: 'assets/logo/logo-text-dark.svg',
+        png: 'assets/images/brand/logo/logo-text-dark.png',
+        svg: 'assets/images/brand/logo/logo-text-dark.svg',
       },
       name: {
         en: 'Text Logo Dark',
@@ -69,8 +69,8 @@ export const logos: LogoCollection = {
     },
     {
       formats: {
-        png: 'assets/logo/logo-text-light.png',
-        svg: 'assets/logo/logo-text-light.svg',
+        png: 'assets/images/brand/logo/logo-text-light.png',
+        svg: 'assets/images/brand/logo/logo-text-light.svg',
       },
       name: {
         en: 'Text Logo Light',
@@ -83,7 +83,7 @@ export const logos: LogoCollection = {
     },
     {
       formats: {
-        svg: 'assets/logo/logo-project.svg',
+        svg: 'assets/images/brand/logo/logo-project.svg',
       },
       name: {
         en: 'Project Logo',
