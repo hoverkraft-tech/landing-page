@@ -8,7 +8,12 @@ const brandAssetModules = import.meta.glob<ImageMetadata>('~/assets/images/brand
 
 const brandAssetMap = new Map<string, ImageMetadata>();
 
-export const normalizeBrandAssetPath = (rawPath: string): string => rawPath.replace(/^\.\//, '').replace(/^\//, '');
+export const normalizeBrandAssetPath = (rawPath: string): string =>
+  rawPath
+    .replace(/^\.\//, '')
+    .replace(/^\//, '')
+    .replace(/^src\//, '')
+    .replace(/^assets\/images\/brand\//, '');
 
 for (const [fullPath, metadata] of Object.entries(brandAssetModules)) {
   const normalizedPath = fullPath.split('/assets/images/brand/')[1];

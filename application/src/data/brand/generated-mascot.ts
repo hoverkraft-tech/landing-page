@@ -11,7 +11,7 @@ import type { MascotAsset } from './types';
 
 export const mascot: MascotAsset = {
   formats: {
-    png: 'assets/mascot/mascot.png',
+    png: 'assets/images/brand/mascot/mascot.png',
   },
   name: {
     en: 'Hoverbuddy',
