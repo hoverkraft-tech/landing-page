@@ -1,0 +1,94 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+import type { HomeHeroContent } from './types';
+
+export interface Props {
+  content: HomeHeroContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="relative overflow-hidden not-prose">
+  <div
+    class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary/30 to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:px-6 md:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:py-24"
+  >
+    <div class="max-w-3xl">
+      <p
+        class="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-secondary md:text-sm"
+        set:html={content.tagline}
+      />
+      <h1
+        class="font-heading text-4xl font-bold leading-[1.05] tracking-tight text-heading md:text-5xl lg:text-6xl"
+        set:html={content.title}
+      />
+      <p class="mt-6 text-base leading-relaxed text-muted md:text-lg" set:html={content.subtitle} />
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <Button {...content.primaryAction} class="w-full sm:w-auto" />
+        <Button {...content.secondaryAction} class="w-full sm:w-auto" />
+      </div>
+      <ul class="mt-8 grid gap-3 text-sm text-default md:text-base">
+        {
+          content.proof.map((item) => (
+            <li class="flex gap-3">
+              <div class="relative rounded-2xl border border-gray-200 bg-white p-4 shadow-lg ring-1 ring-black/5 dark:border-white/10 dark:bg-white/4">
+                <Icon name={item.icon ?? 'tabler:check'} class="h-4 w-4" aria-hidden="true" />
+              </div>
+              <span>{item.text}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="relative">
+      <div class="absolute -inset-4 rounded-3xl bg-primary/5 blur-2xl" aria-hidden="true"></div>
+      <div
+        class="relative rounded-2xl border border-gray-200 bg-white p-4 shadow-lg ring-1 ring-black/5 dark:border-white/10 dark:bg-white/4"
+      >
+        <div class="rounded-xl border border-gray-200 bg-gray-50 p-4 dark:border-white/10 dark:bg-slate-950/60">
+          <div class="mb-4 flex items-start justify-between gap-4">
+            <div>
+              <p class="text-sm font-semibold text-heading">{content.visual.title}</p>
+              <p class="mt-1 text-xs leading-relaxed text-muted">{content.visual.subtitle}</p>
+            </div>
+            <span class="rounded-full bg-primary px-3 py-1 text-xs font-semibold text-white">OpenKraft</span>
+          </div>
+
+          <div class="space-y-3">
+            {
+              content.visual.nodes.map((node, index) => (
+                <div class="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3 dark:border-white/10 dark:bg-white/4">
+                  <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-sm font-semibold text-secondary">
+                    {index + 1}
+                  </span>
+                  <div class="h-2 flex-1 rounded-full bg-gray-200 dark:bg-white/10">
+                    <div class="h-2 rounded-full bg-primary" style={`width: ${46 + index * 10}%`} />
+                  </div>
+                  <span class="w-28 text-right text-sm font-medium text-heading">{node}</span>
+                </div>
+              ))
+            }
+          </div>
+
+          <div class="mt-4 grid grid-cols-3 gap-3">
+            {
+              content.visual.metrics.map((metric) => (
+                <div class="rounded-lg border border-gray-200 bg-white p-3 text-center dark:border-white/10 dark:bg-white/4">
+                  <p class="text-sm font-bold text-heading">{metric}</p>
+                  <p class="mt-1 text-[0.7rem] uppercase tracking-wide text-muted">metric</p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -19,6 +19,7 @@ const localizedFooterData = getLocalizedFooterData(Astro.url);
 ---
 
 <Layout metadata={metadata}>
+  <slot name="announcement" />
   <slot name="header">
     <Header {...localizedHeaderData} isSticky showRssFeed showToggleTheme />
   </slot>

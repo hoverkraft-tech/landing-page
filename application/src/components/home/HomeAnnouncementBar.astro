@@ -1,0 +1,29 @@
+---
+import { Icon } from 'astro-icon/components';
+
+export interface Props {
+  text: string;
+  href: string;
+}
+
+const { text, href } = Astro.props;
+---
+
+{
+  text && (
+    <a
+      href={href}
+      class="group block bg-secondary text-white focus:outline-hidden focus:ring-3 focus:ring-primary focus:ring-offset-2"
+    >
+      <div class="mx-auto flex min-h-9 max-w-7xl items-center justify-center gap-2 px-4 py-2 text-center text-sm font-medium md:min-h-10 md:px-6">
+        <Icon name="tabler:sparkles" class="h-4 w-4 shrink-0" aria-hidden="true" />
+        <span>{text}</span>
+        <Icon
+          name="tabler:arrow-right"
+          class="h-4 w-4 shrink-0 transition-transform duration-150 group-hover:translate-x-0.5"
+          aria-hidden="true"
+        />
+      </div>
+    </a>
+  )
+}

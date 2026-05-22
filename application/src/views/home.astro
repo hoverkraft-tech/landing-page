@@ -1,0 +1,56 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import HomeAnnouncementBar from '~/components/home/HomeAnnouncementBar.astro';
+import HomeHero from '~/components/home/HomeHero.astro';
+import HomeProofStrip from '~/components/home/HomeProofStrip.astro';
+import HomeAudienceTabs from '~/components/home/HomeAudienceTabs.astro';
+import HomePlatformModel from '~/components/home/HomePlatformModel.astro';
+import HomeComparison from '~/components/home/HomeComparison.astro';
+import HomeOperatingModel from '~/components/home/HomeOperatingModel.astro';
+import HomeCredibility from '~/components/home/HomeCredibility.astro';
+import HomeResourceHighlights from '~/components/home/HomeResourceHighlights.astro';
+import HomeActivation from '~/components/home/HomeActivation.astro';
+import HomeIntegrationGrid from '~/components/home/HomeIntegrationGrid.astro';
+import { getHomepageContent } from '~/data/homepage';
+import type { SupportedLanguage } from '~/i18n/ui';
+
+export interface Props {
+  lang: SupportedLanguage;
+}
+
+const { lang } = Astro.props;
+const content = getHomepageContent(lang);
+const metadata = {
+  ...content.metadata,
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="announcement">
+    <HomeAnnouncementBar {...content.announcement} />
+  </Fragment>
+
+  <HomeHero content={content.hero} />
+  <HomeProofStrip items={content.proofStrip} />
+  <HomeAudienceTabs header={content.useCases.header} items={content.useCases.items} />
+  <HomePlatformModel header={content.platformModel.header} pillars={content.platformModel.pillars} />
+  <HomeComparison header={content.comparison.header} columns={content.comparison.columns} />
+  <HomeOperatingModel
+    header={content.operatingModel.header}
+    steps={content.operatingModel.steps}
+    primaryAction={content.operatingModel.primaryAction}
+    secondaryAction={content.operatingModel.secondaryAction}
+  />
+  <HomeCredibility header={content.credibility.header} cards={content.credibility.cards} />
+  <HomeResourceHighlights header={content.resources.header} items={content.resources.items} />
+  <HomeActivation content={content.activation} />
+  <HomeIntegrationGrid content={content.integrations} />
+  <CallToAction
+    title={content.finalCta.title}
+    subtitle={content.finalCta.subtitle}
+    actions={[content.finalCta.primaryAction, content.finalCta.secondaryAction]}
+    classes={{ container: 'py-16 md:py-20 lg:py-24' }}
+  />
+</Layout>
