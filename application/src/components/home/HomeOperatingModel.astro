@@ -1,0 +1,56 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import type { HomeAction, HomeOperatingStep, HomeSectionHeader } from './types';
+
+export interface Props {
+  header: HomeSectionHeader;
+  steps: HomeOperatingStep[];
+  primaryAction: HomeAction;
+  secondaryAction: HomeAction;
+}
+
+const { header, steps, primaryAction, secondaryAction } = Astro.props;
+---
+
+<WidgetWrapper id="operating-model" containerClass="py-16 md:py-20 lg:py-24">
+  <Headline
+    {...header}
+    classes={{
+      container: 'max-w-3xl md:mx-auto text-center',
+      title: 'text-3xl md:text-4xl font-bold tracking-tight',
+      subtitle: 'text-base md:text-lg leading-relaxed',
+    }}
+  />
+
+  <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
+    {
+      steps.map((step) => (
+        <article class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-white/10 dark:bg-white/4">
+          <div class="mb-4 flex items-center gap-3">
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10 text-secondary">
+              <Icon name={step.icon ?? 'tabler:circle'} class="h-5 w-5" aria-hidden="true" />
+            </span>
+            <span class="text-sm font-bold text-primary">{String(step.index).padStart(2, '0')}</span>
+          </div>
+          <h3 class="text-lg font-semibold text-heading">{step.title}</h3>
+          <ul class="mt-4 space-y-2 text-sm leading-relaxed text-muted">
+            {step.deliverables.map((deliverable) => (
+              <li class="flex gap-2">
+                <Icon name="tabler:point-filled" class="mt-1 h-3 w-3 shrink-0 text-primary" aria-hidden="true" />
+                <span>{deliverable}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+    <Button {...primaryAction} class="w-full sm:w-auto" />
+    <Button {...secondaryAction} class="w-full sm:w-auto" />
+  </div>
+</WidgetWrapper>

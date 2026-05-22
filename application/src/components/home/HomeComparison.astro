@@ -1,0 +1,62 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import type { HomeComparisonColumn, HomeSectionHeader } from './types';
+
+export interface Props {
+  header: HomeSectionHeader;
+  columns: [HomeComparisonColumn, HomeComparisonColumn];
+}
+
+const { header, columns } = Astro.props;
+---
+
+<WidgetWrapper id="comparison" containerClass="py-16 md:py-20 lg:py-24">
+  <div class="grid gap-10 lg:grid-cols-[0.85fr_1.15fr] lg:items-start">
+    <Headline
+      {...header}
+      classes={{
+        container: 'max-w-2xl text-left md:mx-0',
+        title: 'text-3xl md:text-4xl font-bold tracking-tight',
+        subtitle: 'text-base md:text-lg leading-relaxed',
+      }}
+    />
+
+    <div class="grid gap-4 md:grid-cols-2">
+      {
+        columns.map((column) => (
+          <article
+            class:list={[
+              'rounded-2xl border p-6',
+              column.tone === 'positive'
+                ? 'border-primary/40 bg-primary/5 dark:bg-primary/10'
+                : 'border-gray-200 bg-white dark:border-white/10 dark:bg-white/4',
+            ]}
+          >
+            <h3 class="text-xl font-semibold text-heading">{column.title}</h3>
+            <ul class="mt-5 space-y-4">
+              {column.items.map((item) => (
+                <li class="flex gap-3 text-sm leading-relaxed text-default">
+                  <span
+                    class:list={[
+                      'mt-0.5 inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full',
+                      column.tone === 'positive' ? 'bg-primary text-white' : 'bg-gray-100 text-muted dark:bg-white/10',
+                    ]}
+                  >
+                    <Icon
+                      name={column.tone === 'positive' ? 'tabler:check' : 'tabler:x'}
+                      class="h-4 w-4"
+                      aria-hidden="true"
+                    />
+                  </span>
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</WidgetWrapper>

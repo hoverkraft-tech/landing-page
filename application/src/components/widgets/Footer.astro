@@ -1,7 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
+import { Image } from 'astro:assets';
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
+import logo from '~/assets/images/brand/logo/logo-icon.png';
 
 interface Link {
   text?: string;
@@ -15,56 +17,104 @@ interface Links {
   links: Array<Link>;
 }
 
+interface FollowBlock {
+  title: string;
+  subtitle?: string;
+  links: Array<Link>;
+}
+
+interface FooterCta {
+  text: string;
+  href: string;
+  ariaLabel?: string;
+}
+
 export interface Props {
   links: Array<Links>;
   secondaryLinks: Array<Link>;
   socialLinks: Array<Link>;
+  description?: string;
+  follow?: FollowBlock;
+  cta?: FooterCta;
   footNote?: string;
   theme?: string;
 }
 
-const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme = 'light' } = Astro.props;
+const {
+  socialLinks = [],
+  secondaryLinks = [],
+  links = [],
+  description = '',
+  follow,
+  cta,
+  footNote = '',
+  theme = 'light',
+} = Astro.props;
+
+const externalLinkAttrs = (href?: string) =>
+  href?.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 ---
 
-<footer class:list={[{ dark: theme === 'dark' }, 'relative border-t border-gray-200 dark:border-slate-800 not-prose']}>
-  <div class="dark:bg-dark absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+<footer
+  class:list={[{ dark: theme === 'dark' }, 'not-prose relative isolate border-t border-gray-200 dark:border-white/10']}
+>
+  <div class="pointer-events-none absolute inset-0 dark:bg-dark" aria-hidden="true"></div>
   <div
-    class="relative max-w-7xl mx-auto px-4 sm:px-6 dark:text-slate-300 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+    class="pointer-events-none absolute inset-x-0 top-0 -z-10 h-72 bg-gradient-to-b from-primary/5 via-transparent to-transparent dark:from-primary/10"
+    aria-hidden="true"
   >
-    <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
-      <div class="col-span-12 lg:col-span-4">
-        <div class="mb-2">
-          <a class="inline-block font-bold text-xl" href={getHomePermalink()}>{SITE?.name}</a>
-        </div>
+  </div>
+
+  <div
+    class="relative mx-auto max-w-7xl px-4 sm:px-6 dark:text-slate-300 intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+  >
+    <!-- Brand band -->
+    <div class="flex flex-col gap-6 py-10 md:flex-row md:items-center md:justify-between md:gap-8 md:py-12">
+      <div class="max-w-2xl">
+        <a class="inline-flex items-center gap-2" href={getHomePermalink()} aria-label={SITE?.name}>
+          <Image class="h-9 w-auto" src={logo} alt={SITE?.name} width={47} height={47} />
+          <span class="text-xl font-bold text-primary dark:text-white font-heading">{SITE?.name}</span>
+        </a>
         {
-          secondaryLinks?.length > 0 && (
-            <div class="text-sm text-muted flex gap-1">
-              {secondaryLinks.map(({ text, href }, index) => (
-                <>
-                  {index !== 0 ? ' · ' : ''}
-                  <a
-                    class="text-muted hover:text-gray-700 dark:text-gray-400 hover:underline transition duration-150 ease-in-out"
-                    href={href}
-                    set:html={text}
-                  />
-                </>
-              ))}
-            </div>
+          description && (
+            <p class="mt-3 max-w-xl text-sm leading-relaxed text-muted dark:text-gray-400">{description}</p>
           )
         }
       </div>
       {
+        cta && (
+          <a
+            class="inline-flex items-center gap-2 self-start rounded-full bg-primary px-5 py-3 text-sm font-semibold text-white shadow-sm transition-colors hover:bg-primary/90 focus-visible:outline-hidden focus-visible:ring-3 focus-visible:ring-primary/40 md:self-auto"
+            href={cta.href}
+            aria-label={cta.ariaLabel ?? cta.text}
+            {...externalLinkAttrs(cta.href)}
+          >
+            <span>{cta.text}</span>
+            <Icon name="tabler:arrow-right" class="h-4 w-4" aria-hidden="true" />
+          </a>
+        )
+      }
+    </div>
+
+    <div class="h-px w-full bg-gray-200 dark:bg-white/10"></div>
+
+    <!-- Link grid -->
+    <div class="grid grid-cols-2 gap-8 py-12 sm:grid-cols-3 lg:grid-cols-12">
+      {
         links.map(({ title, links }) => (
-          <div class="col-span-6 md:col-span-3 lg:col-span-2">
-            <div class="text-secondary dark:text-secondary font-medium mb-2">{title}</div>
+          <div class="lg:col-span-2">
+            <div class="mb-3 text-xs font-semibold uppercase tracking-[0.16em] text-heading dark:text-white">
+              {title}
+            </div>
             {links && Array.isArray(links) && links.length > 0 && (
-              <ul class="text-sm">
+              <ul class="space-y-2 text-sm">
                 {links.map(({ text, href, ariaLabel }) => (
-                  <li class="mb-2">
+                  <li>
                     <a
-                      class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
+                      class="inline-flex items-center gap-1 text-muted transition-colors hover:text-primary dark:text-gray-400 dark:hover:text-primary"
                       href={href}
                       aria-label={ariaLabel}
+                      {...externalLinkAttrs(href)}
                     >
                       <Fragment set:html={text} />
                     </a>
@@ -75,32 +125,87 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
           </div>
         ))
       }
-    </div>
-    <div class="md:flex md:items-center md:justify-between py-6 md:py-8">
+
       {
-        socialLinks?.length ? (
-          <ul class="flex mb-4 md:order-1 -ml-2 md:ml-4 md:mb-0 rtl:ml-0 rtl:-mr-2 rtl:md:ml-0 rtl:md:mr-4">
-            {socialLinks.map(({ ariaLabel, href, text, icon }) => (
+        follow && (
+          <div class="col-span-2 sm:col-span-3 lg:col-span-4">
+            <div class="relative h-full overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 dark:border-white/10 dark:bg-white/4">
+              <div
+                class="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-primary/10 blur-2xl"
+                aria-hidden="true"
+              />
+              <div class="relative">
+                <div class="flex items-center gap-2">
+                  <span class="inline-flex h-8 w-8 items-center justify-center rounded-lg bg-primary/10 text-primary">
+                    <Icon name="tabler:bell" class="h-4 w-4" aria-hidden="true" />
+                  </span>
+                  <span class="text-sm font-semibold text-heading dark:text-white">{follow.title}</span>
+                </div>
+                {follow.subtitle && (
+                  <p class="mt-2 text-sm leading-relaxed text-muted dark:text-gray-400">{follow.subtitle}</p>
+                )}
+                <div class="mt-4 flex flex-wrap gap-2">
+                  {follow.links.map(({ text, href, icon, ariaLabel }) => (
+                    <a
+                      class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-xs font-semibold text-default transition-colors hover:border-primary hover:text-primary dark:border-white/10 dark:bg-white/5 dark:text-gray-300"
+                      href={href}
+                      aria-label={ariaLabel}
+                      {...externalLinkAttrs(href)}
+                    >
+                      {icon && <Icon name={icon} class="h-3.5 w-3.5" aria-hidden="true" />}
+                      <Fragment set:html={text} />
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        )
+      }
+    </div>
+
+    <div class="h-px w-full bg-gray-200 dark:bg-white/10"></div>
+
+    <!-- Bottom bar -->
+    <div class="flex flex-col gap-4 py-6 md:flex-row md:items-center md:justify-between md:py-8">
+      <div class="flex flex-col gap-2 text-sm text-muted dark:text-gray-400 md:flex-row md:items-center md:gap-4">
+        <div set:html={footNote} />
+        {
+          secondaryLinks?.length > 0 && (
+            <ul class="flex flex-wrap items-center gap-x-4 gap-y-1">
+              {secondaryLinks.map(({ text, href }) => (
+                <li>
+                  <a
+                    class="transition-colors hover:text-primary dark:hover:text-primary"
+                    href={href}
+                    {...externalLinkAttrs(href)}
+                    set:html={text}
+                  />
+                </li>
+              ))}
+            </ul>
+          )
+        }
+      </div>
+
+      {
+        socialLinks?.length > 0 && (
+          <ul class="flex flex-wrap items-center gap-1">
+            {socialLinks.map(({ ariaLabel, href, icon }) => (
               <li>
                 <a
-                  class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
+                  class="inline-flex h-9 w-9 items-center justify-center rounded-full text-muted transition-colors hover:bg-primary/10 hover:text-primary focus-visible:outline-hidden focus-visible:ring-3 focus-visible:ring-primary/40 dark:text-gray-400 dark:hover:bg-primary/15"
                   aria-label={ariaLabel}
                   href={href}
+                  {...externalLinkAttrs(href)}
                 >
-                  {icon && <Icon name={icon} class="w-5 h-5" />}
-                  <Fragment set:html={text} />
+                  {icon && <Icon name={icon} class="h-5 w-5" aria-hidden="true" />}
                 </a>
               </li>
             ))}
           </ul>
-        ) : (
-          ''
         )
       }
-
-      <div class="text-sm mr-4 dark:text-muted">
-        <Fragment set:html={footNote} />
-      </div>
     </div>
   </div>
 </footer>

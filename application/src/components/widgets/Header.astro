@@ -18,6 +18,15 @@ interface Link {
 }
 
 interface MenuLink extends Link {
+  description?: string;
+  featured?: {
+    label: string;
+    title: string;
+    description: string;
+    href: string;
+    cta: string;
+    icon?: string;
+  };
   links?: Array<MenuLink>;
 }
 
@@ -55,6 +64,8 @@ const normalizePath = (path: string): string => {
 };
 
 const currentPath = normalizePath(new URL(Astro.url).pathname);
+const externalLinkAttrs = (href?: string) =>
+  href?.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {};
 ---
 
 <header
@@ -73,7 +84,7 @@ const currentPath = normalizePath(new URL(Astro.url).pathname);
         'md:flex md:justify-between': position !== 'center',
       },
       {
-        'md:grid md:grid-cols-3 md:items-center': position === 'center',
+        'md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-x-4': position === 'center',
       },
       {
         'max-w-7xl': !isFullWidth,
@@ -89,15 +100,15 @@ const currentPath = normalizePath(new URL(Astro.url).pathname);
       </div>
     </div>
     <nav
-      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-y-visible md:overflow-x-auto md:justify-self-center"
+      class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-visible md:justify-self-center"
       aria-label="Main navigation"
     >
       <ul
         class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
       >
         {
-          links.map(({ text, href, links }) => (
-            <li class={links?.length ? 'dropdown' : ''}>
+          links.map(({ text, href, links, featured }, index, arr) => (
+            <li class={links?.length ? 'dropdown md:relative' : ''}>
               {links?.length ? (
                 <>
                   <button
@@ -107,21 +118,74 @@ const currentPath = normalizePath(new URL(Astro.url).pathname);
                     {text}{' '}
                     <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
                   </button>
-                  <ul class="dropdown-menu md:backdrop-blur-md dark:md:bg-dark rounded-sm md:absolute pl-4 md:pl-0 md:hidden font-medium md:bg-white/90 md:min-w-[200px] drop-shadow-xl">
-                    {links.map(({ text: text2, href: href2 }) => (
-                      <li>
-                        <a
-                          class:list={[
-                            'first:rounded-t last:rounded-b md:hover:bg-gray-100 hover:text-link dark:hover:text-white dark:hover:bg-gray-700 py-2 px-5 block whitespace-no-wrap',
-                            { 'aw-link-active': normalizePath(href2 ?? '') === currentPath },
-                          ]}
-                          href={href2}
-                        >
-                          {text2}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                  <div
+                    class:list={[
+                      'dropdown-menu pl-4 md:pl-0 md:hidden md:absolute md:top-full md:pt-3 md:z-[60]',
+                      index >= Math.ceil(arr.length / 2) ? 'md:right-0' : 'md:left-1/2 md:-translate-x-1/2',
+                      featured ? 'md:w-[42rem]' : 'md:w-[24rem]',
+                    ]}
+                  >
+                    <div class="md:overflow-hidden md:rounded-2xl md:border md:border-gray-200 md:bg-white/95 md:shadow-xl md:backdrop-blur-md md:dark:border-white/10 md:dark:bg-dark/95">
+                      <div class:list={['md:grid md:gap-0', featured ? 'md:grid-cols-[16rem_1fr]' : '']}>
+                        {featured && (
+                          <a
+                            class="group hidden md:flex md:flex-col md:justify-between md:gap-4 md:bg-gradient-to-br md:from-primary/10 md:to-primary/5 md:p-5 md:dark:from-primary/15 md:dark:to-primary/5"
+                            href={featured.href}
+                            {...externalLinkAttrs(featured.href)}
+                          >
+                            <div>
+                              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+                                <Icon name={featured.icon ?? 'tabler:star'} class="h-5 w-5" aria-hidden="true" />
+                              </span>
+                              <p class="mt-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-primary">
+                                {featured.label}
+                              </p>
+                              <p class="mt-1 text-base font-bold leading-snug text-heading">{featured.title}</p>
+                              <p class="mt-1.5 text-sm leading-relaxed text-muted">{featured.description}</p>
+                            </div>
+                            <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                              {featured.cta}
+                              <Icon
+                                name="tabler:arrow-right"
+                                class="h-4 w-4 transition-transform group-hover:translate-x-0.5"
+                                aria-hidden="true"
+                              />
+                            </span>
+                          </a>
+                        )}
+                        <ul class="md:grid md:gap-1 md:p-3">
+                          {links.map(({ text: text2, href: href2, description, icon }) => (
+                            <li>
+                              <a
+                                class:list={[
+                                  'group flex items-start gap-3 rounded-xl py-2 px-3 transition-colors md:hover:bg-gray-50 md:dark:hover:bg-white/5',
+                                  { 'aw-link-active': normalizePath(href2 ?? '') === currentPath },
+                                ]}
+                                href={href2}
+                                {...externalLinkAttrs(href2)}
+                              >
+                                {icon && (
+                                  <span class="hidden md:inline-flex md:mt-0.5 md:h-8 md:w-8 md:shrink-0 md:items-center md:justify-center md:rounded-lg md:bg-primary/10 md:text-primary md:transition-colors md:group-hover:bg-primary md:group-hover:text-white">
+                                    <Icon name={icon} class="h-4 w-4" aria-hidden="true" />
+                                  </span>
+                                )}
+                                <span class="md:flex md:flex-col">
+                                  <span class="text-sm font-semibold text-heading group-hover:text-primary dark:text-white">
+                                    {text2}
+                                  </span>
+                                  {description && (
+                                    <span class="hidden md:block md:text-xs md:leading-relaxed md:text-muted">
+                                      {description}
+                                    </span>
+                                  )}
+                                </span>
+                              </a>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
                 </>
               ) : (
                 <a
@@ -130,6 +194,7 @@ const currentPath = normalizePath(new URL(Astro.url).pathname);
                     { 'aw-link-active': normalizePath(href ?? '') === currentPath },
                   ]}
                   href={href}
+                  {...externalLinkAttrs(href)}
                 >
                   {text}
                 </a>
