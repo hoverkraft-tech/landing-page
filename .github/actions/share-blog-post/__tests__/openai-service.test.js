@@ -35,7 +35,7 @@ describe("OpenAIService", () => {
       const request =
         service.client.responses.create.mock.calls[0].arguments[0];
       assert.equal(request.model, "gpt-5.4-nano");
-      assert.equal(request.max_tokens, 200);
+      assert.equal(request.max_output_tokens, 200);
       assert.match(request.instructions, /Write a LinkedIn post/);
       assert.match(request.instructions, /Write the post in English/);
       assert.match(request.input, /Title: Hello/);

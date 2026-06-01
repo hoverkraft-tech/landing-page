@@ -13,6 +13,10 @@ class OpenAIService {
     this.client = new OpenAI({ apiKey });
   }
 
+  getMaxOutputTokens(options = {}) {
+    return options.max_output_tokens ?? options.max_tokens ?? 2000;
+  }
+
   getMessageText(content) {
     if (typeof content === "string") {
       return content.trim();
@@ -77,11 +81,11 @@ class OpenAIService {
   async generateText(messages, options = {}) {
     const request = this.buildResponsesRequest(messages);
     const response = await this.client.responses.create({
-      model: options.model || "gpt-5.4-nano",
+      model: options.model ?? "gpt-5.4-nano",
       instructions: request.instructions,
       input: request.input,
-      temperature: options.temperature || 0.7,
-      max_tokens: options.max_tokens || 2000,
+      temperature: options.temperature ?? 0.7,
+      max_output_tokens: this.getMaxOutputTokens(options),
     });
 
     return (response.output_text || "").trim();
