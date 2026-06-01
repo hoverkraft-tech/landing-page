@@ -90,7 +90,7 @@ class OpenAIService {
       instructions: prompt,
       input: `Title: ${title}\nExcerpt: ${excerpt}\nLink (for context only, do not repeat): ${url}`,
       temperature: 0.5,
-      max_tokens: spec.openAI.maxTokens,
+      max_output_tokens: spec.openAI.maxTokens,
     });
 
     const content = response?.output_text;

@@ -28,7 +28,7 @@ describe("OpenAIService", () => {
       ],
       {
         temperature: 0.35,
-        max_tokens: 600,
+        max_output_tokens: 600,
       },
     );
 
@@ -37,9 +37,18 @@ describe("OpenAIService", () => {
     const request = service.client.responses.create.mock.calls[0].arguments[0];
     assert.equal(request.model, "gpt-5.4-nano");
     assert.equal(request.temperature, 0.35);
-    assert.equal(request.max_tokens, 600);
+    assert.equal(request.max_output_tokens, 600);
     assert.equal(request.instructions, "Answer in French.");
     assert.equal(request.input, "Summarize these releases.");
+  });
+
+  it("maps legacy max_tokens options to max_output_tokens", async () => {
+    await service.generateText([{ role: "user", content: "Summarize." }], {
+      max_tokens: 450,
+    });
+
+    const request = service.client.responses.create.mock.calls[0].arguments[0];
+    assert.equal(request.max_output_tokens, 450);
   });
 
   it("flattens array content into plain text input", async () => {

@@ -171,7 +171,7 @@ class ContentGenerator {
       ],
       {
         temperature: 0.35,
-        max_tokens: 600,
+        max_output_tokens: 600,
       },
     );
   }
@@ -194,7 +194,7 @@ class ContentGenerator {
       ],
       {
         temperature: 0.4,
-        max_tokens: 400,
+        max_output_tokens: 400,
       },
     );
   }
@@ -327,7 +327,7 @@ class ContentGenerator {
       ],
       {
         temperature: 0.2,
-        max_tokens: 800,
+        max_output_tokens: 800,
       },
     );
 
