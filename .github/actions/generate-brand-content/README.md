@@ -3,7 +3,7 @@
 # GitHub Action: Generate Brand Content
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/4b93c26e425322f775045c24778e2cdee8505f095aa6bcb9386dd07d98207369/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
+  <img src="https://opengraph.githubassets.com/d595daad82efaa00e305149cacab64c8ebe6911eb8ab488893fc6ad38dcedf27/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Brand Content" />
 </div>
 
 ---
