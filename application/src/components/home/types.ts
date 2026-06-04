@@ -16,12 +16,6 @@ export type HomeBullet = {
   icon?: string;
 };
 
-export type HomeProofPoint = {
-  value?: string;
-  label: string;
-  description?: string;
-};
-
 export type HomeUseCase = {
   id: string;
   title: string;
@@ -61,13 +55,9 @@ export type HomeCredibilityCard = {
   href?: string;
 };
 
-export type HomeResource = {
-  type: string;
-  title: string;
-  description: string;
-  href: string;
-  actionText: string;
-  external?: boolean;
+export type HomeFaqItem = {
+  question: string;
+  answer: string;
 };
 
 export type HomeHeroContent = HomeSectionHeader & {
@@ -92,7 +82,6 @@ export type HomePageContent = {
     href: string;
   };
   hero: HomeHeroContent;
-  proofStrip: HomeProofPoint[];
   useCases: {
     header: HomeSectionHeader;
     items: HomeUseCase[];
@@ -115,9 +104,9 @@ export type HomePageContent = {
     header: HomeSectionHeader;
     cards: HomeCredibilityCard[];
   };
-  resources: {
+  faq: {
     header: HomeSectionHeader;
-    items: HomeResource[];
+    items: HomeFaqItem[];
   };
   activation: {
     header: HomeSectionHeader;
@@ -133,14 +122,6 @@ export type HomePageContent = {
       bullets: string[];
       action: HomeAction;
     };
-  };
-  integrations: {
-    header: HomeSectionHeader;
-    items: Array<{
-      label: string;
-      icon?: string;
-      href?: string;
-    }>;
   };
   finalCta: {
     title: string;

@@ -6,7 +6,7 @@ import Features2 from '~/components/widgets/Features2.astro';
 import { SITE } from 'astrowind:config';
 
 const metadata = {
-  title: 'Contact ventes et support',
+  title: 'Contact commercial et accompagnement',
 };
 
 const contactEmail = SITE?.contactEmail ?? '';
@@ -16,39 +16,39 @@ const bookingUrl = SITE?.bookingUrl ?? '';
 <Layout metadata={metadata}>
   <!-- Widget HeroText ******************* -->
 
-  <HeroText tagline="Contact" title="Contactez notre équipe" />
+  <HeroText tagline="Contact" title="Parlons de votre contexte" />
 
   <BookingLink
     id="booking"
-    title="Réservez un rendez-vous avec notre équipe"
-    subtitle="Choisissez un créneau qui vous convient pour échanger avec nous sur vos besoins."
+    title="Réservez un échange avec notre équipe"
+    subtitle="Choisissez un créneau pour cadrer vos enjeux, vos objectifs et vos contraintes."
     bookingUrl={bookingUrl}
-    description="Notre équipe est disponible pour discuter de vos projets et répondre à vos questions. Pour une demande urgente, utilisez l'un des canaux ci-dessous."
+    description="Nous pouvons intervenir sur un audit, une trajectoire plateforme, un besoin de formation ou une demande plus ponctuelle."
   />
 
   <!-- Widget Features2 ************** -->
 
   <Features2
-    title="Nous sommes là pour vous aider"
+    title="Comment nous joindre"
     items={[
       {
-        title: 'Support général',
-        description: `Contactez-nous pour des questions sur la gestion de compte, la facturation, l'accès aux services ou toute autre demande générale.`,
+        title: 'Demande générale',
+        description: `Contactez-nous pour toute question sur votre compte, la facturation, l'accès aux services ou une demande d'information plus large.`,
       },
       {
-        title: 'Ventes',
+        title: 'Trajectoire plateforme',
         description:
-          'Discutez avec notre équipe commerciale pour choisir l’offre adaptée, comprendre la tarification ou planifier un lancement sur mesure.',
+          'Échangez avec nous pour choisir la bonne offre, comprendre la trajectoire possible et planifier un cadrage adapté.',
       },
       {
-        title: 'Support technique',
+        title: 'Question technique',
         description:
-          "Contactez le support pour des problèmes d'intégration, d'installation ou toute panne technique liée à la plateforme.",
+          "Parlez-nous d'un sujet d'intégration, d'installation ou d'un blocage technique lié à votre plateforme.",
       },
       {
-        title: 'Téléphone',
-        description: '+33 (0)1 23 45 67 89',
-        icon: 'tabler:headset',
+        title: 'Prise de rendez-vous',
+        description: 'Réservez directement un créneau via notre agenda partagé ci-dessus.',
+        icon: 'tabler:calendar-event',
       },
       {
         title: 'Email',
@@ -56,7 +56,7 @@ const bookingUrl = SITE?.bookingUrl ?? '';
         icon: 'tabler:mail',
       },
       {
-        title: 'Adresse',
+        title: 'Présence',
         description: 'Marseille, Aix-en-Provence, France',
         icon: 'tabler:map-pin',
       },

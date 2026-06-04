@@ -82,7 +82,7 @@ const strings = {
       }}
       callToAction2={{
         text: 'Nous contacter',
-        href: translatePath('/contact#form'),
+        href: `${translatePath('/contact')}#booking`,
       }}
     />
   </div>
@@ -90,7 +90,7 @@ const strings = {
   <div data-maturity-assessment-no-print>
     <Note
       title="Pourquoi cette auto-évaluation ?"
-      description="Le Platform Engineering n’est efficace que s’il est mesurable. Ce radar vous aide à objectiver votre point de départ, aligner les parties prenantes, et prioriser des actions à impact (DORA, SPACE, sécurité)."
+      description="Le Platform Engineering ne crée de valeur que s'il est mesurable. Ce radar vous aide à objectiver votre point de départ, aligner les parties prenantes et prioriser des actions à impact sur le delivery, la sécurité et l'expérience développeur."
     />
   </div>
 
@@ -173,14 +173,14 @@ const strings = {
   <div data-maturity-assessment-no-print>
     <CallToAction
       actions={[
-        { variant: 'primary', text: 'Réserver un débrief (30 min)', href: translatePath('/contact#form') },
+        { variant: 'primary', text: 'Réserver un débrief (30 min)', href: `${translatePath('/contact')}#booking` },
         { text: 'Voir nos offres', href: translatePath('/offers') },
       ]}
     >
-      <Fragment slot="title">Envie d'aller plus loin ?</Fragment>
+      <Fragment slot="title">Vous souhaitez approfondir vos résultats ?</Fragment>
       <Fragment slot="subtitle">
-        Ce radar est une première étape. Discutons de vos résultats pour comprendre votre contexte et identifier vos
-        leviers d'action prioritaires.
+        Ce radar constitue un point de départ. Discutons de vos résultats pour comprendre votre contexte et identifier
+        les actions prioritaires à engager.
       </Fragment>
     </CallToAction>
   </div>

@@ -9,7 +9,8 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'OpenKraft - Resources',
-  description: 'Access HoverKraft open source connectors, the community, and resources to accelerate your platform.',
+  description:
+    'Explore HoverKraft open-source connectors, documentation, and community resources to accelerate your platform.',
 };
 ---
 
@@ -36,34 +37,34 @@ const metadata = {
       alt: 'OpenKraft community',
     }}
   >
-    <Fragment slot="title">The open source hub for your platform connectors</Fragment>
+    <Fragment slot="title">The open-source ecosystem for your internal platform</Fragment>
 
     <Fragment slot="subtitle">
-      OpenKraft brings together our templates, dashboards, playbooks, and lessons learned. A space designed for
-      developers, platform teams, and leaders who want to accelerate without sacrificing sovereignty.
+      OpenKraft brings together reusable connectors, templates, dashboards, and field-tested guidance. It is designed
+      for developers, platform teams, and leaders who want to accelerate without losing control.
     </Fragment>
   </Hero>
 
   <Note
     title="Philosophy"
-    description="Knowledge that doesn't circulate dies out. We publish open source the building blocks needed to bring the HoverKraft method to life in any context."
+    description="Knowledge that does not circulate gets lost. We publish the building blocks needed to apply the HoverKraft method in real-world environments."
   />
 
   <Content
     isReversed
-    title="What you'll find in OpenKraft"
+    title="What you will find in OpenKraft"
     items={[
       {
-        title: 'Laptop-to-prod connectors',
-        description: 'CI/CD, observability, security, provisioning: everything is ready to use and maintained.',
+        title: 'CI/CD connectors',
+        description: 'Ready-to-use pipelines for GitHub Actions, GitLab CI, and ArgoCD, including promotion patterns.',
       },
       {
-        title: 'DORA/SPACE dashboards',
-        description: 'Grafana/Looker Studio pack to drive your improvements and share results.',
+        title: 'Integrated observability',
+        description: 'Grafana dashboards, Prometheus alerting, and OpenTelemetry traces already wired together.',
       },
       {
-        title: 'IDP templates',
-        description: 'Backstage, Portainer, and UI components to provide a credible developer portal.',
+        title: 'Security by design',
+        description: 'IAM playbooks, secrets management, and compliance patterns shaped by concrete constraints.',
       },
     ]}
     image={{
@@ -73,98 +74,60 @@ const metadata = {
   />
 
   <Features2
-    title="Our formats"
-    subtitle="Content to learn, implement, and share."
-    columns={3}
+    title="Why contribute?"
+    subtitle="A maintained ecosystem shaped by feedback from the field."
+    columns={2}
     items={[
       {
-        title: 'Documentation',
-        description: 'Comprehensive documentation portal for all our open source projects.',
-        icon: 'tabler:book',
+        title: 'Field-tested feedback',
+        description: 'Each contribution is tied to a real-world use case and documented with implementation context.',
+        icon: 'tabler:users',
       },
       {
-        title: 'HoverKraft Glue',
-        description: 'GitHub & GitLab repositories with connectors, scripts, and integration documentation.',
-        icon: 'tabler:brand-open-source',
+        title: 'HoverKraft review',
+        description: 'Our team reviews, tests, and validates every new connector before publication.',
+        icon: 'tabler:certificate',
       },
       {
-        title: 'Blog & case studies',
-        description: 'Real use cases, architecture retrospectives, and lessons learned shared transparently.',
-        icon: 'tabler:article',
+        title: 'Community support',
+        description: 'Access our community space to exchange practices, questions, and lessons learned.',
+        icon: 'tabler:messages',
       },
       {
-        title: 'Webinars',
-        description: 'Monthly sessions on topics such as GitOps, DORA metrics, and platform governance.',
-        icon: 'tabler:video',
-      },
-      {
-        title: 'Community forum',
-        description: 'Discussions on GitHub Discussions for questions, contributions, and collaborations.',
-        icon: 'tabler:message-circle',
-      },
-      {
-        title: 'Templates & starters',
-        description: 'Ready-to-fork repositories to quickly bootstrap your internal platform.',
-        icon: 'tabler:template',
+        title: 'Collaborative roadmap',
+        description: 'Help prioritize the next connectors and patterns that would deliver the most value.',
+        icon: 'tabler:road',
       },
     ]}
   />
 
   <Steps
-    title="Contribute to OpenKraft"
+    title="How to contribute"
     items={[
       {
-        title: 'Step 1: <span class="font-medium">Explore</span>',
-        description:
-          'Browse our repositories, test our connectors, and identify those that match your technical stack.',
-        icon: 'tabler:search',
+        title: '1. Fork the repository',
+        description: 'Choose the connector you want to improve or create a new one from our templates.',
+        icon: 'tabler:git-branch',
       },
       {
-        title: 'Step 2: <span class="font-medium">Adopt</span>',
-        description:
-          'Integrate the chosen connectors into your platform and share your feedback via issues or discussions.',
-        icon: 'tabler:download',
+        title: '2. Follow the guide',
+        description: 'Each repository includes contribution guidance and automated tests that are ready to run.',
+        icon: 'tabler:book',
       },
       {
-        title: 'Step 3: <span class="font-medium">Contribute</span>',
-        description:
-          'Submit bug fixes, new features, or additional connectors. Every contribution strengthens the ecosystem.',
+        title: '3. Open a pull request',
+        description: 'Submit your connector and our team will help you get it ready for publication.',
         icon: 'tabler:git-pull-request',
       },
       {
-        title: 'Step 4: <span class="font-medium">Share</span>',
-        description:
-          'Document your implementation, publish a blog post, or speak at a meetup. The community grows with you.',
-        icon: 'tabler:share',
+        title: '4. Share the rollout',
+        description: 'Present your implementation to the community and document the outcomes you observed.',
+        icon: 'tabler:microphone',
       },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80',
       alt: 'Community collaboration',
-    }}
-  />
-
-  <Content
-    isReversed
-    title="Sovereign by design"
-    subtitle="Control and transparency guaranteed"
-    items={[
-      {
-        title: 'MIT/Apache licenses',
-        description: 'All our open source code uses permissive licenses. You can fork, modify, and redistribute.',
-      },
-      {
-        title: 'No vendor lock-in',
-        description: 'Our connectors are cloud-agnostic and designed to interoperate with industry-standard tools.',
-      },
-      {
-        title: 'Full transparency',
-        description: 'Public roadmaps, open changelogs, and accessible discussions for all stakeholders.',
-      },
-    ]}
-    image={{
-      src: '~/assets/images/sovereignty-matrix.png',
-      alt: 'Digital sovereignty matrix',
     }}
   />
 
@@ -178,8 +141,8 @@ const metadata = {
         icon: 'tabler:brand-github',
       },
       {
-        text: 'Join the community',
-        href: 'https://github.com/orgs/hoverkraft-tech/discussions',
+        text: 'View documentation',
+        href: 'https://docs.hoverkraft.cloud',
         target: '_blank',
       },
       {
@@ -191,10 +154,11 @@ const metadata = {
       },
     ]}
   >
-    <Fragment slot="title">Join the OpenKraft movement</Fragment>
+    <Fragment slot="title">Ready to contribute to OpenKraft?</Fragment>
 
     <Fragment slot="subtitle">
-      Thousands of teams worldwide use our connectors to build sovereign and performant platforms. Join them.
+      Share your connectors, document your lessons learned, and help other teams accelerate without starting from
+      scratch.
     </Fragment>
   </CallToAction>
 </Layout>

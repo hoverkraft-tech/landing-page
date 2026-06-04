@@ -3,15 +3,13 @@ import Layout from '~/layouts/PageLayout.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import HomeAnnouncementBar from '~/components/home/HomeAnnouncementBar.astro';
 import HomeHero from '~/components/home/HomeHero.astro';
-import HomeProofStrip from '~/components/home/HomeProofStrip.astro';
 import HomeAudienceTabs from '~/components/home/HomeAudienceTabs.astro';
 import HomePlatformModel from '~/components/home/HomePlatformModel.astro';
 import HomeComparison from '~/components/home/HomeComparison.astro';
 import HomeOperatingModel from '~/components/home/HomeOperatingModel.astro';
 import HomeCredibility from '~/components/home/HomeCredibility.astro';
-import HomeResourceHighlights from '~/components/home/HomeResourceHighlights.astro';
+import HomeFaq from '~/components/home/HomeFaq.astro';
 import HomeActivation from '~/components/home/HomeActivation.astro';
-import HomeIntegrationGrid from '~/components/home/HomeIntegrationGrid.astro';
 import { getHomepageContent } from '~/data/homepage';
 import type { SupportedLanguage } from '~/i18n/ui';
 
@@ -33,20 +31,18 @@ const metadata = {
   </Fragment>
 
   <HomeHero content={content.hero} />
-  <HomeProofStrip items={content.proofStrip} />
   <HomeAudienceTabs header={content.useCases.header} items={content.useCases.items} />
-  <HomePlatformModel header={content.platformModel.header} pillars={content.platformModel.pillars} />
+  <HomeCredibility header={content.credibility.header} cards={content.credibility.cards} />
   <HomeComparison header={content.comparison.header} columns={content.comparison.columns} />
+  <HomePlatformModel header={content.platformModel.header} pillars={content.platformModel.pillars} />
   <HomeOperatingModel
     header={content.operatingModel.header}
     steps={content.operatingModel.steps}
     primaryAction={content.operatingModel.primaryAction}
     secondaryAction={content.operatingModel.secondaryAction}
   />
-  <HomeCredibility header={content.credibility.header} cards={content.credibility.cards} />
-  <HomeResourceHighlights header={content.resources.header} items={content.resources.items} />
+  <HomeFaq header={content.faq.header} items={content.faq.items} />
   <HomeActivation content={content.activation} />
-  <HomeIntegrationGrid content={content.integrations} />
   <CallToAction
     title={content.finalCta.title}
     subtitle={content.finalCta.subtitle}

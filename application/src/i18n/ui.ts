@@ -26,12 +26,13 @@ export const ui = {
     'nav.linkedin': 'LinkedIn',
     'nav.rss': 'Flux RSS',
     'nav.latest-insights': 'Derniers contenus',
-    'nav.audit.desc': 'Cartographiez votre delivery et repartez avec une feuille de route priorisée.',
-    'nav.guidance.desc': 'Nos Platform Engineers conçoivent, opèrent puis transmettent votre plateforme.',
-    'nav.peaas.desc': 'Votre plateforme interne en production, livrée et opérée par Hoverkraft.',
+    'nav.audit.desc': 'Cartographiez votre chaîne de delivery et repartez avec une feuille de route priorisée.',
+    'nav.guidance.desc':
+      'Nos Platform Engineers conçoivent, opèrent et transmettent votre plateforme avec vos équipes.',
+    'nav.peaas.desc': 'Votre plateforme interne en production, opérée avec vous et adaptée à votre contexte.',
     'nav.methodology.desc': 'Diagnostiquer, prioriser, construire, transférer et améliorer.',
     'nav.maturity-assessment.desc': 'Évaluez la maturité de votre plateforme en 5 minutes.',
-    'nav.trainings.desc': 'Montez vos équipes en compétences avec des programmes de praticiens.',
+    'nav.trainings.desc': 'Développez les compétences de vos équipes avec des formations conçues par des praticiens.',
     'nav.open-kraft.desc': 'Connecteurs et templates open source qui intègrent vos outils sans les remplacer.',
     'nav.documentation.desc': 'Guides techniques et références pour opérer la plateforme.',
     'nav.github.desc': 'Explorez le code, les connecteurs et les dépôts publics.',
@@ -45,7 +46,7 @@ export const ui = {
     'nav.featured.label': 'Produit phare',
     'nav.featured.solutions.title': 'Platform Engineering as a Service',
     'nav.featured.solutions.desc':
-      'Une Internal Developer Platform clé en main : souveraine, réversible, prête pour vos équipes.',
+      'Une Internal Developer Platform prête à opérer : souveraine, réversible et pensée pour vos équipes.',
     'nav.featured.solutions.cta': 'Découvrir le PEaaS',
     'nav.featured.openkraft.title': 'Écosystème OpenKraft',
     'nav.featured.openkraft.desc':
@@ -61,12 +62,13 @@ export const ui = {
     'footer.docs': 'Documentation',
     'footer.terms': 'Conditions',
     'footer.privacy': 'Politique de confidentialité',
-    'footer.description': 'Platform Engineering souverain, open source et réversible pour équipes produit et tech.',
+    'footer.description':
+      'Platform Engineering souverain, open source et réversible pour les équipes produit et technologiques.',
     'footer.follow-title': 'Suivre les publications',
     'footer.follow-subtitle': 'Retrouvez nos analyses Platform Engineering via le blog et le flux RSS.',
     'site.title': 'Hoverkraft',
     'site.description':
-      'La méthode HoverKraft : Platform Engineering orienté connecteurs pour libérer vos équipes et accélérer le time-to-market.',
+      'La méthode HoverKraft : une approche du Platform Engineering fondée sur les connecteurs pour fluidifier le delivery et accélérer le time-to-market.',
     'footer.copyright': '© 2025 Hoverkraft. Tous droits réservés.',
     'button.learn-more': 'En savoir plus',
     'button.get-started': 'Commencer',
@@ -106,10 +108,10 @@ export const ui = {
     'training.hero.tagline': 'Formations',
     'training.hero.title': 'Formez vos équipes aux pratiques Platform Engineering',
     'training.hero.subtitle':
-      'Nos formations combinent théorie et pratique pour ancrer durablement les compétences essentielles du Platform Engineering moderne. Programmes sur mesure, adaptables à votre contexte et éligibles au financement OPCO.',
+      'Nos formations combinent théorie et pratique pour ancrer durablement les compétences clés du Platform Engineering moderne. Des programmes sur mesure, adaptés à votre contexte et éligibles au financement OPCO.',
 
     'training.catalog.title': 'Notre catalogue de formations',
-    'training.catalog.subtitle': 'Des programmes conçus par des praticiens pour des praticiens',
+    'training.catalog.subtitle': 'Des programmes conçus par des praticiens, pour des équipes confrontées au réel',
 
     'training.principles.title': 'Nos principes pédagogiques',
     'training.principles.items.0.title': '50% théorie / 50% pratique',
@@ -139,7 +141,8 @@ export const ui = {
       'Documentation complète fournie en format électronique, avec accès aux dépôts Git des exercices.',
 
     'training.cta.title': 'Prêt à former vos équipes ?',
-    'training.cta.subtitle': 'Contactez-nous pour construire ensemble un programme de formation adapté à vos besoins.',
+    'training.cta.subtitle':
+      'Contactez-nous pour construire un programme de formation adapté à vos enjeux et à votre contexte.',
     'training.cta.primaryAction': 'Demander un devis',
     'training.cta.secondaryAction': 'Télécharger le catalogue',
 
@@ -158,8 +161,8 @@ export const ui = {
     'training.detail.interested': 'Intéressé par cette formation ?',
     'training.detail.subtitle':
       'Les formations sont réalisées en présentiel ou à distance. Nous vous proposons des formations sur mesure, adaptées à vos besoins. Toutes les formations sont éligibles à un financement par votre OPCO. Nous vous accompagnons dans vos démarches.',
-    'training.detail.moreDetailsPrefix': 'Pour plus de détails consultez nos',
-    'training.detail.conditions': 'conditions de formations',
+    'training.detail.moreDetailsPrefix': 'Pour plus de détails, consultez nos',
+    'training.detail.conditions': 'conditions de formation',
     'training.detail.requestQuote': 'Demander un devis',
     'training.detail.viewAll': 'Voir toutes les formations',
     'training.detail.duration': 'Durée :',
@@ -193,12 +196,12 @@ export const ui = {
     'nav.linkedin': 'LinkedIn',
     'nav.rss': 'RSS feed',
     'nav.latest-insights': 'Latest insights',
-    'nav.audit.desc': 'Map your delivery and walk away with a prioritized roadmap.',
-    'nav.guidance.desc': 'Our platform engineers build, run, then hand over your platform.',
-    'nav.peaas.desc': 'Your internal platform in production, delivered and run by Hoverkraft.',
+    'nav.audit.desc': 'Map your delivery chain and leave with a prioritized roadmap.',
+    'nav.guidance.desc': 'Our Platform Engineers design, operate, and hand over your platform with your teams.',
+    'nav.peaas.desc': 'Your internal platform in production, operated with you and shaped to your context.',
     'nav.methodology.desc': 'Diagnose, prioritize, build, transfer, and improve.',
     'nav.maturity-assessment.desc': 'Assess your platform maturity in 5 minutes.',
-    'nav.trainings.desc': 'Upskill your teams with practitioner-led programs.',
+    'nav.trainings.desc': "Build your teams' capabilities with practitioner-led training programs.",
     'nav.open-kraft.desc': 'Open-source connectors and templates that integrate your tools instead of replacing them.',
     'nav.documentation.desc': 'Technical guides and references to operate the platform.',
     'nav.github.desc': 'Explore the code, connectors, and public repositories.',
@@ -212,7 +215,7 @@ export const ui = {
     'nav.featured.label': 'Flagship',
     'nav.featured.solutions.title': 'Platform Engineering as a Service',
     'nav.featured.solutions.desc':
-      'A turnkey Internal Developer Platform: sovereign, reversible, ready for your teams.',
+      'An Internal Developer Platform ready to operate: sovereign, reversible, and designed for your teams.',
     'nav.featured.solutions.cta': 'Explore PEaaS',
     'nav.featured.openkraft.title': 'OpenKraft ecosystem',
     'nav.featured.openkraft.desc':
@@ -228,12 +231,13 @@ export const ui = {
     'footer.docs': 'Docs',
     'footer.terms': 'Terms',
     'footer.privacy': 'Privacy Policy',
-    'footer.description': 'Sovereign, open-source, and reversible Platform Engineering for product and tech teams.',
+    'footer.description':
+      'Sovereign, open-source, and reversible Platform Engineering for product and technology teams.',
     'footer.follow-title': 'Follow our insights',
     'footer.follow-subtitle': 'Read our Platform Engineering analysis on the blog and RSS feed.',
     'site.title': 'Hoverkraft',
     'site.description':
-      'Cloud-native development platform for modern applications. Build, deploy, and operate with confidence.',
+      'The HoverKraft method: a connector-driven approach to Platform Engineering that streamlines delivery and accelerates time to market.',
     'footer.copyright': '© 2025 Hoverkraft. All rights reserved.',
     'button.learn-more': 'Learn more',
     'button.get-started': 'Get started',
@@ -273,10 +277,10 @@ export const ui = {
     'training.hero.tagline': 'Trainings',
     'training.hero.title': 'Train your teams in Platform Engineering practices',
     'training.hero.subtitle':
-      'Our training programs combine theory and practice to durably anchor essential modern Platform Engineering skills. Custom programs, adaptable to your context and eligible for training funding.',
+      'Our training programs combine theory and practice to build lasting Platform Engineering capabilities. Custom programs, tailored to your context and eligible for training funding.',
 
     'training.catalog.title': 'Our training catalog',
-    'training.catalog.subtitle': 'Programs designed by practitioners for practitioners',
+    'training.catalog.subtitle': 'Programs designed by practitioners for teams working in real delivery environments',
 
     'training.principles.title': 'Our teaching principles',
     'training.principles.items.0.title': '50% theory / 50% practice',
@@ -305,7 +309,7 @@ export const ui = {
       'Complete documentation provided in electronic format, with access to exercise Git repositories.',
 
     'training.cta.title': 'Ready to train your teams?',
-    'training.cta.subtitle': 'Contact us to build together a training program tailored to your needs.',
+    'training.cta.subtitle': 'Contact us to design a training program tailored to your goals and operating context.',
     'training.cta.primaryAction': 'Request a quote',
     'training.cta.secondaryAction': 'Download catalog',
 

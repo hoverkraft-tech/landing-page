@@ -1,0 +1,46 @@
+---
+import { Icon } from 'astro-icon/components';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import Headline from '~/components/ui/Headline.astro';
+import type { HomeSectionHeader } from './types';
+
+interface HomeFaqItem {
+  question: string;
+  answer: string;
+}
+
+export interface Props {
+  header: HomeSectionHeader;
+  items: HomeFaqItem[];
+}
+
+const { header, items } = Astro.props;
+---
+
+<WidgetWrapper id="faq" containerClass="py-16 md:py-20 lg:py-24">
+  <Headline
+    {...header}
+    classes={{
+      container: 'max-w-3xl md:mx-auto text-center',
+      title: 'text-3xl md:text-4xl font-bold tracking-tight',
+      subtitle: 'text-base md:text-lg leading-relaxed',
+    }}
+  />
+
+  <div class="mx-auto grid max-w-4xl gap-4">
+    {
+      items.map((item) => (
+        <details class="group overflow-hidden rounded-2xl border border-gray-200 bg-white px-6 py-5 dark:border-white/10 dark:bg-white/4">
+          <summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-left focus:outline-hidden focus-visible:ring-3 focus-visible:ring-primary/40">
+            <span class="text-lg font-semibold text-heading">{item.question}</span>
+            <span class="mt-0.5 inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+              <Icon name="tabler:plus" class="h-4 w-4 group-open:hidden" aria-hidden="true" />
+              <Icon name="tabler:minus" class="hidden h-4 w-4 group-open:block" aria-hidden="true" />
+            </span>
+          </summary>
+          <p class="mt-4 pr-12 text-sm leading-relaxed text-muted md:text-base">{item.answer}</p>
+        </details>
+      ))
+    }
+  </div>
+</WidgetWrapper>
