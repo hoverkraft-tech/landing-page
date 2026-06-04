@@ -39,15 +39,13 @@ describe('homepage content', () => {
       const content = getHomepageContent(locale);
 
       expect(content.hero.proof).toHaveLength(3);
-      expect(content.proofStrip.length).toBeGreaterThanOrEqual(3);
-      expect(content.proofStrip.length).toBeLessThanOrEqual(5);
       expect(content.useCases.items).toHaveLength(4);
       expect(content.platformModel.pillars).toHaveLength(3);
       expect(content.comparison.columns).toHaveLength(2);
       expect(content.operatingModel.steps.length).toBeGreaterThanOrEqual(4);
       expect(content.operatingModel.steps.length).toBeLessThanOrEqual(6);
-      expect(content.resources.items.length).toBeGreaterThanOrEqual(3);
-      expect(content.integrations.items.length).toBeGreaterThanOrEqual(8);
+      expect(content.credibility.cards).toHaveLength(4);
+      expect(content.faq.items.length).toBeGreaterThanOrEqual(3);
     });
   });
 

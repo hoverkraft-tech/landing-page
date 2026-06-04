@@ -2,27 +2,16 @@ import { useTranslatedPath } from '~/i18n/utils';
 import type { SupportedLanguage } from '~/i18n/ui';
 import type { HomePageContent } from '~/components/home/types';
 
-const externalLinks = {
-  docs: 'https://docs.hoverkraft.cloud',
-  github: 'https://github.com/hoverkraft-tech',
-  gitlab: 'https://gitlab.com/hoverkraft-tech',
-};
-
 export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
   const path = useTranslatedPath(lang);
 
   const commonHrefs = {
     home: path('/'),
-    contact: `${path('/contact')}#form`,
+    contact: `${path('/contact')}#booking`,
     methodology: path('/methodology'),
     offers: path('/offers'),
-    trainings: path('/trainings'),
     openKraft: path('/open-kraft'),
-    blog: path('/blog'),
     maturityAssessment: path('/maturity-assessment'),
-    docs: externalLinks.docs,
-    github: externalLinks.github,
-    gitlab: externalLinks.gitlab,
   };
 
   if (lang === 'en') {
@@ -30,10 +19,10 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
       metadata: {
         title: 'Hoverkraft - Sovereign and reversible Platform Engineering',
         description:
-          'Industrialize Platform Engineering with the HoverKraft method, open-source connectors, and senior guidance to accelerate delivery without lock-in.',
+          'Industrialize Platform Engineering with the HoverKraft method, open-source connectors, and senior guidance to accelerate delivery without vendor lock-in.',
       },
       announcement: {
-        text: 'New: take the Platform Engineering maturity assessment in 5 minutes',
+        text: 'New: assess your Platform Engineering maturity in 5 minutes',
         href: commonHrefs.maturityAssessment,
       },
       hero: {
@@ -58,30 +47,12 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
           metrics: ['DORA', 'SPACE', 'Lean'],
         },
       },
-      proofStrip: [
-        {
-          label: 'Open-source first',
-          description: 'Reusable connectors and templates stay inspectable, portable, and owned by your teams.',
-        },
-        {
-          label: 'Senior practitioners',
-          description: 'Platform Engineers audit, build, coach, and transfer ownership with your teams.',
-        },
-        {
-          label: 'Measured delivery',
-          description: 'DORA, SPACE, and Lean metrics guide priorities from the first working sessions.',
-        },
-        {
-          label: 'No lock-in',
-          description: 'Documentation, reversible choices, and open-source posture are part of the operating model.',
-        },
-      ],
       useCases: {
         header: {
           tagline: 'Choose your path',
-          title: 'One platform challenge, four different vantage points',
+          title: 'Where is delivery complexity creating the most friction today?',
           subtitle:
-            'Pick your role to see the friction we hear most often and the next step that actually moves the needle.',
+            'Choose your role to see the friction patterns we hear most often, their impact on your teams, and the next move worth making.',
         },
         items: [
           {
@@ -89,9 +60,9 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
             title: 'CTOs & CIOs',
             role: 'Strategy & risk',
             problem:
-              'Your teams ship, yet every release still hinges on tribal scripts and manual judgement calls you cannot defend in a steerco.',
+              'Your teams ship, yet every release still depends on fragile scripts and manual decisions that are hard to defend in governance reviews.',
             response:
-              'We translate platform work into a measurable trajectory: visible decisions, fewer surprises, and a roadmap your COMEX can challenge.',
+              'We turn platform work into a measurable trajectory: visible decisions, fewer surprises, and a roadmap leadership can challenge and support.',
             outcomes: [
               'DORA & SPACE baseline within weeks.',
               'Investment plan tied to business outcomes.',
@@ -107,7 +78,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
             problem:
               'You maintain the internal glue, fight backlog after backlog, and never get enough time to industrialize what already works.',
             response:
-              'OpenKraft hands you reusable connectors, paved-road templates, and standards your team owns end-to-end - no proprietary cage.',
+              'OpenKraft gives you reusable connectors, paved-road templates, and standards your team owns end to end, without being trapped in a proprietary stack.',
             outcomes: [
               'Reusable connectors across Git, CI/CD, cloud.',
               'Paved-road templates with sensible defaults.',
@@ -123,7 +94,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
             problem:
               'Developers burn hours on environments, pipelines, secrets, and incident handovers instead of shipping product value.',
             response:
-              'The HoverKraft method removes friction from laptop to production with rituals and tooling that respect developer time.',
+              'The HoverKraft method removes friction from laptop to production with operating rituals and tooling designed to protect developer focus.',
             outcomes: [
               'Onboarding measured in hours, not weeks.',
               'Self-service envs and reproducible builds.',
@@ -139,7 +110,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
             problem:
               'You need delivery efficiency without handing the keys of your platform - or your data - to a single vendor.',
             response:
-              'Documentation, knowledge transfer, and reversibility are part of every engagement: you stay in the driver seat.',
+              "Documentation, knowledge transfer, and reversibility are part of every engagement, so you stay in the driver's seat.",
             outcomes: [
               'Open-source stack, auditable end-to-end.',
               'Knowledge transfer baked into the mission.',
@@ -152,9 +123,10 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
       },
       platformModel: {
         header: {
-          tagline: 'Operating model',
-          title: 'A method, connectors, and experts to move from intent to execution',
-          subtitle: 'Hoverkraft connects strategy, tooling, and enablement into one practical delivery system.',
+          tagline: 'Solution',
+          title: 'A practical system built on method, open components, and senior operators',
+          subtitle:
+            'Hoverkraft connects governance, tooling, and enablement into one delivery system your teams can operate with confidence.',
         },
         pillars: [
           {
@@ -185,7 +157,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         header: {
           tagline: 'Differentiation',
           title: 'Your tools are not the problem. Fragmentation is.',
-          subtitle: 'The refactor replaces a list of capabilities with a clear before-and-after story.',
+          subtitle: 'A clearer before-and-after narrative than a long list of disconnected capabilities.',
         },
         columns: [
           {
@@ -216,7 +188,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         header: {
           tagline: 'Engagement model',
           title: 'From audit to autonomy, a clear path',
-          subtitle: 'Each step creates a useful deliverable, not a slide deck that stops at diagnosis.',
+          subtitle: 'Each step produces an actionable deliverable, not a diagnostic that stops at slides.',
         },
         steps: [
           {
@@ -250,77 +222,59 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
       },
       credibility: {
         header: {
-          tagline: 'Credibility',
-          title: 'This is not a side project. It is your delivery system.',
-          subtitle: 'The trust layer stays grounded in practices Hoverkraft can support publicly.',
+          tagline: 'Principles',
+          title: 'Four principles that keep Platform Engineering practical, measurable, and reversible',
+          subtitle: 'An approach that is easy to evaluate: open, senior-led, measurable, and free from vendor lock-in.',
         },
         cards: [
           {
-            title: 'Platform Engineering practice',
-            description: 'A dedicated practice, not an agency side project.',
-            icon: 'tabler:stack-3',
-          },
-          {
-            title: 'Open-source culture',
-            description: 'Code, templates, and learnings shared with the community.',
+            title: 'Open-source first',
+            description: 'Connectors and templates remain inspectable, portable, and improvable by your teams.',
             icon: 'tabler:brand-open-source',
           },
           {
-            title: 'Security & CI/CD',
-            description: 'Pipelines, secrets, observability, and IAM treated as products.',
-            icon: 'tabler:lock-cog',
+            title: 'Senior practitioners',
+            description: 'The same senior engineers audit, build, coach, and transfer ownership with your teams.',
+            icon: 'tabler:users-group',
           },
           {
-            title: 'DORA/SPACE measurement',
-            description: 'Decisions guided by shared metrics, not opinions.',
+            title: 'Measured delivery',
+            description: 'DORA, SPACE, and Lean indicators help prioritize work from the first weeks.',
             icon: 'tabler:chart-histogram',
           },
           {
-            title: 'Training & transfer',
-            description: 'A successful engagement is one where you take ownership.',
-            icon: 'tabler:certificate',
-          },
-          {
-            title: 'Reversibility',
-            description: 'Code, documentation, and licenses remain yours.',
+            title: 'No lock-in',
+            description: 'Documentation, knowledge transfer, and reversible choices are part of the operating model.',
             icon: 'tabler:rotate-clockwise-2',
           },
         ],
       },
-      resources: {
+      faq: {
         header: {
-          tagline: 'Evidence',
-          title: 'Resources for technical and strategic validation',
-          subtitle: 'Give skeptical visitors useful material before they contact sales.',
+          tagline: 'FAQ',
+          title: 'Questions teams ask before they evolve their delivery model',
+          subtitle: 'Short, concrete answers that help move the next decision forward.',
         },
         items: [
           {
-            type: 'Method',
-            title: 'HoverKraft methodology',
-            description: 'How we diagnose, prioritize, build, transfer, and improve platform capabilities.',
-            href: commonHrefs.methodology,
-            actionText: 'Read the method',
+            question: 'Do we need to replace our current tools to work with Hoverkraft?',
+            answer:
+              'No. Hoverkraft starts from your current Git, CI/CD, cloud, and observability stack. The goal is to reduce fragmentation, not force a full tool migration.',
           },
           {
-            type: 'Open source',
-            title: 'OpenKraft ecosystem',
-            description: 'Connectors, templates, and public repositories that make the approach concrete.',
-            href: commonHrefs.openKraft,
-            actionText: 'Explore OpenKraft',
+            question: 'When should we start with an audit instead of the assessment?',
+            answer:
+              'Start with the assessment when you need a quick self-serve baseline. Start with the audit when you need an external diagnosis, a prioritized roadmap, and decisions your stakeholders can review together.',
           },
           {
-            type: 'Training',
-            title: 'Platform Engineering trainings',
-            description: 'Programs designed by practitioners to help teams operate the platform themselves.',
-            href: commonHrefs.trainings,
-            actionText: 'View trainings',
+            question: 'What stays with our teams at the end of the engagement?',
+            answer:
+              'The operating model, documentation, connectors, templates, dashboards, and transfer of ownership stay with you. Reversibility is part of the engagement, not an optional add-on.',
           },
           {
-            type: 'Insights',
-            title: 'Latest articles',
-            description: 'Technical notes and market analysis on Platform Engineering and cloud-native delivery.',
-            href: commonHrefs.blog,
-            actionText: 'Read the blog',
+            question: 'How quickly can we see a measurable impact?',
+            answer:
+              'Most teams establish an initial baseline, a shared problem map, and prioritized quick wins within the first few weeks. The objective is to make progress visible early, then compound it over time.',
           },
         ],
       },
@@ -347,37 +301,12 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
           action: { variant: 'secondary', text: 'Take the assessment', href: commonHrefs.maturityAssessment },
         },
       },
-      integrations: {
-        header: {
-          tagline: 'Ecosystem',
-          title: 'Connect the tools your teams already use',
-          subtitle: 'Use text labels unless logo usage rights are explicit.',
-        },
-        items: [
-          { label: 'GitHub', icon: 'tabler:brand-github', href: externalLinks.github },
-          { label: 'GitLab', icon: 'tabler:brand-gitlab', href: externalLinks.gitlab },
-          { label: 'Kubernetes', icon: 'tabler:hexagons' },
-          { label: 'Docker', icon: 'tabler:brand-docker' },
-          { label: 'Backstage', icon: 'tabler:layout-dashboard' },
-          { label: 'Dagger', icon: 'tabler:triangle-square-circle' },
-          { label: 'OpenTofu', icon: 'tabler:cloud-cog' },
-          { label: 'Argo CD', icon: 'tabler:git-pull-request' },
-          { label: 'Prometheus', icon: 'tabler:activity' },
-          { label: 'Grafana', icon: 'tabler:chart-donut' },
-          { label: 'AWS', icon: 'tabler:brand-aws' },
-          { label: 'Azure', icon: 'tabler:brand-azure' },
-          { label: 'OVHcloud', icon: 'tabler:cloud' },
-          { label: 'Scaleway', icon: 'tabler:server' },
-          { label: 'OpenShift', icon: 'tabler:hexagon' },
-          { label: 'Proxmox', icon: 'tabler:database' },
-        ],
-      },
       finalCta: {
-        title: 'Build a delivery chain your teams can truly operate',
+        title: 'Start with the next decision, not a transformation program',
         subtitle:
-          'Share your friction points. We help you make the situation measurable and define a practical Platform Engineering path.',
+          'Book an audit or take the assessment to identify the next action that will concretely reduce delivery complexity.',
         primaryAction: { variant: 'primary', text: 'Book an audit', href: commonHrefs.contact },
-        secondaryAction: { variant: 'secondary', text: 'View offers', href: commonHrefs.offers },
+        secondaryAction: { variant: 'secondary', text: 'Take the assessment', href: commonHrefs.maturityAssessment },
       },
     };
   }
@@ -386,17 +315,17 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
     metadata: {
       title: 'Hoverkraft - Platform Engineering souverain et réversible',
       description:
-        'Industrialisez votre Platform Engineering avec la méthode HoverKraft, des connecteurs open source et un accompagnement senior pour accélérer le delivery sans lock-in.',
+        'Industrialisez votre Platform Engineering avec la méthode HoverKraft, des connecteurs open source et un accompagnement senior pour accélérer votre delivery sans verrou propriétaire.',
     },
     announcement: {
-      text: 'Nouveau : faites le radar de maturité Platform Engineering en 5 minutes',
+      text: 'Nouveau : évaluez votre maturité Platform Engineering en 5 minutes',
       href: commonHrefs.maturityAssessment,
     },
     hero: {
       tagline: 'Platform Engineering souverain',
-      title: 'Industrialisez votre Platform Engineering sans perdre votre souveraineté',
+      title: 'Industrialisez votre Platform Engineering sans renoncer à votre souveraineté',
       subtitle:
-        'Hoverkraft combine méthode, connecteurs open source et accompagnement senior pour transformer vos outils existants en chaîne de delivery mesurable, réversible et orientée développeurs.',
+        'Hoverkraft combine méthode, connecteurs open source et accompagnement senior pour structurer vos outils existants en une chaîne de delivery mesurable, réversible et pensée pour les équipes produit et plateforme.',
       primaryAction: { variant: 'primary', text: 'Planifier un audit', href: commonHrefs.contact },
       secondaryAction: { variant: 'secondary', text: 'Faire le radar', href: commonHrefs.maturityAssessment },
       proof: [
@@ -406,36 +335,17 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
       ],
       visual: {
         title: 'Carte de chaîne de delivery',
-        subtitle: 'Méthode, connecteurs et métriques alignés autour du flow développeur.',
+        subtitle: 'Méthode, connecteurs et indicateurs alignés au service du flux de delivery.',
         nodes: ['Source', 'CI/CD', 'Runtime', 'Observabilité', 'Roadmap'],
         metrics: ['DORA', 'SPACE', 'Lean'],
       },
     },
-    proofStrip: [
-      {
-        label: 'Open source first',
-        description:
-          'Connecteurs et templates réutilisables restent inspectables, portables et opérés par vos équipes.',
-      },
-      {
-        label: 'Praticiens seniors',
-        description: 'Des Platform Engineers auditent, construisent, coachent et transfèrent la responsabilité.',
-      },
-      {
-        label: 'Delivery mesuré',
-        description: 'Les métriques DORA, SPACE et Lean guident les priorités dès les premières sessions.',
-      },
-      {
-        label: 'Sans lock-in',
-        description: 'Documentation, choix réversibles et posture open source font partie du modèle opératoire.',
-      },
-    ],
     useCases: {
       header: {
         tagline: 'Choisir son chemin',
-        title: 'Un même défi de plateforme, quatre points de vue différents',
+        title: 'Où la complexité de votre delivery freine-t-elle le plus vos équipes ?',
         subtitle:
-          'Choisissez votre rôle pour voir les irritants les plus fréquents et la prochaine étape qui change vraiment la donne.',
+          'Choisissez votre rôle pour identifier les irritants majeurs, leurs impacts opérationnels et la prochaine décision utile.',
       },
       items: [
         {
@@ -445,9 +355,9 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
           problem:
             'Vos équipes livrent, mais chaque mise en production repose encore sur des scripts maison et des arbitrages difficiles à défendre en COMEX.',
           response:
-            'Nous traduisons la plateforme en trajectoire mesurable : décisions visibles, surprises réduites et feuille de route que votre direction peut challenger.',
+            'Nous transformons le sujet plateforme en trajectoire pilotable : décisions explicites, arbitrages objectivés et feuille de route défendable en direction.',
           outcomes: [
-            'Baseline DORA & SPACE en quelques semaines.',
+            'Point de départ DORA & SPACE établi en quelques semaines.',
             'Plan d’investissement lié aux résultats métier.',
             'Risque et réversibilité rendus explicites.',
           ],
@@ -456,16 +366,16 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         },
         {
           id: 'platform',
-          title: 'Équipes Platform & DevOps',
+          title: 'Équipes plateforme & DevOps',
           role: 'Construire & opérer',
           problem:
-            'Vous maintenez la glue interne, enchaînez les backlogs et n’avez jamais le temps d’industrialiser ce qui fonctionne déjà.',
+            'Vous maintenez les couches d’intégration internes, enchaînez les backlogs et ne trouvez jamais le temps d’industrialiser ce qui fonctionne déjà.',
           response:
-            'OpenKraft vous fournit des connecteurs réutilisables, des templates paved-road et des standards que votre équipe pilote sans verrou propriétaire.',
+            'OpenKraft vous apporte des connecteurs réutilisables, des modèles prêts à l’emploi et des standards que votre équipe maîtrise de bout en bout, sans dépendance propriétaire.',
           outcomes: [
-            'Connecteurs réutilisables Git, CI/CD, cloud.',
-            'Templates paved-road avec defaults sains.',
-            'Golden paths versionnés comme du produit.',
+            'Connecteurs réutilisables pour Git, CI/CD et cloud.',
+            'Modèles prêts à l’emploi avec des paramètres fiables.',
+            'Parcours de référence versionnés comme des produits.',
           ],
           action: { text: 'Explorer OpenKraft', href: commonHrefs.openKraft },
           icon: 'tabler:terminal-2',
@@ -473,15 +383,15 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         {
           id: 'product',
           title: 'Équipes produit & dev',
-          role: 'Flow développeur',
+          role: 'Expérience développeur',
           problem:
             'Les développeurs perdent du temps sur les environnements, pipelines, secrets et incidents au lieu de livrer de la valeur produit.',
           response:
-            'La méthode HoverKraft réduit la friction du laptop à la production avec des rituels et un outillage qui respectent le temps des devs.',
+            'La méthode HoverKraft fluidifie le passage du poste de travail à la production grâce à des rituels et à un outillage conçus pour préserver le temps des développeurs.',
           outcomes: [
-            'Onboarding en heures plutôt qu’en semaines.',
+            'Onboarding en quelques heures plutôt qu’en plusieurs semaines.',
             'Environnements self-service et builds reproductibles.',
-            'Chemins d’astreinte et rituels d’incident clairs.',
+            'Astreinte et gestion des incidents plus lisibles.',
           ],
           action: { text: 'Découvrir la méthode', href: commonHrefs.methodology },
           icon: 'tabler:layout-kanban',
@@ -493,9 +403,9 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
           problem:
             'Vous voulez gagner en efficacité sans confier les clés de votre plateforme - ni de vos données - à un éditeur unique.',
           response:
-            'Documentation, transfert de compétences et réversibilité sont intégrés à chaque mission : vous restez aux commandes.',
+            'Documentation, transfert de compétences et réversibilité sont intégrés à chaque mission : vous gardez la maîtrise de votre trajectoire.',
           outcomes: [
-            'Stack open source auditable de bout en bout.',
+            'Socle open source auditable de bout en bout.',
             'Transfert de compétences intégré à la mission.',
             'Plan de sortie et licences gardés chez vous.',
           ],
@@ -506,9 +416,10 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
     },
     platformModel: {
       header: {
-        tagline: 'Modèle opératoire',
-        title: 'Une méthode, des connecteurs, des experts pour passer de l’intention à l’exécution',
-        subtitle: 'Hoverkraft connecte stratégie, outillage et enablement dans un système de delivery concret.',
+        tagline: 'Solution',
+        title: "Une méthode, des composants ouverts et des experts terrain pour passer de la décision à l'exécution",
+        subtitle:
+          'Hoverkraft articule gouvernance, outillage et montée en compétence dans un système de delivery réellement opérable.',
       },
       pillars: [
         {
@@ -528,7 +439,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         {
           id: 'builders',
           title: 'Kraft Builders',
-          description: 'Platform Engineers seniors qui auditent, construisent, forment et transfèrent.',
+          description: 'Des Platform Engineers seniors qui auditent, construisent, forment et transmettent.',
           action: { text: 'Planifier un audit', href: commonHrefs.contact },
           icon: 'tabler:users-group',
         },
@@ -538,7 +449,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
       header: {
         tagline: 'Différenciation',
         title: 'Vos outils ne sont pas le problème. Leur fragmentation l’est.',
-        subtitle: 'Le refactor remplace une liste de capacités par une histoire avant/après lisible.',
+        subtitle: 'Une lecture avant/après plus lisible qu’une simple accumulation de capacités.',
       },
       columns: [
         {
@@ -569,7 +480,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
       header: {
         tagline: 'Modèle d’engagement',
         title: 'De l’audit à l’autonomie, un parcours clair',
-        subtitle: 'Chaque étape produit un livrable utile, pas un support qui s’arrête au diagnostic.',
+        subtitle: 'Chaque étape produit un livrable exploitable, pas un diagnostic sans suite.',
       },
       steps: [
         {
@@ -608,78 +519,61 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
     },
     credibility: {
       header: {
-        tagline: 'Crédibilité',
-        title: 'Ce n’est pas un chantier annexe. C’est votre système de delivery.',
-        subtitle: 'La couche de confiance reste ancrée dans des pratiques que Hoverkraft peut soutenir publiquement.',
+        tagline: 'Principes',
+        title: 'Quatre principes pour un Platform Engineering utile, mesurable et réversible',
+        subtitle:
+          'Une approche simple à évaluer : ouverte, opérée par des seniors, pilotée par la mesure et sans verrou propriétaire.',
       },
       cards: [
         {
-          title: 'Pratique Platform Engineering',
-          description: 'Une practice dédiée, pas un side project d’agence.',
-          icon: 'tabler:stack-3',
-        },
-        {
-          title: 'Culture open source',
-          description: 'Code, templates et retours partagés avec la communauté.',
+          title: "Open source d'abord",
+          description: 'Connecteurs et templates restent inspectables, portables et améliorables par vos équipes.',
           icon: 'tabler:brand-open-source',
         },
         {
-          title: 'Sécurité et CI/CD',
-          description: 'Pipelines, secrets, observabilité et IAM traités comme des produits.',
-          icon: 'tabler:lock-cog',
+          title: 'Praticiens seniors',
+          description:
+            'Les mêmes ingénieurs seniors auditent, construisent, coachent et transfèrent la responsabilité.',
+          icon: 'tabler:users-group',
         },
         {
-          title: 'Mesure DORA/SPACE',
-          description: 'Décisions guidées par des métriques partagées, pas des opinions.',
+          title: 'Pilotage par la mesure',
+          description: 'Les indicateurs DORA, SPACE et Lean servent à prioriser dès les premières semaines.',
           icon: 'tabler:chart-histogram',
         },
         {
-          title: 'Formation et transfert',
-          description: 'Une mission réussie est une mission où vous reprenez la main.',
-          icon: 'tabler:certificate',
-        },
-        {
-          title: 'Réversibilité',
-          description: 'Code, documentation et licences restent les vôtres.',
+          title: 'Sans verrou propriétaire',
+          description: 'Documentation, transfert de compétences et choix réversibles font partie du modèle opératoire.',
           icon: 'tabler:rotate-clockwise-2',
         },
       ],
     },
-    resources: {
+    faq: {
       header: {
-        tagline: 'Preuves',
-        title: 'Ressources pour valider côté stratégie et côté technique',
-        subtitle: 'Donner aux visiteurs sceptiques de la matière utile avant le contact commercial.',
+        tagline: 'FAQ',
+        title: 'Les questions qui reviennent avant de faire évoluer votre modèle de delivery',
+        subtitle: 'Des réponses courtes, concrètes et directement utiles à la décision.',
       },
       items: [
         {
-          type: 'Méthode',
-          title: 'Méthodologie HoverKraft',
-          description: 'Comment diagnostiquer, prioriser, construire, transférer et améliorer la plateforme.',
-          href: commonHrefs.methodology,
-          actionText: 'Lire la méthode',
+          question: 'Faut-il remplacer nos outils actuels pour travailler avec Hoverkraft ?',
+          answer:
+            "Non. Hoverkraft part de votre stack Git, CI/CD, cloud et observabilité existante. L'objectif est de réduire la fragmentation, pas de forcer une migration complète.",
         },
         {
-          type: 'Open source',
-          title: 'Écosystème OpenKraft',
-          description: 'Connecteurs, templates et dépôts publics pour rendre l’approche concrète.',
-          href: commonHrefs.openKraft,
-          actionText: 'Explorer OpenKraft',
+          question: 'Quand faut-il commencer par un audit plutôt que par le radar ?',
+          answer:
+            "Le radar convient pour obtenir rapidement un premier état des lieux en autonomie. L'audit convient lorsque vous avez besoin d'un diagnostic externe, d'une feuille de route priorisée et de décisions partageables avec vos parties prenantes.",
         },
         {
-          type: 'Formation',
-          title: 'Formations Platform Engineering',
-          description: 'Des programmes conçus par des praticiens pour aider les équipes à opérer elles-mêmes.',
-          href: commonHrefs.trainings,
-          actionText: 'Voir les formations',
+          question: "Qu'est-ce qui reste chez nous à la fin de la mission ?",
+          answer:
+            "Le modèle opératoire, la documentation, les connecteurs, les templates, les dashboards et le transfert de responsabilité restent chez vous. La réversibilité fait partie de la mission, pas d'une option.",
         },
         {
-          type: 'Articles',
-          title: 'Dernières analyses',
-          description:
-            'Notes techniques et analyses de marché sur le Platform Engineering et le delivery cloud-native.',
-          href: commonHrefs.blog,
-          actionText: 'Lire le blog',
+          question: 'À quelle vitesse peut-on constater un impact mesurable ?',
+          answer:
+            "La plupart des équipes obtiennent un état des lieux initial, une cartographie partagée des problèmes et des actions prioritaires dans les premières semaines. L'objectif est de rendre le progrès visible rapidement, puis de l'amplifier dans la durée.",
         },
       ],
     },
@@ -710,37 +604,12 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         action: { variant: 'secondary', text: 'Faire le radar', href: commonHrefs.maturityAssessment },
       },
     },
-    integrations: {
-      header: {
-        tagline: 'Écosystème',
-        title: 'Connecter les outils que vos équipes utilisent déjà',
-        subtitle: 'Utiliser des libellés texte tant que les droits d’usage logo ne sont pas explicites.',
-      },
-      items: [
-        { label: 'GitHub', icon: 'tabler:brand-github', href: externalLinks.github },
-        { label: 'GitLab', icon: 'tabler:brand-gitlab', href: externalLinks.gitlab },
-        { label: 'Kubernetes', icon: 'tabler:hexagons' },
-        { label: 'Docker', icon: 'tabler:brand-docker' },
-        { label: 'Backstage', icon: 'tabler:layout-dashboard' },
-        { label: 'Dagger', icon: 'tabler:triangle-square-circle' },
-        { label: 'OpenTofu', icon: 'tabler:cloud-cog' },
-        { label: 'Argo CD', icon: 'tabler:git-pull-request' },
-        { label: 'Prometheus', icon: 'tabler:activity' },
-        { label: 'Grafana', icon: 'tabler:chart-donut' },
-        { label: 'AWS', icon: 'tabler:brand-aws' },
-        { label: 'Azure', icon: 'tabler:brand-azure' },
-        { label: 'OVHcloud', icon: 'tabler:cloud' },
-        { label: 'Scaleway', icon: 'tabler:server' },
-        { label: 'OpenShift', icon: 'tabler:hexagon' },
-        { label: 'Proxmox', icon: 'tabler:database' },
-      ],
-    },
     finalCta: {
-      title: 'Construisons une chaîne de delivery que vos équipes peuvent vraiment opérer',
+      title: 'Commencez par la prochaine décision, pas par un programme de transformation',
       subtitle:
-        'Partagez vos irritants. Nous vous aidons à objectiver la situation et à définir une trajectoire Platform Engineering mesurable.',
+        "Planifiez un audit ou faites le radar pour identifier l'action suivante qui réduira concrètement la complexité de votre delivery.",
       primaryAction: { variant: 'primary', text: 'Planifier un audit', href: commonHrefs.contact },
-      secondaryAction: { variant: 'secondary', text: 'Voir les offres', href: commonHrefs.offers },
+      secondaryAction: { variant: 'secondary', text: 'Faire le radar', href: commonHrefs.maturityAssessment },
     },
   };
 }

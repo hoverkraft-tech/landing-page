@@ -1,4 +1,4 @@
-import { readFile, writeFile, stat, readdir } from 'node:fs/promises';
+import { mkdir, readFile, writeFile, stat, readdir } from 'node:fs/promises';
 import path from 'node:path';
 import process from 'node:process';
 
@@ -30,6 +30,7 @@ function parseArgs(argv) {
   const args = {
     root: DEFAULT_ROOT,
     mode: 'check', // 'check' | 'write'
+    reportFile: null,
     verbose: false,
   };
 
@@ -54,6 +55,14 @@ function parseArgs(argv) {
       continue;
     }
 
+    if (arg === '--report-file') {
+      const reportFile = argv[index + 1];
+      if (!reportFile) throw new Error('Missing value for --report-file');
+      args.reportFile = path.resolve(process.cwd(), reportFile);
+      index += 1;
+      continue;
+    }
+
     if (arg === '--verbose') {
       args.verbose = true;
       continue;
@@ -71,10 +80,47 @@ function parseArgs(argv) {
 
 function printHelp() {
   // Keep it simple: this is meant to be a safe batch-cleaner, not a full CLI.
-  console.log(`Usage: node ./scripts/humanize-content.mjs [--check|--write] [--root <path>] [--verbose]\n\n`);
+  console.log(
+    `Usage: node ./scripts/humanize-content.mjs [--check|--write] [--root <path>] [--report-file <path>] [--verbose]\n\n`
+  );
   console.log(`Defaults:`);
   console.log(`  --check           (default) report changes without writing`);
   console.log(`  --root src        scan under application/src`);
+  console.log(`  --report-file     write checkstyle XML report to the given path`);
+}
+
+function escapeXml(value) {
+  return value
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;')
+    .replaceAll("'", '&apos;');
+}
+
+function buildCheckstyleReport(issues) {
+  const files = issues
+    .map(({ filePath, changedSymbols }) => {
+      const message = `Humanize content detected ${changedSymbols} symbol change${changedSymbols === 1 ? '' : 's'}.`;
+      return [
+        `  <file name="${escapeXml(filePath)}">`,
+        `    <error line="1" column="1" severity="error" source="humanize-ai-lib" message="${escapeXml(message)}" />`,
+        '  </file>',
+      ].join('\n');
+    })
+    .join('\n');
+
+  return [`<?xml version="1.0" encoding="utf-8"?>`, `<checkstyle version="4.3">`, files, `</checkstyle>`]
+    .filter(Boolean)
+    .join('\n');
+}
+
+async function writeReport(reportFile, issues) {
+  if (!reportFile) return;
+
+  await mkdir(path.dirname(reportFile), { recursive: true });
+  const report = `${buildCheckstyleReport(issues)}\n`;
+  await writeFile(reportFile, report, 'utf8');
 }
 
 async function* walk(dir) {
@@ -138,6 +184,15 @@ function shouldSkipFile(filePath) {
   const base = path.basename(filePath);
   if (base === 'package-lock.json') return true;
   return false;
+}
+
+function toReportPath(filePath) {
+  const relativePath = path.relative(process.cwd(), filePath);
+  if (relativePath && !relativePath.startsWith('..') && !path.isAbsolute(relativePath)) {
+    return relativePath;
+  }
+
+  return filePath;
 }
 
 async function humanizeFile(filePath) {
@@ -210,6 +265,7 @@ async function main() {
   let filesScanned = 0;
   let filesChanged = 0;
   let totalChangedSymbols = 0;
+  const reportIssues = [];
 
   for await (const filePath of walk(args.root)) {
     if (shouldSkipFile(filePath)) continue;
@@ -223,8 +279,13 @@ async function main() {
     filesChanged += 1;
     totalChangedSymbols += changedSymbols;
 
+    const rel = toReportPath(filePath);
+    reportIssues.push({
+      filePath: rel,
+      changedSymbols,
+    });
+
     if (args.verbose) {
-      const rel = path.relative(process.cwd(), filePath);
       console.log(`${args.mode === 'write' ? 'WRITE' : 'CHECK'} ${rel} (+${changedSymbols})`);
     }
 
@@ -234,6 +295,7 @@ async function main() {
   }
 
   const summary = `Humanize summary: scanned=${filesScanned}, changed=${filesChanged}, changedSymbols=${totalChangedSymbols}`;
+  await writeReport(args.reportFile, reportIssues);
 
   if (args.mode === 'check') {
     if (filesChanged > 0) {

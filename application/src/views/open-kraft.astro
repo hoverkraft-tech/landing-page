@@ -10,7 +10,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 const metadata = {
   title: 'OpenKraft - Ressources',
   description:
-    'Accédez aux connecteurs open source HoverKraft, à la communauté et aux ressources pour accélérer votre plateforme.',
+    'Accédez aux connecteurs open source HoverKraft, à la documentation et à la communauté pour accélérer votre plateforme sans perdre la maîtrise.',
 };
 ---
 
@@ -42,17 +42,17 @@ const metadata = {
       alt: 'Communauté OpenKraft',
     }}
   >
-    <Fragment slot="title">Le hub open source pour vos connecteurs plateforme</Fragment>
+    <Fragment slot="title">L'écosystème open source de votre plateforme interne</Fragment>
 
     <Fragment slot="subtitle">
-      OpenKraft rassemble nos templates, dashboards, playbooks et retours d'expérience. Un espace pensé pour les
-      développeurs, les teams plateforme et les leaders qui veulent accélérer sans perdre en souveraineté.
+      OpenKraft rassemble nos templates, tableaux de bord, playbooks et retours d'expérience. Un espace pensé pour les
+      développeurs, les équipes plateforme et les décideurs qui veulent accélérer sans perdre en souveraineté.
     </Fragment>
   </Hero>
 
   <Note
     title="Philosophie"
-    description="Le savoir qui ne circule pas s\'éteint. Nous publions en open source les briques nécessaires pour faire vivre la méthode HoverKraft dans n’importe quel contexte."
+    description="Le savoir qui ne circule pas se perd. Nous publions en open source les briques nécessaires pour faire vivre la méthode HoverKraft dans des contextes réels et variés."
   />
 
   <Content
@@ -69,7 +69,7 @@ const metadata = {
       },
       {
         title: 'Sécurité by design',
-        description: 'Playbooks IAM, gestion des secrets et conformité adaptés à vos contraintes réglementaires.',
+        description: 'Playbooks IAM, gestion des secrets et conformité conçus pour vos contraintes réglementaires.',
       },
     ]}
     image={{
@@ -80,12 +80,12 @@ const metadata = {
 
   <Features2
     title="Pourquoi contribuer ?"
-    subtitle="Un écosystème open source entretenu par la communauté."
+    subtitle="Un écosystème maintenu, documenté et enrichi par les retours du terrain."
     columns={2}
     items={[
       {
         title: "Retours d'expérience terrain",
-        description: 'Chaque contribution est adossée à un use case réel, documenté sur la plateforme.',
+        description: "Chaque contribution s'appuie sur un cas d'usage réel, documenté sur la plateforme.",
         icon: 'tabler:users',
       },
       {
@@ -95,7 +95,8 @@ const metadata = {
       },
       {
         title: 'Support communautaire',
-        description: "Accès à notre serveur communautaire pour échanger bonnes pratiques et retours d'expérience.",
+        description:
+          "Accès à notre espace communautaire pour échanger sur les bonnes pratiques et les retours d'expérience.",
         icon: 'tabler:messages',
       },
       {
@@ -126,7 +127,8 @@ const metadata = {
       },
       {
         title: '4. Partagez la mise en prod',
-        description: "Présentez votre implémentation lors d'un live communautaire et documentez les résultats obtenus.",
+        description:
+          "Présentez votre implémentation lors d'une session communautaire et documentez les résultats obtenus.",
         icon: 'tabler:microphone',
       },
     ]}
@@ -155,10 +157,10 @@ const metadata = {
       },
     ]}
   >
-    <Fragment slot="title">Prêt à enrichir la communauté OpenKraft ?</Fragment>
+    <Fragment slot="title">Prêt à contribuer à l'écosystème OpenKraft ?</Fragment>
     <Fragment slot="subtitle"
-      >Partagez vos connecteurs, documentez vos retours d'expérience et aidez d'autres équipes à accélérer leur
-      plateforme.</Fragment
+      >Partagez vos connecteurs, formalisez vos retours d'expérience et aidez d'autres équipes à accélérer sans repartir
+      de zéro.</Fragment
     >
   </CallToAction>
 </Layout>

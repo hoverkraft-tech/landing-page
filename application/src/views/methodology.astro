@@ -16,7 +16,7 @@ const translatePath = useTranslatedPath(lang);
 const metadata = {
   title: 'Méthodologie - HoverKraft',
   description:
-    'Notre méthode combine DORA, SPACE et Lean pour piloter votre transformation plateforme : audit, design, intégration et run mesurable.',
+    'Notre méthode combine DORA, SPACE et Lean pour structurer votre transformation plateforme : audit, design, intégration et pilotage mesurable.',
 };
 ---
 
@@ -24,19 +24,20 @@ const metadata = {
   <Hero
     tagline="Méthodologie HoverKraft"
     actions={[
-      { variant: 'primary', text: 'Réserver un audit', href: '/contact#form' },
-      { text: 'Voir nos offres', href: '/offers' },
+      { variant: 'primary', text: 'Réserver un audit', href: `${translatePath('/contact')}#booking` },
+      { text: 'Voir nos offres', href: translatePath('/offers') },
     ]}
     image={{
       src: '~/assets/images/pages/methodology/programming-5.webp',
       alt: 'Processus HoverKraft orienté connecteurs',
     }}
   >
-    <Fragment slot="title">La plateforme orientée connecteurs qui prouve par les métriques</Fragment>
+    <Fragment slot="title">Une méthode orientée connecteurs, pilotée par la mesure</Fragment>
 
     <Fragment slot="subtitle">
-      Notre méthode combine DORA, SPACE et Lean pour piloter votre transformation plateforme. Chaque étape est
-      documentée, outillée et mesurée pour créer une chaîne de delivery prévisible et souveraine.
+      Notre méthode combine DORA, SPACE et Lean pour structurer votre transformation plateforme. Chaque étape est
+      documentée, outillée et mesurée afin de construire une chaîne de delivery plus prévisible, plus lisible et plus
+      souveraine.
       <span class="block mt-2 text-sm">
         Pour situer votre point de départ, essayez notre{' '}
         <a href={translatePath('/maturity-assessment')} class="font-semibold text-primary underline underline-offset-4">
@@ -49,7 +50,7 @@ const metadata = {
 
   <Note
     title="Le principe"
-    description="Nous ne vendons pas un outil supplémentaire, mais une méthode qui aligne vos équipes, vos process et vos systèmes autour d’une même vision delivery. La méthodologie repose sur 7 piliers : DevX, environnements, CI/CD & IaC, Kubernetes, observabilité, sécurité et amélioration continue."
+    description="Nous ne vendons pas un outil supplémentaire, mais une méthode qui aligne vos équipes, vos processus et vos systèmes autour d'une même vision du delivery. Elle repose sur sept piliers : DevX, environnements, CI/CD et IaC, Kubernetes, observabilité, sécurité et amélioration continue."
   />
 
   <Content
@@ -63,7 +64,8 @@ const metadata = {
       },
       {
         title: 'Formations & bootcamps',
-        description: 'Des parcours immersifs pour embarquer développeurs, ops et produit sur les pratiques HoverKraft.',
+        description:
+          'Des parcours immersifs pour faire monter en compétence les équipes développement, opérations et produit.',
       },
       {
         title: 'Certification',
@@ -77,8 +79,8 @@ const metadata = {
   />
 
   <Content
-    title="La glue open source HoverKraft"
-    subtitle="Des connecteurs laptop to prod pour orchestrer vos outils existants."
+    title="Les briques open source HoverKraft"
+    subtitle="Des connecteurs de bout en bout pour orchestrer vos outils existants."
     items={[
       {
         title: 'Flux GitOps standardisés',
@@ -90,7 +92,7 @@ const metadata = {
       },
       {
         title: 'Sécurité & IAM',
-        description: 'Gestion des secrets, RBAC, audit trail et conformité intégrés à vos process.',
+        description: 'Gestion des secrets, RBAC, audit trail et conformité intégrés à vos processus.',
       },
       {
         title: 'Portail développeur',
@@ -119,7 +121,7 @@ const metadata = {
       },
       {
         title: '3. Design cible',
-        description: 'Definition du blueprint plateforme et sélection des quick wins.',
+        description: 'Définition du blueprint plateforme et sélection des quick wins.',
         icon: 'tabler:layout-board',
       },
       {
@@ -182,21 +184,21 @@ const metadata = {
     title="Résultats observés"
     subtitle="La méthode HoverKraft délivre un impact mesurable."
     stats={[
-      { title: 'Gain de time-to-market', amount: '40-60%' },
-      { title: 'Incidents en moins', amount: '60-80%' },
-      { title: 'Satisfaction équipes', amount: '+40-60%' },
+      { title: 'Accélération du time-to-market', amount: '40-60%' },
+      { title: 'Réduction des incidents', amount: '60-80%' },
+      { title: 'Satisfaction des équipes', amount: '+40-60%' },
     ]}
   />
 
   <CallToAction
     actions={[
-      { variant: 'primary', text: 'Réserver un audit', href: '/contact#form' },
-      { text: 'Voir nos offres', href: '/offers' },
+      { variant: 'primary', text: 'Réserver un audit', href: `${translatePath('/contact')}#booking` },
+      { text: 'Voir nos offres', href: translatePath('/offers') },
     ]}
   >
-    <Fragment slot="title">Prêt à déployer la méthode HoverKraft ?</Fragment>
+    <Fragment slot="title">Prêts à structurer votre delivery sur des bases mesurables ?</Fragment>
     <Fragment slot="subtitle"
-      >Parlons de vos irritants actuels et dessinons un plan d'action adapté à votre contexte.</Fragment
+      >Parlons de vos irritants actuels et construisons un plan d'action adapté à votre contexte.</Fragment
     >
   </CallToAction>
 </Layout>

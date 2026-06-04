@@ -16,7 +16,7 @@ const translatePath = useTranslatedPath(lang);
 const metadata = {
   title: 'Methodology - HoverKraft',
   description:
-    'Our method combines DORA, SPACE, and Lean to drive your platform transformation: audit, design, integration, and measurable run.',
+    'Our method combines DORA, SPACE, and Lean to structure your platform transformation: audit, design, integration, and measurable operations.',
 };
 ---
 
@@ -24,19 +24,19 @@ const metadata = {
   <Hero
     tagline="HoverKraft Methodology"
     actions={[
-      { variant: 'primary', text: 'Book an audit', href: '/en/contact#form' },
-      { text: 'View our offers', href: '/en/offers' },
+      { variant: 'primary', text: 'Book an audit', href: `${translatePath('/contact')}#booking` },
+      { text: 'View our offers', href: translatePath('/offers') },
     ]}
     image={{
       src: '~/assets/images/pages/methodology/programming-5.webp',
       alt: 'Connector-oriented HoverKraft process',
     }}
   >
-    <Fragment slot="title">The connector-oriented platform that proves through metrics</Fragment>
+    <Fragment slot="title">A connector-driven method, measured end to end</Fragment>
 
     <Fragment slot="subtitle">
-      Our method combines DORA, SPACE, and Lean to drive your platform transformation. Each step is documented, tooled,
-      and measured to create a predictable and sovereign delivery chain.
+      Our method combines DORA, SPACE, and Lean to structure your platform transformation. Each step is documented,
+      equipped, and measured to build a delivery chain that is more predictable, more transparent, and more sovereign.
       <span class="block mt-2 text-sm">
         To get a quick baseline, try our{' '}
         <a href={translatePath('/maturity-assessment')} class="font-semibold text-primary underline underline-offset-4">
@@ -49,7 +49,7 @@ const metadata = {
 
   <Note
     title="The principle"
-    description="We don't sell an additional tool, but a method that aligns your teams, processes, and systems around a shared delivery vision. The methodology is built on seven pillars: DevX, environments, CI/CD & IaC, Kubernetes, observability, security, and continuous improvement."
+    description="We do not sell an additional tool. We provide a method that aligns your teams, processes, and systems around a shared delivery vision. It is built on seven pillars: DevX, environments, CI/CD and IaC, Kubernetes, observability, security, and continuous improvement."
   />
 
   <Content
@@ -79,7 +79,7 @@ const metadata = {
 
   <Content
     title="The HoverKraft open source glue"
-    subtitle="Laptop-to-prod connectors to orchestrate your existing tools."
+    subtitle="End-to-end connectors that orchestrate the tools you already use."
     items={[
       {
         title: 'Standardized GitOps flows',
@@ -91,7 +91,8 @@ const metadata = {
       },
       {
         title: 'Security & IAM',
-        description: 'Policy-as-code, secret rotation, and OAuth/SAML integrations.',
+        description:
+          'Secrets management, RBAC, auditability, and identity integrations aligned with your operating model.',
       },
     ]}
     image={{
@@ -138,17 +139,17 @@ const metadata = {
 
   <Features2
     title="Key deliverables"
-    subtitle="Tangible outputs at each step."
+    subtitle="Concrete outputs at every step."
     columns={3}
     items={[
       {
-        title: 'Architectural Decision Records',
-        description: 'Structured documentation of technical choices, their context, and rationale.',
+        title: 'Architectural decision records',
+        description: 'Structured documentation of technical choices, their context, and their rationale.',
         icon: 'tabler:file-text',
       },
       {
         title: 'DORA/SPACE dashboards',
-        description: 'Pre-built Grafana and Looker Studio templates to track your improvements.',
+        description: 'Pre-built Grafana and Looker Studio templates to track progress over time.',
         icon: 'tabler:dashboard',
       },
       {
@@ -188,20 +189,20 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Schedule an audit',
-        href: '/en/contact#form',
+        text: 'Book an audit',
+        href: `${translatePath('/contact')}#booking`,
       },
       {
         text: 'Explore offers',
-        href: '/en/offers',
+        href: translatePath('/offers'),
       },
     ]}
   >
-    <Fragment slot="title">Ready to transform your delivery?</Fragment>
+    <Fragment slot="title">Ready to build delivery on measurable foundations?</Fragment>
 
     <Fragment slot="subtitle">
-      Kraft Builders support you throughout your platform engineering journey, from strategic framing to operational
-      autonomy of your teams.
+      Kraft Builders support you across your Platform Engineering journey, from strategic framing to operational
+      autonomy for your teams.
     </Fragment>
   </CallToAction>
 </Layout>

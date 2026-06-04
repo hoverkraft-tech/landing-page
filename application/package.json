@@ -30,7 +30,7 @@
     "lint:astro": "astro check",
     "lint:prettier": "prettier --check .",
     "lint:fix": "npm run lint:fix:prettier",
-    "lint:ci": "npm run lint",
+    "lint:ci": "sh -c 'npm run lint:prettier > prettier-report.txt 2>&1 && cat prettier-report.txt && npm run lint:astro > astro-report.txt 2>&1 && cat astro-report.txt && node ./scripts/humanize-content.mjs --check --report-file humanize-report-checkstyle.xml'",
     "lint:fix:prettier": "prettier -w .",
     "test": "vitest run",
     "test:ci": "npm run test -- --reporter=default --reporter=junit --outputFile=junit.xml --coverage.enabled --coverage.reporter=lcov --coverage.reporter=text"

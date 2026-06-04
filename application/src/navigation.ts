@@ -183,7 +183,7 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
     actions: [
       {
         text: t('button.book-audit'),
-        href: `${translatePath('/contact')}#form`,
+        href: `${translatePath('/contact')}#booking`,
         variant: 'primary',
       },
     ],
@@ -204,7 +204,7 @@ export function getLocalizedFooterData(url: URL) {
     description: t('footer.description'),
     cta: {
       text: t('button.book-audit'),
-      href: `${translatePath('/contact')}#form`,
+      href: `${translatePath('/contact')}#booking`,
     },
     follow: {
       title: t('footer.follow-title'),

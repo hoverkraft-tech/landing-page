@@ -6,7 +6,7 @@ import Features2 from '~/components/widgets/Features2.astro';
 import { SITE } from 'astrowind:config';
 
 const metadata = {
-  title: 'Contact',
+  title: 'Sales and support contact',
 };
 
 const contactEmail = SITE?.contactEmail ?? '';
@@ -16,39 +16,39 @@ const bookingUrl = SITE?.bookingUrl ?? '';
 <Layout metadata={metadata}>
   <!-- HeroText Widget ******************* -->
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <HeroText tagline="Contact" title="Talk to our team" />
 
   <BookingLink
     id="booking"
-    title="Schedule a meeting with our team"
-    subtitle="Choose a time that works for you to discuss your needs with us."
+    title="Book a conversation with our team"
+    subtitle="Pick a time to discuss your challenges, goals, and constraints."
     bookingUrl={bookingUrl}
-    description="Our team is available to discuss your projects and answer your questions. For urgent requests, please use one of the channels below."
+    description="We can help with an audit, a platform roadmap, a training plan, or a more specific request."
   />
 
   <!-- Features2 Widget ************** -->
 
   <Features2
-    title="We are here to help!"
+    title="How to reach us"
     items={[
       {
         title: 'General support',
-        description: `Contact us with questions about account management, billing, access to services, or any other general enquiries.`,
+        description: `Contact us about account management, billing, service access, or any broader request for information.`,
       },
       {
-        title: 'Contact sales',
+        title: 'Platform roadmap',
         description:
-          'Discuss with our sales team to choose the right offer, understand pricing, or plan a customised launch.',
+          'Discuss the right offer, expected trajectory, and the framing needed for your platform initiatives.',
       },
       {
-        title: 'Technical support',
+        title: 'Technical question',
         description:
-          'Contact support for integration issues, installation problems, or any technical issues related to the platform.',
+          'Bring us an integration topic, an installation issue, or a specific technical blocker tied to your platform.',
       },
       {
-        title: 'Phone',
-        description: '+1 (234) 567-890',
-        icon: 'tabler:headset',
+        title: 'Book a slot',
+        description: 'Use the shared calendar above to schedule a conversation directly.',
+        icon: 'tabler:calendar-event',
       },
       {
         title: 'Email',
@@ -56,7 +56,7 @@ const bookingUrl = SITE?.bookingUrl ?? '';
         icon: 'tabler:mail',
       },
       {
-        title: 'Location',
+        title: 'Presence',
         description: 'Marseille, Aix-en-Provence, France',
         icon: 'tabler:map-pin',
       },

@@ -42,14 +42,14 @@ const strings = {
   shareCopyLabel: 'Copy link',
   shareCopySuccessLabel: 'Copied',
   shareMailLabel: 'Share via email',
-  shareMailSubject: 'Maturity assessment - Platform Engineering - Evaluation',
+  shareMailSubject: 'Platform Engineering maturity assessment',
   shareTextWithInterpretation:
     'My Platform Engineering maturity score: {score} ({interpretation}) - Assessment by Hoverkraft',
   shareTextWithoutInterpretation: 'My Platform Engineering maturity score: {score} - Assessment by Hoverkraft',
   shareMailBodyWithInterpretation:
-    'Hi,\\n\\nHere are my Platform Engineering maturity assessment evaluation:\\n- Score: {score}\\n- Level: {interpretation}\\n\\nAssessment link (includes my answers):\\n{url}\\n\\nAssessment by Hoverkraft - https://hoverkraft.tech\\n',
+    'Hi,\\n\\nHere is my Platform Engineering maturity assessment:\\n- Score: {score}\\n- Level: {interpretation}\\n\\nAssessment link (includes my answers):\\n{url}\\n\\nAssessment by Hoverkraft - https://hoverkraft.tech\\n',
   shareMailBodyWithoutInterpretation:
-    'Hi,\\n\\nHere are my Platform Engineering maturity assessment evaluation:\\n- Score: {score}\\n\\nAssessment link (includes my answers):\\n{url}\\n\\nAssessment by Hoverkraft - https://hoverkraft.tech\\n',
+    'Hi,\\n\\nHere is my Platform Engineering maturity assessment:\\n- Score: {score}\\n\\nAssessment link (includes my answers):\\n{url}\\n\\nAssessment by Hoverkraft - https://hoverkraft.tech\\n',
   shareLinkedInLabel: 'Share on LinkedIn',
   shareBlueskyLabel: 'Share on Bluesky',
   shareTeamLabel: 'Share with the Hoverkraft team',
@@ -81,7 +81,7 @@ const strings = {
       }}
       callToAction2={{
         text: 'Contact us',
-        href: translatePath('/contact#form'),
+        href: `${translatePath('/contact')}#booking`,
       }}
     />
   </div>
@@ -89,7 +89,7 @@ const strings = {
   <div data-maturity-assessment-no-print>
     <Note
       title="Why this self-assessment?"
-      description="Platform Engineering only works if you can measure it. This radar helps you objectify your baseline, align stakeholders, and prioritize high-impact actions (DORA, SPACE, security)."
+      description="Platform Engineering only creates value when it is measurable. This radar helps you establish a baseline, align stakeholders, and prioritize high-impact actions across delivery, security, and developer experience."
     />
   </div>
 
@@ -169,14 +169,14 @@ const strings = {
   <div data-maturity-assessment-no-print>
     <CallToAction
       actions={[
-        { variant: 'primary', text: 'Book a debrief (30 min)', href: translatePath('/contact#form') },
+        { variant: 'primary', text: 'Book a debrief (30 min)', href: `${translatePath('/contact')}#booking` },
         { text: 'Explore our offers', href: translatePath('/offers') },
       ]}
     >
-      <Fragment slot="title">Want to go further?</Fragment>
+      <Fragment slot="title">Want to turn this baseline into an action plan?</Fragment>
       <Fragment slot="subtitle">
-        This radar is a first step. Let's review your results together to understand your context and identify your top
-        improvement levers.
+        This radar is a starting point. Let's review your results together to understand your context and identify the
+        actions worth prioritizing next.
       </Fragment>
     </CallToAction>
   </div>

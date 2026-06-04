@@ -19,7 +19,7 @@ const translatePath = useTranslatedPath(lang);
 const metadata = {
   title: 'Offres HoverKraft',
   description:
-    "Choisissez l'offre Hoverkraft qui correspond à votre maturité plateforme : audit, autonomie, restart ou Platform Engineer as a Service.",
+    "Choisissez l'offre Hoverkraft adaptée à votre maturité plateforme : audit, autonomie, restart ou Platform Engineer as a Service.",
 };
 ---
 
@@ -27,20 +27,20 @@ const metadata = {
   <Hero
     tagline="Nos offres"
     actions={[
-      { variant: 'primary', text: 'Parler à un Kraft Builder', href: '/contact#form' },
-      { text: 'Voir la méthodologie', href: '/methodology' },
+      { variant: 'primary', text: 'Parler à un Kraft Builder', href: `${translatePath('/contact')}#booking` },
+      { text: 'Voir la méthodologie', href: translatePath('/methodology') },
     ]}
     image={{
       src: '~/assets/images/pages/offers/programming-1.webp',
       alt: 'Présentation des offres HoverKraft',
     }}
   >
-    <Fragment slot="title">Des packs conçus pour libérer vos développeurs, étape par étape</Fragment>
+    <Fragment slot="title">Des offres conçues pour structurer votre delivery, étape par étape</Fragment>
 
     <Fragment slot="subtitle">
-      De l'audit express à l'exécution managée (PEaaS), chaque offre HoverKraft combine méthodologie, connecteurs open
-      source et accompagnement senior. Sélectionnez le pack qui correspond à votre niveau de maturité et à vos objectifs
-      business.
+      De l'audit ciblé à l'exécution managée (PEaaS), chaque offre HoverKraft combine méthode, connecteurs open source
+      et accompagnement senior. Choisissez la formule qui correspond à votre niveau de maturité et à vos objectifs
+      métier.
       <span class="block mt-2 text-sm">
         Vous hésitez ? Faites d'abord le{' '}
         <a href={translatePath('/maturity-assessment')} class="font-semibold text-primary underline underline-offset-4">
@@ -66,11 +66,11 @@ const metadata = {
           { description: 'Carte des connecteurs existants et des points de friction' },
           { description: 'Score DORA/SPACE initial + recommandations priorisées' },
         ],
-        callToAction: { text: "Planifier l'audit", href: '/contact#form' },
+        callToAction: { text: "Planifier l'audit", href: '/contact#booking' },
       },
       {
         title: 'Package Autonomie',
-        subtitle: 'Atelier, kit et suivi pour ancrer la méthode Hoverkraft',
+        subtitle: 'Atelier, kit et suivi pour ancrer durablement la méthode Hoverkraft',
         price: '1 800',
         currency: '€',
         period: 'HT (format 5h, indicatif)',
@@ -85,7 +85,7 @@ const metadata = {
       },
       {
         title: 'Restart (Transformation complète)',
-        subtitle: 'Audit, roadmap 6 mois puis accompagnement 6-12 mois',
+        subtitle: 'Audit, feuille de route à 6 mois puis accompagnement de 6 à 12 mois',
         price: '25 000',
         currency: '€',
         period: 'HT + suivi (indicatif, ajusté au contexte)',
@@ -121,7 +121,7 @@ const metadata = {
       </div>
       <p class="text-default font-medium leading-snug">
         Le coût de l'audit est déduit si un contrat <span class="font-semibold text-default">Restart</span> est signé dans
-        la continuité.
+        son prolongement.
       </p>
     </div>
   </aside>
@@ -140,7 +140,8 @@ const metadata = {
       },
       {
         title: 'Mesure continue',
-        description: 'Indicateurs avant/après, ROI calculé et boucle de feedback mensuelle avec vos équipes.',
+        description:
+          'Indicateurs avant/après, retour sur investissement estimé et boucle de feedback mensuelle avec vos équipes.',
       },
     ]}
     image={{
@@ -171,7 +172,7 @@ const metadata = {
       },
       {
         title: 'PEaaS',
-        description: "Vous souhaitez externaliser une partie de l'équipe plateforme tout en gardant la gouvernance.",
+        description: "Vous souhaitez externaliser une partie de l'équipe plateforme tout en conservant la gouvernance.",
         icon: 'tabler:rocket',
       },
     ]}
@@ -194,17 +195,17 @@ const metadata = {
       },
       {
         title: 'Open source first',
-        description: 'Tous nos connecteurs sont publiés sur GitHub & GitLab pour garantir la réversibilité.',
+        description: 'Tous nos connecteurs sont publiés sur GitHub et GitLab pour garantir la réversibilité.',
         icon: 'tabler:brand-open-source',
       },
       {
         title: "Mesure d'impact",
-        description: 'Suivi DORA/SPACE avant/après, ROI chiffré et recommandations à 6 mois.',
+        description: 'Suivi DORA/SPACE avant/après, ROI objectivé et recommandations à 6 mois.',
         icon: 'tabler:chart-line',
       },
       {
         title: 'Support communautaire',
-        description: 'Accès à la communauté OpenKraft, webinars et ressources exclusives.',
+        description: 'Accès à la communauté OpenKraft, webinaires et ressources exclusives.',
         icon: 'tabler:messages',
       },
       {
@@ -231,12 +232,12 @@ const metadata = {
       },
       {
         title: '3. Delivery en binôme',
-        description: 'Intégration de la glue HoverKraft avec vos équipes pour garantir l’appropriation.',
+        description: 'Intégration des composants HoverKraft avec vos équipes pour garantir l’appropriation.',
         icon: 'tabler:users',
       },
       {
         title: '4. Preuve & transfert',
-        description: 'Dashboards avant/après, documentation livrée et passage de relais sécurisé.',
+        description: 'Tableaux de bord avant/après, documentation livrée et passage de relais sécurisé.',
         icon: 'tabler:report-analytics',
       },
     ]}
@@ -263,7 +264,7 @@ const metadata = {
       },
       {
         title: '3. Signature & kick-off',
-        description: "Planification des ateliers et constitution de l'équipe mixte.",
+        description: "Planification des ateliers et constitution de l'équipe commune.",
         icon: 'tabler:calendar-event',
       },
       {
@@ -312,11 +313,11 @@ const metadata = {
 
   <CallToAction
     actions={[
-      { variant: 'primary', text: 'Choisir mon pack', href: '/contact#form' },
-      { text: 'Découvrir la méthode', href: '/methodology' },
+      { variant: 'primary', text: 'Choisir mon offre', href: `${translatePath('/contact')}#booking` },
+      { text: 'Découvrir la méthode', href: translatePath('/methodology') },
     ]}
   >
-    <Fragment slot="title">Besoin d'un coup de main pour vous décider ?</Fragment>
+    <Fragment slot="title">Besoin d'un échange pour choisir la bonne formule ?</Fragment>
     <Fragment slot="subtitle"
       >Parlons de votre contexte et identifions ensemble l'offre HoverKraft la plus pertinente.</Fragment
     >
