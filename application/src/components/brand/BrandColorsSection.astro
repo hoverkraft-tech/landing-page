@@ -1,6 +1,6 @@
 ---
-import BrandGuidelinesChecklist from './BrandGuidelinesChecklist.astro';
 import type { BrandLocale, ColorCollection } from '~/data/brand/tokens';
+import BrandGuidelinesChecklist from './BrandGuidelinesChecklist.astro';
 
 interface Props {
   lang: BrandLocale;
@@ -19,8 +19,7 @@ const colorDont = brandColors.dont?.[lang] ?? [];
 <div class="mb-16">
   <h2 class="text-3xl md:text-4xl font-bold mb-8 text-gray-900 dark:text-white">{title}</h2>
   <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-    {
-      colorItems.map((color) => (
+    {colorItems.map((color) => (
         <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden border border-gray-200 dark:border-gray-700 pdf-break-avoid">
           <div
             class="h-32 pdf-break-avoid"
@@ -36,8 +35,7 @@ const colorDont = brandColors.dont?.[lang] ?? [];
             <p class="text-sm text-gray-600 dark:text-gray-400">{color.usage[lang]}</p>
           </div>
         </div>
-      ))
-    }
+      ))}
   </div>
 
   <div class="grid md:grid-cols-2 gap-8">

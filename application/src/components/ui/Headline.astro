@@ -1,5 +1,4 @@
 ---
-import type { Headline as Props } from '~/types';
 import { twMerge } from 'tailwind-merge';
 
 const {
@@ -16,8 +15,7 @@ const {
 } = classes;
 ---
 
-{
-  (title || subtitle || tagline) && (
+{(title || subtitle || tagline) && (
     <div class={twMerge('mb-8 md:mx-auto md:mb-12 text-center', containerClass)}>
       {tagline && (
         <p class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase" set:html={tagline} />
@@ -31,5 +29,4 @@ const {
 
       {subtitle && <p class={twMerge('mt-4 text-muted', subtitleClass)} set:html={subtitle} />}
     </div>
-  )
-}
+  )}

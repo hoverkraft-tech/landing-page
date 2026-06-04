@@ -1,10 +1,9 @@
 ---
-import type { Content as Props } from '~/types';
-import Headline from '~/components/ui/Headline.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
+import Headline from '~/components/ui/Headline.astro';
 import ItemGrid from '~/components/ui/ItemGrid.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 
 const {
   title = await Astro.slots.render('title'),
@@ -46,8 +45,7 @@ const {
       <div class="md:basis-1/2 self-center">
         {content && <div class="mb-12 text-lg text-muted" set:html={content} />}
 
-        {
-          callToAction && (
+        {callToAction && (
             <div
               class={
                 callToAction.variant && callToAction.variant !== 'link' ? 'mt-6 mb-8' : 'mt-[-40px] mb-8 text-primary'
@@ -55,8 +53,7 @@ const {
             >
               <Button variant="link" {...callToAction} />
             </div>
-          )
-        }
+          )}
 
         <ItemGrid
           items={items}
@@ -73,8 +70,7 @@ const {
         />
       </div>
       <div aria-hidden="true" class="mt-10 md:mt-0 md:basis-1/2">
-        {
-          image && (
+        {image && (
             <div class="relative m-auto max-w-4xl">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
@@ -90,8 +86,7 @@ const {
                 />
               )}
             </div>
-          )
-        }
+          )}
       </div>
     </div>
   </div>

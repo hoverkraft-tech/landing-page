@@ -2,14 +2,15 @@
 /**
  * Reusable component for individual training detail page
  */
-import type { TrainingCourse } from '~/data/trainings';
-import { useTranslations } from '~/i18n/utils';
-import Layout from '~/layouts/PageLayout.astro';
+
+import { Icon } from 'astro-icon/components';
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
 import ItemGrid2 from '~/components/ui/ItemGrid2.astro';
 import Timeline from '~/components/ui/Timeline.astro';
-import { Icon } from 'astro-icon/components';
+import type { TrainingCourse } from '~/data/trainings';
+import { useTranslations } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
 import { cleanSlug } from '~/utils/permalinks';
 
 interface Props {
@@ -85,8 +86,7 @@ const summaryRows = [
             </h1>
             <p class="mt-4 text-xl text-muted max-w-2xl">{course.description}</p>
 
-            {
-              (course.tags ?? []).length > 0 && (
+            {(course.tags ?? []).length > 0 && (
                 <div class="mt-6 flex flex-wrap gap-2">
                   {(course.tags ?? []).map((tag) => (
                     <a
@@ -97,8 +97,7 @@ const summaryRows = [
                     </a>
                   ))}
                 </div>
-              )
-            }
+              )}
 
             <div class="mt-8 flex flex-col sm:flex-row gap-4">
               <Button variant="primary" text={t('training.detail.contact')} href={`${contactPath}#booking`} />
@@ -106,8 +105,7 @@ const summaryRows = [
             </div>
 
             <div class="mt-10 grid sm:grid-cols-2 gap-3">
-              {
-                summaryRows.slice(0, 4).map((row) => (
+              {summaryRows.slice(0, 4).map((row) => (
                   <div class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 px-4 py-3">
                     <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
                     <div class="leading-snug">
@@ -117,8 +115,7 @@ const summaryRows = [
                       </div>
                     </div>
                   </div>
-                ))
-              }
+                ))}
             </div>
           </div>
 
@@ -155,8 +152,7 @@ const summaryRows = [
               <h2 class="text-2xl md:text-3xl font-bold font-heading text-heading">{t('training.detail.context')}</h2>
               <p class="mt-4 text-lg text-muted whitespace-pre-line">{course.context}</p>
               <div class="mt-8 grid sm:grid-cols-2 gap-3">
-                {
-                  summaryRows.slice(4).map((row) => (
+                {summaryRows.slice(4).map((row) => (
                     <div class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-page px-4 py-3">
                       <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
                       <div class="leading-snug">
@@ -164,8 +160,7 @@ const summaryRows = [
                         <div class="font-medium text-default">{row.value}</div>
                       </div>
                     </div>
-                  ))
-                }
+                  ))}
               </div>
             </div>
           </section>
@@ -267,7 +262,7 @@ const summaryRows = [
               </h2>
               <p class="mt-4 text-lg text-muted">
                 {t('training.detail.subtitle')}
-                <br /><br />
+                <br><br>
                 {t('training.detail.moreDetailsPrefix')}
                 <a href={termsPath} class="underline">{t('training.detail.conditions')}</a>.
               </p>
@@ -319,8 +314,7 @@ const summaryRows = [
             </nav>
 
             <div class="mt-6 border-t border-gray-200 dark:border-slate-800 pt-6 space-y-3">
-              {
-                summaryRows.map((row) => (
+              {summaryRows.map((row) => (
                   <div class="flex items-start gap-3">
                     <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
                     <div class="leading-snug">
@@ -330,8 +324,7 @@ const summaryRows = [
                       </div>
                     </div>
                   </div>
-                ))
-              }
+                ))}
             </div>
 
             <div class="mt-8 flex flex-col gap-3">

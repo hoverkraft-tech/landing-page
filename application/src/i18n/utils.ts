@@ -1,6 +1,6 @@
 import { BLOG_BASE } from '~/utils/permalinks';
-import { BLOG_TRANSLATIONS_BY_KEY, BLOG_TRANSLATION_KEY_BY_PATH } from './path-translations';
-import { ui, defaultLang, routes } from './ui';
+import { BLOG_TRANSLATION_KEY_BY_PATH, BLOG_TRANSLATIONS_BY_KEY } from './path-translations';
+import { defaultLang, routes, ui } from './ui';
 
 const trimSlashes = (value: string) => value.replace(/^\/+|\/+$/g, '');
 const routesByLang = routes as Record<string, Record<string, string>>;

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
 import type { MaturityAssessmentStrings } from './types';
 

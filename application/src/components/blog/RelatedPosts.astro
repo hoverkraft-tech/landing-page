@@ -1,11 +1,10 @@
 ---
 import { APP_BLOG } from 'astrowind:config';
-
-import { getRelatedPosts } from '~/utils/blog';
-import BlogHighlightedPosts from '../widgets/BlogHighlightedPosts.astro';
-import type { Post } from '~/types';
-import { getBlogPermalink } from '~/utils/permalinks';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
+import type { Post } from '~/types';
+import { getRelatedPosts } from '~/utils/blog';
+import { getBlogPermalink } from '~/utils/permalinks';
+import BlogHighlightedPosts from '../widgets/BlogHighlightedPosts.astro';
 
 export interface Props {
   post: Post;
@@ -18,8 +17,7 @@ const t = useTranslations(lang);
 const relatedPosts = post.tags ? await getRelatedPosts(post, 4) : [];
 ---
 
-{
-  APP_BLOG.isRelatedPostsEnabled ? (
+{APP_BLOG.isRelatedPostsEnabled ? (
     <BlogHighlightedPosts
       classes={{
         container:
@@ -30,5 +28,4 @@ const relatedPosts = post.tags ? await getRelatedPosts(post, 4) : [];
       linkUrl={getBlogPermalink()}
       postIds={relatedPosts.map((post) => post.id)}
     />
-  ) : null
-}
+  ) : null}

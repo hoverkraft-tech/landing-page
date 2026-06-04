@@ -1,6 +1,6 @@
 ---
-import type { CallToAction } from '~/types';
 import Button from '~/components/ui/Button.astro';
+import type { CallToAction } from '~/types';
 
 export interface Props {
   title?: string;
@@ -27,36 +27,29 @@ const {
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
     <div class="py-12 md:py-20 pb-8 md:pb-8">
       <div class="text-center max-w-5xl mx-auto">
-        {
-          tagline && (
+        {tagline && (
             <p
               class="text-base text-secondary dark:text-blue-200 font-bold tracking-wide uppercase intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
               set:html={tagline}
             />
-          )
-        }
-        {
-          title && (
+          )}
+        {title && (
             <h1
               class="text-5xl md:text-6xl font-bold leading-tighter tracking-tighter mb-4 font-heading text-heading intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
               set:html={title}
             />
-          )
-        }
+          )}
         <div class="max-w-3xl mx-auto">
-          {
-            subtitle && (
+          {subtitle && (
               <p
                 class="text-xl text-muted mb-6 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
                 set:html={subtitle}
               />
-            )
-          }
+            )}
           <div
             class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
           >
-            {
-              callToAction && (
+            {callToAction && (
                 <div class="flex w-full sm:w-auto">
                   {typeof callToAction === 'string' ? (
                     <Fragment set:html={callToAction} />
@@ -64,10 +57,8 @@ const {
                     <Button variant="primary" {...callToAction} />
                   )}
                 </div>
-              )
-            }
-            {
-              callToAction2 && (
+              )}
+            {callToAction2 && (
                 <div class="flex w-full sm:w-auto">
                   {typeof callToAction2 === 'string' ? (
                     <Fragment set:html={callToAction2} />
@@ -75,8 +66,7 @@ const {
                     <Button {...callToAction2} />
                   )}
                 </div>
-              )
-            }
+              )}
           </div>
         </div>
         {content && <Fragment set:html={content} />}

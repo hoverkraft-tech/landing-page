@@ -1,8 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-
+import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
 import { buildOrderedQuestionIds, decodeAnswersFromParam } from './client/answers-codec';
 import { buildShareText, getInterpretation } from './client/radar-renderer';
-import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
 import type { MaturityAssessmentStrings } from './types';
 
 type AnswerMap = Record<string, number | null>;

@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { HomePillar, HomeSectionHeader } from './types';
 
 export interface Props {
@@ -26,10 +26,8 @@ const { header, pillars } = Astro.props;
     <div
       class="absolute left-1/2 top-12 hidden h-px w-2/3 -translate-x-1/2 bg-linear-to-r from-transparent via-primary/30 to-transparent lg:block"
       aria-hidden="true"
-    >
-    </div>
-    {
-      pillars.map((pillar) => (
+    ></div>
+    {pillars.map((pillar) => (
         <article class="relative rounded-2xl border border-gray-200 bg-white p-6 shadow-sm dark:border-white/10 dark:bg-white/4">
           <div class="mb-5 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary">
             <Icon name={pillar.icon ?? 'tabler:circle'} class="h-6 w-6" aria-hidden="true" />
@@ -44,7 +42,6 @@ const { header, pillars } = Astro.props;
             <Icon name="tabler:arrow-right" class="h-4 w-4" aria-hidden="true" />
           </a>
         </article>
-      ))
-    }
+      ))}
   </div>
 </WidgetWrapper>

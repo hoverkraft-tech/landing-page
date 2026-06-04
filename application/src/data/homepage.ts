@@ -1,6 +1,6 @@
-import { useTranslatedPath } from '~/i18n/utils';
-import type { SupportedLanguage } from '~/i18n/ui';
 import type { HomePageContent } from '~/components/home/types';
+import type { SupportedLanguage } from '~/i18n/ui';
+import { useTranslatedPath } from '~/i18n/utils';
 
 export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
   const path = useTranslatedPath(lang);

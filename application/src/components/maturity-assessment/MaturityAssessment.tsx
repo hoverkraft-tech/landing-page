@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import type React from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import './maturity-assessment.css';
 import type { SupportedLanguage } from '~/i18n/ui';
-import type { MaturityAssessmentProps } from './types';
 import MaturityAssessmentQuestions from './MaturityAssessmentQuestions.tsx';
 import MaturityAssessmentSidebar from './MaturityAssessmentSidebar.tsx';
+import type { MaturityAssessmentProps } from './types';
 import { useMaturityAssessmentState } from './useMaturityAssessmentState';
 
 export type Props = MaturityAssessmentProps & {

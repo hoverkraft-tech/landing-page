@@ -1,9 +1,8 @@
 import type { PaginateFunction } from 'astro';
-
-import { cleanSlug } from '~/utils/permalinks';
-import { defaultLang, showDefaultLang, routes } from '~/i18n/ui';
 import type { TrainingCourse } from '~/data/trainings';
+import { defaultLang, routes, showDefaultLang } from '~/i18n/ui';
 import { fetchTrainingCourses as fetchTrainingCoursesFromLoader } from '~/loaders/training-courses-loader';
+import { cleanSlug } from '~/utils/permalinks';
 
 export const trainingsCoursesPerPage = 6;
 

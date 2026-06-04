@@ -1,6 +1,6 @@
-import { getAsset } from './utils/permalinks';
-import { getLangFromUrl, useTranslatedPath, useTranslations } from './i18n/utils';
 import type { CallToAction } from '~/types';
+import { getLangFromUrl, useTranslatedPath, useTranslations } from './i18n/utils';
+import { getAsset } from './utils/permalinks';
 
 type HeaderNavigationLink = {
   text?: string;

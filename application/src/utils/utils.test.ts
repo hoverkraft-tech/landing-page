@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { trim, toUiAmount } from '~/utils/utils';
+import { toUiAmount, trim } from '~/utils/utils';
 
 describe('utils', () => {
   describe('trim', () => {

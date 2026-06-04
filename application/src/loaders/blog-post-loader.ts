@@ -1,8 +1,8 @@
-import type { Loader } from 'astro/loaders';
 import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
-import yaml from 'js-yaml';
+import type { Loader } from 'astro/loaders';
 import { glob } from 'astro/loaders';
+import yaml from 'js-yaml';
 
 interface CommonData {
   publishDate: string;

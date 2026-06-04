@@ -1,14 +1,12 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
-
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 import Pagination from '~/components/blog/Pagination.astro';
-
-import { getLangFromUrl, useTranslations, useTranslatedPath } from '~/i18n/utils';
-import { getStaticPathsTrainingsTag } from '~/utils/trainings';
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import { getLangFromUrl, useTranslatedPath, useTranslations } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
 import { cleanSlug } from '~/utils/permalinks';
+import { getStaticPathsTrainingsTag } from '~/utils/trainings';
 
 export const prerender = true;
 
@@ -56,9 +54,9 @@ const metadata = {
           title: course.title,
           description: course.description,
           icon: course.icon,
-          badges: (course.tags ?? [])
-            .filter((t): t is string => Boolean(t && t.length > 0))
-            .map((t) => ({ text: t, href: `${courseBasePath}/tag/${cleanSlug(t)}` })),
+          badges: (course.tags ?? []).flatMap((tag) =>
+            typeof tag === 'string' && tag.length > 0 ? [{ text: tag, href: `${courseBasePath}/tag/${cleanSlug(tag)}` }] : []
+          ),
           callToAction: {
             text: t('button.learn-more'),
             href: `${courseBasePath}/${course.slug}`,

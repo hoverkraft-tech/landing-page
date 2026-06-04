@@ -1,10 +1,10 @@
 ---
-import type { ItemGrid as Props } from '~/types';
 import { Icon } from 'astro-icon/components';
 import { twMerge } from 'tailwind-merge';
+import type { Item, ItemGrid as Props } from '~/types';
 import Button from './Button.astro';
 
-const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props;
+const { items = [], columns, defaultIcon = '', classes = {} } = Astro.props as Props;
 
 const {
   container: containerClass = '',
@@ -16,8 +16,7 @@ const {
 } = classes;
 ---
 
-{
-  items && items.length > 0 && (
+{items && items.length > 0 && (
     <div
       class={twMerge(
         `grid gap-8 gap-x-12 sm:gap-y-8 ${
@@ -32,7 +31,10 @@ const {
         containerClass
       )}
     >
-      {items.map(({ title, description, icon, badges, callToAction, classes: itemClasses = {} }) => (
+      {items.map((item: Item) => {
+        const itemClasses = item.classes ?? {};
+
+        return (
         <div
           class={twMerge(
             'relative flex flex-col intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
@@ -40,16 +42,16 @@ const {
             itemClasses?.panel
           )}
         >
-          {(icon || defaultIcon) && (
-            <Icon name={icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
+          {(item.icon || defaultIcon) && (
+            <Icon name={item.icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
           )}
-          <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{title}</div>
-          {description && (
-            <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
+          <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{item.title}</div>
+          {item.description && (
+            <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={item.description} />
           )}
-          {badges && badges.length > 0 && (
+          {item.badges && item.badges.length > 0 && (
             <div class="mt-4 flex flex-wrap gap-2">
-              {badges.map((badge) =>
+              {item.badges.map((badge) =>
                 badge?.href ? (
                   <a
                     href={badge.href}
@@ -65,13 +67,13 @@ const {
               )}
             </div>
           )}
-          {callToAction && (
+          {item.callToAction && (
             <div class="mt-2">
-              <Button {...callToAction} />
+              <Button {...item.callToAction} />
             </div>
           )}
         </div>
-      ))}
+        );
+      })}
     </div>
-  )
-}
+  )}

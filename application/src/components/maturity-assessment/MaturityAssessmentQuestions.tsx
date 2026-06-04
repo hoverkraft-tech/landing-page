@@ -1,9 +1,7 @@
-import React from 'react';
-
 import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
-import type { MaturityAssessmentStrings } from './types';
 // eslint-disable-next-line n/no-missing-import
 import TablerIcon from './TablerIcon';
+import type { MaturityAssessmentStrings } from './types';
 
 type Props = {
   id: string;

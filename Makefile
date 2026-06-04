@@ -51,13 +51,12 @@ ci: ## Run tests in CI mode
 
 linter-fix: ## Execute linting and fix
 	$(call run_linter, \
-		-e FIX_CSS_PRETTIER=true \
-		-e FIX_JSON_PRETTIER=true \
-		-e FIX_JAVASCRIPT_PRETTIER=true \
-		-e FIX_YAML_PRETTIER=true \
 		-e FIX_MARKDOWN=true \
-		-e FIX_MARKDOWN_PRETTIER=true \
-		-e FIX_NATURAL_LANGUAGE=true)
+		-e FIX_NATURAL_LANGUAGE=true \
+		-e FIX_SHELL_SHFMT=true \
+		-e FIX_BIOME_LINT=true \
+		-e FIX_BIOME_FORMAT=true \
+	)
 
 define run_linter
 	DEFAULT_WORKSPACE="$(CURDIR)"; \
@@ -67,13 +66,8 @@ define run_linter
 	docker run \
 		-v $$VOLUME \
 		--rm \
-		-w "$$DEFAULT_WORKSPACE" \
 		-e DEFAULT_WORKSPACE="$$DEFAULT_WORKSPACE" \
-		-e GITHUB_WORKSPACE="$$DEFAULT_WORKSPACE" \
 		-e FILTER_REGEX_INCLUDE="$(filter-out $@,$(MAKECMDGOALS))" \
-		-e VALIDATE_TYPESCRIPT_PRETTIER=false \
-		-e VALIDATE_TYPESCRIPT_ES=false \
-        -e VALIDATE_CSS=false \
 		$(1) \
 		$$LINTER_IMAGE
 endef

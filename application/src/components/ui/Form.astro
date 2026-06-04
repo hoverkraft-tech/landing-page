@@ -1,13 +1,12 @@
 ---
-import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
+import type { Form as Props } from '~/types';
 
-const { inputs, textarea, disclaimer, button, description = '' } = Astro.props;
+const { inputs, textarea, disclaimer, button, description = '' } = Astro.props as Props;
 ---
 
 <form>
-  {
-    inputs &&
+  {inputs &&
       inputs.map(
         ({ type = 'text', name, label = '', autocomplete = 'on', placeholder = '' }) =>
           name && (
@@ -27,11 +26,9 @@ const { inputs, textarea, disclaimer, button, description = '' } = Astro.props;
               />
             </div>
           )
-      )
-  }
+      )}
 
-  {
-    textarea && (
+  {textarea && (
       <div>
         <label for="textarea" class="block text-sm font-medium">
           {textarea.label}
@@ -44,11 +41,9 @@ const { inputs, textarea, disclaimer, button, description = '' } = Astro.props;
           class="py-3 px-4 block w-full text-md rounded-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-slate-900"
         />
       </div>
-    )
-  }
+    )}
 
-  {
-    disclaimer && (
+  {disclaimer && (
       <div class="mt-3 flex items-start">
         <div class="flex mt-0.5">
           <input
@@ -64,24 +59,19 @@ const { inputs, textarea, disclaimer, button, description = '' } = Astro.props;
           </label>
         </div>
       </div>
-    )
-  }
+    )}
 
-  {
-    button && (
+  {button && (
       <div class="mt-10 grid">
         <Button variant="primary" type="submit">
           {button}
         </Button>
       </div>
-    )
-  }
+    )}
 
-  {
-    description && (
+  {description && (
       <div class="mt-3 text-center">
         <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
       </div>
-    )
-  }
+    )}
 </form>

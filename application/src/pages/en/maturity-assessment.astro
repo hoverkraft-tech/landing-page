@@ -1,12 +1,11 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+import MaturityAssessmentWidget from '~/components/maturity-assessment/MaturityAssessment.tsx';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 import HeroText from '~/components/widgets/HeroText.astro';
 import Note from '~/components/widgets/Note.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-
-import MaturityAssessmentWidget from '~/components/maturity-assessment/MaturityAssessment.tsx';
 import { getMaturityAssessmentAxes } from '~/data/maturity-assessment';
 import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
@@ -101,25 +100,25 @@ const strings = {
       </header>
 
       <style is:inline>
-        @media print {
-          /* Print should contain only the report itself */
-          #header,
-          body > footer {
-            display: none !important;
-          }
-
-          [data-maturity-assessment-hero] {
-            display: none !important;
-          }
-
-          [data-maturity-assessment-intro] {
-            display: none !important;
-          }
-
-          [data-maturity-assessment-no-print] {
-            display: none !important;
-          }
+      @media print {
+        /* Print should contain only the report itself */
+        #header,
+        body > footer {
+          display: none !important;
         }
+
+        [data-maturity-assessment-hero] {
+          display: none !important;
+        }
+
+        [data-maturity-assessment-intro] {
+          display: none !important;
+        }
+
+        [data-maturity-assessment-no-print] {
+          display: none !important;
+        }
+      }
       </style>
 
       <MaturityAssessmentWidget

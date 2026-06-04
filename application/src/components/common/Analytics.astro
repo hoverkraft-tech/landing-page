@@ -6,8 +6,7 @@ const usePartytown = ANALYTICS?.vendors?.googleAnalytics?.partytown ?? true;
 const scriptType = usePartytown ? 'text/partytown' : 'text/javascript';
 ---
 
-{
-  googleAnalyticsId ? (
+{googleAnalyticsId ? (
     <Fragment>
       <script
         is:inline
@@ -26,5 +25,4 @@ const scriptType = usePartytown ? 'text/partytown' : 'text/javascript';
         `}
       />
     </Fragment>
-  ) : null
-}
+  ) : null}

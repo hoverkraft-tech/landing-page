@@ -1,4 +1,4 @@
-import React from 'react';
+import { createElement } from 'react';
 import { renderToStaticMarkup } from 'react-dom/server';
 // eslint-disable-next-line n/no-unpublished-import
 import { describe, expect, it, vi } from 'vitest';
@@ -60,7 +60,7 @@ describe('SocialShare', () => {
     const title = 'Share title';
     const url = 'https://example.com/post';
 
-    const html = renderToStaticMarkup(<SocialShare text={text} title={title} url={url} />);
+    const html = renderToStaticMarkup(createElement(SocialShare, { text, title, url }));
 
     const encodedUrl = encodeURIComponent(url);
     const encodedTitle = encodeURIComponent(title);
@@ -74,7 +74,9 @@ describe('SocialShare', () => {
   });
 
   it('disables all share actions when disabled', () => {
-    const html = renderToStaticMarkup(<SocialShare text="Hello" url="https://example.com" disabled />);
+    const html = renderToStaticMarkup(
+      createElement(SocialShare, { text: 'Hello', url: 'https://example.com', disabled: true })
+    );
 
     const disabledButtons = html.match(/<button[^>]*disabled/g) ?? [];
     expect(disabledButtons).toHaveLength(2);

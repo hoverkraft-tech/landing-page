@@ -6,8 +6,7 @@ const { items } = Astro.props as { items: Item[] };
 ---
 
 <ul class="space-y-2 text-left">
-  {
-    items.map(
+  {items.map(
       ({ description, icon }) =>
         description && (
           <li class="flex items-start space-x-3 leading-5">
@@ -17,6 +16,5 @@ const { items } = Astro.props as { items: Item[] };
             <span>{description}</span>
           </li>
         )
-    )
-  }
+    )}
 </ul>

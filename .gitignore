@@ -33,6 +33,6 @@ application/.astro
 # Generated brand assets (fetched from @hoverkraft-tech/branding during CI)
 # Note: generated-*.ts files are kept in git to allow builds without refetching branding data
 application/public/brand/
-application/prettier-report.txt
+application/biome-report.txt
 application/astro-report.txt
 application/humanize-report-checkstyle.xml

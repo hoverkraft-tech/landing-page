@@ -1,22 +1,23 @@
-import { isUnpicCompatible, unpicOptimizer, astroAssetsOptimizer } from './images-optimization';
 import type { ImageMetadata } from 'astro';
-import type { ImagesOptimizer } from './images-optimization';
 import type { MetaDataOpenGraph } from '~/types';
+import type { ImagesOptimizer } from './images-optimization';
+import { astroAssetsOptimizer, isUnpicCompatible, unpicOptimizer } from './images-optimization';
+
 /** The optimized image shape returned by our ImagesOptimizer */
 type OptimizedImage = Awaited<ReturnType<ImagesOptimizer>>[0];
 
-const load = async function () {
-  let images: Record<string, () => Promise<unknown>> | undefined = undefined;
+const load = async () => {
+  let images: Record<string, () => Promise<unknown>> | undefined;
   try {
     images = import.meta.glob('~/assets/images/**/*.{jpeg,jpg,png,tiff,webp,gif,svg,JPEG,JPG,PNG,TIFF,WEBP,GIF,SVG}');
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  } catch (error) {
+  } catch (_error) {
     // continue regardless of error
   }
   return images;
 };
 
-let _images: Record<string, () => Promise<unknown>> | undefined = undefined;
+let _images: Record<string, () => Promise<unknown>> | undefined;
 
 /** */
 export const fetchLocalImages = async () => {

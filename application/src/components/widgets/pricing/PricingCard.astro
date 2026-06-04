@@ -1,9 +1,9 @@
 ---
+import type { Price } from '~/types';
 import PricingCTA from './PricingCTA.astro';
 import PricingHeader from './PricingHeader.astro';
 import PricingItems from './PricingItems.astro';
 import PricingRibbon from './PricingRibbon.astro';
-import type { Price } from '~/types';
 
 const { plan } = Astro.props as { plan: Price };
 

@@ -2,4 +2,4 @@
  * Training course data and types
  */
 
-export type { TrainingMetadata, TrainingObjective, TrainingDay, TrainingInclusion, TrainingCourse } from './types';
+export type { TrainingCourse, TrainingDay, TrainingInclusion, TrainingMetadata, TrainingObjective } from './types';

@@ -1,17 +1,15 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/Hero.astro';
-import Pricing from '~/components/widgets/pricing/Pricing.astro';
+import { Icon } from 'astro-icon/components';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 import Content from '~/components/widgets/Content.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Features3 from '~/components/widgets/Features3.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Pricing from '~/components/widgets/pricing/Pricing.astro';
 import Steps from '~/components/widgets/Steps.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-
-import { Icon } from 'astro-icon/components';
-
 import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
 
 const lang = getLangFromUrl(Astro.url);
 const translatePath = useTranslatedPath(lang);
@@ -119,8 +117,8 @@ const metadata = {
         <Icon name="tabler:info-circle" class="h-5 w-5" />
       </div>
       <p class="text-default font-medium leading-snug">
-        Audit fees are deducted if a <span class="font-semibold text-default">Restart</span> contract is signed as the next
-        step.
+        Audit fees are deducted if a <span class="font-semibold text-default">Restart</span> contract is signed as the
+        next step.
       </p>
     </div>
   </aside>

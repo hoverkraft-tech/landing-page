@@ -4,6 +4,7 @@
  */
 
 import type { SupportedLanguage } from '~/i18n/ui';
+
 export type { SupportedLanguage } from '~/i18n/ui';
 
 export type BrandLocale = SupportedLanguage;

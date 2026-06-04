@@ -1,16 +1,16 @@
 import { describe, expect, it, vi } from 'vitest';
 
 import {
+  applyGetPermalinks,
   BLOG_BASE,
   CATEGORY_BASE,
-  TAG_BASE,
-  applyGetPermalinks,
   cleanSlug,
   getAsset,
   getBlogPermalink,
   getCanonical,
   getHomePermalink,
   getPermalink,
+  TAG_BASE,
   trimSlash,
 } from '~/utils/permalinks';
 

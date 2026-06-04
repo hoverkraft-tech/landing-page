@@ -1,14 +1,12 @@
-import React from 'react';
-
-import type { SupportedLanguage } from '~/i18n/ui';
-import { defaultLang } from '~/i18n/ui';
-import { useTranslatedPath } from '~/i18n/utils';
 // eslint-disable-next-line n/no-missing-import
 import { SITE } from 'astrowind:config';
+import React from 'react';
 // eslint-disable-next-line n/no-missing-import
 import SocialShare from '~/components/common/SocialShare';
 import type { MaturityAssessmentAxis } from '~/data/maturity-assessment';
-import type { MaturityAssessmentStrings } from './types';
+import type { SupportedLanguage } from '~/i18n/ui';
+import { defaultLang } from '~/i18n/ui';
+import { useTranslatedPath } from '~/i18n/utils';
 // eslint-disable-next-line n/no-missing-import
 import MaturityAssessmentRadar from './MaturityAssessmentRadar';
 // eslint-disable-next-line n/no-missing-import
@@ -17,6 +15,7 @@ import MaturityPrintFooter from './MaturityPrintFooter';
 import MaturityPrintHeader from './MaturityPrintHeader';
 // eslint-disable-next-line n/no-missing-import
 import MaturityPrintSummary from './MaturityPrintSummary';
+import type { MaturityAssessmentStrings } from './types';
 
 type Props = {
   id: string;

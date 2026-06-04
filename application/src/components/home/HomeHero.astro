@@ -14,8 +14,7 @@ const { content } = Astro.props;
   <div
     class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary/30 to-transparent"
     aria-hidden="true"
-  >
-  </div>
+  ></div>
   <div
     class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:px-6 md:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:py-24"
   >
@@ -34,16 +33,14 @@ const { content } = Astro.props;
         <Button {...content.secondaryAction} class="w-full sm:w-auto" />
       </div>
       <ul class="mt-8 grid gap-3 text-sm text-default md:text-base">
-        {
-          content.proof.map((item) => (
+        {content.proof.map((item) => (
             <li class="flex gap-3">
               <div class="relative rounded-2xl border border-gray-200 bg-white p-4 shadow-lg ring-1 ring-black/5 dark:border-white/10 dark:bg-white/4">
                 <Icon name={item.icon ?? 'tabler:check'} class="h-4 w-4" aria-hidden="true" />
               </div>
               <span>{item.text}</span>
             </li>
-          ))
-        }
+          ))}
       </ul>
     </div>
 
@@ -62,8 +59,7 @@ const { content } = Astro.props;
           </div>
 
           <div class="space-y-3">
-            {
-              content.visual.nodes.map((node, index) => (
+            {content.visual.nodes.map((node, index) => (
                 <div class="flex items-center gap-3 rounded-lg border border-gray-200 bg-white p-3 dark:border-white/10 dark:bg-white/4">
                   <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-md bg-secondary/10 text-sm font-semibold text-secondary">
                     {index + 1}
@@ -73,19 +69,16 @@ const { content } = Astro.props;
                   </div>
                   <span class="w-28 text-right text-sm font-medium text-heading">{node}</span>
                 </div>
-              ))
-            }
+              ))}
           </div>
 
           <div class="mt-4 grid grid-cols-3 gap-3">
-            {
-              content.visual.metrics.map((metric) => (
+            {content.visual.metrics.map((metric) => (
                 <div class="rounded-lg border border-gray-200 bg-white p-3 text-center dark:border-white/10 dark:bg-white/4">
                   <p class="text-sm font-bold text-heading">{metric}</p>
                   <p class="mt-1 text-[0.7rem] uppercase tracking-wide text-muted">metric</p>
                 </div>
-              ))
-            }
+              ))}
           </div>
         </div>
       </div>

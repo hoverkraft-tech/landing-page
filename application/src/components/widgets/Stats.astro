@@ -1,8 +1,8 @@
 ---
-import type { Stats as Props } from '~/types';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
 import { Icon } from 'astro-icon/components';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
+import type { Stats as Props } from '~/types';
 
 const {
   title = await Astro.slots.render('title'),
@@ -14,14 +14,13 @@ const {
   isDark = false,
   classes = {},
   bg = await Astro.slots.render('bg'),
-} = Astro.props;
+} = Astro.props as Props;
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
   <div class="flex flex-wrap justify-center -m-4 text-center">
-    {
-      stats &&
+    {stats &&
         stats.map(({ amount, title, icon }) => (
           <div class="p-4 md:w-1/4 sm:w-1/2 w-full min-w-[220px] text-center md:border-r md:last:border-none dark:md:border-slate-500 intersect-once motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade intersect-quarter">
             {icon && (
@@ -34,7 +33,6 @@ const {
             )}
             {title && <div class="text-sm font-medium uppercase tracking-widest text-muted lg:text-base">{title}</div>}
           </div>
-        ))
-    }
+        ))}
   </div>
 </WidgetWrapper>

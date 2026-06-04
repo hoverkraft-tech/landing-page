@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import { getLangFromUrl, useTranslations } from '~/i18n/utils';
 import type { HomeSectionHeader, HomeUseCase } from './types';
 
@@ -35,8 +35,7 @@ const t = useTranslations(lang);
       role="tablist"
       aria-label={header.title}
     >
-      {
-        items.map((item, index) => {
+      {items.map((item, index) => {
           const isActive = index === 0;
           return (
             <button
@@ -70,13 +69,11 @@ const t = useTranslations(lang);
               />
             </button>
           );
-        })
-      }
+        })}
     </div>
 
     <div class="bg-gray-50 p-6 md:p-8 dark:bg-slate-950/50">
-      {
-        items.map((item, index) => (
+      {items.map((item, index) => (
           <article
             id={`${tabIdPrefix}-panel-${item.id}`}
             role="tabpanel"
@@ -143,69 +140,68 @@ const t = useTranslations(lang);
               </div>
             </div>
           </article>
-        ))
-      }
+        ))}
     </div>
   </div>
 </WidgetWrapper>
 
 <script>
-  const initializeHomeTabs = () => {
-    document.querySelectorAll<HTMLElement>('[data-home-tabs]').forEach((root) => {
-      if (root.dataset.homeTabsInitialized === 'true') return;
-      root.dataset.homeTabsInitialized = 'true';
+const initializeHomeTabs = () => {
+  document.querySelectorAll<HTMLElement>('[data-home-tabs]').forEach((root) => {
+    if (root.dataset.homeTabsInitialized === 'true') return;
+    root.dataset.homeTabsInitialized = 'true';
 
-      const tabs = Array.from(root.querySelectorAll<HTMLElement>('[data-home-tab]'));
-      const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-home-panel]'));
+    const tabs = Array.from(root.querySelectorAll<HTMLElement>('[data-home-tab]'));
+    const panels = Array.from(root.querySelectorAll<HTMLElement>('[data-home-panel]'));
 
-      const activate = (activeTab: HTMLElement, focusTab = false) => {
-        const activeId = activeTab.getAttribute('data-home-tab');
+    const activate = (activeTab: HTMLElement, focusTab = false) => {
+      const activeId = activeTab.getAttribute('data-home-tab');
 
-        tabs.forEach((tab) => {
-          const isActive = tab === activeTab;
-          tab.setAttribute('aria-selected', String(isActive));
-          tab.setAttribute('data-active', String(isActive));
-          tab.tabIndex = isActive ? 0 : -1;
-        });
+      tabs.forEach((tab) => {
+        const isActive = tab === activeTab;
+        tab.setAttribute('aria-selected', String(isActive));
+        tab.setAttribute('data-active', String(isActive));
+        tab.tabIndex = isActive ? 0 : -1;
+      });
 
-        panels.forEach((panel) => {
-          panel.toggleAttribute('hidden', panel.getAttribute('data-home-panel') !== activeId);
-        });
+      panels.forEach((panel) => {
+        panel.toggleAttribute('hidden', panel.getAttribute('data-home-panel') !== activeId);
+      });
 
-        if (focusTab) {
-          activeTab.focus();
+      if (focusTab) {
+        activeTab.focus();
+      }
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener('click', () => activate(tab));
+      tab.addEventListener('keydown', (event: KeyboardEvent) => {
+        const key = event.key;
+        const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End', 'Enter', ' '];
+
+        if (!keys.includes(key)) return;
+        event.preventDefault();
+
+        if (key === 'Enter' || key === ' ') {
+          activate(tab);
+          return;
         }
-      };
 
-      tabs.forEach((tab, index) => {
-        tab.addEventListener('click', () => activate(tab));
-        tab.addEventListener('keydown', (event: KeyboardEvent) => {
-          const key = event.key;
-          const keys = ['ArrowLeft', 'ArrowRight', 'Home', 'End', 'Enter', ' '];
+        const nextIndex =
+          key === 'Home'
+            ? 0
+            : key === 'End'
+              ? tabs.length - 1
+              : key === 'ArrowRight'
+                ? (index + 1) % tabs.length
+                : (index - 1 + tabs.length) % tabs.length;
 
-          if (!keys.includes(key)) return;
-          event.preventDefault();
-
-          if (key === 'Enter' || key === ' ') {
-            activate(tab);
-            return;
-          }
-
-          const nextIndex =
-            key === 'Home'
-              ? 0
-              : key === 'End'
-                ? tabs.length - 1
-                : key === 'ArrowRight'
-                  ? (index + 1) % tabs.length
-                  : (index - 1 + tabs.length) % tabs.length;
-
-          activate(tabs[nextIndex], true);
-        });
+        activate(tabs[nextIndex], true);
       });
     });
-  };
+  });
+};
 
-  initializeHomeTabs();
-  document.addEventListener('astro:page-load', initializeHomeTabs);
+initializeHomeTabs();
+document.addEventListener('astro:page-load', initializeHomeTabs);
 </script>

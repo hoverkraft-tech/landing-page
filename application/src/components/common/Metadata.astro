@@ -1,10 +1,9 @@
 ---
+import { I18N, METADATA, SITE } from 'astrowind:config';
 import merge from 'lodash.merge';
-
-import { SITE, METADATA, I18N } from 'astrowind:config';
 import type { MetaData, MetaDataImage, MetaDataOpenGraph, MetaDataTwitter } from '~/types';
-import { getCanonical } from '~/utils/permalinks';
 import { adaptOpenGraphImages } from '~/utils/images';
+import { getCanonical } from '~/utils/permalinks';
 
 interface OpenGraphMetadata extends MetaDataOpenGraph {
   site_name?: string;
@@ -79,29 +78,27 @@ const twitterImage = openGraphImages[0];
 ---
 
 <title>{documentTitle}</title>
-<link rel="canonical" href={canonical} />
-<meta name="robots" content={robotsContent} />
+<link rel="canonical" href={canonical}>
+<meta name="robots" content={robotsContent}>
 {resolvedDescription ? <meta name="description" content={resolvedDescription} /> : null}
 
-<meta property="og:title" content={resolvedTitle} />
-<meta property="og:type" content={normalizedOpenGraph.type ?? 'website'} />
-<meta property="og:url" content={normalizedOpenGraph.url ?? canonical} />
+<meta property="og:title" content={resolvedTitle}>
+<meta property="og:type" content={normalizedOpenGraph.type ?? 'website'}>
+<meta property="og:url" content={normalizedOpenGraph.url ?? canonical}>
 {resolvedDescription ? <meta property="og:description" content={resolvedDescription} /> : null}
 {openGraphSiteName ? <meta property="og:site_name" content={openGraphSiteName} /> : null}
 {normalizedOpenGraph.locale ? <meta property="og:locale" content={normalizedOpenGraph.locale} /> : null}
 
-{
-  openGraphImages.map((image) => (
+{openGraphImages.map((image) => (
     <Fragment>
       <meta property="og:image" content={image.url} />
       {image.width ? <meta property="og:image:width" content={String(image.width)} /> : null}
       {image.height ? <meta property="og:image:height" content={String(image.height)} /> : null}
     </Fragment>
-  ))
-}
+  ))}
 
-<meta name="twitter:card" content={resolvedTwitter.cardType ?? 'summary'} />
-<meta name="twitter:title" content={resolvedTitle} />
+<meta name="twitter:card" content={resolvedTwitter.cardType ?? 'summary'}>
+<meta name="twitter:title" content={resolvedTitle}>
 {resolvedDescription ? <meta name="twitter:description" content={resolvedDescription} /> : null}
 {resolvedTwitter.site ? <meta name="twitter:site" content={resolvedTwitter.site} /> : null}
 {resolvedTwitter.handle ? <meta name="twitter:creator" content={resolvedTwitter.handle} /> : null}

@@ -1,14 +1,12 @@
 ---
 import { Icon } from 'astro-icon/components';
-import Logo from '~/components/Logo.astro';
-import ToggleTheme from '~/components/common/ToggleTheme.astro';
-import ToggleMenu from '~/components/common/ToggleMenu.astro';
 import LanguageSelector from '~/components/common/LanguageSelector.astro';
+import ToggleMenu from '~/components/common/ToggleMenu.astro';
+import ToggleTheme from '~/components/common/ToggleTheme.astro';
+import Logo from '~/components/Logo.astro';
 import Button from '~/components/ui/Button.astro';
-
-import { getHomePermalink } from '~/utils/permalinks';
-import { trimSlash, getAsset } from '~/utils/permalinks';
 import type { CallToAction } from '~/types';
+import { getAsset, getHomePermalink, trimSlash } from '~/utils/permalinks';
 
 interface Link {
   text?: string;
@@ -106,8 +104,7 @@ const externalLinkAttrs = (href?: string) =>
       <ul
         class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
       >
-        {
-          links.map(({ text, href, links, featured }, index, arr) => (
+        {links.map(({ text, href, links, featured }, index, arr) => (
             <li class={links?.length ? 'dropdown md:relative' : ''}>
               {links?.length ? (
                 <>
@@ -200,8 +197,7 @@ const externalLinkAttrs = (href?: string) =>
                 </a>
               )}
             </li>
-          ))
-        }
+          ))}
       </ul>
     </nav>
     <div
@@ -214,8 +210,7 @@ const externalLinkAttrs = (href?: string) =>
         <div class="flex">
           <LanguageSelector />
           {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
-          {
-            showRssFeed && (
+          {showRssFeed && (
               <a
                 class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
                 aria-label="RSS Feed"
@@ -223,11 +218,9 @@ const externalLinkAttrs = (href?: string) =>
               >
                 <Icon name="tabler:rss" class="w-5 h-5" />
               </a>
-            )
-          }
+            )}
         </div>
-        {
-          actions?.length ? (
+        {actions?.length ? (
             <span class="ml-4 rtl:ml-0 rtl:mr-4">
               {actions.map((btnProps) => (
                 <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
@@ -235,8 +228,7 @@ const externalLinkAttrs = (href?: string) =>
             </span>
           ) : (
             ''
-          )
-        }
+          )}
       </div>
     </div>
   </div>

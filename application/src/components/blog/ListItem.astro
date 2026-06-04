@@ -1,14 +1,12 @@
 ---
+import { APP_BLOG } from 'astrowind:config';
 import type { ImageMetadata } from 'astro';
 import { Icon } from 'astro-icon/components';
-import Image from '~/components/common/Image.astro';
 import PostTags from '~/components/blog/Tags.astro';
-
-import { APP_BLOG } from 'astrowind:config';
+import Image from '~/components/common/Image.astro';
 import type { Post } from '~/types';
-
-import { getPermalink } from '~/utils/permalinks';
 import { findImage } from '~/utils/images';
+import { getPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
 
 export interface Props {
@@ -24,8 +22,7 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
 <article
   class={`max-w-md mx-auto md:max-w-none grid gap-6 md:gap-8 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade ${image ? 'md:grid-cols-2' : ''}`}
 >
-  {
-    image &&
+  {image &&
       (link ? (
         <a class="relative block group" href={link ?? 'javascript:void(0)'}>
           <div class="relative h-0 pb-[56.25%] md:pb-[75%] md:h-72 lg:pb-[56.25%] overflow-hidden bg-gray-400 dark:bg-slate-700 rounded-sm shadow-sm">
@@ -60,25 +57,21 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
             />
           )}
         </div>
-      ))
-  }
+      ))}
   <div class="mt-2">
     <header>
       <div class="mb-1">
         <span class="text-sm">
           <Icon name="tabler:clock" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
           <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
-          {
-            post.author && (
+          {post.author && (
               <>
                 {' '}
                 · <Icon name="tabler:user" class="w-3.5 h-3.5 inline-block -mt-0.5 dark:text-gray-400" />
                 <span>{post.author.replaceAll('-', ' ')}</span>
               </>
-            )
-          }
-          {
-            post.category && (
+            )}
+          {post.category && (
               <>
                 {' '}
                 ·{' '}
@@ -86,13 +79,11 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
                   {post.category.title}
                 </a>
               </>
-            )
-          }
+            )}
         </span>
       </div>
       <h2 class="text-xl sm:text-2xl font-bold leading-tight mb-2 font-heading text-heading">
-        {
-          link ? (
+        {link ? (
             <a
               class="inline-block hover:text-primary dark:hover:text-blue-700 transition ease-in duration-200"
               href={link}
@@ -101,20 +92,17 @@ const link = APP_BLOG?.post?.isEnabled ? getPermalink(post.permalink, 'post') : 
             </a>
           ) : (
             post.title
-          )
-        }
+          )}
       </h2>
     </header>
 
     {post.excerpt && <p class="flex-grow text-muted text-lg">{post.excerpt}</p>}
-    {
-      post.tags && Array.isArray(post.tags) ? (
+    {post.tags && Array.isArray(post.tags) ? (
         <footer class="mt-5">
           <PostTags tags={post.tags} />
         </footer>
       ) : (
         <Fragment />
-      )
-    }
+      )}
   </div>
 </article>

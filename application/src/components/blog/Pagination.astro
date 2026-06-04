@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { getPermalink } from '~/utils/permalinks';
 import Button from '~/components/ui/Button.astro';
+import { getPermalink } from '~/utils/permalinks';
 
 export interface Props {
   prevUrl?: string;
@@ -13,8 +13,7 @@ export interface Props {
 const { prevUrl, nextUrl, prevText = 'Newer posts', nextText = 'Older posts' } = Astro.props;
 ---
 
-{
-  (prevUrl || nextUrl) && (
+{(prevUrl || nextUrl) && (
     <div class="container flex">
       <div class="flex flex-row mx-auto container justify-between">
         <Button
@@ -32,5 +31,4 @@ const { prevUrl, nextUrl, prevText = 'Newer posts', nextText = 'Older posts' } =
         </Button>
       </div>
     </div>
-  )
-}
+  )}

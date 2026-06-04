@@ -1,6 +1,6 @@
-import { defaultLang } from './ui';
-import { cleanSlug, trimSlash, POST_PERMALINK_PATTERN } from '~/utils/permalinks';
 import yaml from 'js-yaml';
+import { cleanSlug, POST_PERMALINK_PATTERN, trimSlash } from '~/utils/permalinks';
+import { defaultLang } from './ui';
 
 interface Frontmatter {
   publishDate?: Date | string;

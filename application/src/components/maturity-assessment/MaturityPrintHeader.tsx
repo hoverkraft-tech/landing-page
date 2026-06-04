@@ -1,5 +1,3 @@
-import React from 'react';
-
 import type { MaturityAssessmentStrings } from './types';
 
 type Props = {

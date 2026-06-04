@@ -1,9 +1,9 @@
 import path from 'node:path';
 import puppeteer from 'puppeteer';
-import { distDir } from './paths.mjs';
-import { ensureDir } from './fs-utils.mjs';
 import { getSiteOrigin } from './config.mjs';
+import { ensureDir } from './fs-utils.mjs';
 import { startStaticServer } from './http-server.mjs';
+import { distDir } from './paths.mjs';
 import { getPdfTransformSource } from './pdf-transform.mjs';
 
 async function generatePdf(routePath, outputFile) {

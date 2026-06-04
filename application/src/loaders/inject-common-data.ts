@@ -1,6 +1,6 @@
-import type { RemarkPlugin } from '@astrojs/markdown-remark';
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
+import type { RemarkPlugin } from '@astrojs/markdown-remark';
 import yaml from 'js-yaml';
 
 /**
@@ -10,7 +10,7 @@ import yaml from 'js-yaml';
  * NOTE: This plugin modifies file.data which should work with Astro's content collections.
  */
 export function injectCommonData(): ReturnType<RemarkPlugin> {
-  return async function (_tree, file) {
+  return async (_tree, file) => {
     // Get the file path
     const filePath = file.history[0];
     if (!filePath || !filePath.endsWith('.mdx')) {

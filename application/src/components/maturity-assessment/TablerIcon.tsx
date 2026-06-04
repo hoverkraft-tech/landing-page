@@ -1,5 +1,4 @@
 import tablerIconData from '@iconify-json/tabler/icons.json';
-import React from 'react';
 
 type TablerIconData = {
   icons: Record<string, { body: string; width?: number; height?: number }>;

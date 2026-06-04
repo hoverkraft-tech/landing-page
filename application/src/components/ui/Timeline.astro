@@ -20,8 +20,7 @@ const {
 } = classes;
 ---
 
-{
-  items && items.length > 0 && (
+{items && items.length > 0 && (
     <div class={containerClass}>
       {items.map(({ title, description, icon, classes: itemClasses = {} }, index = 0) => (
         <div
@@ -56,5 +55,4 @@ const {
         </div>
       ))}
     </div>
-  )
-}
+  )}

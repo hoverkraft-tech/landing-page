@@ -29,7 +29,7 @@ jobs:
       contents: write
     steps:
       - name: Checkout repository
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           persist-credentials: false
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -47,7 +47,7 @@ jobs:
           client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
           private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }}
 
-      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@4c9d51717dc04d823dac2dc9ac2857e7b3069454 # 0.35.0
+      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@4bb7594b1bf3696c54b2bbae970376056853f8ea # 0.36.0
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: docs/action-documentation-update
@@ -73,7 +73,7 @@ jobs:
       url: ${{ steps.deployment.outputs.url }}
     steps:
       - id: deployment
-        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@0.23.3
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@0.26.2
         with:
           build-path: application/dist
           build-artifact-id: ${{ needs.ci.outputs.build-artifact-id }}
