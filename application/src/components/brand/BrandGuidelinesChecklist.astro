@@ -26,13 +26,11 @@ const styles =
 <div class={styles.container}>
   <h3 class={styles.heading}>{title}</h3>
   <ul class="space-y-2 pdf-break-avoid">
-    {
-      items.map((item) => (
+    {items.map((item) => (
         <li class="flex items-start">
           <span class={styles.bullet}>•</span>
           <span class="text-gray-700 dark:text-gray-300">{item}</span>
         </li>
-      ))
-    }
+      ))}
   </ul>
 </div>

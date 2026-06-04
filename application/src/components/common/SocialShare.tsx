@@ -1,5 +1,7 @@
 import tablerIconData from '@iconify-json/tabler/icons.json';
-import React, { useEffect, useRef, useState } from 'react';
+import * as React from 'react';
+
+const { useEffect, useRef, useState } = React;
 
 import { defaultLang, type SupportedLanguage } from '~/i18n/ui';
 import { useTranslations } from '~/i18n/utils';

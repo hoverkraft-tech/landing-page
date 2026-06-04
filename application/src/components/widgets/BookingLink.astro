@@ -33,8 +33,7 @@ const t = useTranslations(lang);
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-7xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
 
-  {
-    bookingUrl && (
+  {bookingUrl && (
       <div class="flex flex-col max-w-4xl mx-auto text-center">
         <div class="flex justify-center">
           <Button
@@ -52,6 +51,5 @@ const t = useTranslations(lang);
           </div>
         )}
       </div>
-    )
-  }
+    )}
 </WidgetWrapper>

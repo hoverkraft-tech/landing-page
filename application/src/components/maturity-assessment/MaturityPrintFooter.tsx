@@ -1,4 +1,3 @@
-import React from 'react';
 // eslint-disable-next-line n/no-missing-import
 import { SITE } from 'astrowind:config';
 

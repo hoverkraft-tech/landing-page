@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { HomeCredibilityCard, HomeSectionHeader } from './types';
 
 export interface Props {
@@ -24,8 +24,7 @@ const { header, cards } = Astro.props;
     />
 
     <div class="grid gap-4 sm:grid-cols-2">
-      {
-        cards.map((card) => {
+      {cards.map((card) => {
           const Wrapper = card.href ? 'a' : 'article';
           return (
             <Wrapper
@@ -39,8 +38,7 @@ const { header, cards } = Astro.props;
               <p class="mt-2 text-sm leading-relaxed text-muted">{card.description}</p>
             </Wrapper>
           );
-        })
-      }
+        })}
     </div>
   </div>
 </WidgetWrapper>

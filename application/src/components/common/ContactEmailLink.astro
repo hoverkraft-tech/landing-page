@@ -13,12 +13,10 @@ const email = typeof SITE?.contactEmail === 'string' ? SITE.contactEmail.trim() 
 const text = typeof label === 'string' ? label : email;
 ---
 
-{
-  !text ? null : email ? (
+{!text ? null : email ? (
     <a href={`mailto:${email}`} class={className} {...attributes}>
       {text}
     </a>
   ) : (
     text
-  )
-}
+  )}

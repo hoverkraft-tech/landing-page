@@ -1,9 +1,9 @@
 ---
 import { marked } from 'marked';
-import type { ReleaseSummaryData, ReleaseSummaryRelease, ReleaseSummaryRepository } from '~/types';
+import releaseSummaryConfig from '~/data/release-summary-config.mjs';
 import type { SupportedLanguage } from '~/i18n/ui';
 import { defaultLang } from '~/i18n/ui';
-import releaseSummaryConfig from '~/data/release-summary-config.mjs';
+import type { ReleaseSummaryData, ReleaseSummaryRelease, ReleaseSummaryRepository } from '~/types';
 
 interface Props {
   data: ReleaseSummaryData;
@@ -113,17 +113,14 @@ const repositoriesWithHtml: ReleaseSummaryRepositoryWithHtml[] = await Promise.a
       </li>
       <li>
         <strong>{t.stats.latest}:</strong>{' '}
-        {
-          mostRecent
+        {mostRecent
             ? `${mostRecent.repo} ${mostRecent.name} (${formatDate(mostRecent.publishedAt)})`
-            : t.stats.latestFallback
-        }
+            : t.stats.latestFallback}
       </li>
     </ul>
   </section>
 
-  {
-    repositoriesWithHtml.map((repo: ReleaseSummaryRepositoryWithHtml) => (
+  {repositoriesWithHtml.map((repo: ReleaseSummaryRepositoryWithHtml) => (
       <section>
         <h2>{repo.name}</h2>
         <p>{repo.description?.trim() || t.repo.descriptionFallback}</p>
@@ -174,16 +171,13 @@ const repositoriesWithHtml: ReleaseSummaryRepositoryWithHtml[] = await Promise.a
           </article>
         ))}
       </section>
-    ))
-  }
+    ))}
 
-  {
-    showClosingSection && (
+  {showClosingSection && (
       <section>
         <h2>{t.closing.title}</h2>
         {closingHtml && <div class="space-y-4" set:html={closingHtml} />}
         <p class="font-semibold" set:html={closingSignature} />
       </section>
-    )
-  }
+    )}
 </section>

@@ -39,8 +39,7 @@ const getLocalizedPath = (targetLang: keyof typeof languages) => translatePath(n
     class="hidden absolute right-0 top-full mt-2 w-40 rounded-lg shadow-lg bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 z-50"
     data-language-menu
   >
-    {
-      Object.entries(languages).map(([lang, label]) => {
+    {Object.entries(languages).map(([lang, label]) => {
         const typedLang = lang as keyof typeof languages;
 
         return (
@@ -62,157 +61,156 @@ const getLocalizedPath = (targetLang: keyof typeof languages) => translatePath(n
             </span>
           </a>
         );
-      })
-    }
+      })}
   </div>
 </language-selector>
 
 <script type="module" is:inline>
-  class LanguageSelectorElement extends HTMLElement {
-    static instances = new Set();
-    static documentListenersAttached = false;
+class LanguageSelectorElement extends HTMLElement {
+  static instances = new Set();
+  static documentListenersAttached = false;
 
-    static handleGlobalClick(event) {
-      LanguageSelectorElement.instances.forEach((instance) => instance.handleDocumentClick(event));
+  static handleGlobalClick(event) {
+    LanguageSelectorElement.instances.forEach((instance) => instance.handleDocumentClick(event));
+  }
+
+  static handleGlobalKeydown(event) {
+    if (event.key !== 'Escape') {
+      return;
     }
 
-    static handleGlobalKeydown(event) {
-      if (event.key !== 'Escape') {
-        return;
-      }
+    LanguageSelectorElement.instances.forEach((instance) => instance.handleEscape());
+  }
 
-      LanguageSelectorElement.instances.forEach((instance) => instance.handleEscape());
+  static attachDocumentListeners() {
+    if (LanguageSelectorElement.documentListenersAttached) {
+      return;
     }
 
-    static attachDocumentListeners() {
-      if (LanguageSelectorElement.documentListenersAttached) {
-        return;
-      }
+    document.addEventListener('click', LanguageSelectorElement.handleGlobalClick);
+    document.addEventListener('keydown', LanguageSelectorElement.handleGlobalKeydown);
+    LanguageSelectorElement.documentListenersAttached = true;
+  }
 
-      document.addEventListener('click', LanguageSelectorElement.handleGlobalClick);
-      document.addEventListener('keydown', LanguageSelectorElement.handleGlobalKeydown);
-      LanguageSelectorElement.documentListenersAttached = true;
+  static detachDocumentListenersIfUnused() {
+    if (!LanguageSelectorElement.documentListenersAttached || LanguageSelectorElement.instances.size > 0) {
+      return;
     }
 
-    static detachDocumentListenersIfUnused() {
-      if (!LanguageSelectorElement.documentListenersAttached || LanguageSelectorElement.instances.size > 0) {
-        return;
-      }
+    document.removeEventListener('click', LanguageSelectorElement.handleGlobalClick);
+    document.removeEventListener('keydown', LanguageSelectorElement.handleGlobalKeydown);
+    LanguageSelectorElement.documentListenersAttached = false;
+  }
 
-      document.removeEventListener('click', LanguageSelectorElement.handleGlobalClick);
-      document.removeEventListener('keydown', LanguageSelectorElement.handleGlobalKeydown);
-      LanguageSelectorElement.documentListenersAttached = false;
+  button;
+  menu;
+  initialized = false;
+
+  handleButtonClick = (event) => {
+    event.stopPropagation();
+    this.toggleMenu();
+  };
+
+  connectedCallback() {
+    if (this.initialized) {
+      return;
     }
 
-    button;
-    menu;
-    initialized = false;
+    this.button = this.querySelector('[data-toggle-language]');
+    this.menu = this.querySelector('[data-language-menu]');
 
-    handleButtonClick = (event) => {
-      event.stopPropagation();
-      this.toggleMenu();
-    };
-
-    connectedCallback() {
-      if (this.initialized) {
-        return;
-      }
-
-      this.button = this.querySelector('[data-toggle-language]');
-      this.menu = this.querySelector('[data-language-menu]');
-
-      if (!this.button || !this.menu) {
-        return;
-      }
-
-      this.button.addEventListener('click', this.handleButtonClick);
-      this.button.setAttribute('aria-haspopup', 'true');
-      this.button.setAttribute('aria-expanded', this.isOpen() ? 'true' : 'false');
-
-      LanguageSelectorElement.instances.add(this);
-      LanguageSelectorElement.attachDocumentListeners();
-      this.initialized = true;
+    if (!this.button || !this.menu) {
+      return;
     }
 
-    disconnectedCallback() {
-      if (!this.initialized) {
-        return;
-      }
+    this.button.addEventListener('click', this.handleButtonClick);
+    this.button.setAttribute('aria-haspopup', 'true');
+    this.button.setAttribute('aria-expanded', this.isOpen() ? 'true' : 'false');
 
-      if (this.button) {
-        this.button.removeEventListener('click', this.handleButtonClick);
-      }
+    LanguageSelectorElement.instances.add(this);
+    LanguageSelectorElement.attachDocumentListeners();
+    this.initialized = true;
+  }
 
-      LanguageSelectorElement.instances.delete(this);
-      LanguageSelectorElement.detachDocumentListenersIfUnused();
-
-      this.button = undefined;
-      this.menu = undefined;
-      this.initialized = false;
+  disconnectedCallback() {
+    if (!this.initialized) {
+      return;
     }
 
-    handleDocumentClick(event) {
-      if (!this.isConnected || !this.menu) {
-        return;
-      }
+    if (this.button) {
+      this.button.removeEventListener('click', this.handleButtonClick);
+    }
 
-      const target = event.target;
-      if (!(target instanceof Node)) {
-        return;
-      }
+    LanguageSelectorElement.instances.delete(this);
+    LanguageSelectorElement.detachDocumentListenersIfUnused();
 
-      if (this.contains(target)) {
-        return;
-      }
+    this.button = undefined;
+    this.menu = undefined;
+    this.initialized = false;
+  }
 
+  handleDocumentClick(event) {
+    if (!this.isConnected || !this.menu) {
+      return;
+    }
+
+    const target = event.target;
+    if (!(target instanceof Node)) {
+      return;
+    }
+
+    if (this.contains(target)) {
+      return;
+    }
+
+    this.closeMenu();
+  }
+
+  handleEscape() {
+    if (!this.isOpen()) {
+      return;
+    }
+
+    this.closeMenu(true);
+  }
+
+  isOpen() {
+    return Boolean(this.menu && !this.menu.classList.contains('hidden'));
+  }
+
+  toggleMenu() {
+    if (this.isOpen()) {
       this.closeMenu();
+      return;
     }
 
-    handleEscape() {
-      if (!this.isOpen()) {
-        return;
-      }
-
-      this.closeMenu(true);
-    }
-
-    isOpen() {
-      return Boolean(this.menu && !this.menu.classList.contains('hidden'));
-    }
-
-    toggleMenu() {
-      if (this.isOpen()) {
-        this.closeMenu();
-        return;
-      }
-
-      this.openMenu();
-    }
-
-    openMenu() {
-      if (!this.menu || !this.button) {
-        return;
-      }
-
-      this.menu.classList.remove('hidden');
-      this.button.setAttribute('aria-expanded', 'true');
-    }
-
-    closeMenu(focusButton = false) {
-      if (!this.menu || !this.button || !this.isOpen()) {
-        return;
-      }
-
-      this.menu.classList.add('hidden');
-      this.button.setAttribute('aria-expanded', 'false');
-
-      if (focusButton) {
-        this.button.focus();
-      }
-    }
+    this.openMenu();
   }
 
-  if (!customElements.get('language-selector')) {
-    customElements.define('language-selector', LanguageSelectorElement);
+  openMenu() {
+    if (!this.menu || !this.button) {
+      return;
+    }
+
+    this.menu.classList.remove('hidden');
+    this.button.setAttribute('aria-expanded', 'true');
   }
+
+  closeMenu(focusButton = false) {
+    if (!this.menu || !this.button || !this.isOpen()) {
+      return;
+    }
+
+    this.menu.classList.add('hidden');
+    this.button.setAttribute('aria-expanded', 'false');
+
+    if (focusButton) {
+      this.button.focus();
+    }
+  }
+}
+
+if (!customElements.get('language-selector')) {
+  customElements.define('language-selector', LanguageSelectorElement);
+}
 </script>

@@ -16,28 +16,27 @@ const fallbackUrl = translatePath('/maturity-assessment');
         data-form-id="b3290f73-2d7a-4052-8637-5158d38713e8"
         data-portal-id="147601161"
         data-maturity-field="maturity_assessment"
-      >
-      </div>
+      ></div>
     </div>
   </div>
 </section>
 
 <script is:inline src="https://js-eu1.hsforms.net/forms/embed/147601161.js" defer></script>
 <script is:inline define:vars={{ fallbackUrl }}>
-  const hasMaturityAssessmentParam = () => {
-    try {
-      const urlParams = new URLSearchParams(window.location.search);
-      const maturityAssessment = urlParams.get('maturity_assessment');
-      if (maturityAssessment && maturityAssessment.length > 0) {
-        return true;
-      }
-      return false;
-    } catch {
-      return false;
+const hasMaturityAssessmentParam = () => {
+  try {
+    const urlParams = new URLSearchParams(window.location.search);
+    const maturityAssessment = urlParams.get('maturity_assessment');
+    if (maturityAssessment && maturityAssessment.length > 0) {
+      return true;
     }
-  };
-
-  if (!hasMaturityAssessmentParam()) {
-    window.location.replace(fallbackUrl);
+    return false;
+  } catch {
+    return false;
   }
+};
+
+if (!hasMaturityAssessmentParam()) {
+  window.location.replace(fallbackUrl);
+}
 </script>

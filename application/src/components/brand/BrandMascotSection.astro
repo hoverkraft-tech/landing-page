@@ -1,8 +1,8 @@
 ---
 import { Image } from 'astro:assets';
-import { getAsset } from '~/utils/permalinks';
-import { getBrandAssetMetadata, getBrandDownloadLabel } from '~/utils/brand-assets';
 import type { BrandLocale, MascotAsset } from '~/data/brand/tokens';
+import { getBrandAssetMetadata, getBrandDownloadLabel } from '~/utils/brand-assets';
+import { getAsset } from '~/utils/permalinks';
 
 interface Props {
   lang: BrandLocale;
@@ -70,8 +70,7 @@ const mascotDownloads = mascotFormats.map(([format, path]) => {
         decoding="async"
         class="w-full max-w-sm h-auto"
       />
-      {
-        mascotDownloads.length ? (
+      {mascotDownloads.length ? (
           <div class="w-full text-sm text-gray-600 dark:text-gray-400">
             <p>
               <strong>{formatsLabel}</strong>
@@ -92,20 +91,17 @@ const mascotDownloads = mascotFormats.map(([format, path]) => {
               ))}
             </ul>
           </div>
-        ) : null
-      }
+        ) : null}
     </div>
     <div class="space-y-4">
       {localizedName ? <h3 class="text-2xl font-semibold text-gray-900 dark:text-white">{localizedName}</h3> : null}
       <p class="text-gray-700 dark:text-gray-300">{description}</p>
-      {
-        localizedUsage ? (
+      {localizedUsage ? (
           <div class="bg-gray-50 dark:bg-gray-900/70 border border-gray-200 dark:border-gray-700 rounded-lg p-6">
             <h4 class="text-sm font-semibold uppercase tracking-wide text-gray-600 dark:text-gray-400">{usageLabel}</h4>
             <p class="mt-2 text-gray-700 dark:text-gray-300">{localizedUsage}</p>
           </div>
-        ) : null
-      }
+        ) : null}
     </div>
   </div>
 </div>

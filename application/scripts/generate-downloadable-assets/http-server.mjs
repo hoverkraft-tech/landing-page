@@ -1,5 +1,5 @@
-import http from 'node:http';
 import fs from 'node:fs/promises';
+import http from 'node:http';
 import path from 'node:path';
 import { createFileStream } from './fs-utils.mjs';
 
@@ -61,9 +61,7 @@ async function resolveFile(rootDir, requestPath) {
       if (stats.isFile()) {
         return normalizedCandidate;
       }
-    } catch {
-      continue;
-    }
+    } catch {}
   }
 
   return null;

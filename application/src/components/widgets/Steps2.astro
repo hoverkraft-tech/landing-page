@@ -1,8 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import Headline from '~/components/ui/Headline.astro';
 import Button from '~/components/ui/Button.astro';
+import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { Steps as Props } from '~/types';
 
 const {
@@ -17,7 +17,7 @@ const {
   isDark = false,
   classes = {},
   bg = await Astro.slots.render('bg'),
-} = Astro.props;
+} = Astro.props as Props;
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-6xl mx-auto ${classes?.container ?? ''}`} bg={bg}>
@@ -36,21 +36,18 @@ const {
       />
 
       <div class="w-full text-center md:text-left rtl:md:text-right">
-        {
-          typeof callToAction === 'string' ? (
+        {typeof callToAction === 'string' ? (
             <Fragment set:html={callToAction} />
           ) : (
             callToAction &&
             callToAction.text &&
             callToAction.href && <Button variant="primary" {...callToAction} class="mb-12 w-auto" />
-          )
-        }
+          )}
       </div>
     </div>
     <div class="w-full lg:w-1/2 px-0">
       <ul class="space-y-10">
-        {
-          items && items.length
+        {items && items.length
             ? items.map(({ title: title2, description, icon }, index) => (
                 <li class="flex md:-mx-4">
                   <div class="pr-4 sm:pl-4 rtl:pr-0 rtl:pl-4 rtl:sm:pl-0 rtl:sm:pr-4">
@@ -64,8 +61,7 @@ const {
                   </div>
                 </li>
               ))
-            : ''
-        }
+            : ''}
       </ul>
     </div>
   </div>

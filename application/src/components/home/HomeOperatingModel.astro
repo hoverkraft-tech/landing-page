@@ -1,8 +1,8 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Button from '~/components/ui/Button.astro';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { HomeAction, HomeOperatingStep, HomeSectionHeader } from './types';
 
 export interface Props {
@@ -26,8 +26,7 @@ const { header, steps, primaryAction, secondaryAction } = Astro.props;
   />
 
   <div class="grid gap-4 md:grid-cols-2 lg:grid-cols-5">
-    {
-      steps.map((step) => (
+    {steps.map((step) => (
         <article class="rounded-2xl border border-gray-200 bg-white p-5 dark:border-white/10 dark:bg-white/4">
           <div class="mb-4 flex items-center gap-3">
             <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-secondary/10 text-secondary">
@@ -45,8 +44,7 @@ const { header, steps, primaryAction, secondaryAction } = Astro.props;
             ))}
           </ul>
         </article>
-      ))
-    }
+      ))}
   </div>
 
   <div class="mt-8 flex flex-col justify-center gap-3 sm:flex-row">

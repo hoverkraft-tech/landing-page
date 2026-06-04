@@ -24,7 +24,7 @@ npm run preview --prefix application
 
 ## Development Workflow
 
-- `make lint` – Run Prettier and Astro checks (accepts globs: `make lint src/pages`)
+- `make lint` – Run Biome and Astro checks (accepts globs: `make lint src/pages`)
 - `make lint-fix` – Apply automated fixes via npm audit + Dockerized linter
 - `make build` – Run `astro check` and produce a production build
 - `make ci` – Run prepare, lint, and build sequentially

@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { HomeSectionHeader } from './types';
 
 interface HomeFaqItem {
@@ -28,8 +28,7 @@ const { header, items } = Astro.props;
   />
 
   <div class="mx-auto grid max-w-4xl gap-4">
-    {
-      items.map((item) => (
+    {items.map((item) => (
         <details class="group overflow-hidden rounded-2xl border border-gray-200 bg-white px-6 py-5 dark:border-white/10 dark:bg-white/4">
           <summary class="flex cursor-pointer list-none items-start justify-between gap-4 text-left focus:outline-hidden focus-visible:ring-3 focus-visible:ring-primary/40">
             <span class="text-lg font-semibold text-heading">{item.question}</span>
@@ -40,7 +39,6 @@ const { header, items } = Astro.props;
           </summary>
           <p class="mt-4 pr-12 text-sm leading-relaxed text-muted md:text-base">{item.answer}</p>
         </details>
-      ))
-    }
+      ))}
   </div>
 </WidgetWrapper>

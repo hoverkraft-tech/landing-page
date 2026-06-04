@@ -1,10 +1,9 @@
 ---
-import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
+import type { GetStaticPaths, InferGetStaticPropsType } from 'astro';
 
 import TrainingDetailView from '~/components/trainings/TrainingDetailView.astro';
-
-import { getStaticPathsTrainingDetail } from '~/utils/trainings';
 import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+import { getStaticPathsTrainingDetail } from '~/utils/trainings';
 
 export const prerender = true;
 

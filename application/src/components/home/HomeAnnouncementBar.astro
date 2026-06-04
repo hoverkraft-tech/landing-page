@@ -9,8 +9,7 @@ export interface Props {
 const { text, href } = Astro.props;
 ---
 
-{
-  text && (
+{text && (
     <a
       href={href}
       class="group block bg-secondary text-white focus:outline-hidden focus:ring-3 focus:ring-primary focus:ring-offset-2"
@@ -25,5 +24,4 @@ const { text, href } = Astro.props;
         />
       </div>
     </a>
-  )
-}
+  )}

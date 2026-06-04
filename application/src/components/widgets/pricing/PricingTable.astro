@@ -1,10 +1,10 @@
 ---
+import type { Price } from '~/types';
 import PricingCTA from './PricingCTA.astro';
 import PricingHeader from './PricingHeader.astro';
 import PricingItems from './PricingItems.astro';
 import PricingPriceRow from './PricingPriceRow.astro';
 import PricingRibbon from './PricingRibbon.astro';
-import type { Price } from '~/types';
 
 const { prices = [] } = Astro.props as { prices?: Price[] };
 ---
@@ -13,8 +13,7 @@ const { prices = [] } = Astro.props as { prices?: Price[] };
   <div
     class="grid grid-cols-1 gap-4 dark:text-white sm:grid-cols-2 lg:grid-cols-none lg:grid-flow-col lg:auto-cols-fr lg:grid-rows-[auto_auto_auto_auto] lg:gap-x-4 lg:gap-y-0"
   >
-    {
-      prices.map((plan) => {
+    {prices.map((plan) => {
         const {
           title,
           subtitle,
@@ -72,7 +71,6 @@ const { prices = [] } = Astro.props as { prices?: Price[] };
             </div>
           </div>
         );
-      })
-    }
+      })}
   </div>
 </div>

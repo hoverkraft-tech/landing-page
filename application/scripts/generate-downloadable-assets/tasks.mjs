@@ -1,10 +1,10 @@
 import path from 'node:path';
+import { getLocalizationConfig } from './config.mjs';
 import { copyIfExists, ensureDir, fileExists } from './fs-utils.mjs';
 import { createLogoPack } from './logo-pack.mjs';
-import { generatePdf } from './pdf.mjs';
-import { getLocalizationConfig } from './config.mjs';
-import { resolveBrandRoutes } from './routes.mjs';
 import { distDownloadsDir, publicDownloadsDir } from './paths.mjs';
+import { generatePdf } from './pdf.mjs';
+import { resolveBrandRoutes } from './routes.mjs';
 
 async function prepare() {
   await ensureDir(publicDownloadsDir);

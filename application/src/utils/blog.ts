@@ -1,10 +1,10 @@
-import type { PaginateFunction } from 'astro';
-import { getCollection, render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
-import type { Post, Taxonomy } from '~/types';
+import { getCollection, render } from 'astro:content';
 import { APP_BLOG } from 'astrowind:config';
-import { cleanSlug, trimSlash, BLOG_BASE, POST_PERMALINK_PATTERN, CATEGORY_BASE, TAG_BASE } from './permalinks';
+import type { PaginateFunction } from 'astro';
 import { defaultLang, showDefaultLang } from '~/i18n/ui';
+import type { Post, Taxonomy } from '~/types';
+import { BLOG_BASE, CATEGORY_BASE, cleanSlug, POST_PERMALINK_PATTERN, TAG_BASE, trimSlash } from './permalinks';
 
 const generatePermalink = async ({
   id,
@@ -117,7 +117,7 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
   };
 };
 
-const load = async function (): Promise<Array<Post>> {
+const load = async (): Promise<Array<Post>> => {
   const posts = await getCollection('post');
   const normalizedPosts = posts.map(async (post) => await getNormalizedPost(post));
 
@@ -168,10 +168,8 @@ export const findPostsBySlugs = async (
 
   const posts = await fetchPosts({ lang });
 
-  return slugs.reduce(function (r: Array<Post>, slug: string) {
-    posts.some(function (post: Post) {
-      return slug === post.slug && r.push(post);
-    });
+  return slugs.reduce((r: Array<Post>, slug: string) => {
+    posts.some((post: Post) => slug === post.slug && r.push(post));
     return r;
   }, []);
 };
@@ -182,10 +180,8 @@ export const findPostsByIds = async (ids: Array<string>, { lang }: { lang?: stri
 
   const posts = await fetchPosts({ lang });
 
-  return ids.reduce(function (r: Array<Post>, id: string) {
-    posts.some(function (post: Post) {
-      return id === post.id && r.push(post);
-    });
+  return ids.reduce((r: Array<Post>, id: string) => {
+    posts.some((post: Post) => id === post.id && r.push(post));
     return r;
   }, []);
 };

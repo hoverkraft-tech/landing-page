@@ -1,8 +1,8 @@
 ---
+import Button from '~/components/ui/Button.astro';
+import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { CallToAction, Widget } from '~/types';
-import Headline from '~/components/ui/Headline.astro';
-import Button from '~/components/ui/Button.astro';
 
 interface Props extends Widget {
   title?: string;
@@ -39,8 +39,7 @@ const {
         subtitle: 'text-xl text-muted',
       }}
     />
-    {
-      actions && (
+    {actions && (
         <div class="max-w-xs sm:max-w-md m-auto flex flex-nowrap flex-col sm:flex-row sm:justify-center gap-4 mt-6">
           {Array.isArray(actions) ? (
             actions.map((action) => (
@@ -52,7 +51,6 @@ const {
             <Fragment set:html={actions} />
           )}
         </div>
-      )
-    }
+      )}
   </div>
 </WidgetWrapper>

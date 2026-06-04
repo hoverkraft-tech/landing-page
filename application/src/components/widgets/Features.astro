@@ -1,8 +1,7 @@
 ---
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import ItemGrid from '~/components/ui/ItemGrid.astro';
 import Headline from '~/components/ui/Headline.astro';
-import type { Features as Props } from '~/types';
+import ItemGrid from '~/components/ui/ItemGrid.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 
 const {
   title = await Astro.slots.render('title'),
@@ -18,10 +17,13 @@ const {
   classes = {},
   bg = await Astro.slots.render('bg'),
 } = Astro.props;
+
+const headlineClasses = classes?.headline ?? {};
+const itemClasses = classes?.items ?? {};
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
-  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
+  <Headline title={title} subtitle={subtitle} tagline={tagline} classes={headlineClasses} />
   <ItemGrid
     items={items}
     columns={columns}
@@ -30,7 +32,7 @@ const {
       container: '',
       title: 'md:text-[1.3rem]',
       icon: 'text-white bg-primary rounded-full w-10 h-10 p-2 md:w-12 md:h-12 md:p-3 mr-4 rtl:ml-4 rtl:mr-0',
-      ...((classes?.items as Record<string, never>) ?? {}),
+      ...itemClasses,
     }}
   />
 </WidgetWrapper>

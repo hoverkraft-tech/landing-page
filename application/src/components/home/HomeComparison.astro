@@ -1,7 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Headline from '~/components/ui/Headline.astro';
+import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import type { HomeComparisonColumn, HomeSectionHeader } from './types';
 
 export interface Props {
@@ -24,8 +24,7 @@ const { header, columns } = Astro.props;
     />
 
     <div class="grid gap-4 md:grid-cols-2">
-      {
-        columns.map((column) => (
+      {columns.map((column) => (
           <article
             class:list={[
               'rounded-2xl border p-6',
@@ -55,8 +54,7 @@ const { header, columns } = Astro.props;
               ))}
             </ul>
           </article>
-        ))
-      }
+        ))}
     </div>
   </div>
 </WidgetWrapper>

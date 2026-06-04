@@ -8,8 +8,7 @@ const { callToAction, hasRibbon = false } = Astro.props as {
 };
 ---
 
-{
-  callToAction && (
+{callToAction && (
     <div class="flex justify-center">
       {typeof callToAction === 'string' ? (
         <Fragment set:html={callToAction} />
@@ -17,5 +16,4 @@ const { callToAction, hasRibbon = false } = Astro.props as {
         callToAction && callToAction.href && <Button {...(hasRibbon ? { variant: 'primary' } : {})} {...callToAction} />
       )}
     </div>
-  )
-}
+  )}

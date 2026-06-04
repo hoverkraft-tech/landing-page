@@ -1,17 +1,17 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import HomeActivation from '~/components/home/HomeActivation.astro';
 import HomeAnnouncementBar from '~/components/home/HomeAnnouncementBar.astro';
-import HomeHero from '~/components/home/HomeHero.astro';
 import HomeAudienceTabs from '~/components/home/HomeAudienceTabs.astro';
-import HomePlatformModel from '~/components/home/HomePlatformModel.astro';
 import HomeComparison from '~/components/home/HomeComparison.astro';
-import HomeOperatingModel from '~/components/home/HomeOperatingModel.astro';
 import HomeCredibility from '~/components/home/HomeCredibility.astro';
 import HomeFaq from '~/components/home/HomeFaq.astro';
-import HomeActivation from '~/components/home/HomeActivation.astro';
+import HomeHero from '~/components/home/HomeHero.astro';
+import HomeOperatingModel from '~/components/home/HomeOperatingModel.astro';
+import HomePlatformModel from '~/components/home/HomePlatformModel.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 import { getHomepageContent } from '~/data/homepage';
 import type { SupportedLanguage } from '~/i18n/ui';
+import Layout from '~/layouts/PageLayout.astro';
 
 export interface Props {
   lang: SupportedLanguage;
