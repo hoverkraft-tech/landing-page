@@ -1,0 +1,125 @@
+---
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const metadata = {
+  title: 'HoverKraft demo',
+  description:
+    'Explore a guided walkthrough of OpenKraft, HoverKraft connectors, and the delivery proof points behind the platform.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Demo"
+    actions={[
+      { variant: 'primary', text: 'Book a demo', href: `${translatePath('/contact')}#booking` },
+      { text: 'Explore OpenKraft', href: translatePath('/open-kraft') },
+    ]}
+    image={{
+      src: '~/assets/images/pages/shared/open-source.webp',
+      alt: 'Guided HoverKraft demo',
+    }}
+  >
+    <Fragment slot="title">See the HoverKraft platform in a realistic operating flow</Fragment>
+
+    <Fragment slot="subtitle">
+      This guided walkthrough follows the full platform chain: portals, connectors, DORA/SPACE dashboards, and the
+      operating rituals around them. The goal is to make the architecture choices, operational glue, and proof points
+      tangible for your own context.
+    </Fragment>
+  </Hero>
+
+  <Content
+    title="What we show"
+    subtitle="A demo designed to connect operating reality, tooling, and delivery evidence."
+    items={[
+      {
+        title: 'Platform walkthrough',
+        description: 'A guided tour of the portal, environments, and building blocks that keep workflows understandable.',
+      },
+      {
+        title: 'Connectors in action',
+        description: 'A concrete view of CI/CD, IAM, observability, and promotion flows working together.',
+      },
+      {
+        title: 'Dashboards and proof',
+        description: 'A review of DORA/SPACE indicators and the operating rituals that make them useful.',
+      },
+    ]}
+  />
+
+  <Steps
+    title="How the demo runs"
+    items={[
+      {
+        title: '1. Fast framing',
+        description: 'We start from your context to choose the most relevant flows and proof points to show.',
+        icon: 'tabler:messages',
+      },
+      {
+        title: '2. Guided walkthrough',
+        description: 'We walk the delivery chain and the connector glue that supports it end to end.',
+        icon: 'tabler:route-2',
+      },
+      {
+        title: '3. Focused Q&A',
+        description: 'We connect the demo back to your constraints around security, governance, and delivery.',
+        icon: 'tabler:help-hexagon',
+      },
+      {
+        title: '4. Next-step recommendation',
+        description: 'You leave with a clear suggestion on the most relevant HoverKraft entry point.',
+        icon: 'tabler:arrow-forward-up',
+      },
+    ]}
+  />
+
+  <Features2
+    title="What you get from it"
+    subtitle="Useful when you need to qualify a platform initiative without staying at the slideware level."
+    columns={2}
+    items={[
+      {
+        title: 'Concrete vision',
+        description: 'A clear picture of the target platform, its governance, and the pieces that make it operable.',
+        icon: 'tabler:binary-tree-2',
+      },
+      {
+        title: 'Shareable proof points',
+        description: 'Examples of metrics, workflows, and artifacts you can reuse in internal conversations.',
+        icon: 'tabler:presentation-analytics',
+      },
+      {
+        title: 'Context-aware exchange',
+        description: 'A discussion grounded in your real constraints rather than a generic product tour.',
+        icon: 'tabler:adjustments-horizontal',
+      },
+      {
+        title: 'Clear trajectory',
+        description: 'A recommendation on whether audit, autonomy, restart, or PEaaS is the right next step.',
+        icon: 'tabler:compass',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Schedule a demo', href: `${translatePath('/contact')}#booking` },
+      { text: 'View offers', href: translatePath('/offers') },
+    ]}
+  >
+    <Fragment slot="title">Need a demo that is tailored to your context?</Fragment>
+    <Fragment slot="subtitle"
+      >Share your current priorities and we will organize a walkthrough centered on the proof points that matter for your teams.</Fragment
+    >
+  </CallToAction>
+</Layout>

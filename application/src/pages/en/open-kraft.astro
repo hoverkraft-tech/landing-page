@@ -51,8 +51,9 @@ const metadata = {
   />
 
   <Content
+    id="connectors"
     isReversed
-    title="What you will find in OpenKraft"
+    title="Available connectors"
     items={[
       {
         title: 'CI/CD connectors',
@@ -71,6 +72,55 @@ const metadata = {
       src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
       alt: 'HoverKraft open source resources',
     }}
+  />
+
+  <Content
+    id="templates"
+    title="Templates and blueprints"
+    subtitle="Reusable starting points to accelerate adoption without rebuilding the basics."
+    items={[
+      {
+        title: 'GitOps templates',
+        description: 'Repository structures, pipelines, and promotion flows that give teams a strong starting point.',
+      },
+      {
+        title: 'Portal blueprints',
+        description: 'Backstage and Portainer patterns to expose catalogs, runbooks, and internal workflows.',
+      },
+      {
+        title: 'Ready-to-adapt playbooks',
+        description: 'Operations, security, and incident guides shaped by concrete delivery constraints.',
+      },
+    ]}
+  />
+
+  <Features2
+    id="dashboards"
+    title="DORA / SPACE dashboards"
+    subtitle="Pre-configured dashboards to make flow, reliability, and feedback loops visible."
+    columns={2}
+    items={[
+      {
+        title: 'Delivery flow',
+        description: 'Lead time, deployment frequency, and visibility into bottlenecks across the chain.',
+        icon: 'tabler:chart-histogram',
+      },
+      {
+        title: 'Operational reliability',
+        description: 'MTTR, incident exposure, and recurring failure patterns surfaced for review.',
+        icon: 'tabler:lifebuoy',
+      },
+      {
+        title: 'Developer experience',
+        description: 'SPACE indicators to track cognitive load, feedback quality, and team satisfaction.',
+        icon: 'tabler:mood-smile',
+      },
+      {
+        title: 'Shared operating reviews',
+        description: 'Executive exports and review rituals for sponsors, platform leads, and product managers.',
+        icon: 'tabler:presentation-analytics',
+      },
+    ]}
   />
 
   <Features2
@@ -133,6 +183,7 @@ const metadata = {
 
   <CallToAction
     actions={[
+      { text: 'Request a demo', href: '/en/demo' },
       {
         variant: 'primary',
         text: 'Explore GitHub',

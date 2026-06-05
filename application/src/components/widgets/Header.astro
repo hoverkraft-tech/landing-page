@@ -122,25 +122,29 @@ const externalLinkAttrs = (href?: string) =>
                       featured ? 'md:w-[42rem]' : 'md:w-[24rem]',
                     ]}
                   >
-                    <div class="md:overflow-hidden md:rounded-2xl md:border md:border-gray-200 md:bg-white/95 md:shadow-xl md:backdrop-blur-md md:dark:border-white/10 md:dark:bg-dark/95">
-                      <div class:list={['md:grid md:gap-0', featured ? 'md:grid-cols-[16rem_1fr]' : '']}>
+                    <div class="md:overflow-hidden md:rounded-2xl md:border md:border-gray-200 md:bg-white/95 md:shadow-xl md:backdrop-blur-md md:dark:border-white/12 md:dark:bg-slate-950/95 md:dark:shadow-[0_24px_80px_rgba(0,0,0,0.55)]">
+                      <div class:list={['md:grid md:gap-0', featured ? 'md:grid-cols-[16rem_1fr] md:dark:divide-x md:dark:divide-white/8' : '']}>
                         {featured && (
                           <a
-                            class="group hidden md:flex md:flex-col md:justify-between md:gap-4 md:bg-gradient-to-br md:from-primary/10 md:to-primary/5 md:p-5 md:dark:from-primary/15 md:dark:to-primary/5"
+                            class="group hidden md:flex md:flex-col md:justify-between md:gap-4 md:bg-gradient-to-br md:from-primary/10 md:to-primary/5 md:p-5 md:dark:from-white/6 md:dark:via-primary/12 md:dark:to-transparent"
                             href={featured.href}
                             {...externalLinkAttrs(featured.href)}
                           >
                             <div>
-                              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white">
+                              <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white md:dark:bg-primary/18 md:dark:text-primary md:dark:ring-1 md:dark:ring-primary/25">
                                 <Icon name={featured.icon ?? 'tabler:star'} class="h-5 w-5" aria-hidden="true" />
                               </span>
                               <p class="mt-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-primary">
                                 {featured.label}
                               </p>
-                              <p class="mt-1 text-base font-bold leading-snug text-heading">{featured.title}</p>
-                              <p class="mt-1.5 text-sm leading-relaxed text-muted">{featured.description}</p>
+                              <p class="mt-1 text-base font-bold leading-snug text-heading md:dark:text-white">
+                                {featured.title}
+                              </p>
+                              <p class="mt-1.5 text-sm leading-relaxed text-muted md:dark:text-gray-300/85">
+                                {featured.description}
+                              </p>
                             </div>
-                            <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary">
+                            <span class="inline-flex items-center gap-1 text-sm font-semibold text-primary md:dark:text-primary/90">
                               {featured.cta}
                               <Icon
                                 name="tabler:arrow-right"
@@ -150,28 +154,30 @@ const externalLinkAttrs = (href?: string) =>
                             </span>
                           </a>
                         )}
-                        <ul class="md:grid md:gap-1 md:p-3">
+                        <ul class="md:grid md:gap-1 md:p-3 md:dark:bg-slate-950/70">
                           {links.map(({ text: text2, href: href2, description, icon }) => (
                             <li>
                               <a
                                 class:list={[
-                                  'group flex items-start gap-3 rounded-xl py-2 px-3 transition-colors md:hover:bg-gray-50 md:dark:hover:bg-white/5',
-                                  { 'aw-link-active': normalizePath(href2 ?? '') === currentPath },
+                                  'group flex items-start gap-3 rounded-xl py-2 px-3 transition-colors md:hover:bg-gray-50 md:dark:hover:bg-white/8',
+                                  normalizePath(href2 ?? '') === currentPath
+                                    ? 'bg-primary/6 md:dark:bg-primary/12 md:dark:ring-1 md:dark:ring-primary/18'
+                                    : '',
                                 ]}
                                 href={href2}
                                 {...externalLinkAttrs(href2)}
                               >
                                 {icon && (
-                                  <span class="hidden md:inline-flex md:mt-0.5 md:h-8 md:w-8 md:shrink-0 md:items-center md:justify-center md:rounded-lg md:bg-primary/10 md:text-primary md:transition-colors md:group-hover:bg-primary md:group-hover:text-white">
+                                  <span class="hidden md:inline-flex md:mt-0.5 md:h-8 md:w-8 md:shrink-0 md:items-center md:justify-center md:rounded-lg md:bg-primary/10 md:text-primary md:transition-colors md:group-hover:bg-primary md:group-hover:text-white md:dark:bg-white/6 md:dark:text-primary md:dark:group-hover:bg-primary md:dark:group-hover:text-white">
                                     <Icon name={icon} class="h-4 w-4" aria-hidden="true" />
                                   </span>
                                 )}
                                 <span class="md:flex md:flex-col">
-                                  <span class="text-sm font-semibold text-heading group-hover:text-primary dark:text-white">
+                                  <span class="text-sm font-semibold text-heading group-hover:text-primary dark:text-white md:dark:group-hover:text-primary/90">
                                     {text2}
                                   </span>
                                   {description && (
-                                    <span class="hidden md:block md:text-xs md:leading-relaxed md:text-muted">
+                                    <span class="hidden md:block md:text-xs md:leading-relaxed md:text-muted md:dark:text-gray-300/75">
                                       {description}
                                     </span>
                                   )}

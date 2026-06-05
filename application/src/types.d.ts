@@ -192,6 +192,7 @@ export interface Item {
 }
 
 export interface Price {
+  id?: string;
   title?: string;
   subtitle?: string;
   description?: string;
@@ -330,4 +331,4 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
   callToAction?: CallToAction;
 }
 
-export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+export interface Contact extends Omit<Headline, 'classes'>, Form, Widget { }

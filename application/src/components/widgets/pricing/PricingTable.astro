@@ -15,6 +15,7 @@ const { prices = [] } = Astro.props as { prices?: Price[] };
   >
     {prices.map((plan) => {
         const {
+          id,
           title,
           subtitle,
           price,
@@ -36,8 +37,10 @@ const { prices = [] } = Astro.props as { prices?: Price[] };
         return (
           <div class="relative mx-auto flex w-full max-w-sm flex-col gap-4 rounded-lg border border-gray-200 bg-white px-5 py-5 text-center shadow backdrop-blur dark:border-gray-700 dark:bg-slate-900 lg:contents">
             <div
+              {...id ? { id } : {}}
               class:list={[
                 desktopCellBase,
+                'scroll-mt-[88px]',
                 'relative flex flex-col items-center justify-start',
                 'lg:border-x lg:border-t lg:rounded-t-lg',
               ]}
