@@ -81,6 +81,7 @@ const translatePath = useTranslatedPath(lang);
   <!-- Features3 Widget ************** -->
 
   <Features3
+    id="manifesto"
     columns={3}
     isAfterContent
     items={[
@@ -127,6 +128,7 @@ const translatePath = useTranslatedPath(lang);
   <!-- Steps2 Widget ****************** -->
 
   <Steps2
+    id="values"
     title="Nos valeurs"
     subtitle="Elles guident chaque décision, de la roadmap produit aux interactions avec vos équipes."
     items={[
@@ -176,6 +178,7 @@ const translatePath = useTranslatedPath(lang);
   />
 
   <Content
+    id="team"
     isReversed
     title="Une équipe hybride"
     subtitle="Des profils qui ont déjà porté les sujets plateforme, produit et transformation dans des contextes exigeants."
@@ -202,6 +205,7 @@ const translatePath = useTranslatedPath(lang);
 
   <CallToAction
     actions={[
+      { text: 'Voir les temoignages', href: '/testimonials' },
       { variant: 'primary', text: 'Rencontrer un Kraft Builder', href: translatePath('/contact') },
       { text: 'Découvrir la méthode', href: translatePath('/methodology') },
     ]}

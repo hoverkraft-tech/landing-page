@@ -43,7 +43,7 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
     homeHref: translatePath('/'),
     links: [
       {
-        text: t('nav.solutions'),
+        text: t('nav.offers'),
         featured: {
           label: t('nav.featured.label'),
           title: t('nav.featured.solutions.title'),
@@ -66,10 +66,22 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
             icon: 'tabler:users-group',
           },
           {
+            text: t('nav.restart'),
+            href: `${translatePath('/offers')}#restart`,
+            description: t('nav.restart.desc'),
+            icon: 'tabler:refresh',
+          },
+          {
             text: t('nav.peaas'),
             href: `${translatePath('/offers')}#peaas`,
             description: t('nav.peaas.desc'),
             icon: 'tabler:server-cog',
+          },
+          {
+            text: t('nav.trainings'),
+            href: translatePath('/trainings'),
+            description: t('nav.trainings.desc'),
+            icon: 'tabler:school',
           },
         ],
       },
@@ -89,15 +101,27 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
             icon: 'tabler:radar-2',
           },
           {
-            text: t('nav.trainings'),
-            href: translatePath('/trainings'),
-            description: t('nav.trainings.desc'),
-            icon: 'tabler:school',
+            text: t('nav.frameworks'),
+            href: `${translatePath('/methodology')}#frameworks`,
+            description: t('nav.frameworks.desc'),
+            icon: 'tabler:chart-dots-3',
+          },
+          {
+            text: t('nav.principles'),
+            href: `${translatePath('/methodology')}#principles`,
+            description: t('nav.principles.desc'),
+            icon: 'tabler:stack-2',
+          },
+          {
+            text: t('nav.execution-model'),
+            href: `${translatePath('/methodology')}#execution-model`,
+            description: t('nav.execution-model.desc'),
+            icon: 'tabler:route-2',
           },
         ],
       },
       {
-        text: t('nav.open-source'),
+        text: t('nav.open-kraft'),
         featured: {
           label: t('nav.featured.label'),
           title: t('nav.featured.openkraft.title'),
@@ -114,10 +138,22 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
             icon: 'tabler:puzzle',
           },
           {
-            text: t('nav.documentation'),
-            href: 'https://docs.hoverkraft.cloud',
-            description: t('nav.documentation.desc'),
-            icon: 'tabler:book',
+            text: t('nav.connectors'),
+            href: `${translatePath('/open-kraft')}#connectors`,
+            description: t('nav.connectors.desc'),
+            icon: 'tabler:plug-connected',
+          },
+          {
+            text: t('nav.templates'),
+            href: `${translatePath('/open-kraft')}#templates`,
+            description: t('nav.templates.desc'),
+            icon: 'tabler:template',
+          },
+          {
+            text: t('nav.dashboards'),
+            href: `${translatePath('/open-kraft')}#dashboards`,
+            description: t('nav.dashboards.desc'),
+            icon: 'tabler:dashboard',
           },
           {
             text: t('nav.github'),
@@ -137,16 +173,28 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
         text: t('nav.resources'),
         links: [
           {
+            text: t('nav.documentation'),
+            href: 'https://docs.hoverkraft.cloud',
+            description: t('nav.documentation.desc'),
+            icon: 'tabler:book',
+          },
+          {
+            text: t('nav.demo'),
+            href: translatePath('/demo'),
+            description: t('nav.demo.desc'),
+            icon: 'tabler:device-desktop-analytics',
+          },
+          {
+            text: t('nav.testimonials'),
+            href: translatePath('/testimonials'),
+            description: t('nav.testimonials.desc'),
+            icon: 'tabler:message-2-heart',
+          },
+          {
             text: t('nav.blog'),
             href: blogHref,
             description: t('nav.blog.desc'),
             icon: 'tabler:article',
-          },
-          {
-            text: t('nav.latest-insights'),
-            href: blogHref,
-            description: t('nav.latest-insights.desc'),
-            icon: 'tabler:bulb',
           },
           {
             text: t('nav.rss'),
@@ -176,6 +224,24 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
             href: translatePath('/brand-guidelines'),
             description: t('nav.brand.desc'),
             icon: 'tabler:palette',
+          },
+          {
+            text: t('nav.team'),
+            href: `${translatePath('/about')}#team`,
+            description: t('nav.team.desc'),
+            icon: 'tabler:users',
+          },
+          {
+            text: t('nav.manifesto'),
+            href: `${translatePath('/about')}#manifesto`,
+            description: t('nav.manifesto.desc'),
+            icon: 'tabler:book-2',
+          },
+          {
+            text: t('nav.values'),
+            href: `${translatePath('/about')}#values`,
+            description: t('nav.values.desc'),
+            icon: 'tabler:heart-handshake',
           },
         ],
       },
@@ -226,6 +292,8 @@ export function getLocalizedFooterData(url: URL) {
         links: [
           { text: t('nav.offers'), href: translatePath('/offers') },
           { text: t('nav.audit'), href: `${translatePath('/offers')}#audit` },
+          { text: t('nav.guidance'), href: `${translatePath('/offers')}#guidance` },
+          { text: t('nav.restart'), href: `${translatePath('/offers')}#restart` },
           { text: t('nav.trainings'), href: translatePath('/trainings') },
           { text: t('nav.contact'), href: translatePath('/contact') },
         ],
@@ -233,16 +301,19 @@ export function getLocalizedFooterData(url: URL) {
       {
         title: t('footer.resources'),
         links: [
+          { text: t('nav.documentation'), href: 'https://docs.hoverkraft.cloud' },
+          { text: t('nav.demo'), href: translatePath('/demo') },
+          { text: t('nav.testimonials'), href: translatePath('/testimonials') },
           { text: t('nav.blog'), href: blogHref },
           { text: t('nav.rss'), href: getAsset('/rss.xml') },
-          { text: t('nav.github'), href: 'https://github.com/hoverkraft-tech' },
-          { text: t('nav.gitlab'), href: 'https://gitlab.com/hoverkraft-tech' },
         ],
       },
       {
         title: t('footer.company'),
         links: [
           { text: t('nav.about'), href: translatePath('/about') },
+          { text: t('nav.team'), href: `${translatePath('/about')}#team` },
+          { text: t('nav.values'), href: `${translatePath('/about')}#values` },
           { text: t('nav.brand'), href: translatePath('/brand-guidelines') },
           { text: t('nav.linkedin'), href: 'https://www.linkedin.com/company/hoverkraft-tech' },
         ],

@@ -56,8 +56,9 @@ const metadata = {
   />
 
   <Content
+    id="connectors"
     isReversed
-    title="Les briques disponibles"
+    title="Connecteurs disponibles"
     items={[
       {
         title: 'Connecteurs CI/CD',
@@ -76,6 +77,55 @@ const metadata = {
       src: '~/assets/images/security-compliance.png',
       alt: "Connecteurs OpenKraft prêts à l'emploi",
     }}
+  />
+
+  <Content
+    id="templates"
+    title="Templates et blueprints"
+    subtitle="Des squelettes réutilisables pour accélérer l'adoption sans repartir d'une page blanche."
+    items={[
+      {
+        title: 'Templates GitOps',
+        description: 'Structures de dépôts, pipelines et promotions standardisées pour démarrer plus vite.',
+      },
+      {
+        title: 'Blueprints portail',
+        description: 'Modèles Backstage / Portainer pour exposer catalogues, runbooks et workflows internes.',
+      },
+      {
+        title: 'Playbooks prêts à adapter',
+        description: "Guides d'exploitation, sécurité et incident adaptés à vos contraintes réglementaires.",
+      },
+    ]}
+  />
+
+  <Features2
+    id="dashboards"
+    title="Dashboards DORA / SPACE"
+    subtitle="Des tableaux de bord préconfigurés pour rendre visibles les flux, incidents et boucles de feedback."
+    columns={2}
+    items={[
+      {
+        title: 'Flux de delivery',
+        description: "Lead time, fréquence de déploiement et visibilité sur les goulets d'étranglement.",
+        icon: 'tabler:chart-histogram',
+      },
+      {
+        title: 'Fiabilité opérationnelle',
+        description: "MTTR, taux d'incidents et exposition des points de fragilité récurrents.",
+        icon: 'tabler:lifebuoy',
+      },
+      {
+        title: 'Expérience développeur',
+        description: 'Indicateurs SPACE pour suivre la charge cognitive, le feedback et la satisfaction des équipes.',
+        icon: 'tabler:mood-smile',
+      },
+      {
+        title: 'Pilotage partagé',
+        description: 'Exports exécutifs et rituels de revue pour piloter les décisions avec sponsors et produit.',
+        icon: 'tabler:presentation-analytics',
+      },
+    ]}
   />
 
   <Features2
@@ -140,6 +190,7 @@ const metadata = {
 
   <CallToAction
     actions={[
+      { text: 'Demander une demo', href: '/demo' },
       {
         variant: 'primary',
         text: 'Explorer GitHub',
