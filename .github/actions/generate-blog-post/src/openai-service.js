@@ -101,8 +101,7 @@ class OpenAIService {
       prompt: prompt,
       n: 1,
       size: options.size || "1792x1024",
-      quality: options.quality || "standard",
-      style: options.style || "vivid",
+      quality: options.quality || "high",
     });
 
     return response.data[0].url;
