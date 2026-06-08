@@ -67,4 +67,20 @@ describe("OpenAIService", () => {
     assert.equal(request.instructions, "Preserve Markdown.");
     assert.equal(request.input, "Line one.\nLine two.");
   });
+
+  it("does not send unsupported style parameter for image generation", async () => {
+    const result = await service.generateImage(
+      "Generate a release illustration",
+    );
+
+    assert.equal(result, "https://example.com/image.png");
+
+    const request = service.client.images.generate.mock.calls[0].arguments[0];
+    assert.equal(request.model, "gpt-image-2");
+    assert.equal(request.prompt, "Generate a release illustration");
+    assert.equal(request.n, 1);
+    assert.equal(request.size, "1792x1024");
+    assert.equal(request.quality, "high");
+    assert.equal("style" in request, false);
+  });
 });
