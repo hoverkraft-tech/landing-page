@@ -139,7 +139,7 @@ jobs:
           posts: ${{ steps.detect.outputs.posts }}
           site-base-url: ${{ steps.site.outputs.site-base-url }}
           blog-base-path: /blog
-          openai-api-key: ${{ secrets.COPILOT_MCP_OPENAI_API_KEY }}
+          openai-api-key: ${{ secrets.COPILOT_MCP_OPENAI_API_KEY }} # zizmor: ignore[secrets-outside-env]
           postiz-api-url: ${{ vars.POSTIZ_API_URL }}
-          postiz-api-key: ${{ secrets.POSTIZ_API_KEY }}
+          postiz-api-key: ${{ secrets.POSTIZ_API_KEY }} # zizmor: ignore[secrets-outside-env]
           postiz-integrations: ${{ vars.POSTIZ_INTEGRATIONS }}

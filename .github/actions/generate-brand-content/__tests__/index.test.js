@@ -1,12 +1,12 @@
-const assert = require("node:assert/strict");
-const { describe, it, beforeEach, afterEach } = require("node:test");
-const fs = require("fs");
-const path = require("path");
-const mock = require("mock-fs");
+const assert = require('node:assert/strict');
+const { describe, it, beforeEach, afterEach } = require('node:test');
+const fs = require('fs');
+const path = require('path');
+const mock = require('mock-fs');
 
-const { run } = require("../index.js");
+const { run } = require('../index.js');
 
-describe("generate-brand-content run", () => {
+describe('generate-brand-content run', () => {
   let messages;
   let core;
   let io;
@@ -25,45 +25,45 @@ describe("generate-brand-content run", () => {
       mkdirP: async (dir) => fs.promises.mkdir(dir, { recursive: true }),
     };
 
-    outputDir = path.join("tmp", "brand");
+    outputDir = path.join('tmp', 'brand');
 
     defaultInputs = {
-      version: "1.2.3",
-      commit: "deadbeef",
+      version: '1.2.3',
+      commit: 'deadbeef',
       colors: JSON.stringify({
         items: [
-          { id: "primary", value: "#000000" },
-          { id: "secondary", value: "#ffffff" },
+          { id: 'primary', value: '#000000' },
+          { id: 'secondary', value: '#ffffff' },
         ],
       }),
       brandMission: JSON.stringify({
-        title: { en: "Mission", fr: "Mission" },
+        title: { en: 'Mission', fr: 'Mission' },
         description: {
-          en: "Line 1\n\n**Bold** text",
+          en: 'Line 1\n\n**Bold** text',
           fr: 'Ligne 1\nLigne 2 avec "citations" et apostrophes \' plus markdown',
         },
       }),
       logos: JSON.stringify({
         items: [
           {
-            name: { fr: "Logo principal", en: "Primary Logo" },
+            name: { fr: 'Logo principal', en: 'Primary Logo' },
             formats: {
-              svg: "assets/logo/primary.svg",
-              png: "assets/logo/primary.png",
+              svg: 'assets/logo/primary.svg',
+              png: 'assets/logo/primary.png',
             },
-            usage: { fr: "Utilisation", en: "Usage" },
+            usage: { fr: 'Utilisation', en: 'Usage' },
           },
         ],
       }),
       mascot: JSON.stringify({
-        name: { fr: "Mascotte", en: "Mascot" },
+        name: { fr: 'Mascotte', en: 'Mascot' },
         formats: {
-          svg: "assets/mascot/mascot.svg",
+          svg: 'assets/mascot/mascot.svg',
         },
-        usage: { fr: "Utilisation", en: "Usage" },
+        usage: { fr: 'Utilisation', en: 'Usage' },
       }),
       typography: JSON.stringify({
-        items: [{ id: "heading", family: "HK Grotesk" }],
+        items: [{ id: 'heading', family: 'HK Grotesk' }],
       }),
     };
   });
@@ -72,7 +72,7 @@ describe("generate-brand-content run", () => {
     mock.restore();
   });
 
-  it("writes generated files and logs progress", async () => {
+  it('writes generated files and logs progress', async () => {
     mock({});
 
     await run({
@@ -82,89 +82,68 @@ describe("generate-brand-content run", () => {
       outputDir,
     });
 
-    const colorsFile = fs.readFileSync(
-      path.join(outputDir, "generated-colors.ts"),
-      "utf8",
-    );
+    const colorsFile = fs.readFileSync(path.join(outputDir, 'generated-colors.ts'), 'utf8');
     assert.match(colorsFile, /export const brandColors: ColorCollection =/);
     assert.match(colorsFile, /Version: 1\.2\.3/);
     assert.match(colorsFile, /Commit: deadbeef/);
 
-    const missionFile = fs.readFileSync(
-      path.join(outputDir, "generated-mission.ts"),
-      "utf8",
-    );
+    const missionFile = fs.readFileSync(path.join(outputDir, 'generated-mission.ts'), 'utf8');
     assert.match(missionFile, /export const brandMission: BrandMission =/);
     assert.match(missionFile, /en: `Line 1/);
-    assert.ok(missionFile.includes("**Bold** text"));
+    assert.ok(missionFile.includes('**Bold** text'));
     assert.ok(missionFile.includes('Ligne 2 avec "citations" et apostrophes '));
     assert.doesNotMatch(missionFile, /\\n/);
 
-    const typographyFile = fs.readFileSync(
-      path.join(outputDir, "generated-typography.ts"),
-      "utf8",
-    );
-    assert.match(
-      typographyFile,
-      /export const typography: TypographyCollection =/,
-    );
+    const typographyFile = fs.readFileSync(path.join(outputDir, 'generated-typography.ts'), 'utf8');
+    assert.match(typographyFile, /export const typography: TypographyCollection =/);
 
-    const mascotFile = fs.readFileSync(
-      path.join(outputDir, "generated-mascot.ts"),
-      "utf8",
-    );
+    const mascotFile = fs.readFileSync(path.join(outputDir, 'generated-mascot.ts'), 'utf8');
     assert.match(mascotFile, /export const mascot: MascotAsset =/);
-    assert.match(
-      mascotFile,
-      /svg: 'assets\/images\/brand\/mascot\/mascot\.svg'/,
-    );
+    assert.match(mascotFile, /svg: 'assets\/images\/brand\/mascot\/mascot\.svg'/);
 
-    const logosFile = fs.readFileSync(
-      path.join(outputDir, "generated-logos.ts"),
-      "utf8",
-    );
+    const logosFile = fs.readFileSync(path.join(outputDir, 'generated-logos.ts'), 'utf8');
     assert.match(logosFile, /svg: 'assets\/images\/brand\/logo\/primary\.svg'/);
     assert.match(logosFile, /png: 'assets\/images\/brand\/logo\/primary\.png'/);
     assert.doesNotMatch(logosFile, /\\"/);
 
     assert.deepEqual(messages, [
-      "\u2713 Generated generated-colors.ts (2 items)",
-      "\u2713 Generated generated-mission.ts",
-      "\u2713 Generated generated-typography.ts (1 items)",
-      "\u2713 Generated generated-logos.ts (1 items)",
-      "\u2713 Generated generated-mascot.ts",
-      "\u2705 All brand content files generated successfully",
+      '\u2713 Generated generated-colors.ts (2 items)',
+      '\u2713 Generated generated-mission.ts',
+      '\u2713 Generated generated-typography.ts (1 items)',
+      '\u2713 Generated generated-logos.ts (1 items)',
+      '\u2713 Generated generated-mascot.ts',
+      '\u2705 All brand content files generated successfully',
     ]);
   });
 
-  it("throws when required version is missing", async () => {
+  it('throws when required version is missing', async () => {
     await assert.rejects(
       () =>
         run({
           ...defaultInputs,
-          version: "   ",
+          version: '   ',
           core,
           io,
           outputDir,
         }),
-      /version input is required/,
+      /version input is required/
     );
   });
 
-  it("throws when colors payload is not valid JSON", async () => {
+  it('throws when colors payload is not valid JSON', async () => {
     await assert.rejects(
       () =>
         run({
           ...defaultInputs,
-          colors: "not-json",
+          colors: 'not-json',
           core,
           io,
           outputDir,
         }),
-      /Failed to parse colors input/,
+      /Failed to parse colors input/
     );
   });
-  it("throws when core toolkit is missing", async () => {
+  it('throws when core toolkit is missing', async () => {
     await assert.rejects(
       () =>
         run({
@@ -173,7 +152,7 @@ describe("generate-brand-content run", () => {
           io,
           outputDir,
         }),
-      /@actions\/core instance must be provided/,
+      /@actions\/core instance must be provided/
     );
   });
 });

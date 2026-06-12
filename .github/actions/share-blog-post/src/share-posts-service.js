@@ -9,14 +9,7 @@ function splitLines(value) {
 }
 
 class SharePostsService {
-  constructor({
-    core,
-    postMetadataService,
-    postizService,
-    socialImageUrlService,
-    socialCopyService,
-    postDateService,
-  }) {
+  constructor({ core, postMetadataService, postizService, socialImageUrlService, socialCopyService, postDateService }) {
     this.core = core;
     this.postMetadataService = postMetadataService;
     this.postizService = postizService;
@@ -24,7 +17,7 @@ class SharePostsService {
     this.socialCopyService = socialCopyService;
 
     if (!postDateService) {
-      throw new Error("postDateService is required");
+      throw new Error('postDateService is required');
     }
     this.postDateService = postDateService;
   }
@@ -32,16 +25,15 @@ class SharePostsService {
   async sharePosts({ postsRaw, language, siteBaseUrl, blogBasePath }) {
     const folders = splitLines(postsRaw);
     if (folders.length === 0) {
-      this.core.info("No new posts to share");
+      this.core.info('No new posts to share');
       return;
     }
 
-    const resolvedPostDate =
-      this.postDateService.buildRandomAtLeast24HoursAwayInBusinessHoursIso({
-        timeZone: "Europe/Paris",
-        startHourInclusive: 9,
-        endHourExclusive: 18,
-      });
+    const resolvedPostDate = this.postDateService.buildRandomAtLeast24HoursAwayInBusinessHoursIso({
+      timeZone: 'Europe/Paris',
+      startHourInclusive: 9,
+      endHourExclusive: 18,
+    });
 
     for (const folder of folders) {
       const metadata = await this.postMetadataService.readPostMetadata(folder, {
@@ -59,20 +51,17 @@ class SharePostsService {
       });
 
       if (!this.socialCopyService) {
-        throw new Error("socialCopyService is required");
+        throw new Error('socialCopyService is required');
       }
 
-      const contentByIntegrationType =
-        await this.socialCopyService.buildContentByIntegrationType({
-          title: metadata.title,
-          excerpt: metadata.excerpt,
-          url,
-          language,
-        });
+      const contentByIntegrationType = await this.socialCopyService.buildContentByIntegrationType({
+        title: metadata.title,
+        excerpt: metadata.excerpt,
+        url,
+        language,
+      });
 
-      const socialImageUrl = this.socialImageUrlService.resolveFromTildePath(
-        metadata.socialImage,
-      );
+      const socialImageUrl = this.socialImageUrlService.resolveFromTildePath(metadata.socialImage);
 
       const response = await this.postizService.createDraftPost({
         postId: metadata.slug,

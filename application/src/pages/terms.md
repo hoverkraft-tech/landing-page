@@ -1,6 +1,6 @@
 ---
-title: 'Conditions Générales d’Utilisation'
-layout: '~/layouts/MarkdownLayout.astro'
+title: "Conditions Générales d’Utilisation"
+layout: "~/layouts/MarkdownLayout.astro"
 ---
 
 import ContactEmailLink from '~/components/common/ContactEmailLink.astro';

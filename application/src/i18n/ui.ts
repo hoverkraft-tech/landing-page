@@ -50,25 +50,21 @@ export const ui = {
       'Les cadres DORA, SPACE et Lean qui structurent la priorisation et le pilotage de la méthode HoverKraft.',
     'nav.principles.desc':
       "Les principes de souveraineté, de réversibilité et d'alignement qui guident la plateforme cible.",
-    'nav.execution-model.desc':
-      "Le parcours HoverKraft, de l'alignement initial au transfert d'autonomie.",
+    'nav.execution-model.desc': "Le parcours HoverKraft, de l'alignement initial au transfert d'autonomie.",
     'nav.trainings.desc':
       'Développez les compétences de vos équipes avec des formations et parcours de certification conçus par des praticiens.',
     'nav.open-kraft.desc': 'Connecteurs et templates open source qui intègrent vos outils sans les remplacer.',
-    'nav.connectors.desc':
-      "Pipelines, IAM, observabilité et briques d'intégration maintenues en open source.",
+    'nav.connectors.desc': "Pipelines, IAM, observabilité et briques d'intégration maintenues en open source.",
     'nav.templates.desc':
       'Des blueprints et squelettes pour accélérer la mise en place de vos connecteurs et portails.',
-    'nav.dashboards.desc':
-      'Des tableaux de bord préconfigurés pour suivre vos flux, incidents et boucles de feedback.',
+    'nav.dashboards.desc': 'Des tableaux de bord préconfigurés pour suivre vos flux, incidents et boucles de feedback.',
     'nav.documentation.desc': 'Guides techniques et références pour opérer la plateforme.',
     'nav.github.desc': 'Explorez le code, les connecteurs et les dépôts publics.',
     'nav.gitlab.desc': 'Retrouvez nos projets et miroirs publics sur GitLab.',
     'nav.blog.desc': 'Analyses et notes techniques sur le Platform Engineering.',
     'nav.latest-insights.desc': 'Les derniers articles et retours d’expérience.',
     'nav.rss.desc': 'Suivez nos publications via le flux RSS.',
-    'nav.demo.desc':
-      "Une démonstration guidée d'OpenKraft et de la chaîne de delivery outillée par HoverKraft.",
+    'nav.demo.desc': "Une démonstration guidée d'OpenKraft et de la chaîne de delivery outillée par HoverKraft.",
     'nav.testimonials.desc':
       "Des retours d'expérience terrain sur les transformations menées avec la méthode HoverKraft.",
     'nav.about.desc': 'Notre vision, notre mission et le cadre dans lequel HoverKraft intervient.',
@@ -76,7 +72,7 @@ export const ui = {
     'nav.brand.desc': 'Logos, couleurs et ressources de marque.',
     'nav.team.desc': 'Les profils plateforme, produit et transformation qui portent les missions HoverKraft.',
     'nav.manifesto.desc': 'La vision HoverKraft de la plateforme cible, de la gouvernance et du transfert.',
-    'nav.values.desc': 'Les principes d\'exigence, de franchise et de transfert qui guident nos interventions.',
+    'nav.values.desc': "Les principes d'exigence, de franchise et de transfert qui guident nos interventions.",
     'nav.featured.label': 'Produit phare',
     'nav.featured.solutions.title': 'Platform Engineering as a Service',
     'nav.featured.solutions.desc':
@@ -252,10 +248,8 @@ export const ui = {
     'nav.maturity-assessment.desc': 'Assess your platform maturity in 5 minutes.',
     'nav.frameworks.desc':
       'The DORA, SPACE, and Lean frames that shape prioritization and operating reviews in the HoverKraft method.',
-    'nav.principles.desc':
-      'The sovereignty, reversibility, and alignment principles that shape the target platform.',
-    'nav.execution-model.desc':
-      'The HoverKraft journey, from strategic alignment to secure handover and autonomy.',
+    'nav.principles.desc': 'The sovereignty, reversibility, and alignment principles that shape the target platform.',
+    'nav.execution-model.desc': 'The HoverKraft journey, from strategic alignment to secure handover and autonomy.',
     'nav.trainings.desc': "Build your teams' capabilities with practitioner-led training and certification programs.",
     'nav.open-kraft.desc': 'Open-source connectors and templates that integrate your tools instead of replacing them.',
     'nav.connectors.desc': 'Pipelines, IAM, observability, and integration components maintained in the open.',

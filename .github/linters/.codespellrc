@@ -1,0 +1,22 @@
+[codespell]
+# Skip third-party/generated paths and French-locale content files.
+skip =
+    .git,
+    **/node_modules/**,
+    **/coverage/**,
+    **/dist/**,
+    **/package-lock.json,
+    **/fr.mdx,
+    **/fr.ts,
+    **/fr.data.json,
+    **/application/src/pages/privacy.md,
+    **/application/src/pages/terms.md,
+    **/application/src/i18n/ui.ts,
+    **/application/src/data/homepage.ts,
+    **/application/src/data/maturity-assessment.ts,
+    **/application/src/data/brand/generated-*.ts,
+    **/application/src/data/release-summary-config.mjs,
+    **/application/src/views/*.astro,
+    **/application/src/data/trainings/**
+ignore-words = .github/linters/.codespell-ignore-words.txt
+quiet-level = 2

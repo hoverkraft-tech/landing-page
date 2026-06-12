@@ -9,10 +9,7 @@
     "ghcr.io/devcontainers/features/github-cli:1": {},
     "ghcr.io/kreemer/features/chrometesting:1": {}
   },
-  "forwardPorts": [
-    4321,
-    5432
-  ],
+  "forwardPorts": [4321, 5432],
   "secrets": {
     "COPILOT_MCP_OPENAI_API_KEY": {
       "description": "OpenAI's key to run GPT.",
@@ -41,21 +38,15 @@
         "servers": {
           "playwright": {
             "command": "npx",
-            "args": [
-              "@playwright/mcp@latest"
-            ]
+            "args": ["@playwright/mcp@latest"]
           },
           "lighthouse": {
             "command": "npx",
-            "args": [
-              "lighthouse-mcp"
-            ]
+            "args": ["lighthouse-mcp"]
           },
           "image-generator-gpt-image": {
             "command": "npx",
-            "args": [
-              "imagegen-mcp-server"
-            ],
+            "args": ["imagegen-mcp-server"],
             "env": {
               "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY",
               "OPENAI_IMAGE_MODEL": "gpt-image-1.5"

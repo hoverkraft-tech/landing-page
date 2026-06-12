@@ -14,10 +14,12 @@ permissions: {}
 jobs:
   ci:
     uses: ./.github/workflows/__shared-ci.yml
-    secrets: inherit
     permissions:
+      actions: read
       contents: read
       id-token: write
+      issues: write
       packages: read
       pull-requests: write
       security-events: write
+      statuses: write

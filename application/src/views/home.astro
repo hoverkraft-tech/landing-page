@@ -26,9 +26,7 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <Fragment slot="announcement">
-    <HomeAnnouncementBar {...content.announcement} />
-  </Fragment>
+  <Fragment slot="announcement"> <HomeAnnouncementBar {...content.announcement} /> </Fragment>
 
   <HomeHero content={content.hero} />
   <HomeAudienceTabs header={content.useCases.header} items={content.useCases.items} />
@@ -47,6 +45,6 @@ const metadata = {
     title={content.finalCta.title}
     subtitle={content.finalCta.subtitle}
     actions={[content.finalCta.primaryAction, content.finalCta.secondaryAction]}
-    classes={{ container: 'py-16 md:py-20 lg:py-24' }}
+    classes={{ container: "py-16 md:py-20 lg:py-24" }}
   />
 </Layout>

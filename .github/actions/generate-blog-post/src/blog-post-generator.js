@@ -3,8 +3,8 @@
  * Main orchestrator for blog post generation
  */
 
-const path = require("path");
-const crypto = require("crypto");
+const path = require('path');
+const crypto = require('crypto');
 
 class BlogPostGenerator {
   constructor(contentGenerator, openAIService, fileSystemService) {
@@ -21,43 +21,34 @@ class BlogPostGenerator {
     const slug = this.generateSlug(sinceDate, untilDate);
 
     // Create directories
-    const postDir = this.fileSystemService.getAbsolutePath(
-      outputDir,
-      "src/data/post",
-      slug,
-    );
-    const imageDir = this.fileSystemService.getAbsolutePath(
-      outputDir,
-      "src/assets/images/blog",
-      slug,
-    );
+    const postDir = this.fileSystemService.getAbsolutePath(outputDir, 'src/data/post', slug);
+    const imageDir = this.fileSystemService.getAbsolutePath(outputDir, 'src/assets/images/blog', slug);
 
     this.fileSystemService.ensureDirectory(postDir);
     this.fileSystemService.ensureDirectory(imageDir);
 
     // Generate common.yaml
     const commonYaml = this.generateCommonYaml(slug);
-    this.fileSystemService.writeFile(
-      path.join(postDir, "common.yaml"),
-      commonYaml,
-    );
+    this.fileSystemService.writeFile(path.join(postDir, 'common.yaml'), commonYaml);
 
     // Generate French content
-    const frenchContent = await this.contentGenerator.generateFrenchContent(
-      releasesData,
-      { sinceDate, untilDate, slug },
-    );
-    this.writeLocalizedArtifacts(postDir, "fr", frenchContent);
+    const frenchContent = await this.contentGenerator.generateFrenchContent(releasesData, {
+      sinceDate,
+      untilDate,
+      slug,
+    });
+    this.writeLocalizedArtifacts(postDir, 'fr', frenchContent);
 
     // Generate English content
-    const englishContent = await this.contentGenerator.generateEnglishContent(
-      releasesData,
-      { sinceDate, untilDate, slug },
-    );
-    this.writeLocalizedArtifacts(postDir, "en", englishContent);
+    const englishContent = await this.contentGenerator.generateEnglishContent(releasesData, {
+      sinceDate,
+      untilDate,
+      slug,
+    });
+    this.writeLocalizedArtifacts(postDir, 'en', englishContent);
 
     // Generate preview image (fail if it fails)
-    const imagePath = path.join(imageDir, "preview.png");
+    const imagePath = path.join(imageDir, 'preview.png');
     await this.generatePreviewImage(imagePath);
 
     return {
@@ -75,15 +66,11 @@ class BlogPostGenerator {
 
     // Create a short hash from the date range for uniqueness
     const dateString = `${since.toISOString()}-${until.toISOString()}`;
-    const hash = crypto
-      .createHash("sha256")
-      .update(dateString)
-      .digest("hex")
-      .substring(0, 8);
+    const hash = crypto.createHash('sha256').update(dateString).digest('hex').substring(0, 8);
 
     const year = until.getUTCFullYear();
-    const month = String(until.getUTCMonth() + 1).padStart(2, "0");
-    const day = String(until.getUTCDate()).padStart(2, "0");
+    const month = String(until.getUTCMonth() + 1).padStart(2, '0');
+    const day = String(until.getUTCDate()).padStart(2, '0');
 
     return `releases-${year}-${month}-${day}-${hash}`;
   }
@@ -92,7 +79,7 @@ class BlogPostGenerator {
    * Generate common.yaml content
    */
   generateCommonYaml(slug) {
-    const publishDate = new Date().toISOString().split("T")[0];
+    const publishDate = new Date().toISOString().split('T')[0];
     return `publishDate: ${publishDate}T00:00:00Z
 image: ~/assets/images/blog/${slug}/preview.png
 tags:
@@ -121,9 +108,7 @@ translationKey: ${slug}
     const jsonPath = path.join(postDir, `${lang}.data.json`);
     const mdxPath = path.join(postDir, `${lang}.mdx`);
 
-    const normalizedFrontmatter = frontmatter.endsWith("\n\n")
-      ? frontmatter
-      : `${frontmatter.trimEnd()}\n\n`;
+    const normalizedFrontmatter = frontmatter.endsWith('\n\n') ? frontmatter : `${frontmatter.trimEnd()}\n\n`;
 
     const mdxContent = `${normalizedFrontmatter}import ReleaseSummary from '~/components/blog/ReleaseSummary.astro';
 import data from './${lang}.data.json';
@@ -131,10 +116,7 @@ import data from './${lang}.data.json';
 <ReleaseSummary data={data} />
 `;
 
-    this.fileSystemService.writeFile(
-      jsonPath,
-      `${JSON.stringify(data, null, 2)}\n`,
-    );
+    this.fileSystemService.writeFile(jsonPath, `${JSON.stringify(data, null, 2)}\n`);
     this.fileSystemService.writeFile(mdxPath, mdxContent);
   }
 }

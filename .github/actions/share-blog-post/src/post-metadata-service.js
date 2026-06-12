@@ -1,36 +1,36 @@
-const path = require("node:path");
-const matter = require("gray-matter");
-const yaml = require("js-yaml");
+const path = require('node:path');
+const matter = require('gray-matter');
+const yaml = require('js-yaml');
 
 function toIsoUtcNow() {
-  return new Date().toISOString().replace(/\.\d{3}Z$/, "Z");
+  return new Date().toISOString().replace(/\.\d{3}Z$/, 'Z');
 }
 
 function normalizeOptionalString(value) {
-  const normalized = typeof value === "string" ? value.trim() : "";
+  const normalized = typeof value === 'string' ? value.trim() : '';
   return normalized.length > 0 ? normalized : null;
 }
 
 function isTildeAssetPath(value) {
-  return typeof value === "string" && value.startsWith("~/");
+  return typeof value === 'string' && value.startsWith('~/');
 }
 
 function trimSlashes(value, { leading, trailing }) {
-  if (typeof value !== "string" || value.length === 0) {
-    return "";
+  if (typeof value !== 'string' || value.length === 0) {
+    return '';
   }
 
   let start = 0;
   let end = value.length;
 
   if (leading) {
-    while (start < end && value[start] === "/") {
+    while (start < end && value[start] === '/') {
       start += 1;
     }
   }
 
   if (trailing) {
-    while (end > start && value[end - 1] === "/") {
+    while (end > start && value[end - 1] === '/') {
       end -= 1;
     }
   }
@@ -40,7 +40,7 @@ function trimSlashes(value, { leading, trailing }) {
 
 function joinUrl(...parts) {
   return parts
-    .filter((part) => typeof part === "string")
+    .filter((part) => typeof part === 'string')
     .map((part) => part.trim())
     .filter((part) => part.length > 0)
     .map((part, index) => {
@@ -49,7 +49,7 @@ function joinUrl(...parts) {
       }
       return trimSlashes(part, { leading: true, trailing: true });
     })
-    .join("/");
+    .join('/');
 }
 
 class PostMetadataService {
@@ -58,14 +58,12 @@ class PostMetadataService {
   }
 
   async readPostMetadata(folder, { language } = {}) {
-    const base = path.join("application", "src", "data", "post", folder);
+    const base = path.join('application', 'src', 'data', 'post', folder);
 
-    const commonPath = path.join(base, "common.yaml");
-    const requestedMdxPath = language
-      ? path.join(base, `${language}.mdx`)
-      : null;
-    const enMdxPath = path.join(base, "en.mdx");
-    const frMdxPath = path.join(base, "fr.mdx");
+    const commonPath = path.join(base, 'common.yaml');
+    const requestedMdxPath = language ? path.join(base, `${language}.mdx`) : null;
+    const enMdxPath = path.join(base, 'en.mdx');
+    const frMdxPath = path.join(base, 'fr.mdx');
 
     let mdxPath = requestedMdxPath;
     if (requestedMdxPath) {
@@ -74,9 +72,7 @@ class PostMetadataService {
         return null;
       }
     } else {
-      mdxPath = (await this.fileSystemService.fileExists(enMdxPath))
-        ? enMdxPath
-        : frMdxPath;
+      mdxPath = (await this.fileSystemService.fileExists(enMdxPath)) ? enMdxPath : frMdxPath;
     }
 
     const mdxExists = await this.fileSystemService.fileExists(mdxPath);
@@ -87,21 +83,18 @@ class PostMetadataService {
     const mdxRaw = await this.fileSystemService.readFile(mdxPath);
     const { data } = matter(mdxRaw);
 
-    const title = typeof data.title === "string" ? data.title : "";
-    const excerpt = typeof data.excerpt === "string" ? data.excerpt : "";
-    const slug =
-      typeof data.slug === "string" && data.slug.trim().length > 0
-        ? data.slug.trim()
-        : folder;
+    const title = typeof data.title === 'string' ? data.title : '';
+    const excerpt = typeof data.excerpt === 'string' ? data.excerpt : '';
+    const slug = typeof data.slug === 'string' && data.slug.trim().length > 0 ? data.slug.trim() : folder;
 
     let publishDate = toIsoUtcNow();
     let imageFromCommon = null;
     if (await this.fileSystemService.fileExists(commonPath)) {
       const commonRaw = await this.fileSystemService.readFile(commonPath);
       const common = yaml.load(commonRaw);
-      if (common && typeof common === "object") {
+      if (common && typeof common === 'object') {
         const publishDateRaw = common.publishDate;
-        if (typeof publishDateRaw === "string" && publishDateRaw.trim()) {
+        if (typeof publishDateRaw === 'string' && publishDateRaw.trim()) {
           publishDate = publishDateRaw.trim();
         }
 
@@ -110,15 +103,11 @@ class PostMetadataService {
     }
 
     if (!imageFromCommon) {
-      throw new Error(
-        `Missing social image for ${folder}: define common.yaml "image" (~/assets/...)`,
-      );
+      throw new Error(`Missing social image for ${folder}: define common.yaml "image" (~/assets/...)`);
     }
 
     if (!isTildeAssetPath(imageFromCommon)) {
-      throw new Error(
-        `Invalid social image for ${folder}: common.yaml "image" must start with "~/"`,
-      );
+      throw new Error(`Invalid social image for ${folder}: common.yaml "image" must start with "~/"`);
     }
 
     const socialImage = imageFromCommon;

@@ -3,15 +3,7 @@
   "title": "Branding Data Manifest",
   "description": "Contract interface between hoverkraft-tech/branding and hoverkraft-tech/landing-page repositories",
   "type": "object",
-  "required": [
-    "version",
-    "timestamp",
-    "commit",
-    "brandMission",
-    "colors",
-    "logos",
-    "mascot"
-  ],
+  "required": ["version", "timestamp", "commit", "brandMission", "colors", "logos", "mascot"],
   "properties": {
     "version": {
       "type": "string",
@@ -61,9 +53,7 @@
                   ]
                 },
                 "en": {
-                  "examples": [
-                    "We help companies automate logistics with reliable, sustainable technology."
-                  ]
+                  "examples": ["We help companies automate logistics with reliable, sustainable technology."]
                 }
               }
             }
@@ -119,9 +109,7 @@
                   ]
                 },
                 "en": {
-                  "examples": [
-                    "Use the mascot in marketing materials to reinforce brand identity."
-                  ]
+                  "examples": ["Use the mascot in marketing materials to reinforce brand identity."]
                 }
               }
             }

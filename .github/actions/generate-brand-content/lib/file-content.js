@@ -1,12 +1,4 @@
-function createFileContent({
-  description,
-  typeName,
-  exportName,
-  payload,
-  version,
-  commit,
-  timestamp,
-}) {
+function createFileContent({ description, typeName, exportName, payload, version, commit, timestamp }) {
   const serializedPayload = serializePayload(payload);
 
   return `/**
@@ -24,7 +16,7 @@ export const ${exportName}: ${typeName} = ${serializedPayload};
 `;
 }
 
-const INDENT = "  ";
+const INDENT = '  ';
 
 function serializePayload(payload) {
   return formatValue(payload, 0);
@@ -40,7 +32,7 @@ function formatValue(value, level) {
     return formatArray(value, level);
   }
 
-  if (typeof value === "object") {
+  if (typeof value === 'object') {
     return formatObject(value, level);
   }
 
@@ -49,7 +41,7 @@ function formatValue(value, level) {
 
 function formatArray(values, level) {
   if (!values.length) {
-    return "[]";
+    return '[]';
   }
 
   const inline = tryFormatInlineArray(values, level);
@@ -60,9 +52,7 @@ function formatArray(values, level) {
   const nextLevel = level + 1;
   const indent = INDENT.repeat(level);
   const childIndent = INDENT.repeat(nextLevel);
-  const items = values
-    .map((item) => `${childIndent}${formatValue(item, nextLevel)},`)
-    .join("\n");
+  const items = values.map((item) => `${childIndent}${formatValue(item, nextLevel)},`).join('\n');
 
   return `[\n${items}\n${indent}]`;
 }
@@ -79,7 +69,7 @@ function tryFormatInlineArray(values, level) {
     parts.push(primitive);
   }
 
-  const inlineContent = `[${parts.join(", ")}]`;
+  const inlineContent = `[${parts.join(', ')}]`;
   const inlineLength = INDENT.length * level + inlineContent.length;
 
   if (inlineLength <= 120) {
@@ -93,7 +83,7 @@ function formatObject(object, level) {
   const entries = Object.entries(object);
 
   if (!entries.length) {
-    return "{}";
+    return '{}';
   }
 
   const nextLevel = level + 1;
@@ -104,7 +94,7 @@ function formatObject(object, level) {
     return `${childIndent}${formatPropertyKey(key)}: ${formatValue(val, nextLevel)},`;
   });
 
-  return `{\n${lines.join("\n")}\n${indent}}`;
+  return `{\n${lines.join('\n')}\n${indent}}`;
 }
 
 function formatString(value) {
@@ -124,20 +114,20 @@ function formatString(value) {
 }
 
 function escapeCommonCharacters(value) {
-  return ("" + value).replace(/["'\\\n\r\u2028\u2029]/g, function (character) {
+  return ('' + value).replace(/["'\\\n\r\u2028\u2029]/g, function (character) {
     switch (character) {
       case '"':
       case "'":
-      case "\\":
-        return "\\" + character;
-      case "\n":
-        return "\\n";
-      case "\r":
-        return "\\r";
-      case "\u2028":
-        return "\\u2028";
-      case "\u2029":
-        return "\\u2029";
+      case '\\':
+        return '\\' + character;
+      case '\n':
+        return '\\n';
+      case '\r':
+        return '\\r';
+      case '\u2028':
+        return '\\u2028';
+      case '\u2029':
+        return '\\u2029';
     }
   });
 }
@@ -147,28 +137,25 @@ function escapeForSingleQuotes(value) {
 }
 
 function escapeForDoubleQuotes(value) {
-  return ("" + value).replace(/["\\\n\r\u2028\u2029]/g, function (character) {
+  return ('' + value).replace(/["\\\n\r\u2028\u2029]/g, function (character) {
     switch (character) {
       case '"':
-      case "\\":
-        return "\\" + character;
-      case "\n":
-        return "\\n";
-      case "\r":
-        return "\\r";
-      case "\u2028":
-        return "\\u2028";
-      case "\u2029":
-        return "\\u2029";
+      case '\\':
+        return '\\' + character;
+      case '\n':
+        return '\\n';
+      case '\r':
+        return '\\r';
+      case '\u2028':
+        return '\\u2028';
+      case '\u2029':
+        return '\\u2029';
     }
   });
 }
 
 function formatTemplateLiteral(value) {
-  const escaped = value
-    .replace(/\\/g, "\\\\")
-    .replace(/`/g, "\\`")
-    .replace(/\$\{/g, "\\${");
+  const escaped = value.replace(/\\/g, '\\\\').replace(/`/g, '\\`').replace(/\$\{/g, '\\${');
 
   return `\`${escaped}\``;
 }
@@ -183,14 +170,14 @@ function formatPropertyKey(key) {
 
 function formatPrimitiveValue(value) {
   if (value === null) {
-    return "null";
+    return 'null';
   }
 
   switch (typeof value) {
-    case "string":
+    case 'string':
       return formatString(value);
-    case "number":
-    case "boolean":
+    case 'number':
+    case 'boolean':
       return String(value);
     default:
       return null;

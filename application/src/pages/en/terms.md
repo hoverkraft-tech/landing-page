@@ -1,6 +1,6 @@
 ---
-title: 'Terms of Use'
-layout: '~/layouts/MarkdownLayout.astro'
+title: "Terms of Use"
+layout: "~/layouts/MarkdownLayout.astro"
 ---
 
 import ContactEmailLink from '~/components/common/ContactEmailLink.astro';

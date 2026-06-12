@@ -1,0 +1,4 @@
+# Ignore Dockerfile misconfiguration findings inside third-party node_modules.
+# These are vendor files we cannot modify.
+DS-0002
+DS-0026

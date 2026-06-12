@@ -1,11 +1,5 @@
 {
   "threshold": 5,
   "gitignore": true,
-  "ignore": [
-    "**/node_modules/**",
-    "**/dist/**",
-    "**/.astro/**",
-    "**/coverage/**",
-    "application/public/brand/**"
-  ]
+  "ignore": ["**/node_modules/**", "**/dist/**", "**/.astro/**", "**/coverage/**", "application/public/brand/**"]
 }
