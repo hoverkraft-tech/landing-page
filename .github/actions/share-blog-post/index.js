@@ -3,15 +3,15 @@
  * Main entry point for the action
  */
 
-const { OpenAIService } = require("./src/openai-service");
-const { FileSystemService } = require("./src/file-system-service");
-const { PostMetadataService } = require("./src/post-metadata-service");
-const { IntegrationsService } = require("./src/integrations-service");
-const { PostizService } = require("./src/postiz-service");
-const { SharePostsService } = require("./src/share-posts-service");
-const { PostDateService } = require("./src/post-date-service");
-const { SocialImageUrlService } = require("./src/social-image-url-service");
-const { SocialCopyService } = require("./src/social-copy-service");
+const { OpenAIService } = require('./src/openai-service');
+const { FileSystemService } = require('./src/file-system-service');
+const { PostMetadataService } = require('./src/post-metadata-service');
+const { IntegrationsService } = require('./src/integrations-service');
+const { PostizService } = require('./src/postiz-service');
+const { SharePostsService } = require('./src/share-posts-service');
+const { PostDateService } = require('./src/post-date-service');
+const { SocialImageUrlService } = require('./src/social-image-url-service');
+const { SocialCopyService } = require('./src/social-copy-service');
 
 async function run({
   core,
@@ -28,43 +28,43 @@ async function run({
 }) {
   try {
     if (!core) {
-      throw new Error("@actions/core instance is required");
+      throw new Error('@actions/core instance is required');
     }
 
     if (!postizApiKey) {
-      throw new Error("POSTIZ_API_KEY secret is required");
+      throw new Error('POSTIZ_API_KEY secret is required');
     }
 
     if (!postizApiUrl) {
-      throw new Error("POSTIZ_API_URL is required");
+      throw new Error('POSTIZ_API_URL is required');
     }
 
     if (!siteBaseUrl) {
-      throw new Error("SITE_BASE_URL is required");
+      throw new Error('SITE_BASE_URL is required');
     }
 
     if (!blogBasePath) {
-      throw new Error("BLOG_BASE_PATH is required");
+      throw new Error('BLOG_BASE_PATH is required');
     }
 
     if (!language) {
-      throw new Error("LANGUAGE is required");
+      throw new Error('LANGUAGE is required');
     }
 
     if (!openAIKey) {
-      throw new Error("OPENAI_API_KEY secret is required");
+      throw new Error('OPENAI_API_KEY secret is required');
     }
 
     if (!postizIntegrations) {
-      throw new Error("POSTIZ_INTEGRATIONS is required");
+      throw new Error('POSTIZ_INTEGRATIONS is required');
     }
 
     if (!githubRepository) {
-      throw new Error("githubRepository is required");
+      throw new Error('githubRepository is required');
     }
 
     if (!githubSha) {
-      throw new Error("githubSha is required");
+      throw new Error('githubSha is required');
     }
 
     const fileSystemService = new FileSystemService();
@@ -77,7 +77,7 @@ async function run({
     });
 
     if (!integrations || integrations.length === 0) {
-      throw new Error("No Postiz integrations configured");
+      throw new Error('No Postiz integrations configured');
     }
 
     const postizService = new PostizService({

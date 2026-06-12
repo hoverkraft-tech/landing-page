@@ -1,16 +1,16 @@
-const fs = require("node:fs");
-const Ajv = require("ajv");
-const addFormats = require("ajv-formats");
+const fs = require('node:fs');
+const Ajv = require('ajv');
+const addFormats = require('ajv-formats');
 
 function assertCore(core) {
   if (!core) {
-    throw new Error("@actions/core instance must be provided");
+    throw new Error('@actions/core instance must be provided');
   }
 }
 
 function parseManifest(rawManifest) {
   if (!rawManifest) {
-    throw new Error("manifest input is required");
+    throw new Error('manifest input is required');
   }
 
   try {
@@ -26,7 +26,7 @@ function loadSchema(schemaPath) {
   }
 
   try {
-    const schemaContent = fs.readFileSync(schemaPath, "utf8");
+    const schemaContent = fs.readFileSync(schemaPath, 'utf8');
     return JSON.parse(schemaContent);
   } catch (error) {
     throw new Error(`Unable to read schema: ${error.message}`);
@@ -58,7 +58,7 @@ function buildOutputs(manifest) {
     version: manifest.version,
     commit: manifest.commit,
     colors: JSON.stringify(manifest.colors ?? {}),
-    "brand-mission": JSON.stringify(manifest.brandMission ?? {}),
+    'brand-mission': JSON.stringify(manifest.brandMission ?? {}),
     logos: JSON.stringify(manifest.logos ?? {}),
     mascot: JSON.stringify(manifest.mascot ?? {}),
     typography: JSON.stringify(manifest.typography ?? {}),
@@ -71,9 +71,9 @@ async function run({ core, manifest, schemaPath }) {
   try {
     manifest = parseManifest(manifest);
 
-    const safeSchemaPath = (schemaPath ?? "").trim();
+    const safeSchemaPath = (schemaPath ?? '').trim();
     if (!safeSchemaPath.length) {
-      throw new Error("schemaPath argument is required");
+      throw new Error('schemaPath argument is required');
     }
     const schema = loadSchema(safeSchemaPath);
 
@@ -87,10 +87,10 @@ async function run({ core, manifest, schemaPath }) {
 
     const colorCount = manifest.colors?.items?.length ?? 0;
     const logoCount = manifest.logos?.items?.length ?? 0;
-    const localeSummary = JSON.parse(outputs.locales || "[]").join(", ");
+    const localeSummary = JSON.parse(outputs.locales || '[]').join(', ');
 
     core.info(
-      `✓ Manifest validation passed (${colorCount} colors, ${logoCount} logos, mission locales: ${localeSummary})`,
+      `✓ Manifest validation passed (${colorCount} colors, ${logoCount} logos, mission locales: ${localeSummary})`
     );
   } catch (error) {
     core.setFailed(`Manifest validation failed: ${error.message}`);
@@ -107,7 +107,5 @@ module.exports = {
 };
 
 if (require.main === module) {
-  throw new Error(
-    "This module must be executed within GitHub Actions context.",
-  );
+  throw new Error('This module must be executed within GitHub Actions context.');
 }

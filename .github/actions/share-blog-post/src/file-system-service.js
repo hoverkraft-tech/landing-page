@@ -1,4 +1,4 @@
-const fs = require("node:fs/promises");
+const fs = require('node:fs/promises');
 
 class FileSystemService {
   async fileExists(filePath) {
@@ -11,7 +11,7 @@ class FileSystemService {
   }
 
   async readFile(filePath) {
-    return fs.readFile(filePath, "utf8");
+    return fs.readFile(filePath, 'utf8');
   }
 }
 

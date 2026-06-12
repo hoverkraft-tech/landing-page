@@ -1,6 +1,6 @@
 ---
-title: 'Privacy Policy'
-layout: '~/layouts/MarkdownLayout.astro'
+title: "Privacy Policy"
+layout: "~/layouts/MarkdownLayout.astro"
 ---
 
 import ContactEmailLink from '~/components/common/ContactEmailLink.astro';

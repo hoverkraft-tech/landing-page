@@ -3,9 +3,9 @@
  * Handles all file system operations
  */
 
-const fs = require("fs");
-const path = require("path");
-const https = require("https");
+const fs = require('fs');
+const path = require('path');
+const https = require('https');
 
 class FileSystemService {
   /**
@@ -21,7 +21,7 @@ class FileSystemService {
    * Write file
    */
   writeFile(filePath, content) {
-    fs.writeFileSync(filePath, content, "utf8");
+    fs.writeFileSync(filePath, content, 'utf8');
   }
 
   /**
@@ -41,16 +41,16 @@ class FileSystemService {
           if (res.statusCode === 200) {
             const file = fs.createWriteStream(outputPath);
             res.pipe(file);
-            file.on("finish", () => {
+            file.on('finish', () => {
               file.close();
               resolve();
             });
-            file.on("error", reject);
+            file.on('error', reject);
           } else {
             reject(new Error(`Failed to download: ${res.statusCode}`));
           }
         })
-        .on("error", reject);
+        .on('error', reject);
     });
   }
 

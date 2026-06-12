@@ -1,4 +1,4 @@
-const { buildPostContentForIntegration } = require("./post-content-builder");
+const { buildPostContentForIntegration } = require('./post-content-builder');
 
 class SocialCopyService {
   constructor({ openAIService, integrations, readMoreLabelResolver }) {
@@ -12,21 +12,21 @@ class SocialCopyService {
   }
 
   getReadMoreLabel(language) {
-    if (typeof this.readMoreLabelResolver === "function") {
+    if (typeof this.readMoreLabelResolver === 'function') {
       return this.readMoreLabelResolver(language);
     }
 
-    const normalized = `${language || ""}`.trim().toLowerCase();
-    if (normalized === "fr") {
-      return "Lire la suite :";
+    const normalized = `${language || ''}`.trim().toLowerCase();
+    if (normalized === 'fr') {
+      return 'Lire la suite :';
     }
-    return "Read more:";
+    return 'Read more:';
   }
 
   async buildContentByIntegrationType({ title, excerpt, url, language }) {
     const integrations = this.getIntegrations();
     if (integrations.length === 0) {
-      throw new Error("No Postiz integrations configured");
+      throw new Error('No Postiz integrations configured');
     }
 
     const readMoreLabel = this.getReadMoreLabel(language);
@@ -36,7 +36,7 @@ class SocialCopyService {
 
     for (const integration of integrations) {
       const integrationType = integration?.type;
-      const normalizedType = String(integrationType ?? "").trim();
+      const normalizedType = String(integrationType ?? '').trim();
       if (!normalizedType) {
         continue;
       }
@@ -53,20 +53,16 @@ class SocialCopyService {
         description = excerpt;
       }
 
-      contentByIntegrationType[normalizedType] = buildPostContentForIntegration(
-        {
-          description,
-          url,
-          readMoreLabel,
-          integrationType,
-        },
-      );
+      contentByIntegrationType[normalizedType] = buildPostContentForIntegration({
+        description,
+        url,
+        readMoreLabel,
+        integrationType,
+      });
     }
 
     if (Object.keys(contentByIntegrationType).length === 0) {
-      throw new Error(
-        "No valid integration types provided. Ensure postiz-integrations contains valid platform keys.",
-      );
+      throw new Error('No valid integration types provided. Ensure postiz-integrations contains valid platform keys.');
     }
 
     return contentByIntegrationType;

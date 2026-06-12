@@ -21,8 +21,8 @@ const lang = getLangFromUrl(Astro.url);
   <article>
     <header
       class={post.image
-        ? 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'
-        : 'intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade'}
+        ? "intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
+        : "intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"}
     >
       <div class="flex justify-between flex-col sm:flex-row max-w-3xl mx-auto mt-0 mb-2 px-4 sm:px-6 sm:items-center">
         <p>
@@ -30,16 +30,23 @@ const lang = getLangFromUrl(Astro.url);
           <time datetime={String(post.publishDate)} class="inline-block">{getFormattedDate(post.publishDate)}</time>
           {post.author && (
               <>
-                {' '}
-                · <Icon name="tabler:user" class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400" />
+                {" "}
+                ·{" "}
+                <Icon
+                  name="tabler:user"
+                  class="w-4 h-4 inline-block -mt-0.5 dark:text-gray-400"
+                />
                 <span class="inline-block">{post.author}</span>
               </>
             )}
           {post.category && (
               <>
-                {' '}
-                ·{' '}
-                <a class="hover:underline inline-block" href={getPermalink(post.category.slug, 'category')}>
+                {" "}
+                ·{" "}
+                <a
+                  class="hover:underline inline-block"
+                  href={getPermalink(post.category.slug, "category")}
+                >
                   {post.category.title}
                 </a>
               </>
@@ -57,9 +64,7 @@ const lang = getLangFromUrl(Astro.url);
       >
         {post.title}
       </h1>
-      <p class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted text-justify">
-        {post.excerpt}
-      </p>
+      <p class="max-w-3xl mx-auto mt-4 mb-8 px-4 sm:px-6 text-xl md:text-2xl text-muted text-justify">{post.excerpt}</p>
 
       {post.image ? (
           <Image
@@ -67,7 +72,7 @@ const lang = getLangFromUrl(Astro.url);
             class="max-w-full lg:max-w-[900px] mx-auto mb-6 sm:rounded-md bg-gray-400 dark:bg-slate-700"
             widths={[400, 900]}
             sizes="(max-width: 900px) 400px, 900px"
-            alt={post?.excerpt || ''}
+            alt={post?.excerpt || ""}
             width={900}
             height={506}
             loading="eager"

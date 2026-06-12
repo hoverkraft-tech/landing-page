@@ -1,9 +1,9 @@
-const { getPlatformSpec } = require("./social-platforms");
+const { getPlatformSpec } = require('./social-platforms');
 
 function buildPostContent({ description, url, readMoreLabel }) {
-  const normalizedDescription = String(description ?? "").trim();
-  const normalizedUrl = String(url ?? "").trim();
-  const normalizedLabel = String(readMoreLabel ?? "").trim();
+  const normalizedDescription = String(description ?? '').trim();
+  const normalizedUrl = String(url ?? '').trim();
+  const normalizedLabel = String(readMoreLabel ?? '').trim();
 
   if (!normalizedDescription) {
     return normalizedUrl;
@@ -24,23 +24,16 @@ function buildPostContent({ description, url, readMoreLabel }) {
   return `${normalizedDescription} ${normalizedLabel} ${normalizedUrl}`.trim();
 }
 
-function buildPostContentForIntegration({
-  description,
-  url,
-  readMoreLabel,
-  integrationType,
-}) {
+function buildPostContentForIntegration({ description, url, readMoreLabel, integrationType }) {
   const spec = getPlatformSpec(integrationType);
-  const normalizedUrl = String(url ?? "").trim();
-  const normalizedDescription = String(description ?? "").trim();
+  const normalizedUrl = String(url ?? '').trim();
+  const normalizedDescription = String(description ?? '').trim();
 
   if (!normalizedDescription) {
     return normalizedUrl;
   }
 
-  const effectiveReadMoreLabel = spec.formatting.includeReadMoreLabel
-    ? readMoreLabel
-    : "";
+  const effectiveReadMoreLabel = spec.formatting.includeReadMoreLabel ? readMoreLabel : '';
 
   if (!spec.formatting.appendLinkOnNewLine) {
     return buildPostContent({
@@ -58,10 +51,8 @@ function buildPostContentForIntegration({
     return normalizedDescription;
   }
 
-  const normalizedLabel = String(effectiveReadMoreLabel ?? "").trim();
-  const linkLine = normalizedLabel
-    ? `${normalizedLabel} ${normalizedUrl}`
-    : normalizedUrl;
+  const normalizedLabel = String(effectiveReadMoreLabel ?? '').trim();
+  const linkLine = normalizedLabel ? `${normalizedLabel} ${normalizedUrl}` : normalizedUrl;
 
   return `${normalizedDescription}\n\n${linkLine}`.trim();
 }

@@ -1,32 +1,32 @@
 site:
   name: Hoverkraft
-  site: 'https://hoverkraft.cloud'
-  base: '/'
+  site: "https://hoverkraft.cloud"
+  base: "/"
   trailingSlash: false
 
   googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
-  contactEmail: 'contact@hoverkraft.cloud'
-  bookingUrl: 'https://calendar.app.google/3t2J2Cu8FFtzoqoX8'
+  contactEmail: "contact@hoverkraft.cloud"
+  bookingUrl: "https://calendar.app.google/3t2J2Cu8FFtzoqoX8"
 
 # Default SEO metadata
 metadata:
   title:
     default: Hoverkraft
-    template: '%s - Hoverkraft'
-  description: '🚀 Cloud-native development platform for modern applications. Build, deploy, and scale with confidence.'
+    template: "%s - Hoverkraft"
+  description: "🚀 Cloud-native development platform for modern applications. Build, deploy, and scale with confidence."
   robots:
     index: true
     follow: true
   openGraph:
     site_name: Hoverkraft
     images:
-      - url: '~/assets/images/default.png'
+      - url: "~/assets/images/default.png"
         width: 1200
         height: 628
     type: website
   twitter:
-    handle: '@hoverkraft_tech'
-    site: '@hoverkraft_tech'
+    handle: "@hoverkraft_tech"
+    site: "@hoverkraft_tech"
     cardType: summary_large_image
 
 i18n:
@@ -44,25 +44,25 @@ apps:
 
     post:
       isEnabled: true
-      permalink: '/blog/%slug%' # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
+      permalink: "/blog/%slug%" # Variables: %slug%, %year%, %month%, %day%, %hour%, %minute%, %second%, %category%
       robots:
         index: true
 
     list:
       isEnabled: true
-      pathname: 'blog' # Blog main path, you can change this to "articles" (/articles)
+      pathname: "blog" # Blog main path, you can change this to "articles" (/articles)
       robots:
         index: true
 
     category:
       isEnabled: true
-      pathname: 'category' # Category main path /category/some-category, you can change this to "group" (/group/some-category)
+      pathname: "category" # Category main path /category/some-category, you can change this to "group" (/group/some-category)
       robots:
         index: true
 
     tag:
       isEnabled: true
-      pathname: 'tag' # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
+      pathname: "tag" # Tag main path /tag/some-tag, you can change this to "topics" (/topics/some-category)
       robots:
         index: false
 
@@ -75,4 +75,4 @@ analytics:
       id: null # or "G-XXXXXXXXXX"
 
 ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: "system" # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

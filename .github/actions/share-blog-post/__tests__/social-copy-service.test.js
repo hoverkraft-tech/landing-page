@@ -1,31 +1,31 @@
-const { describe, it } = require("node:test");
-const assert = require("node:assert/strict");
+const { describe, it } = require('node:test');
+const assert = require('node:assert/strict');
 
-const { SocialCopyService } = require("../src/social-copy-service");
+const { SocialCopyService } = require('../src/social-copy-service');
 
-describe("SocialCopyService", () => {
-  it("builds content map by integration type", async () => {
+describe('SocialCopyService', () => {
+  it('builds content map by integration type', async () => {
     const calls = [];
 
     const service = new SocialCopyService({
       integrations: [
-        { id: "a", type: "linkedin" },
-        { id: "b", type: "bluesky" },
+        { id: 'a', type: 'linkedin' },
+        { id: 'b', type: 'bluesky' },
       ],
       openAIService: {
         generateSocialSnippet: async (args) => {
           calls.push(args);
-          return args.integrationType === "linkedin" ? "Hi" : "Yo";
+          return args.integrationType === 'linkedin' ? 'Hi' : 'Yo';
         },
       },
-      readMoreLabelResolver: () => "Read more:",
+      readMoreLabelResolver: () => 'Read more:',
     });
 
     const result = await service.buildContentByIntegrationType({
-      title: "T",
-      excerpt: "E",
-      url: "https://example.com/blog/s",
-      language: "en",
+      title: 'T',
+      excerpt: 'E',
+      url: 'https://example.com/blog/s',
+      language: 'en',
     });
 
     assert.equal(calls.length, 2);

@@ -69,33 +69,35 @@ const externalLinkAttrs = (href?: string) =>
 <header
   class:list={[
     { sticky: isSticky, relative: !isSticky, dark: isDark },
-    'top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-opacity ease-in-out',
+    "top-0 z-40 flex-none mx-auto w-full border-b border-gray-50/0 transition-opacity ease-in-out",
   ]}
-  {...isSticky ? { 'data-aw-sticky-header': true } : {}}
+  {...isSticky ? { "data-aw-sticky-header": true } : {}}
   {...id ? { id } : {}}
 >
   <div class="absolute inset-0"></div>
   <div
     class:list={[
-      'relative text-default py-3 px-3 md:px-6 mx-auto w-full',
+      "relative text-default py-3 px-3 md:px-6 mx-auto w-full",
       {
-        'md:flex md:justify-between': position !== 'center',
+        "md:flex md:justify-between": position !== "center",
       },
       {
-        'md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-x-4': position === 'center',
+        "md:grid md:grid-cols-[1fr_auto_1fr] md:items-center md:gap-x-4":
+          position === "center",
       },
       {
-        'max-w-7xl': !isFullWidth,
+        "max-w-7xl": !isFullWidth,
       },
     ]}
   >
-    <div class:list={[{ 'mr-auto rtl:mr-0 rtl:ml-auto': position === 'right' }, 'flex justify-between']}>
-      <a class="flex items-center" href={homeHref}>
-        <Logo />
-      </a>
-      <div class="flex items-center md:hidden">
-        <ToggleMenu />
-      </div>
+    <div
+      class:list={[
+        { "mr-auto rtl:mr-0 rtl:ml-auto": position === "right" },
+        "flex justify-between",
+      ]}
+    >
+      <a class="flex items-center" href={homeHref}> <Logo /> </a>
+      <div class="flex items-center md:hidden"><ToggleMenu /></div>
     </div>
     <nav
       class="items-center w-full md:w-auto hidden md:flex md:mx-5 text-default overflow-y-auto overflow-x-hidden md:overflow-visible md:justify-self-center"
@@ -105,25 +107,37 @@ const externalLinkAttrs = (href?: string) =>
         class="flex flex-col md:flex-row md:self-center w-full md:w-auto text-xl md:text-[0.9375rem] tracking-[0.01rem] font-medium md:justify-center"
       >
         {links.map(({ text, href, links, featured }, index, arr) => (
-            <li class={links?.length ? 'dropdown md:relative' : ''}>
+            <li class={links?.length ? "dropdown md:relative" : ""}>
               {links?.length ? (
                 <>
                   <button
                     type="button"
                     class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
                   >
-                    {text}{' '}
-                    <Icon name="tabler:chevron-down" class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline" />
+                    {text}{" "}
+                    <Icon
+                      name="tabler:chevron-down"
+                      class="w-3.5 h-3.5 ml-0.5 rtl:ml-0 rtl:mr-0.5 hidden md:inline"
+                    />
                   </button>
                   <div
                     class:list={[
-                      'dropdown-menu pl-4 md:pl-0 md:hidden md:absolute md:top-full md:pt-3 md:z-[60]',
-                      index >= Math.ceil(arr.length / 2) ? 'md:right-0' : 'md:left-1/2 md:-translate-x-1/2',
-                      featured ? 'md:w-[42rem]' : 'md:w-[24rem]',
+                      "dropdown-menu pl-4 md:pl-0 md:hidden md:absolute md:top-full md:pt-3 md:z-[60]",
+                      index >= Math.ceil(arr.length / 2)
+                        ? "md:right-0"
+                        : "md:left-1/2 md:-translate-x-1/2",
+                      featured ? "md:w-[42rem]" : "md:w-[24rem]",
                     ]}
                   >
                     <div class="md:overflow-hidden md:rounded-2xl md:border md:border-gray-200 md:bg-white/95 md:shadow-xl md:backdrop-blur-md md:dark:border-white/12 md:dark:bg-slate-950/95 md:dark:shadow-[0_24px_80px_rgba(0,0,0,0.55)]">
-                      <div class:list={['md:grid md:gap-0', featured ? 'md:grid-cols-[16rem_1fr] md:dark:divide-x md:dark:divide-white/8' : '']}>
+                      <div
+                        class:list={[
+                          "md:grid md:gap-0",
+                          featured
+                            ? "md:grid-cols-[16rem_1fr] md:dark:divide-x md:dark:divide-white/8"
+                            : "",
+                        ]}
+                      >
                         {featured && (
                           <a
                             class="group hidden md:flex md:flex-col md:justify-between md:gap-4 md:bg-gradient-to-br md:from-primary/10 md:to-primary/5 md:p-5 md:dark:from-white/6 md:dark:via-primary/12 md:dark:to-transparent"
@@ -132,7 +146,11 @@ const externalLinkAttrs = (href?: string) =>
                           >
                             <div>
                               <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary text-white md:dark:bg-primary/18 md:dark:text-primary md:dark:ring-1 md:dark:ring-primary/25">
-                                <Icon name={featured.icon ?? 'tabler:star'} class="h-5 w-5" aria-hidden="true" />
+                                <Icon
+                                  name={featured.icon ?? "tabler:star"}
+                                  class="h-5 w-5"
+                                  aria-hidden="true"
+                                />
                               </span>
                               <p class="mt-4 text-[0.7rem] font-semibold uppercase tracking-[0.16em] text-primary">
                                 {featured.label}
@@ -155,36 +173,47 @@ const externalLinkAttrs = (href?: string) =>
                           </a>
                         )}
                         <ul class="md:grid md:gap-1 md:p-3 md:dark:bg-slate-950/70">
-                          {links.map(({ text: text2, href: href2, description, icon }) => (
-                            <li>
-                              <a
-                                class:list={[
-                                  'group flex items-start gap-3 rounded-xl py-2 px-3 transition-colors md:hover:bg-gray-50 md:dark:hover:bg-white/8',
-                                  normalizePath(href2 ?? '') === currentPath
-                                    ? 'bg-primary/6 md:dark:bg-primary/12 md:dark:ring-1 md:dark:ring-primary/18'
-                                    : '',
-                                ]}
-                                href={href2}
-                                {...externalLinkAttrs(href2)}
-                              >
-                                {icon && (
-                                  <span class="hidden md:inline-flex md:mt-0.5 md:h-8 md:w-8 md:shrink-0 md:items-center md:justify-center md:rounded-lg md:bg-primary/10 md:text-primary md:transition-colors md:group-hover:bg-primary md:group-hover:text-white md:dark:bg-white/6 md:dark:text-primary md:dark:group-hover:bg-primary md:dark:group-hover:text-white">
-                                    <Icon name={icon} class="h-4 w-4" aria-hidden="true" />
-                                  </span>
-                                )}
-                                <span class="md:flex md:flex-col">
-                                  <span class="text-sm font-semibold text-heading group-hover:text-primary dark:text-white md:dark:group-hover:text-primary/90">
-                                    {text2}
-                                  </span>
-                                  {description && (
-                                    <span class="hidden md:block md:text-xs md:leading-relaxed md:text-muted md:dark:text-gray-300/75">
-                                      {description}
+                          {links.map(
+                            ({
+                              text: text2,
+                              href: href2,
+                              description,
+                              icon,
+                            }) => (
+                              <li>
+                                <a
+                                  class:list={[
+                                    "group flex items-start gap-3 rounded-xl py-2 px-3 transition-colors md:hover:bg-gray-50 md:dark:hover:bg-white/8",
+                                    normalizePath(href2 ?? "") === currentPath
+                                      ? "bg-primary/6 md:dark:bg-primary/12 md:dark:ring-1 md:dark:ring-primary/18"
+                                      : "",
+                                  ]}
+                                  href={href2}
+                                  {...externalLinkAttrs(href2)}
+                                >
+                                  {icon && (
+                                    <span class="hidden md:inline-flex md:mt-0.5 md:h-8 md:w-8 md:shrink-0 md:items-center md:justify-center md:rounded-lg md:bg-primary/10 md:text-primary md:transition-colors md:group-hover:bg-primary md:group-hover:text-white md:dark:bg-white/6 md:dark:text-primary md:dark:group-hover:bg-primary md:dark:group-hover:text-white">
+                                      <Icon
+                                        name={icon}
+                                        class="h-4 w-4"
+                                        aria-hidden="true"
+                                      />
                                     </span>
                                   )}
-                                </span>
-                              </a>
-                            </li>
-                          ))}
+                                  <span class="md:flex md:flex-col">
+                                    <span class="text-sm font-semibold text-heading group-hover:text-primary dark:text-white md:dark:group-hover:text-primary/90">
+                                      {text2}
+                                    </span>
+                                    {description && (
+                                      <span class="hidden md:block md:text-xs md:leading-relaxed md:text-muted md:dark:text-gray-300/75">
+                                        {description}
+                                      </span>
+                                    )}
+                                  </span>
+                                </a>
+                              </li>
+                            ),
+                          )}
                         </ul>
                       </div>
                     </div>
@@ -193,8 +222,11 @@ const externalLinkAttrs = (href?: string) =>
               ) : (
                 <a
                   class:list={[
-                    'hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap',
-                    { 'aw-link-active': normalizePath(href ?? '') === currentPath },
+                    "hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap",
+                    {
+                      "aw-link-active":
+                        normalizePath(href ?? "") === currentPath,
+                    },
                   ]}
                   href={href}
                   {...externalLinkAttrs(href)}
@@ -208,19 +240,21 @@ const externalLinkAttrs = (href?: string) =>
     </nav>
     <div
       class:list={[
-        { 'ml-auto rtl:ml-0 rtl:mr-auto': position === 'left' },
-        'hidden md:self-center md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0 md:justify-self-end',
+        { "ml-auto rtl:ml-0 rtl:mr-auto": position === "left" },
+        "hidden md:self-center md:flex items-center md:mb-0 fixed w-full md:w-auto md:static justify-end left-0 rtl:left-auto rtl:right-0 bottom-0 p-3 md:p-0 md:justify-self-end",
       ]}
     >
       <div class="items-center flex justify-between w-full md:w-auto">
         <div class="flex">
           <LanguageSelector />
-          {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />}
+          {showToggleTheme && (
+              <ToggleTheme iconClass="w-6 h-6 md:w-5 md:h-5 md:inline-block" />
+            )}
           {showRssFeed && (
               <a
                 class="text-muted dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-hidden focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5 inline-flex items-center"
                 aria-label="RSS Feed"
-                href={getAsset('/rss.xml')}
+                href={getAsset("/rss.xml")}
               >
                 <Icon name="tabler:rss" class="w-5 h-5" />
               </a>
@@ -229,11 +263,14 @@ const externalLinkAttrs = (href?: string) =>
         {actions?.length ? (
             <span class="ml-4 rtl:ml-0 rtl:mr-4">
               {actions.map((btnProps) => (
-                <Button {...btnProps} class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto" />
+                <Button
+                  {...btnProps}
+                  class="ml-2 py-2.5 px-5.5 md:px-6 font-semibold shadow-none text-sm w-auto"
+                />
               ))}
             </span>
           ) : (
-            ''
+            ""
           )}
       </div>
     </div>

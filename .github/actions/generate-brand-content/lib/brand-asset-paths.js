@@ -1,36 +1,33 @@
 function toGeneratedBrandAssetPath(assetPath) {
-  if (typeof assetPath !== "string") {
+  if (typeof assetPath !== 'string') {
     return assetPath;
   }
 
-  const normalizedPath = assetPath.replace(/^\.\//, "").replace(/^\/+/, "");
+  const normalizedPath = assetPath.replace(/^\.\//, '').replace(/^\/+/, '');
 
-  if (normalizedPath.startsWith("assets/images/brand/")) {
+  if (normalizedPath.startsWith('assets/images/brand/')) {
     return normalizedPath;
   }
 
-  if (normalizedPath.startsWith("assets/")) {
-    return normalizedPath.replace(/^assets\//, "assets/images/brand/");
+  if (normalizedPath.startsWith('assets/')) {
+    return normalizedPath.replace(/^assets\//, 'assets/images/brand/');
   }
 
   return normalizedPath;
 }
 
 function mapAssetFormats(formats) {
-  if (!formats || typeof formats !== "object" || Array.isArray(formats)) {
+  if (!formats || typeof formats !== 'object' || Array.isArray(formats)) {
     return formats;
   }
 
   return Object.fromEntries(
-    Object.entries(formats).map(([format, assetPath]) => [
-      format,
-      toGeneratedBrandAssetPath(assetPath),
-    ]),
+    Object.entries(formats).map(([format, assetPath]) => [format, toGeneratedBrandAssetPath(assetPath)])
   );
 }
 
 function normalizeGeneratedLogoCollection(logos) {
-  if (!logos || typeof logos !== "object") {
+  if (!logos || typeof logos !== 'object') {
     return logos;
   }
 
@@ -48,7 +45,7 @@ function normalizeGeneratedLogoCollection(logos) {
 }
 
 function normalizeGeneratedMascot(mascot) {
-  if (!mascot || typeof mascot !== "object") {
+  if (!mascot || typeof mascot !== 'object') {
     return mascot;
   }
 

@@ -51,6 +51,8 @@ ci: ## Run tests in CI mode
 
 linter-fix: ## Execute linting and fix
 	$(call run_linter, \
+		-e FIX_YAML_PRETTIER=true \
+		-e FIX_MARKDOWN_PRETTIER=true \
 		-e FIX_MARKDOWN=true \
 		-e FIX_NATURAL_LANGUAGE=true \
 		-e FIX_SHELL_SHFMT=true \

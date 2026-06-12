@@ -6,33 +6,29 @@ class SocialImageUrlService {
   }
 
   getRepository() {
-    const repository = String(this.githubRepository ?? "").trim();
+    const repository = String(this.githubRepository ?? '').trim();
     if (!repository) {
-      throw new Error(
-        "githubRepository is required to build social image URLs",
-      );
+      throw new Error('githubRepository is required to build social image URLs');
     }
     return repository;
   }
 
   getSha() {
-    const sha = String(this.githubSha ?? "").trim();
+    const sha = String(this.githubSha ?? '').trim();
     if (!sha) {
-      throw new Error("githubSha is required to build social image URLs");
+      throw new Error('githubSha is required to build social image URLs');
     }
     return sha;
   }
 
   resolveFromTildePath(socialImage) {
-    if (typeof socialImage !== "string" || socialImage.trim().length === 0) {
-      throw new Error("socialImage path is required");
+    if (typeof socialImage !== 'string' || socialImage.trim().length === 0) {
+      throw new Error('socialImage path is required');
     }
 
     const normalized = socialImage.trim();
-    if (!normalized.startsWith("~/")) {
-      throw new Error(
-        `Cannot resolve social image URL from non-tilde path: ${socialImage}`,
-      );
+    if (!normalized.startsWith('~/')) {
+      throw new Error(`Cannot resolve social image URL from non-tilde path: ${socialImage}`);
     }
 
     const repoPath = `application/src/${normalized.slice(2)}`;
@@ -42,9 +38,7 @@ class SocialImageUrlService {
       const sha = this.getSha();
       return `https://raw.githubusercontent.com/${repository}/${sha}/${repoPath}`;
     } catch (error) {
-      throw new Error(
-        `Cannot resolve social image URL from path ${socialImage}: ${error.message}`,
-      );
+      throw new Error(`Cannot resolve social image URL from path ${socialImage}: ${error.message}`);
     }
   }
 }

@@ -1,79 +1,9 @@
 {
   "$schema": "./node_modules/@biomejs/biome/configuration_schema.json",
-  "vcs": {
-    "enabled": true,
-    "clientKind": "git",
-    "useIgnoreFile": true,
-    "root": ".."
-  },
+  "root": false,
+  "extends": ["../biome.json"],
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!src/assets/styles/tailwind.css", "!!.astro", "!!coverage", "!!dist"]
-  },
-  "formatter": {
-    "enabled": true,
-    "indentStyle": "space",
-    "indentWidth": 2,
-    "lineEnding": "lf",
-    "lineWidth": 120,
-    "attributePosition": "auto"
-  },
-  "linter": {
-    "enabled": true,
-    "rules": {
-      "recommended": false,
-      "correctness": {
-        "noUnusedImports": "error",
-        "noUnusedVariables": "error"
-      }
-    }
-  },
-  "javascript": {
-    "formatter": {
-      "quoteStyle": "single",
-      "jsxQuoteStyle": "double",
-      "quoteProperties": "asNeeded",
-      "trailingCommas": "es5",
-      "semicolons": "always",
-      "arrowParentheses": "always",
-      "bracketSpacing": true,
-      "bracketSameLine": false,
-      "attributePosition": "auto"
-    }
-  },
-  "css": {
-    "parser": {
-      "tailwindDirectives": true
-    },
-    "formatter": {
-      "enabled": true,
-      "indentStyle": "space",
-      "indentWidth": 2,
-      "lineEnding": "lf",
-      "lineWidth": 120
-    }
-  },
-  "html": {
-    "experimentalFullSupportEnabled": true,
-    "formatter": {
-      "enabled": true,
-      "indentStyle": "space",
-      "indentWidth": 2,
-      "lineEnding": "lf",
-      "lineWidth": 120,
-      "attributePosition": "auto",
-      "bracketSameLine": false
-    }
-  },
-  "overrides": [
-    {
-      "includes": [".vscode/**/*.json"],
-      "json": {
-        "parser": {
-          "allowComments": true,
-          "allowTrailingCommas": true
-        }
-      }
-    }
-  ]
+    "includes": ["**", "!src/assets/styles/tailwind.css", "!!**/.astro", "!!**/coverage", "!!**/dist"]
+  }
 }

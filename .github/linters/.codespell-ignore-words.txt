@@ -1,0 +1,3 @@
+# Code identifier false positives.
+# Keep this list minimal — French words are handled by file-level skips in .codespellrc.
+assertio
