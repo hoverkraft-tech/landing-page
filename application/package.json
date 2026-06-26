@@ -43,7 +43,7 @@
     "@fontsource/roboto-mono": "^5.2.9",
     "@iconify-json/tabler": "^1.2.35",
     "archiver": "^8.0.0",
-    "astro": "^6.4.6",
+    "astro": "^6.4.8",
     "astro-embed": "^0.13.0",
     "astro-icon": "^1.1.5",
     "limax": "4.2.3",
