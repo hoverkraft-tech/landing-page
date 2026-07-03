@@ -1,5 +1,5 @@
 import fs from 'node:fs/promises';
-import yaml from 'js-yaml';
+import { load } from 'js-yaml';
 import { configPath } from './paths.mjs';
 
 let projectConfigCache = null;
@@ -12,7 +12,7 @@ async function loadProjectConfig() {
 
   try {
     const rawConfig = await fs.readFile(configPath, 'utf8');
-    const parsed = yaml.load(rawConfig);
+    const parsed = load(rawConfig);
     projectConfigCache = parsed && typeof parsed === 'object' ? parsed : {};
   } catch {
     projectConfigCache = {};

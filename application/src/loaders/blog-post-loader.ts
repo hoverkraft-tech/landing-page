@@ -2,7 +2,7 @@ import { readdir, readFile } from 'node:fs/promises';
 import { join } from 'node:path';
 import type { Loader } from 'astro/loaders';
 import { glob } from 'astro/loaders';
-import yaml from 'js-yaml';
+import { load } from 'js-yaml';
 
 interface CommonData {
   publishDate: string;
@@ -42,7 +42,7 @@ export function blogPostLoader(): Loader {
           // Read common.yaml
           const commonPath = join(baseDir, folder.name, 'common.yaml');
           const commonContent = await readFile(commonPath, 'utf-8');
-          const data = yaml.load(commonContent) as CommonData;
+          const data = load(commonContent) as CommonData;
           commonDataMap.set(folder.name, data);
 
           // Read both language MDX files to get their slugs
@@ -52,7 +52,7 @@ export function blogPostLoader(): Loader {
               const mdxContent = await readFile(mdxPath, 'utf-8');
               const frontmatterMatch = mdxContent.match(/^---\n([\s\S]*?)\n---/);
               if (frontmatterMatch) {
-                const frontmatter = yaml.load(frontmatterMatch[1]) as { slug?: string };
+                const frontmatter = load(frontmatterMatch[1]) as { slug?: string };
                 const slug = frontmatter.slug || data.translationKey;
                 slugToFolder.set(slug, folder.name);
               }

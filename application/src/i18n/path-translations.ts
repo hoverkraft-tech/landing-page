@@ -1,4 +1,4 @@
-import yaml from 'js-yaml';
+import { load } from 'js-yaml';
 import { cleanSlug, POST_PERMALINK_PATTERN, trimSlash } from '~/utils/permalinks';
 import { defaultLang } from './ui';
 
@@ -87,7 +87,7 @@ const commonDataByFolder: Record<string, CommonData> = {};
 for (const [modulePath, yamlContent] of Object.entries(commonModules)) {
   const folderName = modulePath.replace(/^\.\.\/data\/post\//, '').replace(/\/common\.yaml$/, '');
   try {
-    const commonData = yaml.load(yamlContent) as CommonData;
+    const commonData = load(yamlContent) as CommonData;
     commonDataByFolder[folderName] = commonData;
   } catch (error) {
     console.error(`Failed to parse common.yaml for ${folderName}:`, error);
