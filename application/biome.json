@@ -4,6 +4,13 @@
   "extends": ["../biome.json"],
   "files": {
     "ignoreUnknown": true,
-    "includes": ["**", "!src/assets/styles/tailwind.css", "!!**/.astro", "!!**/coverage", "!!**/dist"]
+    "includes": [
+      "**",
+      "!src/assets/styles/tailwind.css",
+      "!src/assets/images/brand/logo/*.svg",
+      "!!**/.astro",
+      "!!**/coverage",
+      "!!**/dist"
+    ]
   }
 }

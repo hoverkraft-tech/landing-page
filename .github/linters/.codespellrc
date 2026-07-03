@@ -1,7 +1,8 @@
 [codespell]
 # Skip third-party/generated paths and French-locale content files.
-skip =
+skip =    
     .git,
+    *.svg,
     **/node_modules/**,
     **/coverage/**,
     **/dist/**,

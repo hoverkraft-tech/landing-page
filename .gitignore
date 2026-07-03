@@ -36,3 +36,4 @@ application/public/brand/
 application/biome-report.txt
 application/astro-report.txt
 application/humanize-report-checkstyle.xml
+application/.astro-build.log

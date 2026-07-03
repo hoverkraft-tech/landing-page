@@ -1,7 +1,7 @@
 import { readFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import type { RemarkPlugin } from '@astrojs/markdown-remark';
-import yaml from 'js-yaml';
+import { load } from 'js-yaml';
 
 /**
  * Remark plugin to inject common.yaml data into blog post frontmatter.
@@ -22,7 +22,7 @@ export function injectCommonData(): ReturnType<RemarkPlugin> {
       const dir = dirname(filePath);
       const commonPath = join(dir, 'common.yaml');
       const commonContent = await readFile(commonPath, 'utf-8');
-      const commonData = yaml.load(commonContent) as Record<string, unknown>;
+      const commonData = load(commonContent) as Record<string, unknown>;
 
       // Inject into both frontmatter AND file.data for Astro content collections
       if (!file.data.astro) {

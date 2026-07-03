@@ -2,6 +2,7 @@
 
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import react from '@astrojs/react';
 import { defineConfig, mergeConfig } from 'vitest/config';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
@@ -20,8 +21,9 @@ const astroViteConfig = getViteConfig(
   {
     // Keep component/unit tests minimal and deterministic.
     // We don't want site integrations (sitemap, compress, etc.) running in unit tests.
+    // Keep the React integration so TSX components still get the expected transform.
     configFile: false,
-    integrations: [],
+    integrations: [react()],
   }
 );
 
