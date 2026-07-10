@@ -48,7 +48,7 @@ jobs:
       contents: read
     steps:
       - name: Checkout repository
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
         with:
           persist-credentials: false
 
@@ -146,7 +146,7 @@ jobs:
           output-dir: ${{ env.BRAND_DIR }}
 
       - name: Create pull request with updated assets
-        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@624be17604ee0a7378488191aacb35851e7cf001 # 0.37.1
+        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@2334d395217f9811699dbd4ace9d8559e4d99e0d # 0.37.3
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: branding-update-${{ steps.validate-manifest.outputs.version }}
