@@ -26,9 +26,9 @@ Generates bilingual blog post content using OpenAI based on provided release dat
 
 ## Features
 
-- **AI-Powered Content**: Uses OpenAI GPT-4o-mini for engaging content generation
+- **AI-Powered Content**: Uses the OpenAI Responses API with GPT-5.4-nano for content generation
 - **Bilingual**: Generates both French and English versions
-- **Image Generation**: Creates preview images with DALL-E 3
+- **Image Generation**: Creates preview images with gpt-image-2
 - **SOLID Principles**: Clean, modular, testable code architecture
 - **Comprehensive Tests**: Full test coverage with Node.js test runner
 

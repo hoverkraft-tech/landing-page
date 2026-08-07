@@ -42,15 +42,6 @@ describe('OpenAIService', () => {
     assert.equal(request.input, 'Summarize these releases.');
   });
 
-  it('maps legacy max_tokens options to max_output_tokens', async () => {
-    await service.generateText([{ role: 'user', content: 'Summarize.' }], {
-      max_tokens: 450,
-    });
-
-    const request = service.client.responses.create.mock.calls[0].arguments[0];
-    assert.equal(request.max_output_tokens, 450);
-  });
-
   it('flattens array content into plain text input', async () => {
     await service.generateText([
       {

@@ -14,7 +14,7 @@ class OpenAIService {
   }
 
   getMaxOutputTokens(options = {}) {
-    return options.max_output_tokens ?? options.max_tokens ?? 2000;
+    return options.max_output_tokens ?? 2000;
   }
 
   getMessageText(content) {
