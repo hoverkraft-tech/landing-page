@@ -3,7 +3,7 @@
 # GitHub Action: Generate Blog Post
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/f364f64e1559085ddfd5afe821d6f4d087070d5f3df5d5533d3f19e95cf8d051/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
+  <img src="https://opengraph.githubassets.com/5f7b538e5c22e1abaf69a28491c28ff5593672fbcfa8e404f428ec664f7c0940/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
 </div>
 
 ---
@@ -26,7 +26,7 @@ Generates bilingual blog post content using OpenAI based on provided release dat
 
 ## Features
 
-- **AI-Powered Content**: Uses the OpenAI Responses API with GPT-5.4-nano for content generation
+- **AI-Powered Content**: Uses OpenAI Responses API with GPT-5.4-nano for content generation
 - **Bilingual**: Generates both French and English versions
 - **Image Generation**: Creates preview images with gpt-image-2
 - **SOLID Principles**: Clean, modular, testable code architecture
