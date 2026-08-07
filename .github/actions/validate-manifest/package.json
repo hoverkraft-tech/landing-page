@@ -13,6 +13,6 @@
     "ajv-formats": "^3.0.1"
   },
   "devDependencies": {
-    "mock-fs": "^5.4.0"
+    "mock-fs": "^5.5.0"
   }
 }
