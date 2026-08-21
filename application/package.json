@@ -49,7 +49,7 @@
     "limax": "4.2.3",
     "lodash.merge": "^4.6.2",
     "marked": "^18.0.9",
-    "puppeteer": "^25.5.0",
+    "puppeteer": "^25.7.0",
     "react": "^19.2.8",
     "react-dom": "^19.2.8",
     "unpic": "^4.2.2"
