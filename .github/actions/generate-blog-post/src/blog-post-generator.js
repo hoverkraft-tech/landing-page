@@ -97,8 +97,8 @@ translationKey: ${slug}
   async generatePreviewImage(outputPath) {
     const prompt = `Create a modern, professional illustration for a tech blog post about software releases. The image should represent open source collaboration, software updates, and innovation. Use geometric shapes, gradients in blue and purple tones, and abstract representations of code, packages, or version control. The style should be clean, minimalist, and tech-forward. No text in the image.`;
 
-    const imageUrl = await this.openAIService.generateImage(prompt);
-    await this.fileSystemService.downloadFile(imageUrl, outputPath);
+    const imageBuffer = await this.openAIService.generateImage(prompt);
+    this.fileSystemService.writeBinaryFile(outputPath, imageBuffer);
   }
 
   /**

@@ -5,6 +5,7 @@ const { OpenAIService } = require('../src/openai-service');
 
 describe('OpenAIService', () => {
   let service;
+  const generatedImageBytes = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a, 0x00, 0xff]);
 
   beforeEach(() => {
     service = new OpenAIService('test-key');
@@ -14,7 +15,7 @@ describe('OpenAIService', () => {
       },
       images: {
         generate: mock.fn(async () => ({
-          data: [{ url: 'https://example.com/image.png' }],
+          data: [{ b64_json: generatedImageBytes.toString('base64') }],
         })),
       },
     };
@@ -59,10 +60,11 @@ describe('OpenAIService', () => {
     assert.equal(request.input, 'Line one.\nLine two.');
   });
 
-  it('does not send unsupported style parameter for image generation', async () => {
+  it('decodes generated image data without unsupported request parameters', async () => {
     const result = await service.generateImage('Generate a release illustration');
 
-    assert.equal(result, 'https://example.com/image.png');
+    assert.ok(Buffer.isBuffer(result));
+    assert.deepEqual(result, generatedImageBytes);
 
     const request = service.client.images.generate.mock.calls[0].arguments[0];
     assert.equal(request.model, 'gpt-image-2');
@@ -71,5 +73,26 @@ describe('OpenAIService', () => {
     assert.equal(request.size, '1792x1024');
     assert.equal(request.quality, 'high');
     assert.equal('style' in request, false);
+    assert.equal('response_format' in request, false);
+  });
+
+  it('fails clearly when generated image data is missing', async () => {
+    const invalidResponses = [
+      {},
+      { data: [] },
+      { data: [{}] },
+      { data: [{ b64_json: '' }] },
+      { data: [{ b64_json: ' ' }] },
+      { data: [{ b64_json: 'A' }] },
+      { data: [{ b64_json: 'not-base64!!!' }] },
+    ];
+
+    for (const response of invalidResponses) {
+      service.client.images.generate = mock.fn(async () => response);
+
+      await assert.rejects(() => service.generateImage('Generate a release illustration'), {
+        message: 'OpenAI image response did not include base64 image data',
+      });
+    }
   });
 });

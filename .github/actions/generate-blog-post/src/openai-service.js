@@ -104,7 +104,18 @@ class OpenAIService {
       quality: options.quality || 'high',
     });
 
-    return response.data[0].url;
+    const imageBase64 = response.data?.[0]?.b64_json;
+    if (typeof imageBase64 !== 'string' || !imageBase64.trim()) {
+      throw new Error('OpenAI image response did not include base64 image data');
+    }
+
+    const normalizedImageBase64 = imageBase64.trim();
+    const imageBuffer = Buffer.from(normalizedImageBase64, 'base64');
+    if (imageBuffer.length === 0 || imageBuffer.toString('base64') !== normalizedImageBase64) {
+      throw new Error('OpenAI image response did not include base64 image data');
+    }
+
+    return imageBuffer;
   }
 }
 

@@ -45,8 +45,8 @@ describe('BlogPostGenerator', () => {
     mockFileSystemService = {
       ensureDirectory: mock.fn(),
       writeFile: mock.fn(),
+      writeBinaryFile: mock.fn(),
       getAbsolutePath: mock.fn((...args) => args.join('/')),
-      downloadFile: mock.fn(),
     };
     blogPostGenerator = new BlogPostGenerator(mockContentGenerator, mockOpenAIService, mockFileSystemService);
   });
@@ -64,8 +64,8 @@ describe('BlogPostGenerator', () => {
 
       mockContentGenerator.generateFrenchContent.mock.mockImplementation(async () => buildLocalizedPayload('fr'));
       mockContentGenerator.generateEnglishContent.mock.mockImplementation(async () => buildLocalizedPayload('en'));
-      mockOpenAIService.generateImage.mock.mockImplementation(async () => 'https://example.com/image.png');
-      mockFileSystemService.downloadFile.mock.mockImplementation(async () => {});
+      const imageBuffer = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x00, 0xff]);
+      mockOpenAIService.generateImage.mock.mockImplementation(async () => imageBuffer);
 
       const result = await blogPostGenerator.generate(mockReleasesData, {
         sinceDate: '2025-10-01T00:00:00Z',
@@ -78,6 +78,12 @@ describe('BlogPostGenerator', () => {
       assert.strictEqual(result.imageGenerated, true);
       assert.strictEqual(mockFileSystemService.ensureDirectory.mock.calls.length, 2);
       assert.strictEqual(mockFileSystemService.writeFile.mock.calls.length, 5); // common.yaml + per-locale JSON & MDX
+      assert.strictEqual(mockFileSystemService.writeBinaryFile.mock.calls.length, 1);
+      assert.strictEqual(
+        mockFileSystemService.writeBinaryFile.mock.calls[0].arguments[0],
+        '/test/src/assets/images/blog/' + result.slug + '/preview.png'
+      );
+      assert.strictEqual(mockFileSystemService.writeBinaryFile.mock.calls[0].arguments[1], imageBuffer);
 
       const frenchJsonCall = mockFileSystemService.writeFile.mock.calls.find((call) =>
         call.arguments?.[0].endsWith('fr.data.json')
