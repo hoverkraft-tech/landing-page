@@ -113,12 +113,15 @@ jobs:
         with:
           manifest: ${{ steps.parse-inputs.outputs.manifest }}
 
-      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
-        id: generate-token
+      - name: Generate token for branding artifact download
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: generate-download-token
         with:
           client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
           private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }} # zizmor: ignore[secrets-outside-env]
           owner: ${{ github.repository_owner }}
+          repositories: ${{ steps.parse-inputs.outputs.repository }}
+          permission-actions: read
 
       - name: Download and organize branding assets
         uses: ./.github/actions/download-branding-assets
@@ -126,7 +129,7 @@ jobs:
           artifact-id: ${{ steps.parse-inputs.outputs.artifact-id }}
           repository: ${{ steps.parse-inputs.outputs.repository }}
           run-id: ${{ steps.parse-inputs.outputs.run-id }}
-          github-token: ${{ steps.generate-token.outputs.token }}
+          github-token: ${{ steps.generate-download-token.outputs.token }}
           logos: ${{ steps.validate-manifest.outputs.logos }}
           mascot: ${{ steps.validate-manifest.outputs.mascot }}
           logos-dir: ${{ env.BRAND_LOGO_DIR }}
@@ -145,10 +148,19 @@ jobs:
           typography: ${{ steps.validate-manifest.outputs.typography }}
           output-dir: ${{ env.BRAND_DIR }}
 
+      - name: Generate token for pull request creation
+        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: generate-pull-request-token
+        with:
+          client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }} # zizmor: ignore[secrets-outside-env]
+          permission-contents: write
+          permission-pull-requests: write
+
       - name: Create pull request with updated assets
         uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@3a27d31e9ccefbe9609cc9165017ed100ff34a22 # 0.38.0
         with:
-          github-token: ${{ steps.generate-token.outputs.token }}
+          github-token: ${{ steps.generate-pull-request-token.outputs.token }}
           branch: branding-update-${{ steps.validate-manifest.outputs.version }}
           commit-message: |
             chore: update branding assets to version ${{ steps.validate-manifest.outputs.version }}
