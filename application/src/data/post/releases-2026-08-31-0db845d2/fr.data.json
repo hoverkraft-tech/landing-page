@@ -1,0 +1,41 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Du 24 au 31 août 2026, 1 release a été publiée sur 1 dépôt suivi, avec une activité concentrée sur docusaurus-theme (1 release).\n\nSur la période, le dépôt docusaurus-theme a porté l'unique publication, avec la release la plus récente docusaurus-theme 0.4.1 datée du 30 août 2026. Aucun autre dépôt suivi n'a contribué à des releases sur cette fenêtre, ce qui indique un cycle de changement focalisé sur le thème et ses composants Docusaurus plutôt que sur une évolution multi-projets.\n\n- docusaurus-theme : la release 0.4.1 sert de point d'ancrage pour les équipes qui standardisent leurs docs Docusaurus, ce qui aide les contributeurs à aligner rapidement leurs changements sur une version stable du thème.\n- Capacité de déploiement \"par dépôt\" : avec 1 release sur 1 dépôt, la plateforme peut piloter des mises à jour ciblées (thème seul) sans impacter l'ensemble du catalogue, ce qui réduit le risque opérationnel pour les SRE lors des rollouts.",
+  "closingMarkdown": "## Récapitulatif (24 août 2026 - 31 août 2026)\n\n- **Dépôts suivis :** 1\n- **Releases publiées :** 1\n- **Projet le plus actif :** `docusaurus-theme` (1)\n- **Release la plus récente :** `docusaurus-theme 0.4.1`\n\n## Dépôts en lumière\n\n### `docusaurus-theme`\n- **Releases :** 1\n- **Étoiles :** 0\n\n## Impacts et points de vigilance\n- La seule release de la période concerne **`docusaurus-theme 0.4.1`**. Pour les équipes qui maintiennent des sites Docusaurus, l'enjeu principal est de vérifier la compatibilité des composants de thème (styles, layouts, configuration) avec votre version de Docusaurus et vos contraintes de conformité (accessibilité, cohérence des composants, règles de linting).\n\n### Conclusion (impact pratique)\nPour les **platform engineers**, **SREs** et autres utilisateurs techniques, cette semaine se résume à un changement localisé sur `docusaurus-theme 0.4.1`. L'impact attendu se mesure surtout au niveau de la **stabilité du build**, de la **cohérence du rendu** et de la **maîtrise des dépendances** lors des déploiements de documentation.\n\n- **Lancer un benchmark de build** sur votre pipeline CI en ciblant `docusaurus-theme` (artefact : **release `docusaurus-theme 0.4.1`**) afin de valider le temps de compilation et la stabilité des caches (gain attendu : réduction des variations de performance et des échecs intermittents).\n- **Vérifier la conformité UI/accessibilité** en relisant la documentation et les composants du thème dans `docusaurus-theme` (artefact : **",
+  "stats": {
+    "period": {
+      "since": "2026-08-24T18:49:29.106Z",
+      "until": "2026-08-31T18:49:29.106Z"
+    },
+    "totalRepos": 1,
+    "totalReleases": 1,
+    "busiestRepo": {
+      "name": "docusaurus-theme",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "docusaurus-theme",
+      "name": "0.4.1",
+      "publishedAt": "2026-08-30T06:54:14Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "docusaurus-theme",
+      "description": "Thème Hoverkraft pour Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "0.4.1",
+          "tag": "0.4.1",
+          "publishedAt": "2026-08-30T06:54:14Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.4.1",
+          "highlights": [
+            "## Résumé de la version\n\nAucune fonctionnalité ni correction visible par les utilisateurs n'est incluse dans cette version.\n\nLes modifications internes mettent à jour les dépendances des GitHub Actions, de Docusaurus/npm, de la GitHub CLI et des dépendances Docker-in-Docker."
+          ]
+        }
+      ]
+    }
+  ]
+}
