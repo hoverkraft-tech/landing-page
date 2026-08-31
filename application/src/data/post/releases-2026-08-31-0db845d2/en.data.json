@@ -1,0 +1,41 @@
+{
+  "lang": "en",
+  "introMarkdown": "From Aug 24, 2026 to Aug 31, 2026, HoverKraft shipped 1 release across 1 repository (deploy frequency: 1 release in 7 days).\n\nDuring this period, activity centered on `docusaurus-theme`, which was the busiest project with 1 release and shipped `docusaurus-theme` version 0.4.1 on Aug 30, 2026. No other repositories recorded releases, so the change surface was limited to the documentation theming layer rather than broader platform components or shared infrastructure patterns.\n\n- `docusaurus-theme` (v0.4.1): Platform engineers and technical contributors can treat this as a focused documentation UI update, which reduces risk compared to simultaneous changes across multiple repos and helps keep adoption work aligned with a single, versioned theme artifact.\n- Release cadence (1 release / week): SREs can use the low release count to validate operational expectations (build, publish, and downstream consumption) without the noise of concurrent deployments, making it easier to correlate any issues to a specific repo version.\n- Single-repo change scope (`docusaurus-theme` only): Technical contributors benefit from clearer review and rollback boundaries when adopting HoverKraft projects, since the theming update is isolated to one repository and one tagged release.",
+  "closingMarkdown": "## Weekly Release Summary (Aug 24, 2026 - Aug 31, 2026)\n\n### Coverage\n- **Repositories covered:** 1\n- **Releases shipped:** 1\n- **Busiest project:** `docusaurus-theme` (1)\n- **Most recent release:** `docusaurus-theme` **0.4.1**\n\n### Repository notes\n- **`docusaurus-theme`**\n  - **Releases:** 1\n  - **Stars:** 0\n\n## Practical impact (concise)\nFor platform engineers, SREs, and other technical users, this week's activity is limited to a single documentation theming change. The main operational value is predictable documentation rendering and consistent UI behavior across environments where the theme is used, with minimal risk to runtime services since the scope is confined to the documentation layer.\n\n### Next steps\n- **Run a documentation build/render benchmark for `docusaurus-theme@0.4.1`** (e.g., measure build time and page load metrics in your CI or staging) to confirm performance stability and catch regressions early.\n- **Review the release notes and configuration expectations for `docusaurus-theme` 0.4.1** to ensure your Docusaurus integration matches the theme's supported settings, improving compliance with internal documentation standards.\n- **Adopt the `docusaurus-theme` upgrade in your documentation pipeline** (pin the version in your docs repo and add a smoke test that validates key pages render) to improve automation and reduce manual drift.",
+  "stats": {
+    "period": {
+      "since": "2026-08-24T18:49:29.106Z",
+      "until": "2026-08-31T18:49:29.106Z"
+    },
+    "totalRepos": 1,
+    "totalReleases": 1,
+    "busiestRepo": {
+      "name": "docusaurus-theme",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "docusaurus-theme",
+      "name": "0.4.1",
+      "publishedAt": "2026-08-30T06:54:14Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "docusaurus-theme",
+      "description": "Hoverkraft theme for Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "0.4.1",
+          "tag": "0.4.1",
+          "publishedAt": "2026-08-30T06:54:14Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.4.1",
+          "highlights": [
+            "## Release Summary\n\nNo user-facing features or fixes are included in this release.\r\n\r\nInternal changes update GitHub Actions, Docusaurus/npm development dependencies, GitHub CLI, and Docker-in-Docker dependencies."
+          ]
+        }
+      ]
+    }
+  ]
+}
