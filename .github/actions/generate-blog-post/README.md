@@ -3,7 +3,7 @@
 # GitHub Action: Generate Blog Post
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/081aa742246272af7849cd466b1ac5211f90bd224d94754fe5449c967d1268d3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
+  <img src="https://opengraph.githubassets.com/685218b2fd93fd7c89ea848275205406bb46d5882bac1d97824f60379684e5c4/hoverkraft-tech/landing-page" width="60px" align="center" alt="Generate Blog Post" />
 </div>
 
 ---
@@ -38,7 +38,7 @@ Generates bilingual blog post content using OpenAI based on provided release dat
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/generate-blog-post@e19e385031f39476dc1b00da85d9e63eeedfc387 # main
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-blog-post@563d130bff06ee7bdb5cb5a340ced9d2f0ef6ee0 # main
   with:
     # JSON-stringified array of releases data
     # This input is required.
