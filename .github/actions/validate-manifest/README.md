@@ -3,7 +3,7 @@
 # GitHub Action: Validate Branding Manifest
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/3b52aab2c5a6954637dbadc90a7f70fcfe4dc0aea75feb50acc9d63bab2def0c/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
+  <img src="https://opengraph.githubassets.com/081aa742246272af7849cd466b1ac5211f90bd224d94754fe5449c967d1268d3/hoverkraft-tech/landing-page" width="60px" align="center" alt="Validate Branding Manifest" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Validates the branding manifest against JSON schema and parses it for use in the
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/validate-manifest@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
+- uses: hoverkraft-tech/landing-page/.github/actions/validate-manifest@e19e385031f39476dc1b00da85d9e63eeedfc387 # main
   with:
     # The manifest JSON string from the repository dispatch event
     # This input is required.
