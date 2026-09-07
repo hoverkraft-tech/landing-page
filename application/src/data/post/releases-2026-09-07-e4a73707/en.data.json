@@ -1,0 +1,53 @@
+{
+  "lang": "en",
+  "introMarkdown": "During Aug 31, 2026-Sep 7, 2026, the platform shipped 2 releases across 1 repository, with the busiest project (ci-github-publish) accounting for both deployments (deploy frequency: 2 releases/week).\n\nThis week's activity centered on `ci-github-publish`, which delivered both releases and therefore drove the release cadence. The most recent release was `ci-github-publish` Version `33536504188.0.0` on Sep 1, 2026, indicating that the CI-to-GitHub publishing path remained the primary change surface. For contributors, this keeps the operational focus on the CI publishing workflow and its release packaging/versioning behavior rather than on additional repositories or architectural components.\n\n- `ci-github-publish` (2 releases): Platform engineers and SREs can treat the CI-to-GitHub publish pipeline as the current source of truth for release timing and troubleshoot issues there first when deployment behavior changes.\n- `ci-github-publish` Version `33536504188.0.0` (Sep 1, 2026): Technical contributors can map observed behavior back to a specific release artifact/version, which reduces time spent correlating CI changes with downstream effects.\n- Single-repo scope (1 repository covered): Adopting teams can expect fewer moving parts this week, making it easier to validate changes end-to-end without cross-repo dependency tracking.",
+  "closingMarkdown": "## Weekly Release Summary (Aug 31, 2026 - Sep 7, 2026)\n\n**Repositories covered:** 1\n**Releases shipped:** 2\n**Busiest project:** `ci-github-publish` (2)\n**Most recent release:** `ci-github-publish` Version `33536504188.0.0`\n\n### Repositories to note\n- **`ci-github-publish`** - 2 releases, **5 ⭐**\n\n## Practical impact (concise)\nFor platform engineers and SREs, the two shipped updates in `ci-github-publish` point to continued iteration on CI-to-GitHub publishing workflows. Technical users should expect incremental improvements in automation reliability and release mechanics, with the most immediate value coming from fewer manual steps and more consistent CI publishing behavior.\n\n### Next steps\n- **Run a CI publishing smoke test** against `ci-github-publish` using the latest release (`33536504188.0.0`) to confirm end-to-end artifact publication behavior and reduce release friction (automation reliability).\n- **Review the `ci-github-publish` release notes and workflow inputs** for any changes in required variables or permissions to maintain compliance with your org's GitHub access model (compliance and operational correctness).\n- **Benchmark pipeline duration and failure rate** for jobs that depend on `ci-github-publish` before vs after the two releases to quantify any performance gains and identify regressions (performance and stability).",
+  "stats": {
+    "period": {
+      "since": "2026-08-31T14:49:24.953Z",
+      "until": "2026-09-07T14:49:24.953Z"
+    },
+    "totalRepos": 1,
+    "totalReleases": 2,
+    "busiestRepo": {
+      "name": "ci-github-publish",
+      "count": 2
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-publish",
+      "name": "Version 33536504188.0.0",
+      "publishedAt": "2026-09-01T17:17:05Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "Version 33536504188.0.0",
+          "tag": "test-release-delete-published-33536504188-1",
+          "publishedAt": "2026-09-01T17:17:05Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/test-release-delete-published-33536504188-1",
+          "highlights": [
+            "What's Changed",
+            "No changes",
+            "New Contributors",
+            "_No new contributors in this release._"
+          ]
+        },
+        {
+          "name": "0.28.0",
+          "tag": "0.28.0",
+          "publishedAt": "2026-09-01T17:13:39Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.28.0",
+          "highlights": [
+            "## Release Summary\n\nThis release adds a new release deletion action, including tests and documentation. Documentation for actions and workflows has also been refreshed.\r\n\r\nInternal changes include GitHub Actions, npm, and documentation tooling dependency updates."
+          ]
+        }
+      ]
+    }
+  ]
+}
