@@ -31,10 +31,9 @@ export function blogPostLoader(): Loader {
       // First, let the glob loader do its thing
       await baseGlobLoader.load(context);
 
-      // Build a map of slug -> folder name by reading each MDX file
+      // Build a map of folder -> common.yaml data.
       const baseDir = './src/data/post';
       const folders = await readdir(baseDir, { withFileTypes: true });
-      const slugToFolder = new Map<string, string>(); // Maps "slug-lang" to folder name
       const commonDataMap = new Map<string, CommonData>();
 
       for (const folder of folders.filter((f) => f.isDirectory())) {
@@ -44,22 +43,6 @@ export function blogPostLoader(): Loader {
           const commonContent = await readFile(commonPath, 'utf-8');
           const data = load(commonContent) as CommonData;
           commonDataMap.set(folder.name, data);
-
-          // Read both language MDX files to get their slugs
-          for (const lang of ['fr', 'en']) {
-            const mdxPath = join(baseDir, folder.name, `${lang}.mdx`);
-            try {
-              const mdxContent = await readFile(mdxPath, 'utf-8');
-              const frontmatterMatch = mdxContent.match(/^---\n([\s\S]*?)\n---/);
-              if (frontmatterMatch) {
-                const frontmatter = load(frontmatterMatch[1]) as { slug?: string };
-                const slug = frontmatter.slug || data.translationKey;
-                slugToFolder.set(slug, folder.name);
-              }
-            } catch {
-              // MDX file doesn't exist for this language
-            }
-          }
         } catch {
           // No common.yaml in this folder
         }
@@ -69,8 +52,8 @@ export function blogPostLoader(): Loader {
       const entries = Array.from(context.store.entries());
 
       for (const [id, entry] of entries) {
-        // The entry ID is the slug from the MDX frontmatter
-        const folderName = slugToFolder.get(id);
+        const filePath = entry.filePath;
+        const folderName = filePath?.replace(/^src\/data\/post\//, '').split('/')[0];
 
         if (folderName && commonDataMap.has(folderName)) {
           const commonData = commonDataMap.get(folderName)!;

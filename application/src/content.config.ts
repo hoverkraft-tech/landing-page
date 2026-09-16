@@ -62,6 +62,7 @@ const postCollection = defineCollection({
     tags: z.array(z.string()).optional(),
     author: z.string().optional(),
     slug: z.string().optional(),
+    routeSlug: z.string().optional(),
     lang: z.enum(['fr', 'en']).optional().default('fr'), // Default language is French
     translationKey: z.string().optional(),
 

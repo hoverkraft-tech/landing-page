@@ -65,11 +65,12 @@ const getNormalizedPost = async (post: CollectionEntry<'post'>): Promise<Post> =
     metadata = {},
     lang = defaultLang,
     translationKey: rawTranslationKey,
+    routeSlug: rawRouteSlug,
     slug: rawSlug,
   } = data;
 
   // Use slug from frontmatter if available, otherwise extract from ID
-  const slug = rawSlug || (id.includes('/') ? id.split('/')[0] : cleanSlug(id));
+  const slug = rawRouteSlug || rawSlug || (id.includes('/') ? id.split('/')[0] : cleanSlug(id));
   const publishDate = new Date(rawPublishDate);
   const updateDate = rawUpdateDate ? new Date(rawUpdateDate) : undefined;
 
