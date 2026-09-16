@@ -87,17 +87,17 @@ const summaryRows = [
             <p class="mt-4 text-xl text-muted max-w-2xl">{course.description}</p>
 
             {(course.tags ?? []).length > 0 && (
-                <div class="mt-6 flex flex-wrap gap-2">
-                  {(course.tags ?? []).map((tag) => (
-                    <a
-                      class="inline-flex items-center rounded-full border border-gray-200 dark:border-slate-700 px-3 py-1 text-sm text-default bg-white/70 dark:bg-slate-900/60"
-                      href={`${catalogPath}/tag/${cleanSlug(tag)}`}
-                    >
-                      {tag}
-                    </a>
-                  ))}
-                </div>
-              )}
+  <div class="mt-6 flex flex-wrap gap-2">
+    {(course.tags ?? []).map((tag) => (
+      <a
+        class="inline-flex items-center rounded-full border border-gray-200 dark:border-slate-700 px-3 py-1 text-sm text-default bg-white/70 dark:bg-slate-900/60"
+        href={`${catalogPath}/tag/${cleanSlug(tag)}`}
+      >
+        {tag}
+      </a>
+    ))}
+  </div>
+)}
 
             <div class="mt-8 flex flex-col sm:flex-row gap-4">
               <Button variant="primary" text={t('training.detail.contact')} href={`${contactPath}#booking`} />
@@ -106,16 +106,16 @@ const summaryRows = [
 
             <div class="mt-10 grid sm:grid-cols-2 gap-3">
               {summaryRows.slice(0, 4).map((row) => (
-                  <div class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 px-4 py-3">
-                    <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
-                    <div class="leading-snug">
-                      {row.label && <div class="text-sm text-muted">{row.label}</div>}
-                      <div class="font-medium text-default">
-                        <span>{row.value}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+  <div class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-white/70 dark:bg-slate-900/60 px-4 py-3">
+    <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
+    <div class="leading-snug">
+      {row.label && <div class="text-sm text-muted">{row.label}</div>}
+      <div class="font-medium text-default">
+        <span>{row.value}</span>
+      </div>
+    </div>
+  </div>
+))}
             </div>
           </div>
 
@@ -153,14 +153,14 @@ const summaryRows = [
               <p class="mt-4 text-lg text-muted whitespace-pre-line">{course.context}</p>
               <div class="mt-8 grid sm:grid-cols-2 gap-3">
                 {summaryRows.slice(4).map((row) => (
-                    <div class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-page px-4 py-3">
-                      <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
-                      <div class="leading-snug">
-                        {row.label && <div class="text-sm text-muted">{row.label}</div>}
-                        <div class="font-medium text-default">{row.value}</div>
-                      </div>
-                    </div>
-                  ))}
+  <div class="flex items-start gap-3 rounded-lg border border-gray-200 dark:border-slate-800 bg-page px-4 py-3">
+    <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
+    <div class="leading-snug">
+      {row.label && <div class="text-sm text-muted">{row.label}</div>}
+      <div class="font-medium text-default">{row.value}</div>
+    </div>
+  </div>
+))}
               </div>
             </div>
           </section>
@@ -177,14 +177,14 @@ const summaryRows = [
                   columns={1}
                   defaultIcon="tabler:check"
                   items={course.objectives.map((obj) => ({
-                    title: obj.title,
-                    description: obj.description,
-                  }))}
+  title: obj.title,
+  description: obj.description,
+}))}
                   classes={{
-                    container: 'gap-4',
-                    panel: 'rounded-lg border border-gray-200 dark:border-slate-800 bg-page p-5',
-                    icon: 'w-8 h-8 text-primary',
-                  }}
+  container: 'gap-4',
+  panel: 'rounded-lg border border-gray-200 dark:border-slate-800 bg-page p-5',
+  icon: 'w-8 h-8 text-primary',
+}}
                 />
               </div>
             </div>
@@ -199,13 +199,13 @@ const summaryRows = [
                 <Timeline
                   defaultIcon="tabler:circle"
                   items={course.outline.map((day, index) => ({
-                    title: day.title,
-                    description: day.description,
-                    icon: `tabler:number-${index + 1}`,
-                  }))}
+  title: day.title,
+  description: day.description,
+  icon: `tabler:number-${index + 1}`,
+}))}
                   classes={{
-                    container: 'mt-2',
-                  }}
+  container: 'mt-2',
+}}
                 />
               </div>
             </div>
@@ -242,14 +242,14 @@ const summaryRows = [
                 <ItemGrid2
                   columns={2}
                   items={course.inclusions.map((inc) => ({
-                    title: inc.title,
-                    icon: inc.icon,
-                  }))}
+  title: inc.title,
+  icon: inc.icon,
+}))}
                   classes={{
-                    container: 'gap-4 md:gap-6',
-                    panel: 'rounded-lg border border-gray-200 dark:border-slate-800 bg-page p-5',
-                    icon: 'w-8 h-8 text-primary',
-                  }}
+  container: 'gap-4 md:gap-6',
+  panel: 'rounded-lg border border-gray-200 dark:border-slate-800 bg-page p-5',
+  icon: 'w-8 h-8 text-primary',
+}}
                 />
               </div>
             </div>
@@ -315,16 +315,16 @@ const summaryRows = [
 
             <div class="mt-6 border-t border-gray-200 dark:border-slate-800 pt-6 space-y-3">
               {summaryRows.map((row) => (
-                  <div class="flex items-start gap-3">
-                    <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
-                    <div class="leading-snug">
-                      {row.label && <div class="text-sm text-muted">{row.label}</div>}
-                      <div class="text-default">
-                        <span>{row.value}</span>
-                      </div>
-                    </div>
-                  </div>
-                ))}
+  <div class="flex items-start gap-3">
+    <Icon name={row.icon} class="w-5 h-5 text-primary mt-0.5" />
+    <div class="leading-snug">
+      {row.label && <div class="text-sm text-muted">{row.label}</div>}
+      <div class="text-default">
+        <span>{row.value}</span>
+      </div>
+    </div>
+  </div>
+))}
             </div>
 
             <div class="mt-8 flex flex-col gap-3">

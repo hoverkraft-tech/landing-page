@@ -40,28 +40,28 @@ const getLocalizedPath = (targetLang: keyof typeof languages) => translatePath(n
     data-language-menu
   >
     {Object.entries(languages).map(([lang, label]) => {
-        const typedLang = lang as keyof typeof languages;
+  const typedLang = lang as keyof typeof languages;
 
-        return (
-          <a
-            href={getLocalizedPath(typedLang)}
-            class:list={[
-              'block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 first:rounded-t-lg last:rounded-b-lg',
-              {
-                'bg-gray-50 dark:bg-gray-900 font-semibold': currentLang === lang,
-                'text-gray-700 dark:text-gray-300': currentLang !== lang,
-              },
-            ]}
-            hreflang={typedLang}
-          >
-            <span class="flex items-center">
-              {lang === 'fr' ? '🇫🇷' : '🇬🇧'}
-              <span class="ml-2">{label}</span>
-              {currentLang === lang && <Icon name="tabler:check" class="w-4 h-4 ml-auto text-primary" />}
-            </span>
-          </a>
-        );
-      })}
+  return (
+    <a
+      href={getLocalizedPath(typedLang)}
+      class:list={[
+        'block px-4 py-2 text-sm hover:bg-gray-100 dark:hover:bg-gray-700 first:rounded-t-lg last:rounded-b-lg',
+        {
+          'bg-gray-50 dark:bg-gray-900 font-semibold': currentLang === lang,
+          'text-gray-700 dark:text-gray-300': currentLang !== lang,
+        },
+      ]}
+      hreflang={typedLang}
+    >
+      <span class="flex items-center">
+        {lang === 'fr' ? '🇫🇷' : '🇬🇧'}
+        <span class="ml-2">{label}</span>
+        {currentLang === lang && <Icon name="tabler:check" class="w-4 h-4 ml-auto text-primary" />}
+      </span>
+    </a>
+  );
+})}
   </div>
 </language-selector>
 

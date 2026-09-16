@@ -18,24 +18,24 @@ const metadata = {
   <Hero
     tagline="OpenKraft"
     actions={[
-      {
-        text: 'Access GitHub',
-        href: 'https://github.com/hoverkraft-tech',
-        target: '_blank',
-        icon: 'tabler:brand-github',
-      },
-      { text: 'View documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank', variant: 'primary' },
-      {
-        text: 'Access GitLab',
-        href: 'https://gitlab.com/hoverkraft-tech/',
-        target: '_blank',
-        icon: 'tabler:brand-gitlab',
-      },
-    ]}
+  {
+    text: 'Access GitHub',
+    href: 'https://github.com/hoverkraft-tech',
+    target: '_blank',
+    icon: 'tabler:brand-github',
+  },
+  { text: 'View documentation', href: 'https://docs.hoverkraft.cloud', target: '_blank', variant: 'primary' },
+  {
+    text: 'Access GitLab',
+    href: 'https://gitlab.com/hoverkraft-tech/',
+    target: '_blank',
+    icon: 'tabler:brand-gitlab',
+  },
+]}
     image={{
-      src: '~/assets/images/pages/shared/open-source.webp',
-      alt: 'OpenKraft community',
-    }}
+  src: '~/assets/images/pages/shared/open-source.webp',
+  alt: 'OpenKraft community',
+}}
   >
     <Fragment slot="title">The open-source ecosystem for your internal platform</Fragment>
 
@@ -55,23 +55,23 @@ const metadata = {
     isReversed
     title="Available connectors"
     items={[
-      {
-        title: 'CI/CD connectors',
-        description: 'Ready-to-use pipelines for GitHub Actions, GitLab CI, and ArgoCD, including promotion patterns.',
-      },
-      {
-        title: 'Integrated observability',
-        description: 'Grafana dashboards, Prometheus alerting, and OpenTelemetry traces already wired together.',
-      },
-      {
-        title: 'Security by design',
-        description: 'IAM playbooks, secrets management, and compliance patterns shaped by concrete constraints.',
-      },
-    ]}
+  {
+    title: 'CI/CD connectors',
+    description: 'Ready-to-use pipelines for GitHub Actions, GitLab CI, and ArgoCD, including promotion patterns.',
+  },
+  {
+    title: 'Integrated observability',
+    description: 'Grafana dashboards, Prometheus alerting, and OpenTelemetry traces already wired together.',
+  },
+  {
+    title: 'Security by design',
+    description: 'IAM playbooks, secrets management, and compliance patterns shaped by concrete constraints.',
+  },
+]}
     image={{
-      src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
-      alt: 'HoverKraft open source resources',
-    }}
+  src: 'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
+  alt: 'HoverKraft open source resources',
+}}
   />
 
   <Content
@@ -79,19 +79,19 @@ const metadata = {
     title="Templates and blueprints"
     subtitle="Reusable starting points to accelerate adoption without rebuilding the basics."
     items={[
-      {
-        title: 'GitOps templates',
-        description: 'Repository structures, pipelines, and promotion flows that give teams a strong starting point.',
-      },
-      {
-        title: 'Portal blueprints',
-        description: 'Backstage and Portainer patterns to expose catalogs, runbooks, and internal workflows.',
-      },
-      {
-        title: 'Ready-to-adapt playbooks',
-        description: 'Operations, security, and incident guides shaped by concrete delivery constraints.',
-      },
-    ]}
+  {
+    title: 'GitOps templates',
+    description: 'Repository structures, pipelines, and promotion flows that give teams a strong starting point.',
+  },
+  {
+    title: 'Portal blueprints',
+    description: 'Backstage and Portainer patterns to expose catalogs, runbooks, and internal workflows.',
+  },
+  {
+    title: 'Ready-to-adapt playbooks',
+    description: 'Operations, security, and incident guides shaped by concrete delivery constraints.',
+  },
+]}
   />
 
   <Features2
@@ -100,27 +100,27 @@ const metadata = {
     subtitle="Pre-configured dashboards to make flow, reliability, and feedback loops visible."
     columns={2}
     items={[
-      {
-        title: 'Delivery flow',
-        description: 'Lead time, deployment frequency, and visibility into bottlenecks across the chain.',
-        icon: 'tabler:chart-histogram',
-      },
-      {
-        title: 'Operational reliability',
-        description: 'MTTR, incident exposure, and recurring failure patterns surfaced for review.',
-        icon: 'tabler:lifebuoy',
-      },
-      {
-        title: 'Developer experience',
-        description: 'SPACE indicators to track cognitive load, feedback quality, and team satisfaction.',
-        icon: 'tabler:mood-smile',
-      },
-      {
-        title: 'Shared operating reviews',
-        description: 'Executive exports and review rituals for sponsors, platform leads, and product managers.',
-        icon: 'tabler:presentation-analytics',
-      },
-    ]}
+  {
+    title: 'Delivery flow',
+    description: 'Lead time, deployment frequency, and visibility into bottlenecks across the chain.',
+    icon: 'tabler:chart-histogram',
+  },
+  {
+    title: 'Operational reliability',
+    description: 'MTTR, incident exposure, and recurring failure patterns surfaced for review.',
+    icon: 'tabler:lifebuoy',
+  },
+  {
+    title: 'Developer experience',
+    description: 'SPACE indicators to track cognitive load, feedback quality, and team satisfaction.',
+    icon: 'tabler:mood-smile',
+  },
+  {
+    title: 'Shared operating reviews',
+    description: 'Executive exports and review rituals for sponsors, platform leads, and product managers.',
+    icon: 'tabler:presentation-analytics',
+  },
+]}
   />
 
   <Features2
@@ -128,82 +128,82 @@ const metadata = {
     subtitle="A maintained ecosystem shaped by feedback from the field."
     columns={2}
     items={[
-      {
-        title: 'Field-tested feedback',
-        description: 'Each contribution is tied to a real-world use case and documented with implementation context.',
-        icon: 'tabler:users',
-      },
-      {
-        title: 'HoverKraft review',
-        description: 'Our team reviews, tests, and validates every new connector before publication.',
-        icon: 'tabler:certificate',
-      },
-      {
-        title: 'Community support',
-        description: 'Access our community space to exchange practices, questions, and lessons learned.',
-        icon: 'tabler:messages',
-      },
-      {
-        title: 'Collaborative roadmap',
-        description: 'Help prioritize the next connectors and patterns that would deliver the most value.',
-        icon: 'tabler:road',
-      },
-    ]}
+  {
+    title: 'Field-tested feedback',
+    description: 'Each contribution is tied to a real-world use case and documented with implementation context.',
+    icon: 'tabler:users',
+  },
+  {
+    title: 'HoverKraft review',
+    description: 'Our team reviews, tests, and validates every new connector before publication.',
+    icon: 'tabler:certificate',
+  },
+  {
+    title: 'Community support',
+    description: 'Access our community space to exchange practices, questions, and lessons learned.',
+    icon: 'tabler:messages',
+  },
+  {
+    title: 'Collaborative roadmap',
+    description: 'Help prioritize the next connectors and patterns that would deliver the most value.',
+    icon: 'tabler:road',
+  },
+]}
   />
 
   <Steps
     title="How to contribute"
     items={[
-      {
-        title: '1. Fork the repository',
-        description: 'Choose the connector you want to improve or create a new one from our templates.',
-        icon: 'tabler:git-branch',
-      },
-      {
-        title: '2. Follow the guide',
-        description: 'Each repository includes contribution guidance and automated tests that are ready to run.',
-        icon: 'tabler:book',
-      },
-      {
-        title: '3. Open a pull request',
-        description: 'Submit your connector and our team will help you get it ready for publication.',
-        icon: 'tabler:git-pull-request',
-      },
-      {
-        title: '4. Share the rollout',
-        description: 'Present your implementation to the community and document the outcomes you observed.',
-        icon: 'tabler:microphone',
-      },
-    ]}
+  {
+    title: '1. Fork the repository',
+    description: 'Choose the connector you want to improve or create a new one from our templates.',
+    icon: 'tabler:git-branch',
+  },
+  {
+    title: '2. Follow the guide',
+    description: 'Each repository includes contribution guidance and automated tests that are ready to run.',
+    icon: 'tabler:book',
+  },
+  {
+    title: '3. Open a pull request',
+    description: 'Submit your connector and our team will help you get it ready for publication.',
+    icon: 'tabler:git-pull-request',
+  },
+  {
+    title: '4. Share the rollout',
+    description: 'Present your implementation to the community and document the outcomes you observed.',
+    icon: 'tabler:microphone',
+  },
+]}
     image={{
-      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80',
-      alt: 'Community collaboration',
-    }}
+  src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1600&q=80',
+  alt: 'Community collaboration',
+}}
   />
 
   <CallToAction
     actions={[
-      { text: 'Request a demo', href: '/en/demo' },
-      {
-        variant: 'primary',
-        text: 'Explore GitHub',
-        href: 'https://github.com/hoverkraft-tech',
-        target: '_blank',
-        icon: 'tabler:brand-github',
-      },
-      {
-        text: 'View documentation',
-        href: 'https://docs.hoverkraft.cloud',
-        target: '_blank',
-      },
-      {
-        variant: 'primary',
-        text: 'Explore GitLab',
-        href: 'https://gitlab.com/hoverkraft-tech',
-        target: '_blank',
-        icon: 'tabler:brand-gitlab',
-      },
-    ]}
+  { text: 'Request a demo', href: '/en/demo' },
+  {
+    variant: 'primary',
+    text: 'Explore GitHub',
+    href: 'https://github.com/hoverkraft-tech',
+    target: '_blank',
+    icon: 'tabler:brand-github',
+  },
+  {
+    text: 'View documentation',
+    href: 'https://docs.hoverkraft.cloud',
+    target: '_blank',
+  },
+  {
+    variant: 'primary',
+    text: 'Explore GitLab',
+    href: 'https://gitlab.com/hoverkraft-tech',
+    target: '_blank',
+    icon: 'tabler:brand-gitlab',
+  },
+]}
   >
     <Fragment slot="title">Ready to contribute to OpenKraft?</Fragment>
 

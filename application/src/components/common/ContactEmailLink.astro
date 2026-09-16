@@ -14,9 +14,9 @@ const text = typeof label === 'string' ? label : email;
 ---
 
 {!text ? null : email ? (
-    <a href={`mailto:${email}`} class={className} {...attributes}>
-      {text}
-    </a>
-  ) : (
-    text
-  )}
+  <a href={`mailto:${email}`} class={className} {...attributes}>
+    {text}
+  </a>
+) : (
+  text
+)}

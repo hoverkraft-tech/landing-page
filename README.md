@@ -4,7 +4,7 @@ Marketing site for Hoverkraft, built with [Astro](https://astro.build/) 6 and Ta
 
 ## Requirements
 
-- Node.js 22+
+- Node.js 22.12+
 - npm 9+
 - Docker (optional, used by linting workflow)
 

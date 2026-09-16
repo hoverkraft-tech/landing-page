@@ -56,13 +56,13 @@ const courseBasePath = translatePath('/trainings');
   <Hero
     tagline={hero.tagline}
     actions={[
-      { variant: 'primary', text: cta.primaryAction, href: `${contactPath}#booking` },
-      { text: t('button.view-offers'), href: offersPath },
-    ]}
+  { variant: 'primary', text: cta.primaryAction, href: `${contactPath}#booking` },
+  { text: t('button.view-offers'), href: offersPath },
+]}
     image={{
-      src: hero.image,
-      alt: hero.tagline,
-    }}
+  src: hero.image,
+  alt: hero.tagline,
+}}
   >
     <Fragment slot="title">{hero.title}</Fragment>
     <Fragment slot="subtitle">{hero.subtitle}</Fragment>
@@ -73,17 +73,17 @@ const courseBasePath = translatePath('/trainings');
     subtitle={catalog.subtitle}
     columns={3}
     items={page.data.map((course) => ({
-      title: course.title,
-      description: course.description,
-      icon: course.icon,
-      badges: (course.tags ?? []).flatMap((tag) =>
-        typeof tag === 'string' && tag.length > 0 ? [{ text: tag, href: `${courseBasePath}/tag/${cleanSlug(tag)}` }] : []
-      ),
-      callToAction: {
-        text: t('button.learn-more'),
-        href: `${courseBasePath}/${course.slug}`,
-      },
-    }))}
+  title: course.title,
+  description: course.description,
+  icon: course.icon,
+  badges: (course.tags ?? []).flatMap((tag) =>
+    typeof tag === 'string' && tag.length > 0 ? [{ text: tag, href: `${courseBasePath}/tag/${cleanSlug(tag)}` }] : []
+  ),
+  callToAction: {
+    text: t('button.learn-more'),
+    href: `${courseBasePath}/${course.slug}`,
+  },
+}))}
   />
 
   <Pagination

@@ -113,71 +113,69 @@ const repositoriesWithHtml: ReleaseSummaryRepositoryWithHtml[] = await Promise.a
       </li>
       <li>
         <strong>{t.stats.latest}:</strong>{' '}
-        {mostRecent
-            ? `${mostRecent.repo} ${mostRecent.name} (${formatDate(mostRecent.publishedAt)})`
-            : t.stats.latestFallback}
+        {mostRecent ? `${mostRecent.repo} ${mostRecent.name} (${formatDate(mostRecent.publishedAt)})` : t.stats.latestFallback}
       </li>
     </ul>
   </section>
 
   {repositoriesWithHtml.map((repo: ReleaseSummaryRepositoryWithHtml) => (
-      <section>
-        <h2>{repo.name}</h2>
-        <p>{repo.description?.trim() || t.repo.descriptionFallback}</p>
+  <section>
+    <h2>{repo.name}</h2>
+    <p>{repo.description?.trim() || t.repo.descriptionFallback}</p>
+    <ul>
+      <li>
+        <strong>{t.repo.starsLabel}:</strong> {formatNumber(repo.stars)}
+      </li>
+      <li>
+        <strong>{t.repo.repoLinkLabel}:</strong>{' '}
+        <a href={repo.url} target="_blank" rel="noopener noreferrer">
+          {t.repo.repoLinkCta}
+        </a>
+      </li>
+      <li>
+        <strong>{t.repo.releaseCountLabel}:</strong> {formatNumber(repo.releases?.length)}
+      </li>
+    </ul>
+    <h3>{t.repo.releasesHeading}</h3>
+    {(repo.releases || []).map((release: ReleaseSummaryReleaseWithHtml) => (
+      <article class="space-y-3">
+        <h4>{release.name || release.tag}</h4>
         <ul>
           <li>
-            <strong>{t.repo.starsLabel}:</strong> {formatNumber(repo.stars)}
+            <strong>{t.release.version}:</strong> <code>{release.tag}</code>
           </li>
           <li>
-            <strong>{t.repo.repoLinkLabel}:</strong>{' '}
-            <a href={repo.url} target="_blank" rel="noopener noreferrer">
-              {t.repo.repoLinkCta}
+            <strong>{t.release.publishedOn}:</strong> {formatDate(release.publishedAt)}
+          </li>
+          <li>
+            <strong>{t.release.linkLabel}:</strong>{' '}
+            <a href={release.url} target="_blank" rel="noopener noreferrer">
+              {t.release.linkCta}
             </a>
           </li>
-          <li>
-            <strong>{t.repo.releaseCountLabel}:</strong> {formatNumber(repo.releases?.length)}
-          </li>
         </ul>
-        <h3>{t.repo.releasesHeading}</h3>
-        {(repo.releases || []).map((release: ReleaseSummaryReleaseWithHtml) => (
-          <article class="space-y-3">
-            <h4>{release.name || release.tag}</h4>
-            <ul>
-              <li>
-                <strong>{t.release.version}:</strong> <code>{release.tag}</code>
-              </li>
-              <li>
-                <strong>{t.release.publishedOn}:</strong> {formatDate(release.publishedAt)}
-              </li>
-              <li>
-                <strong>{t.release.linkLabel}:</strong>{' '}
-                <a href={release.url} target="_blank" rel="noopener noreferrer">
-                  {t.release.linkCta}
-                </a>
-              </li>
-            </ul>
-            <div>
-              <strong>{t.release.highlights}:</strong>
-              {release.highlightHtml?.length ? (
-                <div class="mt-3 space-y-2">
-                  {release.highlightHtml.map((highlightHtml) => (
-                    <div class="prose prose-sm dark:prose-invert" set:html={highlightHtml} />
-                  ))}
-                </div>
-              ) : (
-                <p class="mt-3">{t.release.highlightsFallback}</p>
-              )}
+        <div>
+          <strong>{t.release.highlights}:</strong>
+          {release.highlightHtml?.length ? (
+            <div class="mt-3 space-y-2">
+              {release.highlightHtml.map((highlightHtml) => (
+                <div class="prose prose-sm dark:prose-invert" set:html={highlightHtml} />
+              ))}
             </div>
-          </article>
-        ))}
-      </section>
+          ) : (
+            <p class="mt-3">{t.release.highlightsFallback}</p>
+          )}
+        </div>
+      </article>
     ))}
+  </section>
+))}
 
   {showClosingSection && (
-      <section>
-        <h2>{t.closing.title}</h2>
-        {closingHtml && <div class="space-y-4" set:html={closingHtml} />}
-        <p class="font-semibold" set:html={closingSignature} />
-      </section>
-    )}
+  <section>
+    <h2>{t.closing.title}</h2>
+    {closingHtml && <div class="space-y-4" set:html={closingHtml} />}
+    <p class="font-semibold" set:html={closingSignature} />
+  </section>
+)}
 </section>
