@@ -7,8 +7,5 @@
   "scripts": {
     "test": "node --test",
     "test:ci": "node --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info --test"
-  },
-  "devDependencies": {
-    "mock-fs": "^5.5.0"
   }
 }

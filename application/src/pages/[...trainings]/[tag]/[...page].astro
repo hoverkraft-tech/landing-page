@@ -34,9 +34,9 @@ const metadata = {
 <Layout metadata={metadata}>
   <Hero
     actions={[
-      { variant: 'primary', text: t('training.cta.primaryAction'), href: `${contactPath}#booking` },
-      { text: t('training.detail.viewAll'), href: courseBasePath },
-    ]}
+  { variant: 'primary', text: t('training.cta.primaryAction'), href: `${contactPath}#booking` },
+  { text: t('training.detail.viewAll'), href: courseBasePath },
+]}
   >
     <Fragment slot="title">{t('nav.trainings')}</Fragment>
     <Fragment slot="subtitle">
@@ -51,17 +51,17 @@ const metadata = {
       <Features2
         columns={3}
         items={page.data.map((course) => ({
-          title: course.title,
-          description: course.description,
-          icon: course.icon,
-          badges: (course.tags ?? []).flatMap((tag) =>
-            typeof tag === 'string' && tag.length > 0 ? [{ text: tag, href: `${courseBasePath}/tag/${cleanSlug(tag)}` }] : []
-          ),
-          callToAction: {
-            text: t('button.learn-more'),
-            href: `${courseBasePath}/${course.slug}`,
-          },
-        }))}
+  title: course.title,
+  description: course.description,
+  icon: course.icon,
+  badges: (course.tags ?? []).flatMap((tag) =>
+    typeof tag === 'string' && tag.length > 0 ? [{ text: tag, href: `${courseBasePath}/tag/${cleanSlug(tag)}` }] : []
+  ),
+  callToAction: {
+    text: t('button.learn-more'),
+    href: `${courseBasePath}/${course.slug}`,
+  },
+}))}
       />
 
       <div class="mt-10">

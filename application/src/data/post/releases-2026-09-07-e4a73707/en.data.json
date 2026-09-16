@@ -31,12 +31,7 @@
           "tag": "test-release-delete-published-33536504188-1",
           "publishedAt": "2026-09-01T17:17:05Z",
           "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/test-release-delete-published-33536504188-1",
-          "highlights": [
-            "What's Changed",
-            "No changes",
-            "New Contributors",
-            "_No new contributors in this release._"
-          ]
+          "highlights": ["What's Changed", "No changes", "New Contributors", "_No new contributors in this release._"]
         },
         {
           "name": "0.28.0",

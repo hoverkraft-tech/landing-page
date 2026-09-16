@@ -17,6 +17,6 @@
   "license": "0BSD",
   "dependencies": {
     "humanize-ai-lib": "^1.1.0",
-    "openai": "^7.4.0"
+    "openai": "^7.16.0"
   }
 }

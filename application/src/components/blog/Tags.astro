@@ -14,22 +14,22 @@ const { tags, class: className = 'text-sm', title = undefined, isCategory = fals
 ---
 
 {tags && Array.isArray(tags) && (
-    <>
-      {title !== undefined && (
-        <span class="align-super font-normal underline underline-offset-4 decoration-2 text-muted">{title}</span>
-      )}
-      <ul class={className}>
-        {tags.map((tag) => (
-          <li class="bg-gray-100 dark:bg-slate-700 inline-block mr-2 rtl:mr-0 rtl:ml-2 mb-2 py-0.5 px-2 lowercase font-medium">
-            {!APP_BLOG?.tag?.isEnabled ? (
-              tag.title
-            ) : (
-              <a href={getPermalink(tag.slug, isCategory ? 'category' : 'tag')} class="text-muted hover:text-primary">
-                {tag.title}
-              </a>
-            )}
-          </li>
-        ))}
-      </ul>
-    </>
-  )}
+  <>
+    {title !== undefined && (
+      <span class="align-super font-normal underline underline-offset-4 decoration-2 text-muted">{title}</span>
+    )}
+    <ul class={className}>
+      {tags.map((tag) => (
+        <li class="bg-gray-100 dark:bg-slate-700 inline-block mr-2 rtl:mr-0 rtl:ml-2 mb-2 py-0.5 px-2 lowercase font-medium">
+          {!APP_BLOG?.tag?.isEnabled ? (
+            tag.title
+          ) : (
+            <a href={getPermalink(tag.slug, isCategory ? 'category' : 'tag')} class="text-muted hover:text-primary">
+              {tag.title}
+            </a>
+          )}
+        </li>
+      ))}
+    </ul>
+  </>
+)}

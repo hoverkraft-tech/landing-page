@@ -7,22 +7,22 @@ const scriptType = usePartytown ? 'text/partytown' : 'text/javascript';
 ---
 
 {googleAnalyticsId ? (
-    <Fragment>
-      <script
-        is:inline
-        async
-        type={scriptType}
-        src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(String(googleAnalyticsId))}`}
-      />
-      <script
-        is:inline
-        type={scriptType}
-        set:html={`
+  <Fragment>
+    <script
+      is:inline
+      async
+      type={scriptType}
+      src={`https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(String(googleAnalyticsId))}`}
+    />
+    <script
+      is:inline
+      type={scriptType}
+      set:html={`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
           gtag('config', ${JSON.stringify(String(googleAnalyticsId))});
         `}
-      />
-    </Fragment>
-  ) : null}
+    />
+  </Fragment>
+) : null}

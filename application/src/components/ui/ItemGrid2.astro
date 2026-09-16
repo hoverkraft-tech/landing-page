@@ -17,24 +17,24 @@ const {
 ---
 
 {items && items.length > 0 && (
-    <div
-      class={twMerge(
-        `grid gap-8 gap-x-12 sm:gap-y-8 ${
-          columns === 4
-            ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
-            : columns === 3
-              ? 'lg:grid-cols-3 sm:grid-cols-2'
-              : columns === 2
-                ? 'sm:grid-cols-2 '
-                : ''
-        }`,
-        containerClass
-      )}
-    >
-      {items.map((item: Item) => {
-        const itemClasses = item.classes ?? {};
+  <div
+    class={twMerge(
+      `grid gap-8 gap-x-12 sm:gap-y-8 ${
+        columns === 4
+          ? 'lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2'
+          : columns === 3
+            ? 'lg:grid-cols-3 sm:grid-cols-2'
+            : columns === 2
+              ? 'sm:grid-cols-2 '
+              : ''
+      }`,
+      containerClass
+    )}
+  >
+    {items.map((item: Item) => {
+      const itemClasses = item.classes ?? {};
 
-        return (
+      return (
         <div
           class={twMerge(
             'relative flex flex-col intersect-once intersect-quarter intersect-no-queue motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade',
@@ -43,11 +43,17 @@ const {
           )}
         >
           {(item.icon || defaultIcon) && (
-            <Icon name={item.icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
+            <Icon
+              name={item.icon || defaultIcon}
+              class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)}
+            />
           )}
           <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>{item.title}</div>
           {item.description && (
-            <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={item.description} />
+            <p
+              class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)}
+              set:html={item.description}
+            />
           )}
           {item.badges && item.badges.length > 0 && (
             <div class="mt-4 flex flex-wrap gap-2">
@@ -73,7 +79,7 @@ const {
             </div>
           )}
         </div>
-        );
-      })}
-    </div>
-  )}
+      );
+    })}
+  </div>
+)}

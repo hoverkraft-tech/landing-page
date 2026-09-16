@@ -20,13 +20,13 @@ const metadata = {
   <Hero
     tagline="Temoignages"
     actions={[
-      { variant: 'primary', text: 'Parler à un Kraft Builder', href: `${translatePath('/contact')}#booking` },
-      { text: 'Découvrir la méthode', href: translatePath('/methodology') },
-    ]}
+  { variant: 'primary', text: 'Parler à un Kraft Builder', href: `${translatePath('/contact')}#booking` },
+  { text: 'Découvrir la méthode', href: translatePath('/methodology') },
+]}
     image={{
-      src: '~/assets/images/pages/about/team.png',
-      alt: 'Collectif HoverKraft',
-    }}
+  src: '~/assets/images/pages/about/team.png',
+  alt: 'Collectif HoverKraft',
+}}
   >
     <Fragment slot="title">Des retours terrain sur des transformations concrètes</Fragment>
 
@@ -41,28 +41,28 @@ const metadata = {
     title="Ce que les équipes retiennent"
     subtitle="Extraits reformulés à partir de missions récentes, sans exposer d'informations sensibles ni de noms clients."
     testimonials={[
-      {
-        title: 'Clarifier la trajectoire',
-        testimonial:
-          "Le cadre DORA/SPACE a remis tout le monde autour de la même table. En quelques semaines, nous avions une feuille de route commune et des arbitrages enfin explicites.",
-        name: 'Retour anonymisé',
-        job: 'Direction engineering - ETI industrielle',
-      },
-      {
-        title: 'Réduire la charge cognitive',
-        testimonial:
-          "Les templates et les playbooks ont supprimé une partie des bricolages quotidiens. Les équipes ont retrouvé du temps pour livrer au lieu de reconfigurer les mêmes choses.",
-        name: 'Retour anonymisé',
-        job: 'Lead plateforme - SaaS B2B',
-      },
-      {
-        title: 'Rendre la preuve visible',
-        testimonial:
-          "Le plus utile a été la visibilité créée par les dashboards et les revues régulières. Nous avons enfin pu discuter investissement, incidents et autonomie sur des faits partagés.",
-        name: 'Retour anonymisé',
-        job: 'CTO - groupe multi-sites',
-      },
-    ]}
+  {
+    title: 'Clarifier la trajectoire',
+    testimonial:
+      'Le cadre DORA/SPACE a remis tout le monde autour de la même table. En quelques semaines, nous avions une feuille de route commune et des arbitrages enfin explicites.',
+    name: 'Retour anonymisé',
+    job: 'Direction engineering - ETI industrielle',
+  },
+  {
+    title: 'Réduire la charge cognitive',
+    testimonial:
+      'Les templates et les playbooks ont supprimé une partie des bricolages quotidiens. Les équipes ont retrouvé du temps pour livrer au lieu de reconfigurer les mêmes choses.',
+    name: 'Retour anonymisé',
+    job: 'Lead plateforme - SaaS B2B',
+  },
+  {
+    title: 'Rendre la preuve visible',
+    testimonial:
+      'Le plus utile a été la visibilité créée par les dashboards et les revues régulières. Nous avons enfin pu discuter investissement, incidents et autonomie sur des faits partagés.',
+    name: 'Retour anonymisé',
+    job: 'CTO - groupe multi-sites',
+  },
+]}
   />
 
   <Features2
@@ -70,34 +70,36 @@ const metadata = {
     subtitle="Ils donnent une image utile de l'impact observé sans transformer le site en vitrine de logos."
     columns={2}
     items={[
-      {
-        title: 'Impact lisible',
-        description: "Les retours mettent l'accent sur la visibilité, les arbitrages et la capacité à faire durer les changements.",
-        icon: 'tabler:eye-check',
-      },
-      {
-        title: 'Cadre anonyme',
-        description: 'Les missions restent confidentielles, mais les apprentissages utiles peuvent être partagés.',
-        icon: 'tabler:shield-lock',
-      },
-      {
-        title: 'Effets concrets',
-        description: 'Les équipes parlent de flux, de rituels, de templates et de transfert plutôt que de slogans abstraits.',
-        icon: 'tabler:tool',
-      },
-      {
-        title: 'Point de départ utile',
-        description: 'Ces retours servent surtout à qualifier si votre contexte ressemble a ceux deja accompagnes.',
-        icon: 'tabler:map-search',
-      },
-    ]}
+  {
+    title: 'Impact lisible',
+    description:
+      "Les retours mettent l'accent sur la visibilité, les arbitrages et la capacité à faire durer les changements.",
+    icon: 'tabler:eye-check',
+  },
+  {
+    title: 'Cadre anonyme',
+    description: 'Les missions restent confidentielles, mais les apprentissages utiles peuvent être partagés.',
+    icon: 'tabler:shield-lock',
+  },
+  {
+    title: 'Effets concrets',
+    description:
+      'Les équipes parlent de flux, de rituels, de templates et de transfert plutôt que de slogans abstraits.',
+    icon: 'tabler:tool',
+  },
+  {
+    title: 'Point de départ utile',
+    description: 'Ces retours servent surtout à qualifier si votre contexte ressemble a ceux deja accompagnes.',
+    icon: 'tabler:map-search',
+  },
+]}
   />
 
   <CallToAction
     actions={[
-      { variant: 'primary', text: 'Échanger avec nous', href: `${translatePath('/contact')}#booking` },
-      { text: 'Voir les offres', href: translatePath('/offers') },
-    ]}
+  { variant: 'primary', text: 'Échanger avec nous', href: `${translatePath('/contact')}#booking` },
+  { text: 'Voir les offres', href: translatePath('/offers') },
+]}
   >
     <Fragment slot="title">Vous voulez vérifier si votre contexte ressemble à ces retours ?</Fragment>
     <Fragment slot="subtitle"

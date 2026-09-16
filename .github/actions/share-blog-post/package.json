@@ -20,12 +20,12 @@
     "@postiz/node": "^1.0.8",
     "gray-matter": "^4.0.3",
     "humanize-ai-lib": "^1.1.0",
-    "js-yaml": "^5.2.3",
-    "openai": "^7.4.0"
+    "js-yaml": "^5.4.2",
+    "openai": "^7.16.0"
   },
   "overrides": {
     "gray-matter": {
-      "js-yaml": "^3.15.0"
+      "js-yaml": "3.15.2"
     }
   }
 }

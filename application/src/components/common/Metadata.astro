@@ -90,12 +90,12 @@ const twitterImage = openGraphImages[0];
 {normalizedOpenGraph.locale ? <meta property="og:locale" content={normalizedOpenGraph.locale} /> : null}
 
 {openGraphImages.map((image) => (
-    <Fragment>
-      <meta property="og:image" content={image.url} />
-      {image.width ? <meta property="og:image:width" content={String(image.width)} /> : null}
-      {image.height ? <meta property="og:image:height" content={String(image.height)} /> : null}
-    </Fragment>
-  ))}
+  <Fragment>
+    <meta property="og:image" content={image.url} />
+    {image.width ? <meta property="og:image:width" content={String(image.width)} /> : null}
+    {image.height ? <meta property="og:image:height" content={String(image.height)} /> : null}
+  </Fragment>
+))}
 
 <meta name="twitter:card" content={resolvedTwitter.cardType ?? 'summary'}>
 <meta name="twitter:title" content={resolvedTitle}>

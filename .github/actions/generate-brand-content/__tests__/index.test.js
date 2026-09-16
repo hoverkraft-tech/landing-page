@@ -1,8 +1,8 @@
 const assert = require('node:assert/strict');
 const { describe, it, beforeEach, afterEach } = require('node:test');
-const fs = require('fs');
-const path = require('path');
-const mock = require('mock-fs');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
 
 const { run } = require('../index.js');
 
@@ -25,7 +25,7 @@ describe('generate-brand-content run', () => {
       mkdirP: async (dir) => fs.promises.mkdir(dir, { recursive: true }),
     };
 
-    outputDir = path.join('tmp', 'brand');
+    outputDir = fs.mkdtempSync(path.join(os.tmpdir(), 'generate-brand-content-'));
 
     defaultInputs = {
       version: '1.2.3',
@@ -68,13 +68,11 @@ describe('generate-brand-content run', () => {
     };
   });
 
-  afterEach(() => {
-    mock.restore();
+  afterEach(async () => {
+    await fs.promises.rm(outputDir, { recursive: true, force: true });
   });
 
   it('writes generated files and logs progress', async () => {
-    mock({});
-
     await run({
       ...defaultInputs,
       core,

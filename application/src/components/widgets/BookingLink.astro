@@ -34,22 +34,22 @@ const t = useTranslations(lang);
   <Headline title={title} subtitle={subtitle} tagline={tagline} />
 
   {bookingUrl && (
-      <div class="flex flex-col max-w-4xl mx-auto text-center">
-        <div class="flex justify-center">
-          <Button
-            variant="primary"
-            text={t('booking.button')}
-            href={bookingUrl}
-            target="_blank"
-            icon="tabler:calendar"
-            class="btn-primary text-lg px-8 py-4"
-          />
-        </div>
-        {description && (
-          <div class="mt-6">
-            <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
-          </div>
-        )}
+  <div class="flex flex-col max-w-4xl mx-auto text-center">
+    <div class="flex justify-center">
+      <Button
+        variant="primary"
+        text={t('booking.button')}
+        href={bookingUrl}
+        target="_blank"
+        icon="tabler:calendar"
+        class="btn-primary text-lg px-8 py-4"
+      />
+    </div>
+    {description && (
+      <div class="mt-6">
+        <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
       </div>
     )}
+  </div>
+)}
 </WidgetWrapper>
