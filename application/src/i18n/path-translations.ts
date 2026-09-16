@@ -6,6 +6,7 @@ interface Frontmatter {
   publishDate?: Date | string;
   category?: string;
   slug?: string;
+  routeSlug?: string;
   translationKey?: string;
   lang?: string;
   draft?: boolean;
@@ -116,7 +117,9 @@ for (const [modulePath, module] of Object.entries(postModules)) {
   }
 
   const id = cleanSlug(relativePath);
-  const slug = cleanSlug(String(frontmatter.slug ?? relativePath.split('/').pop() ?? relativePath));
+  const slug = cleanSlug(
+    String(frontmatter.routeSlug ?? frontmatter.slug ?? relativePath.split('/').pop() ?? relativePath)
+  );
   const categorySlug =
     (frontmatter.category ?? commonData?.category)
       ? cleanSlug(String(frontmatter.category ?? commonData?.category))
