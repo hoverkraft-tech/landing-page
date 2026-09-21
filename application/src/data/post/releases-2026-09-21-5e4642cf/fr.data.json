@@ -1,0 +1,41 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Du 14 au 21 septembre 2026, 1 release a été publiée sur 1 dépôt suivi, avec une fréquence de déploiement d'environ 0,14 release/jour (1 release en 7 jours).\n\nSur la période, l'activité s'est concentrée sur `compose-action`, qui a livré `compose-action v3.2.0` le 17 septembre 2026. Cette mise à jour renforce le flux d'exécution autour de l'action de composition (pattern \"action GitHub + orchestration via Docker Compose\"), ce qui impacte directement la manière dont les environnements de test et de validation sont montés dans les pipelines, notamment via les paramètres d'entrée et la configuration de services exposés par Compose.\n\n- `compose-action` : la release `v3.2.0` consolide la capacité d'orchestration Compose dans les workflows, ce qui aide les SRE et ingénieurs plateforme à standardiser le démarrage/arrêt des services et à réduire les écarts entre environnements CI.\n- `compose-action` (211 ⭐) : l'adoption d'une action de composition stabilisée facilite l'intégration pour les contributeurs, car les changements portent sur un point d'entrée unique des pipelines plutôt que sur des scripts dispersés.\n- Dépôt suivi unique : le périmètre réduit sur cette semaine permet d'attribuer clairement l'évolution à `compose-action`, ce qui simplifie le suivi des impacts sur la latence de pipeline et la reproductibilité des tests pour les équipes qui consomment HoverKraft.",
+  "closingMarkdown": "## Synthèse de la semaine (14 septembre 2026 - 21 septembre 2026)\n\n- **Dépôts suivis** : 1\n- **Releases publiées** : 1\n- **Projet le plus actif** : `compose-action` (1 release)\n- **Release la plus récente** : `compose-action` **v3.2.0**\n\n### Dépôts en lumière\n- **`compose-action`** : 1 release, **211 ⭐**\n\n## Release notable\n- **`compose-action` v3.2.0**\n  Mise à jour centrée sur l'action d'orchestration via Docker Compose, utile pour standardiser l'exécution en CI/CD et réduire les écarts entre environnements.\n\n### Points d'attention pour l'adoption\n- Vérifier la compatibilité de la version de l'action avec votre matrice CI (runner, Docker, Compose).\n- Contrôler les paramètres utilisés dans vos workflows (fichiers compose, variables d'environnement, stratégie de montée/descente des services).\n- Revalider les comportements attendus côté logs et gestion des erreurs, surtout si vous automatisez des étapes de tests ou de déploiement.\n\n## Conclusion (impact pratique)\nPour les **platform engineers**, **SREs** et autres utilisateurs techniques, cette semaine se résume à une mise à jour unique mais ciblée de `compose-action`. L'impact attendu concerne surtout la **stabilisation et l'automatisation** des workflows qui exécutent Docker Compose en environnement CI/CD, avec un effort de validation limité à la compatibilité et aux paramètres de vos pipelines.\n\n- **Lancer un benchmark de démarrage CI** sur vos workflows utilisant `compose-action@v3.2.0` (repo : `compose-action`) : mesurer le temps de `up`/`down` et le temps total de job pour confirmer l'absence de régression **performance**.",
+  "stats": {
+    "period": {
+      "since": "2026-09-14T15:41:14.364Z",
+      "until": "2026-09-21T15:41:14.364Z"
+    },
+    "totalRepos": 1,
+    "totalReleases": 1,
+    "busiestRepo": {
+      "name": "compose-action",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "compose-action",
+      "name": "v3.2.0",
+      "publishedAt": "2026-09-17T16:52:47Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "compose-action",
+      "description": "Cette action exécute votre fichier docker-compose et le nettoie avant la fin de l'action",
+      "stars": 211,
+      "url": "https://github.com/hoverkraft-tech/compose-action",
+      "releases": [
+        {
+          "name": "v3.2.0",
+          "tag": "v3.2.0",
+          "publishedAt": "2026-09-17T16:52:47Z",
+          "url": "https://github.com/hoverkraft-tech/compose-action/releases/tag/v3.2.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLes journaux de composition sont désormais diffusés pendant le nettoyage post-tâche, améliorant la visibilité de l'arrêt du service et le dépannage.\n\nLes mises à jour internes incluent une documentation actualisée, des améliorations de l'expérience développeur et des mises à niveau des dépendances/outils dans GitHub Actions, les devcontainers et les dépendances de développement npm."
+          ]
+        }
+      ]
+    }
+  ]
+}

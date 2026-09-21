@@ -1,0 +1,41 @@
+{
+  "lang": "en",
+  "introMarkdown": "From Sep 14, 2026 to Sep 21, 2026, HoverKraft shipped 1 release across 1 repository (deploy frequency: 1 release/week).\n\nDuring this period, the only release was compose-action v3.2.0 on Sep 17, 2026, with the busiest project being compose-action (1). The update centers on the compose-action workflow component, which is typically used as the orchestration layer for Docker Compose-based builds and test runs; changes here affect how contributors and CI jobs resolve services, environment wiring, and execution order within the pipeline.\n\n- compose-action v3.2.0: The release cadence and focus on this workflow component matter for SREs and platform engineers because it directly impacts CI execution consistency (service startup sequencing and compose invocation behavior) for teams adopting HoverKraft projects.\n- compose-action (211 ⭐): Continued attention on a single, widely used repository helps technical contributors reduce integration friction, since workflow-level changes are easier to validate and roll out when the surface area stays narrow.\n- Single-repo scope: With only one repository covered, platform engineers can attribute any pipeline behavior changes to compose-action rather than multiple concurrent repos, which simplifies incident triage and regression tracking.",
+  "closingMarkdown": "## Weekly Release Summary (Sep 14, 2026 - Sep 21, 2026)\n\n### Coverage\n- **Repositories covered:** 1\n- **Releases shipped:** 1\n- **Busiest project:** `compose-action` (1)\n- **Most recent release:** `compose-action` **v3.2.0**\n\n### Repositories to note\n- **compose-action** - **1** release, **211 ⭐**\n\n## Closing summary (practical impact)\nFor platform engineers, SREs, and other technical users, this week's activity centers on `compose-action` and its **v3.2.0** release. The practical value is improved automation around Docker Compose workflows, which typically reduces manual CI/CD wiring and helps standardize how compose-based services are brought up and validated across environments.\n\n- **Run a CI performance check for `compose-action` v3.2.0**: execute your existing compose-based pipeline with the new version and compare job duration and container startup time (expected gain: faster feedback loops and fewer timeouts).\n- **Review `compose-action` v3.2.0 release notes and configuration docs**: confirm any option changes against your current workflow files (expected gain: compliance with updated behavior and fewer deployment regressions).\n- **Adopt/standardize `compose-action` usage across repos that run Compose in CI**: update shared workflow templates to call `compose-action` consistently (expected gain: automation consistency and reduced maintenance effort).",
+  "stats": {
+    "period": {
+      "since": "2026-09-14T15:41:14.364Z",
+      "until": "2026-09-21T15:41:14.364Z"
+    },
+    "totalRepos": 1,
+    "totalReleases": 1,
+    "busiestRepo": {
+      "name": "compose-action",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "compose-action",
+      "name": "v3.2.0",
+      "publishedAt": "2026-09-17T16:52:47Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "compose-action",
+      "description": "This action runs your docker-compose file and clean up before action finished",
+      "stars": 211,
+      "url": "https://github.com/hoverkraft-tech/compose-action",
+      "releases": [
+        {
+          "name": "v3.2.0",
+          "tag": "v3.2.0",
+          "publishedAt": "2026-09-17T16:52:47Z",
+          "url": "https://github.com/hoverkraft-tech/compose-action/releases/tag/v3.2.0",
+          "highlights": [
+            "## Release Summary\n\nCompose logs are now streamed during post-job cleanup, improving visibility into service shutdown and troubleshooting.\r\n\r\nInternal updates include refreshed documentation, developer-experience improvements, and dependency/tooling upgrades across GitHub Actions, devcontainers, and npm development dependencies."
+          ]
+        }
+      ]
+    }
+  ]
+}
