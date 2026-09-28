@@ -1,0 +1,124 @@
+{
+  "lang": "en",
+  "introMarkdown": "Between September 21, 2026 and September 28, 2026, the team shipped 7 releases across 2 repositories (≈1.4 releases per week).\n\nMost of the release activity came from `docker-base-images` (6 releases), indicating continued iteration on the base image layer used by downstream workloads. The most recent release in the period was `next-ip v0.2.0` on September 26, 2026, with `next-ip` contributing 1 release and sharing the same star count (1 ⭐) as `docker-base-images`, suggesting the base-image updates and the `next-ip` component evolved in parallel rather than sequentially.\n\n- `docker-base-images`: Frequent updates to the base image layer matter for platform engineers and SREs because they reduce drift across environments and keep container build inputs consistent when deploying dependent services.\n- `next-ip`: The `next-ip v0.2.0` release matters for technical contributors because it provides a concrete, versioned interface they can integrate against without waiting for unrelated base-image changes.\n- Release cadence across both repos: Shipping 7 releases in a single week window helps SREs validate compatibility and operational behavior (build/runtime) sooner, which shortens the feedback loop for adoption.",
+  "closingMarkdown": "## Release Summary (Sep 21, 2026 - Sep 28, 2026)\n\n**Scope**\n- **Repositories covered:** 2\n- **Releases shipped:** 7\n- **Busiest project:** `docker-base-images` (6 releases)\n- **Most recent release:** `next-ip` **v0.2.0**\n\n### Repository highlights\n- **`docker-base-images`**\n  - **Releases:** 6\n  - **Stars:** 1\n  - **Role in this period:** Primary delivery stream for base image updates, which typically impacts build reliability, dependency consistency, and runtime behavior across downstream images.\n\n- **`next-ip`**\n  - **Releases:** 1\n  - **Stars:** 1\n  - **Most recent release:** **`next-ip` v0.2.0**\n  - **Role in this period:** Focused update to a smaller surface area, likely intended to improve correctness and operational fit for IP-related workflows.\n\n## Practical impact (for platform engineers, SREs, and other technical users)\nThis week's output is dominated by `docker-base-images`, so most operational changes will show up indirectly through downstream builds and container runtime characteristics. The single `next-ip` release provides a targeted improvement path for teams using that component in automation or service configuration. Together, the changes support more consistent deployments and reduce friction when updating environments, provided you validate compatibility in your CI and staging pipelines.\n\n### Next steps\n- **Run a build-and-runtime smoke test for downstream images using `docker-base-images`**\n  - **Reference:** `docker-base-images` (latest 6 releases in this period)\n  - **Expected gain:** faster detection of dependency or OS-layer changes that could affect startup time, health checks, or application compatibility (performance and reliability).\n\n- **Review and validate behavior changes in `next-ip v0.2.0`**",
+  "stats": {
+    "period": {
+      "since": "2026-09-21T17:22:56.404Z",
+      "until": "2026-09-28T17:22:56.404Z"
+    },
+    "totalRepos": 2,
+    "totalReleases": 7,
+    "busiestRepo": {
+      "name": "docker-base-images",
+      "count": 6
+    },
+    "mostRecentRelease": {
+      "repo": "next-ip",
+      "name": "v0.2.0",
+      "publishedAt": "2026-09-26T11:08:06Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "docker-base-images",
+      "description": "Opiniated Docker base images",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version ci-helm - 0.5.4",
+          "tag": "ci-helm-0.5.4",
+          "publishedAt": "2026-09-22T19:29:55Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.5.4",
+          "highlights": [
+            "What's Changed",
+            "Dependency Updates",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 4 updates (#251) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 10 updates (#247) [@dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version codespace-like - 0.6.2",
+          "tag": "codespace-like-0.6.2",
+          "publishedAt": "2026-09-22T19:29:23Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/codespace-like-0.6.2",
+          "highlights": [
+            "What's Changed",
+            "Dependency Updates",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 4 updates (#251) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 10 updates (#247) [@dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 0.6.6",
+          "tag": "argocd-cmp-hk-deployment-0.6.6",
+          "publishedAt": "2026-09-22T19:29:16Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-0.6.6",
+          "highlights": [
+            "What's Changed",
+            "Dependency Updates",
+            "<details>",
+            "<summary>8 changes</summary>"
+          ]
+        },
+        {
+          "name": "Version testcontainers-node - 0.5.3",
+          "tag": "testcontainers-node-0.5.3",
+          "publishedAt": "2026-09-22T19:29:12Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/testcontainers-node-0.5.3",
+          "highlights": [
+            "What's Changed",
+            "Dependency Updates",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 4 updates (#251) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 10 updates (#247) [@dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version super-linter - 0.4.3",
+          "tag": "super-linter-0.4.3",
+          "publishedAt": "2026-09-22T19:29:10Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/super-linter-0.4.3",
+          "highlights": [
+            "What's Changed",
+            "Dependency Updates",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 4 updates (#251) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 10 updates (#247) [@dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        },
+        {
+          "name": "Version mydumper - 0.5.4",
+          "tag": "mydumper-0.5.4",
+          "publishedAt": "2026-09-22T19:28:47Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-0.5.4",
+          "highlights": [
+            "What's Changed",
+            "Dependency Updates",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 4 updates (#251) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps): bump the github-actions-dependencies group across 1 directory with 10 updates (#247) [@dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "next-ip",
+      "description": "Small binary that allow to get next IPs in a given range",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/next-ip",
+      "releases": [
+        {
+          "name": "v0.2.0",
+          "tag": "v0.2.0",
+          "publishedAt": "2026-09-26T11:08:06Z",
+          "url": "https://github.com/hoverkraft-tech/next-ip/releases/tag/v0.2.0",
+          "highlights": [
+            "What's Changed",
+            "feat: add --mask/-m flag to display netmask of returned IPs by @fredleger in https://github.com/hoverkraft-tech/next-ip/pull/15",
+            "build(deps): bump actions/checkout from 6.0.2 to 7.0.1 by @dependabot[bot] in https://github.com/hoverkraft-tech/next-ip/pull/14",
+            "build(deps): bump actions/setup-go from 6.4.0 to 7.0.0 by @dependabot[bot] in https://github.com/hoverkraft-tech/next-ip/pull/13"
+          ]
+        }
+      ]
+    }
+  ]
+}
