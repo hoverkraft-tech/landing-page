@@ -6,6 +6,7 @@ describe('BlogPostGenerator', () => {
   let mockContentGenerator;
   let mockOpenAIService;
   let mockFileSystemService;
+  let mockBiomeService;
   let blogPostGenerator;
   const buildLocalizedPayload = (lang) => ({
     frontmatter: `---\nlang: ${lang}\n---\n\n`,
@@ -48,7 +49,15 @@ describe('BlogPostGenerator', () => {
       writeBinaryFile: mock.fn(),
       getAbsolutePath: mock.fn((...args) => args.join('/')),
     };
-    blogPostGenerator = new BlogPostGenerator(mockContentGenerator, mockOpenAIService, mockFileSystemService);
+    mockBiomeService = {
+      formatDirectory: mock.fn(),
+    };
+    blogPostGenerator = new BlogPostGenerator(
+      mockContentGenerator,
+      mockOpenAIService,
+      mockFileSystemService,
+      mockBiomeService
+    );
   });
 
   describe('generate', () => {
@@ -96,6 +105,12 @@ describe('BlogPostGenerator', () => {
       );
       assert.ok(frenchMdxCall);
       assert.match(frenchMdxCall.arguments[1], /import data from '\.\/fr\.data\.json';/);
+      assert.strictEqual(mockBiomeService.formatDirectory.mock.calls.length, 1);
+      assert.strictEqual(mockBiomeService.formatDirectory.mock.calls[0].arguments[0], '/test');
+      assert.strictEqual(
+        mockBiomeService.formatDirectory.mock.calls[0].arguments[1],
+        `src/data/post/${result.slug}`
+      );
     });
 
     it('should fail when image generation fails', async () => {
@@ -124,6 +139,36 @@ describe('BlogPostGenerator', () => {
         },
         {
           message: 'API error',
+        }
+      );
+    });
+
+    it('should fail when biome formatting fails', async () => {
+      const mockReleasesData = [
+        {
+          repo: 'test-repo',
+          description: 'Test',
+          stars: 42,
+          releases: [{ name: 'v1.0.0', tag: 'v1.0.0' }],
+        },
+      ];
+
+      mockContentGenerator.generateFrenchContent.mock.mockImplementation(async () => buildLocalizedPayload('fr'));
+      mockContentGenerator.generateEnglishContent.mock.mockImplementation(async () => buildLocalizedPayload('en'));
+      mockBiomeService.formatDirectory.mock.mockImplementation(() => {
+        throw new Error('Biome formatting failed');
+      });
+
+      await assert.rejects(
+        async () => {
+          await blogPostGenerator.generate(mockReleasesData, {
+            sinceDate: '2025-10-01T00:00:00Z',
+            untilDate: '2025-11-01T00:00:00Z',
+            outputDir: '/test',
+          });
+        },
+        {
+          message: 'Biome formatting failed',
         }
       );
     });

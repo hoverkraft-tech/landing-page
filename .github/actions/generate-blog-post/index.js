@@ -6,6 +6,7 @@
 const { OpenAIService } = require('./src/openai-service');
 const { ContentGenerator } = require('./src/content-generator');
 const { FileSystemService } = require('./src/file-system-service');
+const { BiomeService } = require('./src/biome-service');
 const { BlogPostGenerator } = require('./src/blog-post-generator');
 
 async function run({ core, releasesData, sinceDate, untilDate, outputDir, openAIKey }) {
@@ -30,7 +31,8 @@ async function run({ core, releasesData, sinceDate, untilDate, outputDir, openAI
     const openAIService = new OpenAIService(openAIKey);
     const contentGenerator = new ContentGenerator(openAIService);
     const fileSystemService = new FileSystemService();
-    const blogPostGenerator = new BlogPostGenerator(contentGenerator, openAIService, fileSystemService);
+    const biomeService = new BiomeService();
+    const blogPostGenerator = new BlogPostGenerator(contentGenerator, openAIService, fileSystemService, biomeService);
 
     // Generate blog post
     const result = await blogPostGenerator.generate(releasesData, {

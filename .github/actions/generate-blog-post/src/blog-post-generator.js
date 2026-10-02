@@ -7,10 +7,11 @@ const path = require('path');
 const crypto = require('crypto');
 
 class BlogPostGenerator {
-  constructor(contentGenerator, openAIService, fileSystemService) {
+  constructor(contentGenerator, openAIService, fileSystemService, biomeService) {
     this.contentGenerator = contentGenerator;
     this.openAIService = openAIService;
     this.fileSystemService = fileSystemService;
+    this.biomeService = biomeService;
   }
 
   /**
@@ -46,6 +47,8 @@ class BlogPostGenerator {
       slug,
     });
     this.writeLocalizedArtifacts(postDir, 'en', englishContent);
+
+    this.formatGeneratedPost(outputDir, slug);
 
     // Generate preview image (fail if it fails)
     const imagePath = path.join(imageDir, 'preview.png');
@@ -118,6 +121,17 @@ import data from './${lang}.data.json';
 
     this.fileSystemService.writeFile(jsonPath, `${JSON.stringify(data, null, 2)}\n`);
     this.fileSystemService.writeFile(mdxPath, mdxContent);
+  }
+
+  /**
+   * Format generated content with Biome
+   */
+  formatGeneratedPost(outputDir, slug) {
+    if (!this.biomeService) {
+      return;
+    }
+
+    this.biomeService.formatDirectory(outputDir, path.join('src/data/post', slug));
   }
 }
 
