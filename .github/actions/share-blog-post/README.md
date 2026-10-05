@@ -3,7 +3,7 @@
 # GitHub Action: Share posts via Postiz
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/defc0bbd947fdaac275daf1e565cfb1a412101314e3ed60200bfc13296e5b4ed/hoverkraft-tech/landing-page" width="60px" align="center" alt="Share posts via Postiz" />
+  <img src="https://opengraph.githubassets.com/59d68be0eccfc535e5470abcc0bdd1169d738c7c68f54a56576d4db7cc3fb1a4/hoverkraft-tech/landing-page" width="60px" align="center" alt="Share posts via Postiz" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Publish blog posts to social networks via Postiz using OpenAI for snippets.
 ## Usage
 
 ````yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/share-blog-post@77fd954a701147564ebfb6297633da3f96471ee3 # main
+- uses: hoverkraft-tech/landing-page/.github/actions/share-blog-post@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
   with:
     # Newline-separated list of post folder names to share
     # This input is required.
