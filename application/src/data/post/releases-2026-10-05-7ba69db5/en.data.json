@@ -1,0 +1,75 @@
+{
+  "lang": "en",
+  "introMarkdown": "During September 28, 2026 - October 5, 2026, we shipped 3 releases across 3 repositories (deploy frequency: 3 releases in 7 days).\n\nThis week's activity centered on the GitHub CI pipeline set: `ci-github-container` shipped 1 release and remained the busiest project (1 run), while `ci-github-publish` also shipped 1 release with the same 5-star footprint. The most recent release was `ci-github-nodejs` 0.25.0 on October 2, 2026, which indicates ongoing iteration in the Node.js CI path alongside the container build/publish flow, keeping the CI architecture consistent across language/runtime variants.\n\n- `ci-github-container`: Continued focus on the container CI path matters for platform engineers because it is the highest-activity repo this period, which typically drives the most frequent feedback on build and packaging reliability.\n- `ci-github-publish`: Publishing changes in this repo matter for SREs and release managers because it affects how artifacts are produced and made available, reducing friction when coordinating downstream deployments.\n- `ci-github-nodejs` (0.25.0): The Node.js CI update matters for technical contributors because it improves the runtime-specific pipeline behavior they depend on, lowering the likelihood of environment-specific CI failures.",
+  "closingMarkdown": "## Weekly Engineering Release Summary (Sep 28, 2026 - Oct 5, 2026)\n\n**Scope**\n- **Repositories covered:** 3\n- **Releases shipped:** 3\n- **Busiest project:** `ci-github-container` (1)\n- **Most recent release:** `ci-github-nodejs` **0.25.0**\n\n## Releases by repository\n- **`ci-github-container`**\n  - **Releases:** 1\n  - **Stars:** 5 ⭐\n- **`ci-github-publish`**\n  - **Releases:** 1\n  - **Stars:** 5 ⭐\n- **`ci-github-nodejs`**\n  - **Releases:** 1\n  - **Stars:** 1 ⭐\n  - **Most recent:** **0.25.0**\n\n## Practical notes\n- Activity was concentrated in the CI workflow tooling, with `ci-github-container` leading the week's release count.\n- The latest Node.js CI update (`ci-github-nodejs` **0.25.0**) is the most immediate change for teams running Node-based pipelines.\n- `ci-github-publish` received a release as well, indicating continued iteration on publishing steps and related automation.\n\n## Closing summary (practical impact)\nFor platform engineers and SREs, this week's set of CI-focused releases primarily affects how GitHub-based pipelines build, test, and publish artifacts. Technical users should expect incremental improvements in automation behavior and pipeline consistency, with the most direct operational touchpoint being `ci-github-nodejs` **0.25.0** for Node.js workflows.\n\n- **Run a CI timing benchmark** using the updated workflows from **`ci-github-nodejs` v0.25.0** (compare job duration and cache hit rates against the prior release) to quantify **performance** impact in Node pipelines.\n- **",
+  "stats": {
+    "period": {
+      "since": "2026-09-28T17:57:31.421Z",
+      "until": "2026-10-05T17:57:31.421Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 3,
+    "busiestRepo": {
+      "name": "ci-github-container",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-nodejs",
+      "name": "0.25.0",
+      "publishedAt": "2026-10-02T14:13:44Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-container",
+      "description": "Opinionated GitHub Actions and workflows for continuous integration in container (OCI) context",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.39.0",
+          "tag": "0.39.0",
+          "publishedAt": "2026-09-30T20:35:48Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.39.0",
+          "highlights": [
+            "## Release Summary\n\n**Docker** adds image build-provenance attestations, pins the installed Docker version, updates BuildKit and Buildx, and supports pull-request image-tag cleanup for user-owned packages.\r\n\r\n**Helm** adds a dedicated chart-signing action and configurable test namespaces, while fixing dependency vulnerabilities in documentation generation.\r\n\r\nInternal maintenance refreshes dependencies, development tooling, and documentation, and fixes CI linting and Helm fixture security failures."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.25.0",
+          "tag": "0.25.0",
+          "publishedAt": "2026-10-02T14:13:44Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.25.0",
+          "highlights": [
+            "## Release Summary\n\nIntroduced `actions/publish` to publish CI-built npm packages directly from your own jobs, giving projects control over validation and GitHub release ordering. (https://github.com/hoverkraft-tech/ci-github-nodejs/pull/536)\r\n\r\nInternal updates refresh dependencies and generated documentation, and streamline test-package maintenance and lint configuration. (https://github.com/hoverkraft-tech/ci-github-nodejs/pull/538)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.29.0",
+          "tag": "0.29.0",
+          "publishedAt": "2026-09-30T16:22:28Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.29.0",
+          "highlights": [
+            "## Release Summary\n\nRelease planning now detects changes.\r\n\r\nInternal updates include GitHub Actions and npm dependency upgrades, alongside refreshed action and workflow documentation."
+          ]
+        }
+      ]
+    }
+  ]
+}
