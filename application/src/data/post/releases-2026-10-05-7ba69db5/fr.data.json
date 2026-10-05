@@ -1,0 +1,75 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Du 28 septembre 2026 au 5 octobre 2026, 3 releases ont été publiées sur 3 dépôts suivis, soit une cadence d'environ 0,43 release par jour.\n\nSur la période, l'activité s'est concentrée sur `ci-github-container` (1 release, 5 ⭐) et `ci-github-publish` (1 release, 5 ⭐), avec une focalisation sur la chaîne CI/CD GitHub orientée artefacts (build de conteneurs puis publication). La release la plus récente, `ci-github-nodejs` v0.25.0 (2 octobre 2026), indique un ajustement côté pipeline Node.js, avec un niveau d'adoption plus faible (1 ⭐) que les workflows conteneurs/publish, ce qui suggère que les changements récents ont surtout consolidé les briques \"container + publish\" avant d'étendre plus largement la base Node.js.\n\n- `ci-github-container` : la release unique sur ce dépôt, avec 5 ⭐, renforce la brique \"build conteneur\" ; pour les SRE et ingénieurs plateforme, cela aide à stabiliser le chemin de livraison (moins de variations entre environnements) lors des déploiements automatisés.\n- `ci-github-publish` : la release associée (5 ⭐) consolide la phase de publication ; pour les contributeurs, cela réduit la friction d'intégration en clarifiant le passage \"artefact prêt → publication\", utile pour fiabiliser les releases.\n- `ci-github-nodejs` (v0.25.0) : malgré 1 ⭐, la mise à jour du pipeline Node.js sert de point d'extension ; pour les équipes qui adoptent Hoverkraft sur des stacks applicatives, cela prépare une homogénéisation progressive des workflows au-delà du conteneur.",
+  "closingMarkdown": "## Période du 28 septembre 2026 au 5 octobre 2026\n\n### Vue d'ensemble\n- **Dépôts suivis :** 3\n- **Releases publiées :** 3\n- **Projet le plus actif :** `ci-github-container` (1)\n- **Release la plus récente :** `ci-github-nodejs` **0.25.0**\n\n### Dépôts en lumière\n- **`ci-github-container`** : 1 release, **5 ⭐**\n- **`ci-github-publish`** : 1 release, **5 ⭐**\n- **`ci-github-nodejs`** : 1 release, **1 ⭐**\n\n### Lecture opérationnelle\n- **`ci-github-container`** concentre l'essentiel de l'activité sur la période. C'est typiquement le point d'entrée pour stabiliser ou standardiser les pipelines liés aux images et aux environnements de build.\n- **`ci-github-publish`** suit avec une release, ce qui suggère une attention portée à la publication (processus de déploiement, règles de versioning, ou contrôles autour des artefacts).\n- **`ci-github-nodejs`** publie une version **0.25.0**. Même avec un signal étoilé plus faible, une release récente sur ce dépôt mérite d'être prise en compte pour la cohérence des workflows Node.js (compatibilité, paramètres CI, ou durcissement des étapes).\n\n## Impact pratique (pour les équipes)\nPour les **plateforme engineers**, **SRE** et utilisateurs techniques, cette séquence indique une consolidation progressive des briques CI autour du **container**, de la **publication d'artefacts** et de l'outillage **Node.js**. L'enjeu concret est de réduire les écarts entre pipelines, fiabiliser la chaîne de publication et limiter les variations de",
+  "stats": {
+    "period": {
+      "since": "2026-09-28T17:57:31.421Z",
+      "until": "2026-10-05T17:57:31.421Z"
+    },
+    "totalRepos": 3,
+    "totalReleases": 3,
+    "busiestRepo": {
+      "name": "ci-github-container",
+      "count": 1
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-nodejs",
+      "name": "0.25.0",
+      "publishedAt": "2026-10-02T14:13:44Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-container",
+      "description": "Actions GitHub et workflows opinés pour l'intégration continue dans un contexte de conteneurs (OCI)",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "0.39.0",
+          "tag": "0.39.0",
+          "publishedAt": "2026-09-30T20:35:48Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.39.0",
+          "highlights": [
+            "## Résumé de la version\n\n**Docker** ajoute des attestations de provenance de build d'images, fixe la version de Docker installée, met à jour BuildKit et Buildx, et prend en charge le nettoyage des tags d'images pour les demandes de tirage (pull request) pour les packages appartenant à l'utilisateur.\n\n**Helm** ajoute une action dédiée à la signature des charts et des espaces de noms de tests configurables, tout en corrigeant des vulnérabilités de dépendances dans la génération de documentation.\n\nDes mises à jour de maintenance interne actualisent les dépendances, les outils de développement et la documentation, et corrigent les échecs de linting CI ainsi que les problèmes de sécurité des fixtures Helm."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions GitHub et workflows opiniâtres pour l'intégration continue dans un contexte Node.js",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "0.25.0",
+          "tag": "0.25.0",
+          "publishedAt": "2026-10-02T14:13:44Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/0.25.0",
+          "highlights": [
+            "## Résumé de la publication\n\nAjout de `actions/publish` pour publier directement, depuis vos propres jobs, des packages npm construits par CI, afin de donner aux projets le contrôle sur la validation et l'ordre des releases GitHub. (https://github.com/hoverkraft-tech/ci-github-nodejs/pull/536)\n\nMises à jour internes pour actualiser les dépendances et la documentation générée, et pour simplifier la maintenance de test-package ainsi que la configuration du lint. (https://github.com/hoverkraft-tech/ci-github-nodejs/pull/538)"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions GitHub et workflows opiniâtres pour des releases, déploiements et publications rationalisés.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "0.29.0",
+          "tag": "0.29.0",
+          "publishedAt": "2026-09-30T16:22:28Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/0.29.0",
+          "highlights": [
+            "## Résumé de la version\n\nLa planification des versions détecte désormais les changements.\n\nLes mises à jour internes incluent GitHub Actions et des mises à niveau des dépendances npm, ainsi qu'une documentation d'action et de workflow actualisée."
+          ]
+        }
+      ]
+    }
+  ]
+}
