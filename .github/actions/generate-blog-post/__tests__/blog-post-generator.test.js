@@ -107,10 +107,7 @@ describe('BlogPostGenerator', () => {
       assert.match(frenchMdxCall.arguments[1], /import data from '\.\/fr\.data\.json';/);
       assert.strictEqual(mockBiomeService.formatDirectory.mock.calls.length, 1);
       assert.strictEqual(mockBiomeService.formatDirectory.mock.calls[0].arguments[0], '/test');
-      assert.strictEqual(
-        mockBiomeService.formatDirectory.mock.calls[0].arguments[1],
-        `src/data/post/${result.slug}`
-      );
+      assert.strictEqual(mockBiomeService.formatDirectory.mock.calls[0].arguments[1], `src/data/post/${result.slug}`);
     });
 
     it('should fail when image generation fails', async () => {

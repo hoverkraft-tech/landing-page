@@ -1,5 +1,4 @@
 const path = require('node:path');
-const matter = require('gray-matter');
 const yaml = require('js-yaml');
 
 function toIsoUtcNow() {
@@ -52,6 +51,20 @@ function joinUrl(...parts) {
     .join('/');
 }
 
+function parseFrontmatter(raw) {
+  if (typeof raw !== 'string' || !raw.startsWith('---')) {
+    return {};
+  }
+
+  const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---(?:\r?\n|$)/);
+  if (!match) {
+    return {};
+  }
+
+  const parsed = yaml.load(match[1]);
+  return parsed && typeof parsed === 'object' ? parsed : {};
+}
+
 class PostMetadataService {
   constructor(fileSystemService) {
     this.fileSystemService = fileSystemService;
@@ -81,7 +94,7 @@ class PostMetadataService {
     }
 
     const mdxRaw = await this.fileSystemService.readFile(mdxPath);
-    const { data } = matter(mdxRaw);
+    const data = parseFrontmatter(mdxRaw);
 
     const title = typeof data.title === 'string' ? data.title : '';
     const excerpt = typeof data.excerpt === 'string' ? data.excerpt : '';
