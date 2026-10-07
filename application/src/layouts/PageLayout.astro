@@ -2,6 +2,7 @@
 import Footer from '~/components/widgets/Footer.astro';
 import Header from '~/components/widgets/Header.astro';
 import AnnouncementBar from '~/components/widgets/AnnouncementBar.astro';
+import { getAnnouncementContent } from '~/data/announcement';
 import { getLangFromUrl } from '~/i18n/utils';
 import Layout from '~/layouts/Layout.astro';
 
@@ -19,13 +20,7 @@ const { metadata } = Astro.props;
 const lang = getLangFromUrl(Astro.url);
 const localizedHeaderData = getLocalizedHeaderData(Astro.url);
 const localizedFooterData = getLocalizedFooterData(Astro.url);
-const announcement = {
-  text:
-    lang === 'en'
-      ? 'Hoverkraft is a sponsor of Kubernetes Community Days Provence 2026'
-      : 'Hoverkraft est sponsor des Kubernetes Community Days Provence 2026',
-  href: 'https://cloudnative-provence.fr/',
-};
+const announcement = getAnnouncementContent(lang);
 ---
 
 <Layout metadata={metadata}>
