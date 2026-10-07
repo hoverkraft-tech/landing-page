@@ -1,6 +1,8 @@
 ---
 import Footer from '~/components/widgets/Footer.astro';
 import Header from '~/components/widgets/Header.astro';
+import HomeAnnouncementBar from '~/components/home/HomeAnnouncementBar.astro';
+import { getLangFromUrl } from '~/i18n/utils';
 import Layout from '~/layouts/Layout.astro';
 
 import { getLocalizedFooterData, getLocalizedHeaderData } from '~/navigation';
@@ -14,12 +16,22 @@ export interface Props {
 const { metadata } = Astro.props;
 
 // Use localized navigation data
+const lang = getLangFromUrl(Astro.url);
 const localizedHeaderData = getLocalizedHeaderData(Astro.url);
 const localizedFooterData = getLocalizedFooterData(Astro.url);
+const announcement = {
+  text:
+    lang === 'en'
+      ? 'Hoverkraft is a sponsor of Kubernetes Community Days Provence 2026'
+      : 'Hoverkraft est sponsor des Kubernetes Community Days Provence 2026',
+  href: 'https://cloudnative-provence.fr/',
+};
 ---
 
 <Layout metadata={metadata}>
-  <slot name="announcement" />
+  <slot name="announcement">
+    <HomeAnnouncementBar {...announcement} />
+  </slot>
   <slot name="header"> <Header {...localizedHeaderData} isSticky showRssFeed showToggleTheme /> </slot>
   <main><slot /></main>
   <slot name="footer"> <Footer {...localizedFooterData} /> </slot>
