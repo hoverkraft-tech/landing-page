@@ -1,6 +1,5 @@
 ---
 import HomeActivation from '~/components/home/HomeActivation.astro';
-import HomeAnnouncementBar from '~/components/home/HomeAnnouncementBar.astro';
 import HomeAudienceTabs from '~/components/home/HomeAudienceTabs.astro';
 import HomeComparison from '~/components/home/HomeComparison.astro';
 import HomeCredibility from '~/components/home/HomeCredibility.astro';
@@ -26,8 +25,6 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <Fragment slot="announcement"> <HomeAnnouncementBar {...content.announcement} /> </Fragment>
-
   <HomeHero content={content.hero} />
   <HomeAudienceTabs header={content.useCases.header} items={content.useCases.items} />
   <HomeCredibility header={content.credibility.header} cards={content.credibility.cards} />

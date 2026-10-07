@@ -21,10 +21,6 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         description:
           'Industrialize Platform Engineering with the HoverKraft method, open-source connectors, and senior guidance to accelerate delivery without vendor lock-in.',
       },
-      announcement: {
-        text: 'Hoverkraft is a sponsor of Kubernetes Community Days Provence 2026',
-        href: 'https://cloudnative-provence.fr/',
-      },
       hero: {
         tagline: 'Sovereign Platform Engineering',
         title: 'Industrialize Platform Engineering without losing control',
@@ -316,10 +312,6 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
       title: 'Hoverkraft - Platform Engineering souverain et réversible',
       description:
         'Industrialisez votre Platform Engineering avec la méthode HoverKraft, des connecteurs open source et un accompagnement senior pour accélérer votre delivery sans verrou propriétaire.',
-    },
-    announcement: {
-      text: 'Hoverkraft est sponsor des Kubernetes Community Days Provence 2026',
-      href: 'https://cloudnative-provence.fr/',
     },
     hero: {
       tagline: 'Platform Engineering souverain',
