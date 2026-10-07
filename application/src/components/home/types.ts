@@ -77,10 +77,6 @@ export type HomePageContent = {
     title: string;
     description: string;
   };
-  announcement: {
-    text: string;
-    href: string;
-  };
   hero: HomeHeroContent;
   useCases: {
     header: HomeSectionHeader;

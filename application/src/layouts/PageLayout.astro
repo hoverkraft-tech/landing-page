@@ -1,7 +1,7 @@
 ---
 import Footer from '~/components/widgets/Footer.astro';
 import Header from '~/components/widgets/Header.astro';
-import HomeAnnouncementBar from '~/components/home/HomeAnnouncementBar.astro';
+import AnnouncementBar from '~/components/widgets/AnnouncementBar.astro';
 import { getLangFromUrl } from '~/i18n/utils';
 import Layout from '~/layouts/Layout.astro';
 
@@ -29,9 +29,7 @@ const announcement = {
 ---
 
 <Layout metadata={metadata}>
-  <slot name="announcement">
-    <HomeAnnouncementBar {...announcement} />
-  </slot>
+  <AnnouncementBar {...announcement} />
   <slot name="header"> <Header {...localizedHeaderData} isSticky showRssFeed showToggleTheme /> </slot>
   <main><slot /></main>
   <slot name="footer"> <Footer {...localizedFooterData} /> </slot>
