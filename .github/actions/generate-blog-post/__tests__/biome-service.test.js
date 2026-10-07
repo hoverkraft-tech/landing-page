@@ -39,8 +39,7 @@ describe('BiomeService', () => {
     assert.throws(
       () => biomeService.formatDirectory('/repo/application', 'src/data/post/releases-2025-11-15-abc123de'),
       {
-        message:
-          'Biome formatting failed for "src/data/post/releases-2025-11-15-abc123de": Syntax error',
+        message: 'Biome formatting failed for "src/data/post/releases-2025-11-15-abc123de": Syntax error',
       }
     );
   });

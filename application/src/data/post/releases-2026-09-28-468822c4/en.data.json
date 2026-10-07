@@ -55,12 +55,7 @@
           "tag": "argocd-cmp-hk-deployment-0.6.6",
           "publishedAt": "2026-09-22T19:29:16Z",
           "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-0.6.6",
-          "highlights": [
-            "What's Changed",
-            "Dependency Updates",
-            "<details>",
-            "<summary>8 changes</summary>"
-          ]
+          "highlights": ["What's Changed", "Dependency Updates", "<details>", "<summary>8 changes</summary>"]
         },
         {
           "name": "Version testcontainers-node - 0.5.3",
