@@ -4,7 +4,7 @@
  * Source: @hoverkraft-tech/branding
  * Version: 0.1.0
  * Commit: 1149c11c0afa546258ff99b3e5dbe38e44e4df2a
- * Generated: 2026-10-07T13:29:30.147Z
+ * Generated: 2026-10-09T04:38:59.281Z
  */
 
 import type { LogoCollection } from './types';
