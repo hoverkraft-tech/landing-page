@@ -1,0 +1,109 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Du 5 au 12 octobre 2026, 6 releases ont été publiées pour 2 dépôts suivis, soit une fréquence d'environ 0,86 release par jour.\n\nLes mises à jour ont été portées principalement par docker-base-images (5 releases), avec un focus sur la base d'exécution utilisée en amont des pipelines ; ci-github-common a complété le cycle avec 1 release, dont la version la plus récente ci-github-common 0.39.0 (12 octobre 2026). Cette répartition indique une dynamique où les fondations (images de base) évoluent plus vite, tandis que les composants partagés côté GitHub (workflows/CI communs) suivent pour stabiliser et standardiser les pratiques d'intégration.\n\n- docker-base-images : 5 releases sur la période, ce qui compte pour les ingénieurs plateforme et SRE car cela réduit le risque de dérive entre environnements en gardant une base d'exécution cohérente pour les déploiements et tests.\n- ci-github-common : release unique mais récente (0.39.0), utile pour les contributeurs et équipes SRE car les changements sur les composants CI partagés limitent les écarts de configuration entre dépôts et améliorent la reproductibilité des pipelines.",
+  "closingMarkdown": "## Synthèse de la période (5 octobre 2026 - 12 octobre 2026)\n\n- **Dépôts suivis :** 2\n- **Releases publiées :** 6\n- **Projet le plus actif :** `docker-base-images` (**5** releases)\n- **Release la plus récente :** `ci-github-common` **0.39.0**\n\n### Dépôts en lumière\n- **`ci-github-common`** : **1 release**, **4 ⭐**\n- **`docker-base-images`** : **5 releases**, **1 ⭐**\n\n### Lecture rapide\nLa dynamique de publication est dominée par **`docker-base-images`**, ce qui suggère des mises à jour régulières sur les images de base utilisées en amont de la plupart des pipelines. **`ci-github-common`** apporte, quant à lui, une mise à jour plus ciblée via la release **0.39.0**, utile pour stabiliser ou ajuster les composants d'automatisation côté GitHub CI.\n\n## Impact pratique (pour plateformes, SRE et utilisateurs techniques)\nSur cette période, les équipes **plateforme** et **SRE** peuvent s'attendre à des changements surtout au niveau des **images de base** (donc indirectement sur les temps de build, la reproductibilité et la conformité des environnements). Les utilisateurs techniques bénéficieront surtout des ajustements de **CI** via `ci-github-common`, avec un effet plus direct sur la cohérence des workflows et la maintenance des pipelines.\n\n- **Exécuter des benchmarks de build** sur un échantillon de pipelines utilisant `docker-base-images` (artefact : images publiées par `docker-base-images`) pour mesurer l'évolution des **temps de build** et la **stabilité** (réduction des écarts entre exécutions).\n- **Vérifier la conformité et la traçabilité**",
+  "stats": {
+    "period": {
+      "since": "2026-10-05T18:38:45.285Z",
+      "until": "2026-10-12T18:38:45.285Z"
+    },
+    "totalRepos": 2,
+    "totalReleases": 6,
+    "busiestRepo": {
+      "name": "docker-base-images",
+      "count": 5
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-common",
+      "name": "0.39.0",
+      "publishedAt": "2026-10-12T05:17:02Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions GitHub et workflows opiniâtres pour les besoins courants d'intégration continue",
+      "stars": 4,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.39.0",
+          "tag": "0.39.0",
+          "publishedAt": "2026-10-12T05:17:02Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.39.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLe linting partage désormais les paramètres par défaut de Super-Linter entre les exécutions locales et CI afin d'assurer une configuration cohérente. Les résumés de Super-Linter sont activés par défaut, avec des règles de Conventional Commits en repli lorsque commitlint est activé sans configuration de projet.\n\nDes mises à jour internes actualisent la documentation, les dépendances des GitHub Actions et `fast-xml-parser`."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker avec opinion",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version testcontainers-node - 0.5.4",
+          "tag": "testcontainers-node-0.5.4",
+          "publishedAt": "2026-10-11T18:49:14Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/testcontainers-node-0.5.4",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Mises à jour des dépendances",
+            "build(deps) : mise à niveau de testcontainers de 12.1.0 à 12.2.0 dans /images/testcontainers-node dans le groupe npm-dependencies (#259) [@dependabot[bot]](https://github.co...)",
+            "Nouveaux contributeurs"
+          ]
+        },
+        {
+          "name": "Version ci-helm - 0.5.5",
+          "tag": "ci-helm-0.5.5",
+          "publishedAt": "2026-10-11T18:49:14Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.5.5",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Mises à jour des dépendances",
+            "build(deps) : mise à jour helmpack/chart-testing de la v3.14.0 à la v3.15.0 dans /images/ci-helm (#261) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "Nouveaux contributeurs"
+          ]
+        },
+        {
+          "name": "Version super-linter - 1.1.0",
+          "tag": "super-linter-1.1.0",
+          "publishedAt": "2026-10-11T18:49:13Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/super-linter-1.1.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Fonctionnalités",
+            "feat(super-linter) : améliorer le comportement de super-linter (#262) @neilime",
+            "Nouveaux contributeurs"
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 0.6.7",
+          "tag": "argocd-cmp-hk-deployment-0.6.7",
+          "publishedAt": "2026-10-11T18:49:13Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-0.6.7",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Mises à jour des dépendances",
+            "build(deps): met à jour argoproj/argocd de la v3.5.3 à la v3.5.4 dans /images/argocd-cmp-hk-deployment (#260) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "Nouveaux contributeurs"
+          ]
+        },
+        {
+          "name": "Version super-linter - 1.0.0",
+          "tag": "super-linter-1.0.0",
+          "publishedAt": "2026-10-08T19:28:05Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/super-linter-1.0.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "## Changements majeurs",
+            "build(deps)! : bump super-linter/super-linter de slim-v8.7.0 à slim-v9.0.0 dans /images/super-linter (#255) [@dependabot[bot]](https://github.com/apps/dependab...)",
+            "Nouveaux contributeurs"
+          ]
+        }
+      ]
+    }
+  ]
+}
