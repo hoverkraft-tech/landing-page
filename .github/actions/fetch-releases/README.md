@@ -3,7 +3,7 @@
 # GitHub Action: Fetch Releases from Hoverkraft Tech Repos
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/b85da2dd91c262fdb3dec3722441ee41ba5f699d6e8056e124a8e6303c41da69/hoverkraft-tech/landing-page" width="60px" align="center" alt="Fetch Releases from Hoverkraft Tech Repos" />
+  <img src="https://opengraph.githubassets.com/25beac14c882791e270766d991195635747a312b1743f1d2a343e3bb8184baef/hoverkraft-tech/landing-page" width="60px" align="center" alt="Fetch Releases from Hoverkraft Tech Repos" />
 </div>
 
 ---
@@ -30,7 +30,7 @@ Fetches releases from all public Hoverkraft Tech repositories within a date rang
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/fetch-releases@9308530339e2fb63e7a6bb661acaffcb7fc36e62 # main
+- uses: hoverkraft-tech/landing-page/.github/actions/fetch-releases@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
   with:
     # Fetch releases since this date (ISO 8601 format)
     # This input is required.
