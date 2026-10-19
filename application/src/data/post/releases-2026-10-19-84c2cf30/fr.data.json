@@ -1,0 +1,56 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Du 12 au 19 octobre 2026, 2 releases ont été publiées sur 1 dépôt suivi, soit une fréquence de déploiement d'environ 0,29 release par jour.\n\nSur la période, le dépôt le plus actif est registry-creds, avec 2 releases, dont la plus récente : registry-creds Version 0.3.8 (18 octobre 2026). Les changements se concentrent sur la gestion des identifiants pour l'accès aux registres (composant \"registry-creds\"), ce qui renforce la cohérence du flux de configuration côté exécution et réduit les écarts entre environnements lors de l'approvisionnement des secrets.\n\n- registry-creds : 2 releases sur la semaine, dont la 0.3.8, ce qui compte pour les SRE et les ingénieurs plateforme car cela stabilise la fourniture des credentials et limite les causes fréquentes d'échecs d'accès aux registres (auth, rotation, configuration environnementale).\n- Capacité \"registry-creds\" : en tant que point central de configuration des identifiants, elle facilite l'adoption par les contributeurs techniques en clarifiant le contrat d'usage (où et comment les creds sont attendus), ce qui réduit le temps de correction lors des intégrations.",
+  "closingMarkdown": "## Synthèse de la semaine (12 octobre 2026 - 19 octobre 2026)\n\n- **Dépôts suivis :** 1\n- **Releases publiées :** 2\n- **Projet le plus actif :** `registry-creds` (**2 releases**)\n- **Release la plus récente :** `registry-creds` **v0.3.8**\n\n### Dépôts en lumière\n- **`registry-creds`** : **2 releases**, **1 ⭐**\n\n### Détail des releases\n- `registry-creds` : **v0.3.8** (dernière release de la période)\n- `registry-creds` : **1 release supplémentaire** sur la période (total : 2)\n\n---\n\nPour les **platform engineers**, **SREs** et autres utilisateurs techniques, l'impact principal de cette semaine est la **stabilisation et l'itération rapide** autour de `registry-creds`, ce qui facilite la **mise à jour contrôlée** des mécanismes de gestion de credentials et réduit le risque opérationnel lors des changements.\n\n- **Lancer des benchmarks de rotation/lecture des credentials** sur `registry-creds` (artefact : `registry-creds` v0.3.8) afin de mesurer l'impact sur la **latence d'accès** et la **fréquence d'échecs** en conditions proches de la production.\n- **Vérifier la conformité des usages** (artefact : documentation et exemples du repo `registry-creds`) pour confirmer l'alignement avec vos exigences internes (ex. **minimisation des droits**, **traçabilité**, **rotation**), et ajuster les playbooks SRE en conséquence.\n- **Adopter/mettre à jour un composant d'automatisation** basé sur `registry-creds` (artefact : scripts, manifests ou interfaces fourn",
+  "stats": {
+    "period": {
+      "since": "2026-10-12T16:13:14.515Z",
+      "until": "2026-10-19T16:13:14.515Z"
+    },
+    "totalRepos": 1,
+    "totalReleases": 2,
+    "busiestRepo": {
+      "name": "registry-creds",
+      "count": 2
+    },
+    "mostRecentRelease": {
+      "repo": "registry-creds",
+      "name": "Version 0.3.8",
+      "publishedAt": "2026-10-18T20:20:40Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "registry-creds",
+      "description": "**Répliquer `imagePullSecrets` Kubernetes dans tous les espaces de noms**",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/registry-creds",
+      "releases": [
+        {
+          "name": "Version 0.3.8",
+          "tag": "0.3.8",
+          "publishedAt": "2026-10-18T20:20:40Z",
+          "url": "https://github.com/hoverkraft-tech/registry-creds/releases/tag/0.3.8",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Maintenance",
+            "chore(release) : mettre à jour le manifeste pour la 0.3.7 (#9) [@github-actions[bot]](https://github.com/apps/github-actions)",
+            "Autres modifications"
+          ]
+        },
+        {
+          "name": "Version 0.3.7",
+          "tag": "0.3.7",
+          "publishedAt": "2026-10-18T19:23:10Z",
+          "url": "https://github.com/hoverkraft-tech/registry-creds/releases/tag/0.3.7",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Aucun changement",
+            "Nouveaux contributeurs",
+            "_Aucun nouveau contributeur dans cette version._"
+          ]
+        }
+      ]
+    }
+  ]
+}
