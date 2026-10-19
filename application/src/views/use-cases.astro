@@ -1,0 +1,300 @@
+---
+import { Icon } from 'astro-icon/components';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const isEnglish = lang === 'en';
+
+const filterOptions = [
+  {
+    id: 'all',
+    label: isEnglish ? 'All landscapes' : 'Tout le paysage',
+  },
+  {
+    id: 'platform',
+    label: isEnglish ? 'Platform teams' : 'Équipes plateforme',
+  },
+  {
+    id: 'product',
+    label: isEnglish ? 'Product engineering' : 'Ingénierie produit',
+  },
+  {
+    id: 'governance',
+    label: isEnglish ? 'Sovereignty & governance' : 'Souveraineté & gouvernance',
+  },
+  {
+    id: 'cloud',
+    label: isEnglish ? 'Cloud & runtime' : 'Cloud & runtime',
+  },
+] as const;
+
+const cards = [
+  {
+    title: isEnglish ? 'Platform modernization' : 'Modernisation de plateforme',
+    category: 'platform',
+    label: isEnglish ? 'Internal platform' : 'Plateforme interne',
+    description: isEnglish
+      ? 'Turn fragmented toolchains into a platform that scales with your delivery model and reduces operational drag.'
+      : "Transformez une chaîne d’outils fragmentée en une plateforme qui s’adapte à votre modèle de delivery et réduit le frottement opérationnel.",
+    bullets: isEnglish
+      ? ['GitOps and environment governance', 'Shared service catalog', 'Observable platform KPIs']
+      : ['GitOps et gouvernance des environnements', 'Catalogue de services partagé', 'KPI de plateforme visibles'],
+  },
+  {
+    title: isEnglish ? 'Developer experience' : 'Expérience développeur',
+    category: 'product',
+    label: isEnglish ? 'Product engineering' : 'Ingénierie produit',
+    description: isEnglish
+      ? 'Reduce setup friction, release delays, and incident handovers so product teams stay focused on value delivery.'
+      : 'Réduisez le frottement de setup, les délais de release et les handovers d’incident pour garder les équipes produit concentrées sur la valeur.',
+    bullets: isEnglish
+      ? ['Self-service environments', 'Clear ownership and routing', 'Less waiting on platform bottlenecks']
+      : ['Environnements en self-service', 'Responsabilités et routage clairs', 'Moins d’attente sur les goulets de la plateforme'],
+  },
+  {
+    title: isEnglish ? 'Sovereignty & compliance' : 'Souveraineté & conformité',
+    category: 'governance',
+    label: isEnglish ? 'Control & reversibility' : 'Contrôle & réversibilité',
+    description: isEnglish
+      ? 'Keep delivery efficient while your teams stay in control of architecture choices, data, and governance obligations.'
+      : 'Gardez une livraison efficace tout en conservant le contrôle sur l’architecture, les données et les obligations de gouvernance.',
+    bullets: isEnglish
+      ? ['Open-source-first components', 'Documented decisions and rollback paths', 'Audit-ready delivery controls']
+      : ['Composants open source-first', 'Décisions documentées et chemins de rollback', 'Contrôles de delivery auditables'],
+  },
+  {
+    title: isEnglish ? 'Multi-cloud operations' : 'Opérations multi-cloud',
+    category: 'cloud',
+    label: isEnglish ? 'Cloud & runtime' : 'Cloud & runtime',
+    description: isEnglish
+      ? 'Unify cloud runtime operations across providers, clusters, and deployment standards without losing engineering velocity.'
+      : 'Unifiez les opérations de runtime multi-cloud entre fournisseurs, clusters et standards de déploiement sans perdre la vélocité.',
+    bullets: isEnglish
+      ? ['Provider-agnostic platform patterns', 'Kubernetes and GitOps standardization', 'Shared observability and incident flow']
+      : ['Patterns de plateforme agnostiques au provider', 'Standardisation Kubernetes et GitOps', 'Observabilité partagée et flux d’incident'],
+  },
+] as const;
+
+const partners = [
+  { name: 'GitHub', tag: isEnglish ? 'CI/CD & collaboration' : 'CI/CD & collaboration' },
+  { name: 'GitLab', tag: isEnglish ? 'Pipelines & DevSecOps' : 'Pipelines & DevSecOps' },
+  { name: 'Kubernetes', tag: isEnglish ? 'Runtime & orchestration' : 'Runtime & orchestration' },
+  { name: 'ArgoCD', tag: isEnglish ? 'GitOps delivery' : 'Livraison GitOps' },
+  { name: 'Terraform', tag: isEnglish ? 'Infrastructure as code' : 'Infrastructure as code' },
+  { name: 'Prometheus', tag: isEnglish ? 'Observability' : 'Observabilité' },
+  { name: 'OVHcloud', tag: isEnglish ? 'Private cloud hosting' : 'Hébergement cloud privé' },
+  { name: 'AWS', tag: isEnglish ? 'Enterprise cloud' : 'Cloud entreprise' },
+] as const;
+
+const valuePillars = [
+  {
+    title: isEnglish ? 'Platform references' : 'Références plateforme',
+    description: isEnglish
+      ? 'We translate field constraints into reusable platform patterns that teams can adopt without losing their ability to evolve.'
+      : 'Nous transformons les contraintes terrain en patterns de plateforme réutilisables que les équipes peuvent adopter sans perdre leur capacité d’évolution.',
+    icon: 'tabler:stack-3',
+  },
+  {
+    title: isEnglish ? 'Provider-agnostic delivery' : 'Delivery agnostique aux fournisseurs',
+    description: isEnglish
+      ? 'We work with the ecosystem you already use and add guardrails so your platform stays portable and maintainable.'
+      : 'Nous travaillons avec l’écosystème que vous utilisez déjà et ajoutons des garde-fous pour garder votre plateforme portable et maintenable.',
+    icon: 'tabler:shield-check',
+  },
+  {
+    title: isEnglish ? 'Partner ecosystem' : 'Écosystème partenaires',
+    description: isEnglish
+      ? 'From Git providers to observability and runtime tooling, we connect the pieces that matter most to your delivery chain.'
+      : 'Des fournisseurs Git jusqu’aux outils d’observabilité et de runtime, nous connectons les briques qui comptent pour votre chaîne de delivery.',
+    icon: 'tabler:users-group',
+  },
+  {
+    title: isEnglish ? 'Measured adoption' : 'Adoption mesurée',
+    description: isEnglish
+      ? 'Every initiative is shaped around measurable outcomes, from onboarding to release reliability and developer experience.'
+      : 'Chaque initiative est pensée autour de résultats mesurables, de l’onboarding à la fiabilité des releases et à l’expérience développeur.',
+    icon: 'tabler:chart-dots-3',
+  },
+] as const;
+
+const metadata = {
+  title: isEnglish ? 'Use cases & platform landscape - HoverKraft' : 'Cas d’usage & paysage plateforme - HoverKraft',
+  description: isEnglish
+    ? 'Explore the platform use cases, supporting providers, and partner ecosystem behind HoverKraft’s connector-driven delivery model.'
+    : 'Explorez les cas d’usage de la plateforme, les fournisseurs supportés et l’écosystème de partenaires qui soutiennent le modèle de delivery orienté connecteurs HoverKraft.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline={isEnglish ? 'Use cases' : 'Cas d’usage'}
+    actions={[
+      { variant: 'primary', text: isEnglish ? 'Book an audit' : 'Réserver un audit', href: `${translatePath('/contact')}#booking` },
+      { text: isEnglish ? 'View our offers' : 'Voir nos offres', href: translatePath('/offers') },
+    ]}
+    image={{
+      src: '~/assets/images/pages/shared/open-source.webp',
+      alt: isEnglish ? 'HoverKraft platform landscape' : 'Paysage plateforme HoverKraft',
+    }}
+  >
+    <Fragment slot="title">
+      {isEnglish ? 'The platform landscape behind real delivery outcomes' : 'Le paysage plateforme qui soutient des résultats concrets'}
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      {isEnglish ? 'We support the ecosystem your teams already depend on and turn it into a clearer, faster, and more resilient delivery model.' : 'Nous accompagnons l\'écosystème que vos équipes utilisent déjà et le transformons en un modèle de delivery plus clair, plus rapide et plus résilient.'}
+    </Fragment>
+  </Hero>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20" data-use-cases-filter>
+    <div class="mb-8 flex flex-wrap items-center gap-3">
+      {filterOptions.map((filter) => (
+        <button
+          type="button"
+          class:list={[
+            'rounded-full border px-4 py-2 text-sm font-medium transition-all',
+            'border-primary/20 bg-white text-default shadow-sm hover:border-primary/40 hover:text-primary',
+            'dark:border-white/10 dark:bg-slate-950/40 dark:text-white',
+            'data-[active=true]:border-primary data-[active=true]:bg-primary data-[active=true]:text-white',
+            'data-[active=true]:dark:border-primary',
+          ]}
+          data-filter-button={filter.id}
+          data-active={filter.id === 'all' ? 'true' : 'false'}
+          aria-pressed={filter.id === 'all' ? 'true' : 'false'}
+        >
+          {filter.label}
+        </button>
+      ))}
+    </div>
+
+    <div class="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+      {cards.map((card) => (
+        <article
+          class="flex h-full flex-col rounded-3xl border border-gray-200 bg-white p-6 shadow-sm transition-all duration-200 dark:border-white/10 dark:bg-white/5"
+          data-landscape-card={card.category}
+          data-landscape-card-visible="true"
+        >
+          <div class="mb-5 flex items-center justify-between gap-3">
+            <span class="rounded-full bg-primary/10 px-3 py-1 text-[0.65rem] font-semibold uppercase tracking-[0.16em] text-primary">
+              {card.label}
+            </span>
+            <span class="inline-flex h-10 w-10 items-center justify-center rounded-xl bg-primary/10 text-primary">
+              <Icon name="tabler:layers-subtract" class="h-5 w-5" aria-hidden="true" />
+            </span>
+          </div>
+          <h2 class="text-xl font-semibold text-heading">{card.title}</h2>
+          <p class="mt-3 text-sm leading-relaxed text-default">{card.description}</p>
+          <ul class="mt-5 space-y-2 text-sm text-default">
+            {card.bullets.map((bullet) => (
+              <li class="flex items-start gap-2">
+                <Icon name="tabler:check" class="mt-0.5 h-4 w-4 shrink-0 text-primary" aria-hidden="true" />
+                <span>{bullet}</span>
+              </li>
+            ))}
+          </ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 pb-8 md:pb-12">
+    <div class="mb-8 max-w-2xl">
+      <p class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-primary">
+        {isEnglish ? 'Platform references' : 'Références plateforme'}
+      </p>
+      <h2 class="mt-3 text-3xl font-bold tracking-tight text-heading md:text-4xl">
+        {isEnglish ? 'A delivery model that fits real-world stacks' : 'Un modèle de delivery qui s\'adapte aux vrais stacks'}
+      </h2>
+    </div>
+
+    <div class="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+      {valuePillars.map((pillar) => (
+        <div class="rounded-2xl border border-gray-200 bg-gray-50 p-5 dark:border-white/10 dark:bg-white/5">
+          <div class="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
+            <Icon name={pillar.icon} class="h-5 w-5" aria-hidden="true" />
+          </div>
+          <h3 class="mt-4 text-lg font-semibold text-heading">{pillar.title}</h3>
+          <p class="mt-2 text-sm leading-relaxed text-default">{pillar.description}</p>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="mx-auto max-w-6xl px-4 py-16 md:py-20">
+    <div class="mb-8 flex items-end justify-between gap-4">
+      <div>
+        <p class="text-[0.7rem] font-semibold uppercase tracking-[0.18em] text-primary">
+          {isEnglish ? 'Partner ecosystem' : 'Écosystème partenaires'}
+        </p>
+        <h2 class="mt-2 text-3xl font-bold tracking-tight text-heading md:text-4xl">
+          {isEnglish ? 'Compatible with the tools you already trust' : 'Compatible avec les outils auxquels vous faites déjà confiance'}
+        </h2>
+      </div>
+    </div>
+
+    <div class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {partners.map((partner) => (
+        <div class="flex items-center gap-4 rounded-2xl border border-gray-200 bg-white p-4 shadow-sm dark:border-white/10 dark:bg-white/5">
+          <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-sm font-black text-primary">
+            {partner.name.slice(0, 2).toUpperCase()}
+          </div>
+          <div>
+            <p class="font-semibold text-heading">{partner.name}</p>
+            <p class="text-xs uppercase tracking-[0.14em] text-muted">{partner.tag}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <CallToAction
+    actions={[
+      { text: isEnglish ? 'Talk to a Kraft Builder' : 'Parler à un Kraft Builder', href: `${translatePath('/contact')}#booking` },
+      { variant: 'primary', text: isEnglish ? 'View offers' : 'Voir nos offres', href: translatePath('/offers') },
+    ]}
+  >
+    <Fragment slot="title">
+      {isEnglish ? 'Need a platform that matches your real stack?' : 'Besoin d\'une plateforme qui colle à votre vrai stack ?'}
+    </Fragment>
+    <Fragment slot="subtitle">
+      {isEnglish ? 'Let\'s map your delivery chain, identify the right provider mix, and shape a practical roadmap for your teams.' : 'Mappons votre chaîne de delivery, identifions le bon mix de fournisseurs et construisons une feuille de route concrète pour vos équipes.'}
+    </Fragment>
+  </CallToAction>
+</Layout>
+
+<script>
+  const initializeUseCasesFilters = () => {
+    document.querySelectorAll<HTMLElement>('[data-use-cases-filter]').forEach((root) => {
+      if (root.dataset.initialized === 'true') return;
+      root.dataset.initialized = 'true';
+
+      const buttons = Array.from(root.querySelectorAll<HTMLElement>('[data-filter-button]'));
+      const cards = Array.from(root.querySelectorAll<HTMLElement>('[data-landscape-card]'));
+
+      const applyFilter = (filter: string) => {
+        cards.forEach((card) => {
+          const matches = filter === 'all' || card.dataset.landscapeCard === filter;
+          card.style.display = matches ? '' : 'none';
+          card.setAttribute('aria-hidden', matches ? 'false' : 'true');
+        });
+
+        buttons.forEach((button) => {
+          const active = button.dataset.filterButton === filter;
+          button.dataset.active = String(active);
+          button.setAttribute('aria-pressed', String(active));
+        });
+      };
+
+      buttons.forEach((button) => {
+        button.addEventListener('click', () => applyFilter(button.dataset.filterButton ?? 'all'));
+      });
+    });
+  };
+
+  initializeUseCasesFilters();
+  document.addEventListener('astro:page-load', initializeUseCasesFilters);
+</script>

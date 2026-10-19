@@ -179,6 +179,12 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
             icon: 'tabler:book',
           },
           {
+            text: t('nav.use-cases'),
+            href: translatePath('/use-cases'),
+            description: t('nav.use-cases.desc'),
+            icon: 'tabler:layout-grid',
+          },
+          {
             text: t('nav.demo'),
             href: translatePath('/demo'),
             description: t('nav.demo.desc'),

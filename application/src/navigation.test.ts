@@ -56,8 +56,8 @@ describe('localized header navigation', () => {
         "Modele d'execution",
       ],
       openKraftLinks: ['OpenKraft', 'Connecteurs', 'Templates', 'Dashboards DORA / SPACE', 'GitHub', 'GitLab'],
-      resourceLinks: ['Documentation', 'Demo', 'Temoignages', 'Blog', 'Flux RSS'],
-      resourcePageHrefFragments: ['demo', 'testimonials'],
+      resourceLinks: ['Documentation', 'Cas d’usage', 'Demo', 'Temoignages', 'Blog', 'Flux RSS'],
+      resourcePageHrefFragments: ['cas-d-usage', 'demo'],
       companyLinks: ['À propos & vision', 'Contact', 'Charte graphique', 'Equipe', 'Manifeste', 'Valeurs'],
     },
     {
@@ -80,8 +80,8 @@ describe('localized header navigation', () => {
         'Execution model',
       ],
       openKraftLinks: ['OpenKraft', 'Connectors', 'Templates', 'DORA / SPACE dashboards', 'GitHub', 'GitLab'],
-      resourceLinks: ['Documentation', 'Demo', 'Testimonials', 'Blog', 'RSS feed'],
-      resourcePageHrefFragments: ['demo', 'testimonials'],
+      resourceLinks: ['Documentation', 'Use cases', 'Demo', 'Testimonials', 'Blog', 'RSS feed'],
+      resourcePageHrefFragments: ['use-cases', 'demo', 'testimonials'],
       companyLinks: ['About & vision', 'Contact', 'Brand Guidelines', 'Team', 'Manifesto', 'Values'],
     },
   ])('matches the Phase 1 funnel groups for $locale', ({
@@ -112,10 +112,10 @@ describe('localized header navigation', () => {
 
     const resourcesGroup = navigation.links[3];
     expect(resourcesGroup.links?.map((link) => link.text)).toEqual(resourceLinks);
-    expect(resourcesGroup.links?.slice(1, 3).map((link) => link.href)).toEqual(
+    expect(resourcesGroup.links?.slice(1, 4).map((link) => link.href)).toEqual(
       expect.arrayContaining(resourcePageHrefFragments.map((fragment) => expect.stringContaining(fragment)))
     );
-    resourcesGroup.links?.slice(1, 3).forEach((link) => expect(link.href).not.toContain('#'));
+    resourcesGroup.links?.slice(1, 4).forEach((link) => expect(link.href).not.toContain('#'));
 
     const companyGroup = navigation.links[4];
     expect(companyGroup.links?.map((link) => link.text)).toEqual(companyLinks);
