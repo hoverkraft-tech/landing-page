@@ -1,0 +1,104 @@
+---
+import { Icon } from 'astro-icon/components';
+import argo from '~/assets/images/technologies/argo.svg?raw';
+import backstage from '~/assets/images/technologies/backstage.svg?raw';
+import datadog from '~/assets/images/technologies/datadog.svg?raw';
+import flux from '~/assets/images/technologies/flux.svg?raw';
+import forgejo from '~/assets/images/technologies/forgejo.svg?raw';
+import github from '~/assets/images/technologies/github.svg?raw';
+import githubActions from '~/assets/images/technologies/githubactions.svg?raw';
+import gitlab from '~/assets/images/technologies/gitlab.svg?raw';
+import grafana from '~/assets/images/technologies/grafana.svg?raw';
+import kubernetes from '~/assets/images/technologies/kubernetes.svg?raw';
+import opentelemetry from '~/assets/images/technologies/opentelemetry.svg?raw';
+import opentofu from '~/assets/images/technologies/opentofu.svg?raw';
+import ovhcloud from '~/assets/images/technologies/ovh.svg?raw';
+import port from '~/assets/images/technologies/port.svg?raw';
+import prometheus from '~/assets/images/technologies/prometheus.svg?raw';
+import scaleway from '~/assets/images/technologies/scaleway.svg?raw';
+import tekton from '~/assets/images/technologies/tekton.svg?raw';
+import terraform from '~/assets/images/technologies/terraform.svg?raw';
+import trivy from '~/assets/images/technologies/trivy.svg?raw';
+
+interface Props {
+  id: string;
+  name: string;
+  class?: string;
+}
+
+const { id, name, class: className } = Astro.props;
+
+// Local Simple Icons artwork is CC0-1.0; each SVG records its source.
+// Port supplies its own mark; AWS uses the existing Tabler collection.
+const marks: Record<string, { svg: string; color: string }> = {
+  backstage: { svg: backstage, color: '#9bf0e1' },
+  port: { svg: port, color: '#181717' },
+  'gitlab-templates': { svg: gitlab, color: '#fc6d26' },
+  github: { svg: github, color: '#181717' },
+  gitlab: { svg: gitlab, color: '#fc6d26' },
+  forgejo: { svg: forgejo, color: '#fb923c' },
+  'github-actions': { svg: githubActions, color: '#2088ff' },
+  'gitlab-ci': { svg: gitlab, color: '#fc6d26' },
+  tekton: { svg: tekton, color: '#fd495c' },
+  trivy: { svg: trivy, color: '#1904da' },
+  opentofu: { svg: opentofu, color: '#ffda18' },
+  terraform: { svg: terraform, color: '#844fba' },
+  ovhcloud: { svg: ovhcloud, color: '#123f6d' },
+  scaleway: { svg: scaleway, color: '#4f0599' },
+  kubernetes: { svg: kubernetes, color: '#326ce5' },
+  argocd: { svg: argo, color: '#ef7b4d' },
+  flux: { svg: flux, color: '#5468ff' },
+  opentelemetry: { svg: opentelemetry, color: '#181717' },
+  prometheus: { svg: prometheus, color: '#e6522c' },
+  grafana: { svg: grafana, color: '#f46800' },
+  datadog: { svg: datadog, color: '#632ca6' },
+};
+const mark = marks[id];
+const isAws = id === 'aws' || id === 'eks';
+---
+
+<span
+  class:list={['technology-mark', className]}
+  data-technology={id}
+  style={`color: ${mark?.color ?? '#232f3e'}`}
+  aria-hidden="true"
+>
+  {mark ? <Fragment set:html={mark.svg} /> : isAws ? <Icon name="tabler:brand-aws" /> : name.slice(0, 2)}
+</span>
+
+<style>
+.technology-mark {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  width: var(--technology-mark-size, 2.75rem);
+  height: var(--technology-mark-size, 2.75rem);
+  overflow: hidden;
+  border: 1px solid #e7ebef;
+  border-radius: 28%;
+  background: #fff;
+  box-shadow: 0 2px 4px rgb(15 23 42 / 3%);
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+.technology-mark :global(svg) {
+  display: block;
+  width: 58%;
+  height: 58%;
+}
+
+.technology-mark[data-technology="backstage"],
+.technology-mark[data-technology="opentofu"] {
+  border-color: #253a3e;
+  background: #172b30;
+}
+
+.technology-mark[data-technology="port"] :global(svg),
+.technology-mark[data-technology="aws"] :global(svg),
+.technology-mark[data-technology="eks"] :global(svg) {
+  width: 76%;
+  height: 76%;
+}
+</style>

@@ -29,6 +29,8 @@ npm run preview --prefix application
 - `make build` – Run `astro check` and produce a production build
 - `make ci` – Run prepare, lint, and build sequentially
 - `npm run preview --prefix application` – Serve the built site for QA
+- `npm test --prefix application` – Run unit tests and Platform Builder browser tests, also included in CI.
+- `npm run test:browser --prefix application` – Run only the Platform Builder browser tests. The suite starts and stops its own local Astro server and uses the installed Puppeteer browser; no running server or production build is needed.
 
 Most changes should happen inside `application/`. See `AGENTS.md` for detailed automation guardrails.
 
@@ -37,6 +39,8 @@ Most changes should happen inside `application/`. See `AGENTS.md` for detailed a
 - `application/astro.config.ts` – Astro configuration, integrations, and Partytown setup
 - `application/src/config.yaml` – Site metadata, feature toggles, and analytics IDs
 - `application/src/i18n/ui.ts` – Shared UI strings for `fr` (default) and `en` locales
+- `application/src/data/platform-workflow.ts` – French and English workflow stages, technology links, and illustrative implementation approaches for `/platform-builder` and `/en/platform-builder`
+- `application/src/components/platform/` – Full-width platform builder with a technology palette, six architecture stages, and explorable connections. Place providers by clicking or dragging, remove them from the canvas, start from an example architecture, and inspect each stage's handoff. The builder follows the site's light/dark theme and supports keyboard and smaller screens; stage explanations and provider links remain readable without JavaScript
 - `application/src/assets/images` – Optimized assets consumed via the shared `Image` component
 - `application/src/content/` and `application/src/data/` – Blog posts and data-driven content
 - `application/src/content.config.ts` – Astro content collections and schema definitions

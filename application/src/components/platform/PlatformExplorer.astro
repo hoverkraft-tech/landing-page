@@ -1,0 +1,377 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+import TechnologyMark from './TechnologyMark.astro';
+import type { PlatformWorkflowContent } from '~/data/platform-workflow';
+import type { SupportedLanguage } from '~/i18n/ui';
+import './platform-builder.css';
+
+interface Props {
+  content: PlatformWorkflowContent;
+  lang: SupportedLanguage;
+}
+const { content, lang } = Astro.props;
+const { copy, stages, approaches } = content;
+const t = (fr: string, en: string) => (lang === 'en' ? en : fr);
+const number = (index: number) => String(index + 1).padStart(2, '0');
+const positions = [
+  { x: 18, y: 28 },
+  { x: 50, y: 28 },
+  { x: 82, y: 28 },
+  { x: 82, y: 73 },
+  { x: 50, y: 73 },
+  { x: 18, y: 73 },
+];
+const connections = [
+  { path: 'M 180 280 H 500', x: 34, y: 28, label: 'Template' },
+  { path: 'M 500 280 H 820', x: 66, y: 28, label: 'Commit' },
+  { path: 'M 820 280 V 730', x: 82, y: 50.5, label: 'Pipeline' },
+  { path: 'M 820 730 H 500', x: 66, y: 73, label: t('Ressources', 'Resources') },
+  { path: 'M 500 730 H 180', x: 34, y: 73, label: t('Télémétrie', 'Telemetry') },
+  { path: 'M 180 730 V 280', x: 18, y: 50.5, label: 'Feedback' },
+];
+const keywords = t(
+  'Catalogue & templates|Git & code review|Build, tests & sécurité|Infrastructure as Code|GitOps & runtime|Métriques, logs & traces',
+  'Catalog & templates|Git & code review|Build, tests & security|Infrastructure as Code|GitOps & runtime|Metrics, logs & traces'
+).split('|');
+const initialCount = stages.reduce((total, stage) => total + stage.approaches.composable.technologyIds.length, 0);
+---
+
+<div id="platform-explorer" class="platform-builder" data-platform-builder data-lang={lang}>
+  <script
+    is:inline
+    type="application/json"
+    data-builder-content
+    set:html={JSON.stringify(content).replace(/</g, '\\u003c')}
+  />
+  <section class="builder-studio" aria-label={t('Concevez votre plateforme', 'Build your platform')}>
+    <header class="builder-toolbar">
+      <div class="studio-title">
+        <span class="studio-symbol" aria-hidden="true"><Icon name="tabler:blocks" /></span>
+        <div>
+          <h2>
+            {t('Architecture', 'Architecture')}<span class="studio-beta">{t('Interactif', 'Interactive')}</span>
+          </h2>
+          <p>{t('Choisissez les outils de votre plateforme.', 'Choose your platform tools.')}</p>
+        </div>
+      </div>
+      <div class="builder-presets" data-builder-controls hidden>
+        <span>{t('Exemples', 'Examples')}</span>
+        <div class="preset-options" role="group" aria-label={copy.approachLabel}>
+          {approaches.map((approach, index) => (
+            <button type="button" class="btn" data-builder-preset={approach.id} aria-pressed={index === 0}>
+              <Icon name={approach.icon} aria-hidden="true" />
+              {approach.label}
+            </button>
+          ))}
+        </div>
+        <Button type="button" variant="tertiary" class="builder-clear" data-builder-clear>
+          <Icon name="tabler:plus" aria-hidden="true" />{t('Partir de zéro', 'Start from scratch')}
+        </Button>
+      </div>
+    </header>
+
+    <div class="builder-workspace">
+      <div class="builder-canvas-area">
+        <div class="builder-canvas-heading">
+          <div>
+            <span class="canvas-status-dot"></span><span data-builder-preset-name>{approaches[0].label}</span>
+            <span class="canvas-caption">/ {t('votre architecture', 'your architecture')}</span>
+          </div>
+          <span class="canvas-instruction"
+            ><Icon name="tabler:hand-move" aria-hidden="true" />
+            {t('Sélectionnez une étape, puis ajoutez vos outils', 'Select a stage, then add your tools')}</span
+          >
+        </div>
+        <div
+          class="builder-canvas-scroll"
+          tabindex="0"
+          role="region"
+          aria-label={t('Architecture : les six étapes de votre plateforme', 'Canvas: the six stages of your platform')}
+        >
+          <div class="builder-board">
+            <div class="board-lane board-lane-top">
+              <span>01 — Self-service & CI</span
+              ><span>{t('Expérience développeur', 'Developer experience')}<Icon name="tabler:arrow-right" /></span>
+            </div>
+            <div class="board-lane board-lane-bottom">
+              <span>02 — {t('Infrastructure & exploitation', 'Infrastructure & operations')}</span
+              ><span><Icon name="tabler:arrow-left" />{t('Exploitation de la plateforme', 'Platform operations')}</span>
+            </div>
+            <svg class="builder-wires" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+              {connections.map((connection, index) => (
+                <g data-builder-edge={stages[index].id} data-connected="true">
+                  <path class="wire-underlay" d={connection.path} />
+                  <path class="wire-line" d={connection.path} pathLength="100" />
+                  <path class="wire-pulse" d={connection.path} pathLength="100" />
+                  <path class="wire-arrow" />
+                  <path class="wire-hit" d={connection.path} />
+                </g>
+              ))}
+            </svg>
+            <div class="board-center" aria-hidden="true">
+              <Icon name="tabler:hexagon-3d" />
+              <span>{t('Connexions entre étapes', 'Workflow connections')}</span
+              ><small>{t('Cliquez sur une connexion pour voir les détails.', 'Select a connection for details.')}</small>
+            </div>
+            {stages.map((stage, index) => (
+              <section
+                class="architecture-module"
+                data-stage-drop={stage.id}
+                style={`--node-x:${positions[index].x}%;--node-y:${positions[index].y}%`}
+                aria-label={stage.label}
+              >
+                <button
+                  type="button"
+                  class="module-select"
+                  data-builder-stage={stage.id}
+                  aria-pressed={index === 0}
+                  aria-controls={`palette-${stage.id}`}
+                  disabled
+                >
+                  <span class="module-index">{number(index)}</span>
+                  <span class="module-title">
+                    {stage.label}
+                    <small>{keywords[index]}</small>
+                  </span>
+                  <span class="module-edit">
+                    <Icon name="tabler:plus" aria-hidden="true" />
+                  </span>
+                </button>
+                <div class="module-technologies">
+                  {stage.technologies.map((technology) => (
+                    <div
+                      class="placed-technology"
+                      data-placed-technology={technology.id}
+                      data-stage={stage.id}
+                      hidden={!stage.approaches.composable.technologyIds.includes(technology.id)}
+                    >
+                      <TechnologyMark id={technology.id} name={technology.name} class="placed-logo" />
+                      <span>{technology.name}</span>
+                      <button
+                        type="button"
+                        data-remove-technology={technology.id}
+                        data-stage={stage.id}
+                        aria-label={`${t('Retirer', 'Remove')} ${technology.name}`}
+                        data-builder-controls
+                        hidden
+                      >
+                        <Icon name="tabler:x" aria-hidden="true" />
+                      </button>
+                    </div>
+                  ))}
+                  <span class="module-empty" data-stage-empty={stage.id} hidden>
+                    <Icon name="tabler:plus" aria-hidden="true" />
+                    {t('Ajoutez un outil', 'Add a tool')}
+                  </span>
+                </div>
+                <div class="module-footer">
+                  <span>{stage.output}</span>
+                  <span class="module-count" data-stage-count={stage.id}>
+                    {stage.approaches.composable.technologyIds.length}
+                  </span>
+                </div>
+                <span class="module-port module-port-in" aria-hidden="true"></span>
+                <span class="module-port module-port-out" aria-hidden="true"></span>
+              </section>
+            ))}
+            {connections.map((connection, index) => (
+              <button
+                type="button"
+                class="builder-connection"
+                style={`--edge-x:${connection.x}%;--edge-y:${connection.y}%`}
+                data-builder-connection={stages[index].id}
+                data-target-stage={stages[(index + 1) % stages.length].id}
+                aria-pressed="false"
+                aria-controls="platform-connection-detail"
+                aria-label={`${stages[index].label} → ${stages[(index + 1) % stages.length].label} : ${connection.label}`}
+                data-builder-controls
+                hidden
+              >
+                <span class="connection-label" data-connection-label>{connection.label}</span>
+                <span class="connection-node" aria-hidden="true">
+                  <Icon
+                    name={
+                      index < 2
+                        ? 'tabler:arrow-right'
+                        : index === 2
+                          ? 'tabler:arrow-down'
+                          : index < 5
+                            ? 'tabler:arrow-left'
+                            : 'tabler:arrow-up'
+                    }
+                  />
+                </span>
+              </button>
+            ))}
+          </div>
+        </div>
+        <div class="builder-foundation">
+          <div>
+            <Icon name="tabler:stack-2" aria-hidden="true" /><strong>{t('Socle commun', 'Shared foundation')}</strong>
+          </div>
+          <span><Icon name="tabler:shield-check" aria-hidden="true" />{t('Sécurité', 'Security')}</span>
+          <span><Icon name="tabler:key" aria-hidden="true" />IAM</span>
+          <span><Icon name="tabler:scale" aria-hidden="true" />{t('Gouvernance', 'Governance')}</span>
+          <span><Icon name="tabler:chart-donut" aria-hidden="true" />FinOps</span>
+        </div>
+      </div>
+
+      <aside class="builder-library" aria-label={copy.technologiesLabel}>
+        <Button type="button" variant="tertiary" class="builder-return" data-builder-return data-builder-controls hidden>
+          <Icon name="tabler:arrow-up" aria-hidden="true" />{t('Revenir à l’architecture', 'Back to the architecture')}
+        </Button>
+        <div class="library-tools" data-builder-library-tools>
+          <div class="library-heading">
+            <span class="library-kicker">{t('Technologies', 'Technologies')}</span>
+            <h3 data-palette-title>{stages[0].label}</h3>
+            <p data-palette-outcome>{stages[0].action}</p>
+          </div>
+          <div class="library-help" data-builder-controls hidden>
+            <Icon name="tabler:drag-drop" aria-hidden="true" />
+            <span>{t('Cliquez sur un outil ou glissez-le dans l’étape.', 'Click a tool or drag it into the stage.')}</span>
+          </div>
+          {stages.map((stage) => (
+            <div class="palette-group" id={`palette-${stage.id}`} data-palette-stage={stage.id}>
+              <h4 class="palette-stage-name">{stage.label}</h4>
+              <div class="palette-options">
+                {stage.technologies.map((technology) => (
+                  <div class="palette-technology">
+                    <button
+                      type="button"
+                      data-add-technology={technology.id}
+                      data-stage={stage.id}
+                      aria-pressed={stage.approaches.composable.technologyIds.includes(technology.id)}
+                      aria-label={`${t('Ajouter ou retirer', 'Add or remove')} ${technology.name}`}
+                      disabled
+                    >
+                      <TechnologyMark id={technology.id} name={technology.name} class="palette-logo" />
+                      <span class="palette-name">
+                        {technology.name}
+                        <small>{technology.category}</small>
+                      </span>
+                      <span class="palette-toggle" aria-hidden="true">
+                        <Icon name="tabler:plus" class="palette-plus" />
+                        <Icon name="tabler:check" class="palette-check" />
+                      </span>
+                    </button>
+                    <div class="palette-description">
+                      <p>{technology.description}</p>
+                      <a
+                        href={technology.href}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`${technology.name} — ${copy.documentationLabel}`}
+                      >
+                        {t('Documentation', 'Documentation')}
+                        <Icon name="tabler:arrow-up-right" aria-hidden="true" />
+                      </a>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+        <div id="platform-connection-detail" class="connection-detail" data-connection-detail hidden>
+          <Button type="button" variant="tertiary" class="connection-back" data-builder-close-connection>
+            <Icon name="tabler:arrow-left" aria-hidden="true" />{t('Technologies', 'Technologies')}
+          </Button>
+          <div class="insight-title">
+            <span>{t('Connexion entre étapes', 'Workflow connection')}</span>
+            <h3 data-connection-title></h3>
+          </div>
+          <div class="connection-flow">
+            {(['source', 'target'] as const).map((endpoint, index) => (
+              <>
+                {index === 1 && (
+                  <div class="connection-transfer">
+                    <span aria-hidden="true"><Icon name="tabler:arrow-down" /></span>
+                    <p data-connection-description></p>
+                  </div>
+                )}
+                <div class="connection-endpoint" data-connection-endpoint={endpoint}>
+                  <span class="connection-endpoint-label">
+                    {index === 0 ? t('Source', 'Source') : t('Destination', 'Destination')}
+                  </span>
+                  {index === 0 ? <h4 data-connection-source></h4> : <h4 data-connection-target></h4>}
+                  {stages.map((stage) => (
+                    <div class="connection-stage-tools" data-connection-stage={stage.id} hidden>
+                      {stage.technologies.map((technology) => (
+                        <span class="connection-technology" data-connection-technology={technology.id} hidden>
+                          <TechnologyMark id={technology.id} name={technology.name} />
+                          <span>{technology.name}</span>
+                        </span>
+                      ))}
+                    </div>
+                  ))}
+                  <p class="connection-empty" data-connection-empty hidden>
+                    {t('Aucune technologie sélectionnée', 'No technology selected')}
+                  </p>
+                </div>
+              </>
+            ))}
+          </div>
+          <p class="connection-state"><Icon name="tabler:info-circle" aria-hidden="true" /><span data-connection-state></span></p>
+        </div>
+        <div class="library-summary" data-builder-controls hidden>
+          <span><strong data-builder-count>{initialCount}</strong>{t('technologies', 'technologies')}</span
+          ><span><strong data-builder-coverage>6 / 6</strong>{t('étapes configurées', 'stages configured')}</span>
+        </div>
+      </aside>
+    </div>
+
+    <div class="builder-insights">
+      <div class="builder-stage-details" data-builder-stage-details>
+        {stages.map((stage, index) => (
+          <article class="builder-stage-detail" data-builder-detail={stage.id} aria-labelledby={`detail-${stage.id}`}>
+            <div class="insight-title">
+              <span>
+                {number(index)} / {t('Rôle de l’étape', 'Stage purpose')}
+              </span>
+              <h3 id={`detail-${stage.id}`}>{stage.title}</h3>
+            </div>
+            <p>{stage.description}</p>
+            <div class="insight-outcome">
+              <Icon name="tabler:arrow-up-right" aria-hidden="true" />
+              <p>
+                <strong>{copy.outcomeLabel}</strong>
+                {stage.outcome}
+              </p>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+  <p class="builder-disclaimer"><Icon name="tabler:info-circle" aria-hidden="true" />{copy.examplesNote}</p>
+  <p class="sr-only" aria-live="polite" aria-atomic="true" data-builder-status></p>
+
+  <section class="builder-approaches" aria-labelledby="builder-approaches-title">
+    <div class="approaches-intro">
+      <p>{t('Choix d’architecture', 'Architecture choices')}</p>
+      <h2 id="builder-approaches-title">
+        {t('Comparez les approches.', 'Compare the approaches.')}
+      </h2>
+      <span>{copy.approachHint}</span>
+    </div>
+    {approaches.map((approach) => (
+      <article>
+        <Icon name={approach.icon} class="approach-icon" aria-hidden="true" />
+        <span class="approach-name">{approach.label}</span>
+        <h3>{approach.benefit}</h3>
+        <p>{approach.description}</p>
+        <p class="approach-tradeoff">
+          <strong>{copy.tradeoffLabel}</strong>
+          {approach.tradeoff}
+        </p>
+      </article>
+    ))}
+  </section>
+</div>
+
+<script>
+import { initializePlatformBuilders } from './initialize-platform-builder';
+initializePlatformBuilders();
+document.addEventListener('astro:page-load', initializePlatformBuilders);
+</script>

@@ -33,6 +33,7 @@
     "lint:ci": "sh -c 'biome lint --error-on-warnings . --reporter=sarif > biome-report.txt 2>&1 && cat biome-report.txt && npm run lint:astro > astro-report.txt 2>&1 && cat astro-report.txt && node ./scripts/humanize-content.mjs --check --report-file humanize-report-checkstyle.xml'",
     "lint:fix:biome": "biome check --write --unsafe .",
     "test": "vitest run",
+    "test:browser": "vitest run src/test/platform-builder.browser.test.ts",
     "test:ci": "npm run test -- --reporter=default --reporter=junit --outputFile=junit.xml --coverage.enabled --coverage.reporter=lcov --coverage.reporter=text"
   },
   "dependencies": {
