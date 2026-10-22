@@ -90,42 +90,45 @@ describe('localized header navigation', () => {
       platformBuilderHref: '/en/platform-builder',
       companyLinks: ['About & vision', 'Contact', 'Brand Guidelines', 'Team', 'Manifesto', 'Values'],
     },
-  ])('uses localized navigation labels and page links for $locale', ({
-    url,
-    groups,
-    offersLinks,
-    offersTrainingsHrefFragment,
-    methodLinks,
-    openKraftLinks,
-    resourceLinks,
-    resourcePageHrefFragments,
-    platformBuilderHref,
-    companyLinks,
-  }) => {
-    const navigation = getLocalizedHeaderData(new URL(url));
+  ])(
+    'uses localized navigation labels and page links for $locale',
+    ({
+      url,
+      groups,
+      offersLinks,
+      offersTrainingsHrefFragment,
+      methodLinks,
+      openKraftLinks,
+      resourceLinks,
+      resourcePageHrefFragments,
+      platformBuilderHref,
+      companyLinks,
+    }) => {
+      const navigation = getLocalizedHeaderData(new URL(url));
 
-    expect(navigation.links.map((link) => link.text)).toEqual(groups);
+      expect(navigation.links.map((link) => link.text)).toEqual(groups);
 
-    const offersGroup = navigation.links[0];
-    expect(offersGroup.links?.map((link) => link.text)).toEqual(offersLinks);
-    expect(offersGroup.links?.at(-1)?.text).toBe(offersLinks[4]);
-    expect(offersGroup.links?.at(-1)?.href).toContain(offersTrainingsHrefFragment);
+      const offersGroup = navigation.links[0];
+      expect(offersGroup.links?.map((link) => link.text)).toEqual(offersLinks);
+      expect(offersGroup.links?.at(-1)?.text).toBe(offersLinks[4]);
+      expect(offersGroup.links?.at(-1)?.href).toContain(offersTrainingsHrefFragment);
 
-    const methodGroup = navigation.links[1];
-    expect(methodGroup.links?.map((link) => link.text)).toEqual(methodLinks);
+      const methodGroup = navigation.links[1];
+      expect(methodGroup.links?.map((link) => link.text)).toEqual(methodLinks);
 
-    const openKraftGroup = navigation.links[2];
-    expect(openKraftGroup.links?.map((link) => link.text)).toEqual(openKraftLinks);
+      const openKraftGroup = navigation.links[2];
+      expect(openKraftGroup.links?.map((link) => link.text)).toEqual(openKraftLinks);
 
-    const resourcesGroup = navigation.links[3];
-    expect(resourcesGroup.links?.map((link) => link.text)).toEqual(resourceLinks);
-    expect(resourcesGroup.links?.find((link) => link.text === 'Platform Builder')?.href).toBe(platformBuilderHref);
-    expect(resourcesGroup.links?.slice(1, 4).map((link) => link.href)).toEqual(
-      expect.arrayContaining(resourcePageHrefFragments.map((fragment) => expect.stringContaining(fragment)))
-    );
-    resourcesGroup.links?.slice(1, 4).forEach((link) => expect(link.href).not.toContain('#'));
+      const resourcesGroup = navigation.links[3];
+      expect(resourcesGroup.links?.map((link) => link.text)).toEqual(resourceLinks);
+      expect(resourcesGroup.links?.find((link) => link.text === 'Platform Builder')?.href).toBe(platformBuilderHref);
+      expect(resourcesGroup.links?.slice(1, 4).map((link) => link.href)).toEqual(
+        expect.arrayContaining(resourcePageHrefFragments.map((fragment) => expect.stringContaining(fragment)))
+      );
+      resourcesGroup.links?.slice(1, 4).forEach((link) => expect(link.href).not.toContain('#'));
 
-    const companyGroup = navigation.links[4];
-    expect(companyGroup.links?.map((link) => link.text)).toEqual(companyLinks);
-  });
+      const companyGroup = navigation.links[4];
+      expect(companyGroup.links?.map((link) => link.text)).toEqual(companyLinks);
+    }
+  );
 });
