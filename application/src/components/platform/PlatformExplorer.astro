@@ -13,6 +13,7 @@ interface Props {
 const { content, lang } = Astro.props;
 const { copy, stages, approaches } = content;
 const t = (fr: string, en: string) => (lang === 'en' ? en : fr);
+const approachesTitle = t('Comparez les approches.', 'Compare the approaches.');
 const number = (index: number) => String(index + 1).padStart(2, '0');
 const positions = [
   { x: 18, y: 28 },
@@ -49,9 +50,7 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
       <div class="studio-title">
         <span class="studio-symbol" aria-hidden="true"><Icon name="tabler:blocks" /></span>
         <div>
-          <h2>
-            {t('Architecture', 'Architecture')}<span class="studio-beta">{t('Interactif', 'Interactive')}</span>
-          </h2>
+          <h2>Architecture<span class="studio-beta">{t('Interactif', 'Interactive')}</span></h2>
           <p>{t('Choisissez les outils de votre plateforme.', 'Choose your platform tools.')}</p>
         </div>
       </div>
@@ -367,9 +366,7 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
   <section class="builder-approaches" aria-labelledby="builder-approaches-title">
     <div class="approaches-intro">
       <p>{t('Choix d’architecture', 'Architecture choices')}</p>
-      <h2 id="builder-approaches-title">
-        {t('Comparez les approches.', 'Compare the approaches.')}
-      </h2>
+      <h2 id="builder-approaches-title">{approachesTitle}</h2>
       <span>{copy.approachHint}</span>
     </div>
     {approaches.map((approach) => (
