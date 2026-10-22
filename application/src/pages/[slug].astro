@@ -4,12 +4,10 @@ import MaturityAssessmentView from '../views/maturity-assessment.astro';
 import MaturityAssessmentShareView from '../views/maturity-assessment-share.astro';
 import MethodologyView from '../views/methodology.astro';
 import OffersView from '../views/offers.astro';
-import UseCasesView from '../views/use-cases.astro';
 
 const localizedViews = {
   methodologie: MethodologyView,
   offres: OffersView,
-  'cas-d-usage': UseCasesView,
   'charte-graphique': BrandGuidelinesView,
   'radar-maturite': MaturityAssessmentView,
   'radar-maturite-partage': MaturityAssessmentShareView,
@@ -19,7 +17,6 @@ export function getStaticPaths() {
   return [
     { params: { slug: 'methodologie' } },
     { params: { slug: 'offres' } },
-    { params: { slug: 'cas-d-usage' } },
     { params: { slug: 'charte-graphique' } },
     { params: { slug: 'radar-maturite' } },
     { params: { slug: 'radar-maturite-partage' } },

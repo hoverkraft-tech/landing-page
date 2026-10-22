@@ -1,0 +1,204 @@
+---
+import { Icon } from 'astro-icon/components';
+import Button from '~/components/ui/Button.astro';
+import PlatformExplorer from '~/components/platform/PlatformExplorer.astro';
+import { getPlatformWorkflowContent } from '~/data/platform-workflow';
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+const content = getPlatformWorkflowContent(lang);
+const { copy } = content;
+const isEnglish = lang === 'en';
+const metadata = {
+  title: isEnglish ? 'Platform Builder: build your platform' : 'Platform Builder : concevez votre plateforme',
+  description: copy.description,
+};
+---
+
+<Layout metadata={metadata}>
+  <div class="platform-page">
+    <section class="platform-intro" aria-labelledby="platform-title">
+      <div>
+        <p class="platform-eyebrow"><span aria-hidden="true"></span>{copy.eyebrow}</p>
+        <h1 id="platform-title">{copy.title} <span>{copy.titleAccent}</span></h1>
+      </div>
+      <div class="intro-context">
+        <p>{copy.description}</p>
+        <div class="intro-facts" aria-label={isEnglish ? 'Platform workflow' : 'Workflow de plateforme'}>
+          <span
+            ><strong>{String(content.stages.length).padStart(2, '0')}</strong>
+            {isEnglish ? 'workflow stages' : 'étapes du workflow'}</span
+          >
+          <span
+            ><strong>{String(content.approaches.length).padStart(2, '0')}</strong>
+            {isEnglish ? 'platform approaches' : 'approches de plateforme'}</span
+          >
+        </div>
+      </div>
+    </section>
+
+    <PlatformExplorer content={content} lang={lang} />
+
+    <section class="platform-cta mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-labelledby="platform-cta-title">
+      <div class="cta-inner">
+        <div class="cta-symbol" aria-hidden="true"><Icon name="tabler:route" /></div>
+        <div>
+          <p class="platform-eyebrow">{copy.ctaEyebrow}</p>
+          <h2 id="platform-cta-title">{copy.ctaTitle}</h2>
+          <p class="cta-description">{copy.ctaDescription}</p>
+        </div>
+        <Button
+          href={`${translatePath('/contact')}#booking`}
+          text={copy.ctaLabel}
+          icon="tabler:arrow-up-right"
+          variant="primary"
+        />
+      </div>
+    </section>
+  </div>
+</Layout>
+
+<style>
+.platform-page {
+  --platform-brand: var(--aw-color-secondary);
+  --platform-line: var(--color-gray-200);
+  --platform-icon-surface: var(--color-gray-50);
+  background: var(--aw-color-bg-page);
+  color: var(--aw-color-text-default);
+}
+.platform-intro {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 3rem;
+  align-items: end;
+  padding: 2.2rem clamp(1.25rem, 3vw, 4rem) 1.8rem;
+  background: var(--aw-color-bg-page);
+}
+.platform-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--aw-font-sans);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--aw-color-text-default);
+}
+.platform-eyebrow span {
+  width: 0.5rem;
+  height: 0.5rem;
+  background: var(--platform-brand);
+  border-radius: 50%;
+}
+h1 {
+  margin-top: 0.8rem;
+  font-size: clamp(2.1rem, 3.5vw, 4.2rem);
+  font-family: var(--aw-font-heading);
+  line-height: 1.1;
+  font-weight: 700;
+  letter-spacing: -0.05em;
+  color: var(--aw-color-text-heading);
+}
+h1 > span {
+  text-decoration: underline;
+  text-decoration-color: var(--platform-brand);
+  text-decoration-thickness: 0.06em;
+  text-underline-offset: 0.15em;
+}
+.intro-context > p {
+  max-width: 32rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.intro-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem 1.5rem;
+  margin-top: 0.75rem;
+  font-size: 0.8125rem;
+}
+.intro-facts strong {
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--aw-color-text-heading);
+  margin-right: 0.3rem;
+}
+.platform-cta {
+  padding-top: 1rem;
+  padding-bottom: 5rem;
+}
+.cta-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1.75rem;
+  align-items: center;
+  padding: 2.5rem 0;
+  border-top: 1px solid var(--platform-line);
+}
+.cta-symbol {
+  display: grid;
+  place-items: center;
+  width: 4rem;
+  height: 4rem;
+  border: 1px solid var(--platform-line);
+  border-radius: 0.5rem;
+  background: var(--platform-icon-surface);
+  color: var(--platform-brand);
+}
+.cta-symbol svg {
+  width: 2rem;
+  height: 2rem;
+}
+h2 {
+  margin-top: 0.6rem;
+  font-size: clamp(1.5rem, 2.3vw, 2rem);
+  font-family: var(--aw-font-heading);
+  letter-spacing: -0.05em;
+  font-weight: 700;
+  color: var(--aw-color-text-heading);
+}
+.cta-description {
+  max-width: 42rem;
+  margin-top: 0.65rem;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+:global(.dark) .platform-page {
+  --platform-brand: var(--aw-color-primary);
+  --platform-line: var(--color-gray-700);
+  --platform-icon-surface: var(--color-gray-800);
+}
+@media (max-width: 767px) {
+  .platform-intro {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-top: 1.6rem;
+    padding-bottom: 1.6rem;
+  }
+  h1 {
+    font-size: clamp(2.6rem, 9vw, 4rem);
+  }
+  .intro-facts {
+    margin-top: 1.2rem;
+  }
+  .cta-inner {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+  .cta-symbol {
+    display: none;
+  }
+  .platform-cta {
+    padding-bottom: 2rem;
+  }
+}
+@media (min-width: 1100px) and (max-height: 900px) {
+  .platform-intro {
+    padding-top: 1.3rem;
+    padding-bottom: 1.1rem;
+  }
+}
+</style>

@@ -1,5 +1,9 @@
 import { describe, expect, it, vi } from 'vitest';
 
+vi.mock('astrowind:config', () => ({
+  I18N: { language: 'fr' },
+}));
+
 vi.mock('./i18n/utils', async () => {
   const { defaultLang, routes, ui } = await import('./i18n/ui');
 
@@ -38,7 +42,7 @@ describe('localized header navigation', () => {
   it.each([
     {
       locale: 'fr',
-      url: 'https://hoverkraft.cloud/fr/',
+      url: 'https://hoverkraft.cloud/',
       groups: ['Offres', 'Methode', 'OpenKraft', 'Ressources', 'Entreprise'],
       offersLinks: [
         'Audit Platform Engineering',
@@ -56,8 +60,9 @@ describe('localized header navigation', () => {
         "Modele d'execution",
       ],
       openKraftLinks: ['OpenKraft', 'Connecteurs', 'Templates', 'Dashboards DORA / SPACE', 'GitHub', 'GitLab'],
-      resourceLinks: ['Documentation', 'Cas d’usage', 'Demo', 'Temoignages', 'Blog', 'Flux RSS'],
-      resourcePageHrefFragments: ['cas-d-usage', 'demo'],
+      resourceLinks: ['Documentation', 'Platform Builder', 'Demo', 'Temoignages', 'Blog', 'Flux RSS'],
+      resourcePageHrefFragments: ['platform-builder', 'demo'],
+      platformBuilderHref: '/platform-builder',
       companyLinks: ['À propos & vision', 'Contact', 'Charte graphique', 'Equipe', 'Manifeste', 'Valeurs'],
     },
     {
@@ -80,11 +85,12 @@ describe('localized header navigation', () => {
         'Execution model',
       ],
       openKraftLinks: ['OpenKraft', 'Connectors', 'Templates', 'DORA / SPACE dashboards', 'GitHub', 'GitLab'],
-      resourceLinks: ['Documentation', 'Use cases', 'Demo', 'Testimonials', 'Blog', 'RSS feed'],
-      resourcePageHrefFragments: ['use-cases', 'demo', 'testimonials'],
+      resourceLinks: ['Documentation', 'Platform Builder', 'Demo', 'Testimonials', 'Blog', 'RSS feed'],
+      resourcePageHrefFragments: ['platform-builder', 'demo', 'testimonials'],
+      platformBuilderHref: '/en/platform-builder',
       companyLinks: ['About & vision', 'Contact', 'Brand Guidelines', 'Team', 'Manifesto', 'Values'],
     },
-  ])('matches the Phase 1 funnel groups for $locale', ({
+  ])('uses localized navigation labels and page links for $locale', ({
     url,
     groups,
     offersLinks,
@@ -93,6 +99,7 @@ describe('localized header navigation', () => {
     openKraftLinks,
     resourceLinks,
     resourcePageHrefFragments,
+    platformBuilderHref,
     companyLinks,
   }) => {
     const navigation = getLocalizedHeaderData(new URL(url));
@@ -112,6 +119,7 @@ describe('localized header navigation', () => {
 
     const resourcesGroup = navigation.links[3];
     expect(resourcesGroup.links?.map((link) => link.text)).toEqual(resourceLinks);
+    expect(resourcesGroup.links?.find((link) => link.text === 'Platform Builder')?.href).toBe(platformBuilderHref);
     expect(resourcesGroup.links?.slice(1, 4).map((link) => link.href)).toEqual(
       expect.arrayContaining(resourcePageHrefFragments.map((fragment) => expect.stringContaining(fragment)))
     );

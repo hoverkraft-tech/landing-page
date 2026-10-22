@@ -32,6 +32,12 @@ process.env.ASTRO_TELEMETRY_DISABLED = '1';
 export default defineConfig({
   output: 'static',
 
+  redirects: {
+    '/cas-d-usage': '/platform-builder',
+    '/use-cases': '/platform-builder',
+    '/en/use-cases': '/en/platform-builder',
+  },
+
   integrations: [
     sitemap(),
     mdx(),
