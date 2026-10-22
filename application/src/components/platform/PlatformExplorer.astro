@@ -112,7 +112,9 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
             <div class="board-center" aria-hidden="true">
               <Icon name="tabler:hexagon-3d" />
               <span>{t('Connexions entre étapes', 'Workflow connections')}</span
-              ><small>{t('Cliquez sur une connexion pour voir les détails.', 'Select a connection for details.')}</small>
+              ><small
+                >{t('Cliquez sur une connexion pour voir les détails.', 'Select a connection for details.')}</small
+              >
             </div>
             {stages.map((stage, index) => (
               <section
@@ -188,7 +190,9 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
                 data-builder-controls
                 hidden
               >
-                <span class="connection-label" data-connection-label>{connection.label}</span>
+                <span class="connection-label" data-connection-label>
+                  {connection.label}
+                </span>
                 <span class="connection-node" aria-hidden="true">
                   <Icon
                     name={
@@ -218,7 +222,14 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
       </div>
 
       <aside class="builder-library" aria-label={copy.technologiesLabel}>
-        <Button type="button" variant="tertiary" class="builder-return" data-builder-return data-builder-controls hidden>
+        <Button
+          type="button"
+          variant="tertiary"
+          class="builder-return"
+          data-builder-return
+          data-builder-controls
+          hidden
+        >
           <Icon name="tabler:arrow-up" aria-hidden="true" />{t('Revenir à l’architecture', 'Back to the architecture')}
         </Button>
         <div class="library-tools" data-builder-library-tools>
@@ -229,7 +240,9 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
           </div>
           <div class="library-help" data-builder-controls hidden>
             <Icon name="tabler:drag-drop" aria-hidden="true" />
-            <span>{t('Cliquez sur un outil ou glissez-le dans l’étape.', 'Click a tool or drag it into the stage.')}</span>
+            <span
+              >{t('Cliquez sur un outil ou glissez-le dans l’étape.', 'Click a tool or drag it into the stage.')}</span
+            >
           </div>
           {stages.map((stage) => (
             <div class="palette-group" id={`palette-${stage.id}`} data-palette-stage={stage.id}>
@@ -286,7 +299,9 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
               <>
                 {index === 1 && (
                   <div class="connection-transfer">
-                    <span aria-hidden="true"><Icon name="tabler:arrow-down" /></span>
+                    <span aria-hidden="true">
+                      <Icon name="tabler:arrow-down" />
+                    </span>
                     <p data-connection-description></p>
                   </div>
                 )}
@@ -312,7 +327,9 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
               </>
             ))}
           </div>
-          <p class="connection-state"><Icon name="tabler:info-circle" aria-hidden="true" /><span data-connection-state></span></p>
+          <p class="connection-state">
+            <Icon name="tabler:info-circle" aria-hidden="true" /><span data-connection-state></span>
+          </p>
         </div>
         <div class="library-summary" data-builder-controls hidden>
           <span><strong data-builder-count>{initialCount}</strong>{t('technologies', 'technologies')}</span
