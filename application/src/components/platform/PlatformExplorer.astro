@@ -1,9 +1,9 @@
 ---
 import { Icon } from 'astro-icon/components';
 import Button from '~/components/ui/Button.astro';
-import TechnologyMark from './TechnologyMark.astro';
 import type { PlatformWorkflowContent } from '~/data/platform-workflow';
 import type { SupportedLanguage } from '~/i18n/ui';
+import TechnologyMark from './TechnologyMark.astro';
 import './platform-builder.css';
 
 interface Props {
@@ -386,6 +386,7 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
 
 <script>
 import { initializePlatformBuilders } from './initialize-platform-builder';
+
 initializePlatformBuilders();
 document.addEventListener('astro:page-load', initializePlatformBuilders);
 </script>
