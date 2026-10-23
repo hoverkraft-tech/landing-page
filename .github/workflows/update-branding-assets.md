@@ -3,7 +3,7 @@
 # GitHub Workflow: Update Branding Assets
 
 <div align="center">
-  <img src="https://opengraph.githubassets.com/c284181c34772f40b23a6420b3fe25b48b61a30816025248ccb5d337f2f9f758/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
+  <img src="https://opengraph.githubassets.com/b701927de44c620333dc0b67e5505b0d5b9dc61de60f8e5b1e064951796015b4/hoverkraft-tech/landing-page" width="60px" align="center" alt="Update Branding Assets" />
 </div>
 
 ---
@@ -63,7 +63,7 @@ on:
 permissions: {}
 jobs:
   update-branding-assets:
-    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@d078b850fc9413e045dba6d694550b32b64b289b # main
+    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@75eaa5b754835f15fcea7338ae9d0a1f99f819f6 # main
     permissions:
       contents: read
     with:
