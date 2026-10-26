@@ -1,0 +1,245 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Du 19 au 26 octobre 2026, 19 releases ont été publiées pour 4 dépôts suivis, avec une cadence de déploiement d'environ 2,4 releases par jour.\n\nLe projet le plus actif, docker-base-images (14 releases), a livré docker-base-images Version 1.0.1 le 26 octobre 2026, ce qui indique une itération continue sur la base d'images (point d'entrée commun aux pipelines). En parallèle, ci-github-publish (3 releases, 5 ⭐) et ci-github-common (1 release, 5 ⭐) ont concentré l'attention sur la couche d'intégration GitHub, avec des changements probablement centrés sur la réutilisation de composants CI communs et sur la publication automatisée, plutôt que sur des modifications applicatives.\n\n- docker-base-images : la fréquence élevée des releases et la mise à jour du 26/10 renforcent la stabilité de la chaîne de dépendances d'images, ce qui aide les SRE à maîtriser les risques de dérive et les ingénieurs plateforme à standardiser les environnements.\n- ci-github-publish : les releases dédiées à la publication GitHub, avec un score de 5 ⭐, comptent pour les contributeurs car elles clarifient le chemin \"build → artefact\", réduisant les écarts entre pipelines et exécutions locales.\n- ci-github-common : la présence d'une release unique mais très suivie (5 ⭐) suggère une consolidation de briques CI réutilisables, utile pour les équipes plateforme qui cherchent à limiter la duplication et à fiabiliser les workflows.",
+  "closingMarkdown": "## Synthèse de la période (19 octobre 2026 - 26 octobre 2026)\n\n- **Dépôts suivis :** 4\n- **Releases publiées :** 19\n- **Projet le plus actif :** `docker-base-images` (**14** releases)\n- **Release la plus récente :** `docker-base-images` **Version 1.0.1**\n\n### Répartition par dépôt (dépôts en lumière)\n- **`ci-github-publish`** : **3** releases, **5 ⭐**\n- **`ci-github-common`** : **1** release, **5 ⭐**\n- **`docker-base-images`** : **14** releases, **1 ⭐**\n\n### Lecture opérationnelle\n- La cadence est principalement portée par **`docker-base-images`**, ce qui suggère une consolidation et une mise à jour continue des couches de base utilisées en amont des images applicatives.\n- Les dépôts **`ci-github-publish`** et **`ci-github-common`** complètent le dispositif côté pipeline, avec des releases plus ciblées, utiles pour la standardisation des workflows et la publication.\n\n---\n\nPour les **ingénieurs plateforme**, **SRE** et autres utilisateurs techniques, l'impact concret se situe surtout dans la **stabilisation du socle d'images** via `docker-base-images` et dans la **réduction de la variabilité des pipelines** via les composants CI GitHub. En pratique, cela facilite le déploiement reproductible et la maîtrise des changements, à condition de valider l'alignement des versions sur vos environnements.\n\n- **Lancer des benchmarks de build et de démarrage** sur vos pipelines et environnements de test en remplaçant le socle par les versions de `docker-base-images` (notamment **1.0.1**) : gain attendu **performance** (temps",
+  "stats": {
+    "period": {
+      "since": "2026-10-19T15:52:35.078Z",
+      "until": "2026-10-26T15:52:35.079Z"
+    },
+    "totalRepos": 4,
+    "totalReleases": 19,
+    "busiestRepo": {
+      "name": "docker-base-images",
+      "count": 14
+    },
+    "mostRecentRelease": {
+      "repo": "docker-base-images",
+      "name": "Version 1.0.1",
+      "publishedAt": "2026-10-26T15:24:13Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions GitHub et workflows opiniâtres pour les besoins courants d'intégration continue",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.39.1",
+          "tag": "0.39.1",
+          "publishedAt": "2026-10-19T19:06:25Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.39.1",
+          "highlights": [
+            "## Résumé de la publication\n\nL'action `need-fix-to-issue` catégorise désormais et déduplique les issues générées. Le `linter` ignore commitlint par défaut lors des exécutions planifiées et manuelles.\n\nLes mises à jour internes actualisent les dépendances des GitHub Actions ainsi que la documentation pour les actions et les workflows."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions GitHub et workflows opiniâtres pour l'intégration continue dans un contexte Node.js",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "Version 1.0.0",
+          "tag": "1.0.0",
+          "publishedAt": "2026-10-25T22:09:17Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/1.0.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLes workflows CI ont été mis à niveau vers des GitHub Actions plus récentes et stables ainsi que des dépendances de workflows réutilisables ; les assistants d'action locale ont été remplacés par des références natives, et des publications automatisées ont été ajoutées pour le dépôt. La documentation relative aux actions et aux workflows a également été mise à jour.\n\nLes dépendances de développement et de maintenance ont été mises à jour, y compris les dépendances npm et les dépendances devcontainer."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions GitHub et workflows opinés pour des releases, déploiements et publications rationalisés.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "Version 1.0.2",
+          "tag": "1.0.2",
+          "publishedAt": "2026-10-22T07:43:13Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/1.0.2",
+          "highlights": [
+            "## Résumé de la version\n\nLa génération des notes de version et le calcul de la version limitent désormais les changements au répertoire de travail et aux chemins d'inclusion configurés, et les versions manuelles peuvent désormais être forcées via une nouvelle entrée `force`. La version met également à jour la documentation des actions et des workflows.\n\nEn interne, la dépendance de build `hoverkraft-tech/docker-base-images/super-linter` a été mise à jour de la version 1.1.0 à la version 2.0.0."
+          ]
+        },
+        {
+          "name": "Version 1.0.1",
+          "tag": "1.0.1",
+          "publishedAt": "2026-10-21T15:51:57Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/1.0.1",
+          "highlights": [
+            "## Résumé de la version\n\nUn correctif du workflow de publication met désormais en portée l'historique des publications dans l'action partagée `prepare` à l'aide du préfixe de balise configuré afin d'éviter de sélectionner la mauvaise base de comparaison lorsque les dépôts publient à la fois des versions de dépôt et des versions de composant. La documentation des actions et des workflows a également été mise à jour.\n\nLes modifications internes incluent une mise à jour des dépendances qui fait passer `actions/create-github-app-token` de la version `3.2.0` à `3.3.0`."
+          ]
+        },
+        {
+          "name": "Version 1.0.0",
+          "tag": "1.0.0",
+          "publishedAt": "2026-10-20T18:54:04Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/1.0.0",
+          "highlights": [
+            "## Résumé de la publication\n\nCette publication corrige la gestion des publications en conservant les balises et en corrigeant les titres des notes de publication, et elle ajoute des autorisations de workflow pour le contenu et les demandes de tirage. La documentation relative aux actions, aux workflows et à la synthèse des publications a également été mise à jour.\n\nEn interne, le projet a mis à niveau ci-github-common, mis à jour GitHub Actions et les dépendances npm, ajouté un workflow de publication interne, et corrigé des problèmes de lint."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker avec avis tranchés",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version 1.0.1",
+          "tag": "1.0.1",
+          "publishedAt": "2026-10-26T15:24:13Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/1.0.1",
+          "highlights": [
+            "## Résumé de la publication\n\nUn correctif du workflow de publication fait désormais en sorte que les images inchangées soient ignorées, sauf si une exécution manuelle est explicitement forcée. La documentation relative aux actions et aux workflows a également été mise à jour.\n\nEn interne, le groupe `docker-dependencies` a été mis à jour afin de passer de `hoverkraft-tech/docker-base-images/super-linter` de la version `1.2.0` à `2.0.0`."
+          ]
+        },
+        {
+          "name": "Version 1.0.0",
+          "tag": "1.0.0",
+          "publishedAt": "2026-10-21T18:57:04Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/1.0.0",
+          "highlights": [
+            "## Résumé de la version\n\nLes fonctionnalités incluent des publications automatisées d'images et de dépôts avec des journaux de modifications (changelogs) alimentés par l'IA, la prise en charge de kubeconform et des tests associés dans ci-helm, un comportement amélioré du super-linter, l'ajout de la prise en charge de GPG, l'optimisation des images, une meilleure expérience développeur et des outils supplémentaires. Les correctifs portent sur la création de liens au moment de la configuration de l'image, une régression de l'ignore git de JSCPD dans le super-linter 8.7.0, des bibliothèques manquantes pour helm chart-testing, ainsi que la tâche export-key.\n\nLes changements internes incluent un large ensemble de mises à jour de dépendances sur les images, les workflows et les outils."
+          ]
+        },
+        {
+          "name": "Version super-linter - 2.0.0",
+          "tag": "super-linter-2.0.0",
+          "publishedAt": "2026-10-21T18:56:08Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/super-linter-2.0.0",
+          "highlights": [
+            "## Résumé de la version\n\nCette version inclut un changement de dépendance de build cassant : le CI du conteneur a été migré vers la version 0.39.0.\n\nAucune autre fonctionnalité ou correction orientée vers le public n'est indiquée."
+          ]
+        },
+        {
+          "name": "Version testcontainers-node - 1.0.0",
+          "tag": "testcontainers-node-1.0.0",
+          "publishedAt": "2026-10-21T18:56:06Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/testcontainers-node-1.0.0",
+          "highlights": [
+            "## Résumé de la version\n\nL'image testcontainers-node met à jour la dépendance testcontainers de la version 12.2.0 à la version 12.2.1.\n\nLes modifications internes incluent la migration de la CI des conteneurs vers la version 0.39.0."
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 1.0.0",
+          "tag": "argocd-cmp-hk-deployment-1.0.0",
+          "publishedAt": "2026-10-21T18:56:05Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-1.0.0",
+          "highlights": [
+            "## Résumé de la version\n\nDans images/argocd-cmp-hk-deployment, cette version met à jour argoproj/argocd de la v3.5.5 à la v3.5.6.\n\nEn interne, le CI du conteneur a été migré vers la version 0.39.0."
+          ]
+        },
+        {
+          "name": "Version codespace-like - 1.0.0",
+          "tag": "codespace-like-1.0.0",
+          "publishedAt": "2026-10-21T18:56:04Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/codespace-like-1.0.0",
+          "highlights": [
+            "## Résumé de la version\n\nCette version inclut une modification d'une dépendance interne de build qui casse la compatibilité et qui migre le CI des conteneurs vers la version 0.39.0."
+          ]
+        },
+        {
+          "name": "Version mydumper - 1.0.0",
+          "tag": "mydumper-1.0.0",
+          "publishedAt": "2026-10-21T18:56:02Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-1.0.0",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement de fonctionnalité ou de correction orienté vers le public n'est répertorié dans cette version.\n\nLes changements internes incluent une mise à jour d'une dépendance avec rupture qui migre le CI des conteneurs vers la version 0.39.0."
+          ]
+        },
+        {
+          "name": "Version ci-helm - 1.0.0",
+          "tag": "ci-helm-1.0.0",
+          "publishedAt": "2026-10-21T18:56:01Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-1.0.0",
+          "highlights": [
+            "## Résumé de la version\n\nCette version inclut une modification cassante de dépendance interne pour les images/ci-helm, en migrant l'intégration continue des conteneurs vers la version 0.39.0.\n\nAucune autre fonctionnalité ou correction n'est indiquée dans le journal des modifications."
+          ]
+        },
+        {
+          "name": "Version testcontainers-node - 0.6.0",
+          "tag": "testcontainers-node-0.6.0",
+          "publishedAt": "2026-10-21T17:18:24Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/testcontainers-node-0.6.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Fonctionnalités",
+            "feat(ci): automatiser les publications d'images et de dépôts avec des journaux de modifications IA (#270) @neilime",
+            "Nouveaux contributeurs"
+          ]
+        },
+        {
+          "name": "Version mydumper - 0.6.0",
+          "tag": "mydumper-0.6.0",
+          "publishedAt": "2026-10-21T17:18:23Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/mydumper-0.6.0",
+          "highlights": [
+            "## Qu'est-ce qui a changé",
+            "Fonctionnalités",
+            "feat(ci): automatiser les publications d'images et de dépôts avec des changelogs IA (#270) @neilime",
+            "Maintenance"
+          ]
+        },
+        {
+          "name": "Version super-linter - 1.2.0",
+          "tag": "super-linter-1.2.0",
+          "publishedAt": "2026-10-21T17:18:22Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/super-linter-1.2.0",
+          "highlights": [
+            "## Quoi de neuf",
+            "Fonctionnalités",
+            "feat(ci) : automatiser les publications d'images et de dépôts avec des journaux de modifications IA (#270) @neilime",
+            "Documentation"
+          ]
+        },
+        {
+          "name": "Version codespace-like - 0.7.0",
+          "tag": "codespace-like-0.7.0",
+          "publishedAt": "2026-10-21T17:18:22Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/codespace-like-0.7.0",
+          "highlights": [
+            "## Quoi de neuf",
+            "Fonctionnalités",
+            "feat(ci) : automatiser les publications d'images et de dépôts avec des journaux de modifications (changelogs) IA (#270) @neilime",
+            "Corrections de bugs"
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 0.7.0",
+          "tag": "argocd-cmp-hk-deployment-0.7.0",
+          "publishedAt": "2026-10-21T17:18:18Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-0.7.0",
+          "highlights": [
+            "## Qu'est-ce qui a changé",
+            "Fonctionnalités",
+            "feat(ci) : automatiser les publications d'images et de dépôts avec des journaux de modifications IA (#270) @neilime",
+            "Mises à jour des dépendances"
+          ]
+        },
+        {
+          "name": "Version ci-helm - 0.6.0",
+          "tag": "ci-helm-0.6.0",
+          "publishedAt": "2026-10-21T17:18:17Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/ci-helm-0.6.0",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Fonctionnalités",
+            "feat(ci) : automatiser les publications d'images et de dépôts avec des changelogs IA (#270) @neilime",
+            "feat(ci-helm) : ajouter la prise en charge de kubeconform et des tests associés (#265) @neilime"
+          ]
+        }
+      ]
+    }
+  ]
+}
