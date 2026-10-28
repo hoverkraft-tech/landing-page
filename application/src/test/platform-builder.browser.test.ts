@@ -134,6 +134,36 @@ describe.each([
     );
   });
 
+  it('reveals a stage and focuses its tools from the empty-state button', async () => {
+    const content = await openBuilder(route);
+    await click('[data-builder-clear]');
+    const stage = content.stages[1];
+    await click(`[data-stage-empty="${stage.id}"]`);
+    expect(await page.evaluate(() => document.querySelector('[data-platform-builder]')?.getAttribute('data-selected-stage'))).toBe(
+      stage.id
+    );
+    expect(await page.evaluate(() => document.activeElement?.getAttribute('data-add-technology'))).toBe(
+      stage.technologies[0].id
+    );
+    expect(await page.evaluate(() => document.activeElement?.getAttribute('data-stage'))).toBe(stage.id);
+  });
+
+  it('collapses and restores the tools sidebar from its dedicated toggle', async () => {
+    await openBuilder(route);
+    const toggle = '[data-builder-toggle-library]';
+    const libraryDisplay = () => page.$eval('.builder-library', (element) => getComputedStyle(element).display);
+    const isCollapsed = () =>
+      page.evaluate(() => document.querySelector('[data-platform-builder]')?.hasAttribute('data-library-collapsed') ?? false);
+    expect(await page.$eval(toggle, (element) => element.getAttribute('aria-expanded'))).toBe('true');
+    await click(toggle);
+    expect(await isCollapsed()).toBe(true);
+    expect(await page.$eval(toggle, (element) => element.getAttribute('aria-expanded'))).toBe('false');
+    expect(await libraryDisplay()).toBe('none');
+    await click(toggle);
+    expect(await isCollapsed()).toBe(false);
+    expect(await libraryDisplay()).not.toBe('none');
+  });
+
   it('opens a connection with its endpoints and restores focus when closed', async () => {
     const { stages } = await openBuilder(route);
     const connection = `[data-builder-connection="${stages[0].id}"]`;
