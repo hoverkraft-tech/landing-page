@@ -2,14 +2,15 @@
 import { Icon } from 'astro-icon/components';
 import Headline from '~/components/ui/Headline.astro';
 import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
-import type { HomePillar, HomeSectionHeader } from './types';
+import type { HomeAction, HomePillar, HomeSectionHeader } from './types';
 
 export interface Props {
   header: HomeSectionHeader;
   pillars: HomePillar[];
+  action?: HomeAction;
 }
 
-const { header, pillars } = Astro.props;
+const { header, pillars, action } = Astro.props;
 ---
 
 <WidgetWrapper id="platform-model" containerClass="py-16 md:py-20 lg:py-24">
@@ -44,4 +45,18 @@ const { header, pillars } = Astro.props;
       </article>
     ))}
   </div>
+
+  {action && (
+    <div class="mt-10 flex justify-center">
+      <a
+        class="inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/5 px-6 py-3 text-sm font-semibold text-primary transition hover:bg-primary/10 dark:border-primary/40 dark:bg-primary/10"
+        href={action.href}
+        target={action.target}
+      >
+        <Icon name={action.icon ?? 'tabler:layout-grid-add'} class="h-5 w-5" aria-hidden="true" />
+        {action.text}
+        <Icon name="tabler:arrow-right" class="h-4 w-4" aria-hidden="true" />
+      </a>
+    </div>
+  )}
 </WidgetWrapper>

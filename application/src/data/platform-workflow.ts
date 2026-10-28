@@ -73,6 +73,8 @@ export interface PlatformWorkflowCopy {
   ctaTitle: string;
   ctaDescription: string;
   ctaLabel: string;
+  ctaSecondaryLabel: string;
+  ctaSteps: string[];
 }
 
 export interface PlatformWorkflowContent {
@@ -125,12 +127,27 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
         'Example architectures. Integrations, access, and operating responsibilities still need to be defined.'
       ),
       ctaEyebrow: t('Votre plateforme', 'Your platform'),
-      ctaTitle: t('Définissons votre architecture.', 'Define your architecture.'),
+      ctaTitle: t('Et maintenant, on en fait quoi ?', 'Now, what do you do with it?'),
       ctaDescription: t(
-        'Partons de vos outils et de vos contraintes pour définir les intégrations, les responsabilités et le premier service à déployer.',
-        'Start with your tools and constraints. Define the integrations, ownership, and first service to deploy.'
+        'Partons de l’architecture que vous venez d’esquisser pour définir les intégrations, les responsabilités et le premier service à déployer.',
+        'Start from the architecture you just sketched to define the integrations, ownership, and first service to deploy.'
       ),
       ctaLabel: t('Parlons de votre plateforme', 'Let’s talk about your platform'),
+      ctaSecondaryLabel: t('Voir nos offres', 'See our offers'),
+      ctaSteps: [
+        t(
+          'Confrontez votre sélection à votre stack actuelle et repérez les écarts.',
+          'Compare your selection with your current stack and spot the gaps.'
+        ),
+        t(
+          'Priorisez un premier périmètre et le service à déployer en premier.',
+          'Prioritize a first scope and the service to deploy first.'
+        ),
+        t(
+          'Planifiez un atelier avec nos Platform Engineers pour cadrer la suite.',
+          'Book a workshop with our Platform Engineers to frame the next steps.'
+        ),
+      ],
     },
     approaches: [
       {

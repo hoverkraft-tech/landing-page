@@ -38,6 +38,7 @@ export function initializePlatformBuilders(): void {
     const canvasScroller = root.querySelector<HTMLElement>('.builder-canvas-scroll');
     const library = root.querySelector<HTMLElement>('.builder-library');
     const libraryTools = root.querySelector<HTMLElement>('[data-builder-library-tools]');
+    const collapseButton = root.querySelector<HTMLButtonElement>('[data-builder-collapse]');
     const stackedWorkspace = window.matchMedia('(max-width: 899px)');
     const status = root.querySelector<HTMLElement>('[data-builder-status]');
     const isEnglish = root.dataset.lang === 'en';
@@ -362,11 +363,30 @@ export function initializePlatformBuilders(): void {
       });
     };
 
+    const setLibraryCollapsed = (collapsed: boolean) => {
+      root.dataset.libraryCollapsed = String(collapsed);
+      if (collapseButton) {
+        collapseButton.setAttribute('aria-expanded', String(!collapsed));
+        const label = collapseButton.querySelector<HTMLElement>('.builder-collapse-label');
+        if (label) label.textContent = collapsed ? translate('Déplier', 'Expand') : translate('Replier', 'Collapse');
+      }
+      scheduleConnectionGeometry();
+    };
+    const expandLibrary = () => {
+      if (root.dataset.libraryCollapsed === 'true') setLibraryCollapsed(false);
+    };
+    const focusStageLibrary = (stageId: string | undefined) => {
+      expandLibrary();
+      technologyButtons.find((option) => option.dataset.stage === stageId)?.focus({ preventScroll: true });
+      library?.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
+    };
+
     stageButtons.forEach((button, index) => {
       button.disabled = false;
       button.addEventListener('focus', () => revealStage(button.dataset.builderStage));
       button.addEventListener('click', () => {
         selectStage(button.dataset.builderStage);
+        expandLibrary();
         if (!stackedWorkspace.matches) return;
         technologyButtons.find((option) => option.dataset.stage === selectedStage.id)?.focus({ preventScroll: true });
         library?.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
@@ -420,6 +440,26 @@ export function initializePlatformBuilders(): void {
         }
       });
       button.addEventListener('dragend', endDrag);
+    });
+
+    emptyHints.forEach((hint) => {
+      const button = hint as HTMLButtonElement;
+      if (button.tagName !== 'BUTTON') return;
+      button.disabled = false;
+      button.addEventListener('click', () => {
+        const stageId = button.dataset.stageEmpty;
+        selectStage(stageId, false, false);
+        focusStageLibrary(stageId);
+        const stage = stageById.get(stageId as PlatformStageId);
+        if (stage) {
+          announce(
+            translate(
+              `Technologies disponibles pour l’étape "${stage.label}".`,
+              `Available technologies for ${stage.label}.`
+            )
+          );
+        }
+      });
     });
 
     removeButtons.forEach((button) => {
@@ -492,6 +532,7 @@ export function initializePlatformBuilders(): void {
         const source = stageById.get(button.dataset.builderConnection as PlatformStageId);
         const target = stageById.get(button.dataset.targetStage as PlatformStageId);
         if (!source || !target) return;
+        expandLibrary();
         selectedStage = source;
         renderStage();
         selectedConnection = source.id;
@@ -512,6 +553,16 @@ export function initializePlatformBuilders(): void {
     });
     presetButtons.forEach((button) => {
       button.addEventListener('click', () => applyPreset(button.dataset.builderPreset));
+    });
+    setLibraryCollapsed(false);
+    collapseButton?.addEventListener('click', () => {
+      const collapsed = root.dataset.libraryCollapsed !== 'true';
+      setLibraryCollapsed(collapsed);
+      announce(
+        collapsed
+          ? translate('Panneau des technologies replié.', 'Technologies panel collapsed.')
+          : translate('Panneau des technologies déplié.', 'Technologies panel expanded.')
+      );
     });
     root.querySelector<HTMLButtonElement>('[data-builder-return]')?.addEventListener('click', () => {
       const button = stageButtons.find((item) => item.dataset.builderStage === selectedStage.id);

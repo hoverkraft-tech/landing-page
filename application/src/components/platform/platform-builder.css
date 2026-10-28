@@ -504,7 +504,19 @@
   border: 1px dashed var(--builder-line);
   border-radius: 6px;
   font-size: 11px;
+  font-weight: 600;
   color: var(--builder-muted);
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    background 0.2s,
+    color 0.2s;
+}
+.module-empty:hover,
+.module-empty:focus-visible {
+  border-color: var(--builder-accent);
+  background: var(--builder-tint);
+  color: var(--builder-accent-text);
 }
 .module-empty svg {
   width: 15px;
@@ -691,6 +703,12 @@
   flex-direction: column;
   min-width: 0;
   height: calc(clamp(700px, calc(100svh - 340px), 900px) + 107px);
+}
+.builder-collapse {
+  display: none;
+}
+.builder-collapse-show {
+  display: none;
 }
 .library-tools {
   display: flex;
@@ -1168,6 +1186,7 @@
   display: none;
 }
 .platform-builder:not([data-enhanced="true"]) .module-select,
+.platform-builder:not([data-enhanced="true"]) .module-empty,
 .platform-builder:not([data-enhanced="true"]) .palette-technology > button {
   pointer-events: none;
 }
@@ -1226,6 +1245,53 @@
   .module-title small,
   .module-footer {
     font-size: 11px;
+  }
+}
+@media (min-width: 900px) {
+  .builder-collapse {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    align-self: flex-start;
+    margin-bottom: 18px;
+    padding: 8px 12px;
+    border: 1px solid var(--builder-line);
+    border-radius: 8px;
+    background: var(--builder-surface);
+    color: var(--builder-accent-text);
+    font-size: 13px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .builder-collapse:hover {
+    background: var(--builder-hover);
+  }
+  .builder-collapse svg {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+  }
+  .platform-builder[data-library-collapsed="true"] .builder-workspace {
+    grid-template-columns: 52px minmax(0, 1fr);
+  }
+  .platform-builder[data-library-collapsed="true"] .builder-library {
+    padding: 22px 7px 0;
+    align-items: center;
+    overflow: hidden;
+  }
+  .platform-builder[data-library-collapsed="true"] .builder-library > :not(.builder-collapse) {
+    display: none;
+  }
+  .platform-builder[data-library-collapsed="true"] .builder-collapse {
+    margin-bottom: 0;
+    padding: 9px;
+  }
+  .platform-builder[data-library-collapsed="true"] .builder-collapse-label,
+  .platform-builder[data-library-collapsed="true"] .builder-collapse-hide {
+    display: none;
+  }
+  .platform-builder[data-library-collapsed="true"] .builder-collapse-show {
+    display: inline-block;
   }
 }
 @media (max-width: 1199px) {

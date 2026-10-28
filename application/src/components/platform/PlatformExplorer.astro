@@ -161,10 +161,17 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
                       </button>
                     </div>
                   ))}
-                  <span class="module-empty" data-stage-empty={stage.id} hidden>
+                  <button
+                    type="button"
+                    class="module-empty"
+                    data-stage-empty={stage.id}
+                    aria-label={`${t('Ajouter un outil à l’étape', 'Add a tool to stage')} ${stage.label}`}
+                    disabled
+                    hidden
+                  >
                     <Icon name="tabler:plus" aria-hidden="true" />
                     {t('Ajoutez un outil', 'Add a tool')}
-                  </span>
+                  </button>
                 </div>
                 <div class="module-footer">
                   <span>{stage.output}</span>
@@ -220,7 +227,20 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
         </div>
       </div>
 
-      <aside class="builder-library" aria-label={copy.technologiesLabel}>
+      <aside class="builder-library" id="platform-builder-library" aria-label={copy.technologiesLabel}>
+        <button
+          type="button"
+          class="builder-collapse"
+          data-builder-collapse
+          data-builder-controls
+          aria-expanded="true"
+          aria-controls="platform-builder-library"
+          hidden
+        >
+          <Icon name="tabler:layout-sidebar-left-collapse" class="builder-collapse-hide" aria-hidden="true" />
+          <Icon name="tabler:layout-sidebar-left-expand" class="builder-collapse-show" aria-hidden="true" />
+          <span class="builder-collapse-label">{t('Replier', 'Collapse')}</span>
+        </button>
         <Button
           type="button"
           variant="tertiary"

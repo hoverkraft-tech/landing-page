@@ -42,19 +42,36 @@ const metadata = {
     <PlatformExplorer content={content} lang={lang} />
 
     <section class="platform-cta mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-labelledby="platform-cta-title">
-      <div class="cta-inner">
-        <div class="cta-symbol" aria-hidden="true"><Icon name="tabler:route" /></div>
-        <div>
-          <p class="platform-eyebrow">{copy.ctaEyebrow}</p>
-          <h2 id="platform-cta-title">{copy.ctaTitle}</h2>
-          <p class="cta-description">{copy.ctaDescription}</p>
+      <div class="cta-card">
+        <div class="cta-main">
+          <div class="cta-head">
+            <div class="cta-symbol" aria-hidden="true"><Icon name="tabler:route" /></div>
+            <div>
+              <p class="platform-eyebrow">{copy.ctaEyebrow}</p>
+              <h2 id="platform-cta-title">{copy.ctaTitle}</h2>
+              <p class="cta-description">{copy.ctaDescription}</p>
+            </div>
+          </div>
+          <ul class="cta-steps">
+            {copy.ctaSteps.map((step) => (
+              <li><Icon name="tabler:circle-check" aria-hidden="true" />{step}</li>
+            ))}
+          </ul>
         </div>
-        <Button
-          href={`${translatePath('/contact')}#booking`}
-          text={copy.ctaLabel}
-          icon="tabler:arrow-up-right"
-          variant="primary"
-        />
+        <div class="cta-actions">
+          <Button
+            href={`${translatePath('/contact')}#booking`}
+            text={copy.ctaLabel}
+            icon="tabler:arrow-up-right"
+            variant="primary"
+          />
+          <Button
+            href={translatePath('/offers')}
+            text={copy.ctaSecondaryLabel}
+            icon="tabler:arrow-right"
+            variant="secondary"
+          />
+        </div>
       </div>
     </section>
   </div>
@@ -130,13 +147,53 @@ h1 > span {
   padding-top: 1rem;
   padding-bottom: 5rem;
 }
-.cta-inner {
+.cta-card {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 1.75rem;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 2rem 3rem;
   align-items: center;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--platform-line);
+  margin-top: 1.5rem;
+  padding: clamp(1.75rem, 3vw, 2.75rem);
+  border: 1px solid var(--platform-line);
+  border-radius: 1rem;
+  background: var(--platform-icon-surface);
+  box-shadow: 0 18px 40px -28px rgb(0 0 0 / 45%);
+}
+.cta-main {
+  display: grid;
+  gap: 1.35rem;
+}
+.cta-head {
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+.cta-steps {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+.cta-steps li {
+  display: flex;
+  gap: 0.6rem;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.cta-steps svg {
+  width: 1.15rem;
+  height: 1.15rem;
+  margin-top: 0.15rem;
+  flex-shrink: 0;
+  color: var(--platform-brand);
+}
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: stretch;
 }
 .cta-symbol {
   display: grid;
@@ -184,7 +241,7 @@ h2 {
   .intro-facts {
     margin-top: 1.2rem;
   }
-  .cta-inner {
+  .cta-card {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
