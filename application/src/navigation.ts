@@ -226,6 +226,12 @@ export function getLocalizedHeaderData(url: URL): HeaderNavigationData {
             icon: 'tabler:mail',
           },
           {
+            text: t('nav.partners'),
+            href: translatePath('/partners'),
+            description: t('nav.partners.desc'),
+            icon: 'tabler:award',
+          },
+          {
             text: t('nav.brand'),
             href: translatePath('/brand-guidelines'),
             description: t('nav.brand.desc'),
@@ -320,6 +326,7 @@ export function getLocalizedFooterData(url: URL) {
           { text: t('nav.about'), href: translatePath('/about') },
           { text: t('nav.team'), href: `${translatePath('/about')}#team` },
           { text: t('nav.values'), href: `${translatePath('/about')}#values` },
+          { text: t('nav.partners'), href: translatePath('/partners') },
           { text: t('nav.brand'), href: translatePath('/brand-guidelines') },
           { text: t('nav.linkedin'), href: 'https://www.linkedin.com/company/hoverkraft-tech' },
         ],
