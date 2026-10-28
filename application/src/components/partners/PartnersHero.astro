@@ -1,0 +1,72 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import Button from '~/components/ui/Button.astro';
+import type { PartnersHeroContent } from './types';
+
+export interface Props {
+  content: PartnersHeroContent;
+}
+
+const { content } = Astro.props;
+---
+
+<section class="relative overflow-hidden not-prose">
+  <div
+    class="absolute inset-x-0 top-0 h-px bg-linear-to-r from-transparent via-primary/30 to-transparent"
+    aria-hidden="true"
+  ></div>
+  <div
+    class="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 md:px-6 md:py-20 lg:grid-cols-[1.02fr_0.98fr] lg:py-24"
+  >
+    <div class="max-w-2xl">
+      {content.tagline && (
+        <p class="mb-4 text-xs font-semibold uppercase tracking-[0.18em] text-secondary md:text-sm">
+          {content.tagline}
+        </p>
+      )}
+      <h1 class="font-heading text-4xl font-bold leading-[1.05] tracking-tight text-heading md:text-5xl lg:text-6xl">
+        {content.title}
+      </h1>
+      <p class="mt-6 text-base leading-relaxed text-muted md:text-lg">{content.subtitle}</p>
+
+      <div class="mt-8 flex flex-col gap-3 sm:flex-row">
+        <Button {...content.primaryAction} class="w-full sm:w-auto" />
+        <Button {...content.secondaryAction} class="w-full sm:w-auto" />
+      </div>
+
+      <ul class="mt-8 flex flex-wrap gap-3">
+        {content.proof.map((item) => (
+          <li class="inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1.5 text-sm font-medium text-default shadow-sm dark:border-white/10 dark:bg-white/5">
+            <Icon name={item.icon ?? 'tabler:check'} class="h-4 w-4 text-primary" aria-hidden="true" />
+            <span>{item.text}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+
+    <div class="relative">
+      <div class="absolute -inset-4 rounded-3xl bg-primary/5 blur-2xl" aria-hidden="true"></div>
+      <div
+        class="relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-2 shadow-lg ring-1 ring-black/5 dark:border-white/10 dark:bg-white/4"
+      >
+        <Image
+          src={content.image.src}
+          alt={content.image.alt}
+          width={768}
+          height={512}
+          sizes="(max-width: 1024px) 100vw, 560px"
+          loading="eager"
+          class="h-auto w-full rounded-xl object-cover"
+        />
+      </div>
+
+      <div
+        class="absolute -bottom-4 left-6 inline-flex items-center gap-2 rounded-full bg-primary px-4 py-2 text-sm font-semibold text-white shadow-lg"
+      >
+        <Icon name={content.badge.icon ?? 'tabler:rosette-discount-check'} class="h-5 w-5" aria-hidden="true" />
+        <span>{content.badge.text}</span>
+      </div>
+    </div>
+  </div>
+</section>

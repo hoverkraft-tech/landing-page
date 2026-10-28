@@ -63,7 +63,7 @@ describe('localized header navigation', () => {
       resourceLinks: ['Documentation', 'Platform Builder', 'Demo', 'Temoignages', 'Blog', 'Flux RSS'],
       resourcePageHrefFragments: ['platform-builder', 'demo'],
       platformBuilderHref: '/platform-builder',
-      companyLinks: ['À propos & vision', 'Contact', 'Charte graphique', 'Equipe', 'Manifeste', 'Valeurs'],
+      companyLinks: ['À propos & vision', 'Contact', 'Partenaires', 'Charte graphique', 'Equipe', 'Manifeste', 'Valeurs'],
     },
     {
       locale: 'en',
@@ -88,7 +88,7 @@ describe('localized header navigation', () => {
       resourceLinks: ['Documentation', 'Platform Builder', 'Demo', 'Testimonials', 'Blog', 'RSS feed'],
       resourcePageHrefFragments: ['platform-builder', 'demo', 'testimonials'],
       platformBuilderHref: '/en/platform-builder',
-      companyLinks: ['About & vision', 'Contact', 'Brand Guidelines', 'Team', 'Manifesto', 'Values'],
+      companyLinks: ['About & vision', 'Contact', 'Partners', 'Brand Guidelines', 'Team', 'Manifesto', 'Values'],
     },
   ])('uses localized navigation labels and page links for $locale', (scenario) => {
     const {
