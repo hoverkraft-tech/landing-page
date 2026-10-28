@@ -1,0 +1,28 @@
+---
+import PartnersAccreditations from '~/components/partners/PartnersAccreditations.astro';
+import PartnersAlliances from '~/components/partners/PartnersAlliances.astro';
+import PartnersHero from '~/components/partners/PartnersHero.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import { getPartnersContent } from '~/data/partners';
+import { getLangFromUrl } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const content = getPartnersContent(lang);
+---
+
+<Layout metadata={content.metadata}>
+  <PartnersHero content={content.hero} />
+  <PartnersAccreditations header={content.accreditations.header} items={content.accreditations.items} />
+  <PartnersAlliances
+    header={content.alliances.header}
+    items={content.alliances.items}
+    synergy={content.alliances.synergy}
+  />
+  <CallToAction
+    title={content.cta.title}
+    subtitle={content.cta.subtitle}
+    actions={[content.cta.primaryAction, content.cta.secondaryAction]}
+    classes={{ container: 'py-16 md:py-20 lg:py-24' }}
+  />
+</Layout>
