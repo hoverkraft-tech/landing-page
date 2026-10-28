@@ -1,0 +1,128 @@
+---
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import { getLangFromUrl, useTranslatedPath } from '~/i18n/utils';
+import Layout from '~/layouts/PageLayout.astro';
+
+const lang = getLangFromUrl(Astro.url);
+const translatePath = useTranslatedPath(lang);
+
+const metadata = {
+  title: 'HoverKraft accreditations & partners',
+  description:
+    'The accreditations, badges, and certifications that prove the HoverKraft standard, alongside our commercial partners.',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="HoverKraft ecosystem"
+    actions={[
+      { variant: 'primary', text: 'Talk to a Kraft Builder', href: `${translatePath('/contact')}#booking` },
+      { text: 'Browse our repositories', href: 'https://github.com/hoverkraft-tech' },
+    ]}
+    image={{
+      src: '~/assets/images/pages/resources/open-source.webp',
+      alt: 'HoverKraft accreditations and partners',
+    }}
+  >
+    <Fragment slot="title">Accreditations, certifications, and partners</Fragment>
+
+    <Fragment slot="subtitle">
+      Our credibility is verifiable: official accreditations and certifications earned with GitHub on one side, and
+      commercial partners that strengthen our offering on the other. Two forms of commitment, one shared demand for
+      reliability and sovereignty.
+    </Fragment>
+  </Hero>
+
+  <!-- Section 1: Accreditations, badges & certifications -->
+
+  <Features2
+    id="accreditations"
+    title="Accreditations, badges & certifications"
+    subtitle="Official recognitions that prove our level of rigor on security, governance, and developer experience."
+    tagline="Official recognitions"
+    columns={2}
+    items={[
+      {
+        title: 'Official GitHub partner',
+        description:
+          'HoverKraft is an official GitHub partner organization, admitted to the GitHub Partner Program after several months of certification.',
+        icon: 'tabler:brand-github',
+        badges: [{ text: 'GitHub Partner Program', href: 'https://partner.github.com/' }],
+        callToAction: {
+          variant: 'link',
+          text: 'Read the announcement',
+          href: '/en/blog/hoverkraft-official-github-partner',
+        },
+      },
+      {
+        title: 'Verified Creator badge',
+        description:
+          'The Verified Creator badge on our GitHub Actions confirms that GitHub has verified HoverKraft as a partner organization.',
+        icon: 'tabler:rosette-discount-check',
+        badges: [{ text: 'Verified Creator' }],
+      },
+      {
+        title: 'GitHub Marketplace',
+        description:
+          'Our reusable GitHub Actions for build, scan, and release are published and maintained on the GitHub Marketplace.',
+        icon: 'tabler:building-store',
+        badges: [{ text: 'Published actions', href: 'https://github.com/marketplace?query=hoverkraft' }],
+      },
+      {
+        title: 'Open source commitment',
+        description:
+          'Connectors, actions, and tools published as open source: anyone can audit, reuse, and improve our delivery chain.',
+        icon: 'tabler:brand-open-source',
+        badges: [{ text: 'github.com/hoverkraft-tech', href: 'https://github.com/hoverkraft-tech' }],
+      },
+    ]}
+  />
+
+  <!-- Section 2: Commercial partners -->
+
+  <Features2
+    id="commercial"
+    title="Commercial partners"
+    subtitle="Partners selected for their demand for reliability, availability, and compliance, in line with our sovereign approach."
+    tagline="Alliances"
+    columns={2}
+    items={[
+      {
+        title: 'BlackSwift',
+        description:
+          'A turnkey, 100% French and sovereign Kubernetes platform. BlackSwift hosts containerized applications with security, monitoring, and backups included, in GDPR compliance.',
+        icon: 'tabler:cloud-cog',
+        badges: [{ text: 'Sovereign Kubernetes' }],
+        callToAction: {
+          variant: 'link',
+          text: 'Discover BlackSwift',
+          href: 'https://www.blackswift.fr',
+          target: '_blank',
+          rel: 'noopener noreferrer',
+        },
+      },
+      {
+        title: 'A complementary approach',
+        description:
+          'HoverKraft brings the method and the connectors, BlackSwift provides the sovereign Kubernetes foundation: together we cover the delivery chain end to end.',
+        icon: 'tabler:puzzle',
+      },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Become a partner', href: `${translatePath('/contact')}#booking` },
+      { text: 'Explore the methodology', href: translatePath('/methodology') },
+    ]}
+  >
+    <Fragment slot="title">Want to build a partnership with HoverKraft?</Fragment>
+    <Fragment slot="subtitle"
+      >Accreditation, technical integration, or commercial partnership: let's discuss the best way to work
+      together.</Fragment
+    >
+  </CallToAction>
+</Layout>
