@@ -77,10 +77,26 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
             <span class="canvas-status-dot"></span><span data-builder-preset-name>{approaches[0].label}</span>
             <span class="canvas-caption">/ {t('votre architecture', 'your architecture')}</span>
           </div>
-          <span class="canvas-instruction"
-            ><Icon name="tabler:hand-move" aria-hidden="true" />
-            {t('Sélectionnez une étape, puis ajoutez vos outils', 'Select a stage, then add your tools')}</span
-          >
+          <div class="canvas-heading-actions">
+            <span class="canvas-instruction"
+              ><Icon name="tabler:hand-move" aria-hidden="true" />
+              {t('Sélectionnez une étape, puis ajoutez vos outils', 'Select a stage, then add your tools')}</span
+            >
+            <Button
+              type="button"
+              variant="tertiary"
+              class="builder-library-toggle"
+              data-builder-toggle-library
+              data-builder-controls
+              aria-expanded="true"
+              aria-controls="platform-library"
+              hidden
+            >
+              <Icon name="tabler:layout-sidebar-left-collapse" class="toggle-icon-collapse" aria-hidden="true" />
+              <Icon name="tabler:layout-sidebar-left-expand" class="toggle-icon-expand" aria-hidden="true" />
+              <span data-library-toggle-label>{t('Replier les outils', 'Collapse tools')}</span>
+            </Button>
+          </div>
         </div>
         <div
           class="builder-canvas-scroll"
@@ -161,10 +177,16 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
                       </button>
                     </div>
                   ))}
-                  <span class="module-empty" data-stage-empty={stage.id} hidden>
+                  <button
+                    type="button"
+                    class="module-empty"
+                    data-stage-empty={stage.id}
+                    aria-label={`${t('Ajoutez un outil à l’étape', 'Add a tool to the')} ${stage.label}`}
+                    hidden
+                  >
                     <Icon name="tabler:plus" aria-hidden="true" />
                     {t('Ajoutez un outil', 'Add a tool')}
-                  </span>
+                  </button>
                 </div>
                 <div class="module-footer">
                   <span>{stage.output}</span>
@@ -220,7 +242,7 @@ const initialCount = stages.reduce((total, stage) => total + stage.approaches.co
         </div>
       </div>
 
-      <aside class="builder-library" aria-label={copy.technologiesLabel}>
+      <aside class="builder-library" id="platform-library" aria-label={copy.technologiesLabel}>
         <Button
           type="button"
           variant="tertiary"

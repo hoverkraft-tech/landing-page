@@ -232,6 +232,38 @@
   width: 16px;
   height: 16px;
 }
+.canvas-heading-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.builder-library-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 8px 12px;
+  border: 1px solid var(--builder-line);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--builder-accent-text);
+  background: var(--builder-surface);
+  white-space: nowrap;
+}
+.builder-library-toggle:hover {
+  background: var(--builder-hover);
+}
+.builder-library-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+.builder-library-toggle .toggle-icon-expand,
+.platform-builder[data-library-collapsed="true"] .builder-library-toggle .toggle-icon-collapse {
+  display: none;
+}
+.platform-builder[data-library-collapsed="true"] .builder-library-toggle .toggle-icon-expand {
+  display: inline-block;
+}
 .builder-canvas-scroll {
   overflow-x: auto;
   overscroll-behavior-x: contain;
@@ -504,7 +536,20 @@
   border: 1px dashed var(--builder-line);
   border-radius: 6px;
   font-size: 11px;
+  font-weight: 600;
   color: var(--builder-muted);
+  background: transparent;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background 0.2s;
+}
+button.module-empty:hover,
+button.module-empty:focus-visible {
+  border-color: var(--builder-accent);
+  border-style: solid;
+  color: var(--builder-accent-text);
+  background: var(--builder-tint);
 }
 .module-empty svg {
   width: 15px;
@@ -1189,6 +1234,17 @@
     stroke-dashoffset: 0;
   }
 }
+@media (min-width: 900px) {
+  .platform-builder[data-library-collapsed="true"] .builder-workspace {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .platform-builder[data-library-collapsed="true"] .builder-canvas-area {
+    grid-column: 1;
+  }
+  .platform-builder[data-library-collapsed="true"] .builder-library {
+    display: none;
+  }
+}
 @media (min-width: 1800px) {
   .builder-library {
     padding: 32px 28px 0;
@@ -1285,6 +1341,9 @@
   .builder-workspace {
     display: flex;
     flex-direction: column;
+  }
+  .builder-library-toggle {
+    display: none;
   }
   .builder-library {
     border-top: 1px solid var(--builder-line);

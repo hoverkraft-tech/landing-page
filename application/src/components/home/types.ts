@@ -85,6 +85,7 @@ export type HomePageContent = {
   platformModel: {
     header: HomeSectionHeader;
     pillars: HomePillar[];
+    action?: HomeAction;
   };
   comparison: {
     header: HomeSectionHeader;

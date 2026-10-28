@@ -25,6 +25,7 @@ const collectActions = (content: HomePageContent): HomeAction[] => [
   content.finalCta.secondaryAction,
   ...content.useCases.items.map((item) => item.action),
   ...content.platformModel.pillars.map((pillar) => pillar.action),
+  ...(content.platformModel.action ? [content.platformModel.action] : []),
 ];
 
 describe('homepage content', () => {

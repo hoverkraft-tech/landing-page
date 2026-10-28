@@ -37,6 +37,7 @@ export function initializePlatformBuilders(): void {
     const wires = root.querySelector<SVGSVGElement>('.builder-wires');
     const canvasScroller = root.querySelector<HTMLElement>('.builder-canvas-scroll');
     const library = root.querySelector<HTMLElement>('.builder-library');
+    const libraryToggle = root.querySelector<HTMLButtonElement>('[data-builder-toggle-library]');
     const libraryTools = root.querySelector<HTMLElement>('[data-builder-library-tools]');
     const stackedWorkspace = window.matchMedia('(max-width: 899px)');
     const status = root.querySelector<HTMLElement>('[data-builder-status]');
@@ -279,6 +280,31 @@ export function initializePlatformBuilders(): void {
       if (announceChange) announce(`${stage.label}. ${stage.outcome}`);
     };
 
+    const setLibraryCollapsed = (collapsed: boolean) => {
+      if (collapsed) root.dataset.libraryCollapsed = 'true';
+      else delete root.dataset.libraryCollapsed;
+      if (libraryToggle) {
+        libraryToggle.setAttribute('aria-expanded', String(!collapsed));
+        const label = libraryToggle.querySelector<HTMLElement>('[data-library-toggle-label]');
+        if (label) {
+          label.textContent = collapsed
+            ? translate('Afficher les outils', 'Show tools')
+            : translate('Replier les outils', 'Collapse tools');
+        }
+      }
+      scheduleConnectionGeometry();
+    };
+
+    // Jump from a stage on the canvas straight to its tools so the "+" and the
+    // empty-state button stay actionable, even when a stage has no tools yet.
+    const revealStageTools = (stageId: string | undefined) => {
+      setLibraryCollapsed(false);
+      library?.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
+      technologyButtons
+        .find((option) => option.dataset.stage === (stageId ?? selectedStage.id))
+        ?.focus({ preventScroll: true });
+    };
+
     const renderPlacement = () => {
       let total = 0;
       let coverage = 0;
@@ -367,9 +393,7 @@ export function initializePlatformBuilders(): void {
       button.addEventListener('focus', () => revealStage(button.dataset.builderStage));
       button.addEventListener('click', () => {
         selectStage(button.dataset.builderStage);
-        if (!stackedWorkspace.matches) return;
-        technologyButtons.find((option) => option.dataset.stage === selectedStage.id)?.focus({ preventScroll: true });
-        library?.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'nearest' });
+        revealStageTools(selectedStage.id);
       });
       button.addEventListener('keydown', (event) => {
         let targetIndex: number;
@@ -530,6 +554,30 @@ export function initializePlatformBuilders(): void {
           'Architecture réinitialisée. Sélectionnez une étape pour ajouter vos technologies.',
           'Architecture cleared. Choose a stage and add its technologies.'
         )
+      );
+    });
+
+    emptyHints.forEach((hint) => {
+      hint.addEventListener('click', () => {
+        const stageId = hint.dataset.stageEmpty;
+        selectStage(stageId, false, false);
+        revealStageTools(stageId);
+        const stage = stageById.get(stageId as PlatformStageId);
+        if (stage) {
+          announce(
+            translate(`Choisissez un outil pour « ${stage.label} ».`, `Choose a tool for ${stage.label}.`)
+          );
+        }
+      });
+    });
+
+    libraryToggle?.addEventListener('click', () => {
+      const collapsed = root.dataset.libraryCollapsed === 'true';
+      setLibraryCollapsed(!collapsed);
+      announce(
+        collapsed
+          ? translate('Panneau des outils affiché.', 'Tools panel shown.')
+          : translate('Panneau des outils replié.', 'Tools panel collapsed.')
       );
     });
 

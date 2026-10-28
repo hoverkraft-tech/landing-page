@@ -43,18 +43,38 @@ const metadata = {
 
     <section class="platform-cta mx-auto max-w-7xl px-4 sm:px-6 lg:px-8" aria-labelledby="platform-cta-title">
       <div class="cta-inner">
-        <div class="cta-symbol" aria-hidden="true"><Icon name="tabler:route" /></div>
-        <div>
-          <p class="platform-eyebrow">{copy.ctaEyebrow}</p>
-          <h2 id="platform-cta-title">{copy.ctaTitle}</h2>
-          <p class="cta-description">{copy.ctaDescription}</p>
+        <div class="cta-intro">
+          <div class="cta-symbol" aria-hidden="true"><Icon name="tabler:route" /></div>
+          <div>
+            <p class="platform-eyebrow">{copy.ctaEyebrow}</p>
+            <h2 id="platform-cta-title">{copy.ctaTitle}</h2>
+            <p class="cta-description">{copy.ctaDescription}</p>
+          </div>
         </div>
-        <Button
-          href={`${translatePath('/contact')}#booking`}
-          text={copy.ctaLabel}
-          icon="tabler:arrow-up-right"
-          variant="primary"
-        />
+        <ol class="cta-steps" aria-label={isEnglish ? 'Next steps' : 'Prochaines étapes'}>
+          {
+            copy.ctaSteps.map((step, index) => (
+              <li>
+                <span class="cta-step-index" aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                <span>{step}</span>
+              </li>
+            ))
+          }
+        </ol>
+        <div class="cta-actions">
+          <Button
+            href={`${translatePath('/contact')}#booking`}
+            text={copy.ctaLabel}
+            icon="tabler:arrow-up-right"
+            variant="primary"
+          />
+          <Button
+            href={translatePath('/offers')}
+            text={copy.ctaSecondaryLabel}
+            icon="tabler:arrow-right"
+            variant="secondary"
+          />
+        </div>
       </div>
     </section>
   </div>
@@ -65,6 +85,7 @@ const metadata = {
   --platform-brand: var(--aw-color-secondary);
   --platform-line: var(--color-gray-200);
   --platform-icon-surface: var(--color-gray-50);
+  --platform-cta-surface: var(--color-gray-50);
   background: var(--aw-color-bg-page);
   color: var(--aw-color-text-default);
 }
@@ -132,11 +153,54 @@ h1 > span {
 }
 .cta-inner {
   display: grid;
-  grid-template-columns: auto 1fr auto;
-  gap: 1.75rem;
+  grid-template-columns: 1.4fr 1fr;
+  grid-template-areas:
+    'intro steps'
+    'actions steps';
+  gap: 1.75rem 2.5rem;
+  align-items: start;
+  padding: clamp(2rem, 4vw, 3rem);
+  border: 1px solid var(--platform-line);
+  border-radius: 1rem;
+  background: var(--platform-cta-surface);
+  box-shadow: 0 24px 60px -45px rgb(15 23 42 / 55%);
+}
+.cta-intro {
+  grid-area: intro;
+  display: flex;
+  gap: 1.25rem;
+  align-items: flex-start;
+}
+.cta-steps {
+  grid-area: steps;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.cta-steps li {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.cta-step-index {
+  flex: none;
+  min-width: 1.75rem;
+  font-family: var(--aw-font-heading);
+  font-variant-numeric: tabular-nums;
+  font-weight: 700;
+  color: var(--platform-brand);
+}
+.cta-actions {
+  grid-area: actions;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
   align-items: center;
-  padding: 2.5rem 0;
-  border-top: 1px solid var(--platform-line);
 }
 .cta-symbol {
   display: grid;
@@ -147,6 +211,7 @@ h1 > span {
   border-radius: 0.5rem;
   background: var(--platform-icon-surface);
   color: var(--platform-brand);
+  flex: none;
 }
 .cta-symbol svg {
   width: 2rem;
@@ -170,6 +235,7 @@ h2 {
   --platform-brand: var(--aw-color-primary);
   --platform-line: var(--color-gray-700);
   --platform-icon-surface: var(--color-gray-800);
+  --platform-cta-surface: var(--color-gray-800);
 }
 @media (max-width: 767px) {
   .platform-intro {
@@ -186,10 +252,19 @@ h2 {
   }
   .cta-inner {
     grid-template-columns: 1fr;
+    grid-template-areas:
+      'intro'
+      'steps'
+      'actions';
     gap: 1.5rem;
   }
   .cta-symbol {
     display: none;
+  }
+  .cta-actions :global(.btn-primary),
+  .cta-actions :global(.btn-secondary) {
+    width: 100%;
+    justify-content: center;
   }
   .platform-cta {
     padding-bottom: 2rem;

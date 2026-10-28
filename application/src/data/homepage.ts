@@ -12,6 +12,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
     offers: path('/offers'),
     openKraft: path('/open-kraft'),
     maturityAssessment: path('/maturity-assessment'),
+    platformBuilder: path('/platform-builder'),
   };
 
   if (lang === 'en') {
@@ -148,6 +149,11 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
             icon: 'tabler:users-group',
           },
         ],
+        action: {
+          text: 'Design your platform with the Platform Builder',
+          href: commonHrefs.platformBuilder,
+          icon: 'tabler:arrow-right',
+        },
       },
       comparison: {
         header: {
@@ -436,6 +442,11 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
           icon: 'tabler:users-group',
         },
       ],
+      action: {
+        text: 'Concevez votre plateforme avec le Platform Builder',
+        href: commonHrefs.platformBuilder,
+        icon: 'tabler:arrow-right',
+      },
     },
     comparison: {
       header: {
