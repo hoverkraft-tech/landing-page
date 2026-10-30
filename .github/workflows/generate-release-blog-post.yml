@@ -68,7 +68,7 @@ jobs:
             core.info(`Date range: ${sinceDate.toISOString()} to ${untilDate.toISOString()}`);
 
       - name: Generate token for blog post creation
-        uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         id: generate-token
         with:
           client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
@@ -97,7 +97,7 @@ jobs:
 
       - name: Create pull request
         if: steps.fetch-releases.outputs.releases-data
-        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@3a27d31e9ccefbe9609cc9165017ed100ff34a22 # 0.38.0
+        uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@44f6108cef0e9884ea7735f3d62932c2310745d4 # 0.39.1
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: blog/releases-${{ steps.generate.outputs.slug }}
