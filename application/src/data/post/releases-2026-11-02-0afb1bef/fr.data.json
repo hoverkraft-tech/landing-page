@@ -1,0 +1,150 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Sur la période du 26 octobre 2026 au 2 novembre 2026, 8 releases ont été publiées pour 6 dépôts suivis, avec une activité concentrée sur le projet ci-github-iac (2 releases).\n\nLes releases ont surtout porté sur l'écosystème CI/GitHub et ses briques d'automatisation : ci-github-iac reste le point d'entrée le plus sollicité, tandis que ci-github-common et ci-github-publish affichent chacune 1 release avec une bonne adoption (5 ⭐), ce qui suggère des changements sur des composants partagés et des workflows de publication. En parallèle, github-action-ovh-mks-scaling a aussi livré 1 release (2 ⭐), indiquant des ajustements sur une action dédiée à la mise à l'échelle MKS, et la dernière release référencée est docker-base-images Version 1.0.2 (2 novembre 2026), utile pour stabiliser la base d'exécution des pipelines.\n\n- ci-github-iac : la concentration de 2 releases sur ce dépôt compte pour les platform engineers et SREs car elle impacte directement la cadence et la cohérence des environnements d'infrastructure (IaC) utilisés par les workflows.\n- ci-github-common et ci-github-publish : la présence de 1 release chacune, avec 5 ⭐, renforce la fiabilité des briques partagées et des étapes de publication pour les contributeurs qui réutilisent ces patterns dans leurs pipelines.\n- github-action-ovh-mks-scaling : 1 release sur une action de scaling MKS aide les équipes SRE à ajuster finement le comportement d'autoscaling/échelle, ce qui réduit les écarts entre intention opérationnelle et exécution.",
+  "closingMarkdown": "## Synthèse de la période (26 octobre 2026 - 2 novembre 2026)\n\n- **Dépôts suivis :** 6\n- **Releases publiées :** 8\n- **Projet le plus actif :** `ci-github-iac` (2 releases)\n- **Release la plus récente :** `docker-base-images` **Version 1.0.2**\n\n### Dépôts en lumière\n- **`ci-github-common`** : 1 release, **5 ⭐**\n- **`ci-github-publish`** : 1 release, **5 ⭐**\n- **`github-action-ovh-mks-scaling`** : 1 release, **2 ⭐**\n\n### Lecture rapide\nLa dynamique est portée par `ci-github-iac`, avec un effort concentré sur l'infrastructure as code. Les dépôts `ci-github-common` et `ci-github-publish` restent les points d'appui pour la standardisation des workflows et la publication. `github-action-ovh-mks-scaling` contribue de façon plus ciblée à l'automatisation du scaling sur OVH MKS.\n\n## Impact pratique (pour plateform engineers, SRE et utilisateurs techniques)\nSur cette période, les mises à jour publiées renforcent surtout la **cohérence des pipelines GitHub** (via `ci-github-common` et `ci-github-publish`) et la **maîtrise de l'infrastructure** (via `ci-github-iac`). La release `docker-base-images` (1.0.2) apporte un socle plus récent pour fiabiliser les images de base, ce qui réduit les écarts entre environnements et facilite la conformité des builds.\n\n### Prochaines étapes concrètes\n- **Lancer un benchmark de build et de démarrage** sur un échantillon d'images en remplaçant",
+  "stats": {
+    "period": {
+      "since": "2026-10-26T19:12:58.522Z",
+      "until": "2026-11-02T19:12:58.526Z"
+    },
+    "totalRepos": 6,
+    "totalReleases": 8,
+    "busiestRepo": {
+      "name": "ci-github-iac",
+      "count": 2
+    },
+    "mostRecentRelease": {
+      "repo": "docker-base-images",
+      "name": "Version 1.0.2",
+      "publishedAt": "2026-11-02T18:49:10Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions GitHub et workflows opinionated pour les besoins courants d'intégration continue",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.39.2",
+          "tag": "0.39.2",
+          "publishedAt": "2026-11-01T11:14:35Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.39.2",
+          "highlights": [
+            "## Résumé de la version\n\nLe linter ignore commitlint pour les push qui ne contiennent aucun commit, y compris la création de tags. Les paramètres explicites du validateur restent toutefois prioritaires, et les commits des branches et des pull requests continuent d'être vérifiés.\n\nCette version met également à jour l'image Super-Linter partagée vers la version 2.0.0 et CodeQL vers la version 4.39.0. Les entrées du workflow restent inchangées."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-iac",
+      "description": "Validation d'infrastructure réutilisable et workflows de bout en bout de VM jetables",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/ci-github-iac",
+      "releases": [
+        {
+          "name": "0.2.0",
+          "tag": "0.2.0",
+          "publishedAt": "2026-10-29T17:45:09Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/0.2.0",
+          "highlights": [
+            "Fonctionnalités",
+            "Ajoutez `actions/ansible/test` pour des playbooks de test explicites et des vérifications de santé de la collection. Il compose `dawidd6/action-ansible-playbook` et `ansible-community/ansib...`",
+            "Publiez des rapports JUnit natifs en tant que résumés de job, annotations, commentaires de PR et artefacts, y compris après des échecs de test.",
+            "Lisez l'exigence exacte d'Ansible Core du consommateur et prenez en charge une version Python cible optionnelle pour la vérification de la cohérence de la collection. Utilisez une matrice de workflow pour plusieurs..."
+          ]
+        },
+        {
+          "name": "0.1.0",
+          "tag": "0.1.0",
+          "publishedAt": "2026-10-29T10:58:54Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/0.1.0",
+          "highlights": [
+            "Première version des GitHub Actions de Hoverkraft pour tester l'infrastructure dans des machines virtuelles jetables.",
+            "`actions/vm/create`** installe Lima et QEMU, démarre une machine virtuelle à partir d'une configuration consommateur requise, et annule le démarrage ayant échoué. Elle exporte le runtime privé...**",
+            "`actions/vm/test`** exécute des commandes Bash invitées ou un script de test, collecte des rapports de tests et de couverture sélectionnés, et publie des résumés GitHub, des annotations, des PR com...",
+            "`actions/vm/destroy`** vérifie la suppression de l'invité avant de supprimer son runtime et ses clés. Les workflows conservent le contrôle du séquencement des tests et du nettoyage spécifique à l'application..."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions GitHub et workflows opinés pour l'intégration continue dans un contexte Node.js",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "Version 1.1.0",
+          "tag": "1.1.0",
+          "publishedAt": "2026-10-29T17:34:32Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/1.1.0",
+          "highlights": [
+            "## Résumé de la publication\n\nL'intégration continue accepte désormais l'entrée `code-ql` comme une chaîne de langage CodeQL ou comme un objet de configuration JSON. Les appels existants conservent la valeur par défaut `typescript`, et le workflow valide les champs JSON pris en charge avant de les transmettre à CodeQL. Le CI a été corrigé pour utiliser des fusions squash signées en mettant à niveau `ci-github-publish` vers la version 1.0.3 pour les mises à jour de la documentation.\n\nLa documentation des actions et des workflows a été mise à jour."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions GitHub et workflows opiniâtres pour un déploiement, une publication et une mise en production rationalisés.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "Version 1.0.3",
+          "tag": "1.0.3",
+          "publishedAt": "2026-10-29T16:49:15Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/1.0.3",
+          "highlights": [
+            "## Résumé de la publication\n\nLes workflows de publication exposent désormais une méthode de fusion optionnelle pour les demandes d'extraction de documentation, permettant aux dépôts ayant des exigences de commits signés d'utiliser des fusions par écrasement (squash). Cette publication étend également les nouvelles tentatives automatiques pour les résumés de changelog et met à jour la documentation des actions et des workflows.\n\nLes changements internes incluent une mise à jour de la dépendance langchain dans `/actions/release/summarize-changelog` ainsi qu'une maintenance générale des dépendances."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker avec opinion",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version 1.0.2",
+          "tag": "1.0.2",
+          "publishedAt": "2026-11-02T18:49:10Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/1.0.2",
+          "highlights": [
+            "## Résumé de la version\n\nCette version n'apporte aucune modification de fonctionnalité ou de correction visible par les utilisateurs.\n\nEn interne, elle met à jour nginx de la version 1.31.6 à la version 1.31.7 dans `/images/argocd-cmp-hk-deployment/tests`."
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 1.0.1",
+          "tag": "argocd-cmp-hk-deployment-1.0.1",
+          "publishedAt": "2026-11-02T18:48:17Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-1.0.1",
+          "highlights": [
+            "## Résumé de la version\n\nAucun changement visible publiquement n'est répertorié pour `images/argocd-cmp-hk-deployment` dans cette version.\n\nEn interne, les mises à jour de la portée des tests mettent à jour nginx de la version 1.31.6 à la version 1.31.7."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "github-action-ovh-mks-scaling",
+      "description": "Mettre à l'échelle vers le haut ou vers le bas un pool de nœuds OVH MKS",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling",
+      "releases": [
+        {
+          "name": "Version 2.0.0",
+          "tag": "2.0.0",
+          "publishedAt": "2026-10-29T18:52:13Z",
+          "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling/releases/tag/2.0.0",
+          "highlights": [
+            "## Résumé de la version\n\nLes workflows CI ont été mis à niveau et automatisés, et une publication de version assistée par IA a été ajoutée, incluant l'automatisation des versions planifiées et manuelles. La documentation des actions et des workflows a également été mise à jour.\n\nLes changements internes incluent des mises à jour des dépendances et des outils dans CI, devcontainer, le linting, le fichier de verrouillage et les packages liés à la build."
+          ]
+        }
+      ]
+    }
+  ]
+}
