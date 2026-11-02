@@ -1,0 +1,150 @@
+{
+  "lang": "en",
+  "introMarkdown": "During Oct 26, 2026-Nov 2, 2026, we shipped 8 releases across 6 repositories (deploy frequency: 8 releases in 8 days).\n\nThis week's activity centered on the CI/GitHub automation layer, with the busiest project being `ci-github-iac` (2 releases), and single-release updates landing in `ci-github-common` (1 release, 5 ⭐) and `ci-github-publish` (1 release, 5 ⭐). The most recent release was `docker-base-images` Version 1.0.2 on Nov 2, 2026, indicating continued iteration on the container baseline that downstream CI jobs and build pipelines depend on. We also shipped a change in `github-action-ovh-mks-scaling` (1 release, 2 ⭐), which points to ongoing refinement of the scaling workflow connector used for cluster operations.\n\n- `docker-base-images` (v1.0.2) matters for platform engineers and SREs because it updates the shared build/runtime baseline that CI pipelines rely on, reducing drift between environments and keeping job behavior consistent.\n- `ci-github-iac` matters for technical contributors because it is the highest-throughput CI component this week (2 releases), so changes here typically affect infrastructure-as-code validation and feedback loops first.\n- `github-action-ovh-mks-scaling` matters for SREs adopting Hoverkraft projects because it governs how scaling actions execute against OVH MKS, which directly impacts operational reliability during workload changes.",
+  "closingMarkdown": "## Weekly Release Summary (Oct 26, 2026 - Nov 2, 2026)\n\n- **Repositories covered:** 6\n- **Releases shipped:** 8\n- **Busiest project:** `ci-github-iac` (2 releases)\n- **Most recent release:** `docker-base-images` **v1.0.2**\n\n### Repositories to note\n- `ci-github-common` - **1 release**, **5 ⭐**\n- `ci-github-publish` - **1 release**, **5 ⭐**\n- `github-action-ovh-mks-scaling` - **1 release**, **2 ⭐**\n\n### Practical impact (concise)\nThis week's output focused on CI and release plumbing, with `ci-github-iac` driving the most activity and `docker-base-images` providing the latest baseline for containerized workflows. For platform engineers and SREs, the main value is steadier automation across build and deployment pipelines, plus a clearer path to standardizing runtime images and scaling operations via the OVH MKS action.\n\n**Next steps**\n- Run a CI pipeline timing check on `ci-github-iac` (compare before/after job durations and cache hit rates) to confirm whether the latest changes improve **build performance** and reduce **cycle time**.\n- Review `docker-base-images` **v1.0.2** release notes and validate your staging workloads against the new base image to reduce **environment drift** and improve **operational consistency**.\n- Test `github-action-ovh-mks-scaling` in a non-production cluster to verify scaling behavior and rollback paths, improving **automation reliability** for infrastructure changes.",
+  "stats": {
+    "period": {
+      "since": "2026-10-26T19:12:58.522Z",
+      "until": "2026-11-02T19:12:58.526Z"
+    },
+    "totalRepos": 6,
+    "totalReleases": 8,
+    "busiestRepo": {
+      "name": "ci-github-iac",
+      "count": 2
+    },
+    "mostRecentRelease": {
+      "repo": "docker-base-images",
+      "name": "Version 1.0.2",
+      "publishedAt": "2026-11-02T18:49:10Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "0.39.2",
+          "tag": "0.39.2",
+          "publishedAt": "2026-11-01T11:14:35Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/0.39.2",
+          "highlights": [
+            "## Release Summary\n\nThe linter skips commitlint for pushes that contain no commits, including tag creation. Explicit validator settings still take precedence, and branch and pull request commits remain checked.\n\nThis release also updates the shared Super-Linter image to 2.0.0 and CodeQL to 4.39.0. Workflow inputs are unchanged."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-iac",
+      "description": "Reusable infrastructure validation and disposable VM end-to-end workflows",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/ci-github-iac",
+      "releases": [
+        {
+          "name": "0.2.0",
+          "tag": "0.2.0",
+          "publishedAt": "2026-10-29T17:45:09Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/0.2.0",
+          "highlights": [
+            "Features",
+            "Add `actions/ansible/test` for explicit test playbooks and collection sanity checks. It composes `dawidd6/action-ansible-playbook` and `ansible-community/ansib…",
+            "Publish native JUnit reports as job summaries, annotations, PR comments and artifacts, including after test failures.",
+            "Read the consumer's exact Ansible Core requirement and support an optional target Python version for collection sanity. Use a workflow matrix for multiple coll…"
+          ]
+        },
+        {
+          "name": "0.1.0",
+          "tag": "0.1.0",
+          "publishedAt": "2026-10-29T10:58:54Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/0.1.0",
+          "highlights": [
+            "First release of Hoverkraft's GitHub Actions for testing infrastructure in disposable virtual machines.",
+            "`actions/vm/create`** installs Lima and QEMU, starts a guest from a required consumer configuration, and rolls back failed startup. It exports the private runt…",
+            "`actions/vm/test`** runs guest Bash commands or a test script, collects selected test and coverage reports, and publishes GitHub summaries, annotations, PR com…",
+            "`actions/vm/destroy`** verifies guest deletion before removing its runtime and keys. Workflows retain control of test sequencing and application-specific clean…"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "Version 1.1.0",
+          "tag": "1.1.0",
+          "publishedAt": "2026-10-29T17:34:32Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/1.1.0",
+          "highlights": [
+            "## Release Summary\n\nContinuous integration now accepts the `code-ql` input as either a CodeQL language string or a JSON configuration object. Existing callers keep the `typescript` default, and the workflow validates supported JSON fields before passing them to CodeQL. CI was fixed to use signed squash merges by upgrading `ci-github-publish` to 1.0.3 for documentation updates.\n\nDocumentation for actions and workflows was updated."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "Version 1.0.3",
+          "tag": "1.0.3",
+          "publishedAt": "2026-10-29T16:49:15Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/1.0.3",
+          "highlights": [
+            "## Release Summary\n\nRelease workflows now expose an optional merge method for documentation pull requests, allowing repositories with signed-commit requirements to use squash merges. This release also extends automatic retries for changelog summaries and updates the actions and workflows documentation.\n\nInternal changes include a langchain dependency update in /actions/release/summarize-changelog and general dependency maintenance."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Opiniated Docker base images",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version 1.0.2",
+          "tag": "1.0.2",
+          "publishedAt": "2026-11-02T18:49:10Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/1.0.2",
+          "highlights": [
+            "## Release Summary\n\nThis release has no user-facing feature or fix changes.\n\nInternally, it updates nginx from 1.31.6 to 1.31.7 in /images/argocd-cmp-hk-deployment/tests."
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 1.0.1",
+          "tag": "argocd-cmp-hk-deployment-1.0.1",
+          "publishedAt": "2026-11-02T18:48:17Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-1.0.1",
+          "highlights": [
+            "## Release Summary\n\nNo public-facing changes are listed for images/argocd-cmp-hk-deployment in this release.\n\nInternally, the tests scope updates nginx from 1.31.6 to 1.31.7."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "github-action-ovh-mks-scaling",
+      "description": "Scale up or down a OVH MKS nodepool",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling",
+      "releases": [
+        {
+          "name": "Version 2.0.0",
+          "tag": "2.0.0",
+          "publishedAt": "2026-10-29T18:52:13Z",
+          "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling/releases/tag/2.0.0",
+          "highlights": [
+            "## Release Summary\n\nCI workflows were upgraded and automated AI-assisted release publishing was added, including scheduled and manual release automation. Documentation for actions and workflows was also updated.\n\nInternal changes include dependency and tooling updates across CI, devcontainer, linting, lockfile, and build-related packages."
+          ]
+        }
+      ]
+    }
+  ]
+}
