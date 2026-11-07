@@ -83,7 +83,10 @@
   },
   "overrides": {
     "esbuild": "0.28.1",
-    "svgo": "4.1.0"
+    "svgo": "4.1.0",
+    "readdir-glob": {
+      "minimatch": "^11.0.5"
+    }
   },
   "allowScripts": {
     "esbuild@0.28.1": true,
