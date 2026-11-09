@@ -1,0 +1,330 @@
+{
+  "lang": "fr",
+  "introMarkdown": "Entre le 2 et le 9 novembre 2026, 25 releases ont été publiées sur 8 dépôts, soit une cadence d'environ 3,6 releases par jour.\n\nLes dépôts les plus actifs ont été ci-github-common (5 releases) et ci-github-publish (4 releases), avec une mise à jour récente de ci-github-publish en Version 3.0.1 (9 novembre 2026). Les changements se concentrent sur la base de composants CI partagés (ci-github-common) et sur le mécanisme de publication (ci-github-publish), ce qui suggère une évolution continue des workflows et des conventions de packaging/relai entre pipelines GitHub. À l'inverse, github-action-ovh-mks-scaling n'a publié qu'une release sur la période (1 release), avec un niveau d'adoption plus faible (2 ⭐), ce qui indique une moindre fréquence d'ajustements sur le volet scaling.\n\n- ci-github-common : la fréquence (5 releases) et la bonne adoption (5 ⭐) renforcent la stabilité des patterns CI réutilisables pour les équipes plateforme et SRE, en réduisant le coût de maintenance des workflows communs.\n- ci-github-publish : la publication de Version 3.0.1 (9 novembre 2026) sur 4 releases et 5 ⭐ améliore la prévisibilité du pipeline de publication pour les contributeurs, en limitant les écarts entre build et artefacts publiés.\n- github-action-ovh-mks-scaling : malgré une seule release (1) et 2 ⭐, son suivi reste utile pour les SRE qui dépendent du scaling MKS, car les ajustements ponctuels peuvent impacter les paramètres d'exécution et la fiabilité opérationnelle.",
+  "closingMarkdown": "## Synthèse (2 novembre 2026 - 9 novembre 2026)\n\n- **Dépôts suivis :** 8\n- **Releases publiées :** 25\n- **Projet le plus actif :** `ci-github-common` (5 releases)\n- **Release la plus récente :** `ci-github-publish` **Version 3.0.1**\n\n### Dépôts en lumière\n- **`ci-github-common`** : 5 releases, **5 ⭐**\n- **`ci-github-publish`** : 4 releases, **5 ⭐**\n- **`github-action-ovh-mks-scaling`** : 1 release, **2 ⭐**\n\n### Lecture rapide\nLa dynamique de la semaine est portée par les briques d'industrialisation autour de GitHub CI/CD (`ci-github-common`, puis `ci-github-publish`). Le dépôt `github-action-ovh-mks-scaling` progresse plus lentement, avec une seule release, ce qui suggère un cycle de stabilisation ou une évolution ciblée.\n\n## Prochaines étapes recommandées\n- **Exécuter un benchmark de pipeline** sur `ci-github-common` (artefact : workflows/inputs des releases) afin de mesurer l'impact sur le **temps de build** et la **stabilité** (taux d'échec, variabilité entre runs).\n- **Vérifier la conformité et la traçabilité des publications** avec `ci-github-publish` (artefact : Version **3.0.1**) : contrôler la **signature/metadata**, la **cohérence des tags**, et la **reproductibilité** des releases.\n- **Valider le comportement de scaling en conditions réelles** via `github-action-ovh-mks-scaling` (artefact : release de la semaine) : mesurer le **temps",
+  "stats": {
+    "period": {
+      "since": "2026-11-02T19:30:43.528Z",
+      "until": "2026-11-09T19:30:43.533Z"
+    },
+    "totalRepos": 8,
+    "totalReleases": 25,
+    "busiestRepo": {
+      "name": "ci-github-common",
+      "count": 5
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-publish",
+      "name": "Version 3.0.1",
+      "publishedAt": "2026-11-09T19:17:18Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-github-common",
+      "description": "Actions GitHub et workflows opiniâtres pour les besoins courants d'intégration continue",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "Version 3.0.0",
+          "tag": "3.0.0",
+          "publishedAt": "2026-11-09T18:06:19Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/3.0.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLes actions regroupent désormais le parseur de rapport afin que les rapports CI puissent être analysés sans configuration de Node.js ni installation de dépendances, et la publication expose également le workflow réutilisable public `action-distributions.yml`, pris en charge par l'action composite `actions/action-distributions`. La documentation des actions et des workflows a été mise à jour.\n\nLes dépendances ont été mises à jour, y compris les mises à jour des actions, et un workflow `make npm-update` a été ajouté pour des mises à niveau npm interactives."
+          ]
+        },
+        {
+          "name": "Version 2.0.2",
+          "tag": "2.0.2",
+          "publishedAt": "2026-11-08T10:23:27Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/2.0.2",
+          "highlights": [
+            "## Résumé de la publication\n\nLe traitement de l'analyse a été corrigé pour gérer les suites PHPUnit imbriquées et les rapports Cobertura à la racine.\n\nDes modifications internes ont mis à jour GitHub Actions et les workflows, notamment `hoverkraft-tech/ci-github-publish` vers la version 3.0.0 et `actions/download-artifact` vers la version 8.0.2, et ont actualisé la documentation des actions et des workflows."
+          ]
+        },
+        {
+          "name": "Version 2.0.1",
+          "tag": "2.0.1",
+          "publishedAt": "2026-11-07T22:27:16Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/2.0.1",
+          "highlights": [
+            "## Résumé de la publication\n\nCorrection de la publication des rapports CI afin que tous les acteurs de pull request du même dépôt, y compris Dependabot et Renovate, suivent les mêmes règles de publication et puissent recevoir des rapports consolidés ainsi que des commentaires de Super-Linter lorsque les autorisations requises sont accordées.\n\nMises à jour internes des assertions de commentaires hébergés et régénération de la référence de reporting avec CI Dokumentor."
+          ]
+        },
+        {
+          "name": "Version 2.0.0",
+          "tag": "2.0.0",
+          "publishedAt": "2026-11-07T18:34:54Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/2.0.0",
+          "highlights": [
+            "## Résumé de publication\n\nLa CI inclut désormais un workflow réutilisable `ci-reports` qui consolide les rapports de tests, de couverture et de lint dans des commentaires persistants. La validation des commits suit désormais les règles commitlint configurées pour chaque dépôt, et l'action autonome de titre découvre que la configuration et les exigences du workflow sémantique ont été mises à jour en conséquence.\n\nLes changements internes incluent des mises à jour des dépendances npm et des mises à jour de la documentation pour les actions et les workflows."
+          ]
+        },
+        {
+          "name": "Version 1.0.0",
+          "tag": "1.0.0",
+          "publishedAt": "2026-11-06T15:59:44Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/1.0.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLa publication regroupe la couverture des téléchargements et l'analyse des rapports CI sous `actions/quality/`, y compris une action partagée `actions/quality/codecov` et l'action `actions/quality/parse-ci-reports` déplacée. La documentation a été mise à jour pour les actions et les workflows.\n\nLes dépendances des actions et des workflows ont été mises à jour vers des versions stables, et un workflow de publication a été ajouté pour la CI."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-iac",
+      "description": "Validation d'infrastructure réutilisable et workflows de bout en bout de VM jetables",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/ci-github-iac",
+      "releases": [
+        {
+          "name": "Version 1.1.1",
+          "tag": "1.1.1",
+          "publishedAt": "2026-11-09T19:07:34Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/1.1.1",
+          "highlights": [
+            "## Résumé de la publication\n\nLa documentation a été mise à jour pour les actions et les workflows, y compris les fichiers READMEs pour `ansible test-molecule`, `ansible test`, `vm create`, `vm destroy` et `vm test`.\n\nAucun correctif ni modification interne n'a été apporté à cette publication."
+          ]
+        },
+        {
+          "name": "Version 1.1.0",
+          "tag": "1.1.0",
+          "publishedAt": "2026-11-09T07:08:47Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/1.1.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLes actions de test prennent désormais en charge un reporting CI consolidé, permettant aux appelants de publier un rapport PR partagé tout en conservant les résumés des jobs, les annotations et les artefacts. Le nommage des artefacts a été mis à jour afin que le publieur partagé puisse collecter les résultats de la tentative d'exécution actuelle, sans rapports obsolètes.\n\nLes modifications internes ont mis à jour les actions, les workflows réutilisables et les dépendances de développement, ajouté des workflows de préparation et de publication de la publication, aligné les vérifications des commits avec la configuration du dépôt, et ajusté le calendrier des tests pour la découverte du rapport téléversé."
+          ]
+        },
+        {
+          "name": "1.0.0",
+          "tag": "1.0.0",
+          "publishedAt": "2026-11-04T18:11:32Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/1.0.0",
+          "highlights": [
+            "Fonctionnalités",
+            "Créez des VM jetables avec une seule action `vm/create` : choisissez Lima pour les images cloud provisionnées ou QEMU direct pour les ISO d'installation sans assistance et les images QCOW2. Les deux...",
+            "Vérifiez l'état du client via Goss à travers `vm/test`. L'action télécharge le vérificateur épinglé par somme de contrôle, rend les suites et les variables, utilise des connexions SSH fraîches et publie...",
+            "Exécutez les scénarios natifs d'Ansible Molecule via `ansible/test-molecule`. Les scénarios possèdent leur inventaire, leur environnement cible et leur déploiement, l'idempotence, la vérification..."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Actions GitHub et workflows pour l'intégration continue dans un contexte Node.js, avec une forte opinion",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "Version 2.1.0",
+          "tag": "2.1.0",
+          "publishedAt": "2026-11-08T17:47:26Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/2.1.0",
+          "highlights": [
+            "## Résumé de la publication\n\nAjout de la prise en charge du reporting CI consolidé dans les workflows de test, permettant un reporting final partagé tout en préservant les résumés GitHub ainsi que les artefacts natifs de rapports de tests et de couverture. Ajout de la prise en charge des publications d'espace de travail et de la validation des packages pour les espaces de travail publics npm et pnpm, y compris des publications Lerna corrigées et indépendantes.\n\nModifications internes : mise à jour de Node.js, pnpm, GitHub Actions, des workflows CI et de publication partagés, des dépendances CI, de la documentation, des vérifications de commit et des performances CI."
+          ]
+        },
+        {
+          "name": "Version 2.0.0",
+          "tag": "2.0.0",
+          "publishedAt": "2026-11-04T21:19:33Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/2.0.0",
+          "highlights": [
+            "## Résumé de la publication\n\nL'automatisation de la publication publie désormais des packages npm qui ont été validés par CI. La documentation des actions et des workflows a également été mise à jour.\n\nEn interne, l'outillage des packages et la configuration des dépendances ont été simplifiés pour les actions."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-php",
+      "description": "Actions GitHub et workflows pour l'intégration continue en contexte PHP, avec une forte opinion",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/ci-github-php",
+      "releases": [
+        {
+          "name": "Version 1.1.1",
+          "tag": "1.1.1",
+          "publishedAt": "2026-11-09T19:01:11Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-php/releases/tag/1.1.1",
+          "highlights": [
+            "## Résumé de la publication\n\nMise à jour de la documentation des actions et des workflows.\n\nChangements internes : actualisation des fichiers de documentation README des workflows et des actions."
+          ]
+        },
+        {
+          "name": "Version 1.1.0",
+          "tag": "1.1.0",
+          "publishedAt": "2026-11-08T12:34:05Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-php/releases/tag/1.1.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLa prise en charge de rapports CI PHP consolidés est désormais disponible, permettant aux actions de lint et de test PHP de conserver des rapports natifs pour des workflows de publication partagés, tout en exposant un `report-artifact-id`. Elle ajoute également, sur option, des commentaires individuels avec des détails repliés, tout en conservant les annotations, les résumés et les artefacts natifs lorsque les commentaires sont désactivés.\n\nLa documentation des actions et des workflows a été mise à jour, et la maintenance interne de la CI et des dépendances a été effectuée via des mises à jour de workflows partagés, un alignement des vérifications de commit et une mise à niveau de la fonctionnalité docker-in-docker dans le devcontainer."
+          ]
+        },
+        {
+          "name": "Version 1.0.0",
+          "tag": "1.0.0",
+          "publishedAt": "2026-11-07T08:47:27Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-php/releases/tag/1.0.0",
+          "highlights": [
+            "Première version stable des GitHub Actions pour HoverKraft PHP et Composer, ainsi que des workflows réutilisables.",
+            "Ce qui est inclus",
+            "CI réutilisable pilotée par des scripts de lint et de test propres au projet, avec des matrices de versions PHP, des rapports de couverture et des vérifications des dépendances.",
+            "Configuration PHP et Composer avec découverte automatique de la racine et des manifestes d'outillage, mise en cache des dépendances, et scripts et plugins d'installation désactivés par défaut."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Actions GitHub et workflows opinionated pour des releases, déploiements et publications rationalisés.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "Version 3.0.1",
+          "tag": "3.0.1",
+          "publishedAt": "2026-11-09T19:17:18Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.0.1",
+          "highlights": [
+            "## Résumé de la publication\n\nLa documentation a été mise à jour pour les actions et les workflows.\n\nLes modifications internes ont mis à jour la dépendance `ci-github-common` vers la version 2.0.2."
+          ]
+        },
+        {
+          "name": "Version 3.0.0",
+          "tag": "3.0.0",
+          "publishedAt": "2026-11-08T09:05:21Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.0.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLa publication met à jour la documentation des actions et des workflows. Elle modifie également la planification des versions afin de clarifier les entrées de version et de préserver la portée du chemin, y compris la prise en charge des catégories de pré-inclusion générées et la priorité explicite de la portée.\n\nLes modifications internes mettent à jour GitHub Actions et les dépendances des workflows, et alignent les vérifications des commits avec la configuration du dépôt."
+          ]
+        },
+        {
+          "name": "Version 2.1.0",
+          "tag": "2.1.0",
+          "publishedAt": "2026-11-07T08:20:58Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/2.1.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLes actions de publication prennent désormais en charge la vérification uniquement à partir de la source et la planification forcée, et ajoutent une action partagée en lecture seule `release/verify` pour la vérification des artefacts et des tags dans les publications Node.js et Composer. La vérification contrôle l'appartenance et l'expiration des artefacts, l'identité des tags et l'état de publication de la publication avant la publication.\n\nLes changements internes incluent des mises à jour des dépendances dans sept répertoires et des mises à jour de la documentation pour les actions et les workflows."
+          ]
+        },
+        {
+          "name": "Version 2.0.0",
+          "tag": "2.0.0",
+          "publishedAt": "2026-11-05T10:11:00Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/2.0.0",
+          "highlights": [
+            "## Résumé de la publication\n\nLa publication ajoute la prise en charge des surcharges partielles de configuration pour les workflows de publication, permettant à `release/plan` et `release/create` d'accepter une entrée `release-config` partielle en YAML ou en JSON, et permettant aux fichiers de configuration du dépôt de ne définir que les paramètres surchargés.\n\nLa documentation a été mise à jour pour les actions et workflows de publication."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Images de base Docker opiniâtres",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version 1.0.3",
+          "tag": "1.0.3",
+          "publishedAt": "2026-11-07T17:00:39Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/1.0.3",
+          "highlights": [
+            "## Résumé de la version\n\nLa version met à jour l'image argocd dans `/images/argocd-cmp-hk-deployment` de la v3.5.6 à la v3.6.1. Elle corrige également super-linter afin qu'il utilise la politique standard de conventional commits.\n\nEn interne, GitHub Actions et les workflows partagés ont été mis à jour vers les dernières versions stables, et la documentation des actions et des workflows a été actualisée."
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 1.0.2",
+          "tag": "argocd-cmp-hk-deployment-1.0.2",
+          "publishedAt": "2026-11-07T16:59:50Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-1.0.2",
+          "highlights": [
+            "## Résumé de la version\n\nMise à jour de la dépendance de l'image `argocd-cmp-hk-deployment` de `argoproj/argocd` de la version v3.5.6 à la version v3.6.1.\n\nChangement interne : cette version inclut uniquement une mise à jour de dépendance."
+          ]
+        },
+        {
+          "name": "Version super-linter - 2.0.1",
+          "tag": "super-linter-2.0.1",
+          "publishedAt": "2026-11-07T16:59:47Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/super-linter-2.0.1",
+          "highlights": [
+            "## Résumé de la publication\n\nDans images/super-linter, cette publication corrige la gestion de la politique de commit conventionnel en utilisant la politique standard.\n\nChangements internes : la politique a été documentée et Dependabot a reçu des préfixes de messages conventionnels explicites."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "github-action-ovh-mks-scaling",
+      "description": "Mettre à l'échelle vers le haut ou vers le bas un pool de nœuds OVH MKS",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling",
+      "releases": [
+        {
+          "name": "Version 2.1.0",
+          "tag": "2.1.0",
+          "publishedAt": "2026-11-09T19:12:17Z",
+          "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling/releases/tag/2.1.0",
+          "highlights": [
+            "## Résumé de la publication\n\nMise à jour de la dépendance de développement `@ts-dev-tools/core` de la version `1.13.3` à `1.14.0`.\n\nLa documentation relative aux actions et aux workflows a été mise à jour, et les contrôles des commits CI ont été alignés lors de la mise à jour de la dépendance vulnérable Joi vers la version `17.13.9`."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "helm-chart-dufs",
+      "description": "un chart Helm pour DUFS",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/helm-chart-dufs",
+      "releases": [
+        {
+          "name": "Version 0.2.4",
+          "tag": "0.2.4",
+          "publishedAt": "2026-11-07T10:03:37Z",
+          "url": "https://github.com/hoverkraft-tech/helm-chart-dufs/releases/tag/0.2.4",
+          "highlights": [
+            "## Quoi de neuf",
+            "Corriger le job de publication Helm OCI @[copilot-swe-agent[bot]](https://github.com/apps/copilot-swe-agent) (#53)",
+            "**Changelog complet** : https://github.com/hoverkraft-tech/helm-chart-dufs/compare/0.2.3...0.2.4"
+          ]
+        },
+        {
+          "name": "Version 0.2.3",
+          "tag": "0.2.3",
+          "publishedAt": "2026-11-07T09:46:19Z",
+          "url": "https://github.com/hoverkraft-tech/helm-chart-dufs/releases/tag/0.2.3",
+          "highlights": [
+            "## Qu'est-ce qui a changé",
+            "ci : migrer les workflows de asdf vers mise @[copilot-swe-agent[bot]](https://github.com/apps/copilot-swe-agent) (#48)",
+            "ci : publier le graphique 0.2.2 @[github-actions[bot]](https://github.com/apps/github-actions) (#44)",
+            "📚 Documentation"
+          ]
+        },
+        {
+          "name": "Version 0.2.2",
+          "tag": "0.2.2",
+          "publishedAt": "2026-11-06T10:01:39Z",
+          "url": "https://github.com/hoverkraft-tech/helm-chart-dufs/releases/tag/0.2.2",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "Aucun changement",
+            "## Journal complet",
+            "https://github.com/hoverkraft-tech/helm-chart-dufs/compare/0.2.1...0.2.2"
+          ]
+        },
+        {
+          "name": "Version 0.2.1",
+          "tag": "0.2.1",
+          "publishedAt": "2026-11-05T09:43:44Z",
+          "url": "https://github.com/hoverkraft-tech/helm-chart-dufs/releases/tag/0.2.1",
+          "highlights": [
+            "Qu'est-ce qui a changé",
+            "chore(deps) : épingler les actions GitHub (#42) @fredleger",
+            "build(deps) : mise à niveau hoverkraft-tech/ci-github-common de 0.15.0 à 0.27.0 (#35) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps) : mise à niveau losisin/helm-values-schema-json-action de 1.5.7 à 2.3.1 (#34) [@dependabot[bot]](https://github.com/apps/dependabot)"
+          ]
+        }
+      ]
+    }
+  ]
+}
