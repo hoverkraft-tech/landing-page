@@ -133,7 +133,7 @@ jobs:
 
       - name: Share posts via Postiz
         if: steps.detect.outputs.count != '0'
-        uses: ./.github/actions/share-blog-post
+        uses: $/.github/actions/share-blog-post
         with:
           language: fr
           posts: ${{ steps.detect.outputs.posts }}
