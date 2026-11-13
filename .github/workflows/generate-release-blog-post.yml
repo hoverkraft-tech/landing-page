@@ -78,7 +78,7 @@ jobs:
 
       - name: Fetch releases
         id: fetch-releases
-        uses: ./.github/actions/fetch-releases
+        uses: $/.github/actions/fetch-releases
         with:
           since-date: ${{ steps.dates.outputs.since-date }}
           until-date: ${{ steps.dates.outputs.until-date }}
@@ -87,7 +87,7 @@ jobs:
       - name: Generate blog post
         if: steps.fetch-releases.outputs.releases-data
         id: generate
-        uses: ./.github/actions/generate-blog-post
+        uses: $/.github/actions/generate-blog-post
         with:
           releases-data: ${{ steps.fetch-releases.outputs.releases-data }}
           since-date: ${{ steps.dates.outputs.since-date }}

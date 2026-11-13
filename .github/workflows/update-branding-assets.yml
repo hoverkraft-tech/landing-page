@@ -109,7 +109,7 @@ jobs:
 
       - name: Validate and parse manifest
         id: validate-manifest
-        uses: ./.github/actions/validate-manifest
+        uses: $/.github/actions/validate-manifest
         with:
           manifest: ${{ steps.parse-inputs.outputs.manifest }}
 
@@ -124,7 +124,7 @@ jobs:
           permission-actions: read
 
       - name: Download and organize branding assets
-        uses: ./.github/actions/download-branding-assets
+        uses: $/.github/actions/download-branding-assets
         with:
           artifact-id: ${{ steps.parse-inputs.outputs.artifact-id }}
           repository: ${{ steps.parse-inputs.outputs.repository }}
@@ -137,7 +137,7 @@ jobs:
           assets-root-dir: ${{ env.ASSETS_ROOT_DIR }}
 
       - name: Generate brand content (mission, colors, typography, logos)
-        uses: ./.github/actions/generate-brand-content
+        uses: $/.github/actions/generate-brand-content
         with:
           version: ${{ steps.validate-manifest.outputs.version }}
           commit: ${{ steps.validate-manifest.outputs.commit }}
