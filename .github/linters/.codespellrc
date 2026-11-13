@@ -14,6 +14,7 @@ skip =
     **/application/src/pages/terms.md,
     **/application/src/i18n/ui.ts,
     **/application/src/data/homepage.ts,
+    **/application/src/data/partners.ts,
     **/application/src/data/maturity-assessment.ts,
     **/application/src/data/platform-workflow.ts,
     **/application/src/components/platform/PlatformExplorer.astro,

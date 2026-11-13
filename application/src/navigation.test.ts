@@ -63,7 +63,15 @@ describe('localized header navigation', () => {
       resourceLinks: ['Documentation', 'Platform Builder', 'Demo', 'Temoignages', 'Blog', 'Flux RSS'],
       resourcePageHrefFragments: ['platform-builder', 'demo'],
       platformBuilderHref: '/platform-builder',
-      companyLinks: ['À propos & vision', 'Contact', 'Partenaires', 'Charte graphique', 'Equipe', 'Manifeste', 'Valeurs'],
+      companyLinks: [
+        'À propos & vision',
+        'Contact',
+        'Partenaires',
+        'Charte graphique',
+        'Equipe',
+        'Manifeste',
+        'Valeurs',
+      ],
     },
     {
       locale: 'en',
