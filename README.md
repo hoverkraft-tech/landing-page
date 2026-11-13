@@ -29,8 +29,8 @@ npm run preview --prefix application
 - `make build` – Run `astro check` and produce a production build
 - `make ci` – Run prepare, lint, and build sequentially
 - `npm run preview --prefix application` – Serve the built site for QA
-- `npm test --prefix application` – Run unit tests and Platform Builder browser tests, also included in CI.
-- `npm run test:browser --prefix application` – Run only the Platform Builder browser tests. The suite starts and stops its own local Astro server and uses the installed Puppeteer browser; no running server or production build is needed.
+- `npm test --prefix application` - Run unit tests and browser regression tests, also included in CI.
+- `npm run test:browser --prefix application` - Run the Platform Builder and partners catalogue browser suites. Each suite starts and stops its own local Astro server and uses the installed Puppeteer browser; no running server or production build is needed.
 
 Most changes should happen inside `application/`. See `AGENTS.md` for detailed automation guardrails.
 

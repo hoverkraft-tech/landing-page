@@ -57,7 +57,7 @@ export function getMaturityAssessmentAxes(lang: MaturityAssessmentLanguage): Mat
             id: 'q3',
             text: 'Environment reproducibility (IaC)',
             levels: {
-              1: 'Manual “ClickOps”, undocumented and not reproducible.',
+              1: 'Manual "ClickOps", undocumented and not reproducible.',
               2: 'Runbooks exist but are followed manually.',
               3: 'Imperative scripts or partial IaC (Terraform) without modularity.',
               4: 'Complete modular IaC (Terraform/Ansible), versioned in Git.',
@@ -200,7 +200,7 @@ export function getMaturityAssessmentAxes(lang: MaturityAssessmentLanguage): Mat
             id: 'q12',
             text: 'Learning culture and resilience',
             levels: {
-              1: 'Blame culture. “Who broke prod?”. No post-incident sharing.',
+              1: 'Blame culture. "Who broke prod?". No post-incident sharing.',
               2: 'Occasional postmortems, poorly shared. Limited learning.',
               3: 'Regular blameless postmortems. Actions tracked, not always systemic.',
               4: 'Structured continuous improvement: systematic postmortems and resilience drills.',
@@ -288,7 +288,7 @@ export function getMaturityAssessmentAxes(lang: MaturityAssessmentLanguage): Mat
             1: "Plus d'un jour. Nécessite une analyse complexe et des corrections manuelles.",
             2: 'Quelques heures. Processus de rollback documenté mais manuel.',
             3: "Moins de 30 minutes. Script de rollback ou ré-exécution d'une pipeline précédente.",
-            4: "Moins de 10 minutes. Rollback « One-click » via l'outil de déploiement.",
+            4: 'Moins de 10 minutes. Rollback "One-click" via l\'outil de déploiement.',
             5: "Instantané / Automatique. Rollback déclenché automatiquement sur détection d'erreur (Canary/Blue-Green).",
           },
           shareId: 5,

@@ -350,7 +350,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
             'Nous transformons le sujet plateforme en trajectoire pilotable : décisions explicites, arbitrages objectivés et feuille de route défendable en direction.',
           outcomes: [
             'Point de départ DORA & SPACE établi en quelques semaines.',
-            'Plan d’investissement lié aux résultats métier.',
+            "Plan d'investissement lié aux résultats métier.",
             'Risque et réversibilité rendus explicites.',
           ],
           action: { text: 'Voir les offres', href: commonHrefs.offers },
@@ -361,12 +361,12 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
           title: 'Équipes plateforme & DevOps',
           role: 'Construire & opérer',
           problem:
-            'Vous maintenez les couches d’intégration internes, enchaînez les backlogs et ne trouvez jamais le temps d’industrialiser ce qui fonctionne déjà.',
+            "Vous maintenez les couches d'intégration internes, enchaînez les backlogs et ne trouvez jamais le temps d'industrialiser ce qui fonctionne déjà.",
           response:
-            'OpenKraft vous apporte des connecteurs réutilisables, des modèles prêts à l’emploi et des standards que votre équipe maîtrise de bout en bout, sans dépendance propriétaire.',
+            "OpenKraft vous apporte des connecteurs réutilisables, des modèles prêts à l'emploi et des standards que votre équipe maîtrise de bout en bout, sans dépendance propriétaire.",
           outcomes: [
             'Connecteurs réutilisables pour Git, CI/CD et cloud.',
-            'Modèles prêts à l’emploi avec des paramètres fiables.',
+            "Modèles prêts à l'emploi avec des paramètres fiables.",
             'Parcours de référence versionnés comme des produits.',
           ],
           action: { text: 'Explorer OpenKraft', href: commonHrefs.openKraft },
@@ -381,7 +381,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
           response:
             'La méthode HoverKraft fluidifie le passage du poste de travail à la production grâce à des rituels et à un outillage conçus pour préserver le temps des développeurs.',
           outcomes: [
-            'Onboarding en quelques heures plutôt qu’en plusieurs semaines.',
+            "Onboarding en quelques heures plutôt qu'en plusieurs semaines.",
             'Environnements self-service et builds reproductibles.',
             'Astreinte et gestion des incidents plus lisibles.',
           ],
@@ -417,7 +417,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         {
           id: 'method',
           title: 'Méthode HoverKraft',
-          description: 'Diagnostic, feuille de route, standards, rituels et métriques connectés à l’exécution.',
+          description: "Diagnostic, feuille de route, standards, rituels et métriques connectés à l'exécution.",
           action: { text: 'Lire la méthode', href: commonHrefs.methodology },
           icon: 'tabler:manual-gearbox',
         },
@@ -440,8 +440,8 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
     comparison: {
       header: {
         tagline: 'Différenciation',
-        title: 'Vos outils ne sont pas le problème. Leur fragmentation l’est.',
-        subtitle: 'Une lecture avant/après plus lisible qu’une simple accumulation de capacités.',
+        title: "Vos outils ne sont pas le problème. Leur fragmentation l'est.",
+        subtitle: "Une lecture avant/après plus lisible qu'une simple accumulation de capacités.",
       },
       columns: [
         {
@@ -470,8 +470,8 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
     },
     operatingModel: {
       header: {
-        tagline: 'Modèle d’engagement',
-        title: 'De l’audit à l’autonomie, un parcours clair',
+        tagline: "Modèle d'engagement",
+        title: "De l'audit à l'autonomie, un parcours clair",
         subtitle: 'Chaque étape produit un livrable exploitable, pas un diagnostic sans suite.',
       },
       steps: [
@@ -581,7 +581,7 @@ export function getHomepageContent(lang: SupportedLanguage): HomePageContent {
         bullets: [
           'Interviews et métriques DORA/SPACE.',
           'Cartographie de la chaîne de delivery.',
-          'Plan d’action priorisé sur 6 mois.',
+          "Plan d'action priorisé sur 6 mois.",
         ],
         action: { variant: 'primary', text: 'Planifier un audit', href: commonHrefs.contact },
       },
