@@ -96,7 +96,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
       exploreLabel: t('Explorer les étapes', 'Explore the stages'),
       approachLabel: t('Approche', 'Approach'),
       approachHint: t(
-        'Comparez les outils et les responsabilités d’exploitation. Ces approches peuvent se combiner.',
+        "Comparez les outils et les responsabilités d'exploitation. Ces approches peuvent se combiner.",
         'Compare tools and operating responsibilities. These approaches can be combined.'
       ),
       workflowLabel: t('Du self-service à la production', 'From self-service to production'),
@@ -113,7 +113,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
       overviewLabel: t('Architecture', 'Architecture'),
       overviewTitle: t('Les outils de votre plateforme.', 'Your platform tools.'),
       overviewDescription: t(
-        'Reliez le portail développeur, Git, la CI, l’IaC, GitOps et l’observabilité.',
+        "Reliez le portail développeur, Git, la CI, l'IaC, GitOps et l'observabilité.",
         'Connect the developer portal, Git, CI, IaC, GitOps, and observability.'
       ),
       loopLabel: t(
@@ -121,7 +121,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
         'Incidents and team feedback inform changes to templates and pipelines.'
       ),
       examplesNote: t(
-        'Exemples d’architecture. Les intégrations, les accès et les responsabilités d’exploitation restent à définir.',
+        "Exemples d'architecture. Les intégrations, les accès et les responsabilités d'exploitation restent à définir.",
         'Example architectures. Integrations, access, and operating responsibilities still need to be defined.'
       ),
       ctaEyebrow: t('Votre plateforme', 'Your platform'),
@@ -130,7 +130,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
         'Partons de vos outils et de vos contraintes pour définir les intégrations, les responsabilités et le premier service à déployer.',
         'Start with your tools and constraints. Define the integrations, ownership, and first service to deploy.'
       ),
-      ctaLabel: t('Parlons de votre plateforme', 'Let’s talk about your platform'),
+      ctaLabel: t('Parlons de votre plateforme', "Let's talk about your platform"),
     },
     approaches: [
       {
@@ -166,15 +166,15 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
       {
         id: 'sovereign',
         label: t('Souveraineté', 'Sovereignty'),
-        title: t('Choisir l’hébergement et les accès', 'Choose hosting and access controls'),
+        title: t("Choisir l'hébergement et les accès", 'Choose hosting and access controls'),
         description: t(
           'Choisissez où héberger le code, les services et les données, et qui peut y accéder.',
           'Choose where code, services, and data are hosted, and who can access them.'
         ),
         icon: 'tabler:shield-lock',
-        benefit: t('Maîtrise de l’hébergement et des données', 'Hosting & data control'),
+        benefit: t("Maîtrise de l'hébergement et des données", 'Hosting & data control'),
         tradeoff: t(
-          'Valider les contrats, les flux de données et les responsabilités d’exploitation.',
+          "Valider les contrats, les flux de données et les responsabilités d'exploitation.",
           'Review contracts, data flows, and operating responsibilities.'
         ),
       },
@@ -183,7 +183,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
       {
         id: 'design',
         journeyTitle: t('Créez un service depuis un template.', 'Create a service from a template.'),
-        action: t('Créer un service à partir d’un template.', 'Create a service from a template.'),
+        action: t("Créer un service à partir d'un template.", 'Create a service from a template.'),
         output: t('Service initialisé', 'Scaffolded service'),
         label: t('Self-service', 'Self-service'),
         eyebrow: t('Catalogue et self-service', 'Catalog & self-service'),
@@ -197,7 +197,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
           'A scaffolded service, listed in the catalog and assigned to a team.'
         ),
         handoff: t(
-          'Le template initialise le dépôt avec les conventions de l’équipe.',
+          "Le template initialise le dépôt avec les conventions de l'équipe.",
           'The template initializes the repository and its conventions.'
         ),
         icon: 'tabler:layout-dashboard',
@@ -257,7 +257,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
             ),
             technologyIds: ['port'],
             tradeoff: t(
-              'Vérifier le modèle de données, les connecteurs et l’offre choisie.',
+              "Vérifier le modèle de données, les connecteurs et l'offre choisie.",
               'Check the data model, connectors, and chosen plan.'
             ),
           },
@@ -269,7 +269,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
             ),
             technologyIds: ['backstage', 'gitlab-templates'],
             tradeoff: t(
-              'Gérer l’identité, les accès et la disponibilité du portail.',
+              "Gérer l'identité, les accès et la disponibilité du portail.",
               'Manage identity, access, and portal availability.'
             ),
           },
@@ -348,11 +348,11 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
             title: t('Forge SaaS', 'SaaS Git hosting'),
             description: t(
               'GitHub ou GitLab.com héberge les dépôts et les code reviews avec les règles de votre organisation.',
-              'GitHub or GitLab.com hosts repositories and code reviews with your organization’s controls.'
+              "GitHub or GitLab.com hosts repositories and code reviews with your organization's controls."
             ),
             technologyIds: ['github', 'gitlab'],
             tradeoff: t(
-              'Choisir les fonctions de gouvernance et l’offre adaptées.',
+              "Choisir les fonctions de gouvernance et l'offre adaptées.",
               'Choose the governance features and plan you need.'
             ),
           },
@@ -465,7 +465,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
           sovereign: {
             title: t('Runners auto-hébergés', 'Self-hosted runners'),
             description: t(
-              'Associez GitLab Self-Managed, vos runners et Trivy à un registre d’artefacts hébergé dans votre réseau.',
+              "Associez GitLab Self-Managed, vos runners et Trivy à un registre d'artefacts hébergé dans votre réseau.",
               'Combine GitLab Self-Managed, your runners, and Trivy with an artifact registry hosted in your network.'
             ),
             technologyIds: ['gitlab-ci', 'trivy'],
@@ -478,9 +478,9 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
       },
       {
         id: 'provision',
-        journeyTitle: t('Provisionnez l’infrastructure.', 'Provision infrastructure.'),
+        journeyTitle: t("Provisionnez l'infrastructure.", 'Provision infrastructure.'),
         action: t(
-          'Définir et provisionner l’infrastructure par le code.',
+          "Définir et provisionner l'infrastructure par le code.",
           'Define and provision infrastructure as code.'
         ),
         output: t('Infrastructure provisionnée', 'Provisioned infrastructure'),
@@ -488,11 +488,11 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
         eyebrow: 'Infrastructure as Code',
         title: t('Infrastructure versionnée dans Git.', 'Infrastructure versioned in Git.'),
         description: t(
-          'Décrivez les réseaux, les ressources et les accès dans des modules versionnés. Examinez les plans avant d’appliquer les changements.',
+          "Décrivez les réseaux, les ressources et les accès dans des modules versionnés. Examinez les plans avant d'appliquer les changements.",
           'Describe networks, resources, and access in versioned modules. Review plans before applying changes.'
         ),
         outcome: t(
-          'Des ressources provisionnées à partir d’une configuration versionnée.',
+          "Des ressources provisionnées à partir d'une configuration versionnée.",
           'Resources provisioned from versioned configuration.'
         ),
         handoff: t(
@@ -573,7 +573,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
           managed: {
             title: t('IaC et services managés', 'IaC for managed resources'),
             description: t(
-              'Terraform provisionne les services AWS. Votre équipe versionne les paramètres de réseau, d’accès et de dimensionnement.',
+              "Terraform provisionne les services AWS. Votre équipe versionne les paramètres de réseau, d'accès et de dimensionnement.",
               'Terraform provisions AWS services. Your team versions network, access, and sizing configuration.'
             ),
             technologyIds: ['terraform', 'aws'],
@@ -605,15 +605,15 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
         eyebrow: 'GitOps & runtime',
         title: t('Déploiement avec GitOps.', 'Deployment with GitOps.'),
         description: t(
-          'Référencez l’artefact et la configuration dans Git. Les contrôleurs GitOps synchronisent le cluster avec cet état et détectent les écarts.',
+          "Référencez l'artefact et la configuration dans Git. Les contrôleurs GitOps synchronisent le cluster avec cet état et détectent les écarts.",
           'Reference the artifact and configuration in Git. GitOps controllers synchronize the cluster with that state and detect drift.'
         ),
         outcome: t(
-          'Un service déployé dont la version et l’état sont visibles.',
+          "Un service déployé dont la version et l'état sont visibles.",
           'A deployed service with a visible version and state.'
         ),
         handoff: t(
-          'Le service instrumenté émet des métriques, des logs et des traces pour l’observabilité.',
+          "Le service instrumenté émet des métriques, des logs et des traces pour l'observabilité.",
           'The instrumented service emits metrics, logs, and traces for observability.'
         ),
         icon: 'tabler:rocket',
@@ -631,7 +631,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
             name: 'Argo CD',
             category: t('Déploiement GitOps', 'GitOps deployment'),
             description: t(
-              'Synchronise les applications Kubernetes avec l’état décrit dans Git.',
+              "Synchronise les applications Kubernetes avec l'état décrit dans Git.",
               'Synchronizes Kubernetes applications with the state defined in Git.'
             ),
             href: 'https://argo-cd.readthedocs.io/en/stable/',
@@ -715,7 +715,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
           'Connect metrics, logs, and traces to services and owning teams. Configure alerts to detect and diagnose incidents.'
         ),
         outcome: t(
-          'Des dashboards par service et des alertes adressées à l’équipe responsable.',
+          "Des dashboards par service et des alertes adressées à l'équipe responsable.",
           'Service dashboards and alerts routed to the owning team.'
         ),
         handoff: t(
@@ -729,7 +729,7 @@ export function getPlatformWorkflowContent(lang: SupportedLanguage): PlatformWor
             name: 'OpenTelemetry',
             category: t('Instrumentation et collecte', 'Instrumentation & collection'),
             description: t(
-              'Instrumente les services et transmet la télémétrie aux outils d’observabilité.',
+              "Instrumente les services et transmet la télémétrie aux outils d'observabilité.",
               'Instruments services and sends telemetry to observability backends.'
             ),
             href: 'https://opentelemetry.io/docs/what-is-opentelemetry/',

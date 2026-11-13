@@ -1,0 +1,121 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { CatalogCollection, PartnersPageContent } from '~/types/partners';
+import CatalogCard from './CatalogCard.astro';
+
+export interface Props {
+  content: PartnersPageContent;
+}
+const { catalog, labels, lang, catalogSection } = Astro.props.content;
+const collections: CatalogCollection[] = ['partners', 'credentials'];
+const payload = JSON.stringify({ catalog, labels, lang }).replace(/</g, '\\u003c');
+---
+
+<section
+  class="ecosystem-container ecosystem-catalog"
+  id="ecosystem-catalog"
+  data-partners-catalog
+  aria-labelledby="catalog-title"
+>
+  <header class="ecosystem-section-heading">
+    <div>
+      <p class="ecosystem-eyebrow">{catalogSection.tagline}</p>
+      <h2 id="catalog-title">{catalogSection.title}<span>{catalogSection.accentTitle}</span></h2>
+    </div>
+    <p>{catalogSection.subtitle}</p>
+  </header>
+  <div data-catalog-controls hidden>
+    <div class="catalog-tabs" role="tablist" aria-label={labels.navigation}>
+      {collections.map((collection) => (
+        <button
+          type="button"
+          role="tab"
+          id={`catalog-tab-${collection}`}
+          data-catalog-tab={collection}
+          aria-selected={collection === 'partners'}
+          aria-controls={`catalog-panel-${collection}`}
+          tabindex={collection === 'partners' ? 0 : -1}
+        >
+          <span>{labels.collections[collection]}</span>
+          <span class="catalog-count-badge">{catalog[collection].length}</span>
+        </button>
+      ))}
+    </div>
+    <div class="catalog-toolbar">
+      <div data-category-filters class="catalog-category-filters" aria-label={labels.category}></div>
+      <label data-category-select-label class="catalog-category-select-label" hidden>
+        <span class="sr-only">{labels.category}</span><select data-category-select></select>
+      </label>
+      <button
+        type="button"
+        data-search-toggle
+        class="catalog-search-toggle"
+        aria-expanded="false"
+        aria-controls="catalog-search-area"
+      >
+        <Icon name="tabler:search" />{labels.search}
+      </button>
+    </div>
+    <div id="catalog-search-area" data-search-area class="catalog-search-area" hidden>
+      <Icon name="tabler:search" />
+      <label for="catalog-search" class="sr-only">{labels.searchLabel}</label>
+      <input
+        id="catalog-search"
+        data-catalog-search
+        type="search"
+        placeholder={labels.searchPlaceholder}
+        autocomplete="off"
+      >
+      <button type="button" data-clear-search aria-label={labels.clearSearch} hidden><Icon name="tabler:x" /></button>
+    </div>
+    <div class="catalog-status">
+      <p data-catalog-context></p>
+      <p data-result-count role="status" aria-live="polite" aria-atomic="true"></p>
+    </div>
+  </div>
+  {collections.map((collection) => (
+    <section
+      id={`catalog-panel-${collection}`}
+      data-catalog-panel={collection}
+      aria-labelledby={`static-title-${collection}`}
+      class="catalog-panel"
+    >
+      <h3 id={`static-title-${collection}`} data-static-heading>
+        {labels.collections[collection]} <span>{catalog[collection].length}</span>
+      </h3>
+      <div class="catalog-grid" data-catalog-grid={collection}>
+        {catalog[collection].map((entry) => (
+          <CatalogCard {entry} {catalog} {labels} {lang} />
+        ))}
+      </div>
+      {catalog[collection].length === 0 && <p data-static-heading>{labels.emptyDescription}</p>}
+    </section>
+  ))}
+  <div data-catalog-empty class="catalog-empty" hidden>
+    <Icon name="tabler:search" />
+    <h3>{labels.noResultsTitle}</h3>
+    <p>{labels.noResultsDescription}</p>
+    <button type="button" data-reset-catalog class="ecosystem-text-action">{labels.reset}</button>
+  </div>
+  <div class="catalog-more">
+    <button type="button" data-show-more hidden>{labels.showMore}<Icon name="tabler:plus" /></button>
+  </div>
+  <aside class="catalog-principle">
+    <Icon name="tabler:rosette-discount-check" />
+    <p><strong>{catalogSection.principleTitle}</strong> {catalogSection.principle}</p>
+  </aside>
+  <dialog data-entry-dialog class="catalog-dialog">
+    <button type="button" data-close-entry class="catalog-dialog-close" aria-label={labels.closeDetails}>
+      <Icon name="tabler:x" />
+    </button>
+    <div data-entry-dialog-content></div>
+  </dialog>
+  <script type="application/json" data-catalog-content set:html={payload} />
+</section>
+
+<script>
+import { initializePartnersCatalog } from './catalog-controller';
+
+initializePartnersCatalog();
+document.addEventListener('astro:page-load', initializePartnersCatalog);
+</script>

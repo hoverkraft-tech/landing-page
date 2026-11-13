@@ -1,28 +1,99 @@
 ---
-import PartnersAccreditations from '~/components/partners/PartnersAccreditations.astro';
-import PartnersAlliances from '~/components/partners/PartnersAlliances.astro';
+import { Icon } from 'astro-icon/components';
+import { validatePartnersCatalog } from '~/components/partners/catalog';
+import PartnersCatalog from '~/components/partners/PartnersCatalog.astro';
 import PartnersHero from '~/components/partners/PartnersHero.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import '~/components/partners/partners.css';
+import Button from '~/components/ui/Button.astro';
 import { getPartnersContent } from '~/data/partners';
 import { getLangFromUrl } from '~/i18n/utils';
 import Layout from '~/layouts/PageLayout.astro';
 
-const lang = getLangFromUrl(Astro.url);
-const content = getPartnersContent(lang);
+const content = getPartnersContent(getLangFromUrl(Astro.url));
+validatePartnersCatalog(content.catalog);
+const { navigation, freedom, cta } = content;
+const sections = [
+  { id: 'ecosystem-catalog', label: navigation.ecosystem },
+  { id: 'ecosystem-freedom', label: navigation.freedom },
+  { id: 'ecosystem-collaborate', label: navigation.collaborate },
+];
 ---
 
 <Layout metadata={content.metadata}>
-  <PartnersHero content={content.hero} />
-  <PartnersAccreditations header={content.accreditations.header} items={content.accreditations.items} />
-  <PartnersAlliances
-    header={content.alliances.header}
-    items={content.alliances.items}
-    synergy={content.alliances.synergy}
-  />
-  <CallToAction
-    title={content.cta.title}
-    subtitle={content.cta.subtitle}
-    actions={[content.cta.primaryAction, content.cta.secondaryAction]}
-    classes={{ container: 'py-16 md:py-20 lg:py-24' }}
-  />
+  <div class="partners-page">
+    <PartnersHero {content} />
+    <div class="ecosystem-section-nav">
+      <div class="ecosystem-container">
+        <nav aria-label={navigation.label}>
+          {sections.map((section, index) => (
+            <a href={`#${section.id}`}>
+              <span>0{index + 1}</span>
+              {section.label}
+            </a>
+          ))}
+        </nav>
+        <p>{navigation.note}<Icon name="tabler:git-branch" /></p>
+      </div>
+    </div>
+    <PartnersCatalog {content} />
+    <section class="ecosystem-freedom" id="ecosystem-freedom" aria-labelledby="ecosystem-freedom-title">
+      <div class="ecosystem-container">
+        <header class="ecosystem-section-heading">
+          <div>
+            <p class="ecosystem-eyebrow">{freedom.tagline}</p>
+            <h2 id="ecosystem-freedom-title">{freedom.title}<span>{freedom.accentTitle}</span></h2>
+          </div>
+          <p>{freedom.subtitle}</p>
+        </header>
+        <div class="ecosystem-principles">
+          {freedom.principles.map((principle, index) => (
+            <article>
+              <p class="ecosystem-principle-number">
+                0{index + 1} / <Icon name={principle.icon} />
+              </p>
+              <h3>{principle.title}</h3>
+              <p>{principle.description}</p>
+            </article>
+          ))}
+        </div>
+        <Button {...freedom.action} variant="link" class="ecosystem-text-action" icon="tabler:arrow-up-right" />
+      </div>
+    </section>
+    <section
+      class="ecosystem-collaborate ecosystem-container"
+      id="ecosystem-collaborate"
+      aria-labelledby="ecosystem-collaborate-title"
+    >
+      <p class="ecosystem-eyebrow">{cta.tagline}</p>
+      <h2 id="ecosystem-collaborate-title">{cta.title}<span>{cta.accentTitle}</span></h2>
+      <p>{cta.subtitle}</p>
+      <Button {...cta.primaryAction} class="ecosystem-primary" icon="tabler:arrow-up-right" />
+      <small>{cta.note}</small>
+      <div class="ecosystem-alternate">
+        <p>{cta.alternatePrompt}</p>
+        <Button {...cta.alternateAction} variant="link" class="ecosystem-text-action" icon="tabler:arrow-right" />
+      </div>
+    </section>
+  </div>
 </Layout>
+
+<script>
+let headerObserver: ResizeObserver | undefined;
+
+function alignSectionNavigation() {
+  headerObserver?.disconnect();
+  const page = document.querySelector<HTMLElement>('.partners-page');
+  const header = document.querySelector<HTMLElement>('[data-aw-sticky-header]');
+  if (!page || !header) return;
+
+  const updateOffset = () =>
+    page.style.setProperty('--ecosystem-header-height', `${header.getBoundingClientRect().height}px`);
+  headerObserver = new ResizeObserver(updateOffset);
+  headerObserver.observe(header);
+  updateOffset();
+}
+
+alignSectionNavigation();
+document.addEventListener('astro:page-load', alignSectionNavigation);
+document.addEventListener('astro:before-swap', () => headerObserver?.disconnect());
+</script>

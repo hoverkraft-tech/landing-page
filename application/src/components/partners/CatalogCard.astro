@@ -1,0 +1,89 @@
+---
+import { Icon } from 'astro-icon/components';
+import Image from '~/components/common/Image.astro';
+import type { SupportedLanguage } from '~/i18n/ui';
+import type { CatalogEntry, CatalogLabels, PartnersCatalog } from '~/types/partners';
+import CatalogEntryDetails from './CatalogEntryDetails.astro';
+import { formatCatalogDate } from './catalog';
+
+export interface Props {
+  entry: CatalogEntry;
+  catalog: PartnersCatalog;
+  labels: CatalogLabels;
+  lang: SupportedLanguage;
+}
+const { entry, catalog, labels, lang } = Astro.props;
+const isPartner = entry.type === 'partner';
+const category =
+  entry.type === 'partner'
+    ? catalog.categories
+        .filter(({ id }) => entry.categoryIds.includes(id))
+        .map(({ label }) => label)
+        .join(' / ')
+    : labels.kinds[entry.kind];
+const proofUrl = entry.type === 'partner' ? entry.website : entry.proofUrl;
+const proofLabel = isPartner ? labels.officialSite : labels.verify;
+---
+
+<article
+  class:list={['catalog-card', { 'catalog-credential-card': !isPartner }]}
+  data-entry-id={entry.id}
+  data-collection={isPartner ? 'partners' : 'credentials'}
+  aria-labelledby={`card-title-${entry.id}`}
+>
+  <div class="catalog-card-topline">
+    <p class="catalog-card-kind">{category}</p>
+    <span class:list={['catalog-card-icon', { 'catalog-card-logo': !!entry.logo }]}>
+      {entry.logo ? (
+        <Image src={entry.logo.src} alt={entry.logo.alt} width={110} height={40} style="object-fit: contain;" />
+      ) : (
+        <Icon name={entry.icon} />
+      )}
+    </span>
+    {entry.type === 'credential' && <p data-credential-status={entry.id} class="catalog-credential-status" hidden></p>}
+  </div>
+  <h3 class="catalog-card-title" id={`card-title-${entry.id}`}>{entry.name}</h3>
+  <p class="catalog-card-summary">{entry.summary}</p>
+  {entry.type === 'partner' && !!entry.tags?.length && (
+    <ul class="catalog-card-tags">
+      {entry.tags.slice(0, 3).map((tag) => (
+        <li>{tag}</li>
+      ))}
+    </ul>
+  )}
+  {entry.type === 'credential' && (
+    <dl class="catalog-card-metadata">
+      <div>
+        <dt>{labels.metadata.issuer}</dt>
+        <dd>{entry.issuer}</dd>
+      </div>
+      <div>
+        <dt>{labels.scopes[entry.holder.scope]}</dt>
+        <dd>{entry.holder.name}</dd>
+      </div>
+      {entry.expiresAt && (
+        <div>
+          <dt>{labels.metadata.expiresAt}</dt>
+          <dd>{formatCatalogDate(entry.expiresAt, lang)}</dd>
+        </div>
+      )}
+    </dl>
+  )}
+  <div class="catalog-card-footer">
+    <button
+      type="button"
+      data-open-entry={entry.id}
+      aria-label={labels.viewDetailsFor.replace('{name}', entry.name)}
+      hidden
+    >
+      {labels.viewDetails}<Icon name="tabler:arrow-up-right" />
+    </button>
+    <a href={proofUrl} target="_blank" rel="noopener noreferrer" aria-label={`${proofLabel} - ${entry.name}`}>
+      {proofLabel}<Icon name="tabler:external-link" />
+    </a>
+  </div>
+  <details data-inline-details={entry.id} class="catalog-inline-details">
+    <summary>{labels.viewDetails}<Icon name="tabler:plus" /></summary>
+    <CatalogEntryDetails {entry} {catalog} {labels} {lang} />
+  </details>
+</article>

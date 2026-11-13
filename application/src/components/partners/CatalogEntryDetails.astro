@@ -1,0 +1,112 @@
+---
+import { Icon } from 'astro-icon/components';
+import type { SupportedLanguage } from '~/i18n/ui';
+import type { CatalogEntry, CatalogLabels, PartnersCatalog } from '~/types/partners';
+import { formatCatalogDate } from './catalog';
+
+export interface Props {
+  entry: CatalogEntry;
+  catalog: PartnersCatalog;
+  labels: CatalogLabels;
+  lang: SupportedLanguage;
+}
+const { entry, catalog, labels, lang } = Astro.props;
+const category =
+  entry.type === 'partner'
+    ? catalog.categories
+        .filter(({ id }) => entry.categoryIds.includes(id))
+        .map(({ label }) => label)
+        .join(' / ')
+    : labels.kinds[entry.kind];
+const related = entry.type === 'partner' ? catalog.credentials.filter(({ partnerId }) => partnerId === entry.id) : [];
+const metadata =
+  entry.type === 'credential'
+    ? [
+        { label: labels.metadata.kind, value: labels.kinds[entry.kind] },
+        { label: labels.metadata.issuer, value: entry.issuer },
+        { label: labels.metadata.holder, value: `${entry.holder.name} (${labels.scopes[entry.holder.scope]})` },
+        ...(entry.issuedAt
+          ? [{ label: labels.metadata.issuedAt, value: formatCatalogDate(entry.issuedAt, lang) }]
+          : []),
+        ...(entry.expiresAt
+          ? [{ label: labels.metadata.expiresAt, value: formatCatalogDate(entry.expiresAt, lang) }]
+          : []),
+      ]
+    : [];
+---
+
+<div id={`fiche/${entry.id}`} data-entry-body={entry.id} class="catalog-detail-body">
+  <p class="ecosystem-eyebrow">{category}</p>
+  <h2 id={`entry-title-${entry.id}`}>{entry.name}</h2>
+  <p class="catalog-detail-lead">{entry.summary}</p>
+  {entry.type === 'credential' && (
+    <>
+      <dl class="catalog-detail-metadata">
+        {metadata.map(({ label, value }) => (
+          <div>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <p data-credential-status={entry.id} class="catalog-credential-status" hidden></p>
+      <a href={entry.proofUrl} target="_blank" rel="noopener noreferrer" class="catalog-resource catalog-proof-link">
+        {labels.proofLink}
+        <Icon name="tabler:external-link" />
+      </a>
+    </>
+  )}
+  {entry.details.paragraphs.length > 0 && (
+    <section class="catalog-detail-section">
+      <h3>{labels.sections[entry.type]}</h3>
+      {entry.details.paragraphs.map((paragraph) => (
+        <p>{paragraph}</p>
+      ))}
+    </section>
+  )}
+  {!!entry.details.bullets?.length && (
+    <section class="catalog-detail-section">
+      <h3>{labels.sections.bullets}</h3>
+      <ul>
+        {entry.details.bullets.map((bullet) => (
+          <li>{bullet}</li>
+        ))}
+      </ul>
+    </section>
+  )}
+  {!!entry.details.responsibilities?.length && (
+    <section class="catalog-detail-section">
+      <h3>{labels.sections.responsibilities}</h3>
+      <dl class="catalog-responsibilities">
+        {entry.details.responsibilities.map((role) => (
+          <div>
+            <dt>{role.name}</dt>
+            <dd>{role.description}</dd>
+          </div>
+        ))}
+      </dl>
+    </section>
+  )}
+  {related.length > 0 && (
+    <section class="catalog-detail-section">
+      <h3>{labels.sections.related}</h3>
+      {related.map((credential) => (
+        <a href={credential.proofUrl} target="_blank" rel="noopener noreferrer" class="catalog-resource">
+          {credential.name}
+          <Icon name="tabler:external-link" />
+        </a>
+      ))}
+    </section>
+  )}
+  {!!entry.details.resources?.length && (
+    <section class="catalog-detail-section">
+      <h3>{labels.sections.resources}</h3>
+      {entry.details.resources.map((resource) => (
+        <a href={resource.href} target="_blank" rel="noopener noreferrer" class="catalog-resource">
+          {resource.label}
+          <Icon name="tabler:external-link" />
+        </a>
+      ))}
+    </section>
+  )}
+</div>
