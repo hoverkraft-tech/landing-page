@@ -1,0 +1,100 @@
+# Publish a GitHub release manually or every Monday at 08:25 UTC.
+# Run this workflow on `main`; other branches and tags are skipped.
+# Shared CI validates the exact commit before `ci-github-publish` plans and creates
+# its release. Conventional Commit changes determine the next version. A run with
+# no relevant changes skips publication. The manual `force` input bypasses only
+# that no-changes guard; CI and existing-tag checks still apply.
+#
+# Start `Internal - Release` from the Actions tab, or run:
+#
+# ```sh
+# gh workflow run release.yml --ref main
+# ```
+#
+# `prepare-release.yml` applies Conventional Commit labels to pull requests.
+# Release notes and the AI summary are published on GitHub. No CHANGELOG.md or npm
+# package is generated. The private application package version is independent of
+# the repository's GitHub release version.
+#
+# Configure `CI_BOT_APP_CLIENT_ID`, `CI_BOT_APP_PRIVATE_KEY` and `OPENAI_API_KEY`
+# at repository or organization level. The App needs contents write and pull
+# requests read permissions. It creates the tag so main CI can regenerate action
+# and workflow documentation. Never move an existing release tag.
+#
+# Site deployment remains continuous: main CI publishes the tested build after
+# each successful main push. Creating a GitHub release does not redeploy the site.
+
+name: Internal - Release
+
+on:
+  workflow_dispatch:
+    # checkov:skip=CKV_GHA_7: force only bypasses the no-changes guard; source and build settings stay fixed.
+    inputs:
+      force:
+        description: Release even when no relevant changes are detected
+        type: boolean
+        required: false
+        default: false
+
+  schedule:
+    - cron: "25 8 * * 1"
+
+permissions: {}
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  ci:
+    if: github.ref_type == 'branch' && github.ref_name == github.event.repository.default_branch
+    uses: $/.github/workflows/__shared-ci.yml
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+      issues: write
+      packages: read
+      pull-requests: write
+      security-events: write
+      statuses: write
+
+  release:
+    name: Create and publish release
+    needs: ci
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: read
+    steps:
+      # Use the app token so the release tag triggers the documentation workflow.
+      - id: generate-token
+        uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+        with:
+          client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
+          private-key: ${{ secrets.CI_BOT_APP_PRIVATE_KEY }} # zizmor: ignore[secrets-outside-env] CI bot authentication is required to trigger tag workflows
+          permission-contents: write
+          permission-pull-requests: read
+
+      - name: Plan release
+        id: plan-release
+        uses: hoverkraft-tech/ci-github-publish/actions/release/plan@c3cd9bbbc4909bb341bd2aafe50a8673afc58fd0 # 3.0.6
+        with:
+          target-ref: ${{ github.sha }}
+          force: ${{ github.event_name == 'workflow_dispatch' && inputs.force }}
+          github-token: ${{ steps.generate-token.outputs.token }}
+
+      - name: Create and publish release
+        if: steps.plan-release.outputs.should-release == 'true' && steps.plan-release.outputs.tag != ''
+        uses: hoverkraft-tech/ci-github-publish/actions/release/create@c3cd9bbbc4909bb341bd2aafe50a8673afc58fd0 # 3.0.6
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }} # zizmor: ignore[secrets-outside-env] repository secret is scoped to the release summary step
+        with:
+          tag: ${{ steps.plan-release.outputs.tag }}
+          target-ref: ${{ github.sha }}
+          changelog-summary: |
+            {
+              "llmAuth": ${{ toJSON(env.OPENAI_API_KEY) }},
+              "llmProvider": "openai"
+            }
+          github-token: ${{ steps.generate-token.outputs.token }}
