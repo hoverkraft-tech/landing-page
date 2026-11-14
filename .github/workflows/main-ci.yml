@@ -37,13 +37,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - id: generate-github-actions-docs
-        uses: hoverkraft-tech/ci-dokumentor@f86631afb5e23eafaf68be94d38a4d4b48f3fa9a # 0.5.0
+        uses: hoverkraft-tech/ci-dokumentor@f4ef352022353a38b944e6d46a8fb458a9f6d06f # 0.6.0
         with:
           source: |
             .github/actions/**/action.yml
             .github/workflows/update-branding-assets.yml
 
-      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
         id: generate-token
         with:
           client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
@@ -52,7 +52,7 @@ jobs:
           permission-pull-requests: write
           permission-workflows: write
 
-      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@3a27d31e9ccefbe9609cc9165017ed100ff34a22 # 0.38.0
+      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@2fa562bd44f9e752a99a374c85ae14644e7f2bdd # 4.2.2
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: docs/action-documentation-update
@@ -78,7 +78,7 @@ jobs:
       url: ${{ steps.deployment.outputs.url }}
     steps:
       - id: deployment
-        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@a0a9d185c51c10710a5987822e78feb2b5ce1932 # 0.29.0
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@78a540b1bf0b18dd2f160c98943f61eefb03e8b9 # 3.0.4
         with:
           build-path: application/dist
           build-artifact-id: ${{ needs.ci.outputs.build-artifact-id }}
