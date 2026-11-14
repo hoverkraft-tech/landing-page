@@ -205,6 +205,11 @@ describe.each([
     await waitForDetails('github-verified-creator');
     await page.keyboard.press('Escape');
     await waitForDetailsClosed();
+    await page.waitForFunction(
+      () =>
+        location.hash === '#ecosystem-catalog' &&
+        document.activeElement?.getAttribute('data-open-entry') === 'github-verified-creator'
+    );
     expect(new URL(page.url()).pathname).toBe(route);
     expect(new URL(page.url()).hash).toBe('#ecosystem-catalog');
     expect(
