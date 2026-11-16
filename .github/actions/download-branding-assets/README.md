@@ -30,7 +30,7 @@ Downloads and organizes branding assets from the branding repository
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/download-branding-assets@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
+- uses: hoverkraft-tech/landing-page/.github/actions/download-branding-assets@17ad4ed9107c5d6673d5157b4d7cf851f2f991ba # 2.3.0
   with:
     # The repository where to download the branding artifact from
     # This input is required.

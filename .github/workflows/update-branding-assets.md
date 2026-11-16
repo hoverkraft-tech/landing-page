@@ -63,7 +63,7 @@ on:
 permissions: {}
 jobs:
   update-branding-assets:
-    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@c83355f5e435231ea4abbc2364aedeba97e58741 # 2.2.1
+    uses: hoverkraft-tech/landing-page/.github/workflows/update-branding-assets.yml@17ad4ed9107c5d6673d5157b4d7cf851f2f991ba # 2.3.0
     permissions:
       contents: read
     with:
