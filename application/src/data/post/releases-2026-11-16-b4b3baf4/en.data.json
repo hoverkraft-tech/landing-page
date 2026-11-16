@@ -1,0 +1,518 @@
+{
+  "lang": "en",
+  "introMarkdown": "From Nov 9-16, 2026, HoverKraft shipped 41 releases across 12 repositories, with the busiest project being `ci-github-container` (8 releases).\n\nDuring this period, release activity concentrated in the GitHub CI pipeline components - `ci-github-container` (8 releases) and `ci-github-common` (7 releases) - which indicates continued iteration on shared workflow logic and container-based build/test execution. The most recent release was `ci-github-nodejs` Version 3.1.0 on Nov 16, 2026, aligning Node.js CI behavior with the updated common/container patterns. `compose-action` also shipped (1 release), keeping the deployment/test composition path consistent with the CI changes while remaining a smaller surface area compared to the core CI libraries.\n\n- `ci-github-common`: Frequent updates to shared CI primitives matter for platform engineers and SREs because they reduce drift across workflows and make changes propagate consistently across services.\n- `ci-github-container`: The highest release count (8) matters for technical contributors because it typically governs build/test runtime behavior, which directly affects reliability and feedback loop time.\n- `compose-action`: Even with fewer releases (1), keeping this action aligned matters for SREs adopting HoverKraft projects because it supports repeatable local and CI composition when validating service changes.",
+  "closingMarkdown": "## Weekly Release Summary (Nov 9, 2026 - Nov 16, 2026)\n\n- **Repositories covered:** 12\n- **Releases shipped:** 41\n- **Busiest project:** `ci-github-container` (**8** releases)\n- **Most recent release:** `ci-github-nodejs` **v3.1.0**\n\n### Repositories to note\n- **`compose-action`** - **1** release, **211 ⭐**\n- **`ci-github-container`** - **8** releases, **6 ⭐**\n- **`ci-github-common`** - **7** releases, **5 ⭐**\n\n### What this week indicates\n- Release activity is concentrated in the CI/GitHub automation layer, with `ci-github-container` leading and `ci-github-common` supporting shared behavior across pipelines.\n- The presence of `compose-action` suggests ongoing refinement of local-to-CI composition workflows, likely used to standardize how services start and stop in automated environments.\n\n## Practical impact (closing)\nFor platform engineers and SREs, this week's output points to continued tightening of CI reliability and consistency, especially around containerized workflows and shared CI primitives. For other technical users, the net effect is fewer pipeline surprises and a clearer path to reuse common automation components across repositories.\n\n- **Run a CI runtime benchmark** on your pipelines using `ci-github-container` (compare job duration and cache hit rate before vs. after the latest changes) to quantify **performance** gains and identify any regressions early.\n- **Review shared CI behavior and policy hooks** in `ci-github-common` to confirm your org's expectations for **compliance and consistency** (e.g., lint/test gating, environment setup, and artifact handling).\n- **Adopt or standardize service composition usage** via `compose-action` in repositories that start multi-service stacks, aiming to improve **",
+  "stats": {
+    "period": {
+      "since": "2026-11-09T19:17:42.242Z",
+      "until": "2026-11-16T19:17:42.245Z"
+    },
+    "totalRepos": 12,
+    "totalReleases": 41,
+    "busiestRepo": {
+      "name": "ci-github-container",
+      "count": 8
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-nodejs",
+      "name": "Version 3.1.0",
+      "publishedAt": "2026-11-16T19:16:44Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "ci-dokumentor",
+      "description": "Automated documentation generator for CI/CD components",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-dokumentor",
+      "releases": [
+        {
+          "name": "Version 0.6.1",
+          "tag": "0.6.1",
+          "publishedAt": "2026-11-16T19:12:13Z",
+          "url": "https://github.com/hoverkraft-tech/ci-dokumentor/releases/tag/0.6.1",
+          "highlights": [
+            "## Release Summary\n\nDocumentation was updated for the action.\n\nInternal changes updated the production dependency inversify from 8.2.3 to 8.2.4, refreshed development dependencies, updated GitHub Actions and workflows, bumped the devcontainer Node feature, aligned CI and release workflows with current stable releases, and validated npm package and Docker image releases."
+          ]
+        },
+        {
+          "name": "Version 0.6.0",
+          "tag": "0.6.0",
+          "publishedAt": "2026-11-11T23:15:27Z",
+          "url": "https://github.com/hoverkraft-tech/ci-dokumentor/releases/tag/0.6.0",
+          "highlights": ["What's Changed", "Features", "feat: upgrade deps (#369) @neilime", "Dependency Updates"]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "Version 4.2.4",
+          "tag": "4.2.4",
+          "publishedAt": "2026-11-16T19:08:45Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.2.4",
+          "highlights": [
+            "## Release Summary\n\nDocumentation updates were made for actions and workflows.\n\nInternal maintenance updated the Node.js and publish actions and workflows, including pinned immutable release commits, a pnpm 12.18.0 fallback in Node.js setup, and refreshed shared dependencies."
+          ]
+        },
+        {
+          "name": "Version 4.2.3",
+          "tag": "4.2.3",
+          "publishedAt": "2026-11-15T09:33:28Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.2.3",
+          "highlights": [
+            "## Release Summary\n\nFixed the shared greetings workflow to skip Dependabot pull requests that use read-only tokens, while keeping issue greetings and same-repository human pull request greetings enabled.\n\nUpdated actions and workflows documentation."
+          ]
+        },
+        {
+          "name": "Version 4.2.2",
+          "tag": "4.2.2",
+          "publishedAt": "2026-11-14T21:15:40Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.2.2",
+          "highlights": [
+            "## Release Summary\n\nThis release includes internal CI maintenance updates to use ci-github-publish 3.0.4 and centralize fork handling in the shared release workflow."
+          ]
+        },
+        {
+          "name": "Version 4.2.1",
+          "tag": "4.2.1",
+          "publishedAt": "2026-11-14T12:36:07Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.2.1",
+          "highlights": [
+            "## Release Summary\n\nFixed forked pull request automation by skipping greetings for forked PRs where standard pull-request tokens cannot post comments, while keeping issue greetings and same-repository pull request greetings enabled. Fixed lint-only report handling so runs containing only `super-linter-summary.md` no longer fail and retain the summary and job results.\n\nUpdated the actions and workflows documentation."
+          ]
+        },
+        {
+          "name": "Version 4.2.0",
+          "tag": "4.2.0",
+          "publishedAt": "2026-11-11T11:03:27Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.2.0",
+          "highlights": [
+            "## Release Summary\n\nAction distribution outputs now support glob patterns, including `*`, `**`, and `?`, so a single pattern can cover committed action bundle directories while literal paths remain supported. This also updates the actions and workflows documentation.\n\nNo internal changes are listed in this release."
+          ]
+        },
+        {
+          "name": "Version 4.1.0",
+          "tag": "4.1.0",
+          "publishedAt": "2026-11-11T01:14:35Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.1.0",
+          "highlights": [
+            "## Release Summary\n\nAdds support for pnpm workspace action distributions, including support for larger workspace distribution artifacts.\n\nAlso updates GitHub Actions and workflows dependencies and refreshes the actions and workflows documentation."
+          ]
+        },
+        {
+          "name": "Version 4.0.0",
+          "tag": "4.0.0",
+          "publishedAt": "2026-11-10T09:33:02Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.0.0",
+          "highlights": [
+            "## Release Summary\n\nCI now discovers bundled action distributions and tests them through shared validation across root and nested action packages. CI reports also now preserve abandoned job results.\n\nInternal changes updated GitHub Actions and reusable workflow dependencies, and the actions and workflows documentation was refreshed."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-container",
+      "description": "Opinionated GitHub Actions and workflows for continuous integration in container (OCI) context",
+      "stars": 6,
+      "url": "https://github.com/hoverkraft-tech/ci-github-container",
+      "releases": [
+        {
+          "name": "Version 3.0.0",
+          "tag": "3.0.0",
+          "publishedAt": "2026-11-15T20:42:53Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/3.0.0",
+          "highlights": [
+            "What's Changed",
+            "Breaking Changes",
+            "feat(helm)!: test prepared chart archives (#975) @neilime",
+            "Features"
+          ]
+        },
+        {
+          "name": "Version 2.0.0",
+          "tag": "2.0.0",
+          "publishedAt": "2026-11-15T11:42:51Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/2.0.0",
+          "highlights": [
+            "What's Changed",
+            "Breaking Changes",
+            "feat(helm)!: separate static chart validation from installation tests (#968) @neilime",
+            "Bug Fixes"
+          ]
+        },
+        {
+          "name": "Version 1.0.0",
+          "tag": "1.0.0",
+          "publishedAt": "2026-11-13T22:35:10Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/1.0.0",
+          "highlights": [
+            "What's Changed",
+            "Breaking Changes",
+            "feat(helm)!: prepare immutable chart archives before publication (#966) @neilime",
+            "Documentation"
+          ]
+        },
+        {
+          "name": "Version 0.43.0",
+          "tag": "0.43.0",
+          "publishedAt": "2026-11-12T15:41:27Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.43.0",
+          "highlights": [
+            "What's Changed",
+            "Features",
+            "feat(docker): promote validated candidate digests (#962) @neilime",
+            "Bug Fixes"
+          ]
+        },
+        {
+          "name": "Version 0.42.0",
+          "tag": "0.42.0",
+          "publishedAt": "2026-11-11T23:55:26Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.42.0",
+          "highlights": [
+            "What's Changed",
+            "Features",
+            "feat(docker): publish candidates with final image metadata (#959) @neilime",
+            "Documentation"
+          ]
+        },
+        {
+          "name": "Version 0.41.1",
+          "tag": "0.41.1",
+          "publishedAt": "2026-11-11T19:22:30Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.41.1",
+          "highlights": [
+            "What's Changed",
+            "Bug Fixes",
+            "fix(docker): isolate mount caches without new caller configuration (#957) @neilime",
+            "New Contributors"
+          ]
+        },
+        {
+          "name": "Version 0.41.0",
+          "tag": "0.41.0",
+          "publishedAt": "2026-11-11T08:51:05Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.41.0",
+          "highlights": [
+            "What's Changed",
+            "Features",
+            "feat(docker): reuse build digests and skip redundant setup (#953) @neilime",
+            "Dependency Updates"
+          ]
+        },
+        {
+          "name": "Version 0.40.0",
+          "tag": "0.40.0",
+          "publishedAt": "2026-11-10T20:40:30Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-container/releases/tag/0.40.0",
+          "highlights": [
+            "What's Changed",
+            "Features",
+            "feat(ci): automate repository releases (#951) @neilime",
+            "Dependency Updates"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-iac",
+      "description": "Reusable infrastructure validation and disposable VM end-to-end workflows",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/ci-github-iac",
+      "releases": [
+        {
+          "name": "Version 1.3.1",
+          "tag": "1.3.1",
+          "publishedAt": "2026-11-16T18:56:47Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/1.3.1",
+          "highlights": [
+            "## Release Summary\n\nUpdated documentation for the ansible, opentofu, and VM actions and workflows.\n\nInternally, CI workflows were updated and aligned across validation, release, and documentation processes, and shared actions and workflows were refreshed with immutable pins and dependency updates."
+          ]
+        },
+        {
+          "name": "Version 1.3.0",
+          "tag": "1.3.0",
+          "publishedAt": "2026-11-12T16:15:21Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/1.3.0",
+          "highlights": [
+            "## Release Summary\n\nFor the ansible scope, test actions now manage controller Python setup themselves and accept an optional checkout-relative `python-version-file`. The playbook action also adds its isolated environment to PATH after Python setup so the maintained execution action uses the pinned Ansible installation.\n\nInternal validation and documentation were refreshed for this change."
+          ]
+        },
+        {
+          "name": "Version 1.2.0",
+          "tag": "1.2.0",
+          "publishedAt": "2026-11-12T10:23:48Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/1.2.0",
+          "highlights": [
+            "## Release Summary\n\nAdded a native OpenTofu test action with reports. Fixed Ansible support for rebuilt sanity test images.\n\nInternal changes updated the Lima dependency to v2.3.0, updated the ci-dokumentor CLI Docker tag to v0.6.0, and refreshed actions and workflows documentation."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "Version 3.1.0",
+          "tag": "3.1.0",
+          "publishedAt": "2026-11-16T19:16:44Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/3.1.0",
+          "highlights": [
+            "## Release Summary\n\nThis release adds optional Vitest sharding to the continuous integration workflow, allowing callers to opt in while existing callers keep their current single test job behavior. Documentation was updated for actions and workflows.\n\nInternal maintenance updates the publish actions and workflows to 3.0.6."
+          ]
+        },
+        {
+          "name": "Version 3.0.3",
+          "tag": "3.0.3",
+          "publishedAt": "2026-11-15T12:36:46Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/3.0.3",
+          "highlights": [
+            "## Release Summary\n\nThis release updates pnpm to 12.18.0.\n\nIt also updates the actions and workflows documentation, refreshes CI actions and workflows, aligns them with current stable releases, and bumps the devcontainer Node feature to 2.1.2."
+          ]
+        },
+        {
+          "name": "Version 3.0.2",
+          "tag": "3.0.2",
+          "publishedAt": "2026-11-12T06:34:23Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/3.0.2",
+          "highlights": [
+            "## Release Summary\n\nFixed package validation so unpublished sibling workspace dependencies are validated together by creating workspace tarballs first and installing declared workspace runtime, optional, and peer dependencies from those tarballs.\n\nUpdated the actions and workflows documentation."
+          ]
+        },
+        {
+          "name": "Version 3.0.1",
+          "tag": "3.0.1",
+          "publishedAt": "2026-11-11T22:31:22Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/3.0.1",
+          "highlights": [
+            "## Release Summary\n\nRelease workflows were updated to use ci-github-publish 3.0.3, fixing GitHub release publishing when the job runs without a checkout and preventing releases from being left as drafts. Documentation for actions and workflows was also updated.\n\nGitHub Actions and reusable workflows were updated to newer stable releases."
+          ]
+        },
+        {
+          "name": "Version 3.0.0",
+          "tag": "3.0.0",
+          "publishedAt": "2026-11-10T08:46:53Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/3.0.0",
+          "highlights": [
+            "## Release Summary\n\nCI now supports consolidated reports from nested workflows by forwarding test comment and report-group options so consumers can publish a single combined coverage comment. Documentation for actions and workflows was also updated.\n\nGitHub Actions dependencies were updated to the latest stable releases."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-php",
+      "description": "Opinionated Github actions and workflows for continuous integration in PHP context",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/ci-github-php",
+      "releases": [
+        {
+          "name": "Version 2.0.1",
+          "tag": "2.0.1",
+          "publishedAt": "2026-11-16T18:58:06Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-php/releases/tag/2.0.1",
+          "highlights": [
+            "## Release Summary\n\nDocumentation was updated for actions and workflows, including the setup-php README and release-related workflow documentation.\n\nComposer was updated from 2.11.0 to 2.11.1, and CI publish actions and workflows were updated to 3.0.6 and aligned with current stable releases."
+          ]
+        },
+        {
+          "name": "Version 2.0.0",
+          "tag": "2.0.0",
+          "publishedAt": "2026-11-11T15:03:40Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-php/releases/tag/2.0.0",
+          "highlights": [
+            "## Release Summary\n\nPHP versions are now discovered from Composer constraints when no PHP version is specified, including a new standalone `get-php-versions` action for resolving compatible versions. Existing explicit CI matrices, setup inputs, optional version files, and Composer platform overrides are preserved.\n\nDocumentation was updated for actions and workflows."
+          ]
+        },
+        {
+          "name": "Version 1.1.2",
+          "tag": "1.1.2",
+          "publishedAt": "2026-11-10T22:47:15Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-php/releases/tag/1.1.2",
+          "highlights": [
+            "## Release Summary\n\nCI documentation was updated, and GitHub Actions and reusable workflows were updated to newer stable releases.\n\nCI fixes now verify report artifacts after producer jobs finish and replace privileged pull request triggers. Internal release workflow integration was updated to use Publish’s `target-ref` input and `should-release` output, with manual force passed to the planner."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "Version 3.0.7",
+          "tag": "3.0.7",
+          "publishedAt": "2026-11-16T19:05:01Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.0.7",
+          "highlights": [
+            "## Release Summary\n\nUpdated the actions and workflows documentation.\n\nInternal changes: documentation was refreshed across workflow and action README files."
+          ]
+        },
+        {
+          "name": "Version 3.0.6",
+          "tag": "3.0.6",
+          "publishedAt": "2026-11-15T14:22:01Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.0.6",
+          "highlights": [
+            "## Release Summary\n\nUpdated the actions and workflows documentation.\n\nInternally, release test fixtures were isolated from workflow changes, and Node.js actions and workflows were updated to 3.0.3."
+          ]
+        },
+        {
+          "name": "Version 3.0.5",
+          "tag": "3.0.5",
+          "publishedAt": "2026-11-15T13:30:58Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.0.5",
+          "highlights": [
+            "## Release Summary\n\nUpdated the documentation for actions and workflows.\n\nUpdated CI actions and workflows, including pinning shared dependencies and workflow references, with no public action or workflow interface changes confirmed."
+          ]
+        },
+        {
+          "name": "Version 3.0.4",
+          "tag": "3.0.4",
+          "publishedAt": "2026-11-14T14:30:06Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.0.4",
+          "highlights": [
+            "## Release Summary\n\nFork handling was centralized and workflow integrations were refreshed, including updated handling for forked pull requests in shared workflows. The actions and workflows documentation was also updated.\n\nDependencies were updated across two action directories, including semver and langchain."
+          ]
+        },
+        {
+          "name": "Version 3.0.3",
+          "tag": "3.0.3",
+          "publishedAt": "2026-11-11T22:04:03Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.0.3",
+          "highlights": [
+            "## Release Summary\n\nA release workflow bug was fixed so assets can be uploaded without a repository checkout by setting repository context for `gh release upload`. Documentation for actions and workflows was updated.\n\nGitHub Actions and reusable workflows were updated to the latest stable releases, and related reference documentation was regenerated."
+          ]
+        },
+        {
+          "name": "Version 3.0.2",
+          "tag": "3.0.2",
+          "publishedAt": "2026-11-10T10:46:51Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.0.2",
+          "highlights": [
+            "## Release Summary\n\nRelease actions now bundle their helpers and shared distribution checks so they run through github-script without action-owned Node.js setup or runtime npm installation. The release workflow also now retries newly uploaded artifact metadata lookups when GitHub briefly returns 404 after upload.\n\nDocumentation for actions and workflows was updated."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "compose-action",
+      "description": "This action runs your docker-compose file and clean up before action finished",
+      "stars": 211,
+      "url": "https://github.com/hoverkraft-tech/compose-action",
+      "releases": [
+        {
+          "name": "Version 3.2.1",
+          "tag": "v3.2.1",
+          "publishedAt": "2026-11-16T19:05:39Z",
+          "url": "https://github.com/hoverkraft-tech/compose-action/releases/tag/v3.2.1",
+          "highlights": [
+            "## Release Summary\n\nThis release fixes the Compose test fixture to use an exec-form healthcheck.\n\nIt also updates workflow and actions documentation, automates Compose action distribution updates and action releases, refreshes workflows, aligns actions and workflows with current stable releases, fixes action security checks, and includes multiple dependency updates."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docusaurus-theme",
+      "description": "Hoverkraft theme for Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "Version 0.4.3",
+          "tag": "0.4.3",
+          "publishedAt": "2026-11-16T19:07:49Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.4.3",
+          "highlights": [
+            "What's Changed",
+            "Dependency Updates",
+            "build(deps-dev): bump rimraf from 6.1.3 to 6.1.4 in the npm-development-dependencies group (#121) [@dependabot[bot]](https://github.com/apps/dependabot)",
+            "build(deps): update GitHub Actions and workflows (#119) @neilime"
+          ]
+        },
+        {
+          "name": "Version 0.4.2",
+          "tag": "0.4.2",
+          "publishedAt": "2026-11-11T23:15:31Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.4.2",
+          "highlights": ["What's Changed", "Dependency Updates", "<details>", "<summary>9 changes</summary>"]
+        }
+      ]
+    },
+    {
+      "name": "github-action-ovh-mks-scaling",
+      "description": "Scale up or down a OVH MKS nodepool",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling",
+      "releases": [
+        {
+          "name": "Version 2.1.1",
+          "tag": "2.1.1",
+          "publishedAt": "2026-11-16T19:03:27Z",
+          "url": "https://github.com/hoverkraft-tech/github-action-ovh-mks-scaling/releases/tag/2.1.1",
+          "highlights": [
+            "## Release Summary\n\nDocumentation was updated for actions and workflows.\n\nInternal maintenance updated the devcontainer Node feature, bumped four GitHub Actions dependencies, and aligned action releases while automating distribution updates."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "landing-page",
+      "description": "Landing Page of hoverkraft organization",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/landing-page",
+      "releases": [
+        {
+          "name": "Version 2.3.0",
+          "tag": "2.3.0",
+          "publishedAt": "2026-11-16T19:05:27Z",
+          "url": "https://github.com/hoverkraft-tech/landing-page/releases/tag/2.3.0",
+          "highlights": [
+            "## Release Summary\n\nNew site updates add an extensible partners ecosystem catalogue and a dedicated partners page that separates accreditations from commercial partners. The release also adds an interactive platform builder, a site-wide sponsor ribbon for KCD Provence 2026, a trainings section with a bilingual course catalog, a maturity assessment with sharing enhancements, and multiple new or updated blog posts and page content refreshes. No fixes are explicitly listed in the provided changelog.\n\nInternal changes include a dependency upgrade."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "slidev-theme",
+      "description": "Hoverkraft theme for Slidev",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/slidev-theme",
+      "releases": [
+        {
+          "name": "Version 0.2.2",
+          "tag": "0.2.2",
+          "publishedAt": "2026-11-16T19:06:11Z",
+          "url": "https://github.com/hoverkraft-tech/slidev-theme/releases/tag/0.2.2",
+          "highlights": [
+            "What's Changed",
+            "Dependency Updates",
+            "build(deps): update GitHub Actions and workflows (#30) @neilime",
+            "Maintenance"
+          ]
+        },
+        {
+          "name": "Version 0.2.1",
+          "tag": "0.2.1",
+          "publishedAt": "2026-11-11T23:15:39Z",
+          "url": "https://github.com/hoverkraft-tech/slidev-theme/releases/tag/0.2.1",
+          "highlights": [
+            "What's Changed",
+            "Maintenance",
+            "ci: align commit checks with repository configuration (#28) @neilime",
+            "ci: adopt shared Slidev releases and update workflows (#27) @neilime"
+          ]
+        }
+      ]
+    }
+  ]
+}
