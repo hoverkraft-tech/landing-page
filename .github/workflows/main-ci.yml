@@ -52,7 +52,7 @@ jobs:
           permission-pull-requests: write
           permission-workflows: write
 
-      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@c63b4ce928082260ab263abc01faf3c1fa20c52b # 4.2.3
+      - uses: hoverkraft-tech/ci-github-common/actions/create-and-merge-pull-request@d606f77fad305ef07dfde3db5270f5e324019c97 # 4.2.4
         with:
           github-token: ${{ steps.generate-token.outputs.token }}
           branch: docs/action-documentation-update
@@ -78,7 +78,7 @@ jobs:
       url: ${{ steps.deployment.outputs.url }}
     steps:
       - id: deployment
-        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@c3cd9bbbc4909bb341bd2aafe50a8673afc58fd0 # 3.0.6
+        uses: hoverkraft-tech/ci-github-publish/actions/deploy/github-pages@80fa7011b27f49f2e04a19f932d36047d17a28f2 # 3.0.7
         with:
           build-path: application/dist
           build-artifact-id: ${{ needs.ci.outputs.build-artifact-id }}
