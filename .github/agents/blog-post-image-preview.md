@@ -35,7 +35,7 @@ mcp-servers:
     args: ["-y", "imagegen-mcp-server"]
     tools: ["image.generate.openai"]
     env:
-      "OPENAI_API_KEY": "COPILOT_MCP_OPENAI_API_KEY"
+      "OPENAI_API_KEY": "OPENAI_API_KEY"
       "OPENAI_IMAGE_MODEL": "gpt-image-1.5"
 ---
 
