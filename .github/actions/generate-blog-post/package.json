@@ -16,8 +16,8 @@
   "author": "HoverKraft Tech",
   "license": "0BSD",
   "dependencies": {
-    "@biomejs/biome": "^2.5.14",
+    "@biomejs/biome": "^2.6.8",
     "humanize-ai-lib": "^1.1.0",
-    "openai": "^7.16.0"
+    "openai": "^7.62.0"
   }
 }
