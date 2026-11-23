@@ -30,7 +30,7 @@ Fetches releases from all public Hoverkraft Tech repositories within a date rang
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/fetch-releases@17ad4ed9107c5d6673d5157b4d7cf851f2f991ba # 2.3.0
+- uses: hoverkraft-tech/landing-page/.github/actions/fetch-releases@86a0048c196e4aaa8b03076606866a9ca4ceb933 # 2.4.0
   with:
     # Fetch releases since this date (ISO 8601 format)
     # This input is required.

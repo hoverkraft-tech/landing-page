@@ -38,7 +38,7 @@ Generates bilingual blog post content using OpenAI based on provided release dat
 ## Usage
 
 ```yaml
-- uses: hoverkraft-tech/landing-page/.github/actions/generate-blog-post@17ad4ed9107c5d6673d5157b4d7cf851f2f991ba # 2.3.0
+- uses: hoverkraft-tech/landing-page/.github/actions/generate-blog-post@86a0048c196e4aaa8b03076606866a9ca4ceb933 # 2.4.0
   with:
     # JSON-stringified array of releases data
     # This input is required.
