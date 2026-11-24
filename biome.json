@@ -72,6 +72,14 @@
           "allowTrailingCommas": true
         }
       }
+    },
+    {
+      "includes": ["application/src/assets/images/brand/logo/*.svg"],
+      "html": {
+        "formatter": {
+          "whitespaceSensitivity": "strict"
+        }
+      }
     }
   ]
 }
