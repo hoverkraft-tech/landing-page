@@ -1,0 +1,301 @@
+{
+  "lang": "en",
+  "introMarkdown": "From Nov 18-25, 2026, we shipped 19 releases across 14 repositories, with the busiest project being `ci-github-publish` (3 releases).\n\nDuring this period, release activity concentrated in the CI publishing path: `ci-github-publish` moved through three releases, including the most recent `Version 3.1.2` on Nov 25, and `ci-github-common` shipped two releases that likely underpin shared CI behavior used by the publishing workflow. `helm-chart-postal` also shipped one release, indicating a continued cadence on the deployment packaging side alongside the CI updates.\n\n- `ci-github-publish` (latest: v3.1.2) matters for platform engineers and SREs because it directly affects how CI artifacts get published, reducing friction when validating and promoting changes across environments.\n- `ci-github-common` matters for technical contributors because shared CI components help keep workflow behavior consistent, which lowers the cost of debugging pipeline issues and updating conventions.\n- `helm-chart-postal` matters for SREs adopting Hoverkraft projects because chart changes are the bridge from CI outputs to deployable configuration, keeping release-to-deployment alignment tighter.",
+  "closingMarkdown": "## Weekly Release Summary (Nov 18, 2026 - Nov 25, 2026)\n\n- **Repositories covered:** 14\n- **Releases shipped:** 19\n- **Busiest project:** `ci-github-publish` (**3** releases)\n- **Most recent release:** `ci-github-publish` **Version 3.1.2**\n\n### Repositories to note\n- **`ci-github-publish`**: **3** releases, **5 ⭐**\n- **`ci-github-common`**: **2** releases, **5 ⭐**\n- **`helm-chart-postal`**: **1** release, **3 ⭐**\n\n### What this week's activity suggests\n- Release momentum concentrated in **CI publishing tooling** (`ci-github-publish`), with shared support likely coming from **common CI components** (`ci-github-common`).\n- A smaller but relevant update landed in **deployment packaging** via `helm-chart-postal`, which typically impacts release-to-cluster consistency and operational rollout behavior.\n\n## Practical impact (for platform engineers, SREs, and other technical users)\nThis week's work primarily improves how artifacts move from CI to published outputs and how shared CI logic is reused across repositories. For platform engineers and SREs, that translates into fewer manual steps around publishing, more consistent pipeline behavior across services, and more predictable Helm-based deployments.\n\n- **Run a CI publish throughput check** using the updated workflow behavior in **`ci-github-publish` (v3.1.2)** to measure end-to-end publish latency and job stability (expected gain: faster, more reliable automation).\n- **Review shared CI primitives for drift and policy alignment** in **`ci-github-common`** to confirm consistent environment variables, permissions, and artifact handling across pipelines (expected gain: compliance and reduced configuration variance).\n- **Validate Helm rollout behavior against the updated chart",
+  "stats": {
+    "period": {
+      "since": "2026-11-18T19:38:27.213Z",
+      "until": "2026-11-25T19:38:27.215Z"
+    },
+    "totalRepos": 14,
+    "totalReleases": 19,
+    "busiestRepo": {
+      "name": "ci-github-publish",
+      "count": 3
+    },
+    "mostRecentRelease": {
+      "repo": "ci-github-publish",
+      "name": "Version 3.1.2",
+      "publishedAt": "2026-11-25T17:34:35Z"
+    }
+  },
+  "repositories": [
+    {
+      "name": "argocd-app-of-apps-template",
+      "description": "",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/argocd-app-of-apps-template",
+      "releases": [
+        {
+          "name": "Version 0.0.1",
+          "tag": "0.0.1",
+          "publishedAt": "2026-11-23T20:41:22Z",
+          "url": "https://github.com/hoverkraft-tech/argocd-app-of-apps-template/releases/tag/0.0.1",
+          "highlights": ["## Release Summary\n\nNo user-facing changes were made in this release."]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-common",
+      "description": "Opinionated GitHub actions and workflows for common continuous integration needs",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-common",
+      "releases": [
+        {
+          "name": "Version 4.3.3",
+          "tag": "4.3.3",
+          "publishedAt": "2026-11-24T17:24:06Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.3.3",
+          "highlights": [
+            "## Release Summary\n\nArtifact downloads now retry when an artifact is temporarily missing, using bounded backoff. The actions and workflows documentation was updated.\n\nThe ci-github-publish dependency was updated to 3.1.1."
+          ]
+        },
+        {
+          "name": "Version 4.3.2",
+          "tag": "4.3.2",
+          "publishedAt": "2026-11-23T20:52:24Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-common/releases/tag/4.3.2",
+          "highlights": [
+            "## Release Summary\n\nDependency Updates: Bumped fast-xml-parser from 5.12.0 to 5.12.1 in /actions/quality/parse-ci-reports.\n\nMaintenance: Updated ci-github-publish to 3.1.0; release summaries now use the maintained provider-aware default strategy when llmModel is omitted."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-iac",
+      "description": "Reusable infrastructure validation and disposable VM end-to-end workflows",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/ci-github-iac",
+      "releases": [
+        {
+          "name": "Version 1.3.2",
+          "tag": "1.3.2",
+          "publishedAt": "2026-11-23T20:36:35Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-iac/releases/tag/1.3.2",
+          "highlights": [
+            "## Release Summary\n\nUpdated documentation for actions and workflows.\n\nInternal: refreshed CI workflows and shared actions, including release automation updates."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-nodejs",
+      "description": "Opinionated Github actions and workflows for continuous integration in NodeJs context",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/ci-github-nodejs",
+      "releases": [
+        {
+          "name": "Version 3.1.1",
+          "tag": "3.1.1",
+          "publishedAt": "2026-11-25T14:41:51Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-nodejs/releases/tag/3.1.1",
+          "highlights": [
+            "## Release Summary\n\nArtifact downloads now retry for build packages and reports. CI now uses the shared changelog summary configuration, isolates package manifests, and updates publishing. The actions and workflows documentation was updated.\n\nInternal updates include pnpm 12.20.0, Super-Linter 2.0.2, npm development dependencies, ci-github-publish 3.1.0, and shared CI actions and workflows."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-php",
+      "description": "Opinionated Github actions and workflows for continuous integration in PHP context",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/ci-github-php",
+      "releases": [
+        {
+          "name": "Version 2.0.3",
+          "tag": "2.0.3",
+          "publishedAt": "2026-11-23T20:33:18Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-php/releases/tag/2.0.3",
+          "highlights": ["## Release Summary\n\nUpdated actions and workflows documentation."]
+        },
+        {
+          "name": "Version 2.0.2",
+          "tag": "2.0.2",
+          "publishedAt": "2026-11-21T21:24:52Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-php/releases/tag/2.0.2",
+          "highlights": [
+            "## Release Summary\n\nDocumentation for actions and workflows has been updated.\n\nShared GitHub Actions and reusable workflows were updated to their latest stable releases. The release workflow now references ci-github-publish 3.1.0."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "ci-github-publish",
+      "description": "Opinionated GitHub actions and workflows for streamlined release, deployment, and publishing.",
+      "stars": 5,
+      "url": "https://github.com/hoverkraft-tech/ci-github-publish",
+      "releases": [
+        {
+          "name": "Version 3.1.2",
+          "tag": "3.1.2",
+          "publishedAt": "2026-11-25T17:34:35Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.1.2",
+          "highlights": [
+            "## Release Summary\n\nArtifact downloads and GitHub Pages artifact discovery now retry when newly uploaded artifacts are temporarily unavailable. The actions and workflows documentation was updated.\n\nShared actions and workflows now use ci-github-common 4.3.3."
+          ]
+        },
+        {
+          "name": "Version 3.1.1",
+          "tag": "3.1.1",
+          "publishedAt": "2026-11-23T20:50:15Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.1.1",
+          "highlights": [
+            "## Release Summary\n\nThe release usage guide removes the fixed-model example and leaves model selection to the provider-aware defaults when `llmModel` is omitted.\n\nCI now waits for release test artifacts to register before downloading them, with a limit on the wait. Release maintenance reviewed the changelog summarizer’s default models and switched the release workflow to the organization-level `CHANGELOG_SUMMARY` secret."
+          ]
+        },
+        {
+          "name": "Version 3.1.0",
+          "tag": "3.1.0",
+          "publishedAt": "2026-11-21T09:18:50Z",
+          "url": "https://github.com/hoverkraft-tech/ci-github-publish/releases/tag/3.1.0",
+          "highlights": [
+            "## Release Summary\n\nAutomates LLM default model updates by moving summarize-changelog defaults to a maintained JSON file and adding a scheduled models.dev curator that proposes review PRs. Adds xAI and DeepSeek support with the required LangChain integrations.\n\nUpdates dependencies (including super-linter to 2.0.2 and multiple npm packages), updates actions and workflows documentation, and adjusts CI workflows to use shared ones and separate Helm validation from publication."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docker-base-images",
+      "description": "Opiniated Docker base images",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/docker-base-images",
+      "releases": [
+        {
+          "name": "Version 1.0.5",
+          "tag": "1.0.5",
+          "publishedAt": "2026-11-23T21:07:28Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/1.0.5",
+          "highlights": [
+            "## Release Summary\n\nDependency updates include bumping hoverkraft-tech/docker-base-images/super-linter from 2.0.1 to 2.0.2 and argoproj/argocd from v3.6.1 to v3.6.2. Documentation for actions and workflows was updated.\n\nMaintenance updated ci-github-publish to 3.1.0."
+          ]
+        },
+        {
+          "name": "Version argocd-cmp-hk-deployment - 1.0.4",
+          "tag": "argocd-cmp-hk-deployment-1.0.4",
+          "publishedAt": "2026-11-23T21:06:29Z",
+          "url": "https://github.com/hoverkraft-tech/docker-base-images/releases/tag/argocd-cmp-hk-deployment-1.0.4",
+          "highlights": [
+            "## Release Summary\n\nimages/argocd-cmp-hk-deployment: bumped argoproj/argocd from v3.6.1 to v3.6.2."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "docusaurus-theme",
+      "description": "Hoverkraft theme for Docusaurus",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/docusaurus-theme",
+      "releases": [
+        {
+          "name": "Version 0.4.4",
+          "tag": "0.4.4",
+          "publishedAt": "2026-11-23T20:54:38Z",
+          "url": "https://github.com/hoverkraft-tech/docusaurus-theme/releases/tag/0.4.4",
+          "highlights": [
+            "## Release Summary\n\nThis release includes maintenance updates to development and Docker dependencies.\n\nInternal changes also add a GitHub Verified Creator badge to the README and update shared CI actions and workflows."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "helm-chart-codespace-like",
+      "description": "A helm chart for deploying self-hosted Dev environment based on coder",
+      "stars": 0,
+      "url": "https://github.com/hoverkraft-tech/helm-chart-codespace-like",
+      "releases": [
+        {
+          "name": "Version 0.3.2",
+          "tag": "0.3.2",
+          "publishedAt": "2026-11-23T20:48:30Z",
+          "url": "https://github.com/hoverkraft-tech/helm-chart-codespace-like/releases/tag/0.3.2",
+          "highlights": [
+            "## Release Summary\n\nFixed a chart issue by keeping values.schema.json in the chart directory. Updated Helm chart documentation for helm-chart-codespace-like.\n\nInternal: Aligned and updated CI, release workflows, and development tooling, including updating ci-github-publish to 3.1.0 and aligning commit checks."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "helm-chart-postal",
+      "description": "A helm chart for Postal server (https://docs.postalserver.io/)",
+      "stars": 3,
+      "url": "https://github.com/hoverkraft-tech/helm-chart-postal",
+      "releases": [
+        {
+          "name": "Version 0.3.2",
+          "tag": "0.3.2",
+          "publishedAt": "2026-11-23T20:46:12Z",
+          "url": "https://github.com/hoverkraft-tech/helm-chart-postal/releases/tag/0.3.2",
+          "highlights": [
+            "## Release Summary\n\nThis release fixes linting of rendered Helm YAML in CI and preserves the verified creator logo in the README.\n\nInternally, it updates Helm and Docker dependencies (including mariadb and cert-manager), refreshes GitHub Actions and tooling, and aligns CI workflows and release configuration."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "helm-starters",
+      "description": "helm starters pack with best-practices inside",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/helm-starters",
+      "releases": [
+        {
+          "name": "0.1.1",
+          "tag": "0.1.1",
+          "publishedAt": "2026-11-20T12:55:44Z",
+          "url": "https://github.com/hoverkraft-tech/helm-starters/releases/tag/0.1.1",
+          "highlights": ["Full Changelog**: https://github.com/hoverkraft-tech/helm-starters/compare/0.1.0...0.1.1"]
+        }
+      ]
+    },
+    {
+      "name": "landing-page",
+      "description": "Landing Page of hoverkraft organization",
+      "stars": 2,
+      "url": "https://github.com/hoverkraft-tech/landing-page",
+      "releases": [
+        {
+          "name": "Version 2.4.0",
+          "tag": "2.4.0",
+          "publishedAt": "2026-11-23T20:49:59Z",
+          "url": "https://github.com/hoverkraft-tech/landing-page/releases/tag/2.4.0",
+          "highlights": [
+            "## Release Summary\n\nAdds a new blog post summarizing recent releases. Updates action documentation.\n\nUpdates npm dependencies, Astro packages, and the super-linter base image. Adds a GitHub Verified Creator badge to the README and updates the CI publish action. Refreshes shared actions and workflows."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "lefthook-base",
+      "description": "Port of pre-commit hooks to use in lefthook",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/lefthook-base",
+      "releases": [
+        {
+          "name": "Version 0.1.2",
+          "tag": "0.1.2",
+          "publishedAt": "2026-11-23T20:39:00Z",
+          "url": "https://github.com/hoverkraft-tech/lefthook-base/releases/tag/0.1.2",
+          "highlights": [
+            "## Release Summary\n\nThe README now includes the official GitHub Verified Creator badge.\n\nContinuous integration and release workflows were aligned with shared configurations. Release automation was updated."
+          ]
+        }
+      ]
+    },
+    {
+      "name": "public-docs",
+      "description": "Public documentation for hoverkraft open-source",
+      "stars": 1,
+      "url": "https://github.com/hoverkraft-tech/public-docs",
+      "releases": [
+        {
+          "name": "Version 0.5.0",
+          "tag": "0.5.0",
+          "publishedAt": "2026-11-23T20:48:05Z",
+          "url": "https://github.com/hoverkraft-tech/public-docs/releases/tag/0.5.0",
+          "highlights": [
+            "## Release Summary\n\nAdded a GitHub Actions pinning process for CI/CD. Introduced GitHub CI documentation and restructured the CI/CD guides. Updated documentation for the docker-base-images golden path.\n\nDependency updates were applied across GitHub Actions and application dependencies."
+          ]
+        }
+      ]
+    }
+  ]
+}
