@@ -1,3 +1,5 @@
+# Hoverkraft blog preview image prompt
+
 Create one Hoverkraft blog preview illustration from the supplied blog post context.
 
 Use the attached images as identity references: image 1 is the Hoverkraft mascot;
