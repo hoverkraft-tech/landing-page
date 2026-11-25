@@ -52,7 +52,7 @@ class BlogPostGenerator {
 
     // Generate preview image (fail if it fails)
     const imagePath = path.join(imageDir, 'preview.png');
-    await this.generatePreviewImage(imagePath);
+    await this.generatePreviewImage(imagePath, englishContent, outputDir);
 
     return {
       slug,
@@ -97,10 +97,18 @@ translationKey: ${slug}
   /**
    * Generate preview image (fails strictly if generation fails)
    */
-  async generatePreviewImage(outputPath) {
-    const prompt = `Create a modern, professional illustration for a tech blog post about software releases. The image should represent open source collaboration, software updates, and innovation. Use geometric shapes, gradients in blue and purple tones, and abstract representations of code, packages, or version control. The style should be clean, minimalist, and tech-forward. No text in the image.`;
+  async generatePreviewImage(outputPath, content, outputDir) {
+    const instructions = this.fileSystemService.readFile(
+      path.resolve(__dirname, '../../../agents/blog-post-image-preview.prompt.md'),
+      'utf8'
+    );
+    const referenceImages = ['mascot/mascot.png', 'logo/logo-icon.png'].map((asset) => ({
+      name: path.basename(asset),
+      data: this.fileSystemService.readFile(path.join(outputDir, 'src/assets/images/brand', asset)),
+    }));
+    const prompt = `${instructions}\n\nBlog post context (JSON):\n${JSON.stringify(content)}`;
 
-    const imageBuffer = await this.openAIService.generateImage(prompt);
+    const imageBuffer = await this.openAIService.generateImage(prompt, { referenceImages });
     this.fileSystemService.writeBinaryFile(outputPath, imageBuffer);
   }
 
