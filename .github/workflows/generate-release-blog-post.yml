@@ -92,7 +92,7 @@ jobs:
           releases-data: ${{ steps.fetch-releases.outputs.releases-data }}
           since-date: ${{ steps.dates.outputs.since-date }}
           until-date: ${{ steps.dates.outputs.until-date }}
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }} # zizmor: ignore[secrets-outside-env]
+          openai-api-key: ${{ secrets.BLOG_CONTENT_OPENAI_API_KEY }} # zizmor: ignore[secrets-outside-env]
           output-dir: application
 
       - name: Create pull request

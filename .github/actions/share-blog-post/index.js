@@ -52,7 +52,7 @@ async function run({
     }
 
     if (!openAIKey) {
-      throw new Error('OPENAI_API_KEY secret is required');
+      throw new Error('OpenAI API key is required. Provide the openai-api-key action input.');
     }
 
     if (!postizIntegrations) {

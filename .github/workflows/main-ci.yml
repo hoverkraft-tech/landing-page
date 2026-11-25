@@ -86,6 +86,9 @@ jobs:
   share-new-blog-posts:
     needs: deploy
     uses: $/.github/workflows/share-new-blog-posts.yml
+    secrets:
+      BLOG_CONTENT_OPENAI_API_KEY: ${{ secrets.BLOG_CONTENT_OPENAI_API_KEY }}
+      POSTIZ_API_KEY: ${{ secrets.POSTIZ_API_KEY }}
     permissions:
       contents: read
       pages: read

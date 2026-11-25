@@ -16,7 +16,7 @@
 # package is generated. The private application package version is independent of
 # the repository's GitHub release version.
 #
-# Configure `CI_BOT_APP_CLIENT_ID`, `CI_BOT_APP_PRIVATE_KEY` and `OPENAI_API_KEY`
+# Configure `CI_BOT_APP_CLIENT_ID`, `CI_BOT_APP_PRIVATE_KEY` and `CHANGELOG_SUMMARY`
 # at repository or organization level. The App needs contents write and pull
 # requests read permissions. It creates the tag so main CI can regenerate action
 # and workflow documentation. Never move an existing release tag.
