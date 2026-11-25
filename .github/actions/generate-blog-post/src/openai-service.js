@@ -92,16 +92,26 @@ class OpenAIService {
   }
 
   /**
-   * Generate image using Image API
+   * Generate a preview using brand references with the Image Edits API
    * See https://developers.openai.com/api/docs/guides/image-generation?api=image
    */
   async generateImage(prompt, options = {}) {
-    const response = await this.client.images.generate({
+    if (!Array.isArray(options.referenceImages) || options.referenceImages.length === 0) {
+      throw new Error('Brand reference images are required for blog previews');
+    }
+
+    const image = await Promise.all(
+      options.referenceImages.map(({ data, name }) => OpenAI.toFile(data, name, { type: 'image/png' }))
+    );
+    const response = await this.client.images.edit({
       model: options.model || 'gpt-image-2',
+      image,
       prompt: prompt,
       n: 1,
-      size: options.size || '1792x1024',
+      size: options.size || '1536x1024',
       quality: options.quality || 'high',
+      background: 'transparent',
+      output_format: 'png',
     });
 
     const imageBase64 = response.data?.[0]?.b64_json;

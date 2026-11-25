@@ -1,5 +1,7 @@
 const { describe, it, beforeEach, mock } = require('node:test');
 const assert = require('node:assert');
+const fs = require('node:fs');
+const path = require('node:path');
 const { BlogPostGenerator } = require('../src/blog-post-generator');
 
 describe('BlogPostGenerator', () => {
@@ -12,15 +14,8 @@ describe('BlogPostGenerator', () => {
     frontmatter: `---\nlang: ${lang}\n---\n\n`,
     data: {
       lang,
-      intro: {
-        quote: null,
-        summary: `${lang} summary`,
-        takeaways: [],
-      },
-      closing: {
-        summary: `${lang} closing`,
-        actions: [],
-      },
+      introMarkdown: `${lang} summary about safer deployments`,
+      closingMarkdown: `${lang} closing`,
       stats: {
         period: {
           since: '2025-10-01T00:00:00Z',
@@ -31,7 +26,13 @@ describe('BlogPostGenerator', () => {
         busiestRepo: null,
         mostRecentRelease: null,
       },
-      repositories: [],
+      repositories: [
+        {
+          name: 'deployment-tools',
+          description: 'Reusable deployment workflows',
+          releases: [{ tag: 'v1.0.0', highlights: ['Validate container health before deployment.'] }],
+        },
+      ],
     },
   });
 
@@ -47,6 +48,10 @@ describe('BlogPostGenerator', () => {
       ensureDirectory: mock.fn(),
       writeFile: mock.fn(),
       writeBinaryFile: mock.fn(),
+      readFile: mock.fn((filePath, encoding) => {
+        if (filePath.endsWith('.prompt.md')) return fs.readFileSync(filePath, encoding);
+        return Buffer.from(path.basename(filePath));
+      }),
       getAbsolutePath: mock.fn((...args) => args.join('/')),
     };
     mockBiomeService = {
@@ -94,6 +99,19 @@ describe('BlogPostGenerator', () => {
       );
       assert.strictEqual(mockFileSystemService.writeBinaryFile.mock.calls[0].arguments[1], imageBuffer);
 
+      const [prompt, options] = mockOpenAIService.generateImage.mock.calls[0].arguments;
+      assert.match(prompt, /en summary about safer deployments/);
+      assert.match(prompt, /Reusable deployment workflows/);
+      assert.match(prompt, /Validate container health before deployment/);
+      assert.match(prompt, /Hoverkraft mascot/);
+      assert.match(prompt, /#1998ff/i);
+      assert.match(prompt, /#ff5a02/i);
+      assert.match(prompt, /topic-related action/i);
+      assert.deepStrictEqual(options.referenceImages, [
+        { name: 'mascot.png', data: Buffer.from('mascot.png') },
+        { name: 'logo-icon.png', data: Buffer.from('logo-icon.png') },
+      ]);
+
       const frenchJsonCall = mockFileSystemService.writeFile.mock.calls.find((call) =>
         call.arguments?.[0].endsWith('fr.data.json')
       );
@@ -138,6 +156,27 @@ describe('BlogPostGenerator', () => {
           message: 'API error',
         }
       );
+    });
+
+    it('fails without a required brand reference instead of generating an unbranded preview', async () => {
+      mockContentGenerator.generateFrenchContent.mock.mockImplementation(async () => buildLocalizedPayload('fr'));
+      mockContentGenerator.generateEnglishContent.mock.mockImplementation(async () => buildLocalizedPayload('en'));
+      mockFileSystemService.readFile.mock.mockImplementation((filePath, encoding) => {
+        if (filePath.endsWith('mascot.png')) throw new Error('Missing brand reference');
+        return fs.readFileSync(filePath, encoding);
+      });
+
+      await assert.rejects(
+        () =>
+          blogPostGenerator.generate([], {
+            sinceDate: '2025-10-01T00:00:00Z',
+            untilDate: '2025-11-01T00:00:00Z',
+            outputDir: '/test',
+          }),
+        /Missing brand reference/
+      );
+      assert.strictEqual(mockOpenAIService.generateImage.mock.calls.length, 0);
+      assert.strictEqual(mockFileSystemService.writeBinaryFile.mock.calls.length, 0);
     });
 
     it('should fail when biome formatting fails', async () => {

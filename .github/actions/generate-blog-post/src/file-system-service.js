@@ -7,6 +7,10 @@ const fs = require('fs');
 const path = require('path');
 
 class FileSystemService {
+  readFile(filePath, encoding) {
+    return fs.readFileSync(filePath, encoding);
+  }
+
   /**
    * Create directory if it doesn't exist
    */

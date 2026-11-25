@@ -22,3 +22,20 @@ not select a GitHub secret.
 
 GitHub release summaries use the organization's separate `CHANGELOG_SUMMARY`
 secret through the [release workflow](../../.github/workflows/release.yml).
+
+## Preview images
+
+Release previews use the generated English post (including repository descriptions
+and release highlights) as context for one scene shared by both locales. The topic
+is the main subject; the Hoverkraft mascot performs a related action with its claw.
+
+The action reads the [shared image prompt](../../.github/agents/blog-post-image-preview.prompt.md)
+and uploads the checked-in mascot and HK logo from `application/src/assets/images/brand/`
+as references to OpenAI's Image Edits API. Keep those assets available under the
+action's `output-dir`. Missing references or image API failures fail generation.
+The request uses a transparent PNG background at 1536x1024.
+
+Use the same prompt for [manual previews](../../.github/agents/blog-post-image-preview.md).
+Review the generated image for mascot identity, a visible connection to the post,
+brand colors, transparency, and readability at social-preview crop sizes. Prompt
+and reference checks cannot guarantee the visual quality of a generated image.
