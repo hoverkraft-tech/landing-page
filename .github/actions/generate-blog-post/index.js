@@ -17,7 +17,7 @@ async function run({ core, releasesData, sinceDate, untilDate, outputDir, openAI
     }
 
     if (!openAIKey) {
-      throw new Error('OpenAI API key is required. Please set OPENAI_API_KEY secret.');
+      throw new Error('OpenAI API key is required. Provide the openai-api-key action input.');
     }
 
     if (!releasesData || releasesData.length === 0) {

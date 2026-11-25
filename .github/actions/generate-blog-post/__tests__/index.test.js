@@ -26,7 +26,7 @@ describe('Action Entry Point', () => {
         });
       },
       {
-        message: 'OpenAI API key is required. Please set OPENAI_API_KEY secret.',
+        message: 'OpenAI API key is required. Provide the openai-api-key action input.',
       }
     );
 

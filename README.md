@@ -67,6 +67,9 @@ Most changes should happen inside `application/`. See `AGENTS.md` for detailed a
 
 Contributions, issues, and feature requests are welcome. Review the [contributing guide](CONTRIBUTING.md) and use the [issue tracker](https://github.com/hoverkraft-tech/landing-page/issues) to report bugs or request features.
 
+See the [blog automation guide](docs/development/blog-automation.md) to configure
+credentials for generating blog content and sharing posts.
+
 ## License
 
 This project is released under the [0BSD License](LICENSE).

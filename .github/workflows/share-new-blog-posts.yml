@@ -10,6 +10,13 @@ on:
         required: true
         type: string
   workflow_call:
+    secrets:
+      BLOG_CONTENT_OPENAI_API_KEY:
+        description: OpenAI API key dedicated to blog content and social snippets
+        required: true
+      POSTIZ_API_KEY:
+        description: Postiz API key for publishing social posts
+        required: true
 
 permissions:
   contents: read
@@ -139,7 +146,7 @@ jobs:
           posts: ${{ steps.detect.outputs.posts }}
           site-base-url: ${{ steps.site.outputs.site-base-url }}
           blog-base-path: /blog
-          openai-api-key: ${{ secrets.OPENAI_API_KEY }} # zizmor: ignore[secrets-outside-env]
+          openai-api-key: ${{ secrets.BLOG_CONTENT_OPENAI_API_KEY }} # zizmor: ignore[secrets-outside-env]
           postiz-api-url: ${{ vars.POSTIZ_API_URL }}
           postiz-api-key: ${{ secrets.POSTIZ_API_KEY }} # zizmor: ignore[secrets-outside-env]
           postiz-integrations: ${{ vars.POSTIZ_INTEGRATIONS }}
