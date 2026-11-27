@@ -37,13 +37,13 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - id: generate-github-actions-docs
-        uses: hoverkraft-tech/ci-dokumentor@f4ef352022353a38b944e6d46a8fb458a9f6d06f # 0.6.0
+        uses: hoverkraft-tech/ci-dokumentor@93a10eb9c637d6b06ef394f12d60189b192b87c2 # 0.6.1
         with:
           source: |
             .github/actions/**/action.yml
             .github/workflows/update-branding-assets.yml
 
-      - uses: actions/create-github-app-token@64ab729a6294000f5aa4a4bc0b73d1f32bc45510 # v3.3.0
+      - uses: actions/create-github-app-token@f418cff399f7aef4c2f0ad47e25ca7a6abbdd6fc # v3.4.0
         id: generate-token
         with:
           client-id: ${{ vars.CI_BOT_APP_CLIENT_ID }}
