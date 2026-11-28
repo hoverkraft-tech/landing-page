@@ -12,7 +12,7 @@ permissions: {}
 jobs:
   lint:
     name: linter
-    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@26c25ffc7f5d804a40c446cdd6977a789806cddd # PR #683 (unreleased)
+    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@c0b651dd3d5f9ce5eff49c3c675c1f5c7f2ca581 # PR #683 (unreleased)
     permissions:
       actions: read
       contents: read
@@ -23,7 +23,7 @@ jobs:
       statuses: write
 
   continuous-integration-actions:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@d580938064613e6d666f79320109f94dc98875b7 # PR #624 (unreleased)
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@be526fc1367b1e06482052d80e449c063fb7507c # PR #624 (unreleased)
     permissions:
       contents: read
       id-token: write
@@ -45,7 +45,7 @@ jobs:
       dependency-review: false
 
   continuous-integration:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@d580938064613e6d666f79320109f94dc98875b7 # PR #624 (unreleased)
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@be526fc1367b1e06482052d80e449c063fb7507c # PR #624 (unreleased)
     permissions:
       contents: read
       id-token: write
@@ -66,8 +66,8 @@ jobs:
       - lint
       - continuous-integration-actions
       - continuous-integration
-    if: ${{ !cancelled() }}
-    uses: hoverkraft-tech/ci-github-common/.github/workflows/ci-reports.yml@26c25ffc7f5d804a40c446cdd6977a789806cddd # PR #683 (unreleased)
+    if: always()
+    uses: hoverkraft-tech/ci-github-common/.github/workflows/ci-reports.yml@c0b651dd3d5f9ce5eff49c3c675c1f5c7f2ca581 # PR #683 (unreleased)
     permissions:
       actions: read
       contents: read
@@ -77,3 +77,19 @@ jobs:
       security-events: write
     with:
       job-results: ${{ toJSON(needs) }}
+
+  complete:
+    name: CI complete
+    if: always()
+    needs:
+      - lint
+      - continuous-integration-actions
+      - continuous-integration
+      - reports
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - uses: hoverkraft-tech/ci-github-common/actions/check-jobs@c0b651dd3d5f9ce5eff49c3c675c1f5c7f2ca581 # PR #683 (unreleased)
+        with:
+          job-results: ${{ toJSON(needs) }}
