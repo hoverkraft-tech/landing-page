@@ -38,3 +38,6 @@ application/astro-report.txt
 application/humanize-report-checkstyle.xml
 application/.astro-build.log
 .ci-github-nodejs-cache
+
+# Native CI reports when commands are run locally
+.reports/

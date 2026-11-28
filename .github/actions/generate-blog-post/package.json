@@ -6,7 +6,8 @@
   "scripts": {
     "test": "node --test __tests__/*.test.js",
     "test:watch": "node --test --watch __tests__/*.test.js",
-    "test:ci": "node --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=lcov --test-reporter-destination=coverage/lcov.info --test"
+    "test:ci": "node --experimental-test-coverage --test-reporter=spec --test-reporter-destination=stdout --test-reporter=junit --test-reporter-destination=\"${CI_REPORTS_DIR:-.reports}/junit.xml\" --test-reporter=lcov --test-reporter-destination=\"${CI_REPORTS_DIR:-.reports}/coverage/lcov.info\" --test",
+    "pretest:ci": "node -e \"require('node:fs').mkdirSync((process.env.CI_REPORTS_DIR || '.reports') + '/coverage', {recursive:true})\""
   },
   "keywords": [
     "github-action",

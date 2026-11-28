@@ -23,6 +23,7 @@ jobs:
       pull-requests: write
       security-events: write
       statuses: write
+      code-quality: write
 
   generate-docs:
     name: Generate Documentation

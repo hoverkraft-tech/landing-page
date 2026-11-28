@@ -31,13 +31,13 @@
     "lint:astro": "astro check",
     "lint:biome": "biome lint --error-on-warnings .",
     "lint:fix": "npm run humanize:fix && npm run lint:fix:biome",
-    "lint:ci": "sh -c 'biome lint --error-on-warnings . --reporter=sarif > biome-report.txt 2>&1 && cat biome-report.txt && npm run lint:astro > astro-report.txt 2>&1 && cat astro-report.txt && node ./scripts/humanize-content.mjs --check --report-file humanize-report-checkstyle.xml'",
+    "lint:ci": "report_dir=\"${CI_REPORTS_DIR:-.reports}\"; mkdir -p \"$report_dir\"; status=0; biome lint --error-on-warnings . --reporter=sarif --reporter-file=\"$report_dir/lint.sarif\" || status=1; npm run lint:astro > \"$report_dir/astro-report.txt\" 2>&1 || status=1; cat \"$report_dir/astro-report.txt\"; node ./scripts/humanize-content.mjs --check --report-file \"$report_dir/humanize-report-checkstyle.xml\" || status=1; exit \"$status\"",
     "lint:fix:biome": "biome check --write --unsafe .",
     "pretest": "npm run setup:browser",
     "test": "vitest run",
     "pretest:browser": "npm run setup:browser",
     "test:browser": "vitest run src/test/*.browser.test.ts",
-    "test:ci": "npm run test -- --reporter=default --reporter=junit --outputFile=junit.xml --coverage.enabled --coverage.reporter=lcov --coverage.reporter=text"
+    "test:ci": "npm run test -- --reporter=default --reporter=junit --outputFile.junit=\"${CI_REPORTS_DIR:-.reports}/junit.xml\" --coverage.enabled=\"${CI_TEST_COVERAGE:-true}\" --coverage.reportsDirectory=\"${CI_REPORTS_DIR:-.reports}/coverage\" --coverage.reporter=lcov --coverage.reporter=text"
   },
   "dependencies": {
     "@astrojs/react": "^7.1.9",
