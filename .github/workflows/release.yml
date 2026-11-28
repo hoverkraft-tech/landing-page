@@ -58,6 +58,7 @@ jobs:
       pull-requests: write
       security-events: write
       statuses: write
+      code-quality: write
 
   release:
     name: Create and publish release

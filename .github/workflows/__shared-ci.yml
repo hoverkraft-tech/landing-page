@@ -12,7 +12,7 @@ permissions: {}
 jobs:
   lint:
     name: linter
-    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@af0bdd6313bd49aaf4a8a7f0de005fb0db856b03 # 4.3.3
+    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@a0bdfab27afed208f3c105e4b543818b8388b80b # PR #683 (unreleased)
     permissions:
       actions: read
       contents: read
@@ -21,17 +21,16 @@ jobs:
       pull-requests: write
       security-events: write
       statuses: write
-    with:
-      comment: false
 
   continuous-integration-actions:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@191d7230d57982bfc11d57f68b005f386a6d7fbf # 3.1.1
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@570c8389e95924c64933ea1e95f555ad7739a46f # PR #624 (unreleased)
     permissions:
       contents: read
       id-token: write
       packages: read
       pull-requests: write
       security-events: write
+      actions: read
     strategy:
       matrix:
         working-directory:
@@ -42,31 +41,55 @@ jobs:
       working-directory: ${{ matrix.working-directory }}
       build: ""
       lint: ""
+      test: '{"test-results":"junit.xml","test-coverage":"coverage/lcov.info"}'
       dependency-review: false
-      test: '{"comment": false, "report-group": "continuous-integration-actions"}'
 
   continuous-integration:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@191d7230d57982bfc11d57f68b005f386a6d7fbf # 3.1.1
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@570c8389e95924c64933ea1e95f555ad7739a46f # PR #624 (unreleased)
     permissions:
       contents: read
       id-token: write
       packages: read
       pull-requests: write
       security-events: write
+      actions: read
     with:
-      test: '{"comment": false, "report-group": "continuous-integration"}'
       working-directory: application
       build: |
         {
           "artifact": ["dist"]
         }
+      lint: '{"lint-results":"lint.sarif\nastro-report.txt\nhumanize-report-checkstyle.xml"}'
 
   reports:
-    needs: [lint, continuous-integration-actions, continuous-integration]
+    needs:
+      - lint
+      - continuous-integration-actions
+      - continuous-integration
     if: always()
-    uses: hoverkraft-tech/ci-github-common/.github/workflows/ci-reports.yml@af0bdd6313bd49aaf4a8a7f0de005fb0db856b03 # 4.3.3
+    uses: hoverkraft-tech/ci-github-common/.github/workflows/ci-reports.yml@a0bdfab27afed208f3c105e4b543818b8388b80b # PR #683 (unreleased)
     permissions:
+      actions: read
       contents: read
       pull-requests: write
+      code-quality: write
+      id-token: write
+      security-events: write
     with:
       job-results: ${{ toJSON(needs) }}
+
+  complete:
+    name: CI complete
+    if: always()
+    needs:
+      - lint
+      - continuous-integration-actions
+      - continuous-integration
+      - reports
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions: {}
+    steps:
+      - uses: hoverkraft-tech/ci-github-common/actions/check-jobs@a0bdfab27afed208f3c105e4b543818b8388b80b # PR #683 (unreleased)
+        with:
+          job-results: ${{ toJSON(needs) }}
