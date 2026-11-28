@@ -1,11 +1,11 @@
 # CI reports
 
-The website and its GitHub Actions run their own checks and validate native
-reports before retaining them. The website's Vitest JSON report includes test
+The site and its GitHub Actions run their own checks and validate native
+reports before retaining them. The site's Vitest JSON report includes test
 results and coverage. Each action package keeps separate test and coverage
 results, so the consolidated report identifies which component needs attention.
 
-One `reports` job waits for repository lint, the website and action packages. It
+One `reports` job waits for repository lint, the site and action packages. It
 publishes annotations, a summary with expandable details, and one updated PR
 comment. Coverage uses GitHub Code Quality when available, with the comment as
 fallback. Packages do not publish competing comments.
