@@ -12,7 +12,7 @@ permissions: {}
 jobs:
   lint:
     name: linter
-    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@c0b651dd3d5f9ce5eff49c3c675c1f5c7f2ca581 # PR #683 (unreleased)
+    uses: hoverkraft-tech/ci-github-common/.github/workflows/linter.yml@a0bdfab27afed208f3c105e4b543818b8388b80b # PR #683 (unreleased)
     permissions:
       actions: read
       contents: read
@@ -23,7 +23,7 @@ jobs:
       statuses: write
 
   continuous-integration-actions:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@be526fc1367b1e06482052d80e449c063fb7507c # PR #624 (unreleased)
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@570c8389e95924c64933ea1e95f555ad7739a46f # PR #624 (unreleased)
     permissions:
       contents: read
       id-token: write
@@ -45,7 +45,7 @@ jobs:
       dependency-review: false
 
   continuous-integration:
-    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@be526fc1367b1e06482052d80e449c063fb7507c # PR #624 (unreleased)
+    uses: hoverkraft-tech/ci-github-nodejs/.github/workflows/continuous-integration.yml@570c8389e95924c64933ea1e95f555ad7739a46f # PR #624 (unreleased)
     permissions:
       contents: read
       id-token: write
@@ -67,7 +67,7 @@ jobs:
       - continuous-integration-actions
       - continuous-integration
     if: always()
-    uses: hoverkraft-tech/ci-github-common/.github/workflows/ci-reports.yml@c0b651dd3d5f9ce5eff49c3c675c1f5c7f2ca581 # PR #683 (unreleased)
+    uses: hoverkraft-tech/ci-github-common/.github/workflows/ci-reports.yml@a0bdfab27afed208f3c105e4b543818b8388b80b # PR #683 (unreleased)
     permissions:
       actions: read
       contents: read
@@ -90,6 +90,6 @@ jobs:
     timeout-minutes: 5
     permissions: {}
     steps:
-      - uses: hoverkraft-tech/ci-github-common/actions/check-jobs@c0b651dd3d5f9ce5eff49c3c675c1f5c7f2ca581 # PR #683 (unreleased)
+      - uses: hoverkraft-tech/ci-github-common/actions/check-jobs@a0bdfab27afed208f3c105e4b543818b8388b80b # PR #683 (unreleased)
         with:
           job-results: ${{ toJSON(needs) }}
